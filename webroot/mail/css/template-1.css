@@ -1,0 +1,114 @@
+@import url(http://fonts.googleapis.com/css?family=Droid+Sans:400,700);
+@import url(http://fonts.googleapis.com/css?family=Exo+2:400,900,700,700italic,900italic,800italic,800,600italic,600,500italic,500,400italic,300italic,300,200,200italic,100italic);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,300,400,700,600);
+/***************Fonts Section***************/
+/********************Header-part of the template***************/
+.body,
+html {
+  margin: 0px;
+}
+.header-part {
+  background: #303641;
+  min-height: 400px;
+}
+.header-part .box {
+  margin: 60px auto;
+  max-width: 700px;
+}
+.header-part .box h1.brand {
+  font-family: 'Exo 2', sans-serif;
+  font-weight: 500;
+  color: #ffffff;
+  text-align: right;
+  font-size: 50px;
+}
+.header-part .box h1.title {
+  color: #0fbd71;
+  font-family: 'Droid Sans', sans-serif;
+  margin-bottom: 0px;
+}
+.header-part .box h4.tag-line {
+  margin-top: 8px;
+  color: #ede9e9;
+  margin-left: 55px;
+}
+.header-part .box h4.message {
+  margin-top: 50px;
+  font-family: 'Droid Sans', sans-serif;
+  font-size: 24px;
+  color: #fe8183;
+}
+.header-part .box p {
+  margin-bottom: 0px;
+  color: #f9f9f9;
+  font-family: 'Open Sans', sans-serif;
+  text-align: justify;
+}
+/*********************template-body**********************/
+.template-body .box {
+  max-width: 600px;
+  margin: 30px auto;
+}
+.template-body .box .product-one .product-row {
+  border-top: none !important;
+}
+.template-body .box .product-row {
+  border-top: 2px solid #c1f3dd;
+  padding-top: 20px;
+}
+.template-body .box .product-row .product-display img {
+  min-height: 200px;
+  width: 200px;
+  margin-top: 20px;
+}
+.template-body .box .product-description h3 {
+  margin-top: 0px;
+  font-family: 'Droid Sans', sans-serif;
+  font-weight: 700;
+  color: #fe8183;
+}
+.template-body .box .product-description p,
+.template-body .box .product-description ul {
+  color: #000000;
+  font-family: 'Open Sans', sans-serif;
+}
+.template-body .box .product-description .btn {
+  margin-top: 10px;
+  border-radius: 0px;
+  padding: 5px 30px;
+  background: #0fbd71;
+  border: none;
+  color: #ffffff;
+  font-family: 'Droid Sans', sans-serif;
+  font-weight: 700;
+  outline: none;
+}
+/*************************footer section******************************/
+.footer {
+  background: #777c84;
+  min-height: 200px;
+  margin-bottom: 0px;
+}
+.footer .box {
+  max-width: 800px;
+  margin: 0px auto;
+  text-align: center;
+}
+.footer .box .social {
+  padding-top: 50px;
+  margin-bottom: 20px;
+}
+.footer .box .social .fa {
+  color: #303641;
+  font-size: 20px;
+  padding: 5px;
+}
+.footer .box p {
+  margin: 0px;
+  color: #ffffff;
+}
+.footer .box p a {
+  color: #0fbd71;
+  text-decoration: none;
+  font-weight: bold;
+}

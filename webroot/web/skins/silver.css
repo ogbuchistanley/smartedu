@@ -1,0 +1,72 @@
+.navbar .nav > li > a {
+color: #454951;
+}
+
+.tsea li a {
+color: #454951;}
+
+.dropdown-menu {
+background: #2f3238;}
+
+#inner-headline .inner-heading h2 {
+color: #454951;
+}
+
+#inner-headline {
+color: #454951;
+}
+
+ul.portfolio-categ li a {
+color: #454951;
+}
+
+footer {
+background: #2f3238;
+}
+
+#sub-footer {
+background: #1d1d21;
+}
+
+.item-thumbs .overlay-img {
+background: #fff;
+}
+
+h1, h2, h3, h4, h5, h6 {
+color: #454951;
+}
+
+body {
+color: #454951;
+}
+
+.accordion-heading a:hover, .accordion-headingg a.activee:hover, .accordion-heading a.active {
+background: #454951;
+}
+
+.faq .accordion-heading a:hover, .faq .accordion-heading a.active:hover, .faq .accordion-heading a.active {
+background: #fe4236;
+}
+
+
+.btn-dark {
+border: 1px solid #18191a;
+color: #fff;
+background: #2f3238;
+}
+
+.widget ul.tags li a {
+color: #454951;
+}
+
+article .post-heading h3 a {
+color: #454951;
+}
+
+ul.meta-post li a {
+color: #454951;
+}
+
+ul.recent li a {
+color: #454951;
+}

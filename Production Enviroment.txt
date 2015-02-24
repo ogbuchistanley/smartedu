@@ -1,0 +1,72 @@
+While on a hosting Server
+
+1)
+AppController beforeFilter()
+comment out this line
+$this->initDB();
+$this->buildAcl()
+
+2)
+Comment out this function
+buildAcl()
+
+
+3)
+Server Paths GoTo /webroot/index.php
+
+if (!defined('ROOT')) {
+	define('ROOT', DS.'home'.DS.'crithink');
+}
+
+if (!defined('APP_DIR')) {
+	define('APP_DIR', DS  . 'public_html');
+}
+
+
+define('CAKE_CORE_INCLUDE_PATH', DS . 'home' . DS . 'crithink' . DS . 'cakephp' . DS . 'lib');
+
+
+if (!defined('WEBROOT_DIR')) {
+	define('WEBROOT_DIR', basename(dirname(dirname(__FILE__))) . DS . 'public_html' . DS . 'webroot');
+}
+if (!defined('WWW_ROOT')) {
+	define('WWW_ROOT', APP_DIR . DS);
+}
+
+// Custom Paths Constants
+if (!defined('WEB_DIR_ROOT')) {
+	define('WEB_DIR_ROOT', DS . 'webroot' . DS .'web' . DS);
+}
+
+if (!defined('APP_DIR_ROOT')) {
+	define('APP_DIR_ROOT', DS . 'webroot' . DS .'app' . DS);
+}
+//Note Set This to your local machine domain while on localhost e.g /smartschool
+//But if its online leave it blank
+if (!defined('DOMAIN_NAME')) {
+	define('DOMAIN_NAME', '');
+}
+
+
+4)
+GoTo
+
+5)
+GoTo Config/bootstrap.php
+comment out this line
+CakePlugin::load('DebugKit');
+on line 64
+
+6)
+GoTo AppController
+comment out this line
+'DebugKit.Toolbar',
+on line 42
+
+
+7)
+GoTo Config/database.php
+Edit to your username and password
+
+
+

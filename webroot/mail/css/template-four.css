@@ -1,0 +1,114 @@
+@import url(http://fonts.googleapis.com/css?family=Droid+Sans:400,700);
+@import url(http://fonts.googleapis.com/css?family=Exo+2:400,900,700,700italic,900italic,800italic,800,600italic,600,500italic,500,400italic,300italic,300,200,200italic,100italic);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,300,400,700,600);
+/***************Fonts Section***************/
+/***********************Header Section*******************/
+.header .social {
+  padding: 10px 30px;
+  background: #e6e6e6;
+  min-height: 60px;
+}
+.header .social ul.social-network {
+  float: left;
+}
+.header .social ul.social-network li {
+  display: inline-block;
+}
+.header .social ul.social-network li a {
+  font-size: 24px;
+  padding: 3px;
+}
+.header .social h4 {
+  float: right;
+  color: #428bca;
+  font-family: 'Droid Sans', sans-serif;
+}
+.header .header-content {
+  background: #495e73;
+  min-height: 400px;
+}
+.header .header-content .box {
+  max-width: 500px;
+  margin: 50px auto;
+}
+.header .header-content .box h1 {
+  color: #ffffff;
+}
+.header .header-content .box p {
+  text-align: right;
+  display: block;
+  color: #eceded;
+}
+.header .header-content .box .manu {
+  background: #576d82;
+  min-height: 200px;
+}
+.header .header-content .box .manu p {
+  margin: 0px;
+  padding: 20px;
+  color: #cccccc;
+  text-align: left;
+}
+/*****************body section*****************/
+.body {
+  margin-top: 50px;
+}
+.body .box {
+  max-width: 800px;
+  margin: 0px auto;
+}
+.body .box .main-content-row {
+  border-bottom: 2px solid #99a8a2;
+  padding-bottom: 20px;
+}
+.body .box .main-content-row .image {
+  background: #cccccc;
+  min-height: 200px;
+}
+.body .box .main-content-row .description h3 {
+  font-family: 'Droid Sans', sans-serif;
+  color: #f64f7a;
+}
+.body .box .main-content-row .description p {
+  font-family: 'Open Sans', sans-serif;
+  color: #919191;
+}
+.body .box .main-content-row .description p > a {
+  text-decoration: none;
+  color: #4c9f81;
+}
+.body .box .sub-content-row {
+  margin-top: 20px;
+}
+.body .box .sub-content-row h4 {
+  font-family: 'Droid Sans', sans-serif;
+  color: #4d5665;
+}
+.body .box .sub-content-row p {
+  font-family: 'Open Sans', sans-serif;
+  color: #93b7db;
+}
+/*************************footer section******************************/
+.footer {
+  background: #5f6872;
+  min-height: 100px;
+  margin-bottom: 0px;
+}
+.footer .box {
+  max-width: 800px;
+  margin: 0px auto;
+  text-align: center;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+.footer .box p {
+  margin: 0px;
+  color: #ffffff;
+  font-family: 'Droid Sans', sans-serif;
+  font-size: 12px;
+}
+.footer .box p a {
+  color: #23bab5;
+  text-decoration: none;
+  font-family: 'Droid Sans', sans-serif;
+}

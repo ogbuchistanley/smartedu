@@ -1,0 +1,136 @@
+/*-----------------------------------------------------------------------------
+
+REVOLUTION RESPONSIVE BASIC STYLES OF HTML DOCUMENT
+
+Screen Stylesheet
+
+version:   	1.0
+date:      	26/06/12
+author:		themepunch
+email:     	support@themepunch.com
+website:   	http://www.themepunch.com
+-----------------------------------------------------------------------------*/
+
+
+
+  /*********************************************************************************************
+		-	SET THE SCREEN SIZES FOR THE BANNER IF YOU WISH TO MAKE THE BANNER RESPONSIVE 	-
+  **********************************************************************************************/
+
+ /*	THE MEDIA CHOOSER TO SET DIFFERENT SIZES OF THE CONTAINER DEPENDING ON THE SCREEN SIZE    */
+   @media only screen and (max-width : 1024px) {
+		 .banner{width:100%; height:409px !important;}
+		 .caption.media-position1 {margin-left:-30px;}		 
+   }
+  
+  
+   @media only screen and (min-width: 768px) and (max-width: 965px) {
+		 .banner{width:100%; height:307px !important;}
+		 .banner li h1 {font-size:28px !important;}
+		 .banner li h2 {font-size:22px !important;}
+		 .banner li h3 {font-size:18px !important;}
+		 .banner li h4 {font-size:16px !important;}
+		 .caption a.button.small {font-size:10px; font-weight:bold; letter-spacing:-1px; padding:9px 15px 8px 15px}
+		 .caption a.button.medium {font-size:12px; font-weight:bold; letter-spacing:-1px; padding:12px 18px 11px 18px}
+		 .tp-caption.general_caption p.lead {font-size:12px !important; line-height:18px;}
+		 .tp-caption.general_caption p.lead-alt {font-size:12px !important; padding:0px 10px 2px 8px;}
+		 .tp-caption.general_caption i {font-size:10px !important;}
+		 
+		 .tp-caption.media-position1 {margin-left: 7%;}	
+		 .tp-caption.media-position2 {margin-left: 5%}	
+		 .tp-caption.media-position3 {margin-left: 5%;}	
+		 .tp-caption.media-position4 {display: none}	
+		 
+		 .tp-caption.media-position1r {margin-left: -5%;}	
+		 .tp-caption.media-position2r {margin-left: 7%}	
+		 .tp-caption.media-position3r {margin-left: 7%;}	
+		 
+		 .caption.media-position1 {margin-top:-6px;}
+		 .caption.media-position2 {margin-top:-6px;}
+		 .caption.media-position3 {margin-left:-18px;}
+		 .caption.media-position5 {margin-left:-25px;}
+		 .caption.media-position6 {margin-left:-18px;}
+		 .caption.media-position7 {margin-left:-172px;}
+		 .caption.media-position8 {margin-left:-12px;}
+		 .caption.media-position9 {margin-top:-9px;}		 
+		 .caption.media-icon i {width:70px; height:70px; background-size: 70px 70px;}
+		 .tp-caption.general_caption h1 {padding-top: 0px; border-top: 4px solid #262626;}
+		 .slider-sub {font-size: 10px}
+   }
+
+   @media only screen and (min-width: 650px) and (max-width: 767px) {
+		 .banner{width:100%; height:227px !important;}
+		 .banner li h1 {font-size:22px !important;}
+		 .banner li h2 {font-size:20px !important;}
+		 .banner li h3 {font-size:16px !important;}
+		 .banner li h4 {font-size:14px !important;}
+		 .caption a.button.small {font-size:10px; font-weight:bold; letter-spacing:-1px; padding:9px 15px 8px 15px;}
+		 .caption a.button.medium {font-size:10px; font-weight:bold; letter-spacing:-1px; padding:9px 15px 8px 15px;}
+		 .tp-caption.general_caption p.lead {display:none;}
+		 .tp-caption.general_caption p.lead-alt {font-size:11px !important; padding:2px 8px 4px 6px; line-height:12px;}
+		 .tp-caption.general_caption i {font-size:10px !important;}
+		 
+		 
+		 .tp-caption.media-position1 {margin-left: 9%;}	
+		 .tp-caption.media-position2 {margin-left: 7%}	
+		 .tp-caption.media-position3 {margin-left: 7%;}	
+		 .tp-caption.media-position4 {display: none}	
+		 
+		 .tp-caption.media-position1r {margin-left: -7%;}	
+		 .tp-caption.media-position2r {margin-left: 11%}	
+		 .tp-caption.media-position3r {margin-left: 11%;}	
+		 
+		 .caption.media-position2 {margin-top:-6px;}
+		 .caption.media-position3 {margin-left:-13px; margin-top:-20px;}
+		 .caption.media-position4 {margin-left:-13px; margin-top:-20px;}
+		 .caption.media-position5 {margin-left:-30px; margin-top:-50px;}
+		 .caption.media-position6 {margin-left:-86px; margin-top:-18px;}
+		 .caption.media-position7 {margin-left:-117px; margin-top:-10px;}
+		 .caption.media-position8 {margin-left:-42px;}
+		 .caption.media-position9 {margin-top:-29px;}
+		 .caption.media-position10 {margin-left:-82px;}	
+		 .caption.media-position11 {margin-top:0px;}
+		 .caption.media-position12 {margin-top:60px;}
+		 .caption.media-position13 {margin-top:-60px;}		 
+		 .caption.media-icon i {width:50px; height:50px; background-size: 50px 50px;}
+		 .tp-caption.general_caption .media-display {display:block !important; font-size:11px !important;}		 
+		 .tp-caption.general_caption h1.border, .tp-caption.general_caption h2.border, .tp-caption.general_caption h3.border, .tp-caption.general_caption h4.border, .tp-caption.general_caption h5.border {padding:7px 0 5px 0;}
+		 .tp-caption.general_caption h1 {padding-top: 0px;border-top: 4px solid #262626;}
+		 .slider-sub {font-size: 9px}
+   }
+
+   @media only screen and (min-width: 0px) and (max-width: 649px) {
+         #slideshow-container{display: none}
+		 .banner{width:100%; height:142px !important; display: none}
+		 .banner li h1 {font-size:12px !important;}
+		 .banner li h2 {font-size:12px !important;}
+		 .banner li h3 {display:none;}
+		 .banner li h4 {display:none;}
+		 .caption a.button.small, .caption a.button.medium  {display:none;}
+		 .tp-caption.general_caption p.lead {display:none;}
+		 .tp-caption.general_caption p.lead-alt {display:none}
+		 .caption.media-position1 {margin-left:-40px; margin-top:50px;}	
+		 .caption.media-position2 {margin-top:-6px;}
+		 .caption.media-position3 {margin-left:-13px; margin-top:-20px;}
+		 .caption.media-position4 {margin-left:-13px; margin-top:-20px;}
+		 .caption.media-position5 {margin-left:-30px; margin-top:-50px;}
+		 .caption.media-position6 {margin-left:-118px; margin-top:25px;}
+		 .caption.media-position7 {margin-left:-117px; margin-top:-10px;}
+		 .caption.media-position8 {margin-left:-42px;}
+		 .caption.media-position9 {margin-top:-29px;}
+		 .caption.media-position10 {margin-left:-82px;}	
+		 .caption.media-position11 {margin-top:0px;}
+		 .caption.media-position12 {margin-top:120px;}
+		 .caption.media-position12 h1 {font-size:14px !important;}
+		 .caption.media-position13 {margin-top:-60px;}
+		 .caption.media-position14 {margin-top:45px;}
+		 .caption.media-position15 {margin-top:90px;}
+		 .caption.media-icon i {width:30px; height:30px; background-size: 30px 30px; margin-top:7px;}
+		 .tp-caption.video_box iframe {width:220px !important; height:123px !important; margin-top:-20px; margin-left:25px;}
+		 .tp-caption.general_caption .media-display, .caption.media-hide {display:none !important;}	
+		 .banner li .media-display2 h3.border2 {display:block !important; font-size:12px !important; padding:5px 7px; margin-top:15px;}	 
+		 .tp-caption.general_caption h1.border, .tp-caption.general_caption h2.border, .tp-caption.general_caption h3.border, .tp-caption.general_caption h4.border, .tp-caption.general_caption h5.border {padding:5px 0 3px 0; border-top:1px solid #ededed;
+			border-bottom:1px solid #ededed;}
+   }
+   
+   

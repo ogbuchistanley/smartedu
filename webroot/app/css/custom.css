@@ -1,0 +1,28 @@
+/*
+*	 Author: Vijay Kumar
+*	 Template: Archon - Flat & Responsive Bootstrap Admin Template
+*	 Version: 1.0
+*	 Bootstrap version: 3.0.0
+*	 Copyright 2013 bootstrapguru
+*	 www: http://bootstrapguru.com
+*	 mail: support@bootstrapguru.com
+*	 You can find our other themes on: https://bootstrapguru.com/themes/
+---------------------------------------------------------------------------------------------- */
+
+/** Error Pages Div***********/
+div.error_page{
+    color: #ffffff;
+    font-family: 'Open Sans';
+    background: #54728c;
+    display: block;
+    border-radius: 6px;
+    padding-top: 60px;
+    text-align: center;
+    min-height: 380px;
+}
+
+.input_error{
+    color: #B94A48;
+}
+
+

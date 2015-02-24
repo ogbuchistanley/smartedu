@@ -1,0 +1,194 @@
+@import url(http://fonts.googleapis.com/css?family=Droid+Sans:400,700);
+@import url(http://fonts.googleapis.com/css?family=Exo+2:400,900,700,700italic,900italic,800italic,800,600italic,600,500italic,500,400italic,300italic,300,200,200italic,100italic);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,300,400,700,600);
+@import url(http://fonts.googleapis.com/css?family=Lato:400,700,900);
+/***************Fonts Section***************/
+/***************************header part**********************/
+.header-part .social {
+  margin-bottom: 20px;
+  background: #23bab5;
+  min-height: 50px;
+  text-align: right;
+}
+.header-part .social h1 {
+  color: #ffffff;
+  margin: 0px;
+  margin-top: 8px;
+  font-family: 'Exo 2', sans-serif;
+}
+.header-part .social .fa {
+  font-size: 20px;
+  color: #303641;
+  padding: 5px;
+  line-height: 50px;
+}
+/*************************body part*************************/
+.template-body {
+  /*************************first row*************************/
+  /*******************Second row**********************/
+  /**************************third row**********************/
+  /********************fourth row******************/
+}
+.template-body .first-row {
+  margin-bottom: 30px;
+}
+.template-body .first-row .box {
+  max-width: 700px;
+  margin: 50px auto;
+}
+.template-body .first-row .box .description {
+  padding-top: 100px;
+}
+.template-body .first-row .box .description h2 {
+  font-family: 'Droid Sans', sans-serif;
+  font-size: 24px;
+  color: #1570a6;
+}
+.template-body .first-row .box .description p {
+  font-family: 'Open Sans', sans-serif;
+  color: #7c8080;
+}
+.template-body .first-row .box .description .btn {
+  border-radius: 0px;
+  outline: none;
+  background: #23bab5;
+  border: none;
+  color: #ffffff;
+  font-family: 'Lato', sans-serif;
+  font-weight: bold;
+}
+.template-body .first-row .box img {
+  height: 300px;
+}
+.template-body .second-row {
+  background: #23bab5;
+  min-height: 200px;
+}
+.template-body .second-row .box {
+  max-width: 700px;
+  margin: 10px auto;
+}
+.template-body .second-row .box h3 {
+  font-family: 'Exo 2', sans-serif;
+  color: #ffffff;
+  margin-top: 30px;
+}
+.template-body .second-row .box p {
+  font-family: 'Open Sans', sans-serif;
+  color: #303641;
+}
+.template-body .second-row .box img {
+  height: 150px;
+  margin-top: 40px;
+}
+.template-body .second-row .box .btn {
+  border-radius: 0px;
+  outline: none;
+  border: none;
+  color: #303641;
+  font-family: 'Lato', sans-serif;
+  font-weight: 700;
+}
+.template-body .third-row {
+  margin-top: 50px;
+}
+.template-body .third-row .box {
+  max-width: 700px;
+  margin: 0px auto;
+  text-align: center;
+}
+.template-body .third-row .box .image img {
+  border: 2px solid #dadcdc;
+  border-radius: 50%;
+  padding: 5px;
+}
+.template-body .third-row .box h4 {
+  color: #1570a6;
+  font-family: 'Droid Sans', sans-serif;
+}
+.template-body .third-row .box p {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 12px;
+}
+.template-body .third-row .box .btn {
+  border-radius: 0px;
+  outline: none;
+  background: #23bab5;
+  border: none;
+  color: #ffffff;
+  font-family: 'Lato', sans-serif;
+  font-weight: bold;
+}
+.template-body .fourth-row {
+  margin: 50px auto;
+}
+.template-body .fourth-row .box {
+  max-width: 700px;
+  margin: 0px auto;
+}
+.template-body .fourth-row .box img {
+  height: 200px;
+  width: 100%;
+}
+.template-body .fourth-row .box h4 {
+  padding-top: 10px;
+}
+.template-body .fourth-row .box .btn {
+  border-radius: 0px;
+  outline: none;
+  background: #23bab5;
+  border: none;
+  color: #ffffff;
+  font-family: 'Lato', sans-serif;
+  font-weight: bold;
+}
+/***************************fifth row**********************/
+.fifth-row .box {
+  max-width: 700px;
+  margin: 50px auto;
+}
+.fifth-row .box h3 {
+  font-family: 'Droid Sans', sans-serif;
+  font-weight: 400;
+}
+.fifth-row .box .row .item img {
+  height: 100px;
+  width: 100%;
+}
+.fifth-row .box .row h3 {
+  text-align: center;
+}
+.fifth-row .box .row .btn {
+  border-radius: 0px;
+  outline: none;
+  background: #23bab5;
+  border: none;
+  color: #ffffff;
+  font-family: 'Lato', sans-serif;
+  font-weight: bold;
+  margin-left: 40px;
+}
+/*************************footer section******************************/
+.footer {
+  background: #082d2c;
+  min-height: 100px;
+  margin-bottom: 0px;
+}
+.footer .box {
+  max-width: 800px;
+  margin: 0px auto;
+  text-align: center;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+.footer .box p {
+  margin: 0px;
+  color: #ffffff;
+  font-family: 'Droid Sans', sans-serif;
+  font-size: 12px;
+}
+.footer .box p a {
+  color: #23bab5;
+  text-decoration: none;
+  font-family: 'Droid Sans', sans-serif;
+}

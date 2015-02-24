@@ -1,0 +1,2 @@
+$(document).ready(function () {$("#academic_year_id").bind("change", function (event) {$.ajax({async:true, data:$("#academic_year_id").serialize(), dataType:"html", success:function (data, textStatus) {$("#academic_term_id").html(data);}, type:"post", url:"\/smartschool\/academic_terms\/ajax_get_terms\/SearchStudent\/%23academic_year_id"});
+return false;});});

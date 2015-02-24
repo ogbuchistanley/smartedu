@@ -1,0 +1,5 @@
+Usernames 		Passwords		Role
+emp0002			Password1		Super Admin
+emp0006			Password1		Employee
+spn0001			Password1		Sponsor
+spn0007			Password1		Sponsor

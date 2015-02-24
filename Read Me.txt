@@ -1,0 +1,30 @@
+If you are using Wamp Server
+
+Navigate to C:\wamp
+Paste the "cakephp" folder in the current directory
+
+Navigate To C:\wamp\www\smartschool\webroot\index.php 
+Goto line 55
+Edit the file the look like this
+define('CAKE_CORE_INCLUDE_PATH', 'C:' . DS . 'wamp' . DS . 'cakephp' . DS . 'lib');
+
+
+If you are using Xampp Server
+
+Navigate to C:\xampp
+Paste the "cakephp" folder in the current directory
+
+Navigate To C:\xampp\htdocs\smartschool\webroot\index.php 
+Goto line 55
+Edit the file the look like this
+define('CAKE_CORE_INCLUDE_PATH', 'C:' . DS . 'xampp' . DS . 'cakephp' . DS . 'lib');
+
+
+if you run into issues of "Can not determine the mimetype." 
+Goto php.ini file search for php_fileinfo
+
+Uncomment the Line Below for Mime Type File Info
+extension=php_fileinfo.dll
+
+
+you are good to go
