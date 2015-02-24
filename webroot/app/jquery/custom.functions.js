@@ -1,5 +1,5 @@
     
-domain_name = '/smartschool';
+domain_name = '/smartedu';
 
 $('document').ready(function(){
     //Students

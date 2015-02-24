@@ -101,11 +101,11 @@ if (!defined('DEVELOPER_SITE_EMAIL')) {
 
 
 if (!defined('DOMAIN_NAME')) {
-	define('DOMAIN_NAME', '/smartschool');
+	define('DOMAIN_NAME', '/smartedu');
 }
 
 if (!defined('DOMAIN_URL')) {
-	define('DOMAIN_URL', 'http://localhost/smartschool');
+	define('DOMAIN_URL', 'http://localhost/smartedu');
 }
 
 /**
