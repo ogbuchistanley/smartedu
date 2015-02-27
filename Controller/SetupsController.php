@@ -23,7 +23,7 @@ class SetupsController extends AppController {
                 $smartedu = new Folder('/Applications/XAMPP/xamppfiles/htdocs/smartedu/');
                 $smartedu->copy('/Applications/XAMPP/xamppfiles/htdocs/' . $data['subdomain']);
 
-                $sql_dump = '/Applications/XAMPP/xamppfiles/htdocs/smartedu/localhost_empty.sql';
+                $sql_dump = '/Applications/XAMPP/xamppfiles/htdocs/smartedu/database_empty.sql';
                 $db_file = '/Applications/XAMPP/xamppfiles/htdocs/'.$data['subdomain'].'/Config/database.php';
                 $domain_file = '/Applications/XAMPP/xamppfiles/htdocs/'.$data['subdomain'].'/domain.config.php';
                 $dbname = $data['subdomain'];
