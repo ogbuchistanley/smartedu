@@ -439,7 +439,7 @@ $cakeDescription = __d('app_dev', ':: SmartSchool :');
     <!-- Core Jquery File  =============================-->
     <script src="<?php echo APP_DIR_ROOT; ?>js/core.js"></script>
     <script src="<?php echo APP_DIR_ROOT; ?>jquery/custom.functions.js"></script>
-    
+
     <!--script src="<?php //echo APP_DIR_ROOT; ?>js/icheck/icheck.js"></script-->
     <?php //echo $scripts_for_layout; ?>
     

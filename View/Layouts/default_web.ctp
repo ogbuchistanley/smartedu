@@ -118,6 +118,7 @@ $cakeDescription = __d('web_dev', ':: SmartSchool ::');
                                     <li><a href="<?php echo DOMAIN_NAME; ?>/home/students">Students<i class="icon-angle-down"></i></a></li>
                                     <li><a href="<?php echo DOMAIN_NAME; ?>/home/exam">Exams / Fees <i class="icon-angle-down"></i></a></li>
                                     <li><a href="<?php echo DOMAIN_NAME; ?>/home/change">Change Password <i class="icon-angle-down"></i></a></li>
+                                    <li><a href="<?php echo DOMAIN_NAME; ?>/home/setup"> Sign Up </a></li>
                                     <li><a href="<?php echo DOMAIN_NAME; ?>/logout"><i class="fa fa-lock"></i><span class="hidden-minibar"> Logout</span> <i class="icon-angle-down"></i></a></li>
                                 </ul>
                             </nav>
@@ -159,6 +160,7 @@ $cakeDescription = __d('web_dev', ':: SmartSchool ::');
                                             <li><a href="<?php echo DOMAIN_NAME; ?>/home/students">Students<i class="icon-angle-down"></i></a></li>
                                             <li><a href="<?php echo DOMAIN_NAME; ?>/home/exam">Exams / Fees <i class="icon-angle-down"></i></a></li>
                                             <li><a href="<?php echo DOMAIN_NAME; ?>/home/change">Change Password <i class="icon-angle-down"></i></a></li>
+                                            <li><a href="<?php echo DOMAIN_NAME; ?>/home/setup"> Sign Up </a></li>
                                             <li><a href="<?php echo DOMAIN_NAME; ?>/logout"><i class="fa fa-lock"></i><span class="hidden-minibar"> Logout</span> <i class="icon-angle-down"></i></a></li>
                                         </ul>
                                     </nav>

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 05, 2015 at 02:10 PM
+-- Generation Time: Feb 24, 2015 at 01:23 PM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -17,17 +17,15 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `smartschool`
+-- Database: `smartedu`
 --
-DROP DATABASE `smartschool`;
-CREATE DATABASE IF NOT EXISTS `smartschool` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `smartschool`;
+CREATE DATABASE IF NOT EXISTS `smartedu` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `smartedu`;
 
 DELIMITER $$
 --
 -- Procedures
 --
-DROP PROCEDURE IF EXISTS `proc_annualClassPositionViews`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_annualClassPositionViews`(IN `ClassID` INT, IN `AcademicYearID` INT)
 BEGIN
 	#Create a Temporary Table to Hold The Values
@@ -135,7 +133,6 @@ BEGIN
 	END Block2;
 END$$
 
-DROP PROCEDURE IF EXISTS `proc_assignSubject2Students`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_assignSubject2Students`(IN `subjectClasslevelID` INT)
 BEGIN 
 	SELECT classlevel_id, class_id, academic_term_id 
@@ -174,7 +171,6 @@ BEGIN
 
 END$$
 
-DROP PROCEDURE IF EXISTS `proc_examsDetailsReportViews`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_examsDetailsReportViews`(IN `AcademicID` INT, IN `TypeID` INT)
 BEGIN
 	-- Create Temporary Table
@@ -277,7 +273,6 @@ BEGIN
 	END Block2;
 END$$
 
-DROP PROCEDURE IF EXISTS `proc_insertAttendDetails`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_insertAttendDetails`(IN `AttendID` INT, `StudentIDS` VARCHAR(225))
 BEGIN
 	# Delete The Record if it exists
@@ -306,7 +301,6 @@ BEGIN
 	END IF;
 END$$
 
-DROP PROCEDURE IF EXISTS `proc_insertExamDetails`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_insertExamDetails`(IN `ExamID` INT)
 BEGIN 
 	SELECT class_id, subject_classlevel_id
@@ -331,7 +325,6 @@ BEGIN
 	END;
 END$$
 
-DROP PROCEDURE IF EXISTS `proc_processItemVariable`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_processItemVariable`(IN `ItemVariableID` INT)
 BEGIN
 	SELECT item_id, student_id, class_id, academic_term_id, price 
@@ -387,7 +380,6 @@ BEGIN
 	END Block1;
 END$$
 
-DROP PROCEDURE IF EXISTS `proc_processTerminalFees`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_processTerminalFees`(IN `ProcessID` INT)
 BEGIN
 	SELECT academic_term_id 
@@ -422,7 +414,6 @@ BEGIN
 	END Block1;
 END$$
 
-DROP PROCEDURE IF EXISTS `proc_terminalClassPositionViews`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_terminalClassPositionViews`(IN `cla_id` INT, IN `term_id` INT)
 Block0: BEGIN
 	SET @Output = 0;
@@ -508,7 +499,6 @@ END Block0$$
 --
 -- Functions
 --
-DROP FUNCTION IF EXISTS `func_annualExamsViews`$$
 CREATE DEFINER=`root`@`localhost` FUNCTION `func_annualExamsViews`(`StudentID` INT, `AcademicYearID` INT) RETURNS int(11)
 BEGIN
 	SET @Output = 0;
@@ -598,7 +588,6 @@ BEGIN
 	RETURN @Output;
 END$$
 
-DROP FUNCTION IF EXISTS `fun_getAttendSummary`$$
 CREATE DEFINER=`root`@`localhost` FUNCTION `fun_getAttendSummary`(TermID INT, ClassID INT) RETURNS int(11)
 Block0: BEGIN
 	SET @Output = 0;
@@ -634,7 +623,6 @@ Block0: BEGIN
 	RETURN @Output;
 END Block0$$
 
-DROP FUNCTION IF EXISTS `fun_getClassHeadTutor`$$
 CREATE DEFINER=`root`@`localhost` FUNCTION `fun_getClassHeadTutor`(ClassLevelID INT, YearID INT) RETURNS int(3)
     DETERMINISTIC
 Block0: BEGIN
@@ -685,7 +673,6 @@ Block0: BEGIN
 	RETURN @Output;
 END Block0$$
 
-DROP FUNCTION IF EXISTS `fun_getSubjectClasslevel`$$
 CREATE DEFINER=`root`@`localhost` FUNCTION `fun_getSubjectClasslevel`(term_id INT) RETURNS int(11)
     DETERMINISTIC
 Block0: BEGIN
@@ -746,19 +733,16 @@ Block0: BEGIN
 	RETURN @Output;
 END Block0$$
 
-DROP FUNCTION IF EXISTS `getCurrentTermID`$$
 CREATE DEFINER=`root`@`localhost` FUNCTION `getCurrentTermID`() RETURNS int(11)
 BEGIN
 	RETURN (SELECT academic_term_id FROM academic_terms WHERE term_status_id=1 LIMIT 1);
 END$$
 
-DROP FUNCTION IF EXISTS `getCurrentYearID`$$
 CREATE DEFINER=`root`@`localhost` FUNCTION `getCurrentYearID`() RETURNS int(11)
 BEGIN
 	RETURN (SELECT academic_year_id FROM academic_years WHERE year_status_id=1 LIMIT 1);	
 END$$
 
-DROP FUNCTION IF EXISTS `SPLIT_STR`$$
 CREATE DEFINER=`root`@`localhost` FUNCTION `SPLIT_STR`(
 	  x VARCHAR(255),
 	  delim VARCHAR(12),
@@ -776,7 +760,6 @@ DELIMITER ;
 -- Table structure for table `academic_terms`
 --
 
-DROP TABLE IF EXISTS `academic_terms`;
 CREATE TABLE IF NOT EXISTS `academic_terms` (
 `academic_term_id` int(11) NOT NULL,
   `academic_term` varchar(50) DEFAULT NULL,
@@ -805,7 +788,6 @@ INSERT INTO `academic_terms` (`academic_term_id`, `academic_term`, `academic_yea
 -- Table structure for table `academic_years`
 --
 
-DROP TABLE IF EXISTS `academic_years`;
 CREATE TABLE IF NOT EXISTS `academic_years` (
 `academic_year_id` int(11) unsigned NOT NULL,
   `academic_year` varchar(50) DEFAULT NULL,
@@ -828,7 +810,6 @@ INSERT INTO `academic_years` (`academic_year_id`, `academic_year`, `year_status_
 -- Table structure for table `acos`
 --
 
-DROP TABLE IF EXISTS `acos`;
 CREATE TABLE IF NOT EXISTS `acos` (
 `id` int(10) NOT NULL,
   `parent_id` int(10) DEFAULT NULL,
@@ -980,7 +961,6 @@ INSERT INTO `acos` (`id`, `parent_id`, `model`, `foreign_key`, `alias`, `lft`, `
 -- Table structure for table `aros`
 --
 
-DROP TABLE IF EXISTS `aros`;
 CREATE TABLE IF NOT EXISTS `aros` (
 `id` int(10) NOT NULL,
   `parent_id` int(10) DEFAULT NULL,
@@ -1009,7 +989,6 @@ INSERT INTO `aros` (`id`, `parent_id`, `model`, `foreign_key`, `alias`, `lft`, `
 -- Table structure for table `aros_acos`
 --
 
-DROP TABLE IF EXISTS `aros_acos`;
 CREATE TABLE IF NOT EXISTS `aros_acos` (
 `id` int(10) NOT NULL,
   `aro_id` int(10) NOT NULL,
@@ -1071,7 +1050,6 @@ INSERT INTO `aros_acos` (`id`, `aro_id`, `aco_id`, `_create`, `_read`, `_update`
 -- Table structure for table `attend_details`
 --
 
-DROP TABLE IF EXISTS `attend_details`;
 CREATE TABLE IF NOT EXISTS `attend_details` (
   `student_id` int(11) DEFAULT NULL,
   `attend_id` int(11) DEFAULT NULL
@@ -1107,7 +1085,6 @@ INSERT INTO `attend_details` (`student_id`, `attend_id`) VALUES
 --
 -- Stand-in structure for view `attend_headerviews`
 --
-DROP VIEW IF EXISTS `attend_headerviews`;
 CREATE TABLE IF NOT EXISTS `attend_headerviews` (
 `attend_id` int(11)
 ,`class_id` int(11)
@@ -1126,7 +1103,6 @@ CREATE TABLE IF NOT EXISTS `attend_headerviews` (
 -- Table structure for table `attends`
 --
 
-DROP TABLE IF EXISTS `attends`;
 CREATE TABLE IF NOT EXISTS `attends` (
 `attend_id` int(11) NOT NULL,
   `class_id` int(11) NOT NULL,
@@ -1159,7 +1135,6 @@ INSERT INTO `attends` (`attend_id`, `class_id`, `employee_id`, `academic_term_id
 -- Table structure for table `classgroups`
 --
 
-DROP TABLE IF EXISTS `classgroups`;
 CREATE TABLE IF NOT EXISTS `classgroups` (
 `classgroup_id` int(11) unsigned NOT NULL,
   `classgroup` varchar(50) DEFAULT NULL
@@ -1183,7 +1158,6 @@ INSERT INTO `classgroups` (`classgroup_id`, `classgroup`) VALUES
 -- Table structure for table `classlevels`
 --
 
-DROP TABLE IF EXISTS `classlevels`;
 CREATE TABLE IF NOT EXISTS `classlevels` (
 `classlevel_id` int(11) NOT NULL,
   `classlevel` varchar(50) DEFAULT NULL,
@@ -1218,7 +1192,6 @@ INSERT INTO `classlevels` (`classlevel_id`, `classlevel`, `classgroup_id`) VALUE
 -- Table structure for table `classrooms`
 --
 
-DROP TABLE IF EXISTS `classrooms`;
 CREATE TABLE IF NOT EXISTS `classrooms` (
 `class_id` int(11) NOT NULL,
   `class_name` varchar(50) DEFAULT NULL,
@@ -1351,7 +1324,6 @@ INSERT INTO `classrooms` (`class_id`, `class_name`, `classlevel_id`, `class_size
 -- Table structure for table `countries`
 --
 
-DROP TABLE IF EXISTS `countries`;
 CREATE TABLE IF NOT EXISTS `countries` (
 `country_id` int(3) unsigned NOT NULL,
   `country_name` varchar(50) DEFAULT NULL
@@ -1602,7 +1574,6 @@ INSERT INTO `countries` (`country_id`, `country_name`) VALUES
 -- Table structure for table `employee_qualifications`
 --
 
-DROP TABLE IF EXISTS `employee_qualifications`;
 CREATE TABLE IF NOT EXISTS `employee_qualifications` (
 `employee_qualification_id` int(11) NOT NULL,
   `employee_id` int(11) NOT NULL,
@@ -1634,7 +1605,6 @@ INSERT INTO `employee_qualifications` (`employee_qualification_id`, `employee_id
 -- Table structure for table `employee_types`
 --
 
-DROP TABLE IF EXISTS `employee_types`;
 CREATE TABLE IF NOT EXISTS `employee_types` (
 `employee_type_id` int(11) unsigned NOT NULL,
   `employee_type` varchar(100) DEFAULT NULL
@@ -1659,7 +1629,6 @@ INSERT INTO `employee_types` (`employee_type_id`, `employee_type`) VALUES
 -- Table structure for table `employees`
 --
 
-DROP TABLE IF EXISTS `employees`;
 CREATE TABLE IF NOT EXISTS `employees` (
 `employee_id` int(11) NOT NULL,
   `employee_no` varchar(10) NOT NULL,
@@ -1719,7 +1688,6 @@ INSERT INTO `employees` (`employee_id`, `employee_no`, `salutation_id`, `first_n
 -- Table structure for table `exam_details`
 --
 
-DROP TABLE IF EXISTS `exam_details`;
 CREATE TABLE IF NOT EXISTS `exam_details` (
 `exam_detail_id` int(11) NOT NULL,
   `exam_id` int(11) DEFAULT NULL,
@@ -1810,7 +1778,6 @@ INSERT INTO `exam_details` (`exam_detail_id`, `exam_id`, `student_id`, `ca1`, `c
 --
 -- Stand-in structure for view `exam_subjectviews`
 --
-DROP VIEW IF EXISTS `exam_subjectviews`;
 CREATE TABLE IF NOT EXISTS `exam_subjectviews` (
 `exam_id` int(11) unsigned
 ,`exam_desc` text
@@ -1838,7 +1805,6 @@ CREATE TABLE IF NOT EXISTS `exam_subjectviews` (
 -- Table structure for table `exams`
 --
 
-DROP TABLE IF EXISTS `exams`;
 CREATE TABLE IF NOT EXISTS `exams` (
 `exam_id` int(11) unsigned NOT NULL,
   `exam_desc` text,
@@ -1885,7 +1851,6 @@ INSERT INTO `exams` (`exam_id`, `exam_desc`, `class_id`, `subject_classlevel_id`
 --
 -- Stand-in structure for view `examsdetails_reportviews`
 --
-DROP VIEW IF EXISTS `examsdetails_reportviews`;
 CREATE TABLE IF NOT EXISTS `examsdetails_reportviews` (
 `exam_id` int(11) unsigned
 ,`subject_id` int(11)
@@ -1915,7 +1880,6 @@ CREATE TABLE IF NOT EXISTS `examsdetails_reportviews` (
 -- Table structure for table `grades`
 --
 
-DROP TABLE IF EXISTS `grades`;
 CREATE TABLE IF NOT EXISTS `grades` (
 `grades_id` int(11) NOT NULL,
   `grade` varchar(20) DEFAULT NULL,
@@ -1957,7 +1921,6 @@ INSERT INTO `grades` (`grades_id`, `grade`, `grade_abbr`, `classgroup_id`, `lowe
 -- Table structure for table `item_bills`
 --
 
-DROP TABLE IF EXISTS `item_bills`;
 CREATE TABLE IF NOT EXISTS `item_bills` (
 `item_bill_id` int(11) NOT NULL,
   `item_id` int(11) NOT NULL,
@@ -1992,7 +1955,6 @@ INSERT INTO `item_bills` (`item_bill_id`, `item_id`, `price`, `classlevel_id`) V
 -- Table structure for table `item_types`
 --
 
-DROP TABLE IF EXISTS `item_types`;
 CREATE TABLE IF NOT EXISTS `item_types` (
 `item_type_id` int(11) NOT NULL,
   `item_type` varchar(50) NOT NULL
@@ -2013,7 +1975,6 @@ INSERT INTO `item_types` (`item_type_id`, `item_type`) VALUES
 -- Table structure for table `item_variables`
 --
 
-DROP TABLE IF EXISTS `item_variables`;
 CREATE TABLE IF NOT EXISTS `item_variables` (
 `item_variable_id` int(11) NOT NULL,
   `item_id` int(11) NOT NULL,
@@ -2040,7 +2001,6 @@ INSERT INTO `item_variables` (`item_variable_id`, `item_id`, `student_id`, `clas
 -- Table structure for table `items`
 --
 
-DROP TABLE IF EXISTS `items`;
 CREATE TABLE IF NOT EXISTS `items` (
 `item_id` int(11) NOT NULL,
   `item_name` varchar(100) NOT NULL,
@@ -2068,7 +2028,6 @@ INSERT INTO `items` (`item_id`, `item_name`, `item_status_id`, `item_description
 -- Table structure for table `local_govts`
 --
 
-DROP TABLE IF EXISTS `local_govts`;
 CREATE TABLE IF NOT EXISTS `local_govts` (
 `local_govt_id` int(3) unsigned NOT NULL,
   `local_govt_name` varchar(50) DEFAULT NULL,
@@ -2867,7 +2826,6 @@ INSERT INTO `local_govts` (`local_govt_id`, `local_govt_name`, `state_id`) VALUE
 -- Table structure for table `message_recipients`
 --
 
-DROP TABLE IF EXISTS `message_recipients`;
 CREATE TABLE IF NOT EXISTS `message_recipients` (
 `message_recipient_id` int(11) NOT NULL,
   `recipient_name` varchar(150) NOT NULL,
@@ -2895,7 +2853,6 @@ INSERT INTO `message_recipients` (`message_recipient_id`, `recipient_name`, `mob
 -- Table structure for table `messages`
 --
 
-DROP TABLE IF EXISTS `messages`;
 CREATE TABLE IF NOT EXISTS `messages` (
 `message_id` int(11) NOT NULL,
   `message` text NOT NULL,
@@ -2930,7 +2887,6 @@ INSERT INTO `messages` (`message_id`, `message`, `message_subject`, `sms_count`,
 -- Table structure for table `order_items`
 --
 
-DROP TABLE IF EXISTS `order_items`;
 CREATE TABLE IF NOT EXISTS `order_items` (
 `order_item_id` int(11) NOT NULL,
   `order_id` int(11) NOT NULL,
@@ -3033,7 +2989,6 @@ INSERT INTO `order_items` (`order_item_id`, `order_id`, `price`, `quantity`, `it
 -- Table structure for table `orders`
 --
 
-DROP TABLE IF EXISTS `orders`;
 CREATE TABLE IF NOT EXISTS `orders` (
 `order_id` int(11) NOT NULL,
   `student_id` int(11) NOT NULL,
@@ -3108,7 +3063,6 @@ INSERT INTO `orders` (`order_id`, `student_id`, `sponsor_id`, `academic_term_id`
 -- Table structure for table `process_items`
 --
 
-DROP TABLE IF EXISTS `process_items`;
 CREATE TABLE IF NOT EXISTS `process_items` (
 `process_item_id` int(11) NOT NULL,
   `process_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -3129,7 +3083,6 @@ INSERT INTO `process_items` (`process_item_id`, `process_date`, `process_by`, `a
 -- Table structure for table `relationship_types`
 --
 
-DROP TABLE IF EXISTS `relationship_types`;
 CREATE TABLE IF NOT EXISTS `relationship_types` (
 `relationship_type_id` int(3) unsigned NOT NULL,
   `relationship_type` varchar(50) DEFAULT NULL
@@ -3156,7 +3109,6 @@ INSERT INTO `relationship_types` (`relationship_type_id`, `relationship_type`) V
 -- Table structure for table `salutations`
 --
 
-DROP TABLE IF EXISTS `salutations`;
 CREATE TABLE IF NOT EXISTS `salutations` (
 `salutation_id` int(3) unsigned NOT NULL,
   `salutation_abbr` varchar(10) DEFAULT NULL,
@@ -3186,7 +3138,6 @@ INSERT INTO `salutations` (`salutation_id`, `salutation_abbr`, `salutation_name`
 -- Table structure for table `sponsors`
 --
 
-DROP TABLE IF EXISTS `sponsors`;
 CREATE TABLE IF NOT EXISTS `sponsors` (
 `sponsor_id` int(3) unsigned NOT NULL,
   `sponsor_no` varchar(10) NOT NULL,
@@ -3252,7 +3203,6 @@ INSERT INTO `sponsors` (`sponsor_id`, `sponsor_no`, `first_name`, `other_name`, 
 -- Table structure for table `sponsorship_types`
 --
 
-DROP TABLE IF EXISTS `sponsorship_types`;
 CREATE TABLE IF NOT EXISTS `sponsorship_types` (
 `sponsorship_type_id` int(3) unsigned NOT NULL,
   `sponsorship_type` varchar(50) DEFAULT NULL
@@ -3273,7 +3223,6 @@ INSERT INTO `sponsorship_types` (`sponsorship_type_id`, `sponsorship_type`) VALU
 -- Table structure for table `spouse_details`
 --
 
-DROP TABLE IF EXISTS `spouse_details`;
 CREATE TABLE IF NOT EXISTS `spouse_details` (
 `spouse_detail_id` int(11) NOT NULL,
   `employee_id` int(5) NOT NULL,
@@ -3296,7 +3245,6 @@ INSERT INTO `spouse_details` (`spouse_detail_id`, `employee_id`, `spouse_name`, 
 -- Table structure for table `states`
 --
 
-DROP TABLE IF EXISTS `states`;
 CREATE TABLE IF NOT EXISTS `states` (
 `state_id` int(3) unsigned NOT NULL,
   `state_name` varchar(30) DEFAULT NULL,
@@ -3352,7 +3300,6 @@ INSERT INTO `states` (`state_id`, `state_name`, `state_code`) VALUES
 -- Table structure for table `status`
 --
 
-DROP TABLE IF EXISTS `status`;
 CREATE TABLE IF NOT EXISTS `status` (
 `status_id` int(11) NOT NULL,
   `status` varchar(50) NOT NULL
@@ -3371,7 +3318,6 @@ INSERT INTO `status` (`status_id`, `status`) VALUES
 --
 -- Stand-in structure for view `student_feesqueryviews`
 --
-DROP VIEW IF EXISTS `student_feesqueryviews`;
 CREATE TABLE IF NOT EXISTS `student_feesqueryviews` (
 `order_id` int(11)
 ,`price` decimal(12,2)
@@ -3399,7 +3345,6 @@ CREATE TABLE IF NOT EXISTS `student_feesqueryviews` (
 --
 -- Stand-in structure for view `student_feesviews`
 --
-DROP VIEW IF EXISTS `student_feesviews`;
 CREATE TABLE IF NOT EXISTS `student_feesviews` (
 `student_name` varchar(152)
 ,`student_id` int(10) unsigned
@@ -3435,7 +3380,6 @@ CREATE TABLE IF NOT EXISTS `student_feesviews` (
 -- Table structure for table `student_status`
 --
 
-DROP TABLE IF EXISTS `student_status`;
 CREATE TABLE IF NOT EXISTS `student_status` (
 `student_status_id` int(3) unsigned NOT NULL,
   `student_status` varchar(50) DEFAULT NULL
@@ -3458,7 +3402,6 @@ INSERT INTO `student_status` (`student_status_id`, `student_status`) VALUES
 -- Table structure for table `students`
 --
 
-DROP TABLE IF EXISTS `students`;
 CREATE TABLE IF NOT EXISTS `students` (
 `student_id` int(10) unsigned NOT NULL,
   `sponsor_id` int(11) DEFAULT NULL,
@@ -3555,7 +3498,6 @@ INSERT INTO `students` (`student_id`, `sponsor_id`, `first_name`, `surname`, `ot
 -- Table structure for table `students_classes`
 --
 
-DROP TABLE IF EXISTS `students_classes`;
 CREATE TABLE IF NOT EXISTS `students_classes` (
 `student_class_id` int(11) NOT NULL,
   `student_id` int(11) NOT NULL,
@@ -3628,7 +3570,6 @@ INSERT INTO `students_classes` (`student_class_id`, `student_id`, `class_id`, `a
 --
 -- Stand-in structure for view `students_classlevelviews`
 --
-DROP VIEW IF EXISTS `students_classlevelviews`;
 CREATE TABLE IF NOT EXISTS `students_classlevelviews` (
 `student_name` varchar(152)
 ,`student_no` varchar(50)
@@ -3648,7 +3589,6 @@ CREATE TABLE IF NOT EXISTS `students_classlevelviews` (
 --
 -- Stand-in structure for view `students_paymentviews`
 --
-DROP VIEW IF EXISTS `students_paymentviews`;
 CREATE TABLE IF NOT EXISTS `students_paymentviews` (
 `order_id` int(11)
 ,`academic_term_id` int(11)
@@ -3673,7 +3613,6 @@ CREATE TABLE IF NOT EXISTS `students_paymentviews` (
 --
 -- Stand-in structure for view `students_subjectsviews`
 --
-DROP VIEW IF EXISTS `students_subjectsviews`;
 CREATE TABLE IF NOT EXISTS `students_subjectsviews` (
 `student_id` int(11)
 ,`subject_classlevel_id` int(11)
@@ -3686,7 +3625,6 @@ CREATE TABLE IF NOT EXISTS `students_subjectsviews` (
 -- Table structure for table `subject_classlevels`
 --
 
-DROP TABLE IF EXISTS `subject_classlevels`;
 CREATE TABLE IF NOT EXISTS `subject_classlevels` (
 `subject_classlevel_id` int(11) NOT NULL,
   `subject_id` int(11) DEFAULT NULL,
@@ -3732,7 +3670,6 @@ INSERT INTO `subject_classlevels` (`subject_classlevel_id`, `subject_id`, `class
 --
 -- Stand-in structure for view `subject_classlevelviews`
 --
-DROP VIEW IF EXISTS `subject_classlevelviews`;
 CREATE TABLE IF NOT EXISTS `subject_classlevelviews` (
 `class_name` varchar(50)
 ,`subject_name` varchar(50)
@@ -3754,7 +3691,6 @@ CREATE TABLE IF NOT EXISTS `subject_classlevelviews` (
 -- Table structure for table `subject_groups`
 --
 
-DROP TABLE IF EXISTS `subject_groups`;
 CREATE TABLE IF NOT EXISTS `subject_groups` (
 `subject_group_id` int(3) NOT NULL,
   `subject_group` varchar(50) DEFAULT NULL
@@ -3779,7 +3715,6 @@ INSERT INTO `subject_groups` (`subject_group_id`, `subject_group`) VALUES
 -- Table structure for table `subject_students_registers`
 --
 
-DROP TABLE IF EXISTS `subject_students_registers`;
 CREATE TABLE IF NOT EXISTS `subject_students_registers` (
   `student_id` int(11) DEFAULT NULL,
   `class_id` int(11) DEFAULT NULL,
@@ -3854,7 +3789,6 @@ INSERT INTO `subject_students_registers` (`student_id`, `class_id`, `subject_cla
 -- Table structure for table `subjects`
 --
 
-DROP TABLE IF EXISTS `subjects`;
 CREATE TABLE IF NOT EXISTS `subjects` (
 `subject_id` int(3) NOT NULL,
   `subject_name` varchar(50) DEFAULT NULL,
@@ -3899,7 +3833,6 @@ INSERT INTO `subjects` (`subject_id`, `subject_name`, `subject_group_id`) VALUES
 -- Table structure for table `teachers_classes`
 --
 
-DROP TABLE IF EXISTS `teachers_classes`;
 CREATE TABLE IF NOT EXISTS `teachers_classes` (
 `teacher_class_id` int(11) NOT NULL,
   `employee_id` int(11) NOT NULL,
@@ -3927,7 +3860,6 @@ INSERT INTO `teachers_classes` (`teacher_class_id`, `employee_id`, `class_id`, `
 --
 -- Stand-in structure for view `teachers_classviews`
 --
-DROP VIEW IF EXISTS `teachers_classviews`;
 CREATE TABLE IF NOT EXISTS `teachers_classviews` (
 `teacher_class_id` int(11)
 ,`employee_id` int(11)
@@ -3947,7 +3879,6 @@ CREATE TABLE IF NOT EXISTS `teachers_classviews` (
 -- Table structure for table `teachers_subjects`
 --
 
-DROP TABLE IF EXISTS `teachers_subjects`;
 CREATE TABLE IF NOT EXISTS `teachers_subjects` (
 `teachers_subjects_id` int(11) NOT NULL,
   `employee_id` int(11) DEFAULT NULL,
@@ -3991,7 +3922,6 @@ INSERT INTO `teachers_subjects` (`teachers_subjects_id`, `employee_id`, `class_i
 --
 -- Stand-in structure for view `teachers_subjectsviews`
 --
-DROP VIEW IF EXISTS `teachers_subjectsviews`;
 CREATE TABLE IF NOT EXISTS `teachers_subjectsviews` (
 `teachers_subjects_id` int(11)
 ,`employee_id` int(11)
@@ -4012,7 +3942,6 @@ CREATE TABLE IF NOT EXISTS `teachers_subjectsviews` (
 -- Table structure for table `user_roles`
 --
 
-DROP TABLE IF EXISTS `user_roles`;
 CREATE TABLE IF NOT EXISTS `user_roles` (
 `user_role_id` int(3) unsigned NOT NULL,
   `user_role` varchar(50) DEFAULT NULL,
@@ -4037,7 +3966,6 @@ INSERT INTO `user_roles` (`user_role_id`, `user_role`, `group_alias`) VALUES
 -- Table structure for table `users`
 --
 
-DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
 `user_id` int(10) unsigned NOT NULL,
   `username` varchar(70) NOT NULL,
@@ -4691,28 +4619,6 @@ MODIFY `user_role_id` int(3) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 ALTER TABLE `users`
 MODIFY `user_id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=50;
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `academic_terms`
---
-ALTER TABLE `academic_terms`
-ADD CONSTRAINT `academic_year_id` FOREIGN KEY (`academic_year_id`) REFERENCES `academic_years` (`academic_year_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table `classlevels`
---
-ALTER TABLE `classlevels`
-ADD CONSTRAINT `classgroup_id` FOREIGN KEY (`classgroup_id`) REFERENCES `classgroups` (`classgroup_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table `classrooms`
---
-ALTER TABLE `classrooms`
-ADD CONSTRAINT `classlevel_id` FOREIGN KEY (`classlevel_id`) REFERENCES `classlevels` (`classlevel_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

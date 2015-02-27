@@ -144,6 +144,7 @@ class DashboardController extends AppController {
     //Get all the students by status including past and present
     public function studentClasslevel() {
         $this->autoRender = false;
+        $res = null;
         if ($this->request->is('ajax')) {
             $Classlevel = ClassRegistry::init('Classlevel');
             $AcademicTerm = ClassRegistry::init('AcademicTerm');
