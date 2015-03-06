@@ -21,8 +21,9 @@
         <div class="panel-heading text-primary">
             <h3 class="panel-title">
                <i class="fa fa-bookmark-o"></i> View Student Terminal Exam Subjects Scores
+                <a class="btn btn-default" href="<?php echo DOMAIN_NAME ?>/exams/print_result/<?php echo $encrypt_id?>"  title="Print"><i class="fa fa-2x fa-print"></i> Print</a>
                 <span class="pull-right">
-                    <a href="javascript:void(0)"  title="Refresh"><i class="fa fa-refresh"></i></a>
+                    <a href="<?php echo DOMAIN_NAME ?>/exams/print_result/<?php echo $encrypt_id?>"  title="Print"><i class="fa fa-print"></i></a>
                     <a href="#" class="panel-minimize"><i class="fa fa-chevron-up"></i></a>
                     <a href="#" class="panel-close"><i class="fa fa-times"></i></a>
                 </span>
@@ -34,12 +35,12 @@
                 <div class="panel">
                     <div class="panel-body">
                         <div class="panel panel-primary">
-                        <div class="panel-heading panel-title  text-white">Overall Terminal Student Class Position</div>
+                        <div class="panel-heading panel-title  text-white">
+                            Overall Terminal Student Class Position
+                            <a class="btn btn-default" href="<?php echo DOMAIN_NAME ?>/exams/print_result/<?php echo $encrypt_id?>"  title="Print"><i class="fa fa-2x fa-print"></i> Print</a>
+                        </div>
                             <table class="table table-bordered table-hover table-striped">
-                                <?php
-                                    if($ClassPosition['ClassPositions']):                                     
-                                ?>
-                                    
+                                <?php if($ClassPosition['ClassPositions']): ?>
                                     <tr>
                                         <th>Student Full Name</th>
                                         <td>
@@ -93,15 +94,61 @@
                         </div>
                     </div>
                 </div>
+            </div><!-- /Panel with Tables -->
+
+            <div class="col-md-6"><!-- Panel with Tables -->
+                <div class="panel">
+                    <div class="panel-body">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading panel-title  text-white">
+                                Terminal Student Assessment Report
+                                <a class="btn btn-default" href="<?php echo DOMAIN_NAME ?>/exams/print_result/<?php echo $encrypt_id?>"  title="Print"><i class="fa fa-2x fa-print"></i> Print</a>
+                            </div>
+                            <table class="table table-bordered table-hover table-striped">
+                                <?php if(!empty($SkillsAssess)): ?>
+                                    <thead>
+                                        <tr>
+                                            <th>Assessment Skills</th>
+                                            <th>5</th>
+                                            <th>4</th>
+                                            <th>3</th>
+                                            <th>2</th>
+                                            <th>1</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach($SkillsAssess as $skill):?>
+                                            <tr>
+                                                <td><?php echo $skill['Skill']['skill']?>:</td>
+                                                <?php echo ($skill['SkillAssessment']['option'] == 5) ? '<td><span class="badge bg-success-dark">5</span></td>' : '<td></td>'; ?>
+                                                <?php echo ($skill['SkillAssessment']['option'] == 4) ? '<td><span class="badge bg-primary-dark">4</span></td>' : '<td></td>'; ?>
+                                                <?php echo ($skill['SkillAssessment']['option'] == 3) ? '<td><span class="badge bg-info-dark">3</span></td>' : '<td></td>'; ?>
+                                                <?php echo ($skill['SkillAssessment']['option'] == 2) ? '<td><span class="badge bg-warning-dark">2</span></td>' : '<td></td>'; ?>
+                                                <?php echo ($skill['SkillAssessment']['option'] == 1) ? '<td><span class="badge bg-danger-dark">1</span></td>' : '<td></td>'; ?>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                    <?php else:?>
+                                        <tr>
+                                            <th>Assessment Has Not Been Carried Out</th>
+                                        </tr>
+                                <?php endif;?>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div> <!-- /Panel with Tables -->
         </div>
-        
+
         <div class="row">
             <div class="col-md-12">
                <div class="panel">
                     <div class="panel-body">
                         <div class="panel panel-info">
-                            <div class="panel-heading panel-title  text-white">List of Student Subjects and their exam Scores</div>
+                            <div class="panel-heading panel-title  text-white">
+                                List of Student Subjects and their exam Scores
+                                <a class="btn btn-default text-primary" href="<?php echo DOMAIN_NAME ?>/exams/print_result/<?php echo $encrypt_id?>"  title="Print"><i class="fa fa-2x fa-print"></i> Print</a>
+                            </div>
                             <div style="overflow-x: scroll" class="panel-body">
                                 <?php if(!empty($TermScores['Scores'])):?>
                                 <table  class="table table-bordered table-hover table-striped display">

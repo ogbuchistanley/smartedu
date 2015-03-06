@@ -7,7 +7,7 @@
  * @since         CakePHP(tm) v 0.10.0.1076
  */
 
-$cakeDescription = __d('app_dev', ':: SmartSchool :');
+$cakeDescription = __d('app_dev', ':: SmartEdu :');
 ?>
 <?php 
     
@@ -76,7 +76,7 @@ $cakeDescription = __d('app_dev', ':: SmartSchool :');
     
     <!-- Loading Custom Stylesheets -->   
     <link href="<?php echo APP_DIR_ROOT; ?>css/jquery.autocomplete.css" rel="stylesheet">
-    <link href="<?php echo APP_DIR_ROOT; ?>css/custom.css" rel="stylesheet">
+    <link href="<?php echo APP_DIR_ROOT; ?>css/custom.css" rel="stylesheet" media="print">
     <link href="<?php echo APP_DIR_ROOT; ?>images/icon.png" rel="shortcut icon">
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
     <!--[if lt IE 9]>
@@ -117,7 +117,7 @@ $cakeDescription = __d('app_dev', ':: SmartSchool :');
                     <i class="fa fa-list btn-nav-toggle-responsive text-white"></i>
                 </a>
                 <a class="navbar-brand" href="<?php echo DOMAIN_NAME ?>/dashboard">
-                    <span class="logo small">Smart<img src="<?php echo APP_DIR_ROOT; ?>images/icon.png" />School</span>
+                    <span class="logo small">Smart<img src="<?php echo APP_DIR_ROOT; ?>images/icon.png" />Edu</span>
                 </a>
             </div>
 
@@ -252,6 +252,7 @@ $cakeDescription = __d('app_dev', ':: SmartSchool :');
                                     <?php //endif;?>
                                     <li><a href="<?php echo DOMAIN_NAME ?>/exams/index#subjectScores" data-original-title="Input Subject Scores"><i class="fa fa-th"></i><span> Input / View Subject Scores</span></a></li>
                                     <li><a href="<?php echo DOMAIN_NAME ?>/exams/index#viewTAScores" data-original-title="Adjust Exams"><i class="fa fa-eye"></i><span> Terminal / Annual Scores</span></a></li>
+                                    <li><a href="<?php echo DOMAIN_NAME ?>/assessments" data-original-title="Skills Assessment"><i class="fa fa-magic"></i><span> Skills Assessment</span></a></li>
                                 </ul>
                             </li>
                             <?php endif;?>

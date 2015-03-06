@@ -3,7 +3,7 @@
 <section id="login">
     <div class="row animated fadeILeftBig">
          <div class="login-holder col-md-6 col-md-offset-3">
-           <h2 class="page-header text-center text-primary"> Smart<img src="<?php echo APP_DIR_ROOT; ?>images/icon.png" />School </h2>
+           <h2 class="page-header text-center text-primary"> Smart<img src="<?php echo APP_DIR_ROOT; ?>images/icon.png" />Edu </h2>
            <div class="row">
                 <noscript>
                     <div style="margin:0 0 35px 0; text-align:center" class="alert alert-danger">
@@ -51,7 +51,7 @@
         <section id="forgot-password" style="background:#2F4051;">
             <div class="row animated fadeILeftBig">
                 <div class="login-holder col-md-6 col-md-offset-3">
-                    <h2 class="page-header text-center text-primary">  Smart<img src="<?php echo APP_DIR_ROOT; ?>images/icon.png" />School </h2>
+                    <h2 class="page-header text-center text-primary">  Smart<img src="<?php echo APP_DIR_ROOT; ?>images/icon.png" />Edu </h2>
                     <div class="alert alert-info" id="msg_box">Enter Your Valid Username</div>
                     <?php
                         // Flash Messages

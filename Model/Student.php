@@ -30,7 +30,7 @@ class Student extends AppModel {
         //$this->data[$this->alias]['updated_at'] = $this->dateFormatBeforeSave();
         return parent::beforeSave($options);
     }
-    
+
     public function afterSave($created, $options = array()) {
         $studClass = ClassRegistry::init('StudentsClass');
         $term_id = ClassRegistry::init('AcademicTerm');
@@ -55,9 +55,8 @@ class Student extends AppModel {
                 $studClass->save();
             }
         }
-        
     }
-        
+
     public $belongsTo = array(
 		'Sponsor' => array(
 			'className' => 'Sponsor',

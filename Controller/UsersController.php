@@ -74,6 +74,7 @@ class UsersController extends AppController {
     }
 
     public function logout() {
+        CakeSession::delete('View_redirect');
         return $this->redirect($this->Auth->logout());
     }
 

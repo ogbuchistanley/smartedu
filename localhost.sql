@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 27, 2015 at 12:55 PM
+-- Generation Time: Mar 06, 2015 at 03:10 PM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -501,7 +501,6 @@ END Block0$$
 -- Functions
 --
 CREATE DEFINER=`root`@`localhost` FUNCTION `func_annualExamsViews`(`StudentID` INT, `AcademicYearID` INT) RETURNS int(11)
-    DETERMINISTIC
 BEGIN
 	SET @Output = 0;
 	#Create a Temporary Table to Hold The Values
@@ -591,7 +590,6 @@ BEGIN
 END$$
 
 CREATE DEFINER=`root`@`localhost` FUNCTION `fun_getAttendSummary`(TermID INT, ClassID INT) RETURNS int(11)
-    DETERMINISTIC
 Block0: BEGIN
 	SET @Output = 0;
 	#Create a Temporary Table to Hold The Values
@@ -676,7 +674,7 @@ Block0: BEGIN
 	RETURN @Output;
 END Block0$$
 
-CREATE DEFINER=`root`@`localhost` FUNCTION `fun_getSubjectClasslevel`(term_id INT) RETURNS int(11)
+CREATE DEFINER=`root`@`localhost` FUNCTION `fun_getSubjectClasslevel`(`term_id` INT) RETURNS int(11)
     DETERMINISTIC
 Block0: BEGIN
 	SET @Output = 0;
@@ -737,13 +735,11 @@ Block0: BEGIN
 END Block0$$
 
 CREATE DEFINER=`root`@`localhost` FUNCTION `getCurrentTermID`() RETURNS int(11)
-    DETERMINISTIC
 BEGIN
 	RETURN (SELECT academic_term_id FROM academic_terms WHERE term_status_id=1 LIMIT 1);
 END$$
 
 CREATE DEFINER=`root`@`localhost` FUNCTION `getCurrentYearID`() RETURNS int(11)
-    DETERMINISTIC
 BEGIN
 	RETURN (SELECT academic_year_id FROM academic_years WHERE year_status_id=1 LIMIT 1);	
 END$$
@@ -753,7 +749,6 @@ CREATE DEFINER=`root`@`localhost` FUNCTION `SPLIT_STR`(
 	  delim VARCHAR(12),
 	  pos INT
 	) RETURNS varchar(255) CHARSET latin1
-    DETERMINISTIC
 RETURN REPLACE(SUBSTRING(SUBSTRING_INDEX(x, delim, pos),
        LENGTH(SUBSTRING_INDEX(x, delim, pos -1)) + 1),
        delim, '')$$
@@ -1053,6 +1048,27 @@ INSERT INTO `aros_acos` (`id`, `aro_id`, `aco_id`, `_create`, `_read`, `_update`
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `assessments`
+--
+
+CREATE TABLE IF NOT EXISTS `assessments` (
+`assessment_id` int(11) NOT NULL,
+  `student_id` int(11) NOT NULL,
+  `academic_term_id` int(11) NOT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `assessments`
+--
+
+INSERT INTO `assessments` (`assessment_id`, `student_id`, `academic_term_id`) VALUES
+(1, 3, 4),
+(2, 5, 4),
+(3, 15, 4);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `attend_details`
 --
 
@@ -1092,16 +1108,16 @@ INSERT INTO `attend_details` (`student_id`, `attend_id`) VALUES
 -- Stand-in structure for view `attend_headerviews`
 --
 CREATE TABLE IF NOT EXISTS `attend_headerviews` (
-`attend_id` int(1)
-,`class_id` int(1)
-,`employee_id` int(1)
-,`academic_term_id` int(1)
-,`attend_date` int(1)
-,`class_name` int(1)
-,`classlevel_id` int(1)
-,`academic_term` int(1)
-,`academic_year_id` int(1)
-,`head_tutor` int(1)
+`attend_id` int(11)
+,`class_id` int(11)
+,`employee_id` int(11)
+,`academic_term_id` int(11)
+,`attend_date` date
+,`class_name` varchar(50)
+,`classlevel_id` int(11)
+,`academic_term` varchar(50)
+,`academic_year_id` int(11) unsigned
+,`head_tutor` varchar(151)
 );
 -- --------------------------------------------------------
 
@@ -1785,25 +1801,25 @@ INSERT INTO `exam_details` (`exam_detail_id`, `exam_id`, `student_id`, `ca1`, `c
 -- Stand-in structure for view `exam_subjectviews`
 --
 CREATE TABLE IF NOT EXISTS `exam_subjectviews` (
-`exam_id` int(1)
-,`exam_desc` int(1)
-,`class_id` int(1)
-,`class_name` int(1)
-,`subject_name` int(1)
-,`subject_id` int(1)
-,`subject_classlevel_id` int(1)
-,`weightageCA1` int(1)
-,`weightageCA2` int(1)
-,`weightageExam` int(1)
-,`setup_by` int(1)
-,`exammarked_status_id` int(1)
-,`setup_date` int(1)
-,`classlevel_id` int(1)
-,`classlevel` int(1)
-,`academic_term_id` int(1)
-,`academic_term` int(1)
-,`academic_year_id` int(1)
-,`academic_year` int(1)
+`exam_id` int(11) unsigned
+,`exam_desc` text
+,`class_id` int(11)
+,`class_name` varchar(50)
+,`subject_name` varchar(50)
+,`subject_id` int(11)
+,`subject_classlevel_id` int(11)
+,`weightageCA1` int(11) unsigned
+,`weightageCA2` int(11) unsigned
+,`weightageExam` int(11) unsigned
+,`setup_by` int(11)
+,`exammarked_status_id` int(11)
+,`setup_date` datetime
+,`classlevel_id` int(11)
+,`classlevel` varchar(50)
+,`academic_term_id` int(11)
+,`academic_term` varchar(50)
+,`academic_year_id` int(11) unsigned
+,`academic_year` varchar(50)
 );
 -- --------------------------------------------------------
 
@@ -1858,27 +1874,27 @@ INSERT INTO `exams` (`exam_id`, `exam_desc`, `class_id`, `subject_classlevel_id`
 -- Stand-in structure for view `examsdetails_reportviews`
 --
 CREATE TABLE IF NOT EXISTS `examsdetails_reportviews` (
-`exam_id` int(1)
-,`subject_id` int(1)
-,`classlevel_id` int(1)
-,`class_id` int(1)
-,`student_id` int(1)
-,`subject_name` int(1)
-,`class_name` int(1)
-,`student_fullname` int(1)
-,`ca1` int(1)
-,`ca2` int(1)
-,`exam` int(1)
-,`weightageCA1` int(1)
-,`weightageCA2` int(1)
-,`weightageExam` int(1)
-,`academic_term_id` int(1)
-,`academic_term` int(1)
-,`exammarked_status_id` int(1)
-,`academic_year_id` int(1)
-,`academic_year` int(1)
-,`classlevel` int(1)
-,`classgroup_id` int(1)
+`exam_id` int(11) unsigned
+,`subject_id` int(11)
+,`classlevel_id` int(11)
+,`class_id` int(11)
+,`student_id` int(10) unsigned
+,`subject_name` varchar(50)
+,`class_name` varchar(50)
+,`student_fullname` varchar(152)
+,`ca1` decimal(4,1)
+,`ca2` decimal(4,1)
+,`exam` decimal(4,1)
+,`weightageCA1` int(11) unsigned
+,`weightageCA2` int(11) unsigned
+,`weightageExam` int(11) unsigned
+,`academic_term_id` int(11)
+,`academic_term` varchar(50)
+,`exammarked_status_id` int(11)
+,`academic_year_id` int(11) unsigned
+,`academic_year` varchar(50)
+,`classlevel` varchar(50)
+,`classgroup_id` int(11) unsigned
 );
 -- --------------------------------------------------------
 
@@ -3158,6 +3174,110 @@ CREATE TABLE IF NOT EXISTS `setups` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `skill_assessments`
+--
+
+CREATE TABLE IF NOT EXISTS `skill_assessments` (
+`skill_assessment_id` int(11) NOT NULL,
+  `skill_id` int(11) NOT NULL,
+  `assessment_id` int(11) NOT NULL,
+  `option` int(11) NOT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=52 ;
+
+--
+-- Dumping data for table `skill_assessments`
+--
+
+INSERT INTO `skill_assessments` (`skill_assessment_id`, `skill_id`, `assessment_id`, `option`) VALUES
+(1, 8, 1, 3),
+(2, 16, 1, 5),
+(3, 12, 1, 5),
+(4, 6, 1, 4),
+(5, 2, 1, 4),
+(6, 1, 1, 4),
+(7, 11, 1, 3),
+(8, 4, 1, 3),
+(9, 9, 1, 2),
+(10, 15, 1, 3),
+(11, 10, 1, 4),
+(12, 17, 1, 3),
+(13, 7, 1, 4),
+(14, 13, 1, 5),
+(15, 3, 1, 4),
+(16, 5, 1, 4),
+(17, 14, 1, 5),
+(18, 8, 2, 2),
+(19, 16, 2, 3),
+(20, 12, 2, 4),
+(21, 6, 2, 5),
+(22, 2, 2, 4),
+(23, 1, 2, 3),
+(24, 11, 2, 2),
+(25, 4, 2, 3),
+(26, 9, 2, 4),
+(27, 15, 2, 5),
+(28, 10, 2, 4),
+(29, 17, 2, 3),
+(30, 7, 2, 2),
+(31, 13, 2, 3),
+(32, 3, 2, 4),
+(33, 5, 2, 5),
+(34, 14, 2, 4),
+(35, 8, 3, 1),
+(36, 16, 3, 1),
+(37, 12, 3, 1),
+(38, 6, 3, 1),
+(39, 2, 3, 2),
+(40, 1, 3, 2),
+(41, 11, 3, 2),
+(42, 4, 3, 2),
+(43, 9, 3, 3),
+(44, 15, 3, 3),
+(45, 10, 3, 3),
+(46, 17, 3, 3),
+(47, 7, 3, 3),
+(48, 13, 3, 4),
+(49, 3, 3, 4),
+(50, 5, 3, 4),
+(51, 14, 3, 4);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `skills`
+--
+
+CREATE TABLE IF NOT EXISTS `skills` (
+`skill_id` int(11) NOT NULL,
+  `skill` varchar(200) NOT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
+
+--
+-- Dumping data for table `skills`
+--
+
+INSERT INTO `skills` (`skill_id`, `skill`) VALUES
+(1, 'Handwriting'),
+(2, 'Fluency'),
+(3, 'Sports'),
+(4, 'Horse riding'),
+(5, 'Swimming'),
+(6, 'Craft'),
+(7, 'Punctuality'),
+(8, 'Attendance'),
+(9, 'Neatness'),
+(10, 'Politeness'),
+(11, 'Honesty'),
+(12, 'Cooperation'),
+(13, 'Self control'),
+(14, 'Use of Initiative'),
+(15, 'Perseverance'),
+(16, 'Attentiveness in Class'),
+(17, 'Promptness in Completing Assignment');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `sponsors`
 --
 
@@ -3342,26 +3462,26 @@ INSERT INTO `status` (`status_id`, `status`) VALUES
 -- Stand-in structure for view `student_feesqueryviews`
 --
 CREATE TABLE IF NOT EXISTS `student_feesqueryviews` (
-`order_id` int(1)
-,`price` int(1)
-,`process_item_id` int(1)
-,`item_id` int(1)
-,`item_name` int(1)
-,`academic_term_id` int(1)
-,`academic_term` int(1)
-,`student_name` int(1)
-,`student_id` int(1)
-,`sponsor_name` int(1)
-,`sponsor_id` int(1)
-,`class_name` int(1)
-,`class_id` int(1)
-,`classlevel` int(1)
-,`classlevel_id` int(1)
-,`academic_year_id` int(1)
-,`academic_year` int(1)
-,`item_type_id` int(1)
-,`item_status_id` int(1)
-,`item_type` int(1)
+`order_id` int(11)
+,`price` decimal(12,2)
+,`process_item_id` int(11)
+,`item_id` int(11)
+,`item_name` varchar(100)
+,`academic_term_id` int(11)
+,`academic_term` varchar(50)
+,`student_name` varchar(152)
+,`student_id` int(10) unsigned
+,`sponsor_name` varchar(101)
+,`sponsor_id` int(3) unsigned
+,`class_name` varchar(50)
+,`class_id` int(11)
+,`classlevel` varchar(50)
+,`classlevel_id` int(11)
+,`academic_year_id` int(11)
+,`academic_year` varchar(50)
+,`item_type_id` int(11)
+,`item_status_id` int(3)
+,`item_type` varchar(50)
 );
 -- --------------------------------------------------------
 
@@ -3369,33 +3489,33 @@ CREATE TABLE IF NOT EXISTS `student_feesqueryviews` (
 -- Stand-in structure for view `student_feesviews`
 --
 CREATE TABLE IF NOT EXISTS `student_feesviews` (
-`student_name` int(1)
-,`student_id` int(1)
-,`student_no` int(1)
-,`sponsor_name` int(1)
-,`sponsor_id` int(1)
-,`salutation_name` int(1)
-,`order_id` int(1)
-,`price` int(1)
-,`quantity` int(1)
-,`subtotal` int(1)
-,`item_id` int(1)
-,`item_name` int(1)
-,`item_description` int(1)
-,`academic_term_id` int(1)
-,`academic_term` int(1)
-,`order_status_id` int(1)
-,`class_id` int(1)
-,`class_name` int(1)
-,`classlevel_id` int(1)
-,`classlevel` int(1)
-,`item_type_id` int(1)
-,`item_type` int(1)
-,`image_url` int(1)
-,`academic_year_id` int(1)
-,`academic_year` int(1)
-,`student_status_id` int(1)
-,`student_status` int(1)
+`student_name` varchar(152)
+,`student_id` int(10) unsigned
+,`student_no` varchar(50)
+,`sponsor_name` varchar(101)
+,`sponsor_id` int(3) unsigned
+,`salutation_name` varchar(50)
+,`order_id` int(11)
+,`price` decimal(12,2)
+,`quantity` int(3)
+,`subtotal` decimal(22,2)
+,`item_id` int(11)
+,`item_name` varchar(100)
+,`item_description` text
+,`academic_term_id` int(11)
+,`academic_term` varchar(50)
+,`order_status_id` int(3)
+,`class_id` int(11)
+,`class_name` varchar(50)
+,`classlevel_id` int(11)
+,`classlevel` varchar(50)
+,`item_type_id` int(11)
+,`item_type` varchar(50)
+,`image_url` varchar(50)
+,`academic_year_id` int(11) unsigned
+,`academic_year` varchar(50)
+,`student_status_id` int(3) unsigned
+,`student_status` varchar(50)
 );
 -- --------------------------------------------------------
 
@@ -3594,18 +3714,18 @@ INSERT INTO `students_classes` (`student_class_id`, `student_id`, `class_id`, `a
 -- Stand-in structure for view `students_classlevelviews`
 --
 CREATE TABLE IF NOT EXISTS `students_classlevelviews` (
-`student_name` int(1)
-,`student_no` int(1)
-,`class_name` int(1)
-,`class_id` int(1)
-,`student_id` int(1)
-,`classlevel` int(1)
-,`classlevel_id` int(1)
-,`sponsor_id` int(1)
-,`sponsor_name` int(1)
-,`academic_year_id` int(1)
-,`academic_year` int(1)
-,`student_status_id` int(1)
+`student_name` varchar(152)
+,`student_no` varchar(50)
+,`class_name` varchar(50)
+,`class_id` int(11)
+,`student_id` int(10) unsigned
+,`classlevel` varchar(50)
+,`classlevel_id` int(11)
+,`sponsor_id` int(11)
+,`sponsor_name` varchar(101)
+,`academic_year_id` int(11)
+,`academic_year` varchar(50)
+,`student_status_id` int(11)
 );
 -- --------------------------------------------------------
 
@@ -3613,23 +3733,23 @@ CREATE TABLE IF NOT EXISTS `students_classlevelviews` (
 -- Stand-in structure for view `students_paymentviews`
 --
 CREATE TABLE IF NOT EXISTS `students_paymentviews` (
-`order_id` int(1)
-,`academic_term_id` int(1)
-,`status_id` int(1)
-,`payment_status` int(1)
-,`academic_term` int(1)
-,`student_name` int(1)
-,`student_no` int(1)
-,`class_name` int(1)
-,`class_id` int(1)
-,`student_id` int(1)
-,`classlevel` int(1)
-,`classlevel_id` int(1)
-,`sponsor_id` int(1)
-,`sponsor_name` int(1)
-,`academic_year_id` int(1)
-,`academic_year` int(1)
-,`student_status_id` int(1)
+`order_id` int(11)
+,`academic_term_id` int(11)
+,`status_id` int(3)
+,`payment_status` varchar(8)
+,`academic_term` varchar(50)
+,`student_name` varchar(152)
+,`student_no` varchar(50)
+,`class_name` varchar(50)
+,`class_id` int(11)
+,`student_id` int(10) unsigned
+,`classlevel` varchar(50)
+,`classlevel_id` int(11)
+,`sponsor_id` int(11)
+,`sponsor_name` varchar(101)
+,`academic_year_id` int(11)
+,`academic_year` varchar(50)
+,`student_status_id` int(11)
 );
 -- --------------------------------------------------------
 
@@ -3637,10 +3757,10 @@ CREATE TABLE IF NOT EXISTS `students_paymentviews` (
 -- Stand-in structure for view `students_subjectsviews`
 --
 CREATE TABLE IF NOT EXISTS `students_subjectsviews` (
-`student_id` int(1)
-,`subject_classlevel_id` int(1)
-,`student_name` int(1)
-,`student_no` int(1)
+`student_id` int(11)
+,`subject_classlevel_id` int(11)
+,`student_name` varchar(153)
+,`student_no` varchar(50)
 );
 -- --------------------------------------------------------
 
@@ -3694,19 +3814,19 @@ INSERT INTO `subject_classlevels` (`subject_classlevel_id`, `subject_id`, `class
 -- Stand-in structure for view `subject_classlevelviews`
 --
 CREATE TABLE IF NOT EXISTS `subject_classlevelviews` (
-`class_name` int(1)
-,`subject_name` int(1)
-,`subject_id` int(1)
-,`class_id` int(1)
-,`classlevel_id` int(1)
-,`subject_classlevel_id` int(1)
-,`classlevel` int(1)
-,`examstatus_id` int(1)
-,`exam_status` int(1)
-,`academic_term_id` int(1)
-,`academic_term` int(1)
-,`academic_year_id` int(1)
-,`academic_year` int(1)
+`class_name` varchar(50)
+,`subject_name` varchar(50)
+,`subject_id` int(3)
+,`class_id` int(11)
+,`classlevel_id` int(11)
+,`subject_classlevel_id` int(11)
+,`classlevel` varchar(50)
+,`examstatus_id` int(11)
+,`exam_status` varchar(18)
+,`academic_term_id` int(11)
+,`academic_term` varchar(50)
+,`academic_year_id` int(11) unsigned
+,`academic_year` varchar(50)
 );
 -- --------------------------------------------------------
 
@@ -3884,17 +4004,17 @@ INSERT INTO `teachers_classes` (`teacher_class_id`, `employee_id`, `class_id`, `
 -- Stand-in structure for view `teachers_classviews`
 --
 CREATE TABLE IF NOT EXISTS `teachers_classviews` (
-`teacher_class_id` int(1)
-,`employee_id` int(1)
-,`class_id` int(1)
-,`academic_year_id` int(1)
-,`created_at` int(1)
-,`updated_at` int(1)
-,`employee_name` int(1)
-,`status_id` int(1)
-,`class_name` int(1)
-,`classlevel_id` int(1)
-,`academic_year` int(1)
+`teacher_class_id` int(11)
+,`employee_id` int(11)
+,`class_id` int(11)
+,`academic_year_id` int(11)
+,`created_at` datetime
+,`updated_at` timestamp
+,`employee_name` varchar(152)
+,`status_id` int(2)
+,`class_name` varchar(50)
+,`classlevel_id` int(11)
+,`academic_year` varchar(50)
 );
 -- --------------------------------------------------------
 
@@ -3946,18 +4066,18 @@ INSERT INTO `teachers_subjects` (`teachers_subjects_id`, `employee_id`, `class_i
 -- Stand-in structure for view `teachers_subjectsviews`
 --
 CREATE TABLE IF NOT EXISTS `teachers_subjectsviews` (
-`teachers_subjects_id` int(1)
-,`employee_id` int(1)
-,`class_id` int(1)
-,`subject_id` int(1)
-,`subject_name` int(1)
-,`subject_classlevel_id` int(1)
-,`assign_date` int(1)
-,`class_name` int(1)
-,`employee_name` int(1)
-,`status_id` int(1)
-,`academic_term_id` int(1)
-,`academic_term` int(1)
+`teachers_subjects_id` int(11)
+,`employee_id` int(11)
+,`class_id` int(11)
+,`subject_id` int(11)
+,`subject_name` varchar(50)
+,`subject_classlevel_id` int(11)
+,`assign_date` timestamp
+,`class_name` varchar(50)
+,`employee_name` varchar(152)
+,`status_id` int(2)
+,`academic_term_id` int(11)
+,`academic_term` varchar(50)
 );
 -- --------------------------------------------------------
 
@@ -3994,12 +4114,12 @@ CREATE TABLE IF NOT EXISTS `users` (
   `username` varchar(70) NOT NULL,
   `password` varchar(150) NOT NULL,
   `display_name` varchar(100) DEFAULT NULL,
-  `type_id` int(11) DEFAULT NULL,
-  `image_url` varchar(50) DEFAULT NULL,
+  `type_id` int(11) NOT NULL,
+  `image_url` varchar(50) NOT NULL,
   `user_role_id` int(11) NOT NULL,
   `group_alias` varchar(20) NOT NULL DEFAULT 'web_users',
   `status_id` int(11) NOT NULL DEFAULT '1',
-  `created_by` int(11) DEFAULT NULL,
+  `created_by` int(11) NOT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
@@ -4011,8 +4131,8 @@ CREATE TABLE IF NOT EXISTS `users` (
 INSERT INTO `users` (`user_id`, `username`, `password`, `display_name`, `type_id`, `image_url`, `user_role_id`, `group_alias`, `status_id`, `created_by`, `created_at`, `updated_at`) VALUES
 (1, 'emp0002', '$2a$10$8Jx2GjQqaqqzXfFG1CgCQemp63A2ZZzQbz3z0pv80wat8xNMtDjj.', 'GEORGE, UCHE', 2, 'employees/2.jpg', 6, 'adm_users', 1, 2, '2014-06-16 02:39:58', '2014-10-15 08:09:43'),
 (2, 'spn0001', '$2a$10$BSauz9mo4qbV08gwkX0MUuPtGZ0rMnhy/DkJV6bPmlkbly5MDk7Sa', 'KAYOH, CHINA', 1, 'sponsors/1.jpg', 1, 'web_users', 1, 2, '2014-07-17 11:14:00', '2014-07-21 13:30:13'),
-(3, 'emp0006', '$2a$10$QG2RqGT8ZAMHXaPdEunG4OUcH4Sez52PbRO.DY1jmVvZCj4wrBLcW', 'KINGSLEY, CHINAKA', 6, 'employees/6.JPG', 3, 'expired_users', 2, 2, '2015-02-26 02:43:42', '2015-02-26 13:43:42'),
-(4, 'emp0004', '$2a$10$oncEz7DKJm4EqJUQYn/GmuTpz0JLLaMg.KgqBuKUyM2/vpGkpYXT2', 'BOLA, YUSRAH INUA', 4, 'employees/4.jpg', 4, 'ict_users', 1, 4, '2014-06-24 04:01:20', '2015-02-26 12:53:49');
+(3, 'emp0006', '$2a$10$QG2RqGT8ZAMHXaPdEunG4OUcH4Sez52PbRO.DY1jmVvZCj4wrBLcW', 'KINGSLEY, CHINAKA', 6, 'employees/6.JPG', 3, 'emp_users', 1, 2, '2014-10-14 01:43:13', '2014-10-15 08:07:53'),
+(4, 'emp0004', '$2a$10$oncEz7DKJm4EqJUQYn/GmuTpz0JLLaMg.KgqBuKUyM2/vpGkpYXT2', 'BOLA, YUSRAH INUA', 4, 'employees/4.jpg', 4, 'ict_users', 1, 4, '2014-06-24 04:01:20', '2015-03-04 11:22:12');
 
 -- --------------------------------------------------------
 
@@ -4021,7 +4141,7 @@ INSERT INTO `users` (`user_id`, `username`, `password`, `display_name`, `type_id
 --
 DROP TABLE IF EXISTS `attend_headerviews`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `attend_headerviews` AS select 1 AS `attend_id`,1 AS `class_id`,1 AS `employee_id`,1 AS `academic_term_id`,1 AS `attend_date`,1 AS `class_name`,1 AS `classlevel_id`,1 AS `academic_term`,1 AS `academic_year_id`,1 AS `head_tutor`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `attend_headerviews` AS select `a`.`attend_id` AS `attend_id`,`a`.`class_id` AS `class_id`,`a`.`employee_id` AS `employee_id`,`a`.`academic_term_id` AS `academic_term_id`,`a`.`attend_date` AS `attend_date`,`b`.`class_name` AS `class_name`,`b`.`classlevel_id` AS `classlevel_id`,`c`.`academic_term` AS `academic_term`,`c`.`academic_year_id` AS `academic_year_id`,concat(ucase(`d`.`first_name`),' ',`d`.`other_name`) AS `head_tutor` from (((`attends` `a` join `classrooms` `b` on((`a`.`class_id` = `b`.`class_id`))) join `academic_terms` `c` on((`a`.`academic_term_id` = `c`.`academic_term_id`))) join `employees` `d` on((`a`.`employee_id` = `d`.`employee_id`)));
 
 -- --------------------------------------------------------
 
@@ -4030,7 +4150,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `exam_subjectviews`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `exam_subjectviews` AS select 1 AS `exam_id`,1 AS `exam_desc`,1 AS `class_id`,1 AS `class_name`,1 AS `subject_name`,1 AS `subject_id`,1 AS `subject_classlevel_id`,1 AS `weightageCA1`,1 AS `weightageCA2`,1 AS `weightageExam`,1 AS `setup_by`,1 AS `exammarked_status_id`,1 AS `setup_date`,1 AS `classlevel_id`,1 AS `classlevel`,1 AS `academic_term_id`,1 AS `academic_term`,1 AS `academic_year_id`,1 AS `academic_year`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `exam_subjectviews` AS select `a`.`exam_id` AS `exam_id`,`a`.`exam_desc` AS `exam_desc`,`a`.`class_id` AS `class_id`,`f`.`class_name` AS `class_name`,`c`.`subject_name` AS `subject_name`,`b`.`subject_id` AS `subject_id`,`a`.`subject_classlevel_id` AS `subject_classlevel_id`,`a`.`weightageCA1` AS `weightageCA1`,`a`.`weightageCA2` AS `weightageCA2`,`a`.`weightageExam` AS `weightageExam`,`a`.`employee_id` AS `setup_by`,`a`.`exammarked_status_id` AS `exammarked_status_id`,`a`.`setup_date` AS `setup_date`,`f`.`classlevel_id` AS `classlevel_id`,`g`.`classlevel` AS `classlevel`,`b`.`academic_term_id` AS `academic_term_id`,`d`.`academic_term` AS `academic_term`,`d`.`academic_year_id` AS `academic_year_id`,`e`.`academic_year` AS `academic_year` from (((((`exams` `a` left join (`classlevels` `g` join `classrooms` `f` on((`f`.`classlevel_id` = `g`.`classlevel_id`))) on((`a`.`class_id` = `f`.`class_id`))) join `subject_classlevels` `b` on((`a`.`subject_classlevel_id` = `b`.`subject_classlevel_id`))) join `subjects` `c` on((`b`.`subject_id` = `c`.`subject_id`))) join `academic_terms` `d` on((`b`.`academic_term_id` = `d`.`academic_term_id`))) join `academic_years` `e` on((`d`.`academic_year_id` = `e`.`academic_year_id`)));
 
 -- --------------------------------------------------------
 
@@ -4039,7 +4159,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `examsdetails_reportviews`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `examsdetails_reportviews` AS select 1 AS `exam_id`,1 AS `subject_id`,1 AS `classlevel_id`,1 AS `class_id`,1 AS `student_id`,1 AS `subject_name`,1 AS `class_name`,1 AS `student_fullname`,1 AS `ca1`,1 AS `ca2`,1 AS `exam`,1 AS `weightageCA1`,1 AS `weightageCA2`,1 AS `weightageExam`,1 AS `academic_term_id`,1 AS `academic_term`,1 AS `exammarked_status_id`,1 AS `academic_year_id`,1 AS `academic_year`,1 AS `classlevel`,1 AS `classgroup_id`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `examsdetails_reportviews` AS select `exams`.`exam_id` AS `exam_id`,`subject_classlevels`.`subject_id` AS `subject_id`,`subject_classlevels`.`classlevel_id` AS `classlevel_id`,`classrooms`.`class_id` AS `class_id`,`students`.`student_id` AS `student_id`,`subjects`.`subject_name` AS `subject_name`,`classrooms`.`class_name` AS `class_name`,concat(ucase(`students`.`first_name`),' ',lcase(`students`.`surname`),' ',lcase(`students`.`other_name`)) AS `student_fullname`,`exam_details`.`ca1` AS `ca1`,`exam_details`.`ca2` AS `ca2`,`exam_details`.`exam` AS `exam`,`exams`.`weightageCA1` AS `weightageCA1`,`exams`.`weightageCA2` AS `weightageCA2`,`exams`.`weightageExam` AS `weightageExam`,`academic_terms`.`academic_term_id` AS `academic_term_id`,`academic_terms`.`academic_term` AS `academic_term`,`exams`.`exammarked_status_id` AS `exammarked_status_id`,`academic_terms`.`academic_year_id` AS `academic_year_id`,`academic_years`.`academic_year` AS `academic_year`,`classlevels`.`classlevel` AS `classlevel`,`classlevels`.`classgroup_id` AS `classgroup_id` from (((((((((`exams` join `exam_details` on((`exams`.`exam_id` = `exam_details`.`exam_id`))) join `subject_classlevels` on((`exams`.`subject_classlevel_id` = `subject_classlevels`.`subject_classlevel_id`))) join `subjects` on((`subject_classlevels`.`subject_id` = `subjects`.`subject_id`))) join `students` on((`exam_details`.`student_id` = `students`.`student_id`))) join `academic_terms` on((`subject_classlevels`.`academic_term_id` = `academic_terms`.`academic_term_id`))) join `academic_years` on((`academic_years`.`academic_year_id` = `academic_terms`.`academic_year_id`))) join `classlevels` on((`subject_classlevels`.`classlevel_id` = `classlevels`.`classlevel_id`))) join `students_classes` on((`students`.`student_id` = `students_classes`.`student_id`))) join `classrooms` on((`students_classes`.`class_id` = `classrooms`.`class_id`)));
 
 -- --------------------------------------------------------
 
@@ -4048,7 +4168,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `student_feesqueryviews`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `student_feesqueryviews` AS select 1 AS `order_id`,1 AS `price`,1 AS `process_item_id`,1 AS `item_id`,1 AS `item_name`,1 AS `academic_term_id`,1 AS `academic_term`,1 AS `student_name`,1 AS `student_id`,1 AS `sponsor_name`,1 AS `sponsor_id`,1 AS `class_name`,1 AS `class_id`,1 AS `classlevel`,1 AS `classlevel_id`,1 AS `academic_year_id`,1 AS `academic_year`,1 AS `item_type_id`,1 AS `item_status_id`,1 AS `item_type`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `student_feesqueryviews` AS select `orders`.`order_id` AS `order_id`,`item_bills`.`price` AS `price`,`orders`.`process_item_id` AS `process_item_id`,`item_bills`.`item_id` AS `item_id`,`items`.`item_name` AS `item_name`,`orders`.`academic_term_id` AS `academic_term_id`,`academic_terms`.`academic_term` AS `academic_term`,`students_classlevelviews`.`student_name` AS `student_name`,`students_classlevelviews`.`student_id` AS `student_id`,concat(ucase(`sponsors`.`first_name`),' ',`sponsors`.`other_name`) AS `sponsor_name`,`sponsors`.`sponsor_id` AS `sponsor_id`,`students_classlevelviews`.`class_name` AS `class_name`,`students_classlevelviews`.`class_id` AS `class_id`,`students_classlevelviews`.`classlevel` AS `classlevel`,`students_classlevelviews`.`classlevel_id` AS `classlevel_id`,`students_classlevelviews`.`academic_year_id` AS `academic_year_id`,`students_classlevelviews`.`academic_year` AS `academic_year`,`items`.`item_type_id` AS `item_type_id`,`items`.`item_status_id` AS `item_status_id`,`item_types`.`item_type` AS `item_type` from ((((((`item_types` join `items` on((`item_types`.`item_type_id` = `items`.`item_type_id`))) join `item_bills` on((`item_bills`.`item_id` = `items`.`item_id`))) join `students_classlevelviews` on((`item_bills`.`classlevel_id` = `students_classlevelviews`.`classlevel_id`))) join `sponsors` on((`sponsors`.`sponsor_id` = `students_classlevelviews`.`sponsor_id`))) join `orders` on((`orders`.`student_id` = `students_classlevelviews`.`student_id`))) join `academic_terms` on((`academic_terms`.`academic_term_id` = `orders`.`academic_term_id`)));
 
 -- --------------------------------------------------------
 
@@ -4057,7 +4177,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `student_feesviews`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `student_feesviews` AS select 1 AS `student_name`,1 AS `student_id`,1 AS `student_no`,1 AS `sponsor_name`,1 AS `sponsor_id`,1 AS `salutation_name`,1 AS `order_id`,1 AS `price`,1 AS `quantity`,1 AS `subtotal`,1 AS `item_id`,1 AS `item_name`,1 AS `item_description`,1 AS `academic_term_id`,1 AS `academic_term`,1 AS `order_status_id`,1 AS `class_id`,1 AS `class_name`,1 AS `classlevel_id`,1 AS `classlevel`,1 AS `item_type_id`,1 AS `item_type`,1 AS `image_url`,1 AS `academic_year_id`,1 AS `academic_year`,1 AS `student_status_id`,1 AS `student_status`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `student_feesviews` AS select concat(ucase(`a`.`first_name`),' ',`a`.`surname`,' ',`a`.`other_name`) AS `student_name`,`a`.`student_id` AS `student_id`,`a`.`student_no` AS `student_no`,concat(ucase(`b`.`first_name`),' ',`b`.`other_name`) AS `sponsor_name`,`b`.`sponsor_id` AS `sponsor_id`,`c`.`salutation_name` AS `salutation_name`,`f`.`order_id` AS `order_id`,`h`.`price` AS `price`,`h`.`quantity` AS `quantity`,(`h`.`quantity` * `h`.`price`) AS `subtotal`,`h`.`item_id` AS `item_id`,`i`.`item_name` AS `item_name`,`i`.`item_description` AS `item_description`,`f`.`academic_term_id` AS `academic_term_id`,`g`.`academic_term` AS `academic_term`,`f`.`status_id` AS `order_status_id`,`l`.`class_id` AS `class_id`,`m`.`class_name` AS `class_name`,`m`.`classlevel_id` AS `classlevel_id`,`n`.`classlevel` AS `classlevel`,`i`.`item_type_id` AS `item_type_id`,`j`.`item_type` AS `item_type`,`a`.`image_url` AS `image_url`,`g`.`academic_year_id` AS `academic_year_id`,`k`.`academic_year` AS `academic_year`,`d`.`student_status_id` AS `student_status_id`,`d`.`student_status` AS `student_status` from ((((((((((((`students` `a` join `sponsors` `b` on((`a`.`sponsor_id` = `b`.`sponsor_id`))) join `salutations` `c` on((`c`.`salutation_id` = `b`.`salutation_id`))) join `student_status` `d` on((`a`.`student_status_id` = `d`.`student_status_id`))) join `orders` `f` on((`a`.`student_id` = `f`.`student_id`))) join `academic_terms` `g` on((`f`.`academic_term_id` = `g`.`academic_term_id`))) join `order_items` `h` on((`f`.`order_id` = `h`.`order_id`))) join `items` `i` on((`h`.`item_id` = `i`.`item_id`))) join `item_types` `j` on((`i`.`item_type_id` = `j`.`item_type_id`))) join `academic_years` `k` on((`g`.`academic_year_id` = `k`.`academic_year_id`))) join `students_classes` `l` on(((`a`.`student_id` = `l`.`student_id`) and (`g`.`academic_year_id` = `l`.`academic_year_id`)))) join `classrooms` `m` on((`l`.`class_id` = `m`.`class_id`))) join `classlevels` `n` on((`m`.`classlevel_id` = `n`.`classlevel_id`)));
 
 -- --------------------------------------------------------
 
@@ -4066,7 +4186,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `students_classlevelviews`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `students_classlevelviews` AS select 1 AS `student_name`,1 AS `student_no`,1 AS `class_name`,1 AS `class_id`,1 AS `student_id`,1 AS `classlevel`,1 AS `classlevel_id`,1 AS `sponsor_id`,1 AS `sponsor_name`,1 AS `academic_year_id`,1 AS `academic_year`,1 AS `student_status_id`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `students_classlevelviews` AS select concat(ucase(`students`.`first_name`),' ',`students`.`surname`,' ',`students`.`other_name`) AS `student_name`,`students`.`student_no` AS `student_no`,`classrooms`.`class_name` AS `class_name`,`classrooms`.`class_id` AS `class_id`,`students`.`student_id` AS `student_id`,`classlevels`.`classlevel` AS `classlevel`,`classrooms`.`classlevel_id` AS `classlevel_id`,`students`.`sponsor_id` AS `sponsor_id`,concat(ucase(`sponsors`.`first_name`),' ',`sponsors`.`other_name`) AS `sponsor_name`,`students_classes`.`academic_year_id` AS `academic_year_id`,`academic_years`.`academic_year` AS `academic_year`,`students`.`student_status_id` AS `student_status_id` from (((((`students` join `students_classes` on((`students_classes`.`student_id` = `students`.`student_id`))) join `classrooms` on((`students_classes`.`class_id` = `classrooms`.`class_id`))) join `classlevels` on((`classlevels`.`classlevel_id` = `classrooms`.`classlevel_id`))) join `academic_years` on((`students_classes`.`academic_year_id` = `academic_years`.`academic_year_id`))) join `sponsors` on((`students`.`sponsor_id` = `sponsors`.`sponsor_id`)));
 
 -- --------------------------------------------------------
 
@@ -4075,7 +4195,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `students_paymentviews`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `students_paymentviews` AS select 1 AS `order_id`,1 AS `academic_term_id`,1 AS `status_id`,1 AS `payment_status`,1 AS `academic_term`,1 AS `student_name`,1 AS `student_no`,1 AS `class_name`,1 AS `class_id`,1 AS `student_id`,1 AS `classlevel`,1 AS `classlevel_id`,1 AS `sponsor_id`,1 AS `sponsor_name`,1 AS `academic_year_id`,1 AS `academic_year`,1 AS `student_status_id`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `students_paymentviews` AS select `a`.`order_id` AS `order_id`,`a`.`academic_term_id` AS `academic_term_id`,`a`.`status_id` AS `status_id`,(case `a`.`status_id` when 1 then 'Paid' when 2 then 'Not Paid' end) AS `payment_status`,`c`.`academic_term` AS `academic_term`,`b`.`student_name` AS `student_name`,`b`.`student_no` AS `student_no`,`b`.`class_name` AS `class_name`,`b`.`class_id` AS `class_id`,`b`.`student_id` AS `student_id`,`b`.`classlevel` AS `classlevel`,`b`.`classlevel_id` AS `classlevel_id`,`b`.`sponsor_id` AS `sponsor_id`,`b`.`sponsor_name` AS `sponsor_name`,`b`.`academic_year_id` AS `academic_year_id`,`b`.`academic_year` AS `academic_year`,`b`.`student_status_id` AS `student_status_id` from ((`orders` `a` join `students_classlevelviews` `b` on((`a`.`student_id` = `b`.`student_id`))) join `academic_terms` `c` on(((`a`.`academic_term_id` = `c`.`academic_term_id`) and (`c`.`academic_year_id` = `b`.`academic_year_id`)))) where (`a`.`process_item_id` is not null);
 
 -- --------------------------------------------------------
 
@@ -4084,7 +4204,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `students_subjectsviews`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `students_subjectsviews` AS select 1 AS `student_id`,1 AS `subject_classlevel_id`,1 AS `student_name`,1 AS `student_no`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `students_subjectsviews` AS select `a`.`student_id` AS `student_id`,`a`.`subject_classlevel_id` AS `subject_classlevel_id`,concat(ucase(`b`.`first_name`),', ',`b`.`surname`,' ',`b`.`other_name`) AS `student_name`,`b`.`student_no` AS `student_no` from (`subject_students_registers` `a` join `students` `b` on((`a`.`student_id` = `b`.`student_id`)));
 
 -- --------------------------------------------------------
 
@@ -4093,7 +4213,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `subject_classlevelviews`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `subject_classlevelviews` AS select 1 AS `class_name`,1 AS `subject_name`,1 AS `subject_id`,1 AS `class_id`,1 AS `classlevel_id`,1 AS `subject_classlevel_id`,1 AS `classlevel`,1 AS `examstatus_id`,1 AS `exam_status`,1 AS `academic_term_id`,1 AS `academic_term`,1 AS `academic_year_id`,1 AS `academic_year`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `subject_classlevelviews` AS select `classrooms`.`class_name` AS `class_name`,`subjects`.`subject_name` AS `subject_name`,`subjects`.`subject_id` AS `subject_id`,`classrooms`.`class_id` AS `class_id`,`classlevels`.`classlevel_id` AS `classlevel_id`,`subject_classlevels`.`subject_classlevel_id` AS `subject_classlevel_id`,`classlevels`.`classlevel` AS `classlevel`,`subject_classlevels`.`examstatus_id` AS `examstatus_id`,(case `subject_classlevels`.`examstatus_id` when 1 then 'Exam Already Setup' when 2 then 'Exam Not Setup' end) AS `exam_status`,`subject_classlevels`.`academic_term_id` AS `academic_term_id`,`academic_terms`.`academic_term` AS `academic_term`,`academic_terms`.`academic_year_id` AS `academic_year_id`,`academic_years`.`academic_year` AS `academic_year` from (((((`subject_classlevels` join `academic_terms` on((`subject_classlevels`.`academic_term_id` = `academic_terms`.`academic_term_id`))) join `academic_years` on((`academic_terms`.`academic_year_id` = `academic_years`.`academic_year_id`))) left join `classrooms` on((`subject_classlevels`.`class_id` = `classrooms`.`class_id`))) left join `classlevels` on((`subject_classlevels`.`classlevel_id` = `classlevels`.`classlevel_id`))) left join `subjects` on((`subject_classlevels`.`subject_id` = `subjects`.`subject_id`)));
 
 -- --------------------------------------------------------
 
@@ -4102,7 +4222,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `teachers_classviews`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `teachers_classviews` AS select 1 AS `teacher_class_id`,1 AS `employee_id`,1 AS `class_id`,1 AS `academic_year_id`,1 AS `created_at`,1 AS `updated_at`,1 AS `employee_name`,1 AS `status_id`,1 AS `class_name`,1 AS `classlevel_id`,1 AS `academic_year`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `teachers_classviews` AS select `b`.`teacher_class_id` AS `teacher_class_id`,`b`.`employee_id` AS `employee_id`,`b`.`class_id` AS `class_id`,`b`.`academic_year_id` AS `academic_year_id`,`b`.`created_at` AS `created_at`,`b`.`updated_at` AS `updated_at`,concat(ucase(`a`.`first_name`),', ',`a`.`other_name`) AS `employee_name`,`a`.`status_id` AS `status_id`,`c`.`class_name` AS `class_name`,`c`.`classlevel_id` AS `classlevel_id`,`d`.`academic_year` AS `academic_year` from (((`employees` `a` join `teachers_classes` `b` on((`a`.`employee_id` = `b`.`employee_id`))) join `classrooms` `c` on((`b`.`class_id` = `c`.`class_id`))) join `academic_years` `d` on((`b`.`academic_year_id` = `d`.`academic_year_id`)));
 
 -- --------------------------------------------------------
 
@@ -4111,7 +4231,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `teachers_subjectsviews`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `teachers_subjectsviews` AS select 1 AS `teachers_subjects_id`,1 AS `employee_id`,1 AS `class_id`,1 AS `subject_id`,1 AS `subject_name`,1 AS `subject_classlevel_id`,1 AS `assign_date`,1 AS `class_name`,1 AS `employee_name`,1 AS `status_id`,1 AS `academic_term_id`,1 AS `academic_term`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `teachers_subjectsviews` AS select `b`.`teachers_subjects_id` AS `teachers_subjects_id`,`b`.`employee_id` AS `employee_id`,`b`.`class_id` AS `class_id`,`d`.`subject_id` AS `subject_id`,`f`.`subject_name` AS `subject_name`,`b`.`subject_classlevel_id` AS `subject_classlevel_id`,`b`.`assign_date` AS `assign_date`,`a`.`class_name` AS `class_name`,concat(ucase(`c`.`first_name`),', ',`c`.`other_name`) AS `employee_name`,`c`.`status_id` AS `status_id`,`d`.`academic_term_id` AS `academic_term_id`,`e`.`academic_term` AS `academic_term` from (((((`classrooms` `a` join `teachers_subjects` `b` on((`a`.`class_id` = `b`.`class_id`))) join `employees` `c` on((`c`.`employee_id` = `b`.`employee_id`))) join `subject_classlevels` `d` on((`d`.`subject_classlevel_id` = `b`.`subject_classlevel_id`))) join `academic_terms` `e` on((`e`.`academic_term_id` = `d`.`academic_term_id`))) join `subjects` `f` on((`f`.`subject_id` = `d`.`subject_id`)));
 
 --
 -- Indexes for dumped tables
@@ -4146,6 +4266,12 @@ ALTER TABLE `aros`
 --
 ALTER TABLE `aros_acos`
  ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `ARO_ACO_KEY` (`aro_id`,`aco_id`);
+
+--
+-- Indexes for table `assessments`
+--
+ALTER TABLE `assessments`
+ ADD PRIMARY KEY (`assessment_id`);
 
 --
 -- Indexes for table `attend_details`
@@ -4298,6 +4424,18 @@ ALTER TABLE `setups`
  ADD PRIMARY KEY (`setup_id`);
 
 --
+-- Indexes for table `skill_assessments`
+--
+ALTER TABLE `skill_assessments`
+ ADD PRIMARY KEY (`skill_assessment_id`);
+
+--
+-- Indexes for table `skills`
+--
+ALTER TABLE `skills`
+ ADD PRIMARY KEY (`skill_id`);
+
+--
 -- Indexes for table `sponsors`
 --
 ALTER TABLE `sponsors`
@@ -4416,6 +4554,11 @@ MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 ALTER TABLE `aros_acos`
 MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=40;
+--
+-- AUTO_INCREMENT for table `assessments`
+--
+ALTER TABLE `assessments`
+MODIFY `assessment_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `attends`
 --
@@ -4537,6 +4680,16 @@ MODIFY `salutation_id` int(3) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12
 ALTER TABLE `setups`
 MODIFY `setup_id` int(11) NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT for table `skill_assessments`
+--
+ALTER TABLE `skill_assessments`
+MODIFY `skill_assessment_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=52;
+--
+-- AUTO_INCREMENT for table `skills`
+--
+ALTER TABLE `skills`
+MODIFY `skill_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=18;
+--
 -- AUTO_INCREMENT for table `sponsors`
 --
 ALTER TABLE `sponsors`
@@ -4611,6 +4764,28 @@ MODIFY `user_role_id` int(3) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 ALTER TABLE `users`
 MODIFY `user_id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `academic_terms`
+--
+ALTER TABLE `academic_terms`
+ADD CONSTRAINT `academic_year_id` FOREIGN KEY (`academic_year_id`) REFERENCES `academic_years` (`academic_year_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `classlevels`
+--
+ALTER TABLE `classlevels`
+ADD CONSTRAINT `classgroup_id` FOREIGN KEY (`classgroup_id`) REFERENCES `classgroups` (`classgroup_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `classrooms`
+--
+ALTER TABLE `classrooms`
+ADD CONSTRAINT `classlevel_id` FOREIGN KEY (`classlevel_id`) REFERENCES `classlevels` (`classlevel_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

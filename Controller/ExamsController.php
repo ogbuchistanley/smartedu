@@ -54,10 +54,11 @@ class ExamsController extends AppController {
             $this->accessDenialError();
         }
     }
-    
+
+
     //Returns all the exams that has been setup
     public function get_exam_setup() {
-        $this->autoRender = false;
+        $this->set('title_for_layout', 'Exams');
         $resultCheck = $this->Acl->check($this->group_alias, 'ExamsController');
         if($resultCheck){
             if ($this->request->is('ajax')) {
@@ -78,7 +79,8 @@ class ExamsController extends AppController {
             $this->accessDenialError();
         }
     }
-    
+
+
     //Seacrh for all the subjects assigned to a classlevel or classroom for a specific academic year
     public function search_subjects_assigned() {
         $this->autoRender = false;
@@ -285,18 +287,23 @@ class ExamsController extends AppController {
     //Displaying Student Terminal Exam Scores
      public function term_scorestd($encrypt_id) {
         $this->set('title_for_layout','Terminal Student Position');
+        $AssessmentModel = ClassRegistry::init('Assessment');
+        $SkillAssessmentModel = ClassRegistry::init('SkillAssessment');
         $resultCheck = $this->Acl->check($this->group_alias, 'ExamsController');
         if($resultCheck){
             //Decrypt the id sent
-           $decrypt_id = $this->encryption->decode($encrypt_id);
-           $student_id = explode('/', $decrypt_id)[0];
-           $class_id = explode('/', $decrypt_id)[1];
-           $term_id = explode('/', $decrypt_id)[2];
-           //$term_id = explode('/', $decrypt_id)[1];
+            $decrypt_id = $this->encryption->decode($encrypt_id);
+            $student_id = explode('/', $decrypt_id)[0];
+            $class_id = explode('/', $decrypt_id)[1];
+            $term_id = explode('/', $decrypt_id)[2];
 
-           $results = $this->Exam->findStudentExamTerminalDetails($student_id, $term_id, $class_id);  
-           $response = array();           
-           $response2 = array();           
+            $option = array('conditions' => array('Assessment.student_id' => $student_id, 'Assessment.academic_term_id' => $term_id));
+            $student_assess = $AssessmentModel->find('first', $option);
+            $skill_assess = $SkillAssessmentModel->find('all', array('conditions' => array('SkillAssessment.assessment_id' => $student_assess['Assessment']['assessment_id'])));
+
+            $results = $this->Exam->findStudentExamTerminalDetails($student_id, $term_id, $class_id);
+            $response = array();
+            $response2 = array();
            if(!empty($results[0])) {   
                //All the students by classroom
                foreach ($results[0] as $result){
@@ -341,6 +348,8 @@ class ExamsController extends AppController {
            }
            $this->set('TermScores', $response);              
            $this->set('ClassPosition', $response2);              
+           $this->set('SkillsAssess', $skill_assess);
+           $this->set('encrypt_id', $encrypt_id);
         }else{
          $this->accessDenialError();
         }        
@@ -507,6 +516,85 @@ class ExamsController extends AppController {
             $this->set('AnnualCLSPos', $response);              
         }else{
          $this->accessDenialError();
+        }
+    }
+
+    //Printing of Student Terminal Result Sheet
+    public function print_result($encrypt_id) {
+        $this->set('title_for_layout','Terminal Student Result');
+        $this->layout = null;
+        $AssessmentModel = ClassRegistry::init('Assessment');
+        $SkillAssessmentModel = ClassRegistry::init('SkillAssessment');
+        $resultCheck = $this->Acl->check($this->group_alias, 'ExamsController');
+        if($resultCheck){
+            //Decrypt the id sent
+            $decrypt_id = $this->encryption->decode($encrypt_id);
+            $student_id = explode('/', $decrypt_id)[0];
+            $class_id = explode('/', $decrypt_id)[1];
+            $term_id = explode('/', $decrypt_id)[2];
+
+            $option = array('conditions' => array('Assessment.student_id' => $student_id, 'Assessment.academic_term_id' => $term_id));
+            $student_assess = $AssessmentModel->find('first', $option);
+            $skill_assess = $SkillAssessmentModel->find('all', array('conditions' => array('SkillAssessment.assessment_id' => $student_assess['Assessment']['assessment_id'])));
+
+            $results = $this->Exam->findStudentExamTerminalDetails($student_id, $term_id, $class_id);
+            $response = array();
+            $response2 = array();
+            if(!empty($results[0])) {
+                $average = 0; $count = 0;
+                //All the students by classroom
+                foreach ($results[0] as $result){
+                    $res[] = array(
+                        "subject_name"=>$result['a']['subject_name'],
+                        "ca1"=>$result['a']['ca1'],
+                        "ca2"=>$result['a']['ca2'],
+                        "exam"=>$result['a']['exam'],
+                        "studentSubjectTotal"=>$result['a']['studentSubjectTotal'],
+                        "studentPercentTotal"=>$result['a']['studentPercentTotal'],
+                        "grade"=>$result['a']['grade'],
+                        "grade_abbr"=>$result['a']['grade_abbr'],
+                        "weightageCA1"=>$result['a']['weightageCA1'],
+                        "weightageCA2"=>$result['a']['weightageCA2'],
+                        "weightageExam"=>$result['a']['weightageExam'],
+                        "weightageTotal"=>$result['a']['weightageTotal'],
+                    );
+                    $count++;
+                    $average += $result['a']['studentSubjectTotal'];
+                }
+                $response['Average'] = $average / $count;
+                $response['Scores'] = $res;
+                $response['Flag'] = 1;
+            } else {
+                $response['Average'] = 0;
+                $response['Scores'] = null;
+                $response['Flag'] = 0;
+            }
+            if(!empty($results[1])) {
+                //All the students by classroom
+                foreach ($results[1] as $result){
+                    $res2 = array(
+                        "full_name"=>$result['a']['full_name'],
+                        "class_name"=>$result['a']['class_name'],
+                        "academic_term"=>$result['a']['academic_term'],
+                        "student_sum_total"=>$result['a']['student_sum_total'],
+                        "exam_perfect_score"=>$result['a']['exam_perfect_score'],
+                        "class_position"=>$result['a']['class_position'],
+                        "clas_size"=>$result['a']['clas_size'],
+                    );
+                }
+                $response2['ClassPositions'] = $res2;
+                $response2['Flag'] = 1;
+            } else {
+                $response2['ClassPositions'] = null;
+                $response2['Flag'] = 0;
+            }
+
+            $this->set('TermScores', $response);
+            $this->set('ClassPosition', $response2);
+            $this->set('SkillsAssess', $skill_assess);
+            $this->set('encrypt_id', $encrypt_id);
+        }else{
+            $this->accessDenialError();
         }
     }
 }
