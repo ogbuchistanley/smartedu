@@ -2,11 +2,32 @@
 <?php 
     App::uses('Encryption', 'Utility'); 
     $Encryption = new Encryption();
+
 ?>
+    <div class="row">
+        <?php
+        $errors = $this->validationErrors['Sponsor'];
+        $flatErrors = Set::flatten($errors);
+        $flatErrors2 = $flatErrors;
+        $test = array();
+        foreach($flatErrors as $key => $value){
+            $test[] = $value;
+        }
+        if(!empty($test[count($test) - 1])) {
+            echo '<div class="alert alert-danger">';
+            echo '<ul>';
+            foreach($flatErrors2 as $key => $value) {
+                echo (!empty($value)) ? '<li>'.$value.'</li>' : false;
+            }
+            echo '</ul>';
+            echo '</div>';
+        }
+        ?>
+    </div>
     <div class="col-md-12">
         <div class="panel">
             <!-- Info Boxes -->
-            <div class="row">
+            <!--div class="row">
                 <div class="col-md-12">
                     <div class="info-box  bg-info  text-white">
                         <div class="info-icon bg-info-dark">
@@ -22,7 +43,7 @@
             <div class="panel-heading text-primary">
                 <h3 class="panel-title">
                     <i class="fa fa-pencil-square"></i>
-                   Adjust Sponsors' Information
+                   Adjust Sponsors' Information<label class="label label-primary">Please fill the form properly and modify accurately...</label>
                     <span class="pull-right">
                         <a href="javascript:void(0)"  title="Refresh"><i class="fa fa-refresh"></i></a>
                         <a href="#" class="panel-minimize"><i class="fa fa-chevron-up"></i></a>
@@ -33,17 +54,22 @@
             <div class="panel-body">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <?php 
+                        <?php
+                            //$sponsor = $this->request->data;
                             $encrypted_sponsor_id = $Encryption->encode($sponsor['Sponsor']['sponsor_id']);
                             //Creates The Form
                             echo $this->Form->create('Sponsor', array(
                                     'url' => '/sponsors/adjust/'.$encrypted_sponsor_id,
                                     'class' => 'form-horizontal cascde-forms',
                                     'novalidate' => 'novalidate',
-                                    'id' => 'sponsor_form'
+                                    'id' => 'sponsor_form',
+                                    'type' => 'file'
                                 )
                             );     
                         ?>
+                        <div class="form-group">
+                            <?php echo $this->Form->input('sponsor_id'); ?>
+                        </div>
                         <!--form class="form-horizontal cascde-forms" method="post" action="#" name="basic_validate" id="basic_validate" novalidate="novalidate"-->
                             <br/>
                             <div class="form-group">
@@ -66,13 +92,13 @@
                                 <label class="col-lg-2 col-md-3 control-label" for="first_name">First Name</label>
                                 <div class="col-lg-7 col-md-9">
                                     <input type="text" class="form-control form-cascade-control input-small" value="<?php echo $sponsor['Sponsor']['first_name']?>"
-                                 name="data[Sponsor][first_name]" id="first_name" placeholder="Type Sponsor's first name" required>
+                                 name="data[Sponsor][first_name]" disabled id="first_name" placeholder="Type Sponsor's first name" required>
                                </div>
                             </div>
                             <div class="form-group">
                               <label class="col-lg-2 col-md-3 control-label">Other Names</label>
                               <div class="col-lg-7 col-md-9">
-                               <input type="text" class="form-control form-cascade-control input-small" name="data[Sponsor][other_name]" id="other_name" 
+                               <input type="text" class="form-control form-cascade-control input-small" name="data[Sponsor][other_name]" id="other_name" disabled
                                       value="<?php echo (empty($sponsor['Sponsor']['other_name'])) ? '' : $sponsor['Sponsor']['other_name']?>" placeholder="Type Sponsor's other names">
                              </div>
                             </div>
@@ -86,7 +112,7 @@
                             <div class="form-group">
                                 <label class="col-lg-2 col-md-3 control-label" for="mobile_number1">Mobile Number 1</label>
                               <div class="col-lg-7 col-md-9">
-                                    <input type="text" class="form-control form-cascade-control input-small" name="data[Sponsor][mobile_number1]" 
+                                    <input type="text" class="form-control form-cascade-control input-small" name="data[Sponsor][mobile_number1]"
                                     value="<?php echo $sponsor['Sponsor']['mobile_number1']?>" id="mobile_number1" placeholder="Sponsor's Mobile number One" required>
                               </div>
                             </div>
@@ -175,24 +201,36 @@
                                     value="<?php echo $sponsor['Sponsor']['occupation']?>" id="occupation" placeholder="Sponsor's Occupation" required>
                                 </div>
                             </div>
-                            <!--div class="form-group">
+                            <div class="form-group">
                                 <label class="col-lg-2 col-md-3 control-label" for="company_name">Company name</label>
                                 <div class="col-lg-7 col-md-9">
                                     <input type="text" class="form-control form-cascade-control input-small" name="data[Sponsor][company_name]" 
-                                    value="<?php //echo ($sponsor['Sponsor']['company_name']) ? $sponsor['Sponsor']['company_name'] : ""?>" id="company_name" placeholder="Sponsor's Company name if any" required>
+                                    value="<?php echo ($sponsor['Sponsor']['company_name']) ? $sponsor['Sponsor']['company_name'] : ""?>" id="company_name" placeholder="Sponsor's Company name if any" required>
                                 </div>
-                            </div-->
+                            </div>
                             <div class="form-group">
                                 <label class="col-lg-2 col-md-3 control-label" for="company_address">Office Address</label>
                                 <div class="col-lg-7 col-md-9">
                                     <textarea class="form-control form-cascade-control input-small" name="data[Sponsor][company_address]" 
                                     id="company_address" placeholder="Sponsor's Company Address if any" required><?php echo ($sponsor['Sponsor']['company_address']) ? $sponsor['Sponsor']['company_address'] : ""?></textarea>
                                 </div>
-                            </div>                                    
+                            </div>
+                            <div class="form-group">
+                                <label for="image_url" class="col-lg-2 col-md-3 control-label">&nbsp;&nbsp;</label>
+                                <div class="col-lg-7 col-md-9">
+                                    <span class="btn btn-info fileinput-button" ng-class="{disabled: disabled}">
+                                        <i class="glyphicon glyphicon-plus"></i>
+                                        <span>Browse File...</span>
+                                        <input ng-disabled="disabled" value="<?php echo $sponsor['Sponsor']['image_url']?>" type="file" name="data[Sponsor][image_url]" id="image_url" onChange="readURL(this);" required="required" /><br>
+                                        <img data-src="holder.js/140x140" class="img-rounded" id="img_prev" src="<?php echo DOMAIN_NAME ?>/img/uploads/<?php echo ($sponsor['Sponsor']['image_url']) ? $sponsor['Sponsor']['image_url'] : 'avatar.jpg';?>" style="width: 140px; height: 140px;"/>
+                                    </span>
+                                    <div id="image_error"></div>
+                                </div>
+                            </div>
                             <div class="form-group">
                               <label class="col-lg-2 col-md-3 control-label">&nbsp;&nbsp;</label>
                               <div class="col-lg-7 col-md-9">
-                                  <button type="submit" id="register_sponsor_btn" class="btn btn-info">Update Sponsor</button>
+                                  <button type="submit" id="register_sponsor_btn" class="btn btn-info">Update Record</button>
                               </div>
                             </div> 
                         </form>

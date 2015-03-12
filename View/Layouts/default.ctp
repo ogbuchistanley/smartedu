@@ -7,7 +7,7 @@
  * @since         CakePHP(tm) v 0.10.0.1076
  */
 
-$cakeDescription = __d('app_dev', ':: SmartEdu :');
+$cakeDescription = __d('app_dev', ':: '.APP_NAME.' :');
 ?>
 <?php 
     
@@ -38,6 +38,11 @@ $cakeDescription = __d('app_dev', ':: SmartEdu :');
     
     //Disable The Links For Sponsors During Error Displays
     $disable_links = Configure::read('disable_links');
+
+    //Master Record Setup status
+    $master_record_id = Configure::read('master_record_id');
+    //Master Record Count
+    $master_record_count = Configure::read('master_record_count');
 ?>
 
 <?php 
@@ -76,7 +81,7 @@ $cakeDescription = __d('app_dev', ':: SmartEdu :');
     
     <!-- Loading Custom Stylesheets -->   
     <link href="<?php echo APP_DIR_ROOT; ?>css/jquery.autocomplete.css" rel="stylesheet">
-    <link href="<?php echo APP_DIR_ROOT; ?>css/custom.css" rel="stylesheet" media="print">
+    <link href="<?php echo APP_DIR_ROOT; ?>css/custom.css" rel="stylesheet">
     <link href="<?php echo APP_DIR_ROOT; ?>images/icon.png" rel="shortcut icon">
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
     <!--[if lt IE 9]>
@@ -117,7 +122,7 @@ $cakeDescription = __d('app_dev', ':: SmartEdu :');
                     <i class="fa fa-list btn-nav-toggle-responsive text-white"></i>
                 </a>
                 <a class="navbar-brand" href="<?php echo DOMAIN_NAME ?>/dashboard">
-                    <span class="logo small">Smart<img src="<?php echo APP_DIR_ROOT; ?>images/icon.png" />Edu</span>
+                    <span class="logo small"><?php echo substr(APP_NAME, 0, 5)?><img src="<?php echo APP_DIR_ROOT; ?>images/icon.png" /><?php echo substr(APP_NAME, 5); ?></span>
                 </a>
             </div>
 
@@ -136,10 +141,8 @@ $cakeDescription = __d('app_dev', ':: SmartEdu :');
                             </span>
                         </a>
                         <ul class="dropdown-menu" id="user_profile">
-                            <?php if($disable_links): ?>
-                                <li class="divider"></li>
-                                <li><a href="<?php echo DOMAIN_NAME ?>/users/change" rel="inbox" class="text-primary"><i class="fa fa-exchange"></i> Change Password</a></li>
-                            <?php endif;?>
+                            <li class="divider"></li>
+                            <li><a href="<?php echo DOMAIN_NAME ?>/users/change" rel="inbox" class="text-primary"><i class="fa fa-exchange"></i> Change Password</a></li>
                             <li class="divider"></li>
                             <li><a href="<?php echo DOMAIN_NAME ?>/logout" class="text-danger"><i class="fa fa-lock"></i> Logout</a></li>
                         </ul>
@@ -167,155 +170,214 @@ $cakeDescription = __d('app_dev', ':: SmartEdu :');
                             <button class="btn  btn-nav-toggle text-primary"><i class="fa fa-angle-double-left toggle-left"></i> </button>
                         </li>
                         <?php if($disable_links): ?>
-                            <li class="active"><a href="<?php echo DOMAIN_NAME ?>/dashboard/" data-original-title="Dashboard"><i class="fa fa-dashboard"></i><span class="hidden-minibar"> Dashboard</span></a></li>
-                            <?php if($student_index || $student_register): ?>
-                            <li class="submenu">
-                                <a class="dropdown" href="javascript:void(0)" data-original-title="Students"><i class="fa fa-group"></i><span class="hidden-minibar">  Students <span class="badge bg-primary pull-right" id="student_count"></span></span></a>
-                                <ul>
-                                <?php if($student_index): ?>
-                                    <li><a href="<?php echo DOMAIN_NAME ?>/students/" data-original-title="Manage Students"><i class="fa fa-gear"></i><span> Manage Students</span></a></li>
-                                <?php endif;?>
-                                <?php if($student_register): ?>
-                                    <li><a href="<?php echo DOMAIN_NAME ?>/students/register" data-original-title="Register New"><i class="fa fa-plus-square"></i><span> Register New</span></a></li>
-                                <?php endif;?>
-                                </ul> 
-                            </li>
-                            <?php endif;?>
-                            <?php if($sponsor_index || $sponsor_register): ?>
-                            <li class="submenu">
-                                <a class="dropdown" href="javascript:void(0)" data-original-title="Sponsors"><i class="fa fa-male"></i><span class="hidden-minibar">  Sponsors <span class="badge bg-primary pull-right" id="sponsor_count"></span></span></a>
-                                <ul>
-                                <?php if($sponsor_index): ?>
-                                    <li><a href="<?php echo DOMAIN_NAME ?>/sponsors/" data-original-title="Manage Sponsors"><i class="fa fa-gear"></i><span> Manage Sponsors</span></a></li>
-                                <?php endif;?>
-                                <?php if($sponsor_register): ?>
-                                    <li><a href="<?php echo DOMAIN_NAME ?>/sponsors/register" data-original-title="Register New"><i class="fa fa-plus-circle"></i><span> Register New</span></a></li>
-                                <?php endif;?>
-                                </ul> 
-                            </li>
-                            <?php endif;?>
-                            <?php if($employee_index || $employee_register || $employee_adjust): ?>
-                            <li class="submenu">
-                                <a class="dropdown" href="javascript:void(0)" data-original-title="Employees"><i class="fa fa-user"></i><span class="hidden-minibar">  Employees <span class="badge bg-primary pull-right" id="employee_count"></span></span></a>
-                                <ul>
-                                <?php if($employee_index): ?>
-                                    <li><a href="<?php echo DOMAIN_NAME ?>/employees/" data-original-title="505"><i class="fa fa-gear"></i><span> Manage Employees</span></a></li>
-                                <?php endif;?>
-                                <?php if($employee_register): ?>
-                                    <li><a href="<?php echo DOMAIN_NAME ?>/employees/register" data-original-title="404"><i class="fa fa-plus-circle"></i><span> Register New</span></a></li>
-                                <?php endif;?>
-                                <?php if($employee_adjust): ?>
-                                    <li><a href="<?php echo DOMAIN_NAME ?>/employees/adjust/<?php echo $Encryption->encode(AuthComponent::user('type_id')) ?>" data-original-title="404"><i class="fa fa-plus-circle"></i><span> Update Record</span></a></li>
-                                <?php endif;?>
-                                </ul> 
-                            </li>
-                            <?php endif;?>
-                            <?php if($subject_add2class): ?>
-                            <li class="submenu">
-                                <a class="dropdown" href="javascript:void(0)" data-original-title="Subjects"><i class="fa fa-book"></i><span class="hidden-minibar">  Subjects <span class="badge bg-primary pull-right" id="subject_count"></span></span></a>
-                                <ul>
-                                    <li><a href="<?php echo DOMAIN_NAME ?>/subjects/add2class#assign2class" data-original-title="404"><i class="fa fa-plus-square"></i><span> Assign To Classes</span></a></li>
-                                    <li><a href="<?php echo DOMAIN_NAME ?>/subjects/add2class#assign2teachers" data-original-title="404"><i class="fa fa-plus-circle"></i><span>  Assign Tutor</span></a></li>
-                                    <li><a href="<?php echo DOMAIN_NAME ?>/subjects/add2class#adjust_subjects_assign" data-original-title="404"><i class="fa fa-edit"></i><span> Modify/Manage Students</span></a></li>
-                                </ul> 
-                            </li>
-                            <?php endif;?>
-                            <?php if($attend_index): ?>
-                            <li  class="submenu">
-                                <a class="dropdown" href="javascript:void(0)" data-original-title="Class Room"><i class="fa fa-check-square"></i><span class="hidden-minibar"> Attendance <span class="badge bg-primary pull-right" id="attend_count"></span></span></a>
-                                <ul>
-                                    <li><a href="<?php echo DOMAIN_NAME ?>/attends/index#take_attend"><i class="fa fa-check-square-o"></i><span> Take / Mark</span></a></li>
-                                    <li><a href="<?php echo DOMAIN_NAME ?>/attends/index#edit_attend"><i class="fa fa-search-plus"></i><span> View / Edit</span></a></li>
-                                    <li><a href="<?php echo DOMAIN_NAME ?>/attends/index#summary"><i class="fa fa-plus-square"></i><span> Summary</span></a></li>
-                                </ul> 
-                            </li>
-                            <?php endif;?>
-                            <?php if($classroom_index || $classroom_myclass): ?>
-                            <li  class="submenu">
-                                <a class="dropdown" href="javascript:void(0)" data-original-title="Class Room"><i class="fa fa-building"></i><span class="hidden-minibar"> Class Room <span class="badge bg-primary pull-right" id="class_count"></span></span></a>
-                                <ul>
-                                    <?php if($classroom_index): ?>
-                                        <li><a href="<?php echo DOMAIN_NAME ?>/classrooms/index#assign_students"><i class="fa fa-plus-circle"></i><span> Add Students </span></a></li>
-                                        <li><a href="<?php echo DOMAIN_NAME ?>/classrooms/index#search_students"><i class="fa fa-search-plus"></i><span> Search For Students</span></a></li>
-                                        <li><a href="<?php echo DOMAIN_NAME ?>/classrooms/index#assign_head_tutor"><i class="fa fa-plus-square"></i><span> Assign Head Tutor</span></a></li>
-                                    <?php endif;?>
-                                    <li><a href="<?php echo DOMAIN_NAME ?>/classrooms/myclass"><i class="fa fa-building"></i><span> My Classroom(s)</span></a></li>
-                                </ul> 
-                            </li>
-                            <?php endif;?>
-                            <?php if($exam_index): ?>
-                            <li class="submenu">
-                                <a class="dropdown" href="javascript:void(0)" data-original-title="Exams"><i class="fa fa-bookmark"></i><span class="hidden-minibar"> Exams <span class="badge bg-primary pull-right" id="exams_count"></span></span></a>
-                                <ul>
-                                    <?php //if($exam_setup_exam): ?>
-                                    <li><a href="<?php echo DOMAIN_NAME ?>/exams/index#setupExam" data-original-title="Setup / Adjust Exams"><i class="fa fa-gear"></i><span> Setup / Adjust Exams</span></a></li>
-                                    <?php //endif;?>
-                                    <li><a href="<?php echo DOMAIN_NAME ?>/exams/index#subjectScores" data-original-title="Input Subject Scores"><i class="fa fa-th"></i><span> Input / View Subject Scores</span></a></li>
-                                    <li><a href="<?php echo DOMAIN_NAME ?>/exams/index#viewTAScores" data-original-title="Adjust Exams"><i class="fa fa-eye"></i><span> Terminal / Annual Scores</span></a></li>
-                                    <li><a href="<?php echo DOMAIN_NAME ?>/assessments" data-original-title="Skills Assessment"><i class="fa fa-magic"></i><span> Skills Assessment</span></a></li>
-                                </ul>
-                            </li>
-                            <?php endif;?>
-                            <?php if($item_index): ?>
-                            <li class="submenu">
-                                <a href="javascript:void(0)" data-original-title="Bills / Fees"><i class="fa fa-money"></i><span class="hidden-minibar"> Item Bills / Fees <span class="badge bg-primary pull-right" id="fees_count"></span></span></a>
-                                <ul>
-                                    <li><a href="<?php echo DOMAIN_NAME ?>/items/summary" data-original-title="Current Term Summary"><i class="fa fa-dashboard"></i><span> Current Term Summary</span></a></li>                                    
-                                    <?php if($item_process_fees):?>
-                                    <li><a href="<?php echo DOMAIN_NAME ?>/items/index#process_fees" data-original-title="Process Fees"><i class="fa fa-gear"></i><span> Process Fees</span></a></li>
-                                    <?php endif;?>
-                                    <li><a href="<?php echo DOMAIN_NAME ?>/items/index#bill_student" data-original-title="Bill Student / Class"><i class="fa fa-money"></i><span> Bill Student / Class</span></a></li>
-                                    <!--li><a href="<?php //echo DOMAIN_NAME ?>/items/index#search" data-original-title="Search History"><i class="fa fa-search"></i><span> Search History</span></a></li-->
-                                </ul>
-                            </li>
-                            <?php endif;?>
-                            <?php if($msg_index): ?>
+                            <?php if($master_record_id > ($master_record_count) - 1): ?>
+                                <!--li class="active"><a href="<?php echo DOMAIN_NAME ?>/dashboard/" data-original-title="Dashboard"><i class="fa fa-dashboard"></i><span class="hidden-minibar"> Dashboard</span></a></li-->
+                                <?php if($student_index || $student_register): ?>
                                 <li class="submenu">
-                                    <a href="javascript:void(0)" data-original-title="Message Center"><i class="fa fa-envelope"></i><span class="hidden-minibar"> Message Center <span class="badge bg-primary pull-right" id="message_count"></span></span></a>
+                                    <a class="dropdown" href="javascript:void(0)" data-original-title="Students"><i class="fa fa-group"></i><span class="hidden-minibar">  Students <span class="badge bg-primary pull-right" id="student_count"></span></span></a>
                                     <ul>
-                                        <li><a href="<?php echo DOMAIN_NAME ?>/messages/index#sponsors" data-original-title="Sponsors"><i class="fa fa-user"></i><span> Sponsors</span></a></li>
-                                        <li><a href="<?php echo DOMAIN_NAME ?>/messages/index#employees" data-original-title="Employees"><i class="fa fa-male"></i><span> Employees</span></a></li>
-                                        <li><a href="<?php echo DOMAIN_NAME ?>/messages/recipient" data-original-title="Recipient"><i class="fa fa-group"></i><span> Recipients</span></a></li>
+                                    <?php if($student_index): ?>
+                                        <li><a href="<?php echo DOMAIN_NAME ?>/students/" data-original-title="Manage Students"><i class="fa fa-gear"></i><span> Manage Students</span></a></li>
+                                    <?php endif;?>
+                                    <?php if($student_register): ?>
+                                        <li><a href="<?php echo DOMAIN_NAME ?>/students/register" data-original-title="Register New"><i class="fa fa-plus-square"></i><span> Register New</span></a></li>
+                                    <?php endif;?>
                                     </ul>
                                 </li>
-                            <?php endif;?>
-                            <!--li class="submenu">
-                                <a class="dropdown" href="javascript:void(0)" data-original-title="Pages"><i class="fa fa-book"></i><span class="hidden-minibar">  Reports </span>
-                                </a>
-                                <ul>
-                                    <li><a href="javascript:void(0)" data-original-title="Calendar"><i class="fa fa-calendar"></i><span> Calendar</span></a></li>
-                                    <li><a href="javascript:void(0)" data-original-title="Chat"><i class="fa fa-comment"></i><span> Chat</span></a></li>
-                                    <li><a href="javascript:void(0)" data-original-title="Profile Activity"><i class="fa fa-th"></i><span> Profile Activity</span></a></li>
+                                <?php endif;?>
+                                <?php if($sponsor_index || $sponsor_register): ?>
+                                <li class="submenu">
+                                    <a class="dropdown" href="javascript:void(0)" data-original-title="Sponsors"><i class="fa fa-male"></i><span class="hidden-minibar">  Sponsors <span class="badge bg-primary pull-right" id="sponsor_count"></span></span></a>
+                                    <ul>
+                                    <?php if($sponsor_index): ?>
+                                        <li><a href="<?php echo DOMAIN_NAME ?>/sponsors/" data-original-title="Manage Sponsors"><i class="fa fa-gear"></i><span> Manage Sponsors</span></a></li>
+                                    <?php endif;?>
+                                    <?php if($sponsor_register): ?>
+                                        <li><a href="<?php echo DOMAIN_NAME ?>/sponsors/register" data-original-title="Register New"><i class="fa fa-plus-circle"></i><span> Register New</span></a></li>
+                                    <?php endif;?>
+                                    </ul>
+                                </li>
+                                <?php endif;?>
+                                <?php if($employee_index || $employee_register || $employee_adjust): ?>
+                                <li class="submenu">
+                                    <a class="dropdown" href="javascript:void(0)" data-original-title="Employees"><i class="fa fa-user"></i><span class="hidden-minibar">  Employees <span class="badge bg-primary pull-right" id="employee_count"></span></span></a>
+                                    <ul>
+                                    <?php if($employee_index): ?>
+                                        <li><a href="<?php echo DOMAIN_NAME ?>/employees/" data-original-title="505"><i class="fa fa-gear"></i><span> Manage Employees</span></a></li>
+                                    <?php endif;?>
+                                    <?php if($employee_register): ?>
+                                        <li><a href="<?php echo DOMAIN_NAME ?>/employees/register" data-original-title="404"><i class="fa fa-plus-circle"></i><span> Register New</span></a></li>
+                                    <?php endif;?>
+                                    <?php if($employee_adjust): ?>
+                                        <li><a href="<?php echo DOMAIN_NAME ?>/employees/adjust/<?php echo $Encryption->encode(AuthComponent::user('type_id')) ?>" data-original-title="404"><i class="fa fa-plus-circle"></i><span> Update Record</span></a></li>
+                                    <?php endif;?>
+                                    </ul>
+                                </li>
+                                <?php endif;?>
+                                <?php if($subject_add2class): ?>
+                                <li class="submenu">
+                                    <a class="dropdown" href="javascript:void(0)" data-original-title="Subjects"><i class="fa fa-book"></i><span class="hidden-minibar">  Subjects <span class="badge bg-primary pull-right" id="subject_count"></span></span></a>
+                                    <ul>
+                                        <li><a href="<?php echo DOMAIN_NAME ?>/subjects/add2class#assign2class" data-original-title="404"><i class="fa fa-plus-square"></i><span> Assign To Classes</span></a></li>
+                                        <li><a href="<?php echo DOMAIN_NAME ?>/subjects/add2class#assign2teachers" data-original-title="404"><i class="fa fa-plus-circle"></i><span>  Assign Tutor</span></a></li>
+                                        <li><a href="<?php echo DOMAIN_NAME ?>/subjects/add2class#adjust_subjects_assign" data-original-title="404"><i class="fa fa-edit"></i><span> Modify/Manage Students</span></a></li>
+                                    </ul>
+                                </li>
+                                <?php endif;?>
+                                <?php if($attend_index === 'hide'): ?>
+                                    <li  class="submenu">
+                                        <a class="dropdown" href="javascript:void(0)" data-original-title="Class Room"><i class="fa fa-check-square"></i><span class="hidden-minibar"> Attendance <span class="badge bg-primary pull-right" id="attend_count"></span></span></a>
+                                        <ul>
+                                            <li><a href="<?php echo DOMAIN_NAME ?>/attends/index#take_attend"><i class="fa fa-check-square-o"></i><span> Take / Mark</span></a></li>
+                                            <li><a href="<?php echo DOMAIN_NAME ?>/attends/index#edit_attend"><i class="fa fa-search-plus"></i><span> View / Edit</span></a></li>
+                                            <li><a href="<?php echo DOMAIN_NAME ?>/attends/index#summary"><i class="fa fa-plus-square"></i><span> Summary</span></a></li>
+                                        </ul>
+                                    </li>
+                                <?php endif;?>
+                                <?php if($classroom_index || $classroom_myclass and $classroom_index ==='hide'): ?>
+                                <li  class="submenu">
+                                    <a class="dropdown" href="javascript:void(0)" data-original-title="Class Room"><i class="fa fa-building"></i><span class="hidden-minibar"> Class Room <span class="badge bg-primary pull-right" id="class_count"></span></span></a>
+                                    <ul>
+                                        <?php if($classroom_index): ?>
+                                            <li><a href="<?php echo DOMAIN_NAME ?>/classrooms/index#assign_students"><i class="fa fa-plus-circle"></i><span> Add Students </span></a></li>
+                                            <li><a href="<?php echo DOMAIN_NAME ?>/classrooms/index#search_students"><i class="fa fa-search-plus"></i><span> Search For Students</span></a></li>
+                                            <li><a href="<?php echo DOMAIN_NAME ?>/classrooms/index#assign_head_tutor"><i class="fa fa-plus-square"></i><span> Assign Head Tutor</span></a></li>
+                                        <?php endif;?>
+                                        <li><a href="<?php echo DOMAIN_NAME ?>/classrooms/myclass"><i class="fa fa-building"></i><span> My Classroom(s)</span></a></li>
+                                    </ul>
+                                </li>
+                                <?php endif;?>
+                                <?php if($exam_index === 'hide'): ?>
+                                <li class="submenu">
+                                    <a class="dropdown" href="javascript:void(0)" data-original-title="Exams"><i class="fa fa-bookmark"></i><span class="hidden-minibar"> Exams <span class="badge bg-primary pull-right" id="exams_count"></span></span></a>
+                                    <ul>
+                                        <?php //if($exam_setup_exam): ?>
+                                        <li><a href="<?php echo DOMAIN_NAME ?>/exams/index#setupExam" data-original-title="Setup / Adjust Exams"><i class="fa fa-gear"></i><span> Setup / Adjust Exams</span></a></li>
+                                        <?php //endif;?>
+                                        <li><a href="<?php echo DOMAIN_NAME ?>/exams/index#subjectScores" data-original-title="Input Subject Scores"><i class="fa fa-th"></i><span> Input / View Subject Scores</span></a></li>
+                                        <li><a href="<?php echo DOMAIN_NAME ?>/exams/index#viewTAScores" data-original-title="Adjust Exams"><i class="fa fa-eye"></i><span> Terminal / Annual Scores</span></a></li>
+                                        <li><a href="<?php echo DOMAIN_NAME ?>/assessments" data-original-title="Skills Assessment"><i class="fa fa-magic"></i><span> Skills Assessment</span></a></li>
+                                    </ul>
+                                </li>
+                                <?php endif;?>
+                                <?php if($item_index === 'hide'): ?>
+                                <li class="submenu">
+                                    <a href="javascript:void(0)" data-original-title="Bills / Fees"><i class="fa fa-money"></i><span class="hidden-minibar"> Item Bills / Fees <span class="badge bg-primary pull-right" id="fees_count"></span></span></a>
+                                    <ul>
+                                        <li><a href="<?php echo DOMAIN_NAME ?>/items/summary" data-original-title="Current Term Summary"><i class="fa fa-dashboard"></i><span> Current Term Summary</span></a></li>
+                                        <?php if($item_process_fees):?>
+                                        <li><a href="<?php echo DOMAIN_NAME ?>/items/index#process_fees" data-original-title="Process Fees"><i class="fa fa-gear"></i><span> Process Fees</span></a></li>
+                                        <?php endif;?>
+                                        <li><a href="<?php echo DOMAIN_NAME ?>/items/index#bill_student" data-original-title="Bill Student / Class"><i class="fa fa-money"></i><span> Bill Student / Class</span></a></li>
+                                        <!--li><a href="<?php //echo DOMAIN_NAME ?>/items/index#search" data-original-title="Search History"><i class="fa fa-search"></i><span> Search History</span></a></li-->
+                                    </ul>
+                                </li>
+                                <?php endif;?>
+                                <?php if($msg_index === 'hide'): ?>
+                                    <li class="submenu">
+                                        <a href="javascript:void(0)" data-original-title="Message Center"><i class="fa fa-envelope"></i><span class="hidden-minibar"> Message Center <span class="badge bg-primary pull-right" id="message_count"></span></span></a>
+                                        <ul>
+                                            <li><a href="<?php echo DOMAIN_NAME ?>/messages/index#sponsors" data-original-title="Sponsors"><i class="fa fa-user"></i><span> Sponsors</span></a></li>
+                                            <li><a href="<?php echo DOMAIN_NAME ?>/messages/index#employees" data-original-title="Employees"><i class="fa fa-male"></i><span> Employees</span></a></li>
+                                            <li><a href="<?php echo DOMAIN_NAME ?>/messages/recipient" data-original-title="Recipient"><i class="fa fa-group"></i><span> Recipients</span></a></li>
+                                        </ul>
+                                    </li>
+                                <?php endif;?>
+                                <!--li class="submenu">
+                                    <a class="dropdown" href="javascript:void(0)" data-original-title="Pages"><i class="fa fa-book"></i><span class="hidden-minibar">  Reports </span>
+                                    </a>
+                                    <ul>
+                                        <li><a href="javascript:void(0)" data-original-title="Calendar"><i class="fa fa-calendar"></i><span> Calendar</span></a></li>
+                                        <li><a href="javascript:void(0)" data-original-title="Chat"><i class="fa fa-comment"></i><span> Chat</span></a></li>
+                                        <li><a href="javascript:void(0)" data-original-title="Profile Activity"><i class="fa fa-th"></i><span> Profile Activity</span></a></li>
 
-                                    <li><a href="javascript:void(0)" data-original-title="Gallery"><i class="fa fa-th"></i><span> Gallery</span></a></li>
-                                    <li><a href="javascript:void(0)" data-original-title="Grids"><i class="fa fa-th-large"></i><span> Grids</span></a></li>
-                                </ul>
-                            </li-->
-                            <?php if($record_index): ?>
+                                        <li><a href="javascript:void(0)" data-original-title="Gallery"><i class="fa fa-th"></i><span> Gallery</span></a></li>
+                                        <li><a href="javascript:void(0)" data-original-title="Grids"><i class="fa fa-th-large"></i><span> Grids</span></a></li>
+                                    </ul>
+                                </li-->
+                                <?php if($record_index): ?>
+                                <li class="submenu">
+                                    <a class="dropdown" href="javascript:void(0)" data-original-title="Master Records">
+                                        <i class="fa fa-sitemap"></i><span class="hidden-minibar"> Master Records <span class="badge bg-primary pull-right" id="record_count"></span></span>
+                                    </a>
+                                    <ul>
+                                        <li><a href="<?php echo DOMAIN_NAME ?>/records/index" data-original-title="Academic Terms"><i class="fa fa-ticket"></i><span> Academic Terms</span></a></li>
+                                        <li><a href="<?php echo DOMAIN_NAME ?>/records/academic_year" data-original-title="Academic Years"><i class="fa fa-outdent"></i><span> Academic Years</span></a></li>
+                                        <li><a href="<?php echo DOMAIN_NAME ?>/records/class_group" data-original-title="Class Group"><i class="fa fa-xing"></i><span> Class Group</span></a></li>
+                                        <li><a href="<?php echo DOMAIN_NAME ?>/records/class_level" data-original-title="Class Level"><i class="fa fa-trello"></i><span> Class Level</span></a></li>
+                                        <li><a href="<?php echo DOMAIN_NAME ?>/records/class_room" data-original-title="Class Rooms"><i class="fa fa-group"></i><span> Class Rooms</span></a></li>
+                                        <li><a href="<?php echo DOMAIN_NAME ?>/records/subject_group" data-original-title="Subject Group"><i class="fa fa-align-left"></i><span> Subject Groups</span></a></li>
+                                        <li><a href="<?php echo DOMAIN_NAME ?>/records/subject" data-original-title="Subject"><i class="fa fa-file-text"></i><span> Subjects</span></a></li>
+                                        <li><a href="<?php echo DOMAIN_NAME ?>/records/grade" data-original-title="Grade Grouping"><i class="fa fa-renren"></i><span> Grade Grouping</span></a></li>
+                                        <!--li><a href="<?php echo DOMAIN_NAME ?>/records/item" data-original-title="Items"><i class="fa fa-compass"></i><span> Items</span></a></li>
+                                        <li><a href="<?php echo DOMAIN_NAME ?>/records/item_bill" data-original-title="Item Bills"><i class="fa fa-money"></i><span> Item Bills</span></a></li-->
+                                    </ul>
+                                </li>
+                                <?php endif;?>
+                                <?php if($user_index): ?>
+                                    <li><a href="<?php echo DOMAIN_NAME ?>/users/index" data-original-title="Users"><i class="fa fa-user"></i><span> Manage Users</span></a></li>
+                                    <!--li><a href="<?php echo DOMAIN_NAME ?>/users/register" data-original-title="Users"><i class="fa fa-exclamation-circle"></i><span> Register New</span></a></li-->
+                                <?php endif;?>
+                            <?php else:?>
+                                <?php if($record_index): ?>
+                                    <li class="submenu">
+                                        <a class="dropdown" href="javascript:void(0)" data-original-title="Master Records">
+                                            <i class="fa fa-sitemap"></i><span class="hidden-minibar"> Master Records <span class="badge bg-primary pull-right" id="record_count"></span></span>
+                                        </a>
+                                        <ul>
+                                            <li><a href="<?php echo DOMAIN_NAME ?>/records/academic_year" data-original-title="Academic Years"><i class="fa fa-outdent"></i><span> Academic Years</span></a></li>
+                                            <?php if($master_record_id > 0): ?>
+                                                <li><a href="<?php echo DOMAIN_NAME ?>/records/index" data-original-title="Academic Terms"><i class="fa fa-ticket"></i><span> Academic Terms</span></a></li>
+                                            <?php endif;?>
+                                            <?php if($master_record_id > 1): ?>
+                                                <li><a href="<?php echo DOMAIN_NAME ?>/records/class_group" data-original-title="Class Group"><i class="fa fa-xing"></i><span> Class Group</span></a></li>
+                                            <?php endif;?>
+                                            <?php if($master_record_id > 2): ?>
+                                                <li><a href="<?php echo DOMAIN_NAME ?>/records/class_level" data-original-title="Class Level"><i class="fa fa-trello"></i><span> Class Level</span></a></li>
+                                            <?php endif;?>
+                                            <?php if($master_record_id > 3): ?>
+                                                <li><a href="<?php echo DOMAIN_NAME ?>/records/class_room" data-original-title="Class Rooms"><i class="fa fa-group"></i><span> Class Rooms</span></a></li>
+                                            <?php endif;?>
+                                            <?php if($master_record_id > 4): ?>
+                                                <li><a href="<?php echo DOMAIN_NAME ?>/records/subject_group" data-original-title="Subject Group"><i class="fa fa-align-left"></i><span> Subject Groups</span></a></li>
+                                            <?php endif;?>
+                                            <?php if($master_record_id > 5): ?>
+                                                <li><a href="<?php echo DOMAIN_NAME ?>/records/subject" data-original-title="Subject"><i class="fa fa-file-text"></i><span> Subjects</span></a></li>
+                                            <?php endif;?>
+                                            <?php if($master_record_id > 6): ?>
+                                                <li><a href="<?php echo DOMAIN_NAME ?>/records/grade" data-original-title="Grade Grouping"><i class="fa fa-renren"></i><span> Grade Grouping</span></a></li>
+                                            <?php endif;?>
+                                            <?php if($master_record_id > 7): ?>
+                                                <li><a href="<?php echo DOMAIN_NAME ?>/records/item_bill" data-original-title="Item Bills"><i class="fa fa-money"></i><span> Item Bills</span></a></li>
+                                            <?php endif;?>
+                                            <?php if($master_record_id > 8): ?>
+                                                <li><a href="<?php echo DOMAIN_NAME ?>/records/item" data-original-title="Items"><i class="fa fa-compass"></i><span> Items</span></a></li>
+                                            <?php endif;?>
+                                        </ul>
+                                    </li>
+                                <?php endif;?>
+                            <?php endif;?>
+                        <?php else:?>
+                            <?php
+                                $encrypted_sponsor_id = $Encryption->encode(AuthComponent::user('type_id'));
+                            ?>
+                            <li><a href="<?php echo DOMAIN_NAME ?>/home" data-original-title="Class"><i class="fa fa-dashboard"></i> <span class="hidden-minibar"> Home</span></a></li>
                             <li class="submenu">
-                                <a class="dropdown" href="javascript:void(0)" data-original-title="Master Records">
-                                    <i class="fa fa-sitemap"></i><span class="hidden-minibar"> Master Records <span class="badge bg-primary pull-right" id="record_count"></span></span>
-                                </a>
+                                <a class="dropdown" href="javascript:void(0)" data-original-title="Sponsor"><i class="fa fa-male"></i><span class="hidden-minibar">  Sponsor <span class="badge bg-primary pull-right" id="sponsor_count"></span></span></a>
                                 <ul>
-                                    <li><a href="<?php echo DOMAIN_NAME ?>/records/index" data-original-title="Academic Terms"><i class="fa fa-indent"></i><span> Academic Terms</span></a></li>
-                                    <li><a href="<?php echo DOMAIN_NAME ?>/records/academic_year" data-original-title="Academic Years"><i class="fa fa-outdent"></i><span> Academic Years</span></a></li>
-                                    <li><a href="<?php echo DOMAIN_NAME ?>/records/class_group" data-original-title="Class Group"><i class="fa fa-xing"></i><span> Class Group</span></a></li>
-                                    <li><a href="<?php echo DOMAIN_NAME ?>/records/class_level" data-original-title="Class Level"><i class="fa fa-trello"></i><span> Class Level</span></a></li>
-                                    <li><a href="<?php echo DOMAIN_NAME ?>/records/class_room" data-original-title="Class Rooms"><i class="fa fa-group"></i><span> Class Rooms</span></a></li>
-                                    <li><a href="<?php echo DOMAIN_NAME ?>/records/grade" data-original-title="Grade Grouping"><i class="fa fa-renren"></i><span> Grade Grouping</span></a></li>
-                                    <li><a href="<?php echo DOMAIN_NAME ?>/records/item" data-original-title="Items"><i class="fa fa-compass"></i><span> Items</span></a></li>
-                                    <li><a href="<?php echo DOMAIN_NAME ?>/records/item_bill" data-original-title="Item Bills"><i class="fa fa-money"></i><span> Item Bills</span></a></li>
-                                    <li><a href="<?php echo DOMAIN_NAME ?>/records/subject_group" data-original-title="Subject Group"><i class="fa fa-align-left"></i><span> Subject Groups</span></a></li>
-                                    <li><a href="<?php echo DOMAIN_NAME ?>/records/subject" data-original-title="Subject"><i class="fa fa-file-text"></i><span> Subjects</span></a></li>
-                                </ul> 
+                                    <li><a href="<?php echo DOMAIN_NAME; ?>/sponsors/view/<?php echo $encrypted_sponsor_id; ?>" data-original-title="My Record"><i class="fa fa-eye"></i><span> My Record</span></a></li>
+                                    <li><a href="<?php echo DOMAIN_NAME ?>/sponsors/adjust/<?php echo $encrypted_sponsor_id; ?>" data-original-title="Adjust Record"><i class="fa fa-edit"></i><span> Adjust Record</span></a></li>
+                                </ul>
                             </li>
-                            <?php endif;?>
-                            <?php if($user_index): ?>
-                                <li><a href="<?php echo DOMAIN_NAME ?>/users/index" data-original-title="Users"><i class="fa fa-user"></i><span> Manage Users</span></a></li>
-                                <!--li><a href="<?php echo DOMAIN_NAME ?>/users/register" data-original-title="Users"><i class="fa fa-exclamation-circle"></i><span> Register New</span></a></li-->
-                            <?php endif;?>
-                            <li><a href="<?php echo DOMAIN_NAME ?>/users/change" data-original-title="Class"><i class="fa fa-exchange"></i> <span class="hidden-minibar"> Change Password</span></a></li>
+                            <li class="submenu">
+                                <a class="dropdown" href="javascript:void(0)" data-original-title="Student"><i class="fa fa-group"></i><span class="hidden-minibar">  Student <span class="badge bg-primary pull-right" id="student_count"></span></span></a>
+                                <ul>
+                                    <li><a href="<?php echo DOMAIN_NAME; ?>/home/students" data-original-title="My Student"><i class="fa fa-eye"></i><span> My Student(s)</span></a></li>
+                                    <li><a href="<?php echo DOMAIN_NAME ?>/home/exam" data-original-title="Exam Record"><i class="fa fa-bookmark"></i><span> Exam Record</span></a></li>
+                                </ul>
+                            </li>
                         <?php endif;?>
+                        <li><a href="<?php echo DOMAIN_NAME ?>/users/change" data-original-title="Class"><i class="fa fa-exchange"></i> <span class="hidden-minibar"> Change Password</span></a></li>
                         <li><a href="<?php echo DOMAIN_NAME ?>/logout" data-original-title="Class"><i class="fa fa-lock"></i><span class="hidden-minibar"> Logout</span></a></li>
                     </ul>
                 </div>
@@ -327,9 +389,11 @@ $cakeDescription = __d('app_dev', ':: SmartEdu :');
                 <div class="row">
                     <div class="col-mod-12">
                         <ul class="breadcrumb">
-                             <?php if($disable_links): ?>
-                                <li class="active"><a href="<?php echo DOMAIN_NAME ?>/dashboard/"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-                            <?php endif;?>
+                             <?php if($disable_links){ ?>
+                                <!--li class="active"><a href="<?php echo DOMAIN_NAME ?>/dashboard/"><i class="fa fa-dashboard"></i> Dashboard</a></li-->
+                             <?php }else{ ?>
+                                <li class="active"><a href="<?php echo DOMAIN_NAME ?>/home/"><i class="fa fa-dashboard"></i> Home</a></li>
+                            <?php };?>
                             <li><a href="<?php echo DOMAIN_NAME ?>/logout" class="text-danger"><i class="fa fa-lock"></i> Logout</a></li>
                         </ul>
                     </div>

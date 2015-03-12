@@ -68,7 +68,7 @@ $('document').ready(function(){
     // Ajax Auto Validation : First Name
     autoValidateField($('#first_name'), domian_url+'validate_form');
     // Ajax Auto Validation : Other Names
-    //autoValidateField($('#other_name'), domian_url+'validate_form');
+    autoValidateField($('#other_name'), domian_url+'validate_form');
     // Ajax Auto Validation : Email
     //autoValidateField($('#email'), domian_url+'validate_form');
     // Ajax Auto Validation : Mobile Number One
@@ -79,7 +79,7 @@ $('document').ready(function(){
     autoValidateDropDown($('#country_id'), domian_url+'validate_form');
     // Ajax Auto Validation : Occupation
     autoValidateField($('#occupation'), domian_url+'validate_form');
-    // Ajax Auto Validation : Sponsorship Type
-    //autoValidateDropDown($('#sponsorship_type_id'), domian_url+'validate_form');
+    // Ajax Auto Validation : Passport
+    validateImageFile($("#image_url"));
     /////// Validations  : ends/////////////////////////////////////      
 });

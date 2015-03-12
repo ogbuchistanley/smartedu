@@ -1,75 +1,107 @@
-<section id="featured">
-	<!-- start slider -->
-	<!-- Slider -->
-    <div class="container">
-        <div class="row">
-            <div class="span12">
-                <div id="sliderindex5">
-                    <div>
-                      <img src="<?php echo WEB_DIR_ROOT; ?>img/slides/carousel/slider1.jpg" alt="" title="" />
-                    </div>
-                    <div>
-                      <img src="<?php echo WEB_DIR_ROOT; ?>img/slides/carousel/slider2.jpg"  alt="" title=""/>
-                    </div>
-                    <div>
-                      <img src="<?php echo WEB_DIR_ROOT; ?>img/slides/carousel/slider3.jpg" alt="" title="" />
-                    </div>
-                    <div>
-                      <img src="<?php echo WEB_DIR_ROOT; ?>img/slides/carousel/slider4.jpg" alt="" title="" />
-                    </div>
-                </div>
-                <ul id="pager" class="sliderindex5pager">
-                    <li class="selected"><center><h3 class="stabs"><strong>Simple &amp; Efficient</strong></h3></center></li>
-                    <li class=""><center><h3 class="stabs"> <strong>Reduce overhead cost </strong></h3></center></li>
-                    <li class=""><center><h3 class="stabs"> <strong>Save time </strong></h3></center></li>
-                    <li class=""><center><h3 class="stabs"> <strong>School from home</strong></h3></center></li>
-                </ul>
-            </div>
-        </div>
-    </div>	
-<!-- end slider -->
-</section>
+<?php echo $this->Html->script("../app/js/bootstrap-datatables.js", FALSE);?>
+<?php echo $this->Html->script("../app/js/dataTables-custom.js", FALSE);?>
+<?php echo $this->Html->script("../app/jquery/custom.student.js", FALSE);?>
+<?php
+    App::uses('Encryption', 'Utility');
+    $Encryption = new Encryption();
+?>
 
-<!-- Start Content-->
-<section id="content">
-    <div class="container">
-        <!-- Start Front services-->
-        <div class="row">
-            <div class="span12">
-                    <div class="row">
-                      <div class="span4">
-                        <div class="wpb_wrapper clearfix">
-                            <span class="font-icon-beaker"></span>
-                            <h3 class="sname thin"> <strong>Incredibly</strong> Responsive</h3>
-                            <p style="text-align: center;">SmartSchool is completely responsive. And when we say responsive, we mean it won’t only work on mobile devices; it’ll look damn good too!</p>
-                        </div> 
-                      </div>
-                      <div class="span4">
-                        <div class="wpb_wrapper clearfix">
-                            <span class="font-icon-dashboard"></span>
-                            <h3 class="sname thin"><strong>Retina</strong> Ready</h3>
-                            <p style="text-align: center;">Retina ready? No problem for SmartSchool. All images look very sharp on all modern retina displays. And they are adjust for very fast loading.</p>
-                        </div> 
-                      </div>  
-                        
-                      <div class="span4">
-                        <div class="wpb_wrapper clearfix">
-                            <span class="font-icon-cogs"></span>
-                            <h3 class="sname thin"><strong>Fully</strong> Customizable</h3>
-                            <p style="text-align: center;">SmartSchool is fully customizable modern HTML5 template. You can do anything from scratch and create a personal look you like. It's fun and easy.</p>
-                        </div> 
-                    </div> 
+<div class="col-md-12">
+    <div class="panel">
+        <!-- Info Boxes -->
+        <!--div class="row">
+            <div class="col-md-12">
+                <div class="info-box  bg-info  text-white">
+                    <div class="info-icon bg-info-dark">
+                        <i class="fa fa-list fa-4x"></i>
+                    </div>
+                    <div class="info-details">
+                        <h4>Manage List of Students by Editing, Viewing or Deleting </h4>
+                    </div>
                 </div>
             </div>
         </div>
-        <!-- End Front services-->
-        <!-- divider -->
-        <div class="row bottom2">
-            <div class="span12">
-                <div class="solidline"></div>
-            </div>
+        <!-- / Info Boxes -->
+        <div class="panel-heading text-primary">
+            <h3 class="panel-title">
+                <i class="fa fa-list"></i> Manage Students Information
+                <span class="pull-right">
+                    <a href="javascript:void(0)"  title="Refresh"><i class="fa fa-refresh"></i></a>
+                    <a href="#" class="panel-minimize"><i class="fa fa-chevron-up"></i></a>
+                    <a href="#" class="panel-close"><i class="fa fa-times"></i></a>
+                </span>
+            </h3>
         </div>
-        <!-- end divider -->
+        <div class="panel-body">
+            <div class="panel panel-info">
+                <div class="panel-heading panel-title  text-white">Student's Table</div>
+                <div style="overflow-x: scroll" class="panel-body">
+                    <table  class="table table-bordered table-hover table-striped display" id="student_table" >
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Full Name</th>
+                            <th>Gender</th>
+                            <th>Sponsor Name</th>
+                            <th>Birth Date</th>
+                            <th>Class</th>
+                            <th>Status</th>
+                            <th>View</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php $i=1; foreach ($students as $student): ?>
+                            <tr class="gradeA">
+                                <?php
+                                    $encrypted_student_id = $Encryption->encode($student['Student']['student_id']);
+                                    $encrypted_sponsor_id = $Encryption->encode($student['Student']['sponsor_id']);
+                                ?>
+                                <td><?php echo h($student['Student']['student_no']); ?>&nbsp;</td>
+                                <td><?php echo h($student['Student']['first_name']), ' ', h($student['Student']['surname']), ' '; echo (!empty($student['Student']['other_name'])) ? h($student['Student']['other_name']) : '' ?>&nbsp;</td>
+                                <td><?php echo h($student['Student']['gender']); ?>&nbsp;</td>
+                                <td>
+                                    <a target="__blank" href="<?php echo DOMAIN_NAME ?>/sponsors/view/<?php echo $encrypted_sponsor_id; ?>" class="btn-link">
+                                        <?php echo h($student['Sponsor']['first_name']), ' ', h($student['Sponsor']['other_name']); ?>
+                                    </a>
+                                </td>
+                                <td><?php echo h($student['Student']['birth_date']); ?>&nbsp;</td>
+                                <td><?php echo (!empty($student['Student']['class_id'])) ? h($student['Classroom']['class_name']) : '<span class="label label-danger">nill</span>'; ?>&nbsp;</td>
+                                <td>
+                                    <?php
+                                    if(h($student['Student']['student_status_id']) === '1' || h($student['Student']['student_status_id']) === '2'){
+                                        echo '<span class="label label-success"> '.$student['StudentStatus']['student_status'].'</span>';
+                                    }else if(h($student['Student']['student_status_id']) === '3'){
+                                        echo '<span class="label label-warning"> '.$student['StudentStatus']['student_status'].'</span>';
+                                    }else{
+                                        echo '<span class="label label-danger"> '.$student['StudentStatus']['student_status'].'</span>';
+                                    }
+                                    ?>
+                                </td>
+                                <td><a target="__blank" href="<?php echo DOMAIN_NAME ?>/students/view/<?php echo $encrypted_student_id; ?>" class="btn btn-info btn-xs"><i class="fa fa-eye"></i> View</a></td>
+                        <?php endforeach; ?>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <th>ID</th>
+                            <th>Full Name</th>
+                            <th>Gender</th>
+                            <th>Sponsor Name</th>
+                            <th>Birth Date</th>
+                            <th>Class</th>
+                            <th>Status</th>
+                            <th>View</th>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div> <!-- /panel body -->
+            </div>
+        </div> <!-- /panel body -->
     </div>
-</section>
-<!-- End Content-->
+</div> <!-- /col-md-12 -->
+<?php
+//on click of Manage Students link... activate the link
+echo $this->Js->buffer('
+        setTabActive("[href=\"'.DOMAIN_NAME.'/students/\"]", 1);
+    ');
+?> 
+ 

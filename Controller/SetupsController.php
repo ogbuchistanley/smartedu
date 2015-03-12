@@ -11,6 +11,11 @@ App::uses('Folder', 'Utility');
 
 class SetupsController extends AppController {
 
+    public function beforeFilter() {
+        parent::beforeFilter();
+        $this->masterRedirect();
+    }
+
     public function setup(){
         $Setup = ClassRegistry::init('Setup');
         if ($this->request->is('post')) {

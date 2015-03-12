@@ -5,14 +5,14 @@
 <div class="col-md-12">
     <div class="panel">
         <!-- Info Boxes -->
-        <div class="row">
+        <!--div class="row">
             <div class="col-md-12">
                 <div class="info-box  bg-info  text-white">
                     <div class="info-icon bg-info-dark">
                         <i class="fa fa-book fa-4x"></i>
                     </div>
                     <div class="info-details">
-                        <h4>View Students Terminal Subjects Scores (CA's or Exams) </h4>
+                        <h4>View Students Terminal Subjects Scores (CA's and Exams) </h4>
                     </div>
                 </div>
             </div>
@@ -20,7 +20,7 @@
         <!-- / Info Boxes -->
         <div class="panel-heading text-primary">
             <h3 class="panel-title">
-               <i class="fa fa-bookmark-o"></i> View Student Terminal Exam Subjects Scores
+               <i class="fa fa-bookmark-o"></i> View Student Terminal Exam Subjects Scores (CA's and Exams)
                 <a class="btn btn-default" href="<?php echo DOMAIN_NAME ?>/exams/print_result/<?php echo $encrypt_id?>"  title="Print"><i class="fa fa-2x fa-print"></i> Print</a>
                 <span class="pull-right">
                     <a href="<?php echo DOMAIN_NAME ?>/exams/print_result/<?php echo $encrypt_id?>"  title="Print"><i class="fa fa-print"></i></a>

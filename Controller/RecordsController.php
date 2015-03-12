@@ -3,6 +3,14 @@ App::uses('AppController', 'Controller');
 
 class RecordsController extends AppController {
 
+    private $MasterSetupModel;
+
+    // only allow the login controllers only
+    public function beforeFilter() {
+        parent::beforeFilter();
+        $this->MasterSetupModel = ClassRegistry::init('MasterSetup');
+    }
+
     //Delete ID's that are checked
     function deleteIDs($delete_terms_id, $Classgroup) {
         if($delete_terms_id !== null) {
@@ -13,49 +21,7 @@ class RecordsController extends AppController {
         }
     }
     
-    //Academic Terms Master Record ////////////////////////////////////////////
-    public function index() {
-        $this->set('title_for_layout', 'Academic Term Records');
-        $resultCheck = $this->Acl->check($this->group_alias, 'RecordsController');
-        if($resultCheck){
-            $this->loadModels('AcademicYear', 'academic_year', 'DESC');
-            $AcademicTerm = ClassRegistry::init('AcademicTerm');        
-            $count = 0;
-
-            if ($this->request->is('post') and isset($this->request->data['SearchAcademicTerm'])) {
-                $data = $this->request->data['SearchAcademicTerm'];
-                $options = array('conditions' => array('AcademicTerm.academic_year_id' => $data['academic_year_search_id']));
-                $this->set('AcademicTerms', $AcademicTerm->find('all', $options));
-
-            }else if ($this->request->is('post') and isset($this->request->data['AcademicTerm'])) {
-                $data_array = $this->request->data['AcademicTerm'];
-                $delete_terms = $this->request->data['AcademicTerm']['deleted_term'];
-                $delete_terms_id = (!empty($delete_terms)) ? explode(',', $delete_terms) : null;
-                for ($i=0; $i<count($data_array['academic_term_id']); $i++){
-                    $data = $this->request->data['AcademicTerm'];
-                    //Save Record if its New Else // Update Existing Record
-                    $data['academic_term_id'] = ($data_array['academic_term_id'][$i] === '') ? null : $data_array['academic_term_id'][$i];
-
-                    $data['academic_term'] = $data_array['academic_term'][$i];
-                    $data['academic_year_id'] = $data_array['academic_year_id'][$i];
-                    $data['term_status_id'] = $data_array['term_status_id'][$i];
-                    $data['term_type_id'] = $data_array['term_type_id'][$i];
-                    if($AcademicTerm->save($data)){   $count++;  }
-                }
-
-                //Delete The ID's Checked
-                $this->deleteIDs($delete_terms_id, $AcademicTerm);
-
-                $this->set('AcademicTerms', $AcademicTerm->find('all'));
-            }else{
-                $this->set('AcademicTerms', $AcademicTerm->find('all'));
-            }
-        }else{
-            $this->accessDenialError();
-        }
-    }
-    
-    //Academic Years Master Record  ////////////////////////////////////////////////////////////////////////////////////
+    /////////Academic Years Master Record  //////////////////////  1st Step //////////////////////////////////////////////////////////////
     public function academic_year() {
         $this->set('title_for_layout', 'Academic Year Records');
         $resultCheck = $this->Acl->check($this->group_alias, 'RecordsController');
@@ -85,7 +51,17 @@ class RecordsController extends AppController {
                 //Delete The ID's Checked
                 $this->deleteIDs($delete_terms_id, $AcademicYear);
 
-                $this->set('AcademicYears', $AcademicYear->find('all'));
+                //Save The Master Record State Then Redirect To the next level (Academic Term)
+                if($count > 0) {
+                    $this->setFlashMessage('Academic Years Has Been Saved', 1);
+                    if($this->master_record_id < $this->master_record_count) {
+                        $this->MasterSetupModel->id = 1;
+                        $this->MasterSetupModel->saveField('master_record_id', 1);
+                        $this->redirect(array('controller' => 'records', 'action' => 'index'));
+                    }else{
+                        $this->set('AcademicYears', $AcademicYear->find('all'));
+                    }
+                }
             }else{
                 $this->set('AcademicYears', $AcademicYear->find('all'));
             }
@@ -93,8 +69,61 @@ class RecordsController extends AppController {
             $this->accessDenialError();
         }
     }
+
+    ////////Academic Terms Master Record ///////////// 2nd Step ////////////////////////////////////////////////////////
+    public function index() {
+        $this->set('title_for_layout', 'Academic Term Records');
+        $resultCheck = $this->Acl->check($this->group_alias, 'RecordsController');
+        if($resultCheck){
+            $this->loadModels('AcademicYear', 'academic_year', 'DESC');
+            $AcademicTerm = ClassRegistry::init('AcademicTerm');
+            $count = 0;
+
+            if ($this->request->is('post') and isset($this->request->data['SearchAcademicTerm'])) {
+                $data = $this->request->data['SearchAcademicTerm'];
+                $options = array('conditions' => array('AcademicTerm.academic_year_id' => $data['academic_year_search_id']));
+                $this->set('AcademicTerms', $AcademicTerm->find('all', $options));
+
+            }else if ($this->request->is('post') and isset($this->request->data['AcademicTerm'])) {
+                $data_array = $this->request->data['AcademicTerm'];
+                $delete_terms = $this->request->data['AcademicTerm']['deleted_term'];
+                $delete_terms_id = (!empty($delete_terms)) ? explode(',', $delete_terms) : null;
+                for ($i=0; $i<count($data_array['academic_term_id']); $i++){
+                    $data = $this->request->data['AcademicTerm'];
+                    //Save Record if its New Else // Update Existing Record
+                    $data['academic_term_id'] = ($data_array['academic_term_id'][$i] === '') ? null : $data_array['academic_term_id'][$i];
+
+                    $data['academic_term'] = $data_array['academic_term'][$i];
+                    $data['academic_year_id'] = $data_array['academic_year_id'][$i];
+                    $data['term_status_id'] = $data_array['term_status_id'][$i];
+                    $data['term_type_id'] = $data_array['term_type_id'][$i];
+                    if($AcademicTerm->save($data)){ $count++; }
+                }
+
+                //Delete The ID's Checked
+                $this->deleteIDs($delete_terms_id, $AcademicTerm);
+
+                //Save The Master Record State Then Redirect To the next level (Class Group)
+                if($count > 0) {
+                    $this->setFlashMessage('Academic Terms Has Been Saved', 1);
+                    if($this->master_record_id < $this->master_record_count) {
+                        $this->MasterSetupModel->id = 1;
+                        $this->MasterSetupModel->saveField('master_record_id', 2);
+                        $this->redirect(array('controller' => 'records', 'action' => 'class_group'));
+                    }else{
+                        $this->set('AcademicTerms', $AcademicTerm->find('all'));
+                    }
+                }
+
+            }else{
+                $this->set('AcademicTerms', $AcademicTerm->find('all'));
+            }
+        }else{
+            $this->accessDenialError();
+        }
+    }
     
-    //Class Groups Master Record  ////////////////////////////////////////////////////////////////////////////////////
+    ////////// Class Groups Master Record  ////////////////////// 3rd Step //////////////////////////////////////////////////////////////
     public function class_group() {
         $this->set('title_for_layout', 'Class Group Records');
         $resultCheck = $this->Acl->check($this->group_alias, 'RecordsController');
@@ -117,7 +146,17 @@ class RecordsController extends AppController {
                 //Delete The ID's Checked
                 $this->deleteIDs($delete_terms_id, $Classgroup);
 
-                $this->set('Classgroups', $Classgroup->find('all'));
+                //Save The Master Record State Then Redirect To the next level (Class Level)
+                if($count > 0) {
+                    $this->setFlashMessage('Class Group Has Been Saved', 1);
+                    if($this->master_record_id < $this->master_record_count) {
+                        $this->MasterSetupModel->id = 1;
+                        $this->MasterSetupModel->saveField('master_record_id', 3);
+                        $this->redirect(array('controller' => 'records', 'action' => 'class_level'));
+                    }else{
+                        $this->set('Classgroups', $Classgroup->find('all'));
+                    }
+                }
             }else{
                 $this->set('Classgroups', $Classgroup->find('all'));
             }
@@ -126,7 +165,7 @@ class RecordsController extends AppController {
         }
     }
     
-    //Class Levels Master Record  ////////////////////////////////////////////////////////////////////////////////////
+    /////// Class Levels Master Record  ////////////////////// 4th Step //////////////////////////////////////////////////////////////
     public function class_level() {
         $this->set('title_for_layout', 'Class Level Records');
         $resultCheck = $this->Acl->check($this->group_alias, 'RecordsController');
@@ -156,7 +195,17 @@ class RecordsController extends AppController {
                 //Delete The ID's Checked
                 $this->deleteIDs($delete_terms_id, $Classlevel);
 
-                $this->set('Classlevels', $Classlevel->find('all'));
+                //Save The Master Record State Then Redirect To the next level (Class Room)
+                if($count > 0) {
+                    $this->setFlashMessage('Class Level Has Been Saved', 1);
+                    if($this->master_record_id < $this->master_record_count) {
+                        $this->MasterSetupModel->id = 1;
+                        $this->MasterSetupModel->saveField('master_record_id', 4);
+                        $this->redirect(array('controller' => 'records', 'action' => 'class_room'));
+                    }else{
+                        $this->set('Classlevels', $Classlevel->find('all'));
+                    }
+                }
             }else{
                 $this->set('Classlevels', $Classlevel->find('all'));
             }
@@ -165,7 +214,7 @@ class RecordsController extends AppController {
         }
     }
     
-    //Class Rooms Master Record  ////////////////////////////////////////////////////////////////////////////////////
+    /////// Class Rooms Master Record  //////////////////// 5th Step ////////////////////////////////////////////////////////////////
     public function class_room() {
         $this->set('title_for_layout', 'Class Room Records');
         $resultCheck = $this->Acl->check($this->group_alias, 'RecordsController');
@@ -196,58 +245,26 @@ class RecordsController extends AppController {
                 //Delete The ID's Checked
                 $this->deleteIDs($delete_terms_id, $Classroom);
 
-                $this->set('Classrooms', $Classroom->find('all'));
-            }else{
-                $this->set('Classrooms', $Classroom->find('all'));
-            }
-        }else{
-            $this->accessDenialError();
-        }
-    }
-    
-    //Grade Groupings Master Record  ////////////////////////////////////////////////////////////////////////////////////
-    public function grade() {
-        $this->set('title_for_layout', 'Grade Records');
-        $resultCheck = $this->Acl->check($this->group_alias, 'RecordsController');
-        if($resultCheck){
-            $this->loadModels('Classgroup', 'classgroup');
-            $Grade = ClassRegistry::init('Grade');        
-            $count = 0;
-
-            if ($this->request->is('post') and isset($this->request->data['SearchGrade'])) {
-                $data = $this->request->data['SearchGrade'];
-                $options = array('conditions' => array('Grade.classgroup_id' => $data['class_group_search_id']));
-                $this->set('Grades', $Grade->find('all', $options));
-
-            }else if ($this->request->is('post') and isset($this->request->data['Grade'])) {
-                $data_array = $this->request->data['Grade'];
-                $delete_terms = $this->request->data['Grade']['deleted_term'];
-                $delete_terms_id = (!empty($delete_terms)) ? explode(',', $delete_terms) : null;
-                for ($i=0; $i<count($data_array['grades_id']); $i++){
-                    $data = $this->request->data['Grade'];
-                    //Save Record if its New Else // Update Existing Record
-                    $data['grades_id'] = ($data_array['grades_id'][$i] === '') ? null : $data_array['grades_id'][$i];
-
-                    $data['grade'] = $data_array['grade'][$i];
-                    $data['classgroup_id'] = $data_array['classgroup_id'][$i];
-                    $data['grade_abbr'] = $data_array['grade_abbr'][$i];
-                    $data['lower_bound'] = $data_array['lower_bound'][$i];
-                    $data['upper_bound'] = $data_array['upper_bound'][$i];
-                    if($Grade->save($data)){   $count++;  }
+                //Save The Master Record State Then Redirect To the next level (Subject Group)
+                if($count > 0) {
+                    $this->setFlashMessage('Class Room Has Been Saved', 1);
+                    if($this->master_record_id < $this->master_record_count) {
+                        $this->MasterSetupModel->id = 1;
+                        $this->MasterSetupModel->saveField('master_record_id', 5);
+                        $this->redirect(array('controller' => 'records', 'action' => 'subject_group'));
+                    }else{
+                        $this->set('Classrooms', $Classroom->find('all'));
+                    }
                 }
-                //Delete The ID's Checked
-                $this->deleteIDs($delete_terms_id, $Grade);
-
-                $this->set('Grades', $Grade->find('all'));
             }else{
-                $this->set('Grades', $Grade->find('all'));
+                $this->set('Classrooms', $Classroom->find('all'));
             }
         }else{
             $this->accessDenialError();
         }
     }
     
-    //Subject Groups Master Record  ////////////////////////////////////////////////////////////////////////////////////
+    //// Subject Groups Master Record  //////////////////////// 6th Step ////////////////////////////////////////////////////////////
     public function subject_group() {
         $this->set('title_for_layout', 'Subject Group Records');
         $resultCheck = $this->Acl->check($this->group_alias, 'RecordsController');
@@ -270,7 +287,17 @@ class RecordsController extends AppController {
                 //Delete The ID's Checked
                 $this->deleteIDs($delete_terms_id, $SubjectGroup);
 
-                $this->set('SubjectGroups', $SubjectGroup->find('all'));
+                //Save The Master Record State Then Redirect To the next level (Subject)
+                if($count > 0) {
+                    $this->setFlashMessage('Subject Group Has Been Saved', 1);
+                    if($this->master_record_id < $this->master_record_count) {
+                        $this->MasterSetupModel->id = 1;
+                        $this->MasterSetupModel->saveField('master_record_id', 6);
+                        $this->redirect(array('controller' => 'records', 'action' => 'subject'));
+                    }else{
+                        $this->set('SubjectGroups', $SubjectGroup->find('all'));
+                    }
+                }
             }else{
                 $this->set('SubjectGroups', $SubjectGroup->find('all'));
             }
@@ -279,7 +306,7 @@ class RecordsController extends AppController {
         }
     }
     
-    //Subject Master Record  ////////////////////////////////////////////////////////////////////////////////////
+    //////  Subject Master Record  //////////////////////// 7th Step ////////////////////////////////////////////////////////////
     public function subject() {
         $this->set('title_for_layout', 'Subject Records');
         $resultCheck = $this->Acl->check($this->group_alias, 'RecordsController');
@@ -309,7 +336,17 @@ class RecordsController extends AppController {
                 //Delete The ID's Checked
                 $this->deleteIDs($delete_terms_id, $Subject);
 
-                $this->set('Subjects', $Subject->find('all'));
+                //Save The Master Record State Then Redirect To the next level (Grade)
+                if($count > 0) {
+                    $this->setFlashMessage('Subject Has Been Saved', 1);
+                    if($this->master_record_id < $this->master_record_count) {
+                        $this->MasterSetupModel->id = 1;
+                        $this->MasterSetupModel->saveField('master_record_id', 7);
+                        $this->redirect(array('controller' => 'records', 'action' => 'grade'));
+                    }else{
+                        $this->set('Subjects', $Subject->find('all'));
+                    }
+                }
             }else{
                 $this->set('Subjects', $Subject->find('all'));
             }
@@ -317,8 +354,61 @@ class RecordsController extends AppController {
             $this->accessDenialError();
         }
     }
+
+    //// Grade Groupings Master Record  //////////////////////////// 8th Step ////////////////////////////////////////////////////////
+    public function grade() {
+        $this->set('title_for_layout', 'Grade Records');
+        $resultCheck = $this->Acl->check($this->group_alias, 'RecordsController');
+        if($resultCheck){
+            $this->loadModels('Classgroup', 'classgroup');
+            $Grade = ClassRegistry::init('Grade');
+            $count = 0;
+
+            if ($this->request->is('post') and isset($this->request->data['SearchGrade'])) {
+                $data = $this->request->data['SearchGrade'];
+                $options = array('conditions' => array('Grade.classgroup_id' => $data['class_group_search_id']));
+                $this->set('Grades', $Grade->find('all', $options));
+
+            }else if ($this->request->is('post') and isset($this->request->data['Grade'])) {
+                $data_array = $this->request->data['Grade'];
+                $delete_terms = $this->request->data['Grade']['deleted_term'];
+                $delete_terms_id = (!empty($delete_terms)) ? explode(',', $delete_terms) : null;
+                for ($i=0; $i<count($data_array['grades_id']); $i++){
+                    $data = $this->request->data['Grade'];
+                    //Save Record if its New Else // Update Existing Record
+                    $data['grades_id'] = ($data_array['grades_id'][$i] === '') ? null : $data_array['grades_id'][$i];
+
+                    $data['grade'] = $data_array['grade'][$i];
+                    $data['classgroup_id'] = $data_array['classgroup_id'][$i];
+                    $data['grade_abbr'] = $data_array['grade_abbr'][$i];
+                    $data['lower_bound'] = $data_array['lower_bound'][$i];
+                    $data['upper_bound'] = $data_array['upper_bound'][$i];
+                    if($Grade->save($data)){   $count++;  }
+                }
+                //Delete The ID's Checked
+                $this->deleteIDs($delete_terms_id, $Grade);
+
+                //Save The Master Record State Then Redirect To the next level (Item)
+                if($count > 0) {
+                    $this->setFlashMessage('Grade Has Been Saved', 1);
+                    if($this->master_record_id < $this->master_record_count) {
+                        $this->MasterSetupModel->id = 1;
+                        $this->MasterSetupModel->saveField('master_record_id', 8);
+                        //Change Your Password
+                        $this->redirect(array('controller' => 'users', 'action' => 'change'));
+                    }else{
+                        $this->set('Grades', $Grade->find('all'));
+                    }
+                }
+            }else{
+                $this->set('Grades', $Grade->find('all'));
+            }
+        }else{
+            $this->accessDenialError();
+        }
+    }
     
-    //Items Master Record  ////////////////////////////////////////////////////////////////////////////////////
+    ///// Items Master Record  //////////////////////// 9th Step ////////////////////////////////////////////////////////////
     public function item() {
         $this->set('title_for_layout', 'Item Records');
         $resultCheck = $this->Acl->check($this->group_alias, 'RecordsController');
@@ -345,7 +435,17 @@ class RecordsController extends AppController {
                 //Delete The ID's Checked
                 $this->deleteIDs($delete_terms_id, $Item);
 
-                $this->set('Items', $Item->find('all'));
+                //Save The Master Record State Then Redirect To the next level (Item Bills)
+                if($count > 0) {
+                    $this->setFlashMessage('Items Has Been Saved', 1);
+                    if($this->master_record_id < $this->master_record_count) {
+                        $this->MasterSetupModel->id = 1;
+                        $this->MasterSetupModel->saveField('master_record_id', 9);
+                        $this->redirect(array('controller' => 'records', 'action' => 'item_bill'));
+                    }else{
+                        $this->set('Items', $Item->find('all'));
+                    }
+                }
             }else{
                 $this->set('Items', $Item->find('all'));
             }
@@ -354,7 +454,7 @@ class RecordsController extends AppController {
         }
     }
     
-    //Item Bills Master Record  ////////////////////////////////////////////////////////////////////////////////////
+    //// Item Bills Master Record  ///////////////////// 10th Step ///////////////////////////////////////////////////////////////
     public function item_bill() {
         $this->set('title_for_layout', 'Item Bills Records');
         $resultCheck = $this->Acl->check($this->group_alias, 'RecordsController');
@@ -397,7 +497,17 @@ class RecordsController extends AppController {
                 //Delete The ID's Checked
                 $this->deleteIDs($delete_terms_id, $ItemBill);
 
-                $this->set('ItemBills', $ItemBill->find('all'));
+                //Save The Master Record State
+                if($count > 0) {
+                    $this->setFlashMessage('Item Bills Has Been Saved', 1);
+                    if($this->master_record_id < $this->master_record_count) {
+                        $this->MasterSetupModel->id = 1;
+                        $this->MasterSetupModel->saveField('master_record_id', 9);
+                        //$this->redirect(array('controller' => 'dashboard', 'action' => 'index'));
+                    }else{
+                        $this->set('ItemBills', $ItemBill->find('all'));
+                    }
+                }
             }else{
                 $this->set('ItemBills', $ItemBill->find('all'));
             }
@@ -406,5 +516,4 @@ class RecordsController extends AppController {
         }
     }    
 }
-
 ?>

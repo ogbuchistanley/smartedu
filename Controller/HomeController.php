@@ -7,16 +7,24 @@ class HomeController extends AppController
     public $components = array('Paginator');
 
     // only allow the login controllers only
-    public function beforeFilter()
-    {
+    public function beforeFilter() {
         parent::beforeFilter();
-        $this->layout = 'default_web';
+        $this->masterRedirect();
+        //$this->layout = 'default_web';
     }
 
     /////////////////////////////////////// Sponsors or Students actions ///////////////////////////////////////////////
-    public function index()
-    {
-
+    public function index() {
+        $this->set('title_for_layout', 'Students');
+        $student = ClassRegistry::init('Student');
+        $sponsor_id = $this->Auth->user('type_id');
+        $result = $this->Acl->check($this->group_alias, 'HomeController');
+        if ($result) {
+            $options = array('conditions' => array('Student.sponsor_id' => $sponsor_id));
+            $this->set('students', $student->find('all', $options));
+        } else {
+            $this->accessDenialError();
+        }
 
     }
 
@@ -29,36 +37,36 @@ class HomeController extends AppController
 
     public function students()
     {
+        $this->set('title_for_layout', 'Students');
         $student = ClassRegistry::init('Student');
         $sponsor_id = $this->Auth->user('type_id');
         $result = $this->Acl->check($this->group_alias, 'HomeController');
         if ($result) {
             $options = array('conditions' => array('Student.sponsor_id' => $sponsor_id));
             $this->set('students', $student->find('all', $options));
-            //$this->set('students', $student->find('all'));
         } else {
             $this->accessDenialError();
         }
     }
 
-    public function record($encrypt_id = null)
-    {
-        $this->set('title_for_layout', 'Student Record');
-        $student = ClassRegistry::init('Student');
-        $result = $this->Acl->check($this->group_alias, 'HomeController');
-        if ($result) {
-            $decrypt_student_id = $this->encryption->decode($encrypt_id);
-            if (!$student->exists($decrypt_student_id)) {
-                $this->accessDenialError('Invalid Student Record Requested for Viewing', 2);
-            }
-            $options = array('conditions' => array('Student.' . $student->primaryKey => $decrypt_student_id));
-            $this->set('student', $student->find('first', $options));
-
-        } else {
-            $this->accessDenialError();
-        }
-    }
-
+//    public function record($encrypt_id = null)
+//    {
+//        $this->set('title_for_layout', 'Student Record');
+//        $student = ClassRegistry::init('Student');
+//        $result = $this->Acl->check($this->group_alias, 'HomeController');
+//        if ($result) {
+//            $decrypt_student_id = $this->encryption->decode($encrypt_id);
+//            if (!$student->exists($decrypt_student_id)) {
+//                $this->accessDenialError('Invalid Student Record Requested for Viewing', 2);
+//            }
+//            $options = array('conditions' => array('Student.' . $student->primaryKey => $decrypt_student_id));
+//            $this->set('student', $student->find('first', $options));
+//
+//        } else {
+//            $this->accessDenialError();
+//        }
+//    }
+//
     public function exam()
     {
         $this->set('title_for_layout', 'Student Record');
@@ -112,18 +120,25 @@ class HomeController extends AppController
     }
 
     //Displaying Student Terminal Exam Scores
-    public function term_scorestd($encrypt_id)
-    {
+    public function term_scorestd($encrypt_id){
+
         $this->set('title_for_layout', 'Terminal Student Position');
         $resultCheck = $this->Acl->check($this->group_alias, 'HomeController');
         if ($resultCheck) {
             $Exam = ClassRegistry::init('Exam');
+            $AssessmentModel = ClassRegistry::init('Assessment');
+            $SkillAssessmentModel = ClassRegistry::init('SkillAssessment');
             //Decrypt the id sent
             $decrypt_id = $this->encryption->decode($encrypt_id);
             $student_id = explode('/', $decrypt_id)[0];
             $class_id = explode('/', $decrypt_id)[1];
             $term_id = explode('/', $decrypt_id)[2];
-            //$term_id = explode('/', $decrypt_id)[1];
+            $skill_assess = null;
+
+            $option = array('conditions' => array('Assessment.student_id' => $student_id, 'Assessment.academic_term_id' => $term_id));
+            $student_assess = $AssessmentModel->find('first', $option);
+            if($student_assess)
+                $skill_assess = $SkillAssessmentModel->find('all', array('conditions' => array('SkillAssessment.assessment_id' => $student_assess['Assessment']['assessment_id'])));
 
             $results = $Exam->findStudentExamTerminalDetails($student_id, $term_id, $class_id);
             $response = array();
@@ -172,6 +187,9 @@ class HomeController extends AppController
             }
             $this->set('TermScores', $response);
             $this->set('ClassPosition', $response2);
+            $this->set('SkillsAssess', $skill_assess);
+            $this->set('encrypt_id', $encrypt_id);
+            $this->render('/Exams/term_scorestd');
         } else {
             $this->accessDenialError();
         }
@@ -198,6 +216,7 @@ class HomeController extends AppController
             $responseSub = array();
             $responsePos = array();
             $counts = 0;
+            $re = null;
             //Terminal List of Student Subjects and their exam Scores in Details
             foreach ($AcademicTerms as $AcademicTerm) {
                 $results = $Exam->findStudentExamAnnualDetails($student_id, $AcademicTerm['AcademicTerm']['academic_term_id'], $class_id);
@@ -266,6 +285,7 @@ class HomeController extends AppController
             $this->set('AnnualScoresArray', $response);
             $this->set('AnnualSubArray', $responseSub);
             $this->set('AnnualPositionArray', $responsePos);
+            $this->render('/Exams/annual_scorestd');
         } else {
             $this->accessDenialError();
         }
@@ -318,33 +338,34 @@ class HomeController extends AppController
     }
 
     //Password Change
-    public function change()
-    {
-        $this->set('title_for_layout', 'Password Change');
-        $User = ClassRegistry::init('User');
-        if ($this->request->is('post')) {
-            $id = $this->Auth->user('user_id');
-            $old_pass = $this->request->data['User']['old_pass'];
-            $new_pass = $this->request->data['User']['new_pass'];
-            $new_pass2 = $this->request->data['User']['new_pass2'];
-            $user = $User->find('first', array('conditions' => array('User.' . $User->primaryKey => $id)));
-            $storedHash = $user['User']['password'];
-            $newHash = Security::hash($old_pass, 'blowfish', $storedHash);
-            if ($storedHash === $newHash) {
-                if ($new_pass === $new_pass2) {
-                    $User->id = $id;
-                    if ($User->saveField('password', $new_pass2)) {
-                        $this->setFlashMessage('Password Successfully Changed', 1);
-                    }
-                } else {
-                    $this->setFlashMessage('New And Confrim Password Mismatch', 2);
-                }
-            } else {
-                $this->setFlashMessage('Old Password Mismatch', 2);
-            }
-            return $this->redirect(array('action' => 'change'));
-        }
-    }
+//    public function change()
+//    {
+//        $this->render('/Users/change');
+//        $this->set('title_for_layout', 'Password Change');
+//        $User = ClassRegistry::init('User');
+//        if ($this->request->is('post')) {
+//            $id = $this->Auth->user('user_id');
+//            $old_pass = $this->request->data['User']['old_pass'];
+//            $new_pass = $this->request->data['User']['new_pass'];
+//            $new_pass2 = $this->request->data['User']['new_pass2'];
+//            $user = $User->find('first', array('conditions' => array('User.' . $User->primaryKey => $id)));
+//            $storedHash = $user['User']['password'];
+//            $newHash = Security::hash($old_pass, 'blowfish', $storedHash);
+//            if ($storedHash === $newHash) {
+//                if ($new_pass === $new_pass2) {
+//                    $User->id = $id;
+//                    if ($User->saveField('password', $new_pass2)) {
+//                        $this->setFlashMessage('Password Successfully Changed', 1);
+//                    }
+//                } else {
+//                    $this->setFlashMessage('New And Confrim Password Mismatch', 2);
+//                }
+//            } else {
+//                $this->setFlashMessage('Old Password Mismatch', 2);
+//            }
+//            return $this->redirect(array('action' => 'change'));
+//        }
+//    }
     /////////////////////////////////////// \\\ Sponsors or Students actions ///////////////////////////////////////////////
 }
 

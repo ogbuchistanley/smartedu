@@ -31,7 +31,11 @@ class AppController extends Controller {
     public $helpers = array('Html', 'Form', 'Js');
     
     public $group_alias;
-    
+
+    public $master_record_id;
+
+    public $master_record_count;
+
     //Global Variable for encryption
     public $encryption;
 
@@ -41,7 +45,7 @@ class AppController extends Controller {
     //$this->Auth->actionPath = 'controllers/';
     public $components = array(
         'Acl',
-        //'DebugKit.Toolbar',
+        'DebugKit.Toolbar',
         'Session',
         'Auth' => array(
             'authenticate' => array(
@@ -76,6 +80,9 @@ class AppController extends Controller {
         }else if($type === 2){
             $temp = 'alert alert-danger';
             $icon = '<i class="fa fa-thumbs-o-down fa-2x"></i> ';
+        }else if($type === 3){
+            $temp = 'alert alert-warning';
+            $icon = '<i class="fa fa-warning fa-2x"></i> ';
         }
         $this->Session->setFlash(__('<b>'.$icon.' '.$msg.'</b>'), 'default', array('class' => $temp));
     }
@@ -84,9 +91,9 @@ class AppController extends Controller {
     function beforeFilter() {
         //////////////////////////////////////////////////////////////////////
         //Remove This While on Production Enviroment
+        //$this->buildAcl();
         //$this->initDB();
-        //$this->buildAcl();      
-        
+
         $this->Auth->allow('login');           
         $this->Auth->allow('forget_password');           
         $this->encryption  = new Encryption();
@@ -99,14 +106,42 @@ class AppController extends Controller {
         }else{
             $this->group_alias = 'expired_users';
         }
-        
-        //Delete action can only be successfully triggered if it receives a POST request:
-        //$this->Security->requirePost('delete');
-        //The csrfExpires property By default the FormHelper will add a data[_Token][key]
-        // containing the CSRF token to every form when the component is enabled
-        //$this->Security->csrfExpires = '+1 hour';
+
+        //Get The Current Master Record That HAs Been Setup
+        $MasterSetupModel = ClassRegistry::init('MasterSetup');
+        $MasterSetup = $MasterSetupModel->find('first', array('conditions' => array('MasterSetup.master_setup_id' => 1)));
+        $val = intval($MasterSetup['MasterSetup']['master_record_id']);
+
+        //Set the master_setup_id to be accessed globally both in views and controllers
+        $this->master_record_id = $val;
+        $this->master_record_count = 8;
+        Configure::write('master_record_id', $val);
+        Configure::write('master_record_count', $this->master_record_count);
+
     }
-    
+
+    //Redirect To The Master Record To Be Setup
+    public function masterRedirect(){
+        $val = $this->master_record_id;
+        if($val === 0)
+            $this->redirect(array('controller' => 'records', 'action' => 'academic_year'));
+            //$this->response->location(DOMAIN_URL.'/records/academic_year');
+        elseif($val === 1)
+            $this->redirect(array('controller' => 'records', 'action' => 'index'));
+        elseif($val === 2)
+            $this->redirect(array('controller' => 'records', 'action' => 'class_group'));
+        elseif($val === 3)
+            $this->redirect(array('controller' => 'records', 'action' => 'class_level'));
+        elseif($val === 4)
+            $this->redirect(array('controller' => 'records', 'action' => 'class_room'));
+        elseif($val === 5)
+            $this->redirect(array('controller' => 'records', 'action' => 'subject_group'));
+        elseif($val === 6)
+            $this->redirect(array('controller' => 'records', 'action' => 'subject'));
+        elseif($val === 7)
+            $this->redirect(array('controller' => 'records', 'action' => 'grade'));
+    }
+
     // Set all the access links for all the controllers
     function beforeRender() {        
         $auth = $this->group_alias;
@@ -307,9 +342,13 @@ class AppController extends Controller {
         $this->Acl->deny('expired_users', 'controllers');
         
         //allow users (Students, Sponsors) ==> 2            web_users
-        $this->Acl->deny('web_users', 'controllers');
-        $this->Acl->allow('web_users', 'HomeController');
-        
+        $this->Acl->deny('spn_users', 'controllers');
+        $this->Acl->allow('spn_users', 'HomeController');
+        $this->Acl->allow('spn_users', 'StudentsController/view');
+        $this->Acl->allow('spn_users', 'SponsorsController/view');
+        $this->Acl->allow('spn_users', 'SponsorsController/adjust', 'update');
+        $this->Acl->deny('spn_users', 'SponsorsController/index');
+
         
         //Access Controls (Employees or Teachers)==> 3      emp_users
         $this->Acl->deny('emp_users', 'controllers'); 
@@ -341,6 +380,7 @@ class AppController extends Controller {
         //SponsorsController
         $this->Acl->allow('ict_users', 'SponsorsController');
         $this->Acl->allow('ict_users', 'SponsorsController/index');
+        $this->Acl->allow('ict_users', 'SponsorsController/view');
         $this->Acl->allow('ict_users', 'SponsorsController/register', 'create');
         $this->Acl->allow('ict_users', 'SponsorsController/adjust', 'update');
         $this->Acl->deny('ict_users', 'SponsorsController/delete', 'delete');
@@ -355,8 +395,7 @@ class AppController extends Controller {
         $this->Acl->allow('ict_users', 'SubjectsController/add2class');
         //ItemsController
         $this->Acl->allow('ict_users', 'ItemsController');
-        $this->Acl->deny('ict_users', 'ItemsController/process_fees');   
-        
+        $this->Acl->deny('ict_users', 'ItemsController/process_fees');
         
 
         //Access Control (Super Admin) to everything ==> 5    adm_users

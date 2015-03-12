@@ -6,16 +6,21 @@ class EmployeesController extends AppController {
 
     //public $helpers = array('Html', 'Form', 'Js');
     public $components = array('Paginator');
-    
+
+    public function beforeFilter() {
+        parent::beforeFilter();
+        $this->masterRedirect();
+    }
+
     public function autoComplete() {
         //$model, $field_name1, $field_id $field_name2 // Auto Completes The Field.
         $this->autoCompleteField('Employee', 'first_name', 'employee_id', 'other_name');
     }
-    
+
     public function validate_form() {
         $this->validateForm('Employee');
     }
-    
+
     public function index() {
         $result = $this->Acl->check($this->group_alias, 'EmployeesController/index');
         if($result){
@@ -24,27 +29,27 @@ class EmployeesController extends AppController {
         }else{
             $this->accessDenialError();
         }
-    }    
-    
+    }
+
     //Create New Employee Adim Access Only
     public function register() {
         $result = $this->Acl->check($this->group_alias, 'EmployeesController/register', 'create');
         if($result){
             $this->loadModels('Salutation', 'salutation_name');
             $EmployeeNew = ClassRegistry::init('EmployeeNew');
-            
+
             if ($this->request->is('post')) {
                 $data = $this->request->data['EmployeeNew'];
 //                $results = $EmployeeNew->find('first', array('conditions' => array('Employee.mobile_number1' => trim($data['mobile_number1']))));
                 $results = $EmployeeNew->query('SELECT * FROM employees WHERE mobile_number1="'.trim($data['mobile_number1']).'" LIMIT 1');
                 $results = ($results) ? array_shift($results) : false;
                 if($results && strtolower($results['employees']['first_name']) === strtolower(trim($data['first_name']))){
-                    $this->setFlashMessage(' The Employee '.$data['first_name'].' With Mobile Number '.$data['mobile_number1'].' Already Exist.', 2); 
+                    $this->setFlashMessage(' The Employee '.$data['first_name'].' With Mobile Number '.$data['mobile_number1'].' Already Exist.', 2);
                     return $this->redirect(array('controller' => 'employees', 'action' => 'register'));
                 }else{
                     $EmployeeNew->create();
                     if ($EmployeeNew->save($data)) {
-                        $this->setFlashMessage('The Employee '.$data['first_name'].' '.$data['other_name'].' has been saved.', 1);   
+                        $this->setFlashMessage('The Employee '.$data['first_name'].' '.$data['other_name'].' has been saved.', 1);
                         return $this->redirect(array('controller' => 'employees', 'action' => 'register'));
                     }else {
                         $this->setFlashMessage('The Employee could not be saved. Please,  Kindly Fill the Form Properly.', 2);
@@ -55,7 +60,7 @@ class EmployeesController extends AppController {
             $this->accessDenialError();
         }
     }
-    
+
     /*public function register() {
         $result = $this->Acl->check($this->group_alias, 'EmployeesController/register', 'create');
         if($result){
@@ -126,7 +131,7 @@ class EmployeesController extends AppController {
             $EmpQua = ClassRegistry::init('EmployeeQualification');
             $SpouseDetail = ClassRegistry::init('SpouseDetail');
             $decrypt_employee_id = $this->encryption->decode($encrypt_id);
-            
+
             if (!$this->Employee->exists($decrypt_employee_id)) {
                 $this->accessDenialError('Invalid Employee Record Requested for Viewing', 2);
             }
@@ -140,7 +145,7 @@ class EmployeesController extends AppController {
             $this->accessDenialError();
         }
     }
-    
+
     public function adjust($encrypt_id = null) {
         $result = $this->Acl->check($this->group_alias, 'EmployeesController/adjust', 'update');
         if($result){
@@ -165,10 +170,10 @@ class EmployeesController extends AppController {
                     //Uploading The Image Provided
                     if(isset($data['image_url'])){
                         if($this->uploadImage($decrypt_employee_id, 'employees', $this->request->data['Employee'])) {
-                            $this->setFlashMessage('The Employee '.$data['first_name'].' '.$data['other_name'].' has been Updated.', 1);   
+                            $this->setFlashMessage('The Employee has been Updated.', 1);
                         }
                     }else {
-                        $this->setFlashMessage('The Employee '.$data['first_name'].' '.$data['other_name'].' has been Updated... But Image Was Not Uploaded', 1);
+                        $this->setFlashMessage('The Employee has been Updated... But New Image Was Not Uploaded', 1);
                     }
                     //Update The Spouse Record if Married
                     if(!empty($data['spouse_name'])) {
@@ -193,8 +198,9 @@ class EmployeesController extends AppController {
                             $dataValue['qualification_date'] = !(empty($data['qualification_date'][$i])) ? $data['qualification_date'][$i] : null;
                             $EmpQua->save($dataValue);
                         }
-                    }   
-                    return $this->redirect(array('controller' => 'dashboard', 'action' => 'index'));
+                    }
+                    return $this->redirect(array('action' => 'adjust/'.$encrypt_id));
+                    //return $this->redirect(array('controller' => 'dashboard', 'action' => 'index'));
                 } else {
                     $this->setFlashMessage('The Employee could not be saved. Please, try again.', 2);
                 }
@@ -211,7 +217,7 @@ class EmployeesController extends AppController {
             $this->accessDenialError();
         }
     }
-    
+
     public function delete($encrypt_id = null) {
         $result = $this->Acl->check($this->group_alias, 'EmployeesController/delete', 'delete');
         $user = ClassRegistry::init('User');
@@ -220,7 +226,7 @@ class EmployeesController extends AppController {
             $options = array('conditions' => array('Employee.' . $this->Employee->primaryKey => $decrypt_employee_id));
             $employee_record = $this->Employee->find('first', $options);
             $this->Employee->id = $decrypt_employee_id;
-            
+
             if (!$this->Employee->exists()) {
                 $this->accessDenialError('Invalid Employee Record Requested for Deletion', 2);
             }
@@ -230,14 +236,14 @@ class EmployeesController extends AppController {
                 $user->query('DELETE FROM users WHERE username="'.$employee_record['Employee']['mployee_no'].'" LIMIT 1');
                 $this->setFlashMessage('The Employee ' . $employee_record['Employee']['mployee_no'] . ' and its Equivalent User Record has been deleted.', 1);
             } else {
-                $this->setFlashMessage('The Employee could not be deleted. Please, try again.', 2);   
+                $this->setFlashMessage('The Employee could not be deleted. Please, try again.', 2);
             }
             return $this->redirect(array('action' => 'index'));
         }else{
             $this->accessDenialError();
-        }        
+        }
     }
-    
+
     //Update Employee Status
     public function statusUpdate() {
         $this->autoRender = false;

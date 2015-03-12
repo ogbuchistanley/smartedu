@@ -6,9 +6,10 @@ class SponsorsController extends AppController {
 
     //public $helpers = array('Html', 'Form', 'Js');
     public $components = array('Paginator');
-    
-     public function beforeFilter() {
+
+    public function beforeFilter() {
         parent::beforeFilter();
+        $this->masterRedirect();
     }
     
     public function autoComplete() {
@@ -61,7 +62,7 @@ class SponsorsController extends AppController {
     }
     
     public function view($encrypt_id = null) {
-        $result = $this->Acl->check($this->group_alias, 'SponsorsController');
+        $result = $this->Acl->check($this->group_alias, 'SponsorsController/view');
         if($result){
             $decrypt_sponsor_id = $this->encryption->decode($encrypt_id);
             
@@ -83,23 +84,34 @@ class SponsorsController extends AppController {
             $this->loadModels('State', 'state_name');
             $this->loadModels('SponsorshipType', 'sponsorship_type');
             $decrypt_sponsor_id = $this->encryption->decode($encrypt_id);
-            
+
             if (!$this->Sponsor->exists($decrypt_sponsor_id)) {
                 $this->accessDenialError('Invalid Sponsor Record Requested for Modification', 2);
             }
             if ($this->request->is(array('post', 'put'))) {
                 $this->Sponsor->id = $decrypt_sponsor_id;
-                if ($this->Sponsor->save($this->request->data)) {
-                    $this->setFlashMessage('The Sponsor has been Updated.', 1);
-                    return $this->redirect(array('action' => 'index'));
+                $data = $this->request->data['Sponsor'];
+                if(!$data['image_url']['name']){
+                    unset($data['image_url']);
+                }
+                if ($this->Sponsor->save($data)) {
+                    //Uploading The Image Provided
+                    if(isset($data['image_url'])){
+                        if($this->uploadImage($decrypt_sponsor_id, 'sponsors', $this->request->data['Sponsor'])) {
+                            $this->setFlashMessage('The Sponsor has been Updated.', 1);
+                        }
+                    }else {
+                        $this->setFlashMessage('The Sponsor has been Updated... But New Image Was Not Uploaded', 1);
+                    }
+                    return $this->redirect(array('action' => 'adjust/'.$encrypt_id));
                 } else {
                     $this->setFlashMessage('The sponsor could not be Updated. Please, try again.', 2);
                 }
-            } else {
-                $options = array('conditions' => array('Sponsor.' . $this->Sponsor->primaryKey => $decrypt_sponsor_id));
-                $this->request->data = $this->Sponsor->find('first', $options);
-                $this->set('sponsor', $this->Sponsor->find('first', $options));
             }
+            $options = array('conditions' => array('Sponsor.' . $this->Sponsor->primaryKey => $decrypt_sponsor_id));
+            $this->request->data = $this->Sponsor->find('first', $options);
+            $this->set('sponsor', $this->Sponsor->find('first', $options));
+            //debug($this->request->data);
         }else{
            $this->accessDenialError();
         }

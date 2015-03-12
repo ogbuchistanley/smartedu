@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 06, 2015 at 03:10 PM
+-- Generation Time: Mar 12, 2015 at 10:56 AM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -819,142 +819,156 @@ CREATE TABLE IF NOT EXISTS `acos` (
   `alias` varchar(255) DEFAULT NULL,
   `lft` int(10) DEFAULT NULL,
   `rght` int(10) DEFAULT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=130 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=144 ;
 
 --
 -- Dumping data for table `acos`
 --
 
 INSERT INTO `acos` (`id`, `parent_id`, `model`, `foreign_key`, `alias`, `lft`, `rght`) VALUES
-(1, NULL, NULL, NULL, 'controllers', 1, 258),
+(1, NULL, NULL, NULL, 'controllers', 1, 286),
 (2, 1, NULL, NULL, 'AcademicTermsController', 2, 5),
 (3, 2, NULL, NULL, 'ajax_get_terms', 3, 4),
 (4, 1, NULL, NULL, 'AcademicYearsController', 6, 7),
 (5, 1, NULL, NULL, 'AppController', 8, 9),
-(6, 1, NULL, NULL, 'AttendsController', 10, 31),
+(6, 1, NULL, NULL, 'AssessmentsController', 10, 19),
 (7, 6, NULL, NULL, 'index', 11, 12),
-(8, 6, NULL, NULL, 'search_students', 13, 14),
-(9, 6, NULL, NULL, 'take_attend', 15, 16),
-(10, 6, NULL, NULL, 'validateIfExist', 17, 18),
-(11, 6, NULL, NULL, 'search_attend', 19, 20),
-(12, 6, NULL, NULL, 'view', 21, 22),
-(13, 6, NULL, NULL, 'edit', 23, 24),
-(14, 6, NULL, NULL, 'search_summary', 25, 26),
-(15, 6, NULL, NULL, 'summary', 27, 28),
-(16, 6, NULL, NULL, 'details', 29, 30),
-(17, 1, NULL, NULL, 'ClassroomsController', 32, 45),
-(18, 17, NULL, NULL, 'ajax_get_classes', 33, 34),
-(19, 17, NULL, NULL, 'index', 35, 36),
-(20, 17, NULL, NULL, 'myclass', 37, 38),
-(21, 17, NULL, NULL, 'search_classes', 39, 40),
-(22, 17, NULL, NULL, 'assign_head_tutor', 41, 42),
-(23, 17, NULL, NULL, 'view', 43, 44),
-(24, 1, NULL, NULL, 'DashboardController', 46, 61),
-(25, 24, NULL, NULL, 'index', 47, 48),
-(26, 24, NULL, NULL, 'tutor', 49, 50),
-(27, 24, NULL, NULL, 'studentGender', 51, 52),
-(28, 24, NULL, NULL, 'studentStauts', 53, 54),
-(29, 24, NULL, NULL, 'studentClasslevel', 55, 56),
-(30, 24, NULL, NULL, 'classHeadTutor', 57, 58),
-(31, 24, NULL, NULL, 'subjectHeadTutor', 59, 60),
-(32, 1, NULL, NULL, 'EmployeesController', 62, 79),
-(33, 32, NULL, NULL, 'autoComplete', 63, 64),
-(34, 32, NULL, NULL, 'validate_form', 65, 66),
-(35, 32, NULL, NULL, 'index', 67, 68),
-(36, 32, NULL, NULL, 'register', 69, 70),
-(37, 32, NULL, NULL, 'view', 71, 72),
-(38, 32, NULL, NULL, 'adjust', 73, 74),
-(39, 32, NULL, NULL, 'delete', 75, 76),
-(40, 32, NULL, NULL, 'statusUpdate', 77, 78),
-(41, 1, NULL, NULL, 'ExamsController', 80, 105),
-(42, 41, NULL, NULL, 'index', 81, 82),
-(43, 41, NULL, NULL, 'setup_exam', 83, 84),
-(44, 41, NULL, NULL, 'get_exam_setup', 85, 86),
-(45, 41, NULL, NULL, 'search_subjects_assigned', 87, 88),
-(46, 41, NULL, NULL, 'search_subjects_examSetup', 89, 90),
-(47, 41, NULL, NULL, 'enter_scores', 91, 92),
-(48, 41, NULL, NULL, 'view_scores', 93, 94),
-(49, 41, NULL, NULL, 'search_student_classlevel', 95, 96),
-(50, 41, NULL, NULL, 'term_scorestd', 97, 98),
-(51, 41, NULL, NULL, 'term_scorecls', 99, 100),
-(52, 41, NULL, NULL, 'annual_scorestd', 101, 102),
-(53, 41, NULL, NULL, 'annual_scorecls', 103, 104),
-(54, 1, NULL, NULL, 'HomeController', 106, 125),
-(55, 54, NULL, NULL, 'index', 107, 108),
-(56, 54, NULL, NULL, 'students', 109, 110),
-(57, 54, NULL, NULL, 'record', 111, 112),
-(58, 54, NULL, NULL, 'exam', 113, 114),
-(59, 54, NULL, NULL, 'search_student', 115, 116),
-(60, 54, NULL, NULL, 'term_scorestd', 117, 118),
-(61, 54, NULL, NULL, 'annual_scorestd', 119, 120),
-(62, 54, NULL, NULL, 'view_stdfees', 121, 122),
-(63, 54, NULL, NULL, 'change', 123, 124),
-(64, 1, NULL, NULL, 'ItemsController', 126, 139),
-(65, 64, NULL, NULL, 'index', 127, 128),
-(66, 64, NULL, NULL, 'validateIfExist', 129, 130),
-(67, 64, NULL, NULL, 'process_fees', 131, 132),
-(68, 64, NULL, NULL, 'bill_students', 133, 134),
-(69, 64, NULL, NULL, 'view_stdfees', 135, 136),
-(70, 64, NULL, NULL, 'view_clsfees', 137, 138),
-(71, 1, NULL, NULL, 'LocalGovtsController', 140, 143),
-(72, 71, NULL, NULL, 'ajax_get_local_govt', 141, 142),
-(73, 1, NULL, NULL, 'MessagesController', 144, 153),
-(74, 73, NULL, NULL, 'index', 145, 146),
-(75, 73, NULL, NULL, 'send', 147, 148),
-(76, 73, NULL, NULL, 'search_student_classlevel', 149, 150),
-(77, 73, NULL, NULL, 'encrypt', 151, 152),
-(78, 1, NULL, NULL, 'RecordsController', 154, 177),
-(79, 78, NULL, NULL, 'deleteIDs', 155, 156),
-(80, 78, NULL, NULL, 'index', 157, 158),
-(81, 78, NULL, NULL, 'academic_year', 159, 160),
-(82, 78, NULL, NULL, 'class_group', 161, 162),
-(83, 78, NULL, NULL, 'class_level', 163, 164),
-(84, 78, NULL, NULL, 'class_room', 165, 166),
-(85, 78, NULL, NULL, 'grade', 167, 168),
-(86, 78, NULL, NULL, 'subject_group', 169, 170),
-(87, 78, NULL, NULL, 'subject', 171, 172),
-(88, 78, NULL, NULL, 'item', 173, 174),
-(89, 78, NULL, NULL, 'item_bill', 175, 176),
-(90, 1, NULL, NULL, 'SponsorsController', 178, 193),
-(91, 90, NULL, NULL, 'autoComplete', 179, 180),
-(92, 90, NULL, NULL, 'validate_form', 181, 182),
+(8, 6, NULL, NULL, 'view', 13, 14),
+(9, 6, NULL, NULL, 'assess', 15, 16),
+(10, 6, NULL, NULL, 'edit', 17, 18),
+(11, 1, NULL, NULL, 'AttendsController', 20, 41),
+(12, 11, NULL, NULL, 'index', 21, 22),
+(13, 11, NULL, NULL, 'search_students', 23, 24),
+(14, 11, NULL, NULL, 'take_attend', 25, 26),
+(15, 11, NULL, NULL, 'validateIfExist', 27, 28),
+(16, 11, NULL, NULL, 'search_attend', 29, 30),
+(17, 11, NULL, NULL, 'view', 31, 32),
+(18, 11, NULL, NULL, 'edit', 33, 34),
+(19, 11, NULL, NULL, 'search_summary', 35, 36),
+(20, 11, NULL, NULL, 'summary', 37, 38),
+(21, 11, NULL, NULL, 'details', 39, 40),
+(22, 1, NULL, NULL, 'ClassroomsController', 42, 55),
+(23, 22, NULL, NULL, 'ajax_get_classes', 43, 44),
+(24, 22, NULL, NULL, 'index', 45, 46),
+(25, 22, NULL, NULL, 'myclass', 47, 48),
+(26, 22, NULL, NULL, 'search_classes', 49, 50),
+(27, 22, NULL, NULL, 'assign_head_tutor', 51, 52),
+(28, 22, NULL, NULL, 'view', 53, 54),
+(29, 1, NULL, NULL, 'DashboardController', 56, 73),
+(30, 29, NULL, NULL, 'index', 57, 58),
+(31, 29, NULL, NULL, 'tutor', 59, 60),
+(32, 29, NULL, NULL, 'studentGender', 61, 62),
+(33, 29, NULL, NULL, 'studentStauts', 63, 64),
+(34, 29, NULL, NULL, 'studentPaymentStatus', 65, 66),
+(35, 29, NULL, NULL, 'studentClasslevel', 67, 68),
+(36, 29, NULL, NULL, 'classHeadTutor', 69, 70),
+(37, 29, NULL, NULL, 'subjectHeadTutor', 71, 72),
+(38, 1, NULL, NULL, 'EmployeesController', 74, 91),
+(39, 38, NULL, NULL, 'autoComplete', 75, 76),
+(40, 38, NULL, NULL, 'validate_form', 77, 78),
+(41, 38, NULL, NULL, 'index', 79, 80),
+(42, 38, NULL, NULL, 'register', 81, 82),
+(43, 38, NULL, NULL, 'view', 83, 84),
+(44, 38, NULL, NULL, 'adjust', 85, 86),
+(45, 38, NULL, NULL, 'delete', 87, 88),
+(46, 38, NULL, NULL, 'statusUpdate', 89, 90),
+(47, 1, NULL, NULL, 'ExamsController', 92, 119),
+(48, 47, NULL, NULL, 'index', 93, 94),
+(49, 47, NULL, NULL, 'setup_exam', 95, 96),
+(50, 47, NULL, NULL, 'get_exam_setup', 97, 98),
+(51, 47, NULL, NULL, 'search_subjects_assigned', 99, 100),
+(52, 47, NULL, NULL, 'search_subjects_examSetup', 101, 102),
+(53, 47, NULL, NULL, 'enter_scores', 103, 104),
+(54, 47, NULL, NULL, 'view_scores', 105, 106),
+(55, 47, NULL, NULL, 'search_student_classlevel', 107, 108),
+(56, 47, NULL, NULL, 'term_scorestd', 109, 110),
+(57, 47, NULL, NULL, 'term_scorecls', 111, 112),
+(58, 47, NULL, NULL, 'annual_scorestd', 113, 114),
+(59, 47, NULL, NULL, 'annual_scorecls', 115, 116),
+(60, 47, NULL, NULL, 'print_result', 117, 118),
+(61, 1, NULL, NULL, 'HomeController', 120, 137),
+(62, 61, NULL, NULL, 'index', 121, 122),
+(63, 61, NULL, NULL, 'setup', 123, 124),
+(64, 61, NULL, NULL, 'students', 125, 126),
+(65, 61, NULL, NULL, 'exam', 127, 128),
+(66, 61, NULL, NULL, 'search_student', 129, 130),
+(67, 61, NULL, NULL, 'term_scorestd', 131, 132),
+(68, 61, NULL, NULL, 'annual_scorestd', 133, 134),
+(69, 61, NULL, NULL, 'view_stdfees', 135, 136),
+(70, 1, NULL, NULL, 'ItemsController', 138, 157),
+(71, 70, NULL, NULL, 'index', 139, 140),
+(72, 70, NULL, NULL, 'summary', 141, 142),
+(73, 70, NULL, NULL, 'payment_status', 143, 144),
+(74, 70, NULL, NULL, 'validateIfExist', 145, 146),
+(75, 70, NULL, NULL, 'process_fees', 147, 148),
+(76, 70, NULL, NULL, 'bill_students', 149, 150),
+(77, 70, NULL, NULL, 'view_stdfees', 151, 152),
+(78, 70, NULL, NULL, 'view_clsfees', 153, 154),
+(79, 70, NULL, NULL, 'statusUpdate', 155, 156),
+(80, 1, NULL, NULL, 'LocalGovtsController', 158, 161),
+(81, 80, NULL, NULL, 'ajax_get_local_govt', 159, 160),
+(82, 1, NULL, NULL, 'MessagesController', 162, 177),
+(83, 82, NULL, NULL, 'index', 163, 164),
+(84, 82, NULL, NULL, 'recipient', 165, 166),
+(85, 82, NULL, NULL, 'delete_recipient', 167, 168),
+(86, 82, NULL, NULL, 'send', 169, 170),
+(87, 82, NULL, NULL, 'sendOne', 171, 172),
+(88, 82, NULL, NULL, 'search_student_classlevel', 173, 174),
+(89, 82, NULL, NULL, 'encrypt', 175, 176),
+(90, 1, NULL, NULL, 'RecordsController', 178, 201),
+(91, 90, NULL, NULL, 'deleteIDs', 179, 180),
+(92, 90, NULL, NULL, 'academic_year', 181, 182),
 (93, 90, NULL, NULL, 'index', 183, 184),
-(94, 90, NULL, NULL, 'register', 185, 186),
-(95, 90, NULL, NULL, 'view', 187, 188),
-(96, 90, NULL, NULL, 'adjust', 189, 190),
-(97, 90, NULL, NULL, 'delete', 191, 192),
-(98, 1, NULL, NULL, 'StudentsClassesController', 194, 201),
-(99, 98, NULL, NULL, 'assign', 195, 196),
-(100, 98, NULL, NULL, 'search', 197, 198),
-(101, 98, NULL, NULL, 'search_all', 199, 200),
-(102, 1, NULL, NULL, 'StudentsController', 202, 217),
-(103, 102, NULL, NULL, 'validate_form', 203, 204),
-(104, 102, NULL, NULL, 'index', 205, 206),
-(105, 102, NULL, NULL, 'view', 207, 208),
-(106, 102, NULL, NULL, 'register', 209, 210),
-(107, 102, NULL, NULL, 'adjust', 211, 212),
-(108, 102, NULL, NULL, 'delete', 213, 214),
-(109, 102, NULL, NULL, 'statusUpdate', 215, 216),
-(110, 1, NULL, NULL, 'SubjectsController', 218, 239),
-(111, 110, NULL, NULL, 'ajax_get_subjects', 219, 220),
-(112, 110, NULL, NULL, 'add2class', 221, 222),
-(113, 110, NULL, NULL, 'assign', 223, 224),
-(114, 110, NULL, NULL, 'validateIfExist', 225, 226),
-(115, 110, NULL, NULL, 'search_all', 227, 228),
-(116, 110, NULL, NULL, 'assign_tutor', 229, 230),
-(117, 110, NULL, NULL, 'search_assigned', 231, 232),
-(118, 110, NULL, NULL, 'modify_assign', 233, 234),
-(119, 110, NULL, NULL, 'search_students', 235, 236),
-(120, 110, NULL, NULL, 'updateStudentsSubjects', 237, 238),
-(121, 1, NULL, NULL, 'UsersController', 240, 257),
-(122, 121, NULL, NULL, 'login', 241, 242),
-(123, 121, NULL, NULL, 'logout', 243, 244),
-(124, 121, NULL, NULL, 'index', 245, 246),
-(125, 121, NULL, NULL, 'register', 247, 248),
-(126, 121, NULL, NULL, 'forget_password', 249, 250),
-(127, 121, NULL, NULL, 'adjust', 251, 252),
-(128, 121, NULL, NULL, 'change', 253, 254),
-(129, 121, NULL, NULL, 'statusUpdate', 255, 256);
+(94, 90, NULL, NULL, 'class_group', 185, 186),
+(95, 90, NULL, NULL, 'class_level', 187, 188),
+(96, 90, NULL, NULL, 'class_room', 189, 190),
+(97, 90, NULL, NULL, 'subject_group', 191, 192),
+(98, 90, NULL, NULL, 'subject', 193, 194),
+(99, 90, NULL, NULL, 'grade', 195, 196),
+(100, 90, NULL, NULL, 'item', 197, 198),
+(101, 90, NULL, NULL, 'item_bill', 199, 200),
+(102, 1, NULL, NULL, 'SetupsController', 202, 205),
+(103, 102, NULL, NULL, 'setup', 203, 204),
+(104, 1, NULL, NULL, 'SponsorsController', 206, 221),
+(105, 104, NULL, NULL, 'autoComplete', 207, 208),
+(106, 104, NULL, NULL, 'validate_form', 209, 210),
+(107, 104, NULL, NULL, 'index', 211, 212),
+(108, 104, NULL, NULL, 'register', 213, 214),
+(109, 104, NULL, NULL, 'view', 215, 216),
+(110, 104, NULL, NULL, 'adjust', 217, 218),
+(111, 104, NULL, NULL, 'delete', 219, 220),
+(112, 1, NULL, NULL, 'StudentsClassesController', 222, 229),
+(113, 112, NULL, NULL, 'assign', 223, 224),
+(114, 112, NULL, NULL, 'search', 225, 226),
+(115, 112, NULL, NULL, 'search_all', 227, 228),
+(116, 1, NULL, NULL, 'StudentsController', 230, 245),
+(117, 116, NULL, NULL, 'validate_form', 231, 232),
+(118, 116, NULL, NULL, 'index', 233, 234),
+(119, 116, NULL, NULL, 'view', 235, 236),
+(120, 116, NULL, NULL, 'register', 237, 238),
+(121, 116, NULL, NULL, 'adjust', 239, 240),
+(122, 116, NULL, NULL, 'delete', 241, 242),
+(123, 116, NULL, NULL, 'statusUpdate', 243, 244),
+(124, 1, NULL, NULL, 'SubjectsController', 246, 267),
+(125, 124, NULL, NULL, 'ajax_get_subjects', 247, 248),
+(126, 124, NULL, NULL, 'add2class', 249, 250),
+(127, 124, NULL, NULL, 'assign', 251, 252),
+(128, 124, NULL, NULL, 'validateIfExist', 253, 254),
+(129, 124, NULL, NULL, 'search_all', 255, 256),
+(130, 124, NULL, NULL, 'assign_tutor', 257, 258),
+(131, 124, NULL, NULL, 'search_assigned', 259, 260),
+(132, 124, NULL, NULL, 'modify_assign', 261, 262),
+(133, 124, NULL, NULL, 'search_students', 263, 264),
+(134, 124, NULL, NULL, 'updateStudentsSubjects', 265, 266),
+(135, 1, NULL, NULL, 'UsersController', 268, 285),
+(136, 135, NULL, NULL, 'login', 269, 270),
+(137, 135, NULL, NULL, 'logout', 271, 272),
+(138, 135, NULL, NULL, 'index', 273, 274),
+(139, 135, NULL, NULL, 'register', 275, 276),
+(140, 135, NULL, NULL, 'forget_password', 277, 278),
+(141, 135, NULL, NULL, 'adjust', 279, 280),
+(142, 135, NULL, NULL, 'change', 281, 282),
+(143, 135, NULL, NULL, 'statusUpdate', 283, 284);
 
 -- --------------------------------------------------------
 
@@ -978,7 +992,7 @@ CREATE TABLE IF NOT EXISTS `aros` (
 
 INSERT INTO `aros` (`id`, `parent_id`, `model`, `foreign_key`, `alias`, `lft`, `rght`) VALUES
 (1, NULL, NULL, NULL, 'expired_users', 1, 2),
-(2, NULL, NULL, NULL, 'web_users', 3, 4),
+(2, NULL, NULL, NULL, 'spn_users', 3, 4),
 (3, NULL, NULL, NULL, 'emp_users', 5, 6),
 (4, NULL, NULL, NULL, 'ict_users', 7, 8),
 (5, NULL, NULL, NULL, 'app_users', 9, 10),
@@ -998,7 +1012,7 @@ CREATE TABLE IF NOT EXISTS `aros_acos` (
   `_read` varchar(2) NOT NULL DEFAULT '0',
   `_update` varchar(2) NOT NULL DEFAULT '0',
   `_delete` varchar(2) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=40 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=45 ;
 
 --
 -- Dumping data for table `aros_acos`
@@ -1007,43 +1021,48 @@ CREATE TABLE IF NOT EXISTS `aros_acos` (
 INSERT INTO `aros_acos` (`id`, `aro_id`, `aco_id`, `_create`, `_read`, `_update`, `_delete`) VALUES
 (1, 1, 1, '-1', '-1', '-1', '-1'),
 (2, 2, 1, '-1', '-1', '-1', '-1'),
-(3, 2, 54, '1', '1', '1', '1'),
-(4, 3, 1, '-1', '-1', '-1', '-1'),
-(5, 3, 24, '1', '1', '1', '1'),
-(6, 3, 41, '1', '1', '1', '1'),
-(7, 3, 6, '1', '1', '1', '1'),
-(8, 3, 105, '1', '1', '1', '1'),
-(9, 3, 20, '1', '1', '1', '1'),
-(10, 3, 23, '1', '1', '1', '1'),
-(11, 3, 38, '0', '0', '1', '0'),
-(12, 4, 1, '-1', '-1', '-1', '-1'),
-(13, 4, 24, '1', '1', '1', '1'),
-(14, 4, 41, '1', '1', '1', '1'),
-(15, 4, 78, '1', '1', '1', '1'),
-(16, 4, 6, '1', '1', '1', '1'),
-(17, 4, 17, '1', '1', '1', '1'),
-(18, 4, 102, '1', '1', '1', '1'),
-(19, 4, 104, '1', '1', '1', '1'),
-(20, 4, 105, '1', '1', '1', '1'),
-(21, 4, 106, '1', '0', '0', '0'),
-(22, 4, 107, '0', '0', '1', '0'),
-(23, 4, 108, '0', '0', '0', '-1'),
-(24, 4, 90, '1', '1', '1', '1'),
-(25, 4, 93, '1', '1', '1', '1'),
-(26, 4, 94, '1', '0', '0', '0'),
-(27, 4, 96, '0', '0', '1', '0'),
-(28, 4, 97, '0', '0', '0', '-1'),
-(29, 4, 32, '1', '1', '1', '1'),
-(30, 4, 35, '1', '1', '1', '1'),
-(31, 4, 36, '1', '0', '0', '0'),
-(32, 4, 38, '0', '0', '1', '0'),
-(33, 4, 39, '0', '0', '0', '-1'),
-(34, 4, 110, '1', '1', '1', '1'),
-(35, 4, 112, '1', '1', '1', '1'),
-(36, 4, 64, '1', '1', '1', '1'),
-(37, 4, 67, '-1', '-1', '-1', '-1'),
-(38, 6, 1, '1', '1', '1', '1'),
-(39, 6, 54, '-1', '-1', '-1', '-1');
+(3, 2, 61, '1', '1', '1', '1'),
+(4, 2, 119, '1', '1', '1', '1'),
+(5, 2, 109, '1', '1', '1', '1'),
+(6, 2, 110, '0', '0', '1', '0'),
+(7, 2, 107, '-1', '-1', '-1', '-1'),
+(8, 3, 1, '-1', '-1', '-1', '-1'),
+(9, 3, 29, '1', '1', '1', '1'),
+(10, 3, 47, '1', '1', '1', '1'),
+(11, 3, 11, '1', '1', '1', '1'),
+(12, 3, 119, '1', '1', '1', '1'),
+(13, 3, 25, '1', '1', '1', '1'),
+(14, 3, 28, '1', '1', '1', '1'),
+(15, 3, 44, '0', '0', '1', '0'),
+(16, 4, 1, '-1', '-1', '-1', '-1'),
+(17, 4, 29, '1', '1', '1', '1'),
+(18, 4, 47, '1', '1', '1', '1'),
+(19, 4, 90, '1', '1', '1', '1'),
+(20, 4, 11, '1', '1', '1', '1'),
+(21, 4, 22, '1', '1', '1', '1'),
+(22, 4, 116, '1', '1', '1', '1'),
+(23, 4, 118, '1', '1', '1', '1'),
+(24, 4, 119, '1', '1', '1', '1'),
+(25, 4, 120, '1', '0', '0', '0'),
+(26, 4, 121, '0', '0', '1', '0'),
+(27, 4, 122, '0', '0', '0', '-1'),
+(28, 4, 104, '1', '1', '1', '1'),
+(29, 4, 107, '1', '1', '1', '1'),
+(30, 4, 109, '1', '1', '1', '1'),
+(31, 4, 108, '1', '0', '0', '0'),
+(32, 4, 110, '0', '0', '1', '0'),
+(33, 4, 111, '0', '0', '0', '-1'),
+(34, 4, 38, '1', '1', '1', '1'),
+(35, 4, 41, '1', '1', '1', '1'),
+(36, 4, 42, '1', '0', '0', '0'),
+(37, 4, 44, '0', '0', '1', '0'),
+(38, 4, 45, '0', '0', '0', '-1'),
+(39, 4, 124, '1', '1', '1', '1'),
+(40, 4, 126, '1', '1', '1', '1'),
+(41, 4, 70, '1', '1', '1', '1'),
+(42, 4, 75, '-1', '-1', '-1', '-1'),
+(43, 6, 1, '1', '1', '1', '1'),
+(44, 6, 61, '-1', '-1', '-1', '-1');
 
 -- --------------------------------------------------------
 
@@ -1604,7 +1623,7 @@ CREATE TABLE IF NOT EXISTS `employee_qualifications` (
   `date_from` date DEFAULT NULL,
   `date_to` date DEFAULT NULL,
   `qualification_date` date DEFAULT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
 
 --
 -- Dumping data for table `employee_qualifications`
@@ -1619,7 +1638,9 @@ INSERT INTO `employee_qualifications` (`employee_qualification_id`, `employee_id
 (7, 16, 'ABU Zaria', 'B.Sc.', '2014-10-05', '2014-10-29', '2014-11-07'),
 (8, 16, 'BUK Kano', 'M.Sc. In View', '2014-10-22', NULL, NULL),
 (9, 20, 'Zaria Children Children', 'School Certificate', '2000-10-12', '2009-11-12', '2009-11-19'),
-(10, 6, 'Depot N.A', 'School Certificate', '1991-05-15', '1998-08-12', '1998-09-08');
+(10, 6, 'Depot N.A', 'School Certificate', '1991-05-15', '1998-08-12', '1998-09-08'),
+(11, 4, '', '', NULL, NULL, NULL),
+(12, 4, '', '', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1689,7 +1710,7 @@ INSERT INTO `employees` (`employee_id`, `employee_no`, `salutation_id`, `first_n
 (1, 'emp0001', 7, 'John', 'Igwe Chukwudi', 'male', '1991-03-04', 'employees/1.jpg', 'No 15 Major Ahmed Avenue, Asaba, Delta State', 6, '07032563781', '', 'Single', 140, 0, 73, 'chukwu@gmail.com', NULL, NULL, NULL, '', '', '0000-00-00', 1, 1, '2014-06-24 03:53:30', '2015-01-10 19:50:03'),
 (2, 'emp0002', 9, 'George', 'Uche', 'male', '1990-05-08', 'employees/2.jpg', 'CBN Quarters Wuse II FCT, Abuja', 6, '08030734377', '08037483829', 'Married', 140, 1, 6, 'uche@yahoo.com', NULL, NULL, NULL, '', '', '0000-00-00', 2, 1, '2014-06-24 03:56:22', '2015-01-10 19:50:20'),
 (3, 'emp0003', 4, 'Yahuza', 'Sule Musa', 'male', '1972-05-10', NULL, 'No 11 Mallam Kato Square S/G, Kano ', 3, '08037263872', '09038364822', 'Married', 140, 2, 23, 'sule@gmail.com', NULL, NULL, NULL, '', '', '0000-00-00', 1, 1, '2014-06-24 03:58:42', '2015-01-10 19:50:06'),
-(4, 'emp0004', 2, 'Bola', 'Yusrah Inua', 'female', '1990-09-08', 'employees/4.jpg', 'Kilometer 22 Funtua, Katsina', 2, '08174827455', '09038364822', 'Married', 140, 32, 115, 'inua@hotmail.co.za', NULL, NULL, NULL, '', '', '0000-00-00', 1, 1, '2014-06-24 04:01:20', '2015-01-10 19:49:48'),
+(4, 'emp0004', 2, 'Bola', 'Yusrah Inua', 'Female', '1990-09-08', 'employees/4.jpg', 'Kilometer 22 Funtua, Katsina', 2, '08174827455', '09038364822', 'Married', 140, 32, 115, 'inua@hotmail.co.za', 'Mallam Inua', '09038956758', 'Uncle', 'National I.D Card', '234565534', '2015-03-27', 1, 1, '2014-06-24 04:01:20', '2015-03-12 09:05:00'),
 (5, 'emp0005', 1, 'KayOh', 'Chi Odi', 'male', '1992-11-12', 'employees/5.jpg', '22 Calabari Street Ebute Meta Lagos', 5, '07032563781', '', 'Single', 142, 11, 267, 'chichi@rocketmail.co', NULL, NULL, NULL, '', '', '0000-00-00', 1, 1, '2014-06-25 01:59:05', '2014-06-25 00:59:05'),
 (6, 'emp0006', 1, 'Kingsley', 'Chinaka', 'Female', '2014-07-15', 'employees/6.JPG', 'No 10 Igbo Road S/G Zaira', 6, '08030734377', '08022020075', 'Single', 140, 12, 290, 'kingsley4united@yahoo.com', 'Mr. George', '08174949450', 'Brother', 'National I.D Card', '7865798', '2018-02-14', 1, 2, '2014-07-15 12:57:59', '2015-02-05 10:35:07'),
 (7, 'emp0007', 1, 'Okon', 'Ubong', 'male', '1982-07-13', 'employees/7.JPG', 'Zaria Academy Quarters Shika, Zaria', 6, '07034825391', '', 'Married', 140, 8, 179, 'okon@yahoo.com', NULL, NULL, NULL, '', '', '0000-00-00', 1, 2, '2014-09-04 09:21:15', '2014-09-04 08:21:15'),
@@ -2845,6 +2866,25 @@ INSERT INTO `local_govts` (`local_govt_id`, `local_govt_name`, `state_id`) VALUE
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `master_setups`
+--
+
+CREATE TABLE IF NOT EXISTS `master_setups` (
+`master_setup_id` int(11) NOT NULL,
+  `setup` varchar(30) NOT NULL DEFAULT 'smartedu',
+  `master_record_id` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `master_setups`
+--
+
+INSERT INTO `master_setups` (`master_setup_id`, `setup`, `master_record_id`) VALUES
+(1, 'smartedu', 8);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `message_recipients`
 --
 
@@ -3291,6 +3331,7 @@ CREATE TABLE IF NOT EXISTS `sponsors` (
   `company_name` varchar(100) DEFAULT NULL,
   `company_address` text,
   `email` varchar(100) DEFAULT NULL,
+  `image_url` varchar(100) DEFAULT NULL,
   `contact_address` text,
   `local_govt_id` int(11) DEFAULT NULL,
   `state_id` int(11) DEFAULT NULL,
@@ -3301,44 +3342,48 @@ CREATE TABLE IF NOT EXISTS `sponsors` (
   `sponsorship_type_id` int(11) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=33 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=37 ;
 
 --
 -- Dumping data for table `sponsors`
 --
 
-INSERT INTO `sponsors` (`sponsor_id`, `sponsor_no`, `first_name`, `other_name`, `salutation_id`, `occupation`, `company_name`, `company_address`, `email`, `contact_address`, `local_govt_id`, `state_id`, `country_id`, `mobile_number1`, `mobile_number2`, `created_by`, `sponsorship_type_id`, `created_at`, `updated_at`) VALUES
-(1, 'spn0001', 'KayOh', 'China', 5, 'Chief Software Developer', 'Zuma Communications', '124 Ayilara Street Off Itire Road Ojuelegba, Surulere, Lagos', 'kheengz@gmail.com', 'CBN Quarters Wuse II FCT Abuja', 290, 12, 140, '08030734377', '08022020075', 1, 1, '2014-06-14 03:19:21', '2014-07-03 11:59:37'),
-(2, 'spn0002', 'Maazi', 'Okarfor', 4, 'Freelancer Programmer', 'Joker''s Club', 'Ikuna, Ilewe Ikotun', 'nondefyde@yahoo.com', '', 7, 1, 140, '080294834889', '090383662892', 1, 3, '2014-06-14 05:46:46', '2014-07-03 11:59:37'),
-(3, 'spn0003', 'Usman', 'Abrahim Mohammed', 11, 'Farmer', '', '', 'usman@yahoo.com', '', NULL, 0, 134, '07034555544', '07032345267', 1, 2, '2014-06-14 05:53:01', '2014-07-03 11:59:37'),
-(4, 'spn0004', 'Emmanuel', 'Skele Jigawa', 9, 'Programmer', '', 'Dogon Bauchi Road S/G Zaria', 'emma@gmail.com', 'No 22 Jigawa Road S/G Lagos', NULL, 0, 137, '039474625278', '', 1, 1, '2014-06-14 06:02:44', '2014-07-03 11:59:37'),
-(5, 'spn0005', 'Dickson', 'Emmanuel Akpan', 9, 'Programmer', 'Agent Dickson Consultance', '', 'dickson@hotmail.co.za', 'CBN Quarters Wuse II FCT Abuja', 5, 1, 140, '04950585080', '07032345267', 9, 1, '2014-06-17 10:21:25', '2014-07-03 11:59:37'),
-(6, 'spn0006', 'Ibrahim', 'Audu', 6, 'Business', '', '', 'audu@gmail.com', 'No 21 Lagos street S/G', 178, 8, 140, '0930738865', '092985479', 1, 1, '2014-06-27 04:15:34', '2014-07-03 11:59:37'),
-(7, 'spn0007', 'Dorathy', 'Akume', 7, 'Legal Practinioner', 'Nigeria Bar Association', 'Victoria Island Lagos', 'akume@roketmail.com', 'Aminu Road S/G Munchiya, Kaduna', 114, 32, 140, '0930738865', '', 1, 1, '2014-07-03 01:45:19', '2014-07-03 12:45:20'),
-(8, 'spn0008', 'Abdullahi Mariam', 'Ojochide', 3, 'Accountant', 'Guarantee Trust Bank', '124C Ayilara Street, Ojuelegba road', 'chidepink@gmail.com', 'No, 35 Adewuyi streeet, Ijeshastedo Surulere Lagos', 470, 16, 140, '07037830508', '08083580024', 6, 3, '2014-07-22 03:38:23', '2014-07-22 14:38:23'),
-(9, 'spn0009', 'Eric Kelvin', 'Desmond', 5, 'Doctor', 'RedRose Clinic', '4A, Aja Town', 'desmond@yahoo.com', 'No, 14 Festac Town', 181, 8, 140, '08029554329', '08023310427', 6, 2, '2014-07-22 03:44:30', '2014-07-22 14:44:30'),
-(10, 'spn0010', 'Nuhu', 'Inuwa Desmond', 11, 'Accountant', 'First Bank', '5b Mile2 road', 'luvnuhu@yahoo.com', '3, Festac Town', 339, 13, 140, '07033560739', '08024262994', 6, 1, '2014-07-22 04:21:30', '2014-07-22 15:21:30'),
-(11, 'spn0011', 'Haruna', 'Ibrahim', 5, 'Architecture', 'Freelancer', '', 'ibrahim.haruna@yahoo.com', 'No 77 Itire Road Surulere, Lagos', 147, 7, 140, '08035268493', '09047568475', 6, 1, '2014-09-10 01:16:52', '2014-09-10 12:16:53'),
-(12, 'spn0012', 'ABUBAKAR', 'YUSUF', 11, 'LAWYER', '', '', 'ABUBAKARYUSUF@YAHOO.COM', '111 IJESHA ROAD LAGOS', 340, 13, 140, '08081593158', '07060627828', 6, 1, '2014-09-10 01:44:32', '2014-09-10 12:54:24'),
-(13, 'spn0013', 'Adamu ', 'Jamiu', 11, 'Doctor', 'Ovansa Hospital and Maternity', '3, Oremeji street', 'adamuja@yahoo.com', '3, Shodimu street', 137, 6, 140, '09066778855', '08033442211', 6, 1, '2014-09-10 01:58:01', '2014-09-10 12:58:01'),
-(14, 'spn0014', 'Ben', 'Affleck', 8, 'Engineer', 'Benson&co', '909, Iju Lagos', 'benafleck@gmail.com', '5, washway Town', 477, 16, 140, '08122224455', '09077665544', 6, 2, '2014-09-10 02:15:40', '2014-09-10 13:15:40'),
-(15, 'spn0015', 'Casey', 'Affleck', 7, 'Barrister', 'God''s gift', '3, Fapounda street', 'afflecttings@gmail.com', '3, Falolu street', 203, 9, 140, '08099776655', '08155667788', 6, 3, '2014-09-10 03:19:39', '2014-09-10 14:19:40'),
-(16, 'spn0016', 'Johnny', 'Depp', 5, 'Doctor', 'Living Spring Hospital', '1, Ojuelegba street', 'johnde@gmail.com', '4, olorunda street', 220, 37, 140, '09055667788', '09055443322', 6, 1, '2014-09-10 03:30:55', '2014-09-10 14:30:55'),
-(17, 'spn0017', 'Abdullahi', 'Oseni', 6, 'Accountant', 'Zuma Communications Limited', '124c Ayilara Street', 'abdul@yahoo.com', '35, Fectac Town', 176, 8, 140, '09024556634', '08029554324', 6, 1, '2014-09-10 03:42:06', '2014-09-10 14:42:06'),
-(18, 'spn0018', 'Mohammed', 'Nuhu', 4, 'Accountant', 'First Bank', 'Victoria Island City', 'nuhluvchide@gmail.com', '24, Adewuyi street', 339, 13, 140, '08024262994', '07033560739', 6, 2, '2014-09-10 03:56:35', '2014-09-10 14:56:35'),
-(19, 'spn0019', 'MOHAMMED', 'INUWA', 9, 'LAWYER', '', '', 'MCKUMDO@YAHOO.COM', '24 ADEWUYI STREET OF IJESHA ', NULL, 13, 140, '08081593158', '08080204017', 6, 1, '2014-09-10 04:02:39', '2014-09-10 15:02:40'),
-(20, 'spn0020', 'Hassan', 'Oseni', 1, 'Accountant', 'Guarantee Trust Bank', '123, Agbebi raod', 'osehass@gmail.com', '97, Ijesha road', 343, 15, 140, '09077665544', '08055443322', 6, 2, '2014-09-11 10:08:49', '2014-09-11 09:08:50'),
-(21, 'spn0021', 'Oseni ', 'Gift', 3, 'Student', '', '', 'osengift@yahoo.com', '39, Festac Town', 272, 31, 140, '07033560738', '07037830509', 6, 3, '2014-09-11 10:36:51', '2014-09-11 09:36:51'),
-(22, 'spn0022', 'Emmanuel', 'Shuaibu', 1, 'Accountant', 'First Bank', '', 'emm@gmail.com', '89 okunola street', 267, 11, 140, '09066778855', '08155667788', 6, 1, '2014-09-11 12:21:33', '2014-09-11 11:21:34'),
-(23, 'spn0023', 'Emmanuel', 'Sylvester', 10, 'Doctor', '', '', 'sylvester@yahoo.com', '45, Adae street', 274, 31, 140, '09033445566', '09011223344', 6, 1, '2014-09-11 12:37:49', '2014-09-11 11:37:49'),
-(24, 'spn0024', 'MOHAMMED', 'ISSAH', 5, 'CUSTOM', '', '', 'MOHAMMEDISSAH@GMAIL.COM', '1 ILE OGBO STREET OFF IJESHA LAGOS', NULL, 13, 140, '08024387677', '08024387677', 6, 1, '2014-09-11 01:03:32', '2014-09-11 12:03:32'),
-(25, 'spn0025', 'Peter', 'Peterson', 4, 'Business ', '', '', 'peter@gmail.com', '456, Adedeji street', 181, 8, 140, '08122223355', '07088996655', 6, 1, '2014-09-11 01:14:12', '2014-09-11 12:14:12'),
-(26, 'spn0026', 'Joshua', 'Johnson', 10, 'Barrister', '', '', 'johns@yahoo.com', '3,Tapa Street', 286, 33, 140, '07033560738', '', 6, 1, '2014-09-11 01:32:09', '2014-09-11 12:32:09'),
-(27, 'spn0027', 'Ebube', 'Chima', 8, 'Accountant', '', '', 'ebu@yahoo.com', '3, Adeniran Ogunsanya way', 316, 13, 140, '08024262994', '', 6, 1, '2014-09-11 01:41:38', '2014-09-11 12:41:38'),
-(28, 'spn0028', 'Vivian', 'George', 8, 'Banker', NULL, 'GTBank Owerri', 'vivian@gmail.com', 'World Banking Estate Owerri', 290, 12, 140, '08030734377', '094387324', 2, NULL, '2014-10-24 11:17:22', '2014-10-24 10:17:22'),
-(29, 'spn0029', 'Ibrahim ', 'Bala', 6, 'Trader', NULL, '', '', 'Line Zumo', 277, 33, 140, '08030734377', '', 2, NULL, '2014-10-26 12:53:05', '2014-12-22 11:42:39'),
-(30, 'spn0030', 'Ebube', 'Chidi', 7, 'Business', NULL, '', 'vivian@gmail.com', 'Samaru', 288, 12, 140, '08024262994', '', 2, NULL, '2014-10-26 12:59:27', '2014-10-26 11:59:27'),
-(32, 'spn0032', 'Peter', 'Malgwi', 8, 'Lecturer', NULL, 'Kebbi State University', 'peter@gmail.com', 'Katsina Ala', 142, 7, 140, '08135201037', '', 2, NULL, '2014-10-26 01:11:21', '2014-10-26 12:11:21');
+INSERT INTO `sponsors` (`sponsor_id`, `sponsor_no`, `first_name`, `other_name`, `salutation_id`, `occupation`, `company_name`, `company_address`, `email`, `image_url`, `contact_address`, `local_govt_id`, `state_id`, `country_id`, `mobile_number1`, `mobile_number2`, `created_by`, `sponsorship_type_id`, `created_at`, `updated_at`) VALUES
+(1, 'spn0001', 'KayOh', 'China', 9, ' Software Developer', 'Softsmart Business Solutions', '25 Durban Street, Off Ademola Adetokumbo Creasent, Wuse II, Abuja', 'kheengz@gmail.com', 'sponsors/1.jpg', 'CBN Quarters Wuse II FCT Abuja, Nigeria', 212, 37, 140, '08030734377', '08022020075', 1, 1, '2015-03-11 06:18:18', '2015-03-12 08:45:24'),
+(2, 'spn0002', 'Maazi', 'Okarfor', 4, 'Freelancer Programmer', 'Joker''s Club', 'Ikuna, Ilewe Ikotun', 'nondefyde@yahoo.com', NULL, '', 7, 1, 140, '080294834889', '090383662892', 1, 3, '2014-06-14 05:46:46', '2014-07-03 11:59:37'),
+(3, 'spn0003', 'Usman', 'Abrahim Mohammed', 11, 'Farmer', '', '', 'usman@yahoo.com', NULL, '', NULL, 0, 134, '07034555544', '07032345267', 1, 2, '2014-06-14 05:53:01', '2014-07-03 11:59:37'),
+(4, 'spn0004', 'Emmanuel', 'Skele Jigawa', 9, 'Programmer', '', 'Dogon Bauchi Road S/G Zaria', 'emma@gmail.com', NULL, 'No 22 Jigawa Road S/G Lagos', NULL, 0, 137, '039474625278', '', 1, 1, '2014-06-14 06:02:44', '2014-07-03 11:59:37'),
+(5, 'spn0005', 'Dickson', 'Emmanuel Akpan', 9, 'Programmer', 'Agent Dickson Consultance', '', 'dickson@hotmail.co.za', NULL, 'CBN Quarters Wuse II FCT Abuja', 5, 1, 140, '04950585080', '07032345267', 9, 1, '2014-06-17 10:21:25', '2014-07-03 11:59:37'),
+(6, 'spn0006', 'Ibrahim', 'Audu', 6, 'Business', '', '', 'audu@gmail.com', NULL, 'No 21 Lagos street S/G', 178, 8, 140, '0930738865', '092985479', 1, 1, '2014-06-27 04:15:34', '2014-07-03 11:59:37'),
+(7, 'spn0007', 'Dorathy', 'Akume', 7, 'Legal Practinioner', 'Nigeria Bar Association', 'Victoria Island Lagos', 'akume@roketmail.com', NULL, 'Aminu Road S/G Munchiya, Kaduna', 114, 32, 140, '0930738865', '', 1, 1, '2014-07-03 01:45:19', '2014-07-03 12:45:20'),
+(8, 'spn0008', 'Abdullahi Mariam', 'Ojochide', 3, 'Accountant', 'Guarantee Trust Bank', '124C Ayilara Street, Ojuelegba road', 'chidepink@gmail.com', NULL, 'No, 35 Adewuyi streeet, Ijeshastedo Surulere Lagos', 470, 16, 140, '07037830508', '08083580024', 6, 3, '2014-07-22 03:38:23', '2014-07-22 14:38:23'),
+(9, 'spn0009', 'Eric Kelvin', 'Desmond', 5, 'Doctor', 'RedRose Clinic', '4A, Aja Town', 'desmond@yahoo.com', NULL, 'No, 14 Festac Town', 181, 8, 140, '08029554329', '08023310427', 6, 2, '2014-07-22 03:44:30', '2014-07-22 14:44:30'),
+(10, 'spn0010', 'Nuhu', 'Inuwa Desmond', 11, 'Accountant', 'First Bank', '5b Mile2 road', 'luvnuhu@yahoo.com', NULL, '3, Festac Town', 339, 13, 140, '07033560739', '08024262994', 6, 1, '2014-07-22 04:21:30', '2014-07-22 15:21:30'),
+(11, 'spn0011', 'Haruna', 'Ibrahim', 5, 'Architecture', 'Freelancer', '', 'ibrahim.haruna@yahoo.com', NULL, 'No 77 Itire Road Surulere, Lagos', 147, 7, 140, '08035268493', '09047568475', 6, 1, '2014-09-10 01:16:52', '2014-09-10 12:16:53'),
+(12, 'spn0012', 'ABUBAKAR', 'YUSUF', 11, 'LAWYER', '', '', 'ABUBAKARYUSUF@YAHOO.COM', NULL, '111 IJESHA ROAD LAGOS', 340, 13, 140, '08081593158', '07060627828', 6, 1, '2014-09-10 01:44:32', '2014-09-10 12:54:24'),
+(13, 'spn0013', 'Adamu ', 'Jamiu', 11, 'Doctor', 'Ovansa Hospital and Maternity', '3, Oremeji street', 'adamuja@yahoo.com', NULL, '3, Shodimu street', 137, 6, 140, '09066778855', '08033442211', 6, 1, '2014-09-10 01:58:01', '2014-09-10 12:58:01'),
+(14, 'spn0014', 'Ben', 'Affleck', 8, 'Engineer', 'Benson&co', '909, Iju Lagos', 'benafleck@gmail.com', NULL, '5, washway Town', 477, 16, 140, '08122224455', '09077665544', 6, 2, '2014-09-10 02:15:40', '2014-09-10 13:15:40'),
+(15, 'spn0015', 'Casey', 'Affleck', 7, 'Barrister', 'God''s gift', '3, Fapounda street', 'afflecttings@gmail.com', NULL, '3, Falolu street', 203, 9, 140, '08099776655', '08155667788', 6, 3, '2014-09-10 03:19:39', '2014-09-10 14:19:40'),
+(16, 'spn0016', 'Johnny', 'Depp', 5, 'Doctor', 'Living Spring Hospital', '1, Ojuelegba street', 'johnde@gmail.com', NULL, '4, olorunda street', 220, 37, 140, '09055667788', '09055443322', 6, 1, '2014-09-10 03:30:55', '2014-09-10 14:30:55'),
+(17, 'spn0017', 'Abdullahi', 'Oseni', 6, 'Accountant', 'Zuma Communications Limited', '124c Ayilara Street', 'abdul@yahoo.com', NULL, '35, Fectac Town', 176, 8, 140, '09024556634', '08029554324', 6, 1, '2014-09-10 03:42:06', '2014-09-10 14:42:06'),
+(18, 'spn0018', 'Mohammed', 'Nuhu', 4, 'Accountant', 'First Bank', 'Victoria Island City', 'nuhluvchide@gmail.com', NULL, '24, Adewuyi street', 339, 13, 140, '08024262994', '07033560739', 6, 2, '2014-09-10 03:56:35', '2014-09-10 14:56:35'),
+(19, 'spn0019', 'MOHAMMED', 'INUWA', 9, 'LAWYER', '', '', 'MCKUMDO@YAHOO.COM', NULL, '24 ADEWUYI STREET OF IJESHA ', NULL, 13, 140, '08081593158', '08080204017', 6, 1, '2014-09-10 04:02:39', '2014-09-10 15:02:40'),
+(20, 'spn0020', 'Hassan', 'Oseni', 1, 'Accountant', 'Guarantee Trust Bank', '123, Agbebi raod', 'osehass@gmail.com', NULL, '97, Ijesha road', 343, 15, 140, '09077665544', '08055443322', 6, 2, '2014-09-11 10:08:49', '2014-09-11 09:08:50'),
+(21, 'spn0021', 'Oseni ', 'Gift', 3, 'Student', '', '', 'osengift@yahoo.com', NULL, '39, Festac Town', 272, 31, 140, '07033560738', '07037830509', 6, 3, '2014-09-11 10:36:51', '2014-09-11 09:36:51'),
+(22, 'spn0022', 'Emmanuel', 'Shuaibu', 1, 'Accountant', 'First Bank', '', 'emm@gmail.com', NULL, '89 okunola street', 267, 11, 140, '09066778855', '08155667788', 6, 1, '2014-09-11 12:21:33', '2014-09-11 11:21:34'),
+(23, 'spn0023', 'Emmanuel', 'Sylvester', 10, 'Doctor', '', '', 'sylvester@yahoo.com', NULL, '45, Adae street', 274, 31, 140, '09033445566', '09011223344', 6, 1, '2014-09-11 12:37:49', '2014-09-11 11:37:49'),
+(24, 'spn0024', 'MOHAMMED', 'ISSAH', 5, 'CUSTOM', '', '', 'MOHAMMEDISSAH@GMAIL.COM', NULL, '1 ILE OGBO STREET OFF IJESHA LAGOS', NULL, 13, 140, '08024387677', '08024387677', 6, 1, '2014-09-11 01:03:32', '2014-09-11 12:03:32'),
+(25, 'spn0025', 'Peter', 'Peterson', 4, 'Business ', '', '', 'peter@gmail.com', NULL, '456, Adedeji street', 181, 8, 140, '08122223355', '07088996655', 6, 1, '2014-09-11 01:14:12', '2014-09-11 12:14:12'),
+(26, 'spn0026', 'Joshua', 'Johnson', 10, 'Barrister', '', '', 'johns@yahoo.com', NULL, '3,Tapa Street', 286, 33, 140, '07033560738', '', 6, 1, '2014-09-11 01:32:09', '2014-09-11 12:32:09'),
+(27, 'spn0027', 'Ebube', 'Chima', 8, 'Accountant', '', '', 'ebu@yahoo.com', NULL, '3, Adeniran Ogunsanya way', 316, 13, 140, '08024262994', '', 6, 1, '2014-09-11 01:41:38', '2014-09-11 12:41:38'),
+(28, 'spn0028', 'Vivian', 'George', 8, 'Banker', NULL, 'GTBank Owerri', 'vivian@gmail.com', NULL, 'World Banking Estate Owerri', 290, 12, 140, '08030734377', '094387324', 2, NULL, '2014-10-24 11:17:22', '2014-10-24 10:17:22'),
+(29, 'spn0029', 'Ibrahim ', 'Bala', 6, 'Trader', NULL, '', '', NULL, 'Line Zumo', 277, 33, 140, '08030734377', '', 2, NULL, '2014-10-26 12:53:05', '2014-12-22 11:42:39'),
+(30, 'spn0030', 'Ebube', 'Chidi', 7, 'Business', NULL, '', 'vivian@gmail.com', NULL, 'Samaru', 288, 12, 140, '08024262994', '', 2, NULL, '2014-10-26 12:59:27', '2014-10-26 11:59:27'),
+(32, 'spn0032', 'Peter', 'Malgwi', 8, 'Lecturer', NULL, 'Kebbi State University', 'peter@gmail.com', NULL, 'Katsina Ala', 142, 7, 140, '08135201037', '', 2, NULL, '2014-10-26 01:11:21', '2014-10-26 12:11:21'),
+(33, 'spn0033', 'Obinna', 'Ekwueme', 8, NULL, NULL, NULL, 'kingsley4united@yahoo.com', NULL, NULL, NULL, NULL, NULL, '08030734377', NULL, 2, NULL, '2015-03-10 03:07:43', '2015-03-10 14:07:44'),
+(34, '', NULL, NULL, 7, ' Software Developer', 'Softsmart Business Solution', '25 Durban Street, Off Ademola Adetokumbo Creasent, Wuse II, Abuja', 'kheengz@gmail.com', NULL, 'CBN Quarters Wuse II FCT Abuja, Nigeria', 19, 2, 140, '08030734377', '08022020075', NULL, NULL, NULL, '2015-03-11 18:12:23'),
+(35, '', NULL, NULL, 7, ' Software Developer', 'Softsmart Business Solution', '25 Durban Street, Off Ademola Adetokumbo Creasent, Wuse II, Abuja', 'kheengz@gmail.com', NULL, 'CBN Quarters Wuse II FCT Abuja, Nigeria', 19, 2, 140, '08030734377', '08022020075', NULL, NULL, NULL, '2015-03-11 18:12:32'),
+(36, '', NULL, NULL, 7, ' Software Developer', 'Softsmart Business Solution', '25 Durban Street, Off Ademola Adetokumbo Creasent, Wuse II, Abuja', 'kheengz@gmail.com', NULL, 'CBN Quarters Wuse II FCT Abuja, Nigeria', 92, 5, 140, '08030734377', '08022020075', NULL, NULL, NULL, '2015-03-11 18:12:49');
 
 -- --------------------------------------------------------
 
@@ -3568,7 +3613,7 @@ CREATE TABLE IF NOT EXISTS `students` (
   `created_by` int(11) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=63 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=64 ;
 
 --
 -- Dumping data for table `students`
@@ -3578,7 +3623,7 @@ INSERT INTO `students` (`student_id`, `sponsor_id`, `first_name`, `surname`, `ot
 (1, 2, 'John', 'Adamu', 'Inua', 'stu0001', 'students/1.jpg', 'Female', '2014-05-27', 8, 'Traditional', 'L.E.A school dogon bauchi, Katsina', 4, 'Third Term 2013-2014', 1, 22, 2, 140, 5, 1, '2014-06-13 12:51:15', '2014-10-23 08:47:26'),
 (2, 4, 'Samuel', 'Makus', 'Mark', 'stu0002', 'students/2.jpg', 'Male', '2012-12-25', NULL, 'Christainity', 'St. Micheal Anglican High School', 4, 'Third Term 2013-2014', 4, 1, 1, 140, 1, 1, '2014-06-24 11:13:50', '2014-09-12 09:23:56'),
 (3, 3, 'Musa', 'Usman', 'Abdulahi', 'stu0003', 'students/3.JPG', 'Male', '2010-06-10', 9, 'Muslim', '', 4, 'Third Term 2013-2014', 3, 330, 13, 140, 3, 1, '2014-06-30 11:56:29', '2015-01-10 19:34:08'),
-(4, 6, 'Jamila', 'Audu ', 'Ibrahim', 'stu0004', 'students/4.JPG', 'Female', '2011-03-07', 15, 'Muslim', '', 4, 'Third Term 2013-2014', 1, 283, 33, 140, 1, 1, '2014-06-30 12:05:17', '2014-09-12 09:23:56'),
+(4, 6, 'Jamila', 'Audu ', 'Ibrahim', 'stu0004', 'students/4.png', 'Female', '2007-08-15', 15, 'Muslim', '', 4, 'Third Term 2013-2014', 1, 158, 7, 140, 1, 1, '2014-06-30 12:05:17', '2015-03-12 09:45:47'),
 (5, 1, 'Kheengz', 'China', 'Odi', 'stu0005', 'students/5.JPG', 'Male', '1988-05-05', 36, 'Christian', 'Depot NA Chindict Barracks Zaria', 4, 'Third Term 2013-2014', 1, 290, 12, 140, 1, 1, '2014-06-30 12:22:47', '2015-01-10 20:33:44'),
 (6, 1, 'Emmanuel', 'Dick', 'Dude', 'stu0006', 'students/6.jpg', 'Female', '2014-06-19', 106, 'Traditional', 'Efiong Topko Secondary School', 4, 'Third Term 2013-2014', 1, 178, 8, 140, 6, 1, '2014-06-30 04:33:24', '2014-09-12 09:23:56'),
 (7, 2, 'Chinonso', 'Chukwu', 'Maazi', 'stu0007', 'students/7.JPG', 'Female', '2009-05-12', NULL, 'Christian', 'St. Bath Wussasa Zaria', 4, 'Third Term 2013-2014', 1, 80, 4, 140, 2, 1, '2014-07-02 10:29:52', '2014-09-12 09:23:56'),
@@ -3633,7 +3678,8 @@ INSERT INTO `students` (`student_id`, `sponsor_id`, `first_name`, `surname`, `ot
 (59, 1, 'Emmanuel', 'Joker', 'Bull', 'stu0059', 'students/59.jpg', 'Male', '2000-11-01', 106, NULL, NULL, 4, 'Third Term 2013-2014', 1, 56, 3, 140, 6, 2, '2014-10-24 10:24:40', '2014-10-24 09:24:40'),
 (60, 16, 'Florence', 'Mary', 'John', 'stu0060', 'students/60.jpg', 'Female', '2011-04-15', 40, NULL, NULL, 4, 'Third Term', 1, 134, 6, 140, 2, 2, '2014-10-24 10:26:23', '2014-10-24 09:26:23'),
 (61, 13, 'Judith', 'John', 'Grace', 'stu0061', NULL, 'Female', '2005-11-11', 10, NULL, NULL, 4, 'Second Term 2014-2015', 1, 288, 12, 140, 1, 2, '2014-11-17 01:14:45', '2014-11-17 12:14:45'),
-(62, 3, 'Mariah', 'Usman', 'Fade', 'stu0062', NULL, 'Female', '1995-07-05', 106, NULL, NULL, 4, 'Second Term 2014-2015', 1, 19, 2, 140, 3, 2, '2014-11-17 10:52:14', '2014-11-17 09:52:14');
+(62, 3, 'Mariah', 'Usman', 'Fade', 'stu0062', NULL, 'Female', '1995-07-05', 106, NULL, NULL, 4, 'Second Term 2014-2015', 1, 19, 2, 140, 3, 2, '2014-11-17 10:52:14', '2014-11-17 09:52:14'),
+(63, 9, 'JohnBull', 'Desmond', 'Jude', 'stu0063', 'students/63.jpg', 'Male', '2007-06-04', 106, NULL, NULL, 4, 'First Term 2014-2015', 1, 270, 11, 140, 2, 4, '2015-03-12 10:39:38', '2015-03-12 09:39:38');
 
 -- --------------------------------------------------------
 
@@ -3646,7 +3692,7 @@ CREATE TABLE IF NOT EXISTS `students_classes` (
   `student_id` int(11) NOT NULL,
   `class_id` int(11) NOT NULL,
   `academic_year_id` int(11) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=58 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=59 ;
 
 --
 -- Dumping data for table `students_classes`
@@ -3706,7 +3752,8 @@ INSERT INTO `students_classes` (`student_class_id`, `student_id`, `class_id`, `a
 (54, 59, 106, 2),
 (55, 60, 40, 2),
 (56, 61, 10, 2),
-(57, 62, 106, 2);
+(57, 62, 106, 2),
+(58, 63, 106, 2);
 
 -- --------------------------------------------------------
 
@@ -4096,8 +4143,8 @@ CREATE TABLE IF NOT EXISTS `user_roles` (
 --
 
 INSERT INTO `user_roles` (`user_role_id`, `user_role`, `group_alias`) VALUES
-(1, 'Sponsor', 'web_users'),
-(2, 'Student', 'web_users'),
+(1, 'Sponsor', 'spn_users'),
+(2, 'Student', 'spn_users'),
 (3, 'Employee', 'emp_users'),
 (4, 'ICT', 'ict_users'),
 (5, 'Admin', 'app_users'),
@@ -4115,24 +4162,25 @@ CREATE TABLE IF NOT EXISTS `users` (
   `password` varchar(150) NOT NULL,
   `display_name` varchar(100) DEFAULT NULL,
   `type_id` int(11) NOT NULL,
-  `image_url` varchar(50) NOT NULL,
+  `image_url` varchar(50) DEFAULT NULL,
   `user_role_id` int(11) NOT NULL,
   `group_alias` varchar(20) NOT NULL DEFAULT 'web_users',
   `status_id` int(11) NOT NULL DEFAULT '1',
   `created_by` int(11) NOT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`user_id`, `username`, `password`, `display_name`, `type_id`, `image_url`, `user_role_id`, `group_alias`, `status_id`, `created_by`, `created_at`, `updated_at`) VALUES
-(1, 'emp0002', '$2a$10$8Jx2GjQqaqqzXfFG1CgCQemp63A2ZZzQbz3z0pv80wat8xNMtDjj.', 'GEORGE, UCHE', 2, 'employees/2.jpg', 6, 'adm_users', 1, 2, '2014-06-16 02:39:58', '2014-10-15 08:09:43'),
-(2, 'spn0001', '$2a$10$BSauz9mo4qbV08gwkX0MUuPtGZ0rMnhy/DkJV6bPmlkbly5MDk7Sa', 'KAYOH, CHINA', 1, 'sponsors/1.jpg', 1, 'web_users', 1, 2, '2014-07-17 11:14:00', '2014-07-21 13:30:13'),
+(1, 'emp0002', '$2a$10$hcl7ySmI/9NxTnEMp6GFQOA8dnJezUk/Kn7OQqjphpQEqKmLy2oUe', 'GEORGE, UCHE', 2, 'employees/2.jpg', 6, 'adm_users', 1, 2, '2014-06-16 02:39:58', '2015-03-11 12:06:22'),
+(2, 'spn0001', '$2a$10$uLb3awX5tZDRLz4PU/WGLuCCWi5duSkO8BijIpdBVy83GHbiXSUmq', 'KAYOH, CHINA', 1, 'sponsors/1.jpg', 1, 'spn_users', 1, 2, '2014-07-17 11:14:00', '2015-03-11 18:48:14'),
 (3, 'emp0006', '$2a$10$QG2RqGT8ZAMHXaPdEunG4OUcH4Sez52PbRO.DY1jmVvZCj4wrBLcW', 'KINGSLEY, CHINAKA', 6, 'employees/6.JPG', 3, 'emp_users', 1, 2, '2014-10-14 01:43:13', '2014-10-15 08:07:53'),
-(4, 'emp0004', '$2a$10$oncEz7DKJm4EqJUQYn/GmuTpz0JLLaMg.KgqBuKUyM2/vpGkpYXT2', 'BOLA, YUSRAH INUA', 4, 'employees/4.jpg', 4, 'ict_users', 1, 4, '2014-06-24 04:01:20', '2015-03-04 11:22:12');
+(4, 'emp0004', '$2a$10$oncEz7DKJm4EqJUQYn/GmuTpz0JLLaMg.KgqBuKUyM2/vpGkpYXT2', 'BOLA, YUSRAH INUA', 4, 'employees/4.jpg', 4, 'ict_users', 1, 4, '2014-06-24 04:01:20', '2015-03-04 11:22:12'),
+(5, 'spn0033', '$2a$10$2mmZphckyEYGq6DR78B.XOn/f7dxv09BnjM8D/URqw9FpFcPtit8i', 'OBINNA EKWUEME', 33, 'sponsors/33.jpg', 1, 'spn_users', 1, 2, '2015-03-10 03:07:44', '2015-03-11 12:36:10');
 
 -- --------------------------------------------------------
 
@@ -4376,6 +4424,12 @@ ALTER TABLE `local_govts`
  ADD PRIMARY KEY (`local_govt_id`);
 
 --
+-- Indexes for table `master_setups`
+--
+ALTER TABLE `master_setups`
+ ADD PRIMARY KEY (`master_setup_id`);
+
+--
 -- Indexes for table `message_recipients`
 --
 ALTER TABLE `message_recipients`
@@ -4543,7 +4597,7 @@ MODIFY `academic_year_id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMEN
 -- AUTO_INCREMENT for table `acos`
 --
 ALTER TABLE `acos`
-MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=130;
+MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=144;
 --
 -- AUTO_INCREMENT for table `aros`
 --
@@ -4553,7 +4607,7 @@ MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 -- AUTO_INCREMENT for table `aros_acos`
 --
 ALTER TABLE `aros_acos`
-MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=40;
+MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=45;
 --
 -- AUTO_INCREMENT for table `assessments`
 --
@@ -4588,7 +4642,7 @@ MODIFY `country_id` int(3) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=234;
 -- AUTO_INCREMENT for table `employee_qualifications`
 --
 ALTER TABLE `employee_qualifications`
-MODIFY `employee_qualification_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
+MODIFY `employee_qualification_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `employee_types`
 --
@@ -4639,6 +4693,11 @@ MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 --
 ALTER TABLE `local_govts`
 MODIFY `local_govt_id` int(3) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=781;
+--
+-- AUTO_INCREMENT for table `master_setups`
+--
+ALTER TABLE `master_setups`
+MODIFY `master_setup_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `message_recipients`
 --
@@ -4693,7 +4752,7 @@ MODIFY `skill_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=18;
 -- AUTO_INCREMENT for table `sponsors`
 --
 ALTER TABLE `sponsors`
-MODIFY `sponsor_id` int(3) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=33;
+MODIFY `sponsor_id` int(3) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=37;
 --
 -- AUTO_INCREMENT for table `sponsorship_types`
 --
@@ -4723,12 +4782,12 @@ MODIFY `student_status_id` int(3) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMEN
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-MODIFY `student_id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=63;
+MODIFY `student_id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=64;
 --
 -- AUTO_INCREMENT for table `students_classes`
 --
 ALTER TABLE `students_classes`
-MODIFY `student_class_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=58;
+MODIFY `student_class_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=59;
 --
 -- AUTO_INCREMENT for table `subject_classlevels`
 --
@@ -4763,7 +4822,7 @@ MODIFY `user_role_id` int(3) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-MODIFY `user_id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+MODIFY `user_id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
 -- Constraints for dumped tables
 --

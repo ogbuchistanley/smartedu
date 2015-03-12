@@ -2,7 +2,7 @@
 <div class="col-md-12">
     <div class="panel">
         <!-- Info Boxes -->
-        <div class="row">
+        <!--div class="row">
             <div class="col-md-12">
                 <div class="info-box  bg-info  text-white">
                     <div class="info-icon bg-info-dark">
@@ -10,7 +10,7 @@
                     </div>
                     <div class="info-details">
                         <h4>Sponsors Complete Information   
-                            <span class="badge pull-right bg-white text-info"><?php echo $sponsor['Sponsor']['first_name'] . ' ' . $sponsor['Sponsor']['other_name'];?>
+                            <span class="badge pull-right bg-white text-info"><?php //echo $sponsor['Sponsor']['first_name'] . ' ' . $sponsor['Sponsor']['other_name'];?>
                             <i class="fa fa-user fa-1x"></i> 
                             </span> 
                         </h4>
@@ -77,7 +77,7 @@
                                 <li class="list-group-item"><?php echo (!empty($sponsor['Sponsor']['contact_address'])) ? h($sponsor['Sponsor']['contact_address']) : '<span class="label label-danger">nill</span>'; ?></li>
                                 <!--li class="list-group-item"><?php //echo h($sponsor['SponsorshipType']['sponsorship_type']); ?></li-->
                                 <li class="list-group-item"><?php echo h($sponsor['Sponsor']['occupation']); ?></li>
-                                <!--li class="list-group-item"><?php //echo (!empty($sponsor['Sponsor']['company_name'])) ? h($sponsor['Sponsor']['company_name']) : '<span class="label label-danger">nill</span>'; ?></li-->
+                                <li class="list-group-item"><?php echo (!empty($sponsor['Sponsor']['company_name'])) ? h($sponsor['Sponsor']['company_name']) : '<span class="label label-danger">nill</span>'; ?></li>
                                 <li class="list-group-item"><?php echo (!empty($sponsor['Sponsor']['company_address'])) ? h($sponsor['Sponsor']['company_address']) : '<span class="label label-danger">nill</span>'; ?></li>
                                 <li class="list-group-item select">
                                     <a class="btn btn-block bg-info text-white btn-lg "></a>

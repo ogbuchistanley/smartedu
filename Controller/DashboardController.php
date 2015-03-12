@@ -10,6 +10,7 @@ class DashboardController extends AppController {
     // only allow the login controllers only
     public function beforeFilter() {
         parent::beforeFilter();
+        $this->masterRedirect();
         $this->student = ClassRegistry::init('Student');
         //$this->layout = 'default_web'; 
     }

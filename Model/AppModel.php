@@ -198,7 +198,7 @@ class AppModel extends Model {
 //    }
     
     //Send SMS
-    function SendSMS($mobile_no, $msg_sender, $msg_body) {
+    function SendSMS($mobile_no, $msg_body, $msg_sender=APP_NAME) {
         if(substr($mobile_no, 0, 1) === '0'){
             $no = '234' . substr ($mobile_no, 1);
         }elseif (substr($mobile_no, 0, 3) === '234') {

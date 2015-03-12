@@ -8,6 +8,7 @@ class ItemsController extends AppController {
         // only allow the login controllers only
     public function beforeFilter() {
         parent::beforeFilter();
+        $this->masterRedirect();
     }
     
     /////////////////////////////////////// actions ///////////////////////////////////////////////

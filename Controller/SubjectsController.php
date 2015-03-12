@@ -3,6 +3,11 @@ App::uses('AppController', 'Controller');
 
 class SubjectsController extends AppController {
 
+    public function beforeFilter() {
+        parent::beforeFilter();
+        $this->masterRedirect();
+    }
+
     public function ajax_get_subjects($model, $parentLB) {
         $parentLB = str_replace('#', '', $parentLB);
         $id = $this->request->data[$model][$parentLB];

@@ -12,6 +12,7 @@ class ExamsController extends AppController {
     // only allow the login controllers only
     public function beforeFilter() {
         parent::beforeFilter();
+        $this->masterRedirect();
     }
     
     public function index() {
@@ -296,10 +297,12 @@ class ExamsController extends AppController {
             $student_id = explode('/', $decrypt_id)[0];
             $class_id = explode('/', $decrypt_id)[1];
             $term_id = explode('/', $decrypt_id)[2];
+            $skill_assess = null;
 
             $option = array('conditions' => array('Assessment.student_id' => $student_id, 'Assessment.academic_term_id' => $term_id));
             $student_assess = $AssessmentModel->find('first', $option);
-            $skill_assess = $SkillAssessmentModel->find('all', array('conditions' => array('SkillAssessment.assessment_id' => $student_assess['Assessment']['assessment_id'])));
+            if($student_assess)
+                $skill_assess = $SkillAssessmentModel->find('all', array('conditions' => array('SkillAssessment.assessment_id' => $student_assess['Assessment']['assessment_id'])));
 
             $results = $this->Exam->findStudentExamTerminalDetails($student_id, $term_id, $class_id);
             $response = array();
@@ -352,7 +355,7 @@ class ExamsController extends AppController {
            $this->set('encrypt_id', $encrypt_id);
         }else{
          $this->accessDenialError();
-        }        
+        }
     }
 
     //Displaying Terminal Classroom Positions
@@ -409,7 +412,8 @@ class ExamsController extends AppController {
             $response = array();    
             $responseSub = array();    
             $responsePos = array();    
-            $counts = 0;   
+            $counts = 0;
+            $re = null;
             //Terminal List of Student Subjects and their exam Scores in Details
             foreach ($AcademicTerms as $AcademicTerm) {
                 $results = $this->Exam->findStudentExamAnnualDetails($student_id, $AcademicTerm['AcademicTerm']['academic_term_id'], $class_id);  
@@ -525,8 +529,8 @@ class ExamsController extends AppController {
         $this->layout = null;
         $AssessmentModel = ClassRegistry::init('Assessment');
         $SkillAssessmentModel = ClassRegistry::init('SkillAssessment');
-        $resultCheck = $this->Acl->check($this->group_alias, 'ExamsController');
-        if($resultCheck){
+//        $resultCheck = $this->Acl->check($this->group_alias, 'ExamsController');
+//        if($resultCheck){
             //Decrypt the id sent
             $decrypt_id = $this->encryption->decode($encrypt_id);
             $student_id = explode('/', $decrypt_id)[0];
@@ -593,8 +597,8 @@ class ExamsController extends AppController {
             $this->set('ClassPosition', $response2);
             $this->set('SkillsAssess', $skill_assess);
             $this->set('encrypt_id', $encrypt_id);
-        }else{
-            $this->accessDenialError();
-        }
+//        }else{
+//            $this->accessDenialError();
+//        }
     }
 }

@@ -1,9 +1,8 @@
 $('document').ready(function(){
     
     //var domain_name = '/smartschool';
-
+    
     setTabActive('[href="'+domain_name+'/exams/index#setupExam"]', 1);
-
      $('[href="'+domain_name+'/exams/index#setupExam"]').attr('data-toggle', 'tab');
      $('[href="'+domain_name+'/exams/index#subjectScores"]').attr('data-toggle', 'tab');
      $('[href="'+domain_name+'/exams/index#viewTAScores"]').attr('data-toggle', 'tab');
@@ -20,8 +19,8 @@ $('document').ready(function(){
         $('#myTab a[href="'+domain_name+'/exams/index#viewTAScores"]').tab('show');
         setTabActive('[href="'+domain_name+'/exams/index#viewTAScores"]', 1);
     });
-
-
+    
+    
     //////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////           Dependent ListBox
     var url = "\/academic_terms\/ajax_get_terms\/SubjectClasslevel\/%23academic_year_id_all";

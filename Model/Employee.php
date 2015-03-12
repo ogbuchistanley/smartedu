@@ -19,10 +19,11 @@ class Employee extends AppModel {
             $this->data[$this->alias]['created_by'] = AuthComponent::user('type_id');
         }
         if(isset($this->data[$this->alias]['image_url'])){
-            $this->data[$this->alias]['image_url'] = basename($this->data[$this->alias]['image_url']['name']);
+            $image_url = $this->data[$this->alias]['image_url']['name'];
+            $this->data[$this->alias]['image_url'] = basename($image_url);
+            $ext = pathinfo($image_url, PATHINFO_EXTENSION);
             if(isset($this->data[$this->alias]['employee_id'])) {
-                $image_url = $this->data[$this->alias]['image_url'];
-                $this->data[$this->alias]['image_url'] = $this->data[$this->alias]['employee_id'].'.'.explode('.', $image_url)[1];
+                $this->data[$this->alias]['image_url'] = 'employees/' . $this->data[$this->alias]['employee_id'] . '.' . $ext;
             }
         }
         if(isset($this->data[$this->alias]['identity_expiry_date'])){
@@ -36,16 +37,15 @@ class Employee extends AppModel {
     }
     public function afterSave($created, $options = array()) {
         $id = $this->id;
+        $UserModel = ClassRegistry::init('User');
+        $UserModel->id = AuthComponent::user('user_id');
         //$no = 'emp'. str_pad($id, 4, '0', STR_PAD_LEFT);
-        $ext = '.jpg';   
         if(isset($this->data[$this->alias]['image_url'])){
             $image_url = $this->data[$this->alias]['image_url'];
-            $ext = explode('.', $image_url)[1];
-            $this->saveField('image_url', "employees/'.$id.'.'.$ext.'");
-//            $this->query('UPDATE employees SET '
-//                . 'image_url="employees/'.$id.'.'.$ext.'", '
-//                . 'employee_no=CONCAT("emp", REPEAT("0", 4-LENGTH("'.$id.'")), CAST("'.$id.'" AS CHAR(10))) '
-//                . 'WHERE employee_id="'.$id.'"');
+            $ext = pathinfo($image_url, PATHINFO_EXTENSION);
+            $name = 'employees/' . $id . '.' . $ext;
+            //User Image URL
+            $UserModel->saveField('image_url', $name);
         }
     }
     

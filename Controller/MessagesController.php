@@ -6,7 +6,8 @@ class MessagesController extends AppController {
     
     // only allow the login controllers only
     public function beforeFilter() {
-        parent::beforeFilter(); 
+        parent::beforeFilter();
+        $this->masterRedirect();
     }
     
     public function index() {
@@ -29,7 +30,7 @@ class MessagesController extends AppController {
         if($result){
             $MessageRecipient = ClassRegistry::init('MessageRecipient');
             $recipient_id = ($encrypt_id === null) ? null : $this->encryption->decode($encrypt_id);
-            $d = '';//$MessageRecipient->SendSMS('08030734377', 'test', 'Dude work na joker');
+            $d = '';//$MessageRecipient->SendSMS('08030734377', 'Dude work na joker');
             if ($this->request->is('post')) {
                 $data = $this->request->data['MessageRecipient'];
                 $MessageRecipient->id = $recipient_id;
@@ -212,7 +213,7 @@ class MessagesController extends AppController {
         }
         if($mobile_no !== null){
             //Send S.M.S
-            ($sponsor->SendSMS($mobile_no, $subject, $message)[0] == " Message Sent Successfully.") ? $sms_count++ : '';
+            ($sponsor->SendSMS($mobile_no, $message, $subject)[0] == " Message Sent Successfully.") ? $sms_count++ : '';
 
         }
         return $sms_count . ', ' .$email_count;
@@ -314,7 +315,7 @@ class MessagesController extends AppController {
         }
         if($mobile_no !== null){
             //Send S.M.S
-            ($recipient->SendSMS($mobile_no, $subject, $message)[0] == " Message Sent Successfully.") ? $sms_count++ : '';
+            ($recipient->SendSMS($mobile_no, $message, $subject)[0] == " Message Sent Successfully.") ? $sms_count++ : '';
         }
         $this->setFlashMessage($sms_count . ' SMS and ' . $email_count . ' email Massages Has Been Sent to the Recipients', 1); 
         return $sms_count . '_' . $email_count;
@@ -337,7 +338,7 @@ class MessagesController extends AppController {
         }
         if($mobile_no !== null){
             //Send S.M.S
-            ($employee->SendSMS($mobile_no, $subject, $message)[0] == " Message Sent Successfully.") ? $sms_count++ : '';
+            ($employee->SendSMS($mobile_no, $message, $subject)[0] == " Message Sent Successfully.") ? $sms_count++ : '';
         }
         $this->setFlashMessage($sms_count . ' SMS and ' . $email_count . ' email Massages Has Been Sent to the Employees', 1); 
         return $sms_count . '_' . $email_count;

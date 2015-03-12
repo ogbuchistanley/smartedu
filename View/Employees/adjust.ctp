@@ -4,6 +4,26 @@
     App::uses('Encryption', 'Utility'); 
     $Encryption = new Encryption();
 ?>
+    <div class="row">
+        <?php
+        $errors = $this->validationErrors['Employee'];
+        $flatErrors = Set::flatten($errors);
+        $flatErrors2 = $flatErrors;
+        $test = array();
+        foreach($flatErrors as $key => $value){
+            $test[] = $value;
+        }
+        if(!empty($test[count($test) - 1])) {
+            echo '<div class="alert alert-danger">';
+            echo '<ul>';
+            foreach($flatErrors2 as $key => $value) {
+                echo (!empty($value)) ? '<li>'.$value.'</li>' : false;
+            }
+            echo '</ul>';
+            echo '</div>';
+        }
+        ?>
+    </div>
 
     <div class="col-md-12">
         <div class="panel">
@@ -109,14 +129,14 @@
                                                 <label class="col-lg-2 col-md-3 control-label">First Name</label>
                                                 <div class="col-lg-7 col-md-9">
                                                  <input type="text" class="form-control form-cascade-control input-small" value="<?php echo $employee['Employee']['first_name']?>"
-                                                    name="data[Employee][first_name]" id="first_name" placeholder="Type Employee's first name" required>
+                                                    name="data[Employee][first_name]" id="first_name" placeholder="Type Employee's first name" disabled required>
                                                </div>
                                             </div>
                                             <div class="form-group">
                                               <label class="col-lg-2 col-md-3 control-label">Other Names</label>
                                               <div class="col-lg-7 col-md-9">
                                                <input type="text" class="form-control form-cascade-control input-small" value="<?php echo $employee['Employee']['other_name']?>"
-                                                name="data[Employee][other_name]" id="other_name" placeholder="Type Employee's other names" required>
+                                                name="data[Employee][other_name]" id="other_name" placeholder="Type Employee's other names" disabled required>
                                              </div>
                                             </div>
                                             <div class="form-group">
@@ -468,7 +488,7 @@
                                                 <div class="form-group">
                                                   <label class="col-lg-2 col-md-3 control-label">&nbsp;&nbsp;</label>
                                                   <div class="col-lg-7 col-md-9">
-                                                      <button type="submit" id="register_emp_btn" class="btn btn-info">Update Employee Record</button>
+                                                      <button type="submit" id="register_emp_btn" class="btn btn-info">Update Record</button>
                                                   </div>
                                                 </div> 
                                             </center>

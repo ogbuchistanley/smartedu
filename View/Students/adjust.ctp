@@ -4,6 +4,26 @@
     App::uses('Encryption', 'Utility'); 
     $Encryption = new Encryption();
 ?>
+    <div class="row">
+        <?php
+            $errors = $this->validationErrors['Student'];
+            $flatErrors = Set::flatten($errors);
+            $flatErrors2 = $flatErrors;
+            $test = array();
+            foreach($flatErrors as $key => $value){
+                $test[] = $value;
+            }
+            if(!empty($test[count($test) - 1])) {
+                echo '<div class="alert alert-danger">';
+                echo '<ul>';
+                foreach($flatErrors2 as $key => $value) {
+                    echo (!empty($value)) ? '<li>'.$value.'</li>' : false;
+                }
+                echo '</ul>';
+                echo '</div>';
+            }
+        ?>
+    </div>
 
     <div class="col-md-12">
         <div class="panel">
@@ -46,6 +66,9 @@
                                 )
                             );     
                         ?>
+                        <div class="form-group">
+                            <?php echo $this->Form->input('student_id'); ?>
+                        </div>
 
                         <!--form action="<?php //echo DOMAIN_NAME ?>/students/adjust/<?php //echo base64_encode($student['Student']['student_id']);?>" class="form-horizontal cascde-forms" novalidate="novalidate" id="student_form" enctype="multipart/form-data" method="post" accept-charset="utf-8"-->
                         

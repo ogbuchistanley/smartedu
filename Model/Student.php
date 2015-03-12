@@ -17,12 +17,13 @@ class Student extends AppModel {
             
         }
         if(isset($this->data[$this->alias]['image_url'])){
-            $this->data[$this->alias]['image_url'] = basename($this->data[$this->alias]['image_url']['name']);
+            $image_url = $this->data[$this->alias]['image_url']['name'];
+            $this->data[$this->alias]['image_url'] = basename($image_url);
+            $ext = pathinfo($image_url, PATHINFO_EXTENSION);
             if(isset($this->data[$this->alias]['student_id'])) {
-                $image_url = $this->data[$this->alias]['image_url'];
-                $this->data[$this->alias]['image_url'] = $this->data[$this->alias]['student_id'].'.'.explode('.', $image_url)[1];
+                $this->data[$this->alias]['image_url'] = 'students/' . $this->data[$this->alias]['student_id'] . '.' . $ext;
             }
-        }    
+        }
         if(isset($this->data[$this->alias]['birth_date'])){
             $this->data[$this->alias]['birth_date'] = $this->dateFormatBeforeSave($this->data[$this->alias]['birth_date']);
         }
@@ -35,9 +36,11 @@ class Student extends AppModel {
         $studClass = ClassRegistry::init('StudentsClass');
         $term_id = ClassRegistry::init('AcademicTerm');
         $id = $this->id;
+        //$no = 'emp'. str_pad($id, 4, '0', STR_PAD_LEFT);
+
         if(isset($this->data[$this->alias]['image_url'])){
             $image_url = $this->data[$this->alias]['image_url'];
-            $ext = explode('.', $image_url)[1];
+            $ext = pathinfo($image_url, PATHINFO_EXTENSION);
             $this->query('UPDATE students SET '
                 . 'image_url="students/'.$id.'.'.$ext.'", '
                 . 'student_no=CONCAT("stu", REPEAT("0", 4-LENGTH("'.$id.'")), CAST("'.$id.'" AS CHAR(10))) '

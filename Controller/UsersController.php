@@ -145,7 +145,7 @@ class UsersController extends AppController {
                 if ($this->User->save()) {
                     //Send SMS
                     $msg = 'User '.$username.', Your Password Has Been Reset To = '.$pass;
-                    //$this->User->SendSMS($no, 'Solid Step', $msg);
+                    //$this->User->SendSMS($no, $msg);
                     //Send Mail
                     $check = null;
 
@@ -218,16 +218,18 @@ class UsersController extends AppController {
             $user = $this->User->find('first', array('conditions' => array('User.' . $this->User->primaryKey => $id)));
             $storedHash = $user['User']['password'];
             $newHash = Security::hash($old_pass, 'blowfish', $storedHash);
+            //$output = null;
             if($storedHash === $newHash){
                 if($new_pass === $new_pass2){                    
                     $this->User->id = $id;
-                    echo ($this->User->saveField('password', $new_pass2)) ? 1 : 0;
+                    $output = ($this->User->saveField('password', $new_pass2)) ? 1 : 0;
                 }else{
-                    echo -1;
+                    $output = -1;
                 }
             }else{
-                echo -2;
+                $output = -2;
             }
+            echo trim($output);
         }
     }
     

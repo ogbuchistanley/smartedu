@@ -26,17 +26,17 @@ $('document').ready(function(){
 //        var group_alias = $('#group_alias').val();
         ajax_loading_image($('#msg_box3'), ' Processing...');
         $.post(domain_name+'/users/change', $('#change_pass_form').serialize(), function(data){
-            if(data === '1'){
+            if(data == 1){
                 set_msg_box($('#msg_box3'), ' Your Password was Successfully Updated', 1);
                 $('#change_pass_form')[0].reset();
-            }else if(data === '0'){
+            }else if(data == 0){
                 set_msg_box($('#msg_box3'), ' Error Updating Your Password... Try Again', 2);
-            }else if(data === '-1'){
+            }else if(data == -1){
                 $('#new_pass2').focus();
                 set_msg_box($('#msg_box3'), ' Your <i>New and Confirm Passwords</i> did not match', 2);
-            }else if(data === '-2'){
+            }else if(data == -2){
                 $('#old_pass').focus();
-                set_msg_box($('#msg_box3'), ' Your <i>Existing Password</i> did not match', 2);
+                set_msg_box($('#msg_box3'), ' Your <i>Old (Existing) Password</i> did not match', 2);
             }  
         });
         return false;

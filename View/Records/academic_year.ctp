@@ -8,7 +8,7 @@
 <div class="col-md-12">
     <div class="panel">
         <!-- Info Boxes -->
-        <div class="row">
+        <!--div class="row">
             <div class="col-md-12">
                 <div class="info-box  bg-info  text-white">
                     <div class="info-icon bg-info-dark">
@@ -23,7 +23,8 @@
         <!-- / Info Boxes -->
         <div class="panel-heading text-primary">
             <h3 class="panel-title">
-               <i class="fa fa-plus"></i> Add New / <i class="fa fa-edit"></i>  Modify Existing Records 
+               <i class="fa fa-plus"></i> Add New / <i class="fa fa-edit"></i>  Modify Existing Records
+                <span class="label label-warning">Note: Only One Academic Year Status Can Be Set To Active</span>
                 <span class="pull-right">
                     <a href="javascript:void(0)"  title="Refresh"><i class="fa fa-refresh"></i></a>
                     <a href="#" class="panel-minimize"><i class="fa fa-chevron-up"></i></a>

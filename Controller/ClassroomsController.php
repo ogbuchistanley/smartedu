@@ -9,6 +9,12 @@ App::uses('AppController', 'Controller');
  */
 class ClassroomsController extends AppController {
 
+    // only allow the login controllers only
+    public function beforeFilter() {
+        parent::beforeFilter();
+        $this->masterRedirect();
+    }
+
     public function ajax_get_classes($model, $parentLB) {
         $parentLB = str_replace('#', '', $parentLB);
         $id = $this->request->data[$model][$parentLB];

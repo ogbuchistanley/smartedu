@@ -4,16 +4,17 @@ App::uses('AppController', 'Controller');
 class StudentsController extends AppController {
 
 	public $components = array('Paginator');
-    
+
     // only allow the login controllers only
     public function beforeFilter() {
         parent::beforeFilter();
+        $this->masterRedirect();
     }
     
     public function validate_form() {
         $this->validateForm('Student');
     }
-    
+
     public function index() {
         $this->set('title_for_layout', 'Students');
         //$this->layout = 'default_web'; 
@@ -102,19 +103,18 @@ class StudentsController extends AppController {
                 if ($this->Student->save($data)) {
                     if(isset($data['image_url'])){
                         $this->uploadImage($decrypt_student_id, 'students', $this->request->data['Student']);
-                        $this->setFlashMessage('The Student '.$data['first_name'].' '.$data['surname'].' has been Updated.', 1);
+                        $this->setFlashMessage('The Student has been Updated.', 1);
                     }else {
-                        $this->setFlashMessage('The Student '.$data['first_name'].' '.$data['surname'].' has been Updated... But Image Was Not Uploaded', 1);
+                        $this->setFlashMessage('The Student has been Updated... But New Image Was Not Uploaded', 1);
                     }
+                    return $this->redirect(array('action' => 'adjust/'.$encrypt_id));
                 } else {
                     $this->setFlashMessage('The student could not be update. Please, try again.', 2);
                 }
-                return $this->redirect(array('action' => 'index'));
-            } else {
-                $options = array('conditions' => array('Student.' . $this->Student->primaryKey => $decrypt_student_id));
-                $this->request->data = $this->Student->find('first', $options);
-                $this->set('student', $this->Student->find('first', $options));
             }
+            $options = array('conditions' => array('Student.' . $this->Student->primaryKey => $decrypt_student_id));
+            $this->request->data = $this->Student->find('first', $options);
+            $this->set('student', $this->Student->find('first', $options));
         }else{
             $this->accessDenialError();
         }

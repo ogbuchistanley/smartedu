@@ -14,45 +14,29 @@ class Sponsor extends AppModel {
             $this->data[$this->alias]['created_at'] = $this->dateFormatBeforeSave();
             $this->data[$this->alias]['created_by'] = AuthComponent::user('type_id');
         }
+        if(isset($this->data[$this->alias]['image_url'])){
+            $image_url = $this->data[$this->alias]['image_url']['name'];
+            $this->data[$this->alias]['image_url'] = basename($image_url);
+            $ext = pathinfo($image_url, PATHINFO_EXTENSION);
+            if(isset($this->data[$this->alias]['sponsor_id'])) {
+                $this->data[$this->alias]['image_url'] = 'sponsors/' . $this->data[$this->alias]['sponsor_id'] . '.' . $ext;
+            }
+        }
         //$this->data[$this->alias]['updated_at'] = $this->dateFormatBeforeSave();
         return parent::beforeSave($options);
     }
     
      public function afterSave($created, $options = array()) {
-        $User = ClassRegistry::init('User');
-        $userRole = ClassRegistry::init('UserRole');
-        $Role = $userRole->find('first', array('conditions' => array('UserRole.' . $userRole->primaryKey => 1)));
-        $id = $this->id;
-        $no = trim(strtolower('spn'. str_pad($id, 4, '0', STR_PAD_LEFT)));
-        $ext = '.jpg';
-        $val = 'sponsors/'.$id.$ext;
-         if($created){
-            $this->query('UPDATE sponsors SET sponsor_no=CONCAT("spn", REPEAT("0", 4-LENGTH("'.$id.'")), '
-                . 'CAST("'.$id.'" AS CHAR(10))) WHERE sponsor_id="'.$id.'"');
-             if(isset($id)){
-                $User->create();
-                $User->data['User']['username'] = $no;
-                $User->data['User']['password'] = 'Password1';
-                $User->data['User']['display_name'] = trim(strtoupper($this->data[$this->alias]['first_name'] . ' ' . ucwords($this->data[$this->alias]['other_name'])));
-                $User->data['User']['type_id'] = $id;
-                $User->data['User']['group_alias'] = $Role['UserRole']['group_alias'];
-                $User->data['User']['image_url'] = $val;
-                $User->data['User']['user_role_id'] = 1;
-                if($User->save()) {
-                    //Send SMS
-                    //$mobile_no = $this->data[$this->alias]['mobile_number1'];
-                    //$this->SendSMS($mobile_no, 'SmartSchool', 'Username = '.trim(strtolower($no)).' and Password = Password1');
-                    //Send Mail
-                    $email = $this->data[$this->alias]['email'];
-                    $name = $this->data[$this->alias]['first_name'] . ' ' . $this->data[$this->alias]['other_name'];
-                    $msg_body = 'Find Below your username and password to access the school app<br><br>';
-                    $msg_body .= 'Username: '.$no.' <br>Password: Password1';
-                    if(!empty($email)){                                 
-                        $this->sendMail($msg_body, 'Authentication', $email, $name);
-                    } 
-                }
-            }
-            //$this->createNewUser($no, $this->data[$this->alias]['first_name'], $this->data[$this->alias]['other_name'], $id, $val, 1);
+         $id = $this->id;
+         $UserModel = ClassRegistry::init('User');
+         $UserModel->id = AuthComponent::user('user_id');
+         //$no = 'emp'. str_pad($id, 4, '0', STR_PAD_LEFT);
+         if(isset($this->data[$this->alias]['image_url'])){
+             $image_url = $this->data[$this->alias]['image_url'];
+             $ext = pathinfo($image_url, PATHINFO_EXTENSION);
+             $name = 'sponsors/' . $id . '.' . $ext;
+             //User Image URL
+             $UserModel->saveField('image_url', $name);
         }
     }
     
@@ -143,11 +127,17 @@ class Sponsor extends AppModel {
                 'message' => 'A Occupation is required',                
             )
         ),
-//        'sponsorship_type_id' => array(
-//            'notEmpty' => array(
-//                'rule' => array('notEmpty'),
-//                'message' => 'A Sponsorship Type is required',                
-//            )
-//        )
+        'image_url' => array(
+            'uploadError' => array(
+                'rule' => 'uploadError',
+                'message' => 'The image upload failed.',
+                'allowEmpty' => TRUE
+            ),
+            'fileSize' => array(
+                'rule' => array('fileSize', '<=', '1MB'),
+                'message' => 'Image must be less than 1MB.',
+                'allowEmpty' => TRUE
+            )
+        )
     );
 }

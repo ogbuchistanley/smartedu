@@ -12,6 +12,7 @@ class AssessmentsController extends AppController {
     // only allow the login controllers only
     public function beforeFilter() {
         parent::beforeFilter();
+        $this->masterRedirect();
     }
     
     ////////////////////////////////////// Skills Assessment Begins /////////////////////////////////////////////////////////////////////////////////////////

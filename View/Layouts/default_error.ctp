@@ -7,7 +7,7 @@
  * @since         CakePHP(tm) v 0.10.0.1076
  */
 
-$cakeDescription = __d('app_dev', ':: SmartSchool ::');
+$cakeDescription = __d('app_dev', ':: '.APP_NAME.' :');
 
 ?>
 <!DOCTYPE html>

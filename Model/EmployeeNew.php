@@ -44,13 +44,13 @@ class EmployeeNew extends AppModel {
                 $this->saveField('employee_no', $no);
                 //Send SMS
 //                $mobile_no = $this->data[$this->alias]['mobile_number1'];
-//                $msg = 'Username = '.$no.' and Password = Password1';
-//                //$this->SendSMS($mobile_no, 'SmartSchool', $msg);
+                $msg = 'Welcome To '.APP_NAME.' Application here is your Username = '.$no.' and Password = Password1 to access the portal login via '.DOMAIN_URL;
+//                //$this->SendSMS($mobile_no, $msg);
 //                //Send Mail
                 $email = $this->data[$this->alias]['email'];
                 $name = $this->data[$this->alias]['first_name'] . ' ' . $this->data[$this->alias]['other_name'];
-                $msg_body = 'Find Below your username and password to access the school app<br><br>';
-                $msg_body .= 'Username: '.$no.' <br>Password: Password1';
+                $msg_body = 'Find Below your username and password to access the school application portal<br><br>';
+                $msg_body .= $msg_body .= $msg;;
                 if(!empty($email)){                                 
                     $this->sendMail($msg_body, 'Authentication', $email, $name);
                 } 
