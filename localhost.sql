@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 12, 2015 at 10:56 AM
+-- Generation Time: Mar 12, 2015 at 11:31 AM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -3342,7 +3342,7 @@ CREATE TABLE IF NOT EXISTS `sponsors` (
   `sponsorship_type_id` int(11) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=37 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=34 ;
 
 --
 -- Dumping data for table `sponsors`
@@ -3380,10 +3380,7 @@ INSERT INTO `sponsors` (`sponsor_id`, `sponsor_no`, `first_name`, `other_name`, 
 (29, 'spn0029', 'Ibrahim ', 'Bala', 6, 'Trader', NULL, '', '', NULL, 'Line Zumo', 277, 33, 140, '08030734377', '', 2, NULL, '2014-10-26 12:53:05', '2014-12-22 11:42:39'),
 (30, 'spn0030', 'Ebube', 'Chidi', 7, 'Business', NULL, '', 'vivian@gmail.com', NULL, 'Samaru', 288, 12, 140, '08024262994', '', 2, NULL, '2014-10-26 12:59:27', '2014-10-26 11:59:27'),
 (32, 'spn0032', 'Peter', 'Malgwi', 8, 'Lecturer', NULL, 'Kebbi State University', 'peter@gmail.com', NULL, 'Katsina Ala', 142, 7, 140, '08135201037', '', 2, NULL, '2014-10-26 01:11:21', '2014-10-26 12:11:21'),
-(33, 'spn0033', 'Obinna', 'Ekwueme', 8, NULL, NULL, NULL, 'kingsley4united@yahoo.com', NULL, NULL, NULL, NULL, NULL, '08030734377', NULL, 2, NULL, '2015-03-10 03:07:43', '2015-03-10 14:07:44'),
-(34, '', NULL, NULL, 7, ' Software Developer', 'Softsmart Business Solution', '25 Durban Street, Off Ademola Adetokumbo Creasent, Wuse II, Abuja', 'kheengz@gmail.com', NULL, 'CBN Quarters Wuse II FCT Abuja, Nigeria', 19, 2, 140, '08030734377', '08022020075', NULL, NULL, NULL, '2015-03-11 18:12:23'),
-(35, '', NULL, NULL, 7, ' Software Developer', 'Softsmart Business Solution', '25 Durban Street, Off Ademola Adetokumbo Creasent, Wuse II, Abuja', 'kheengz@gmail.com', NULL, 'CBN Quarters Wuse II FCT Abuja, Nigeria', 19, 2, 140, '08030734377', '08022020075', NULL, NULL, NULL, '2015-03-11 18:12:32'),
-(36, '', NULL, NULL, 7, ' Software Developer', 'Softsmart Business Solution', '25 Durban Street, Off Ademola Adetokumbo Creasent, Wuse II, Abuja', 'kheengz@gmail.com', NULL, 'CBN Quarters Wuse II FCT Abuja, Nigeria', 92, 5, 140, '08030734377', '08022020075', NULL, NULL, NULL, '2015-03-11 18:12:49');
+(33, 'spn0033', 'Obinna', 'Ekwueme', 8, NULL, NULL, NULL, 'kingsley4united@yahoo.com', NULL, NULL, NULL, NULL, NULL, '08030734377', NULL, 2, NULL, '2015-03-10 03:07:43', '2015-03-10 14:07:44');
 
 -- --------------------------------------------------------
 
@@ -4752,7 +4749,7 @@ MODIFY `skill_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=18;
 -- AUTO_INCREMENT for table `sponsors`
 --
 ALTER TABLE `sponsors`
-MODIFY `sponsor_id` int(3) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=37;
+MODIFY `sponsor_id` int(3) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=34;
 --
 -- AUTO_INCREMENT for table `sponsorship_types`
 --

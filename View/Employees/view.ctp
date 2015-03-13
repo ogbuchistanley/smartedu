@@ -2,7 +2,7 @@
 <div class="col-md-12">
     <div class="panel">
         <!-- Info Boxes -->
-        <div class="row">
+        <!--div class="row">
             <div class="col-md-12">
                 <div class="info-box  bg-info  text-white">
                     <div class="info-icon bg-info-dark">
@@ -10,7 +10,7 @@
                     </div>
                     <div class="info-details">
                         <h4>Employee Complete Information   
-                            <span class="badge pull-right bg-white text-info"><?php echo $employee['Employee']['first_name'], ' ', $employee['Employee']['other_name'];?>
+                            <span class="badge pull-right bg-white text-info"><?php //echo $employee['Employee']['first_name'], ' ', $employee['Employee']['other_name'];?>
                             <i class="fa fa-user fa-1x"></i> 
                             </span> 
                         </h4>

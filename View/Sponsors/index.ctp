@@ -28,7 +28,7 @@
         <div class="panel-heading text-primary">
             <h3 class="panel-title">
                 <i class="fa fa-list"></i>
-               Manage Sponsors Information<label class="label label-primary">Mange List of Sponsors by Editing, Viewing or Deleting</label>
+               Manage Sponsors Information <label class="label label-primary">Mange List of Sponsors by Editing, Viewing or Deleting</label>
                 <span class="pull-right">
                     <a href="javascript:void(0)"  title="Refresh"><i class="fa fa-refresh"></i></a>
                     <a href="#" class="panel-minimize"><i class="fa fa-chevron-up"></i></a>

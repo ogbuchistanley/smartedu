@@ -45,6 +45,8 @@ $('document').ready(function(){
     getDependentListBox($("#subject_group_id"), $("#subject_id"), url11);
     var url12 = "\/subjects\/ajax_get_subjects\/ModifySubjectClasslevel\/%23subject_group_modify_id";
     getDependentListBox($("#subject_group_modify_id"), $("#subject_modify_id"), url12);
+    var url_sub = "\/subjects\/ajax_get_subjects\/SubjectStudentView\/%23subject_view_group_id";
+    getDependentListBox($("#subject_view_group_id"), $("#subject_view_id"), url_sub);
 
     // OnChange of Academic Year Get Academic Term
     var url = "\/academic_terms\/ajax_get_terms\/SubjectClasslevel\/%23academic_year_id";
@@ -55,6 +57,8 @@ $('document').ready(function(){
     getDependentListBox($("#academic_year_search_id"), $("#academic_term_search_id"), url21);
     var url22 = "\/academic_terms\/ajax_get_terms\/ModifySubjectClasslevel\/%23academic_year_modify_id";
     getDependentListBox($("#academic_year_modify_id"), $("#academic_term_modify_id"), url22);
+    var url_acad = "\/academic_terms\/ajax_get_terms\/SubjectStudentView\/%23academic_view_year_id";
+    getDependentListBox($("#academic_view_year_id"), $("#academic_view_term_id"), url_acad);
     
     // OnChange Of Classlevel Get Class Room
     var url3 = "\/classrooms\/ajax_get_classes\/SubjectClasslevel\/%23classlevel_id";
@@ -63,6 +67,8 @@ $('document').ready(function(){
     getDependentListBox($("#classlevel_id_all"), $("#class_id_all"), url31);
     var url32 = "\/classrooms\/ajax_get_classes\/ModifySubjectClasslevel\/%23classlevel_modify_id";
     getDependentListBox($("#classlevel_modify_id"), $("#class_modify_id"), url32);
+    var url_cla = "\/classrooms\/ajax_get_classes\/SubjectStudentView\/%23classlevel_view_id";
+    getDependentListBox($("#classlevel_view_id"), $("#class_view_id"), url_cla);
     //////////////////////////////////////////////////////////////////////////////////////////////////////
     
     
@@ -357,8 +363,77 @@ $('document').ready(function(){
                 $('#manage_students_modal').modal('hide');
             }
         });
-    });	
-    
+    });
+
+
+    /////////////////////////////////////////////////////////////////////////// Subject View Analysis //////////////////////////////////////////
+    //When the Search button is clicked for viewing students subject scores in a classroom
+    $(document.body).on('submit', '#search_subject_view_form', function(){
+        ajax_loading_image($('#msg_box'), ' Loading Contents');
+        $.ajax({
+            type: "POST",
+            url: domain_name+'/subjects/search_subject',
+            data: $(this).serialize(),
+            success: function(data){
+                try{
+                    var obj = $.parseJSON(data);
+                    var term = $('#academic_view_term_id').children('option:selected').text();
+                    var subject_name = $('#subject_view_id').children('option:selected').text();
+                    var class_name = $('#class_view_id').children('option:selected').text();
+                    var output = '<caption><strong>'+term+' Results Output For '+class_name+ ' ('+subject_name+')</strong></caption>\
+                                    <thead><tr>\
+                                        <th>#</th>\
+                                        <th>Full Name</th>\
+                                        <th>1st C.A ('+obj.WA1+')</th>\
+                                        <th>2nd C.A ('+obj.WA2+')</th>\
+                                        <th>Exam ('+obj.WAExam+')</th>\
+                                        <th>Total ('+obj.WATotal+')</th>\
+                                        <th>Total (100%)</th>\
+                                        <th>Details</th>\
+                                    </tr></thead>';
+                    if(obj.Flag === 1){
+                        output += '<tbody>';
+                        $.each(obj.StudentScores, function(key, value) {
+                            output += '<tr>\
+                                <td>'+(key + 1)+'</td>\n\
+                                <td>'+value.student_fullname+'</td>\n\
+                                <td>'+value.ca1+'</td>\n\
+                                <td>'+value.ca2+'</td>\n\
+                                <td>'+value.exam+'</td>\n\
+                                <td>'+value.sum_total+'</td>\n\
+                                <td>'+ ((value.sum_total * 100) / obj.WATotal).toFixed(2)+'</td>\n\
+                                <td>\
+                                    <a target="__blank" href="'+domain_name+'/subjects/view/'+value.std_sub_cla_term_id+'/'+(key+1)+'" class="btn btn-primary btn-xs">\n\
+                                    <i class="fa fa-eye-slash"></i> View </a>\
+                                </td>\n\
+                            </tr>';
+                        });
+                        output += '</tbody>';
+                        $('#subjects_view_table').html(output);
+                    }else if(obj.Flag === 0){
+                        output += '<tr><th colspan="8">No Record Found</th></tr>';
+                        $('#subjects_view_table').html(output);
+                    }
+                } catch (exception) {
+                    $('#subjects_view_table').html(data);
+                }
+                ajax_remove_loading_image($('#msg_box'));
+                //Scroll To Div
+                scroll2Div($('#subjects_view_table'));
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                $('#subjects_view_table').html(errorThrown);
+                ajax_remove_loading_image($('#msg_box'));
+            }
+        });
+        return false;
+    });
+
+
+
+
+
+
     //Functions Triggers
     //Moves Each Selected Option From Left 2 Right
     $(document.body).on('dblclick', '#AvailableLB', function(){

@@ -293,5 +293,98 @@ class SubjectsController extends AppController {
             }
         }
     }
-}
 
+
+    /////////////////////////////////////////////////////////////////////////// Subject View Analysis //////////////////////////////////////////
+    //// View Student Subject
+    public function index() {
+        $result = $this->Acl->check($this->group_alias, 'SubjectsController');
+        if($result){
+            $this->loadModels('SubjectGroup');
+            $this->loadModels('Classlevel');
+            $this->loadModels('AcademicYear', 'academic_year', 'DESC');
+        }else{
+            $this->accessDenialError();
+        }
+    }
+
+
+    //Search for students that offered a subject in a class for an academic term
+    public function search_subject() {
+        $this->autoRender = false;
+        $resultCheck = $this->Acl->check($this->group_alias, 'SubjectsController');
+        if($resultCheck){
+            if ($this->request->is('ajax')) {
+                $term_id = $this->request->data['SubjectStudentView']['academic_view_term_id'];
+                $subject_id = $this->request->data['SubjectStudentView']['subject_view_id'];
+                $class_id = $this->request->data['SubjectStudentView']['class_view_id'];
+
+                $results = $this->Subject->findStudentsSubject($term_id, $subject_id, $class_id);
+                $response = array();
+                $wa1 = $wa2 = $waexam = $waTotal =0;
+                if($results) {
+                    //All the students offering the subjects in a classroom or classlevel
+                    foreach ($results as $result){
+                        $wa1 = $result['a']['weightageCA1'];
+                        $wa2 = $result['a']['weightageCA2'];
+                        $waexam = $result['a']['weightageExam'];
+                        $waTotal = $wa1 + $wa2 + $waexam;
+                        $res[] = array(
+                            "std_sub_cla_term_id"=>$this->encryption->encode($result['a']['student_id'].'/'.$result['a']['subject_id'].'/'.$class_id.'/'.$term_id),
+                            "student_fullname"=>$result['a']['student_fullname'],
+                            "ca1"=>$result['a']['ca1'],
+                            "ca2"=>$result['a']['ca2'],
+                            "exam"=>$result['a']['exam'],
+                            "sum_total"=>number_format($result[0]['sum_total'], 2)
+                        );
+                    }
+                    $response['StudentScores'] = $res;
+                    $response['Flag'] = 1;
+                } else {
+                    $response['StudentScores'] = null;
+                    $response['Flag'] = 0;
+                }
+                $response['WA1'] = $wa1;
+                $response['WA2'] = $wa2;
+                $response['WAExam'] = $waexam;
+                $response['WATotal'] = $waTotal;
+                echo json_encode($response);
+            }
+        }else{
+            $this->accessDenialError('You Are Not Authorize To Perform Such Task', 2);
+        }
+    }
+
+    //Controller for displaying summary of students subject in a class
+    public function view($encrypt_id, $position=0) {
+        $this->set('title_for_layout','Subject Analysis Summary');
+        $resultCheck = $this->Acl->check($this->group_alias, 'SubjectsController');
+        if($resultCheck){
+            //Decrypt the id sent
+            $decrypt_id = $this->encryption->decode($encrypt_id);
+            $student_id = explode('/', $decrypt_id)[0];
+            $subject_id = explode('/', $decrypt_id)[1];
+            $class_id = explode('/', $decrypt_id)[2];
+            $term_id = explode('/', $decrypt_id)[3];
+
+            $results = $this->Subject->findStudentsSubjectSummary($student_id, $subject_id, $class_id, $term_id);
+            $response = array();
+            $response2 = array();
+            if(!empty($results[0])) {
+                $response = array_shift($results[0]);
+            } else {
+                $response['StudentScore'] = null;
+            }
+            if(!empty($results[1])) {
+                $response2 = array_shift($results[1]);
+                $response2['Position'] = $position;
+            } else {
+                $response2['AnalysisScore'] = null;
+            }
+            $this->set('StudentScore', $response);
+            $this->set('AnalysisScore', $response2);
+        }else{
+            $this->accessDenialError('You Are Not Authorize To Perform Such Task', 2);
+        }
+    }
+}

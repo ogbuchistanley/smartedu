@@ -5,7 +5,7 @@
         <div class="panel">
             <div class="panel-heading text-primary">
                 <h3 class="panel-title">
-                    <i class="fa fa-folder-open"></i> Exam Scores (Terminal and Annual)
+                  <label class="label label-primary"> <i class="fa fa-folder-open"></i> Exam Scores (Terminal and Annual)</label>
                 <span class="pull-right">
                     <a href="javascript:void(0)"  title="Refresh"><i class="fa fa-refresh"></i></a>
                     <a href="#" class="panel-minimize"><i class="fa fa-chevron-up"></i></a>

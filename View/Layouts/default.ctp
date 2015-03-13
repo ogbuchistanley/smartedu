@@ -221,6 +221,7 @@ $cakeDescription = __d('app_dev', ':: '.APP_NAME.' :');
                                         <li><a href="<?php echo DOMAIN_NAME ?>/subjects/add2class#assign2class" data-original-title="404"><i class="fa fa-plus-square"></i><span> Assign To Classes</span></a></li>
                                         <li><a href="<?php echo DOMAIN_NAME ?>/subjects/add2class#assign2teachers" data-original-title="404"><i class="fa fa-plus-circle"></i><span>  Assign Tutor</span></a></li>
                                         <li><a href="<?php echo DOMAIN_NAME ?>/subjects/add2class#adjust_subjects_assign" data-original-title="404"><i class="fa fa-edit"></i><span> Modify/Manage Students</span></a></li>
+                                        <li><a href="<?php echo DOMAIN_NAME ?>/subjects/index" data-original-title="404"><i class="fa fa-eye-slash"></i><span> View Scores</span></a></li>
                                     </ul>
                                 </li>
                                 <?php endif;?>
@@ -254,7 +255,7 @@ $cakeDescription = __d('app_dev', ':: '.APP_NAME.' :');
                                         <?php //if($exam_setup_exam): ?>
                                         <li><a href="<?php echo DOMAIN_NAME ?>/exams/index#setupExam" data-original-title="Setup / Adjust Exams"><i class="fa fa-gear"></i><span> Setup / Adjust Exams</span></a></li>
                                         <?php //endif;?>
-                                        <li><a href="<?php echo DOMAIN_NAME ?>/exams/index#subjectScores" data-original-title="Input Subject Scores"><i class="fa fa-th"></i><span> Input / View Subject Scores</span></a></li>
+                                        <li><a href="<?php echo DOMAIN_NAME ?>/exams/index#subjectScores" data-original-title="Input / Edit Scores"><i class="fa fa-th"></i><span> Input / Edit Scores</span></a></li>
                                         <li><a href="<?php echo DOMAIN_NAME ?>/exams/index#viewTAScores" data-original-title="Adjust Exams"><i class="fa fa-eye"></i><span> Terminal / Annual Scores</span></a></li>
                                         <li><a href="<?php echo DOMAIN_NAME ?>/assessments" data-original-title="Skills Assessment"><i class="fa fa-magic"></i><span> Skills Assessment</span></a></li>
                                     </ul>
@@ -314,7 +315,7 @@ $cakeDescription = __d('app_dev', ':: '.APP_NAME.' :');
                                     </ul>
                                 </li>
                                 <?php endif;?>
-                                <?php if($user_index): ?>
+                                <?php if($user_index === 'hide'): ?>
                                     <li><a href="<?php echo DOMAIN_NAME ?>/users/index" data-original-title="Users"><i class="fa fa-user"></i><span> Manage Users</span></a></li>
                                     <!--li><a href="<?php echo DOMAIN_NAME ?>/users/register" data-original-title="Users"><i class="fa fa-exclamation-circle"></i><span> Register New</span></a></li-->
                                 <?php endif;?>

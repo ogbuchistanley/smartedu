@@ -29,7 +29,6 @@ class EmployeeNew extends AppModel {
         $no = trim(strtolower('emp'. str_pad($id, 4, '0', STR_PAD_LEFT)));
         $val = 'employees/'.$id.'.jpg';
         if($created){
-            //$this->saveField('employee_no', $no);
 //            $this->query('UPDATE employees SET employee_no=CONCAT("emp", REPEAT("0", 4-LENGTH("'.$id.'")), '
 //                . 'CAST("'.$id.'" AS CHAR(10))) WHERE employee_id="'.$id.'"');
             $User->create();

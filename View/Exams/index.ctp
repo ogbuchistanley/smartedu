@@ -39,7 +39,7 @@
                         </li>
                         <?php //endif; ?>
                         <li>
-                            <a href="<?php echo DOMAIN_NAME ?>/exams/index#subjectScores" data-toggle="tab"><b><i class="fa fa-th"></i> Input / <i class="fa fa-eye"></i> View  Subject Scores</b></a>
+                            <a href="<?php echo DOMAIN_NAME ?>/exams/index#subjectScores" data-toggle="tab"><b><i class="fa fa-th"></i> Input / <i class="fa fa-edit"></i> Edit Scores</b></a>
                         </li>
                         <li>
                             <a href="<?php echo DOMAIN_NAME ?>/exams/index#viewTAScores" data-toggle="tab"><b><i class="fa fa-eye"></i> Terminal / Annual Scores </b></a>

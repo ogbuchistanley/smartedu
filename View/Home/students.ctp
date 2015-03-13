@@ -24,7 +24,7 @@ $Encryption = new Encryption();
         <!-- / Info Boxes -->
         <div class="panel-heading text-primary">
             <h3 class="panel-title">
-                <i class="fa fa-list"></i> Manage Students Information
+                <i class="fa fa-list"></i> Students Information <label class="label label-primary">View List of Your Students</label>
                 <span class="pull-right">
                     <a href="javascript:void(0)"  title="Refresh"><i class="fa fa-refresh"></i></a>
                     <a href="#" class="panel-minimize"><i class="fa fa-chevron-up"></i></a>

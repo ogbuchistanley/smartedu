@@ -49,24 +49,6 @@ class HomeController extends AppController
         }
     }
 
-//    public function record($encrypt_id = null)
-//    {
-//        $this->set('title_for_layout', 'Student Record');
-//        $student = ClassRegistry::init('Student');
-//        $result = $this->Acl->check($this->group_alias, 'HomeController');
-//        if ($result) {
-//            $decrypt_student_id = $this->encryption->decode($encrypt_id);
-//            if (!$student->exists($decrypt_student_id)) {
-//                $this->accessDenialError('Invalid Student Record Requested for Viewing', 2);
-//            }
-//            $options = array('conditions' => array('Student.' . $student->primaryKey => $decrypt_student_id));
-//            $this->set('student', $student->find('first', $options));
-//
-//        } else {
-//            $this->accessDenialError();
-//        }
-//    }
-//
     public function exam()
     {
         $this->set('title_for_layout', 'Student Record');

@@ -38,4 +38,19 @@ class UtilityHelper extends AppHelper {
         $date = DateTime::createFromFormat('Y-m-d', $dateString);
         return ($dateString !== null) ? $date->format('D, jS M, Y') : date('D, jS M, Y');
     }
+
+    //Format Class Position
+    public function formatPosition($position=0){
+        $lastDigit = substr($position, -1, 1);
+        if($lastDigit == 1) {
+            $fomatedPosition = $position . 'st';
+        }elseif($lastDigit == 2) {
+            $fomatedPosition = $position . 'nd';
+        }elseif($lastDigit == 3) {
+            $fomatedPosition = $position . 'rd';
+        }else{
+            $fomatedPosition = $position . 'th';
+        }
+        return $fomatedPosition;
+    }
 }

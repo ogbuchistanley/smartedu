@@ -45,7 +45,7 @@ class AppController extends Controller {
     //$this->Auth->actionPath = 'controllers/';
     public $components = array(
         'Acl',
-        'DebugKit.Toolbar',
+        //'DebugKit.Toolbar',
         'Session',
         'Auth' => array(
             'authenticate' => array(

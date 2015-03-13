@@ -3,7 +3,7 @@
 <div class="col-md-12">
     <div class="panel">
         <!-- Info Boxes -->
-        <div class="row">
+        <!--div class="row">
             <div class="col-md-12">
                 <div class="info-box  bg-info  text-white">
                     <div class="info-icon bg-info-dark">
@@ -19,7 +19,7 @@
         <div class="panel-heading text-primary">
             <h3 class="panel-title">                
                <i class="fa fa-align-center"></i>
-               Management of Subjects in a Class Room 
+               Management of Subjects in a Class Room <label class="label label-primary">Manage and View Subjects Assigned to a Class Room</label>
                 <span class="pull-right">
                     <a href="javascript:void(0)"  title="Refresh"><i class="fa fa-refresh"></i></a>
                     <a href="#" class="panel-minimize"><i class="fa fa-chevron-up"></i></a>
@@ -62,7 +62,7 @@
                                                     );     
                                                 ?>
                                                     <div class="form-group">
-                                                        <label for="classlevel_id" class="col-sm-4 control-label">Subject Groups</label>
+                                                        <label for="subject_group_id" class="col-sm-4 control-label">Subject Groups</label>
                                                         <div class="col-sm-8">
                                                             <?php 
                                                                 echo $this->Form->input('subject_group_id', array(

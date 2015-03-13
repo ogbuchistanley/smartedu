@@ -35,22 +35,20 @@ class SponsorsController extends AppController {
         $result = $this->Acl->check($this->group_alias, 'SponsorsController/register', 'create');
         if($result){
             $this->loadModels('Salutation', 'salutation_name');
-            $this->loadModels('Country');
-            $this->loadModels('State', 'state_name');
-            $this->loadModels('SponsorshipType', 'sponsorship_type');
+            $SponsorNew = ClassRegistry::init('SponsorNew');
 
             if ($this->request->is('post')) {
-                $data = $this->request->data['Sponsor'];
-                $results = $this->Sponsor->query('SELECT * FROM sponsors WHERE mobile_number1="'.trim($data['mobile_number1']).'" LIMIT 1');
+                $data = $this->request->data['SponsorNew'];
+                $results = $SponsorNew->query('SELECT * FROM sponsors WHERE mobile_number1="'.trim($data['mobile_number1']).'" LIMIT 1');
                 $results = ($results) ? array_shift($results) : false;
                 if($results && strtolower($results['sponsors']['first_name']) === strtolower(trim($data['first_name']))){
                     $this->setFlashMessage(' The Sponsor '.$data['first_name'].' With Mobile Number '.$data['mobile_number1'].' Already Exist.', 2); 
                     return $this->redirect(array('action' => 'register'));
                 }else{
-                    $this->Sponsor->create();
-                    if ($this->Sponsor->save($this->request->data)){
+                    $SponsorNew->create();
+                    if ($SponsorNew->save($data)){
                         $this->setFlashMessage('The Sponsor '.$data['first_name'].' '.$data['other_name'].' has been saved.', 1);
-                        return $this->redirect(array('action' => 'register'));
+                        return $this->redirect(array('controller' => 'sponsors', 'action' => 'register'));
                     }else {
                         $this->setFlashMessage('The Sponsor could not be saved. Please, Kindly Fill the Form Properly.', 2);
                     }
