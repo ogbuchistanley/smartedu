@@ -172,7 +172,7 @@ class AppController extends Controller {
         Configure::write('user_index', $this->Acl->check($auth, 'UsersController'));
         
         //Disable The Links For Sponsors During Error Displays
-        Configure::write('disable_links', !$this->Acl->check($auth, 'HomeController'));
+        Configure::write('user_role', $this->Auth->user('user_role_id'));
     }
     
     function loadModels($model, $field=null, $order='ASC') {

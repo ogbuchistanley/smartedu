@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 12, 2015 at 11:31 AM
+-- Generation Time: Mar 16, 2015 at 12:56 PM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -1700,7 +1700,7 @@ CREATE TABLE IF NOT EXISTS `employees` (
   `created_by` int(11) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
 
 --
 -- Dumping data for table `employees`
@@ -1723,7 +1723,8 @@ INSERT INTO `employees` (`employee_id`, `employee_no`, `salutation_id`, `first_n
 (15, 'emp0015', 6, 'Jude', 'Eze Ebunafor', 'male', '1955-02-25', 'employees/15.jpg', 'K/M 24, Lagos-Badagry Express Way, Lagos', NULL, '08058472593', '09474853738', 'Married', 140, 1, 3, 'judeemma@yahoo.com', 'Mrs. Judith Eze Ebunafor', '08049504784', 'Wife', 'National I.D Card', '048595639478', '2016-05-03', 1, 2, '2014-10-27 07:10:06', '2014-10-27 18:10:07'),
 (16, 'emp0016', 7, 'Mary', 'Jane', 'female', '1983-08-16', 'employees/16.jpg', 'First Bank Quaters Lagos', NULL, '08058472593', '09474853738', 'Married', 140, 37, 212, 'okon@ymail.com', 'Moses Mark', '98764786549867', 'Brother', 'Drivers Licence', '34567897435', '2015-07-27', 1, 2, '2014-10-27 07:23:56', '2014-10-27 18:23:56'),
 (19, 'emp0019', 11, 'Sulieman', 'Bala Audu', 'male', '1970-01-01', NULL, '345 dogon Bauchi Road S/G Zaria', NULL, '07034825391', '', 'Married', 140, 13, 315, 'kheengz@gmail.com', 'Mr. & Mrs Ibrahim Juniadu', '08136583745', 'Parent', '', '', '1970-01-01', 1, 2, '2014-10-27 07:40:14', '2014-10-27 19:58:36'),
-(20, 'emp0020', 5, 'Attama', 'Benjamin', 'Male', '2014-10-29', 'employees/20.jpg', 'Sokoto Road, Zaria', NULL, '08030734377', '07033456863', 'Single', 140, 15, 363, 'kingsley4united@yahoo.com', 'Mr. Mrs Atama', '08134857694', 'Parent', '', '', NULL, 2, 2, '2014-10-29 02:51:01', '2014-10-29 15:31:55');
+(20, 'emp0020', 5, 'Attama', 'Benjamin', 'Male', '2014-10-29', 'employees/20.jpg', 'Sokoto Road, Zaria', NULL, '08030734377', '07033456863', 'Single', 140, 15, 363, 'kingsley4united@yahoo.com', 'Mr. Mrs Atama', '08134857694', 'Parent', '', '', NULL, 2, 2, '2014-10-29 02:51:01', '2014-10-29 15:31:55'),
+(21, 'emp0021', 8, 'Nonso', 'Okafor', NULL, NULL, NULL, NULL, NULL, '0938366283', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, 2, '2015-03-12 04:17:34', '2015-03-12 15:17:35');
 
 -- --------------------------------------------------------
 
@@ -3342,7 +3343,7 @@ CREATE TABLE IF NOT EXISTS `sponsors` (
   `sponsorship_type_id` int(11) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=34 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=35 ;
 
 --
 -- Dumping data for table `sponsors`
@@ -3380,7 +3381,8 @@ INSERT INTO `sponsors` (`sponsor_id`, `sponsor_no`, `first_name`, `other_name`, 
 (29, 'spn0029', 'Ibrahim ', 'Bala', 6, 'Trader', NULL, '', '', NULL, 'Line Zumo', 277, 33, 140, '08030734377', '', 2, NULL, '2014-10-26 12:53:05', '2014-12-22 11:42:39'),
 (30, 'spn0030', 'Ebube', 'Chidi', 7, 'Business', NULL, '', 'vivian@gmail.com', NULL, 'Samaru', 288, 12, 140, '08024262994', '', 2, NULL, '2014-10-26 12:59:27', '2014-10-26 11:59:27'),
 (32, 'spn0032', 'Peter', 'Malgwi', 8, 'Lecturer', NULL, 'Kebbi State University', 'peter@gmail.com', NULL, 'Katsina Ala', 142, 7, 140, '08135201037', '', 2, NULL, '2014-10-26 01:11:21', '2014-10-26 12:11:21'),
-(33, 'spn0033', 'Obinna', 'Ekwueme', 8, NULL, NULL, NULL, 'kingsley4united@yahoo.com', NULL, NULL, NULL, NULL, NULL, '08030734377', NULL, 2, NULL, '2015-03-10 03:07:43', '2015-03-10 14:07:44');
+(33, 'spn0033', 'Obinna', 'Ekwueme', 8, NULL, NULL, NULL, 'kingsley4united@yahoo.com', NULL, NULL, NULL, NULL, NULL, '08030734377', NULL, 2, NULL, '2015-03-10 03:07:43', '2015-03-10 14:07:44'),
+(34, 'spn0034', 'Okafor', 'Emmanuel Nonso', 6, NULL, NULL, NULL, 'nondefyde@gmail.com', NULL, NULL, NULL, NULL, NULL, '08061539278', NULL, 2, NULL, '2015-03-12 04:23:49', '2015-03-12 15:23:49');
 
 -- --------------------------------------------------------
 
@@ -4166,7 +4168,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `created_by` int(11) NOT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `users`
@@ -4177,7 +4179,9 @@ INSERT INTO `users` (`user_id`, `username`, `password`, `display_name`, `type_id
 (2, 'spn0001', '$2a$10$uLb3awX5tZDRLz4PU/WGLuCCWi5duSkO8BijIpdBVy83GHbiXSUmq', 'KAYOH, CHINA', 1, 'sponsors/1.jpg', 1, 'spn_users', 1, 2, '2014-07-17 11:14:00', '2015-03-11 18:48:14'),
 (3, 'emp0006', '$2a$10$QG2RqGT8ZAMHXaPdEunG4OUcH4Sez52PbRO.DY1jmVvZCj4wrBLcW', 'KINGSLEY, CHINAKA', 6, 'employees/6.JPG', 3, 'emp_users', 1, 2, '2014-10-14 01:43:13', '2014-10-15 08:07:53'),
 (4, 'emp0004', '$2a$10$oncEz7DKJm4EqJUQYn/GmuTpz0JLLaMg.KgqBuKUyM2/vpGkpYXT2', 'BOLA, YUSRAH INUA', 4, 'employees/4.jpg', 4, 'ict_users', 1, 4, '2014-06-24 04:01:20', '2015-03-04 11:22:12'),
-(5, 'spn0033', '$2a$10$2mmZphckyEYGq6DR78B.XOn/f7dxv09BnjM8D/URqw9FpFcPtit8i', 'OBINNA EKWUEME', 33, 'sponsors/33.jpg', 1, 'spn_users', 1, 2, '2015-03-10 03:07:44', '2015-03-11 12:36:10');
+(5, 'spn0033', '$2a$10$2mmZphckyEYGq6DR78B.XOn/f7dxv09BnjM8D/URqw9FpFcPtit8i', 'OBINNA EKWUEME', 33, 'sponsors/33.jpg', 1, 'spn_users', 1, 2, '2015-03-10 03:07:44', '2015-03-11 12:36:10'),
+(6, 'emp0021', '$2a$10$FJWcHNDR.ABY4/7jQu3XSePl6/.7DJRXmnuYI.9B9FYGkJaQ9srqK', 'NONSO Okafor', 21, 'employees/21.jpg', 3, 'emp_users', 1, 2, '2015-03-12 04:17:34', '2015-03-12 15:17:35'),
+(7, 'spn0034', '$2a$10$MEbGvwX4b.5naswjy4qwA.vb41d8eLA3N83LVwueRIu0tvx3GUHb6', 'OKAFOR EMMANUEL NONSO', 34, 'sponsors/34.jpg', 1, 'spn_users', 1, 2, '2015-03-12 04:23:49', '2015-03-12 15:23:49');
 
 -- --------------------------------------------------------
 
@@ -4649,7 +4653,7 @@ MODIFY `employee_type_id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMEN
 -- AUTO_INCREMENT for table `employees`
 --
 ALTER TABLE `employees`
-MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
+MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=22;
 --
 -- AUTO_INCREMENT for table `exam_details`
 --
@@ -4749,7 +4753,7 @@ MODIFY `skill_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=18;
 -- AUTO_INCREMENT for table `sponsors`
 --
 ALTER TABLE `sponsors`
-MODIFY `sponsor_id` int(3) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=34;
+MODIFY `sponsor_id` int(3) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=35;
 --
 -- AUTO_INCREMENT for table `sponsorship_types`
 --
@@ -4819,7 +4823,7 @@ MODIFY `user_role_id` int(3) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-MODIFY `user_id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+MODIFY `user_id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 --
 -- Constraints for dumped tables
 --

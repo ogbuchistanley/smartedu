@@ -36,8 +36,8 @@ $cakeDescription = __d('app_dev', ':: '.APP_NAME.' :');
     $attend_index = Configure::read('attend_index');
     $user_index = Configure::read('user_index');
     
-    //Disable The Links For Sponsors During Error Displays
-    $disable_links = Configure::read('disable_links');
+    //Disable The Links For Sponsors if user role > 2
+    $user_role = Configure::read('user_role');
 
     //Master Record Setup status
     $master_record_id = Configure::read('master_record_id');
@@ -169,7 +169,8 @@ $cakeDescription = __d('app_dev', ':: '.APP_NAME.' :');
                         <li class="nav-toggle">
                             <button class="btn  btn-nav-toggle text-primary"><i class="fa fa-angle-double-left toggle-left"></i> </button>
                         </li>
-                        <?php if($disable_links): ?>
+                        <!--- Enable Links for Admin Users-->
+                        <?php if($user_role > 2): ?>
                             <?php if($master_record_id > ($master_record_count) - 1): ?>
                                 <!--li class="active"><a href="<?php echo DOMAIN_NAME ?>/dashboard/" data-original-title="Dashboard"><i class="fa fa-dashboard"></i><span class="hidden-minibar"> Dashboard</span></a></li-->
                                 <?php if($student_index || $student_register): ?>
@@ -235,7 +236,7 @@ $cakeDescription = __d('app_dev', ':: '.APP_NAME.' :');
                                         </ul>
                                     </li>
                                 <?php endif;?>
-                                <?php if($classroom_index || $classroom_myclass and $classroom_index ==='hide'): ?>
+                                <?php if($classroom_index || $classroom_myclass): ?>
                                 <li  class="submenu">
                                     <a class="dropdown" href="javascript:void(0)" data-original-title="Class Room"><i class="fa fa-building"></i><span class="hidden-minibar"> Class Room <span class="badge bg-primary pull-right" id="class_count"></span></span></a>
                                     <ul>
@@ -359,6 +360,7 @@ $cakeDescription = __d('app_dev', ':: '.APP_NAME.' :');
                                 <?php endif;?>
                             <?php endif;?>
                         <?php else:?>
+                            <!--- Enable Links for Sponsor Users-->
                             <?php
                                 $encrypted_sponsor_id = $Encryption->encode(AuthComponent::user('type_id'));
                             ?>
@@ -390,7 +392,7 @@ $cakeDescription = __d('app_dev', ':: '.APP_NAME.' :');
                 <div class="row">
                     <div class="col-mod-12">
                         <ul class="breadcrumb">
-                             <?php if($disable_links){ ?>
+                             <?php if($user_role > 2){ ?>
                                 <!--li class="active"><a href="<?php echo DOMAIN_NAME ?>/dashboard/"><i class="fa fa-dashboard"></i> Dashboard</a></li-->
                              <?php }else{ ?>
                                 <li class="active"><a href="<?php echo DOMAIN_NAME ?>/home/"><i class="fa fa-dashboard"></i> Home</a></li>
