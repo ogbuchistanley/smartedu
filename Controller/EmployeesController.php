@@ -44,15 +44,15 @@ class EmployeesController extends AppController {
                 $results = $EmployeeNew->query('SELECT * FROM employees WHERE mobile_number1="'.trim($data['mobile_number1']).'" LIMIT 1');
                 $results = ($results) ? array_shift($results) : false;
                 if($results && strtolower($results['employees']['first_name']) === strtolower(trim($data['first_name']))){
-                    $this->setFlashMessage(' The Employee '.$data['first_name'].' With Mobile Number '.$data['mobile_number1'].' Already Exist.', 2);
+                    $this->setFlashMessage(' The Staff '.$data['first_name'].' With Mobile Number '.$data['mobile_number1'].' Already Exist.', 2);
                     return $this->redirect(array('controller' => 'employees', 'action' => 'register'));
                 }else{
                     $EmployeeNew->create();
                     if ($EmployeeNew->save($data)) {
-                        $this->setFlashMessage('The Employee '.$data['first_name'].' '.$data['other_name'].' has been saved.', 1);
+                        $this->setFlashMessage('The Staff '.$data['first_name'].' '.$data['other_name'].' has been saved.', 1);
                         return $this->redirect(array('controller' => 'employees', 'action' => 'register'));
                     }else {
-                        $this->setFlashMessage('The Employee could not be saved. Please,  Kindly Fill the Form Properly.', 2);
+                        $this->setFlashMessage('The Staff could not be saved. Please,  Kindly Fill the Form Properly.', 2);
                     }
                 }
             }
@@ -133,7 +133,7 @@ class EmployeesController extends AppController {
             $decrypt_employee_id = $this->encryption->decode($encrypt_id);
 
             if (!$this->Employee->exists($decrypt_employee_id)) {
-                $this->accessDenialError('Invalid Employee Record Requested for Viewing', 2);
+                $this->accessDenialError('Invalid Staff Record Requested for Viewing', 2);
             }
             $options = array('conditions' => array('Employee.' . $this->Employee->primaryKey => $decrypt_employee_id));
             $this->set('employee', $this->Employee->find('first', $options));
@@ -158,7 +158,7 @@ class EmployeesController extends AppController {
             $decrypt_employee_id = $this->encryption->decode($encrypt_id);
 
             if (!$this->Employee->exists($decrypt_employee_id)) {
-                $this->accessDenialError('Invalid Employee Record Requested for Modification', 2);
+                $this->accessDenialError('Invalid Staff Record Requested for Modification', 2);
             }
             if ($this->request->is(array('post', 'put'))) {
                 $this->Employee->id = $decrypt_employee_id;
@@ -170,10 +170,10 @@ class EmployeesController extends AppController {
                     //Uploading The Image Provided
                     if(isset($data['image_url'])){
                         if($this->uploadImage($decrypt_employee_id, 'employees', $this->request->data['Employee'])) {
-                            $this->setFlashMessage('The Employee has been Updated.', 1);
+                            $this->setFlashMessage('The Staff has been Updated.', 1);
                         }
                     }else {
-                        $this->setFlashMessage('The Employee has been Updated... But New Image Was Not Uploaded', 1);
+                        $this->setFlashMessage('The Staff has been Updated... But New Image Was Not Uploaded', 1);
                     }
                     //Update The Spouse Record if Married
                     if(!empty($data['spouse_name'])) {
@@ -202,7 +202,7 @@ class EmployeesController extends AppController {
                     return $this->redirect(array('action' => 'adjust/'.$encrypt_id));
                     //return $this->redirect(array('controller' => 'dashboard', 'action' => 'index'));
                 } else {
-                    $this->setFlashMessage('The Employee could not be saved. Please, try again.', 2);
+                    $this->setFlashMessage('The Staff could not be saved. Please, try again.', 2);
                 }
             } else {
                 $options2 = array('conditions' => array('SpouseDetail.employee_id' => $decrypt_employee_id));
@@ -228,15 +228,15 @@ class EmployeesController extends AppController {
             $this->Employee->id = $decrypt_employee_id;
 
             if (!$this->Employee->exists()) {
-                $this->accessDenialError('Invalid Employee Record Requested for Deletion', 2);
+                $this->accessDenialError('Invalid Staff Record Requested for Deletion', 2);
             }
             $this->request->allowMethod('post', 'delete');
             if ($this->Employee->delete()) {
                 //Delete the equivalent users record
-                $user->query('DELETE FROM users WHERE username="'.$employee_record['Employee']['mployee_no'].'" LIMIT 1');
-                $this->setFlashMessage('The Employee ' . $employee_record['Employee']['mployee_no'] . ' and its Equivalent User Record has been deleted.', 1);
+                $user->query('DELETE FROM users WHERE username="'.$employee_record['Employee']['employee_no'].'" LIMIT 1');
+                $this->setFlashMessage('The Staff ' . $employee_record['Employee']['employee_no'] . ' and its Equivalent User Record has been deleted.', 1);
             } else {
-                $this->setFlashMessage('The Employee could not be deleted. Please, try again.', 2);
+                $this->setFlashMessage('The Staff could not be deleted. Please, try again.', 2);
             }
             return $this->redirect(array('action' => 'index'));
         }else{
@@ -250,7 +250,7 @@ class EmployeesController extends AppController {
         if ($this->request->is('ajax')) {
             $this->Employee->id = $this->request->data('employee_id');
             if (!$this->Employee->exists()) {
-                echo 'Invalid Employee Record Requested for Modification';
+                echo 'Invalid Staff Record Requested for Modification';
             }else{
                 echo ($this->Employee->saveField('status_id', $this->request->data('status_id'))) ? 1 : 0;
             }

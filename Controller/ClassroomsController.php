@@ -147,8 +147,9 @@ class ClassroomsController extends AppController {
             $StudentsClass = ClassRegistry::init('StudentsClass');
              //Decrypt the id sent
             $decrypt_id = $this->encryption->decode($encrypt_id);
-            $class_id = explode('/', $decrypt_id)[0];
-            $year = explode('/', $decrypt_id)[1];
+            $encrypt = explode('/', $decrypt_id);
+            $class_id = $encrypt[0];
+            $year = $encrypt[1];
             $results = $StudentsClass->findStudentsByClasslevelOrClass($year, null, $class_id);
             $response = array();   
             

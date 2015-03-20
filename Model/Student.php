@@ -36,18 +36,17 @@ class Student extends AppModel {
         $studClass = ClassRegistry::init('StudentsClass');
         $term_id = ClassRegistry::init('AcademicTerm');
         $id = $this->id;
-        //$no = 'emp'. str_pad($id, 4, '0', STR_PAD_LEFT);
+        $no = trim('STD'. str_pad($id, 4, '0', STR_PAD_LEFT));
 
         if(isset($this->data[$this->alias]['image_url'])){
             $image_url = $this->data[$this->alias]['image_url'];
             $ext = pathinfo($image_url, PATHINFO_EXTENSION);
-            $this->query('UPDATE students SET '
-                . 'image_url="students/'.$id.'.'.$ext.'", '
-                . 'student_no=CONCAT("stu", REPEAT("0", 4-LENGTH("'.$id.'")), CAST("'.$id.'" AS CHAR(10))) '
-                . 'WHERE student_id="'.$id.'"');
+            $this->query('UPDATE students SET image_url="students/'.$id.'.'.$ext.'", student_no="'.$no.'" WHERE student_id="'.$id.'"');
         }else{
-            $this->query('UPDATE students SET student_no=CONCAT("stu", REPEAT("0", 4-LENGTH("'.$id.'")), '
-            . 'CAST("'.$id.'" AS CHAR(10))) WHERE student_id="'.$id.'"');
+            //Update The Sponsor ID
+            $this->saveField('student_no', $no);
+            //$this->query('UPDATE students SET student_no=CONCAT("stu", REPEAT("0", 4-LENGTH("'.$id.'")), '
+            //. 'CAST("'.$id.'" AS CHAR(10))) WHERE student_id="'.$id.'"');
         }
         if($created){
             if($this->data[$this->alias]['class_id'] !== ''){

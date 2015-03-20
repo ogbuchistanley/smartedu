@@ -1,7 +1,7 @@
 <?php echo $this->Html->script("../app/js/jquery-ui.js", FALSE);?>
 <?php echo $this->Html->script("../app/jquery/custom.student.js", FALSE);?>
-<?php 
-    App::uses('Encryption', 'Utility'); 
+<?php
+    App::uses('Encryption', 'Utility');
     $Encryption = new Encryption();
 ?>
     <div class="row">
@@ -43,7 +43,7 @@
             <!-- / Info Boxes -->
             <div class="panel-heading text-primary">
                 <h3 class="panel-title">
-                    <i class="fa fa-pencil-square"></i> Adjust Students' Information <label class="label label-primary">Please fill the form properly and modify accurately...</label>
+                    <i class="fa fa-pencil-square"></i> Adjust Students' Information <small class="text-danger"> <i class="fa fa-warning"></i>Note All Fields With * Need To Be Filled</small>
                     <span class="pull-right">
                         <a href="javascript:void(0)"  title="Refresh"><i class="fa fa-refresh"></i></a>
                         <a href="#" class="panel-minimize"><i class="fa fa-chevron-up"></i></a>
@@ -101,20 +101,20 @@
                                    </a></li>
                                  </ul>
                                  <div id="step-1">	
-                                     <h2 class="StepTitle">Sponsor Details</h2>	
+                                     <h2 class="StepTitle">Staff Details <small class="text-danger"> <i class="fa fa-warning"></i>Note All Fields With * Need To Be Filled</small></h2>
                                     <div class="panel">
                                         <div class="panel-body">
                                             <div class="form-group">
-                                                <label for="sponsor_name" class="col-lg-2 col-md-3 control-label">Sponsor</label>
+                                                <label for="sponsor_name" class="col-lg-2 col-md-3 control-label">Staff <small class="text-danger"> * </small></label>
                                                 <div class="col-lg-7 col-md-9">
                                                     <input type="text" class="form-control form-cascade-control input-small" name="sponsor_name" 
-                                                    value="<?php echo strtoupper($student['Sponsor']['first_name']), ' ', ucwords($student['Sponsor']['other_name']);?>" id="sponsor_name" placeholder="Student's Sponsor" required="required">
+                                                    value="<?php echo strtoupper($student['Sponsor']['first_name']), ' ', ucwords($student['Sponsor']['other_name']);?>" id="sponsor_name" placeholder="Student's Staff" required="required">
                                                     <input type="hidden" class="form-control form-cascade-control input-small" name="data[Student][sponsor_id]" 
                                                     value="<?php echo $student['Student']['sponsor_id']?>" id="sponsor_id" required="required">
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                              <label for="relationtype_id" class="col-lg-2 col-md-3 control-label">Relationship Type</label>
+                                              <label for="relationtype_id" class="col-lg-2 col-md-3 control-label">Relationship Type <small class="text-danger"> * </small></label>
                                               <div class="col-lg-7 col-md-9">
                                                   <?php 
                                                         echo $this->Form->input('relationtype_id', array(
@@ -133,32 +133,32 @@
                                     </div>  		
                                 </div>             
                                 <div id="step-2">
-                                    <h2 class="StepTitle">Personal Details</h2>
+                                    <h2 class="StepTitle">Personal Details <small class="text-danger"> <i class="fa fa-warning"></i>Note All Fields With * Need To Be Filled</small></h2>
                                   <div class="panel">
                                     <div class="panel-body">
                                           <div class="form-group">
-                                              <label for="first_name" class="col-lg-2 col-md-3 control-label">First Name</label>
+                                              <label for="first_name" class="col-lg-2 col-md-3 control-label">First Name <small class="text-danger"> * </small></label>
                                             <div class="col-lg-7 col-md-9">
                                              <input type="text" class="form-control form-cascade-control input-small" value="<?php echo $student['Student']['first_name']?>"
                                              name="data[Student][first_name]" id="first_name" placeholder="Type Student's first name" required="required"/>
                                            </div>
                                          </div>
                                          <div class="form-group">
-                                          <label for="surname" class="col-lg-2 col-md-3 control-label">Surname</label>
+                                          <label for="surname" class="col-lg-2 col-md-3 control-label">Last Name <small class="text-danger"> * </small></label>
                                           <div class="col-lg-7 col-md-9">
                                            <input type="text" class="form-control form-cascade-control input-small" name="data[Student][surname]" 
-                                           value="<?php echo $student['Student']['surname']?>" id="surname" placeholder="Type Student's surname" required="required"/>
+                                           value="<?php echo $student['Student']['surname']?>" id="surname" placeholder="Type Student's Last Name" required="required"/>
                                          </div>
                                        </div>
                                        <div class="form-group">
-                                        <label for="other_name" class="col-lg-2 col-md-3 control-label">Other Names</label>
+                                        <label for="other_name" class="col-lg-2 col-md-3 control-label">Other Name</label>
                                         <div class="col-lg-7 col-md-9">
                                          <input type="text" class="form-control form-cascade-control input-small" name="data[Student][other_name]"
-                                                value="<?php echo isset($student['Student']['other_name']) ? $student['Student']['other_name'] : '';?>" id="other_name" placeholder="Type Student's other name if there's any">
+                                                value="<?php echo isset($student['Student']['other_name']) ? $student['Student']['other_name'] : '';?>" id="other_name" placeholder="Type Student's Other Names if there's any">
                                        </div>
                                       </div>
                                       <div class="form-group">
-                                        <label for="gender" class="col-lg-2 col-md-3 control-label">Gender</label>
+                                        <label for="gender" class="col-lg-2 col-md-3 control-label">Gender <small class="text-danger"> * </small></label>
                                         <div class="col-lg-7 col-md-9">
                                             <?php 
                                                 echo $this->Form->input('gender', array(
@@ -174,14 +174,14 @@
                                         </div>
                                      </div>
                                      <div class="form-group">
-                                        <label for="birth_date" class="col-lg-2 col-md-3 control-label">Date of Birth</label>
+                                        <label for="birth_date" class="col-lg-2 col-md-3 control-label">Date of Birth <small class="text-danger"> * </small></label>
                                         <div class="col-lg-7 col-md-9">
                                             <input type="text" class="form-control form-cascade-control input-small" name="data[Student][birth_date]" 
                                             value="<?php $a = explode('-', $student['Student']['birth_date']); echo $a[2].'/'.$a[1].'/'.$a[0]; ?>" id="birth_date" placeholder="Select Student's date of birth" required="required"/>
                                         </div>
                                      </div>
                                      <div class="form-group">
-                                        <label for="country_id" class="col-lg-2 col-md-3 control-label">Nationality</label>
+                                        <label for="country_id" class="col-lg-2 col-md-3 control-label">Nationality <small class="text-danger"> * </small></label>
                                         <div class="col-lg-7 col-md-9">
                                             <?php 
                                                 echo $this->Form->input('country_id', array(
@@ -199,7 +199,7 @@
                                      </div>
                                     <div id="state_lga_div">
                                      <div class="form-group">
-                                        <label for="state_id" class="col-lg-2 col-md-3 control-label">State of origin</label>
+                                        <label for="state_id" class="col-lg-2 col-md-3 control-label">State of origin <small class="text-danger"> * </small></label>
                                         <div class="col-lg-7 col-md-9">
                                             <?php 
                                                 echo $this->Form->input('state_id', array(
@@ -215,7 +215,7 @@
                                         </div>
                                      </div>
                                      <div class="form-group">
-                                        <label for="local_govt_id" class="col-lg-2 col-md-3 control-label">Local Govt.</label>
+                                        <label for="local_govt_id" class="col-lg-2 col-md-3 control-label">Local Govt. <small class="text-danger"> * </small></label>
                                         <div class="col-lg-7 col-md-9">
                                             <select class="form-control" name="data[Student][local_govt_id]" id="local_govt_id">
                                                 <?php 
@@ -308,7 +308,7 @@
                                                             <i class="glyphicon glyphicon-plus"></i>
                                                             <span>Browse File...</span>
                                                             <input ng-disabled="disabled"  value="<?php echo $student['Student']['image_url']?>" type="file" name="data[Student][image_url]" id="image_url" onChange="readURL(this);" required="required" /><br>
-                                                            <img data-src="holder.js/140x140" class="img-rounded" id="img_prev" src="<?php echo DOMAIN_NAME ?>/img/uploads/<?php echo ($student['Student']['image_url']) ? $student['Student']['image_url'] : '';?>" style="width: 140px; height: 140px;"/>
+                                                            <img data-src="holder.js/140x140" class="img-rounded" id="img_prev" src="<?php echo DOMAIN_NAME ?>/img/uploads/<?php echo ($student['Student']['image_url']) ? $student['Student']['image_url'] : 'avatar.jpg';?>" style="width: 140px; height: 140px;"/>
                                                         </span>
                                                         <div id="image_error"></div>
                                                     </div>

@@ -59,7 +59,7 @@
                                           </td>                                 
                                         </tr>
                                         <tr>
-                                            <th>Sponsor Name</th>
+                                            <th>Parent Name</th>
                                             <td><?php echo $Info['salutation_name'], ' ', $Info['sponsor_name'];?></td>
                                         </tr>
                                         <tr>

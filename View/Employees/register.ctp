@@ -19,7 +19,7 @@
         <!-- / Info Boxes -->
         <div class="panel-heading text-primary">
             <h3 class="panel-title">
-                <i class="fa fa-pencil-square"></i> Create New Employee <label class="label label-primary">Please fill the form properly and modify accurately...</label>
+                <i class="fa fa-pencil-square"></i> Create New Staff <small class="text-danger"> <i class="fa fa-warning"></i>Note All Fields With * Need To Be Filled</small>
                     <span class="pull-right">
                         <a href="javascript:void(0)"  title="Refresh"><i class="fa fa-refresh"></i></a>
                         <a href="#" class="panel-minimize"><i class="fa fa-chevron-up"></i></a>
@@ -43,7 +43,7 @@
                     <!--form class="form-horizontal cascde-forms" method="post" action="#" name="basic_validate" id="basic_validate" novalidate="novalidate"-->
                     <br>
                     <div class="form-group">
-                        <label class="col-lg-2 col-md-3 control-label">Title</label>
+                        <label class="col-lg-2 col-md-3 control-label">Title <small class="text-danger"> * </small></label>
                         <div class="col-lg-7 col-md-9">
                             <?php
                             echo $this->Form->input('salutation_id', array(
@@ -52,37 +52,44 @@
                                     'class' => 'form-control',
                                     'id' => 'salutation_id',
                                     'options' => $Salutations,
-                                    'empty' => '(Select Employee\'s Title)'
+                                    'empty' => '(Select Staff\'s Title)'
                                 )
                             );
                             ?>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-2 col-md-3 control-label">First Name</label>
+                        <label class="col-lg-2 col-md-3 control-label">First Name <small class="text-danger"> * </small></label>
                         <div class="col-lg-7 col-md-9">
                             <input type="text" class="form-control form-cascade-control input-small"
-                                   name="data[EmployeeNew][first_name]" id="first_name" placeholder="Type Employee's first name" required>
+                                   name="data[EmployeeNew][first_name]" id="first_name" placeholder="Type Staff's First name" required>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-2 col-md-3 control-label">Other Names</label>
+                        <label class="col-lg-2 col-md-3 control-label">Last Names <small class="text-danger"> * </small></label>
                         <div class="col-lg-7 col-md-9">
                             <input type="text" class="form-control form-cascade-control input-small"
-                                   name="data[EmployeeNew][other_name]" id="other_name" placeholder="Type Employee's other names" required>
+                                   name="data[StaffNew][other_name]" id="other_name" placeholder="Type Employee's Last names" required>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="mobile_number1" class="col-lg-2 col-md-3 control-label">Mobile Number</label>
+                        <label class="col-lg-2 col-md-3 control-label">Email</label>
+                        <div class="col-lg-7 col-md-9">
+                            <input type="email" class="form-control form-cascade-control input-small" name="data[StaffNew][email]"
+                                   id="email" placeholder="Staff's e-mail">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="mobile_number1" class="col-lg-2 col-md-3 control-label">Mobile Number <small class="text-danger"> * </small></label>
                         <div class="col-lg-7 col-md-9">
                             <input type="text" class="form-control form-cascade-control input-small" name="data[EmployeeNew][mobile_number1]"
-                                   id="mobile_number1" placeholder="Employee's Mobile Number" required>
+                                   id="mobile_number1" placeholder="Staff's Mobile Number" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-lg-2 col-md-3 control-label">&nbsp;&nbsp;</label>
                         <div class="col-lg-7 col-md-9">
-                            <button type="submit" id="register_emp_btn" class="btn btn-info">Register Employee</button>
+                            <button type="submit" id="register_emp_btn" class="btn btn-info">Register Staff</button>
                         </div>
                     </div>
                     </form>
@@ -96,7 +103,7 @@
 //    echo $this->Js->buffer('
 //        $("#country_id").val("140");
 //    ');
-//on click of Register New Employee Record link... activate the link
+//on click of Register New Staff Record link... activate the link
 echo $this->Js->buffer('
         setTabActive("[href=\"'.DOMAIN_NAME.'/employees/register\"]", 1);
     ');

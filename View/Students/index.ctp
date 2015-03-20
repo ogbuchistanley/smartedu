@@ -26,7 +26,7 @@
         <!-- / Info Boxes -->
         <div class="panel-heading text-primary">
             <h3 class="panel-title">
-               <i class="fa fa-list"></i> Manage Students Information <label class="label label-primary">Mange List of Students by Editing, Viewing or Deleting</label>
+               <i class="fa fa-list"></i> Manage Students Information
                 <span class="pull-right">
                     <a href="javascript:void(0)"  title="Refresh"><i class="fa fa-refresh"></i></a>
                     <a href="#" class="panel-minimize"><i class="fa fa-chevron-up"></i></a>
@@ -44,7 +44,7 @@
                           <th>ID</th>
                           <th>Full Name</th>
                           <th>Gender</th>
-                          <th>Sponsor Name</th>
+                          <th>Parent Name</th>
                           <th>Birth Date</th>
                           <th>Class</th>
                           <th>Status</th>
@@ -99,7 +99,7 @@
                           <th>ID</th>
                           <th>Full Name</th>
                           <th>Gender</th>
-                          <th>Sponsor Name</th>
+                          <th>Parent Name</th>
                           <th>Birth Date</th>
                           <th>Class</th>
                           <th>Status</th>

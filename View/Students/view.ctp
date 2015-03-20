@@ -30,76 +30,77 @@
                 </span>
             </h3>
         </div>
-        <div class="panel-body">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <div class="price-list row">
-                        <div class="price-box col-md-4 col-sm-12 col-xs-12 col-lg-4">	
-                            <div class="price-header bg-primary">
-                                <h3>Headings</h3>
-                            </div>
-                            <ul class="list-group features">
-                                <li class="list-group-item"><strong>Full Name</strong></li>
-                                <li class="list-group-item"><strong>Student ID</strong></li>
-                                <li class="list-group-item"><strong>Sponsor's Name</strong></li>
-                                <li class="list-group-item"><strong>Relationship Type</strong></li>
-                                <li class="list-group-item"><strong>Gender</strong></li>
-                                <li class="list-group-item"><strong>Current Class</strong></li>
-                                <li class="list-group-item"><strong>Status</strong></li>
-                                <li class="list-group-item"><strong>Date of Birth</strong></li>
-                                <!--li class="list-group-item"><strong>Religion</strong></li-->
-                                <li class="list-group-item"><strong>Nationality</strong></li>
-                                <li class="list-group-item"><strong>State of Origin</strong></li>
-                                <li class="list-group-item"><strong>Local Govt. Area</strong></li>
-                                <!--li class="list-group-item"><strong>Previous School</strong></li-->
-                                <li class="list-group-item select">                                    
-                                    <a class="btn btn-block bg-primary text-white btn-lg "></a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="price-box col-md-5 col-sm-12 col-xs-12 col-lg-5">	
-                            <div class="price-header bg-info">
-                                <h3>Details</h3>
-                            </div>
-                            <ul class="list-group features">
-                                <li class="list-group-item">
-                                    <?php 
-                                        echo h($student['Student']['first_name']), ' ', h($student['Student']['surname']), ' '; echo (!empty($student['Student']['other_name'])) ? h($student['Student']['other_name']) : ''; 
-                                    ?>
-                                </li>
-                                <li class="list-group-item"><?php echo h($student['Student']['student_no']); ?></li>
-                                <li class="list-group-item"><?php echo h($student['Sponsor']['first_name']), ' ', h($student['Sponsor']['other_name']); ?></li>
-                                <li class="list-group-item"><?php echo h($student['RelationshipType']['relationship_type']); ?></li>
-                                <li class="list-group-item"><?php echo h($student['Student']['gender']); ?></li>
-                                <li class="list-group-item"><?php echo (!empty($student['Student']['class_id'])) ? h($student['Classroom']['class_name']) : '<span class="label label-danger">nill</span>'; ?></li>
-                                <li class="list-group-item"><?php echo h($student['StudentStatus']['student_status']); ?></li>
-                                <li class="list-group-item"><?php echo h($student['Student']['birth_date']); ?></li>
-                                <!--li class="list-group-item"><?php //echo h($student['Student']['religion']); ?></li-->
-                                <li class="list-group-item"><?php echo (!empty($student['Student']['country_id'])) ? h($student['Country']['country_name']) : '<span class="label label-danger">nill</span>';?></li>
-                                <li class="list-group-item"><?php echo (!empty($student['Student']['state_id'])) ? h($student['State']['state_name']).' State' : '<span class="label label-danger">nill</span>';?></li>
-                                <li class="list-group-item"><?php echo (!empty($student['Student']['local_govt_id'])) ? h($student['LocalGovt']['local_govt_name']) : '<span class="label label-danger">nill</span>';?></li>
-                                <!--li class="list-group-item"><?php //echo (!empty($student['Student']['previous_school'])) ? h($student['Student']['previous_school']) : '<span class="label label-danger">nill</span>'; ?></li-->
-                                <li class="list-group-item select">
-                                    <a class="btn btn-block bg-info text-white btn-lg "></a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="price-box col-md-3 col-sm-6 col-xs-12 col-lg-3 featured">	
-                            <div class="price-header bg-success">
-                                <h3>Passport</h3>
-                            </div>
-                            <ul class="list-group features">
-                                <li class="list-group-item">
-                                    <img class="img-rounded" data-src="holder.js/140x140"  style='width: 140px; height: 140px;'
-                                        src="<?php echo DOMAIN_NAME ?>/img/uploads/<?php echo ($student['Student']['image_url']) ? $student['Student']['image_url'] : 'avatar.jpg';?>"/>
-                                </li>
-                                <li class="list-group-item select">
-                                    <a class="btn btn-block bg-success text-white btn-lg "></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+        <div class="col-md-8">
+            <div class="panel panel-info">
+                <div class="panel-heading panel-title  text-white">Details Table</div>
+                <div style="overflow-x: scroll" class="panel-body">
+                    <table  class="table table-bordered table-hover table-striped display" >
+                        <tbody>
+                            <tr>
+                                <th>Full Name</th>
+                                <td>
+                                    <?php echo h($student['Student']['first_name']), ' ', h($student['Student']['surname']), ' '; echo (!empty($student['Student']['other_name'])) ? h($student['Student']['other_name']) : ''; ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Student ID</th>
+                                <td><?php echo h($student['Student']['student_no']); ?></td>
+                            </tr>
+                            <tr>
+                                <th>Parent's Name</th>
+                                <td><?php echo h($student['Sponsor']['first_name']), ' ', h($student['Sponsor']['other_name']); ?></td>
+                            </tr>
+                            <tr>
+                                <th>Relationship Type</th>
+                                <td><?php echo h($student['RelationshipType']['relationship_type']); ?></td>
+                            </tr>
+                            <tr>
+                                <th>Gender</th>
+                                <td><?php echo h($student['Student']['gender']); ?></td>
+                            </tr>
+                            <tr>
+                                <th>Current Class</th>
+                                <td><?php echo (!empty($student['Student']['class_id'])) ? h($student['Classroom']['class_name']) : '<span class="label label-danger">nill</span>'; ?></td>
+                            </tr>
+                            <tr>
+                                <th>Status</th>
+                                <td><?php echo h($student['StudentStatus']['student_status']); ?></td>
+                            </tr>
+                            <tr>
+                                <th>Birth Date</th>
+                                <td><?php echo h($student['Student']['birth_date']); ?></td>
+                            </tr>
+                            <tr>
+                                <th>Nationality</th>
+                                <td><?php echo (!empty($student['Student']['country_id'])) ? h($student['Country']['country_name']) : '<span class="label label-danger">nill</span>';?></td>
+                            </tr>
+                            <tr>
+                                <th>State of Origin</th>
+                                <td><?php echo (!empty($student['Student']['state_id'])) ? h($student['State']['state_name']).' State' : '<span class="label label-danger">nill</span>';?></td>
+                            </tr>
+                            <tr>
+                                <th>Local Govt. Area</th>
+                                <td><?php echo (!empty($student['Student']['local_govt_id'])) ? h($student['LocalGovt']['local_govt_name']) : '<span class="label label-danger">nill</span>';?></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div> <!-- /panel body -->
+            </div>
+        </div>
+        <div class="price-list row">
+            <div class="price-box col-md-3 col-sm-6 col-xs-12 col-lg-3 featured">
+                <div class="price-header">
+                    <h3 class="bg-info">Passport</h3>
                 </div>
+                <ul class="list-group features">
+                    <li class="list-group-item">
+                        <img class="img-rounded" data-src="holder.js/140x140"  style='width: 140px; height: 140px;'
+                            src="<?php echo DOMAIN_NAME ?>/img/uploads/<?php echo ($student['Student']['image_url']) ? $student['Student']['image_url'] : 'avatar.jpg';?>"/>
+                    </li>
+                    <li class="list-group-item select">
+                        <a class="btn btn-block bg-info text-white btn-lg "></a>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>

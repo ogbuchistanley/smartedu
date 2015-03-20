@@ -37,12 +37,12 @@ class EmailConfig {
 
 	public $smtp = array(
 		'transport' => 'Smtp',
-		'from' => array('kheengz@zumasoftwares.net' => 'Zuma Software'),
-		'host' => 'zumasoftwares.net',
+		'from' => array(DEVELOPER_SITE_EMAIL => DEVELOPER_SITE_NAME),
+		'host' => 'smartedu.io',
 		'port' => 25,
 		'timeout' => 30,
-		'username' => 'zumasoft',
-		'password' => 'Student_1',
+		'username' => 'smartedu',
+		'password' => 'qwertyuiop101',
 		'client' => null,
 		'log' => false,
 		//'charset' => 'utf-8',

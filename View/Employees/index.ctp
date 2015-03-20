@@ -29,7 +29,7 @@
         <!-- / Info Boxes -->
         <div class="panel-heading text-primary">
             <h3 class="panel-title">
-               <i class="fa fa-list"></i> Manage Employees' Information <label class="label label-primary">Mange List of Employees by Editing, Viewing or Deleting</label>
+               <i class="fa fa-list"></i> Manage Staffs' Information
                 <span class="pull-right">
                     <a href="javascript:void(0)"  title="Refresh"><i class="fa fa-refresh"></i></a>
                     <a href="#" class="panel-minimize"><i class="fa fa-chevron-up"></i></a>
@@ -39,7 +39,7 @@
         </div>
         <div class="panel-body">
             <div class="panel panel-info">
-                <div class="panel-heading panel-title  text-white">Employee's Table</div>
+                <div class="panel-heading panel-title  text-white">Staff's Table</div>
                 <div style="overflow-x: scroll" class="panel-body">
                    <table  class="table table-bordered table-hover table-striped display" id="employee_table" >
                      <thead>
@@ -66,7 +66,7 @@
                           <td><?php echo h($employee['Employee']['employee_no']); ?>&nbsp;</td>
                           <td><?php echo h($employee['Salutation']['salutation_abbr']); ?>&nbsp;</td>
                           <td><?php echo h($employee['Employee']['first_name']), ' ', h($employee['Employee']['other_name']); ?>&nbsp;</td>
-                          <td><?php echo h($employee['Employee']['email']); ?>&nbsp;</td>
+                          <td><?php echo ($employee['Employee']['email']) ? $employee['Employee']['email'] : '<span class="label label-danger">nill</span>'; ?>&nbsp;</td>
                           <td><?php echo h($employee['Employee']['mobile_number1']); ?>&nbsp;</td>
                           <td>
                               <?php 
@@ -111,7 +111,7 @@
     <div id="employee_delete_modal" class="modal fade" tabindex="-1" data-width="400" style="display: none;">
        <div class="modal-header">
            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-           <h4 class="modal-title">Deleting An Employee Record</h4>
+           <h4 class="modal-title">Deleting A Staff Record</h4>
        </div>
         <form action="#" id="employee_delete_form" method="post">
             <div class="modal-body">

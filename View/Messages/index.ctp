@@ -40,19 +40,19 @@
                 <div class="panel-body">
                     <ul id="myTab" class="nav nav-tabs">
                         <li class="active">
-                            <a href="<?php echo DOMAIN_NAME ?>/messages/index#sponsors" data-toggle="tab"><b><i class="fa fa-user"></i> Individual / <i class="fa fa-group"></i> Group Sponsors</b></a>                            
+                            <a href="<?php echo DOMAIN_NAME ?>/messages/index#sponsors" data-toggle="tab"><b><i class="fa fa-user"></i> Individual / <i class="fa fa-group"></i> Group Parents</b></a>
                         </li>
                         <li>
-                            <a href="<?php echo DOMAIN_NAME ?>/messages/index#employees" data-toggle="tab"><b><i class="fa fa-male"></i> Individual / <i class="fa fa-group"></i> Group Employees</b></a>
+                            <a href="<?php echo DOMAIN_NAME ?>/messages/index#employees" data-toggle="tab"><b><i class="fa fa-male"></i> Individual / <i class="fa fa-group"></i> Group Staffs</b></a>
                         </li>
                     </ul>
                     <div id="myTabContent" class="tab-content"> 
-                        <div class="tab-pane fade in active" id="sponsors"><br> <!-- setupExam -->
+                        <div class="tab-pane fade in active" id="Parents"><br> <!-- setupExam -->
                             <div class="col-md-7">
                                 <div class="panel panel-cascade">
                                     <div class="panel-body">
                                         <div class="panel panel-default">
-                                            <div class="panel-heading"><i class="fa fa-search fa-1x"></i> Search for Sponsors using their Ward(s)</div>                                            
+                                            <div class="panel-heading"><i class="fa fa-search fa-1x"></i> Search for Parents using their Ward(s)</div>
                                             <div class="panel-body">
                                                 <?php 
                                                     //Creates The Form
@@ -108,8 +108,8 @@
                                                     </div>  
                                                     <div class="form-group">
                                                         <div class="col-sm-offset-2 col-sm-10">
-                                                            <button type="submit" class="btn btn-info">Search Sponsors</button>
-                                                            <a target="__blank" href="<?php echo DOMAIN_NAME ?>/messages/send/<?php echo $Encryption->encode('all/spn_all'); ?>" class="btn btn-success">Message all Sponsors</a>
+                                                            <button type="submit" class="btn btn-info">Search Parents</button>
+                                                            <a target="__blank" href="<?php echo DOMAIN_NAME ?>/messages/send/<?php echo $Encryption->encode('ALL/PAR_ALL'); ?>" class="btn btn-success">Message all Parents</a>
                                                         </div>
                                                     </div>
                                                 </form>
@@ -131,12 +131,12 @@
                                 <div class="panel panel-cascade">
                                     <div class="panel-body">
                                         <div class="panel panel-info">
-                                            <div class="panel-heading panel-title  text-white">Employee's Table</div>
+                                            <div class="panel-heading panel-title  text-white">Staff's Table</div>
                                                <table  class="table table-bordered table-hover table-striped display" >
                                                    <?php if(!empty($employees)) :?>
                                                         <div class="col-sm-offset-4 col-sm-10"><br>
                                                            <button type="button" class="mark_btn_emp btn btn-success">Mark All</button>
-                                                           <button type="button" class="msg_all_mark_emp btn btn-primary" value="emp">Message Marked Employees</button>
+                                                           <button type="button" class="msg_all_mark_emp btn btn-primary" value="STF">Message Marked Staffs</button>
                                                            <span style="font-size: medium" class="label label-danger err"></span><br>
                                                        </div>
                                                       <thead>
@@ -156,7 +156,7 @@
                                                         <?php $i=1; foreach ($employees as $employee): ?>
                                                        <tr class="gradeA">
                                                            <?php 
-                                                             $encrypted_employee_id = $Encryption->encode($employee['Employee']['employee_id'] . '/emp');
+                                                             $encrypted_employee_id = $Encryption->encode($employee['Employee']['employee_id'] . '/STF');
                                                            ?>
                                                            <td><?php echo $i++;?></td>
                                                            <td><?php echo h($employee['Employee']['employee_no']); ?>&nbsp;</td>
@@ -202,7 +202,7 @@
                                             <div class="form-group">
                                                 <div class="col-sm-offset-2 col-sm-10"><br><br><br>
                                                     <button type="button" class="mark_btn_emp btn btn-success">Mark All</button>
-                                                    <button type="button" class="msg_all_mark_emp btn btn-primary" value="emp">Message Marked Employees</button>
+                                                    <button type="button" class="msg_all_mark_emp btn btn-primary" value="STF">Message Marked Staffs</button>
                                                     <span style="font-size: medium" class="label label-danger err"></span>
                                                 </div>
                                             </div>
@@ -224,7 +224,7 @@
            <h4 class="modal-title">Sending Message Form</h4>
        </div>
         <div class="panel panel-default">
-            <div class="panel-heading bg-primary-dark text-white"><i class="fa fa-envelope-o fa-1x"></i> S.M.S / e-mail Message Form for Sponsors / Employees</div>                                            
+            <div class="panel-heading bg-primary-dark text-white"><i class="fa fa-envelope-o fa-1x"></i> S.M.S / e-mail Message Form for Parents / Staffs</div>
             <div class="panel-body">
                 <?php 
                     //Creates The Form

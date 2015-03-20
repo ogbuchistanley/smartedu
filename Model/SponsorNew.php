@@ -26,32 +26,36 @@ class SponsorNew extends AppModel {
         $userRole = ClassRegistry::init('UserRole');
         $Role = $userRole->find('first', array('conditions' => array('UserRole.' . $userRole->primaryKey => 1)));
         $id = $this->id;
-        $no = trim(strtolower('spn'. str_pad($id, 4, '0', STR_PAD_LEFT)));
+        $no = trim('PAR'. str_pad($id, 4, '0', STR_PAD_LEFT));
         $val = 'sponsors/'.$id.'.jpg';
         if($created){
-//            $this->query('UPDATE sponsors SET sponsor_no=CONCAT("spn", REPEAT("0", 4-LENGTH("'.$id.'")), '
-//                . 'CAST("'.$id.'" AS CHAR(10))) WHERE sponsor_id="'.$id.'"');
+            $mobile_no = $this->data[$this->alias]['mobile_number1'];
+            $pass = $this->generatePassword();
+            $msg = 'Welcome To '.APP_NAME.' Application here is your Username='.$no.' and Password='.$pass.' to access the portal, login via '.DOMAIN_URL;
+            $msg_email = 'Welcome To '.APP_NAME.' Application here is your <br><br>Username: '.$no.' <br>Password: '.$pass.' <br><br>to access the portal, login via '.DOMAIN_URL;
+            $email = $this->data[$this->alias]['email'];
+            $name = $this->data[$this->alias]['first_name'] . ' ' . $this->data[$this->alias]['other_name'];
+//            $this->query('UPDATE sponsors SET sponsor_no=CONCAT("PAR", REPEAT("0", 4-LENGTH("'.$id.'")), CAST("'.$id.'" AS CHAR(10))) WHERE sponsor_id="'.$id.'"');
             $User->create();
             $User->data['User']['username'] = $no;
-            $User->data['User']['password'] = 'Password1';
+            $User->data['User']['password'] = $pass;
             $User->data['User']['display_name'] = trim(strtoupper($this->data[$this->alias]['first_name'] . ' ' . ucwords($this->data[$this->alias]['other_name'])));
             $User->data['User']['type_id'] = $id;
             $User->data['User']['group_alias'] = $Role['UserRole']['group_alias'];
             $User->data['User']['image_url'] = $val;
             $User->data['User']['user_role_id'] = 1;
             if($User->save()) {
+                //Update The Sponsor ID
                 $this->saveField('sponsor_no', $no);
+
                 //Send SMS
-                $mobile_no = $this->data[$this->alias]['mobile_number1'];
-                $msg = 'Welcome To '.APP_NAME.' Application here is your Username = '.$no.' and Password = Password1 to access the portal, login via '.DOMAIN_URL;
                 $this->SendSMS($mobile_no, $msg);
+
                 //Send Mail
-                $email = $this->data[$this->alias]['email'];
-                $name = $this->data[$this->alias]['first_name'] . ' ' . $this->data[$this->alias]['other_name'];
                 $msg_body = 'Find Below your username and password to access the school application portal<br><br>';
-                $msg_body .= $msg;
+                $msg_body .= $msg_email;
                 if(!empty($email)){
-                    $this->sendMail($msg_body, 'Authentication', $email, $name);
+                    $this->sendMail($msg_body, 'Login Details', $email, $name);
                 }
             }
             //$this->createNewUser($no, $this->data[$this->alias]['first_name'], $this->data[$this->alias]['other_name'], $id, $val, 1);

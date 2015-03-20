@@ -28,7 +28,7 @@
         <div class="panel-heading text-primary">
             <h3 class="panel-title">
                 <i class="fa fa-list"></i>
-               Manage Sponsors Information <label class="label label-primary">Mange List of Sponsors by Editing, Viewing or Deleting</label>
+               Manage Parents Information
                 <span class="pull-right">
                     <a href="javascript:void(0)"  title="Refresh"><i class="fa fa-refresh"></i></a>
                     <a href="#" class="panel-minimize"><i class="fa fa-chevron-up"></i></a>
@@ -40,7 +40,7 @@
             <div class="col-md-11">
                 <div class="panel-body">
                     <div class="panel panel-info">
-                        <div class="panel-heading panel-title  text-white">Sponsor's Table</div>
+                        <div class="panel-heading panel-title  text-white">Parent's Table</div>
                         <div style="overflow-x: scroll" class="panel-body">
                             <table  class="table table-bordered table-hover table-striped display" id="sponsor_table" >
                                 <thead>
@@ -104,7 +104,7 @@
     <div id="sponsor_delete_modal" class="modal fade" tabindex="-1" data-width="400" style="display: none;">
        <div class="modal-header">
            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-           <h4 class="modal-title">Deleting A Sponsor Record</h4>
+           <h4 class="modal-title">Deleting A Parent Record</h4>
        </div>
         <form action="#" id="sponsor_delete_form" method="post">
             <div class="modal-body">
@@ -123,7 +123,7 @@
    </div>
  </div> <!-- /col-md-12 -->
  <?php
-    //on click of Manage Sponsors Record link... activate the link
+    //on click of Manage Parents Record link... activate the link
     echo $this->Js->buffer('
         setTabActive("[href=\"'.DOMAIN_NAME.'/sponsors/\"]", 1);
     ');

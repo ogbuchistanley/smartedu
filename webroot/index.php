@@ -63,7 +63,7 @@ define('CAKE_CORE_INCLUDE_PATH', DS . 'Applications' . DS . 'XAMPP' . DS . 'xamp
 /**
  * Editing below this line should NOT be necessary.
  * Change at your own risk.
- *
+ *f
  */
 if (!defined('WEBROOT_DIR')) {
 	define('WEBROOT_DIR', basename(dirname(__FILE__)));
@@ -88,15 +88,19 @@ if (!defined('MAIL_DIR_ROOT')) {
 
 
 if (!defined('DEVELOPER_SITE_ADDRESS')) {
-	define('DEVELOPER_SITE_ADDRESS', 'http://www.zumasoftware.net');
+	define('DEVELOPER_SITE_ADDRESS', 'http://www.smartedu.io');
 }
 
 if (!defined('DEVELOPER_SITE_NAME')) {
-	define('DEVELOPER_SITE_NAME', 'Zuma Software');
+	define('DEVELOPER_SITE_NAME', 'Smart Edu');
 }
 
 if (!defined('DEVELOPER_SITE_EMAIL')) {
-	define('DEVELOPER_SITE_EMAIL', 'noreply@zumasoftware.net');
+	define('DEVELOPER_SITE_EMAIL', 'noreply@smartedu.io');
+}
+
+if (!defined('DEVELOPER_SITE_NUMBER')) {
+	define('DEVELOPER_SITE_NUMBER', '08099887766');
 }
 
 
@@ -106,7 +110,7 @@ if (!defined('DOMAIN_NAME')) {
 }
 
 if (!defined('DOMAIN_URL')) {
-	define('DOMAIN_URL', 'http://localhost/smartedu');
+	define('DOMAIN_URL', 'http://198.12.158.236/smartedu');
 }
 
 if (!defined('APP_NAME')) {

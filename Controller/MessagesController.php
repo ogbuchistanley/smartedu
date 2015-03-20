@@ -74,8 +74,9 @@ class MessagesController extends AppController {
         $result_check = $this->Acl->check($this->group_alias, 'MessagesController');
         if($result_check){
             $decrypted = $this->encryption->decode($encrypt_param);
-            $receiver_ids = explode('/', $decrypted)[0];
-            $type = explode('/', $decrypted)[1];
+            $encrypt = explode('/', $decrypted);
+            $receiver_ids = $encrypt[0];
+            $type = $encrypt[1];
             $id_s = explode(',', $receiver_ids);
             //Remove Duplicates
             $ids = array_unique($id_s);
@@ -84,17 +85,17 @@ class MessagesController extends AppController {
                 $option = $this->request->data['Send']['option'];
                 $message = $this->request->data['Send']['message'];
                 
-                //Type emp = employees while spn = sponsors
-                if($type === 'emp'){
+                //Type emp = Staffs while spn = sponsors
+                if($type === 'STF'){
                     $this->message_emp($subject, $option, $message, $ids);
-                }elseif($type === 'rcp'){
+                }elseif($type === 'RCP'){
                     $this->message_rcp($subject, $option, $message, $ids);
-                }elseif ($type === 'spn') {
-                    $this->message_spn($subject, $option, $message, $ids, 'spn');
-                }elseif ($type === 'spn_class') {
-                    $this->message_spn($subject, $option, $message, $ids, 'spn_class');
-                }elseif($receiver_ids === 'all' and $type === 'spn_all') {
-                    $this->message_spn($subject, $option, $message, null, 'spn_all');
+                }elseif ($type === 'PAR') {
+                    $this->message_spn($subject, $option, $message, $ids, 'PAR');
+                }elseif ($type === 'PAR_CLASS') {
+                    $this->message_spn($subject, $option, $message, $ids, 'PAR_CLASS');
+                }elseif($receiver_ids === 'ALL' and $type === 'PAR_ALL') {
+                    $this->message_spn($subject, $option, $message, null, 'PAR_ALL');
                 }
                 return $this->redirect(array('action' => 'index'));
             } else {
@@ -115,27 +116,28 @@ class MessagesController extends AppController {
             $message = $this->request->data['Send']['message'];
             $type = $this->request->data['Send']['type'];
 
-            //Type emp = employees while spn = sponsors
-            if($type === 'rcp'){
+            //Type emp = Staffs while spn = sponsors
+            if($type === 'RCP'){
                 echo $this->sendRecipient($id, $subject, $option, $message);
-            }elseif($type === 'emp'){
+            }elseif($type === 'STF'){
                 echo $this->sendEmployee($id, $subject, $option, $message);
             }
         }
     }
     
-    //Message Sending to employees
+    //Message Sending to Staffs
     private function message_emp($subject, $option, $message, $ids) {
         $sms_count = 0;
         $email_count = 0;
         
         for ($i=0; $i<count($ids); $i++){
             $out = $this->sendEmployee($ids[$i], $subject, $option, $message);
-            $sms_count += explode('_', $out)[0];
-            $email_count += explode('_', $out)[1];
+            $temp = explode('_', $out);
+            $sms_count += $temp[0];
+            $email_count += $temp[1];
         }
         $this->saveMassage($subject, $message, $sms_count, $email_count);
-        $this->setFlashMessage($sms_count . ' SMS and ' . $email_count . ' email Massages Has Been Sent to the Employees', 1);   
+        $this->setFlashMessage($sms_count . ' SMS and ' . $email_count . ' email Massages Has Been Sent to the Staffs', 1);
     }
     
     //Message Sending to recipients
@@ -145,22 +147,23 @@ class MessagesController extends AppController {
         
         for ($i=0; $i<count($ids); $i++){
             $out = $this->sendRecipient($ids[$i], $subject, $option, $message);
-            $sms_count += explode('_', $out)[0];
-            $email_count += explode('_', $out)[1];
+            $tempo = explode('_', $out);
+            $sms_count += $tempo[0];
+            $email_count += $tempo[1];
         }
         $this->saveMassage($subject, $message, $sms_count, $email_count);
         $this->setFlashMessage($sms_count . ' SMS and ' . $email_count . ' email Massages Has Been Sent to the Recipients', 1);   
     }
     
-    //Message Sending to Sponsors 
+    //Message Sending to Parents
     private function message_spn($subject, $option, $message, $ids, $type=null) {
         $StudentsClass = ClassRegistry::init('StudentsClass');
         $term_id = ClassRegistry::init('AcademicTerm');
         $sms_count = 0;
         $email_count =0;
                 
-        if($type == 'spn_all'){
-            //All the Sponsors with wards in the current academic year
+        if($type == 'PAR_ALL'){
+            //All the Parents with wards in the current academic year
 //            $sponsor_ids = $StudentsClass->query('SELECT DISTINCT a.sponsor_id FROM students_classlevelviews a '
 //                    . 'WHERE a.academic_year_id="'.$term_id->getCurrentYearID().'"');
             $sponsor_ids = $StudentsClass->query('SELECT DISTINCT a.sponsor_id FROM students_classlevelviews a '
@@ -168,11 +171,12 @@ class MessagesController extends AppController {
             if($sponsor_ids){
                 foreach ($sponsor_ids as $sponsor_id){
                     $result = $this->sposnorHelper($subject, $option, $message, $sponsor_id['a']['sponsor_id'], $sms_count, $email_count);
-                    $sms_count = explode(',', $result)[0];
-                    $email_count = explode(',', $result)[1];
+                    $temp = explode(',', $result);
+                    $sms_count = $temp[0];
+                    $email_count = $temp[1];
                 }
             }
-        }  else if($type == 'spn_class'){
+        }  else if($type == 'PAR_CLASS'){
             //All the classrooms Marked
             for ($i=0; $i<count($ids); $i++){
                 $sponsor_ids = $StudentsClass->query('SELECT DISTINCT a.sponsor_id FROM students_classlevelviews a '
@@ -180,21 +184,23 @@ class MessagesController extends AppController {
                 if($sponsor_ids){
                     foreach ($sponsor_ids as $sponsor_id){
                         $result = $this->sposnorHelper($subject, $option, $message, $sponsor_id['a']['sponsor_id'], $sms_count, $email_count);
-                        $sms_count = explode(',', $result)[0];
-                        $email_count = explode(',', $result)[1];
+                        $temp = explode(',', $result);
+                        $sms_count = $temp[0];
+                        $email_count = $temp[1];
                     }
                 }
             }
-        }  else if($type == 'spn') {
-            //All the Sponosrs Marked
+        }  else if($type == 'PAR') {
+            //All the Parents Marked
             for ($i=0; $i<count($ids); $i++){
                 $result = $this->sposnorHelper($subject, $option, $message, $ids[$i], $sms_count, $email_count);
-                $sms_count = explode(',', $result)[0];
-                $email_count = explode(',', $result)[1];
+                $tempo = explode(',', $result);
+                $sms_count = $tempo[0];
+                $email_count = $tempo[1];
             }
         }
         $this->saveMassage($subject, $message, $sms_count, $email_count);
-        $this->setFlashMessage($sms_count . ' SMS and ' . $email_count . ' email Massages Has Been Sent to the Sponsors', 1);   
+        $this->setFlashMessage($sms_count . ' SMS and ' . $email_count . ' email Massages Has Been Sent to the Parents', 1);
     }
     
     //Sponsor Message Helper
@@ -213,7 +219,8 @@ class MessagesController extends AppController {
         }
         if($mobile_no !== null){
             //Send S.M.S
-            ($sponsor->SendSMS($mobile_no, $message, $subject)[0] == " Message Sent Successfully.") ? $sms_count++ : '';
+            $temp = $sponsor->SendSMS($mobile_no, $message, $subject);
+            ($temp[0] == " Message Sent Successfully.") ? $sms_count++ : '';
 
         }
         return $sms_count . ', ' .$email_count;
@@ -315,13 +322,14 @@ class MessagesController extends AppController {
         }
         if($mobile_no !== null){
             //Send S.M.S
-            ($recipient->SendSMS($mobile_no, $message, $subject)[0] == " Message Sent Successfully.") ? $sms_count++ : '';
+            $temp = $recipient->SendSMS($mobile_no, $message, $subject);
+            ($temp[0] == " Message Sent Successfully.") ? $sms_count++ : '';
         }
         $this->setFlashMessage($sms_count . ' SMS and ' . $email_count . ' email Massages Has Been Sent to the Recipients', 1); 
         return $sms_count . '_' . $email_count;
     }
     
-    //Single Employee
+    //Single Staff
     private function sendEmployee($id, $subject, $option, $message) {
         $sms_count = 0;
         $email_count = 0;
@@ -338,9 +346,10 @@ class MessagesController extends AppController {
         }
         if($mobile_no !== null){
             //Send S.M.S
-            ($employee->SendSMS($mobile_no, $message, $subject)[0] == " Message Sent Successfully.") ? $sms_count++ : '';
+            $temp = $employee->SendSMS($mobile_no, $message, $subject);
+            ($temp[0] == " Message Sent Successfully.") ? $sms_count++ : '';
         }
-        $this->setFlashMessage($sms_count . ' SMS and ' . $email_count . ' email Massages Has Been Sent to the Employees', 1); 
+        $this->setFlashMessage($sms_count . ' SMS and ' . $email_count . ' email Massages Has Been Sent to the Staffs', 1);
         return $sms_count . '_' . $email_count;
     }
 }

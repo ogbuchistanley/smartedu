@@ -55,7 +55,7 @@ $('document').ready(function(){
                 $('.err').html('');
                 $.post(domain_name+'/messages/encrypt/' + ids + '/' + $(btn + ':first').val(), function(data){            
                     try{
-                        //Type emp = employees while spn = sponsors
+                        //Type STF = Staffs while PAR = Parents
                         window.location.replace(domain_name+'/messages/send/'+data);
                     } catch (exception) {
                         $('.err').html(data);
@@ -66,12 +66,12 @@ $('document').ready(function(){
     }
     
     
-    ///////////////////////////////////    Employee Message   //////////////////////////////////////////////////////////////////
+    ///////////////////////////////////    Staff Message   //////////////////////////////////////////////////////////////////
     
-    //Mark or UnMark All Employees
+    //Mark or UnMark All Staffs
     mark_all('.mark_btn_emp', '.message_check_emp');
     
-    //Encrypt The Marked ID's and Process to Send Page For The Marked Employees
+    //Encrypt The Marked ID's and Process to Send Page For The Marked Staffs
     redirectToSend('.msg_all_mark_emp', '.message_check_emp');
     
     
@@ -84,12 +84,12 @@ $('document').ready(function(){
     redirectToSend('.msg_all_mark_rcp', '.message_check_rcp');
     
     
-    ///////////////////////////////////    Sponsor Message   //////////////////////////////////////////////////////////////////
+    ///////////////////////////////////    Parent Message   //////////////////////////////////////////////////////////////////
     
-    //Mark or UnMark All Sponsors
+    //Mark or UnMark All Parents
     mark_all('.mark_btn_spn', '.message_check_spn');
     
-    //Encrypt The Marked ID's and Process to Send Page For The Marked Employees
+    //Encrypt The Marked ID's and Process to Send Page For The Marked Staffs
     redirectToSend('.msg_all_mark_spn', '.message_check_spn');
     
     //Search Form For displaying List of Students in a class room or list of class rooms in a class level
@@ -106,14 +106,14 @@ $('document').ready(function(){
                     var div = '<div class="form-group">\
                             <div class="col-sm-offset-2 col-sm-8"><br><br><br>\
                                 <button type="button" class="mark_btn_spn btn btn-success">Mark All</button>\
-                                <button type="button" class="msg_all_mark_spn btn btn-primary" value="spn">Message Marked Sponsors</button>\
+                                <button type="button" class="msg_all_mark_spn btn btn-primary" value="PAR">Message Marked Parents</button>\
                                 <span style="font-size: medium" class="label label-danger err"></span>\
                             </div>\
                         </div>';
                     var div2 = '<div class="form-group">\
                             <div class="col-sm-offset-2 col-sm-8"><br><br><br>\
                                 <button type="button" class="mark_btn_spn btn btn-success">Mark All</button>\
-                                <button type="button" class="msg_all_mark_spn btn btn-primary" value="spn_class">Message Marked Classes</button>\
+                                <button type="button" class="msg_all_mark_spn btn btn-primary" value="PAR_CLASS">Message Marked Classes</button>\
                                 <span style="font-size: medium" class="label label-danger err"></span>\
                             </div>\
                         </div>';
@@ -125,7 +125,7 @@ $('document').ready(function(){
                                         <th>#</th>\
                                         <th>Student No.</th>\
                                         <th>Student Name</th>\
-                                        <th>Sponsor Name</th>\
+                                        <th>Parent Name</th>\
                                         <th>Send</th>\
                                         <th>Mark</th>\
                                     </tr></thead>';
@@ -193,7 +193,7 @@ $('document').ready(function(){
         $('#hidden_recipient_id').val($(this).val());
     });
     
-    // Deleting the sponsor record via modal
+    // Deleting the Parent record via modal
    $(document.body).on('submit', '#recipient_delete_form', function(){
         $.ajax({ 
             type: 'POST', 
@@ -235,13 +235,13 @@ $('document').ready(function(){
     });
     
     
-    //on click of the send button employee
+    //on click of the send button Staff
     $(document.body).on('click', '.send_message_employee', function(){
         $('#hidden_id').val($(this).val());
-        $('#type').val('emp');
+        $('#type').val('STF');
     });
     
-    // Sending Message To Employee or Sponsor via modal
+    // Sending Message To Staff or Parent via modal
    $(document.body).on('submit', '#message_form', function(){
        var values = $('#message_form').serialize();
        ajax_loading_image($('#msg_box4'), ' Sending Message');

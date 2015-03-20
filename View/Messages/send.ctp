@@ -26,7 +26,7 @@
                         <i class="fa fa-envelope fa-4x"></i>
                     </div> 
                     <div class="info-details">
-                        <h4>Manage S.M.S and e-mails Sending for <?php echo ($type === 'emp') ? 'Employees' : 'Sponsors'?></h4>
+                        <h4>Manage S.M.S and e-mails Sending for <?php echo ($type === 'STF') ? 'Staffs' : 'Parents'?></h4>
                     </div> 
                 </div>
             </div>
@@ -47,7 +47,7 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel-body">
                     <div class="panel panel-default">
-                        <div class="panel-heading bg-primary-dark text-white"><i class="fa fa-envelope-o fa-1x"></i> S.M.S / e-mail Message Form for <?php echo ($type === 'emp') ? 'Employees' : 'Sponsors'?></div>                                            
+                        <div class="panel-heading bg-primary-dark text-white"><i class="fa fa-envelope-o fa-1x"></i> S.M.S / e-mail Message Form for <?php echo ($type === 'STF') ? 'Staffs' : 'Parents'?></div>
                         <div class="panel-body">
                             <?php 
                                 //Creates The Form

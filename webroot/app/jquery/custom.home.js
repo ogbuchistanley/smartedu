@@ -9,7 +9,7 @@ $('document').ready(function(){
     getDependentListBox($("#academic_year_id"), $("#academic_term_id"), url);
     //////////////////////////////////////////////////////////////////////////////////////////////////////
     
-     //Search Form For displaying Subjects assigned to sponsor
+     //Search Form For displaying Subjects assigned to Parent
      $('#search_student_sponsor_form').on('submit', function(){
         ajax_loading_image($('#msg_box'), ' Loading Contents');
         var values = $('#search_student_sponsor_form').serialize();

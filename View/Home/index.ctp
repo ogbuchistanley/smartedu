@@ -42,7 +42,7 @@ $Encryption = new Encryption();
                             <th>ID</th>
                             <th>Full Name</th>
                             <th>Gender</th>
-                            <th>Sponsor Name</th>
+                            <th>Parent Name</th>
                             <th>Birth Date</th>
                             <th>Class</th>
                             <th>Status</th>
@@ -85,7 +85,7 @@ $Encryption = new Encryption();
                             <th>ID</th>
                             <th>Full Name</th>
                             <th>Gender</th>
-                            <th>Sponsor Name</th>
+                            <th>Parent Name</th>
                             <th>Birth Date</th>
                             <th>Class</th>
                             <th>Status</th>

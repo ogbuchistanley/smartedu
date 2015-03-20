@@ -1,71 +1,123 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title><?php echo $this->fetch('title'); ?></title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!-- Bootstrap -->
-        <link href="<?php echo MAIL_DIR_ROOT; ?>css/bootstrap.min.css" rel="stylesheet">
-        <link href="<?php echo MAIL_DIR_ROOT; ?>css/font-awesome.css" rel="stylesheet">
-        <link href="<?php echo MAIL_DIR_ROOT; ?>css/template-three.css" rel="stylesheet">
-        <?php echo $this->fetch('css');?>
-    </head>
-    <body>
+<html lang="en">
+<head>
+    <title><?php echo $this->fetch('title'); ?></title>
+    <meta name="viewport" content="width=device-width" />
 
-        <div class="header">	
-            <div class="container">
-                <h1>SmartSchool</h1>	
-                <ul class="social">
-                    <li><a href="#"><i class="fa fa-facebook-square"></i></a></li>
-                    <li><a href="#"><i class="fa fa-twitter-square"></i></a></li>
-                    <li><a href="#"><i class="fa fa-google-plus-square"></i></a></li>
-                    <li><a href="#"><i class="fa fa-linkedin-square"></i></a></li>
-                </ul>			
-            </div><!--end of container-->
-        </div><!--end of header-->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body bgcolor="#FFFFFF" style="font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif; margin:0; padding:0;">
 
-        <div class="body">
-            <div class="container box-container">
-                <div class="box">
-                    <h2>Smart<img src="<?php echo APP_DIR_ROOT; ?>images/icon.png" />School Application Mails</h2>
-                    <div class="cover">
-                        <img src="<?php echo MAIL_DIR_ROOT; ?>images/cover.jpg" alt="">
-                    </div><!--end of cover-->
-                    <div class="row description">
-                        <?php echo $this->fetch('content'); ?> 
-                        
-                        <div class="col-md-4 col-md-offset-1">
-                            <h3>
-                                <a href="<?php echo DOMAIN_URL ?>/dashboard">
-                                    Smart<img src="<?php echo APP_DIR_ROOT; ?>images/icon.png" />School
-                                </a>
-                            </h3>
-                            <p>
-                                <br>Date and Time: <?php echo date("l, jS F, Y");?>
-                                <br>if you did not initiate this action, we recommend that you contact us at 
+<table style="width: 100%;" bgcolor="#009CB3">
+    <tr>
+        <td></td>
+        <td class="header container" style="display:block!important; max-width:600px!important; margin:0 auto!important; clear:both!important;">
+
+            <div class="content" style="padding:15px; max-width:600px; margin:0 auto; display:block;">
+                <table bgcolor="#009CB3">
+                    <tr>
+                        <td style="color: white; font-size: xx-large">
+                            <a style="text-decoration: none; color: white" href="<?php echo DOMAIN_URL ?>/">
+                                <?php echo APP_NAME; ?> Mailing Service
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+        </td>
+        <td></td>
+    </tr>
+</table><!-- /HEADER -->
+<table class="body-wrap" style="width: 100%;">
+    <tr>
+        <td></td>
+        <td class="container" style="display:block!important; max-width:600px!important; margin:0 auto!important; clear:both!important;" bgcolor="#FFFFFF">
+
+            <div class="content" style="padding:15px; max-width:600px; margin:0 auto; display:block;">
+                <table>
+                    <tr>
+                        <td>
+                            <div class="row">
+                                <?php echo $this->fetch('content'); ?>
+                            </div>
+                            <br><br>
+                            <!-- Callout Panel -->
+                            <a style="text-decoration: none;" href="<?php echo DOMAIN_URL ?>/">
+                                <p class="callout" style="margin-bottom: 16px; font-weight: normal; font-size:14px; line-height:1.6; padding:15px; background-color:#ECF8FF;">
+                                    Click Here To Access The Application
+                                </p>
+                            </a>
+                            <p style="margin-bottom: 15px; font-weight: normal; font-size:14px; line-height:1.6; padding:15px; background-color:#ECF8FF;">
+                                <br>Date and Time: <?php echo date('g:ia \o\n l jS F Y');?>
+                                <br>Note: This is an auto generated email. if you did not initiate this action kindly ignore this mail.
+                                <br>We recommend that you contact us at
                                 <a href="<?php echo DEVELOPER_SITE_ADDRESS;?>">
-                                    <?php echo DEVELOPER_SITE_NAME;?> 
+                                    <?php echo DEVELOPER_SITE_NAME;?>
                                 </a> for further assistance.
                             </p>
-                            <p> <a href="<?php echo DOMAIN_URL ?>/dashboard">Click Here To Access The Application</a> </p>
-                        </div>
-                        
-                            
-                    </div><!--end of row-->
-                </div><!--end of box-->
-            </div><!--end of container-->
-        </div><!--end of body-->
+                            <!-- /Callout Panel -->
 
-        <div class="footer">
-            <br><br><p>&copy; <?php echo date("Y"); ?> <a href="<?php echo DEVELOPER_SITE_ADDRESS;?>"><?php echo DEVELOPER_SITE_NAME;?></a> All rights reserved</p>
-        </div>
+                            <!-- social & contact -->
+                            <table class="social" width="100%">
+                                <tr>
+                                    <td>
 
-        <!-- Load JS here for Faster site load =============================-->
-        <script src="<?php echo APP_DIR_ROOT; ?>js/jquery-1.10.2.js"></script>
-        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <!--script src="https://code.jquery.com/jquery.js"></script-->
-        <!-- Include all compiled plugins (below), or include individual files as needed -->
-        <script src="<?php echo MAIL_DIR_ROOT; ?>js/bootstrap.min.js"></script>
-        <?php echo $this->fetch('script'); ?>
-        <?php echo $this->Js->writeBuffer(array('cache' => TRUE));?>
-    </body>
+                                        <!-- column 2 -->
+                                        <table align="left" class="column">
+                                            <tr>
+                                                <td>
+
+                                                    <h5 class="">Contact Info:</h5>
+                                                    <p style="margin-bottom: 10px; font-weight: normal; font-size:14px; line-height:1.6;">Phone: <strong><?php echo DEVELOPER_SITE_NUMBER?></strong><br/>
+                                                        Email: <strong><a href="emailto:<?php echo DEVELOPER_SITE_EMAIL;?>"><?php echo DEVELOPER_SITE_EMAIL;?></a></strong></p>
+
+                                                </td>
+                                            </tr>
+                                        </table><!-- /column 2 -->
+
+                                        <span class="clear" style="display: block; clear: both;"></span>
+
+                                    </td>
+                                </tr>
+                            </table><!-- /social & contact -->
+
+                        </td>
+                    </tr>
+                </table>
+            </div><!-- /content -->
+
+        </td>
+        <td></td>
+    </tr>
+</table><!-- /BODY -->
+
+<!-- FOOTER -->
+<table class="footer-wrap" style="width: 100%;	clear:both!important;">
+    <tr>
+        <td></td>
+        <td class="container" style="display:block!important; max-width:600px!important; margin:0 auto!important; clear:both!important;">
+
+            <!-- content -->
+            <div class="content" style="padding:15px; max-width:600px; margin:0 auto; display:block;">
+                <table>
+                    <tr>
+                        <td align="center">
+                            <p style="border-top: 1px solid rgb(215,215,215); padding-top:15px; font-size:14px; font-weight: bold;">
+                                <a style="color: #009CB3;" href="#">Terms</a> |
+                                <a style="color: #009CB3;" href="#">Privacy</a> |
+                                <a style="color: #009CB3;" href="#"><unsubscribe>Unsubscribe</unsubscribe></a>
+                                &copy; <?php echo date("Y"); ?> <a href="<?php echo DEVELOPER_SITE_ADDRESS;?>"><?php echo DEVELOPER_SITE_NAME;?></a> All rights reserved
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </div><!-- /content -->
+
+        </td>
+        <td></td>
+    </tr>
+</table><!-- /FOOTER -->
+
+</body>
 </html>

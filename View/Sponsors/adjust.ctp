@@ -43,7 +43,7 @@
             <div class="panel-heading text-primary">
                 <h3 class="panel-title">
                     <i class="fa fa-pencil-square"></i>
-                   Adjust Sponsors' Information<label class="label label-primary">Please fill the form properly and modify accurately...</label>
+                   Adjust Parents' Information <small class="text-danger"> <i class="fa fa-warning"></i>Note All Fields With * Need To Be Filled</small>
                     <span class="pull-right">
                         <a href="javascript:void(0)"  title="Refresh"><i class="fa fa-refresh"></i></a>
                         <a href="#" class="panel-minimize"><i class="fa fa-chevron-up"></i></a>
@@ -73,7 +73,7 @@
                         <!--form class="form-horizontal cascde-forms" method="post" action="#" name="basic_validate" id="basic_validate" novalidate="novalidate"-->
                             <br/>
                             <div class="form-group">
-                                <label class="col-lg-2 col-md-3 control-label" for="salutation_id">Title</label>
+                                <label class="col-lg-2 col-md-3 control-label" for="salutation_id">Title <small class="text-danger"> * </small></label>
                                 <div class="col-lg-7 col-md-9">
                                     <?php 
                                         echo $this->Form->input('salutation_id', array(
@@ -82,52 +82,52 @@
                                                 'class' => 'form-control',
                                                 'id' => 'salutation_id',
                                                 'options' => $Salutations,
-                                                'empty' => '(Select Sponsor\'s Title)'
+                                                'empty' => '(Select Parent\'s Title)'
                                             )
                                         ); 
                                     ?>
                                </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-lg-2 col-md-3 control-label" for="first_name">First Name</label>
+                                <label class="col-lg-2 col-md-3 control-label" for="first_name">First Name <small class="text-danger"> * </small></label>
                                 <div class="col-lg-7 col-md-9">
                                     <input type="text" class="form-control form-cascade-control input-small" value="<?php echo $sponsor['Sponsor']['first_name']?>"
-                                 name="data[Sponsor][first_name]" disabled id="first_name" placeholder="Type Sponsor's first name" required>
+                                 name="data[Sponsor][first_name]" id="first_name" placeholder="Type Parent's first name" required>
                                </div>
                             </div>
                             <div class="form-group">
-                              <label class="col-lg-2 col-md-3 control-label">Other Names</label>
+                              <label class="col-lg-2 col-md-3 control-label">Last Names <small class="text-danger"> * </small></label>
                               <div class="col-lg-7 col-md-9">
-                               <input type="text" class="form-control form-cascade-control input-small" name="data[Sponsor][other_name]" id="other_name" disabled
-                                      value="<?php echo (empty($sponsor['Sponsor']['other_name'])) ? '' : $sponsor['Sponsor']['other_name']?>" placeholder="Type Sponsor's other names">
+                               <input type="text" class="form-control form-cascade-control input-small" name="data[Sponsor][other_name]" id="other_name"
+                                      value="<?php echo (empty($sponsor['Sponsor']['other_name'])) ? '' : $sponsor['Sponsor']['other_name']?>" placeholder="Type Parent's Last names">
                              </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-lg-2 col-md-3 control-label" for="email">Email</label>
                               <div class="col-lg-7 col-md-9">
                                 <input type="email" class="form-control form-cascade-control input-small" name="data[Sponsor][email]" 
-                                    value="<?php echo (empty($sponsor['Sponsor']['email'])) ? '' : $sponsor['Sponsor']['email'];?>" id="email" placeholder="Sponsor's e-mail">
+                                    value="<?php echo (empty($sponsor['Sponsor']['email'])) ? '' : $sponsor['Sponsor']['email'];?>" id="email" placeholder="Parent's e-mail">
                               </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-lg-2 col-md-3 control-label" for="mobile_number1">Mobile Number 1</label>
+                                <label class="col-lg-2 col-md-3 control-label" for="mobile_number1">Mobile Number 1 <small class="text-danger"> * </small></label>
                               <div class="col-lg-7 col-md-9">
                                     <input type="text" class="form-control form-cascade-control input-small" name="data[Sponsor][mobile_number1]"
-                                    value="<?php echo $sponsor['Sponsor']['mobile_number1']?>" id="mobile_number1" placeholder="Sponsor's Mobile number One" required>
+                                    value="<?php echo $sponsor['Sponsor']['mobile_number1']?>" id="mobile_number1" placeholder="Parent's Mobile number One" required>
                               </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-lg-2 col-md-3 control-label" for="mobile_number2">Mobile Number 2</label>
                                 <div class="col-lg-7 col-md-9">
-                                    <input type="text" class="form-control form-cascade-control input-small" name="data[Sponsor][mobile_number2]" 
-                                    value="<?php echo ($sponsor['Sponsor']['mobile_number2']) ? $sponsor['Sponsor']['mobile_number2'] : ""?>" id="mobile_number2" placeholder="Sponsor's Mobile number Two if any">
+                                    <input type="text" class="form-control form-cascade-control input-small" name="data[Sponsor][mobile_number2]"
+                                    value="<?php echo ($sponsor['Sponsor']['mobile_number2']) ? $sponsor['Sponsor']['mobile_number2'] : ""?>" id="mobile_number2" placeholder="Parent's Mobile number Two if any">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-lg-2 col-md-3 control-label" for="contact_address">Contact Address</label>
+                                <label class="col-lg-2 col-md-3 control-label" for="contact_address">Contact Address <small class="text-danger"> * </small></label>
                                 <div class="col-lg-7 col-md-9">
                                     <textarea class="form-control form-cascade-control input-small" name="data[Sponsor][contact_address]" 
-                                    id="contact_address" placeholder="Sponsor's Contact Address" required><?php echo $sponsor['Sponsor']['contact_address']?></textarea>
+                                    id="contact_address" placeholder="Parent's Contact Address" required><?php echo $sponsor['Sponsor']['contact_address']?></textarea>
                                 </div>
                             </div>
                             <!--div class="form-group">
@@ -140,14 +140,14 @@
 //                                                'class' => 'form-control',
 //                                                'id' => 'sponsorship_type_id',
 //                                                'options' => $SponsorshipTypes,
-//                                                'empty' => '(Select Sponsor\'s Sponsorship Type)'
+//                                                'empty' => '(Select Parent\'s Sponsorship Type)'
 //                                            )
 //                                        ); 
                                     ?>
                                 </div>
                             </div-->
                             <div class="form-group">
-                                <label class="col-lg-2 col-md-3 control-label" for="country_id">Nationality</label>
+                                <label class="col-lg-2 col-md-3 control-label" for="country_id">Nationality <small class="text-danger"> * </small></label>
                                 <div class="col-lg-7 col-md-9">
                                     <?php 
                                         echo $this->Form->input('country_id', array(
@@ -157,7 +157,7 @@
                                                 'id' => 'country_id',
                                                 'required' => 'required',
                                                 'options' => $Countrys,
-                                                'empty' => '(Select Sponsor\'s Country)'
+                                                'empty' => '(Select Parent\'s Country)'
                                             )
                                         ); 
                                     ?>
@@ -165,7 +165,7 @@
                             </div>
                             <div id="state_lga_div">
                                 <div class="form-group">
-                                    <label for="state_id" class="col-lg-2 col-md-3 control-label">State of origin</label>
+                                    <label for="state_id" class="col-lg-2 col-md-3 control-label">State of origin <small class="text-danger"> * </small></label>
                                     <div class="col-lg-7 col-md-9">
                                         <?php 
                                             echo $this->Form->input('state_id', array(
@@ -174,38 +174,38 @@
                                                     'class' => 'form-control',
                                                     'id' => 'state_id',
                                                     'options' => $States,
-                                                    'empty' => '(Select Sponsor\'s State)'
+                                                    'empty' => '(Select Parent\'s State)'
                                                 )
                                             ); 
                                         ?>
                                     </div>
                                  </div>
                                  <div class="form-group">
-                                    <label for="local_govt_id" class="col-lg-2 col-md-3 control-label">Local Govt.</label>
+                                    <label for="local_govt_id" class="col-lg-2 col-md-3 control-label">Local Govt. <small class="text-danger"> * </small></label>
                                     <div class="col-lg-7 col-md-9">
                                         <select class="form-control" name="data[Sponsor][local_govt_id]" id="local_govt_id">
                                             <?php 
                                                 if(!empty($sponsor['Sponsor']['local_govt_id'])) { 
                                                     echo '<option value="'.$sponsor['Sponsor']['local_govt_id'].'">'.$sponsor['LocalGovt']['local_govt_name'].'</option>';
                                                 } else { ?>
-                                                    <option value="">  (Select Sponsor's L.G.A)  </option>
+                                                    <option value="">  (Select Parent's L.G.A)  </option>
                                             <?php } ?>
                                          </select>
                                     </div>
                                  </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-lg-2 col-md-3 control-label" for="occupation">Occupation</label>
+                                <label class="col-lg-2 col-md-3 control-label" for="occupation">Occupation <small class="text-danger"> * </small></label>
                                 <div class="col-lg-7 col-md-9">
                                     <input type="text" class="form-control form-cascade-control input-small" name="data[Sponsor][occupation]" 
-                                    value="<?php echo $sponsor['Sponsor']['occupation']?>" id="occupation" placeholder="Sponsor's Occupation" required>
+                                    value="<?php echo $sponsor['Sponsor']['occupation']?>" id="occupation" placeholder="Parent's Occupation" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-lg-2 col-md-3 control-label" for="company_name">Company name</label>
                                 <div class="col-lg-7 col-md-9">
                                     <input type="text" class="form-control form-cascade-control input-small" name="data[Sponsor][company_name]" 
-                                    value="<?php echo ($sponsor['Sponsor']['company_name']) ? $sponsor['Sponsor']['company_name'] : ""?>" id="company_name" placeholder="Sponsor's Company name if any" required>
+                                    value="<?php echo ($sponsor['Sponsor']['company_name']) ? $sponsor['Sponsor']['company_name'] : ""?>" id="company_name" placeholder="Parent's Company name if any" required>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -240,7 +240,7 @@
         </div>	
     </div>
 <?php
-    //on click of Edit Sponsor Record link... activate the link
+    //on click of Edit Parent Record link... activate the link
     echo $this->Js->buffer('
         setTabActive("[href=\"'.DOMAIN_NAME.'/sponsors/\"]", 0);
     ');

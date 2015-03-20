@@ -179,8 +179,9 @@ class ExamsController extends AppController {
                 $data_array = $this->request->data['ExamDetail'];
                 $j = 0; $val = null;
                 for ($i=0; $i<count($data_array['exam_detail_id']); $i++){
-                    $ExamDetail->id = explode('-', $data_array['exam_detail_id'][$i])[0];
-                    $val = explode('-', $data_array['exam_detail_id'][$i])[1];
+                    $encrypt = explode('-', $data_array['exam_detail_id'][$i]);
+                    $ExamDetail->id = $encrypt[0];
+                    $val = $encrypt[1];
                     $data = $this->request->data['ExamDetail'];
                     $data['exam_detail_id'] = $data_array['exam_detail_id'][$i];
                     $data['ca1'] = $data_array['ca1'][$i];
@@ -294,9 +295,10 @@ class ExamsController extends AppController {
         if($resultCheck){
             //Decrypt the id sent
             $decrypt_id = $this->encryption->decode($encrypt_id);
-            $student_id = explode('/', $decrypt_id)[0];
-            $class_id = explode('/', $decrypt_id)[1];
-            $term_id = explode('/', $decrypt_id)[2];
+            $encrypt = explode('/', $decrypt_id);
+            $student_id = $encrypt[0];
+            $class_id = $encrypt[1];
+            $term_id = $encrypt[2];
             $skill_assess = null;
 
             $option = array('conditions' => array('Assessment.student_id' => $student_id, 'Assessment.academic_term_id' => $term_id));
@@ -364,10 +366,11 @@ class ExamsController extends AppController {
          $resultCheck = $this->Acl->check($this->group_alias, 'ExamsController');
         if($resultCheck){
             $decrypt_id = $this->encryption->decode($encrypt_id);
-           $class_id = explode('/', $decrypt_id)[0];
-           $term_id = explode('/', $decrypt_id)[1];
-           $results = $this->Exam->findClassTerminalPositions($class_id, $term_id);  
-           $response = array();           
+            $encrypt = explode('/', $decrypt_id);
+            $class_id = $encrypt[0];
+            $term_id = $encrypt[1];
+            $results = $this->Exam->findClassTerminalPositions($class_id, $term_id);
+            $response = array();
 
            if(!empty($results)) {   
                //All the students by classroom
@@ -401,9 +404,10 @@ class ExamsController extends AppController {
         if($resultCheck){
             //Decrypt the id sent
             $decrypt_id = $this->encryption->decode($encrypt_id);
-            $student_id = explode('/', $decrypt_id)[0];
-            $class_id = explode('/', $decrypt_id)[1];
-            $year_id = explode('/', $decrypt_id)[2];
+            $encrypt = explode('/', $decrypt_id);
+            $student_id = $encrypt[0];
+            $class_id = $encrypt[1];
+            $year_id = $encrypt[2];
 
             $AcademicTermModel = ClassRegistry::init('AcademicTerm');
             $options = array('conditions' => array('AcademicTerm.academic_year_id' => $year_id));
@@ -493,8 +497,9 @@ class ExamsController extends AppController {
         $resultCheck = $this->Acl->check($this->group_alias, 'ExamsController');
         if($resultCheck){
             $decrypt_id = $this->encryption->decode($encrypt_id);
-            $class_id = explode('/', $decrypt_id)[0];
-            $year_id = explode('/', $decrypt_id)[1];
+            $encrypt = explode('/', $decrypt_id);
+            $class_id = $encrypt[0];
+            $year_id = $encrypt[1];
             $results = $this->Exam->findClassAnnuallPositions($class_id, $year_id);  
             $response = array();  
 
@@ -533,13 +538,14 @@ class ExamsController extends AppController {
 //        if($resultCheck){
             //Decrypt the id sent
             $decrypt_id = $this->encryption->decode($encrypt_id);
-            $student_id = explode('/', $decrypt_id)[0];
-            $class_id = explode('/', $decrypt_id)[1];
-            $term_id = explode('/', $decrypt_id)[2];
+            $encrypt = explode('/', $decrypt_id);
+            $student_id = $encrypt[0];
+            $class_id = $encrypt[1];
+            $term_id = $encrypt[2];
 
             $option = array('conditions' => array('Assessment.student_id' => $student_id, 'Assessment.academic_term_id' => $term_id));
             $student_assess = $AssessmentModel->find('first', $option);
-            $skill_assess = $SkillAssessmentModel->find('all', array('conditions' => array('SkillAssessment.assessment_id' => $student_assess['Assessment']['assessment_id'])));
+            $skill_assess = ($student_assess) ? $SkillAssessmentModel->find('all', array('conditions' => array('SkillAssessment.assessment_id' => $student_assess['Assessment']['assessment_id']))) : null;
 
             $results = $this->Exam->findStudentExamTerminalDetails($student_id, $term_id, $class_id);
             $response = array();

@@ -5984,3 +5984,2974 @@ Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
 Stack Trace:
 #0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
 #1 {main}
+2015-03-16 13:00:17 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 13:00:45 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 13:17:59 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 13:18:27 Error: [MissingActionException] Action AppController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'js',
+)
+Request URL: /smartedu/app/js/bootstrap-tour.js
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(AppController), Object(CakeRequest))
+#2 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-03-16 13:18:27 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 13:38:12 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 13:38:13 Error: [MissingActionException] Action AppController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'js',
+)
+Request URL: /smartedu/app/js/bootstrap-tour.js
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(AppController), Object(CakeRequest))
+#2 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-03-16 13:38:14 Error: [MissingActionException] Action AppController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'js',
+)
+Request URL: /smartedu/app/js/bootstrap-tour.js
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(AppController), Object(CakeRequest))
+#2 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-03-16 13:41:47 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 13:42:51 Error: [MissingActionException] Action AppController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'js',
+)
+Request URL: /smartedu/app/js/bootstrap-tour.js
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(AppController), Object(CakeRequest))
+#2 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-03-16 13:42:51 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 13:42:52 Error: [MissingActionException] Action AppController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'js',
+)
+Request URL: /smartedu/app/js/bootstrap-tour.js
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(AppController), Object(CakeRequest))
+#2 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-03-16 13:43:48 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 13:43:48 Error: [MissingActionException] Action AppController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'js',
+)
+Request URL: /smartedu/app/js/bootstrap-tour.js
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(AppController), Object(CakeRequest))
+#2 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-03-16 13:44:38 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 13:44:38 Error: [MissingActionException] Action AppController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'js',
+)
+Request URL: /smartedu/app/js/bootstrap-tour.js
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(AppController), Object(CakeRequest))
+#2 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-03-16 13:46:14 Error: [MissingActionException] Action AppController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'js',
+)
+Request URL: /smartedu/app/js/bootstrap-tour.js
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(AppController), Object(CakeRequest))
+#2 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-03-16 13:46:14 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 13:46:14 Error: [MissingActionException] Action AppController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'js',
+)
+Request URL: /smartedu/app/js/bootstrap-tour.js
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(AppController), Object(CakeRequest))
+#2 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-03-16 13:46:40 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 13:46:40 Error: [MissingActionException] Action AppController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'js',
+)
+Request URL: /smartedu/app/js/bootstrap-tour.js
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(AppController), Object(CakeRequest))
+#2 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-03-16 13:52:22 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 13:52:23 Error: [MissingActionException] Action AppController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'js',
+)
+Request URL: /smartedu/app/js/bootstrap-tour.js
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(AppController), Object(CakeRequest))
+#2 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-03-16 13:58:39 Error: [MissingActionException] Action AppController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'js',
+)
+Request URL: /smartedu/app/js/bootstrap-tour.js
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(AppController), Object(CakeRequest))
+#2 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-03-16 13:58:40 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 13:58:40 Error: [MissingActionException] Action AppController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'js',
+)
+Request URL: /smartedu/app/js/bootstrap-tour.js
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(AppController), Object(CakeRequest))
+#2 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-03-16 13:59:13 Error: [MissingActionException] Action AppController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'js',
+)
+Request URL: /smartedu/app/js/bootstrap-tour.js
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(AppController), Object(CakeRequest))
+#2 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-03-16 13:59:13 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 13:59:14 Error: [MissingActionException] Action AppController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'js',
+)
+Request URL: /smartedu/app/js/bootstrap-tour.js
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(AppController), Object(CakeRequest))
+#2 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-03-16 14:00:04 Error: [MissingActionException] Action AppController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'js',
+)
+Request URL: /smartedu/app/js/bootstrap-tour.js
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(AppController), Object(CakeRequest))
+#2 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-03-16 14:00:05 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 14:00:06 Error: [MissingActionException] Action AppController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'js',
+)
+Request URL: /smartedu/app/js/bootstrap-tour.js
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(AppController), Object(CakeRequest))
+#2 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-03-16 14:00:37 Error: [MissingActionException] Action AppController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'js',
+)
+Request URL: /smartedu/app/js/bootstrap-tour.js
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(AppController), Object(CakeRequest))
+#2 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-03-16 14:00:38 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 14:00:39 Error: [MissingActionException] Action AppController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'js',
+)
+Request URL: /smartedu/app/js/bootstrap-tour.js
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(AppController), Object(CakeRequest))
+#2 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-03-16 14:03:18 Error: [MissingActionException] Action AppController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'js',
+)
+Request URL: /smartedu/app/js/bootstrap-tour.js
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(AppController), Object(CakeRequest))
+#2 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-03-16 14:03:19 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 14:03:21 Error: [MissingActionException] Action AppController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'js',
+)
+Request URL: /smartedu/app/js/bootstrap-tour.js
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(AppController), Object(CakeRequest))
+#2 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-03-16 14:04:25 Error: [MissingActionException] Action AppController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'js',
+)
+Request URL: /smartedu/app/js/bootstrap-tour.js
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(AppController), Object(CakeRequest))
+#2 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-03-16 14:04:26 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 14:04:27 Error: [MissingActionException] Action AppController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'js',
+)
+Request URL: /smartedu/app/js/bootstrap-tour.js
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(AppController), Object(CakeRequest))
+#2 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-03-16 14:04:57 Error: [MissingActionException] Action AppController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'js',
+)
+Request URL: /smartedu/app/js/bootstrap-tour.js
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(AppController), Object(CakeRequest))
+#2 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-03-16 14:04:58 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 14:04:58 Error: [MissingActionException] Action AppController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'js',
+)
+Request URL: /smartedu/app/js/bootstrap-tour.js
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(AppController), Object(CakeRequest))
+#2 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-03-16 14:05:51 Error: [MissingActionException] Action AppController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'js',
+)
+Request URL: /smartedu/app/js/bootstrap-tour.js
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(AppController), Object(CakeRequest))
+#2 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-03-16 14:05:52 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 14:05:53 Error: [MissingActionException] Action AppController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'js',
+)
+Request URL: /smartedu/app/js/bootstrap-tour.js
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(AppController), Object(CakeRequest))
+#2 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-03-16 14:08:27 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 14:08:27 Error: [MissingActionException] Action AppController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'js',
+)
+Request URL: /smartedu/app/js/bootstrap-tour.js
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(AppController), Object(CakeRequest))
+#2 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-03-16 14:08:39 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 14:10:41 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 14:14:56 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 14:18:08 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 14:18:13 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 14:18:49 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 14:23:53 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 14:26:19 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 14:28:06 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 14:28:53 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 14:29:28 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 14:30:06 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 14:31:43 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 14:33:12 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 14:33:26 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 14:33:43 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 14:35:10 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 14:36:51 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 14:38:39 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 14:39:02 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 14:40:34 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 14:41:18 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 14:44:16 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 14:44:45 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 14:45:04 Error: [MissingActionException] Action AppController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'js',
+)
+Request URL: /smartedu/app/js/bootstrap-tour.js
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(AppController), Object(CakeRequest))
+#2 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-03-16 14:45:04 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 14:45:06 Error: [MissingActionException] Action AppController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'js',
+)
+Request URL: /smartedu/app/js/bootstrap-tour.js
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(AppController), Object(CakeRequest))
+#2 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-03-16 14:46:04 Error: [MissingActionException] Action AppController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'js',
+)
+Request URL: /smartedu/app/js/bootstrap-tour.js
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(AppController), Object(CakeRequest))
+#2 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-03-16 14:46:04 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 14:46:06 Error: [MissingActionException] Action AppController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'js',
+)
+Request URL: /smartedu/app/js/bootstrap-tour.js
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(AppController), Object(CakeRequest))
+#2 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-03-16 14:46:43 Error: [MissingActionException] Action AppController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'js',
+)
+Request URL: /smartedu/app/js/bootstrap-tour.js
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(AppController), Object(CakeRequest))
+#2 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-03-16 14:46:44 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 14:46:46 Error: [MissingActionException] Action AppController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'js',
+)
+Request URL: /smartedu/app/js/bootstrap-tour.js
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(AppController), Object(CakeRequest))
+#2 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-03-16 14:47:46 Error: [MissingActionException] Action AppController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'js',
+)
+Request URL: /smartedu/app/js/bootstrap-tour.js
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(AppController), Object(CakeRequest))
+#2 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-03-16 14:47:46 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 14:47:49 Error: [MissingActionException] Action AppController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'js',
+)
+Request URL: /smartedu/app/js/bootstrap-tour.js
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(AppController), Object(CakeRequest))
+#2 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-03-16 14:48:52 Error: [MissingActionException] Action AppController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'js',
+)
+Request URL: /smartedu/app/js/bootstrap-tour.js
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(AppController), Object(CakeRequest))
+#2 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-03-16 14:48:54 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 14:48:55 Error: [MissingActionException] Action AppController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'js',
+)
+Request URL: /smartedu/app/js/bootstrap-tour.js
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(AppController), Object(CakeRequest))
+#2 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-03-16 14:49:09 Error: [MissingActionException] Action AppController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'js',
+)
+Request URL: /smartedu/app/js/bootstrap-tour.js
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(AppController), Object(CakeRequest))
+#2 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-03-16 14:49:09 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 14:49:12 Error: [MissingActionException] Action AppController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'js',
+)
+Request URL: /smartedu/app/js/bootstrap-tour.js
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(AppController), Object(CakeRequest))
+#2 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-03-16 14:50:20 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 14:50:32 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 14:50:42 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 14:58:26 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 15:03:33 Error: [MissingActionException] Action AppController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'js',
+)
+Request URL: /smartedu/app/js/bootstrap-tour.js
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(AppController), Object(CakeRequest))
+#2 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-03-16 15:03:33 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 15:03:33 Error: [MissingActionException] Action AppController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'js',
+)
+Request URL: /smartedu/app/js/bootstrap-tour.js
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(AppController), Object(CakeRequest))
+#2 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-03-16 15:03:48 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 15:03:52 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 15:04:16 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 15:13:09 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 15:13:45 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 15:17:45 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 15:18:25 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 15:19:28 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 15:19:32 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 15:20:07 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 15:22:22 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 15:23:14 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 15:23:37 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 15:23:41 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 15:23:50 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 15:23:55 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 15:24:34 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 15:25:48 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 15:26:06 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 15:26:21 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 15:27:33 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 15:28:14 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 15:28:36 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 15:28:39 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 15:28:56 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 15:29:50 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 15:30:16 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 16:03:56 Error: [MissingActionException] Action AppController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'js',
+)
+Request URL: /smartedu/app/js/bootstrap-tour.js
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(AppController), Object(CakeRequest))
+#2 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-03-16 16:03:56 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 16:04:06 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 16:04:33 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 16:04:42 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 16:05:03 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 16:05:17 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 16:06:46 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 16:07:32 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 16:24:23 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 16:24:46 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 16:25:03 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 16:25:06 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 16:26:41 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 16:26:42 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 16:36:45 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 16:36:59 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 16:37:03 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 16:37:09 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 16:37:12 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 16:37:39 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 16:37:39 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 16:38:22 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 16:38:45 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 16:38:59 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 16:39:03 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 17:05:37 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 17:05:51 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 17:08:45 Error: [MissingActionException] Action AppController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'js',
+)
+Request URL: /smartedu/app/js/bootstrap-tour.js
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(AppController), Object(CakeRequest))
+#2 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-03-16 17:08:45 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 17:08:59 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-16 17:08:59 Error: [MissingActionException] Action AppController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'js',
+)
+Request URL: /smartedu/app/js/bootstrap-tour.js
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(AppController), Object(CakeRequest))
+#2 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-03-17 10:39:30 Error: [MissingActionException] Action AppController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'js',
+)
+Request URL: /smartedu/app/js/bootstrap-tour.js
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(AppController), Object(CakeRequest))
+#2 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-03-17 10:39:30 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-17 10:39:32 Error: [MissingActionException] Action AppController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'js',
+)
+Request URL: /smartedu/app/js/bootstrap-tour.js
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(AppController), Object(CakeRequest))
+#2 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-03-17 10:39:39 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-17 10:40:14 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-17 10:46:38 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-17 10:47:15 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-17 10:47:46 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-17 10:48:00 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-17 10:49:05 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-17 10:51:50 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-17 10:54:11 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-17 10:55:06 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-17 10:55:16 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-17 10:57:18 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-17 10:59:11 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-17 11:03:13 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-17 11:04:30 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-17 11:04:51 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-17 11:07:37 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-17 11:08:23 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-17 11:10:24 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-17 11:11:07 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-17 11:12:23 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-17 11:12:53 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-17 12:32:35 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-17 12:32:47 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-17 12:33:11 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-17 12:52:16 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Aro.modgl' in 'field list'
+Request URL: /smartedu/exams/print_result/Blny2K6wzZRsAmQ-d-wJPybakM6Ju-8zYt5DTIZGxtU
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Model/Datasource/DboSource.php(458): PDOStatement->execute(Array)
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Model/Datasource/DboSource.php(424): DboSource->_execute('SELECT `Permiss...', Array)
+#2 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Model/Datasource/DboSource.php(666): DboSource->execute('SELECT `Permiss...', Array, Array)
+#3 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Model/Datasource/DboSource.php(1106): DboSource->fetchAll('SELECT `Permiss...', false)
+#4 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Model/Model.php(2947): DboSource->read(Object(Permission), Array)
+#5 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Model/Model.php(2919): Model->_readDataSource('all', Array)
+#6 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Model/Permission.php(124): Model->find('all', Array)
+#7 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Controller/Component/Acl/DbAcl.php(74): Permission->check('adm_users', 'EmployeesContro...', '*')
+#8 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Controller/Component/AclComponent.php(110): DbAcl->check('adm_users', 'EmployeesContro...', '*')
+#9 /Applications/XAMPP/xamppfiles/htdocs/smartedu/Controller/AppController.php(148): AclComponent->check('adm_users', 'EmployeesContro...')
+#10 [internal function]: AppController->beforeRender(Object(CakeEvent))
+#11 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Event/CakeEventManager.php(242): call_user_func(Array, Object(CakeEvent))
+#12 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Controller/Controller.php(927): CakeEventManager->dispatch(Object(CakeEvent))
+#13 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#14 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(ExamsController), Object(CakeRequest))
+#15 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#16 {main}
+2015-03-17 19:13:08 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-17 19:13:35 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-18 10:22:54 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-18 10:24:26 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-18 10:25:34 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-18 10:26:20 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-18 10:27:14 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-18 10:28:55 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-18 10:41:15 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-18 10:42:57 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-18 10:43:05 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-18 10:43:11 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-18 10:43:37 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-18 10:45:58 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-18 10:48:31 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-18 10:48:35 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-18 10:50:58 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-18 10:51:25 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-18 10:51:32 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-18 10:57:46 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-18 10:59:21 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-18 11:00:25 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-18 11:00:38 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-18 11:03:12 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-18 11:28:08 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-18 11:28:24 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-18 11:33:44 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(150): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-18 12:55:30 Error: Fatal Error (4): syntax error, unexpected 'echo' (T_ECHO) in [/Applications/XAMPP/xamppfiles/htdocs/smartedu/View/Layouts/default.ctp, line 79]
+2015-03-18 12:55:30 Error: [FatalErrorException] syntax error, unexpected 'echo' (T_ECHO)
+Request URL: /smartedu/users/change
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Error/ErrorHandler.php(203): ErrorHandler::handleFatalError(4, 'syntax error, u...', '/Applications/X...', 79)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', '/Applications/X...', 79, Array)
+#2 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Core/App.php(931): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', '/Applications/X...', 79, Array)
+#3 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Core/App.php(904): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2015-03-18 20:34:25 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-18 20:34:25 Error: [MissingActionException] Action AppController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'js',
+)
+Request URL: /smartedu/app/js/bootstrap-tour.js
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(AppController), Object(CakeRequest))
+#2 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-03-18 20:34:26 Error: [MissingActionException] Action AppController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'js',
+)
+Request URL: /smartedu/app/js/bootstrap-tour.js
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(AppController), Object(CakeRequest))
+#2 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-03-18 20:34:33 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-18 20:34:55 Error: [SocketException] 
+Request URL: /smartedu/sponsors/register
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Network/Email/MailTransport.php(51): MailTransport->_mail('kingsley4united...', 'Login Details', '<!DOCTYPE html>...', 'From: Smart Edu...', NULL)
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Network/Email/CakeEmail.php(1158): MailTransport->send(Object(CakeEmail))
+#2 /Applications/XAMPP/xamppfiles/htdocs/smartedu/Model/AppModel.php(152): CakeEmail->send('Find Below your...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/smartedu/Model/SponsorNew.php(58): AppModel->sendMail('Find Below your...', 'Login Details', 'kingsley4united...', 'Test Observer')
+#4 [internal function]: SponsorNew->afterSave(true, Array)
+#5 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Event/CakeEventManager.php(240): call_user_func_array(Array, Array)
+#6 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Model/Model.php(1883): CakeEventManager->dispatch(Object(CakeEvent))
+#7 /Applications/XAMPP/xamppfiles/htdocs/smartedu/Controller/SponsorsController.php(51): Model->save(Array)
+#8 [internal function]: SponsorsController->register()
+#9 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(SponsorsController), Array)
+#10 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#11 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(SponsorsController), Object(CakeRequest))
+#12 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#13 {main}
+2015-03-18 20:34:56 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-18 20:35:10 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-18 20:37:42 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-18 20:38:00 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-18 20:38:06 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-18 20:38:22 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-18 20:38:34 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-18 20:38:38 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-18 20:39:00 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-18 20:39:06 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-18 20:39:10 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-18 20:39:15 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-18 21:50:55 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-18 21:50:56 Error: [MissingActionException] Action AppController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'js',
+)
+Request URL: /smartedu/app/js/bootstrap-tour.js
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(AppController), Object(CakeRequest))
+#2 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-03-18 21:58:22 Error: [MissingActionException] Action AppController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'js',
+)
+Request URL: /smartedu/app/js/bootstrap-tour.js
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(AppController), Object(CakeRequest))
+#2 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-03-18 21:58:22 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-18 21:58:22 Error: [MissingActionException] Action AppController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'js',
+)
+Request URL: /smartedu/app/js/bootstrap-tour.js
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(AppController), Object(CakeRequest))
+#2 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-03-18 21:59:00 Error: [MissingActionException] Action AppController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'js',
+)
+Request URL: /smartedu/app/js/bootstrap-tour.js
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(AppController), Object(CakeRequest))
+#2 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-03-18 21:59:00 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-18 21:59:01 Error: [MissingActionException] Action AppController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'js',
+)
+Request URL: /smartedu/app/js/bootstrap-tour.js
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(AppController), Object(CakeRequest))
+#2 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-03-18 21:59:22 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-18 21:59:28 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-18 21:59:33 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-18 21:59:41 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-19 08:09:11 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-19 08:09:21 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-19 08:57:40 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-19 09:02:22 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-19 09:03:08 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-19 09:03:32 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-19 09:05:41 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-19 09:05:42 Error: [MissingActionException] Action AppController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'js',
+)
+Request URL: /smartedu/app/js/bootstrap-tour.js
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(AppController), Object(CakeRequest))
+#2 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-03-19 09:10:44 Error: [MissingActionException] Action AppController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'js',
+)
+Request URL: /smartedu/app/js/bootstrap-tour.js
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(AppController), Object(CakeRequest))
+#2 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-03-19 09:10:45 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-19 09:10:45 Error: [MissingActionException] Action AppController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'js',
+)
+Request URL: /smartedu/app/js/bootstrap-tour.js
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(AppController), Object(CakeRequest))
+#2 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-03-19 09:10:52 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-19 09:10:54 Error: [MissingActionException] Action AppController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'js',
+)
+Request URL: /smartedu/app/js/bootstrap-tour.js
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(AppController), Object(CakeRequest))
+#2 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-03-19 09:10:54 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-19 16:11:17 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-19 16:21:54 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-19 16:25:39 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-19 16:28:21 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-19 16:29:50 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-19 16:41:48 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-19 16:43:02 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-19 16:43:53 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-19 16:44:58 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-19 16:53:25 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-19 16:54:33 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-19 17:17:44 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-19 17:18:10 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-19 17:21:29 Error: [PDOException] SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'class_id="NULL" AND classlevel_id="2" AND academic_term_id="4"' at line 1
+Request URL: /smartedu/subjects/validateIfExist
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Model/Datasource/DboSource.php(458): PDOStatement->execute(Array)
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Model/Datasource/DboSource.php(424): DboSource->_execute('\r\n             ...', Array)
+#2 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Model/Datasource/DboSource.php(666): DboSource->execute('\r\n             ...', Array, Array)
+#3 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Model/Datasource/DboSource.php(537): DboSource->fetchAll('\r\n             ...')
+#4 [internal function]: DboSource->query('\r\n             ...')
+#5 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Model/Model.php(3354): call_user_func_array(Array, Array)
+#6 /Applications/XAMPP/xamppfiles/htdocs/smartedu/Model/SubjectClasslevel.php(69): Model->query('\r\n             ...')
+#7 /Applications/XAMPP/xamppfiles/htdocs/smartedu/Controller/SubjectsController.php(94): SubjectClasslevel->validateIfExist('25', '4', '2', NULL)
+#8 [internal function]: SubjectsController->validateIfExist()
+#9 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(SubjectsController), Array)
+#10 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#11 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(SubjectsController), Object(CakeRequest))
+#12 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#13 {main}
+2015-03-19 17:28:19 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-19 17:30:12 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-19 17:35:15 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-19 17:35:28 Error: [MissingActionException] Action AppController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'js',
+)
+Request URL: /smartedu/app/js/bootstrap-tour.js
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(AppController), Object(CakeRequest))
+#2 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-03-19 17:35:58 Error: [MissingActionException] Action AppController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'js',
+)
+Request URL: /smartedu/app/js/bootstrap-tour.js
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(AppController), Object(CakeRequest))
+#2 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-03-19 17:35:59 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-19 17:36:00 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-19 17:36:05 Error: [MissingActionException] Action AppController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'js',
+)
+Request URL: /smartedu/app/js/bootstrap-tour.js
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(AppController), Object(CakeRequest))
+#2 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-03-19 17:38:08 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-19 17:49:38 Error: [MissingActionException] Action AppController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'js',
+)
+Request URL: /smartedu/app/js/bootstrap-tour.js
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(AppController), Object(CakeRequest))
+#2 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-03-19 17:49:38 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-19 17:49:39 Error: [MissingActionException] Action AppController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'js',
+)
+Request URL: /smartedu/app/js/bootstrap-tour.js
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(AppController), Object(CakeRequest))
+#2 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-03-20 07:30:11 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-20 08:04:44 Error: [MissingActionException] Action AppController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'js',
+)
+Request URL: /smartedu/app/js/bootstrap-tour.js
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(AppController), Object(CakeRequest))
+#2 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-03-20 08:04:44 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-20 10:26:54 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-20 10:27:14 Error: [MissingActionException] Action AppController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'js',
+)
+Request URL: /smartedu/app/js/bootstrap-tour.js
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(AppController), Object(CakeRequest))
+#2 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-03-20 10:27:14 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-20 10:27:18 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-20 10:49:31 Error: [MissingActionException] Action AppController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'js',
+)
+Request URL: /smartedu/app/js/bootstrap-tour.js
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(AppController), Object(CakeRequest))
+#2 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-03-20 10:49:31 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-20 10:49:31 Error: [MissingActionException] Action AppController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'js',
+)
+Request URL: /smartedu/app/js/bootstrap-tour.js
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(AppController), Object(CakeRequest))
+#2 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-03-20 10:49:38 Error: [MissingActionException] Action AppController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'js',
+)
+Request URL: /smartedu/app/js/bootstrap-tour.js
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(AppController), Object(CakeRequest))
+#2 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-03-20 10:49:38 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-20 10:49:38 Error: [MissingActionException] Action AppController::js() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'js',
+)
+Request URL: /smartedu/app/js/bootstrap-tour.js
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(AppController), Object(CakeRequest))
+#2 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-03-20 11:36:38 Error: [MissingConnectionException] Database connection "Mysql" is missing, or could not be created.
+Exception Attributes: array (
+  'class' => 'Mysql',
+  'message' => 'SQLSTATE[HY000] [1049] Unknown database \'smartedu_online\'',
+  'enabled' => true,
+)
+Request URL: /smartedu/students/register
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Model/Datasource/DboSource.php(260): Mysql->connect()
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Model/ConnectionManager.php(105): DboSource->__construct(Array)
+#2 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Model/Model.php(3524): ConnectionManager::getDataSource('default')
+#3 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Model/Model.php(1136): Model->setDataSource('default')
+#4 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Model/Model.php(3551): Model->setSource('master_setups')
+#5 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Model/Model.php(2947): Model->getDataSource()
+#6 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Model/Model.php(2919): Model->_readDataSource('first', Array)
+#7 /Applications/XAMPP/xamppfiles/htdocs/smartedu/Controller/AppController.php(112): Model->find('first', Array)
+#8 /Applications/XAMPP/xamppfiles/htdocs/smartedu/Controller/StudentsController.php(10): AppController->beforeFilter()
+#9 [internal function]: StudentsController->beforeFilter(Object(CakeEvent))
+#10 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Event/CakeEventManager.php(242): call_user_func(Array, Object(CakeEvent))
+#11 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Controller/Controller.php(674): CakeEventManager->dispatch(Object(CakeEvent))
+#12 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(187): Controller->startupProcess()
+#13 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(StudentsController), Object(CakeRequest))
+#14 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#15 {main}
+2015-03-20 11:37:07 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-20 11:39:31 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-20 11:41:21 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-20 12:43:11 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-20 12:43:21 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-20 12:44:51 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-20 13:05:11 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-20 13:05:37 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-20 13:06:20 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-20 13:06:31 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-20 13:06:53 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-20 13:08:14 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-03-20 13:08:18 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}

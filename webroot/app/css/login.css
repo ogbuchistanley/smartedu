@@ -22,6 +22,12 @@
 -------------------------------------------------------------------------------------------------- */
 /*	 Panels variables
 -------------------------------------------------------------------------------------------------- */
+/*
+ Change From 54b5df to 009CB3
+*/
+
+
+
 html,
 body {
   height: 100%;
@@ -44,10 +50,10 @@ section {
   padding: 50px;
   width: 100%;
   height: 100%;
-  background: #54b5df;
+  background: #009CB3;
 }
 section:nth-child(2n) {
-  background: #2f4051;
+  background: #009CB3;
 }
 .login-holder {
   -webkit-border-radius: 6px;
@@ -61,10 +67,10 @@ section:nth-child(2n) {
   display: block;
   margin-top: -185px;
   margin-left: -205px;
-  width: 420px;
+  width: 390px;
   height: auto;
   background: white;
-  padding: 10px;
+  padding: 5px;
 }
 .login-holder .user-avatar {
   border-radius: 50%;

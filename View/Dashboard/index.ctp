@@ -49,7 +49,7 @@
                     </div>
                     <div class="info-details">
                         <h4><?php echo $term_id->getCurrentTermName();?><span class="pull-right"><?php echo $subject_count;?></span></h4>
-                        <p>No. of Subjects Assigned to you as a Tutor in a Class</p>
+                        <p>No. of Subjects Assigned to you in a Class</p>
                     </div>
                 </div>
             </div>
@@ -60,21 +60,21 @@
             <!-- Bar Charts -->
             <div class="row">
                 <!-- Discrete Bar Chart -->
-                <div class="col-md-7">
-                    <div id="chart01">
-                        <svg></svg>
-                    </div>
-                    <p class="text-center divider text-primary">
-                        <b><i class="fa fa-book fa-2x"></i>  Your Subjects for :: <span class="current_term_span"></span> :: Academic Term  <i class="fa fa-calendar fa-2x"></i></b>
-                    </p>
-                </div>
-                <!-- Discrete Bar Chart -->
                 <div class="col-md-5">
                     <div id="chart0">
                         <svg></svg>
                     </div>
                     <p class="text-center divider text-primary">
                         <b><i class="fa fa-home fa-2x"></i>  Your Class Rooms for :: <span class="current_year_span"></span> :: Academic Year  <i class="fa fa-calendar-o fa-2x"></i></b>
+                    </p>
+                </div>
+                <!-- Discrete Bar Chart -->
+                <div class="col-md-7">
+                    <div id="chart01">
+                        <svg></svg>
+                    </div>
+                    <p class="text-center divider text-primary">
+                        <b><i class="fa fa-book fa-2x"></i>  Your Subjects for :: <span class="current_term_span"></span> :: Academic Term  <i class="fa fa-calendar fa-2x"></i></b>
                     </p>
                 </div>
             </div>
@@ -106,8 +106,8 @@
                             <i class="fa fa-male fa-4x"></i>
                         </div>
                         <div class="info-details">
-                            <h4>Employees Count<span class="pull-right"><?php echo $employees;?></span></h4>
-                            <p>Active Employees <span class="badge pull-right bg-white text-success"> <?php echo $active_employees;?> <i class="fa fa-arrow-up fa-1x"></i></span> </p>
+                            <h4>Staffs Count<span class="pull-right"><?php echo $employees;?></span></h4>
+                            <p>Active Staffs <span class="badge pull-right bg-white text-success"> <?php echo $active_employees;?> <i class="fa fa-arrow-up fa-1x"></i></span> </p>
                         </div>
                     </div>
                 </div>
@@ -117,7 +117,7 @@
                             <i class="fa fa-user fa-4x"></i>
                         </div>
                         <div class="info-details">
-                            <h4>Sponsors Count<span class="pull-right"><?php echo $sponsors;?></span></h4>
+                            <h4>Parents Count<span class="pull-right"><?php echo $sponsors;?></span></h4>
                         </div>
                     </div>
                 </div>
@@ -138,12 +138,12 @@
                             <p class="text-center text-primary"><b><i class="fa fa-thumbs-o-up fa-2x"></i> Students Status (%) <i class="fa fa-thumbs-o-down fa-2x"></i></b></p>
                         </div>
                     </div>
-                    <div class="col-md-4 holder">
+                    <!--div class="col-md-4 holder">
                         <div class="col-md-10 col-md-offset-1">
                             <div id="payment_status"></div>
                             <p class="text-center text-primary"><b><i class="fa fa-money fa-2x"></i> Payment Status (%) <i class="fa fa-check fa-2x"></i></b></p>
                         </div>
-                    </div>
+                    </div-->
                 </div>
                 <p class="divider"></p>
                 <!-- Bar Charts -->

@@ -140,8 +140,9 @@ class ItemsController extends AppController {
         $resultCheck = $this->Acl->check($this->group_alias, 'ItemsController');
         if($resultCheck){
             $decrypt_id = $this->encryption->decode($encrypt_id);
-            $student_id = explode('/', $decrypt_id)[0];
-            $term_id = explode('/', $decrypt_id)[1];
+            $encrypt = explode('/', $decrypt_id);
+            $student_id = $encrypt[0];
+            $term_id = $encrypt[1];
 
             $this->set('title_for_layout','Terminal Fees Charges');
             $results = $this->Item->findStudentTerminalFees($student_id, $term_id);  
@@ -187,8 +188,9 @@ class ItemsController extends AppController {
         if($resultCheck){
             //Decrypt the id sent
             $decrypt_id = $this->encryption->decode($encrypt_id);
-            $class_id = explode('/', $decrypt_id)[0];
-            $term_id = explode('/', $decrypt_id)[1];
+            $encrypt = explode('/', $decrypt_id);
+            $class_id = $encrypt[0];
+            $term_id = $encrypt[1];
             $results = $this->Item->findClassTerminalFees($class_id, $term_id);  
             $response = array();  
 

@@ -47,8 +47,9 @@ class AttendsController extends AppController {
         if($resultCheck){
             if ($this->request->is('ajax')) {
                 $decrypt_id = $this->encryption->decode($this->request->data('cls_yr_id'));
-                $class_id = explode('/', $decrypt_id)[0];
-                $year_id = explode('/', $decrypt_id)[1];
+                $encrypt = explode('/', $decrypt_id);
+                $class_id = $encrypt[0];
+                $year_id = $encrypt[1];
                 $results = $this->Attend->findStudentClassroom($year_id, $class_id);
                 $response = array();            
                 if($results) {
@@ -256,8 +257,9 @@ class AttendsController extends AppController {
         $resultCheck = $this->Acl->check($this->group_alias, 'AttendsController');
         if($resultCheck){
             $decrypt_id = $this->encryption->decode($encrypt_id);
-            $class_id = explode('/', $decrypt_id)[0];
-            $term_id = explode('/', $decrypt_id)[1];
+            $encrypt = explode('/', $decrypt_id);
+            $class_id = $encrypt[0];
+            $term_id = $encrypt[1];
             
             $results = $this->Attend->findAttendDaysSummary($term_id, $class_id);
             $response = array();      
@@ -291,9 +293,10 @@ class AttendsController extends AppController {
         $resultCheck = $this->Acl->check($this->group_alias, 'AttendsController');
         if($resultCheck){
             $decrypt_id = $this->encryption->decode($encrypt_id);
-            $term_id = explode('/', $decrypt_id)[0];
-            $class_id = explode('/', $decrypt_id)[1];
-            $std_id = explode('/', $decrypt_id)[2];
+            $encrypt = explode('/', $decrypt_id);
+            $term_id = $encrypt[0];
+            $class_id = $encrypt[1];
+            $std_id = $encrypt[2];
             
             $results = $this->Attend->findAttendDaysDetails($term_id, $class_id, $std_id);
             $response = array();      

@@ -9,7 +9,7 @@
 <div class="col-md-12">
     <div class="panel">
         <!-- Info Boxes -->
-        <div class="row">
+        <!--div class="row">
             <div class="col-md-12">
                 <div class="info-box  bg-info  text-white">
                     <div class="info-icon bg-info-dark">

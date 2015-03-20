@@ -21,7 +21,7 @@ $('document').ready(function(){
         }else{ 
             $('#state_id').val('');            
             $('#state_lga_div').addClass('hide');
-            $('#local_govt_id').html('<option value="">  (Select Employee\'s L.G.A)  </option>');
+            $('#local_govt_id').html('<option value="">  (Select Staff\'s L.G.A)  </option>');
         }
     });
     if($("#country_id").val() === '140'){
@@ -74,7 +74,7 @@ $('document').ready(function(){
         $('#hidden_employee_id').val($(this).val());
     });
     
-   // Deleting the employee record via modal
+   // Deleting the Staff record via modal
    $(document.body).on('submit', '#employee_delete_form', function(){
         $.ajax({ 
             type: 'POST', 
@@ -124,7 +124,7 @@ $('document').ready(function(){
     });
     
     
-    //Inline edit of the Employee status //on Click of the button enable it the select drop down
+    //Inline edit of the Staff status //on Click of the button enable it the select drop down
     $(document.body).on('click', '.employee_status_edit', function(){
         old_btn = $(this).clone();
         var employee_id = $(this).val();
@@ -173,7 +173,7 @@ $('document').ready(function(){
     // Ajax Auto Validation : Other Names
     autoValidateField($('#other_name'), domian_url+'validate_form');
     // Ajax Auto Validation : Email
-    autoValidateField($('#email'), domian_url+'validate_form');
+    //autoValidateField($('#email'), domian_url+'validate_form');
     // Ajax Auto Validation : Mobile Number One
     autoValidateField($('#mobile_number1'), domian_url+'validate_form');
     // Ajax Auto Validation : Contact Address

@@ -112,9 +112,10 @@ class HomeController extends AppController
             $SkillAssessmentModel = ClassRegistry::init('SkillAssessment');
             //Decrypt the id sent
             $decrypt_id = $this->encryption->decode($encrypt_id);
-            $student_id = explode('/', $decrypt_id)[0];
-            $class_id = explode('/', $decrypt_id)[1];
-            $term_id = explode('/', $decrypt_id)[2];
+            $encrypt = explode('/', $decrypt_id);
+            $student_id = $encrypt[0];
+            $class_id = $encrypt[1];
+            $term_id = $encrypt[2];
             $skill_assess = null;
 
             $option = array('conditions' => array('Assessment.student_id' => $student_id, 'Assessment.academic_term_id' => $term_id));
@@ -186,9 +187,10 @@ class HomeController extends AppController
             $Exam = ClassRegistry::init('Exam');
             //Decrypt the id sent
             $decrypt_id = $this->encryption->decode($encrypt_id);
-            $student_id = explode('/', $decrypt_id)[0];
-            $class_id = explode('/', $decrypt_id)[1];
-            $year_id = explode('/', $decrypt_id)[2];
+            $encrypt = explode('/', $decrypt_id);
+            $student_id = $encrypt[0];
+            $class_id = $encrypt[1];
+            $year_id = $encrypt[2];
 
             $AcademicTermModel = ClassRegistry::init('AcademicTerm');
             $options = array('conditions' => array('AcademicTerm.academic_year_id' => $year_id));
@@ -281,8 +283,9 @@ class HomeController extends AppController
         if ($resultCheck) {
             $Item = ClassRegistry::init('Item');
             $decrypt_id = $this->encryption->decode($encrypt_id);
-            $student_id = explode('/', $decrypt_id)[0];
-            $term_id = explode('/', $decrypt_id)[1];
+            $encrypt = explode('/', $decrypt_id);
+            $student_id = $encrypt[0];
+            $term_id = $encrypt[1];
 
             $this->set('title_for_layout', 'Terminal Fees Charges');
             $results = $Item->findStudentTerminalFees($student_id, $term_id);

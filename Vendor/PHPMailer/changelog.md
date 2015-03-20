@@ -2,6 +2,24 @@
 
 * Use `application/javascript` for .js attachments
 * Improve RFC2821 compliance for timelimits, especially for end-of-data
+* Add Azerbaijani translations (Thanks to @mirjalal)
+* Minor code cleanup for robustness
+* Add Indonesian translations (Thanks to @ceceprawiro)
+* Avoid `error_log` Debugoutput naming clash
+* Add ability to parse server capabilities in response to EHLO (useful for SendGrid etc)
+* Amended default values for WordWrap to match RFC
+* Remove html2text converter class (has incompatible license)
+* Provide new mechanism for injecting html to text converters
+* Improve pointers to docs and support in README
+* Add example file upload script
+* Refactor and major cleanup of EasyPeasyICS, now a lot more usable
+* Make set() method simpler and more reliable
+* Add Malay translation (Thanks to @nawawi)
+* Add Bulgarian translation (Thanks to @mialy)
+* Add Armenian translation (Thanks to Hrayr Grigoryan)
+* Add Slovenian translation (Thanks to Klemen Tušar)
+* More efficient word wrapping
+* Add support for S/MIME signing with additional CA certificate (thanks to @IgitBuh)
 
 ## Version 5.2.9 (Sept 25th 2014)
 * **Important: The autoloader is no longer autoloaded by the PHPMailer class**

@@ -3,7 +3,7 @@
 <div class="col-md-12">
     <div class="panel">
         <!-- Info Boxes -->
-        <div class="row">
+        <!--div class="row">
             <div class="col-md-12">
                 <div class="info-box  bg-info  text-white">
                     <div class="info-icon bg-info-dark">
@@ -19,7 +19,7 @@
         <div class="panel-heading">
             <h3 class="panel-title">
                 <i class="fa fa-user"></i>
-               Adjust User's Information
+               Adjust User's Access Level
                 <span class="pull-right">
                     <div class="btn-group code">
                         <a href="javascript:void(0)"  title="Refresh"><i class="fa fa-refresh"></i></a>
@@ -51,11 +51,11 @@
                                     <?php 
                                         $user_category = 'User';
                                         if($user['User']['user_role_id'] == 1){
-                                            $user_category = 'Sponsor';
+                                            $user_category = 'Parent';
                                         }else if($user['User']['user_role_id'] == 2){
                                             $user_category = 'Students';
                                         }else if($user['User']['user_role_id'] > 2){
-                                            $user_category = 'Employee';
+                                            $user_category = 'Staff';
                                         }
                                     ?>
                                     <div class="form-group">

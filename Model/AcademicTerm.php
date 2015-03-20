@@ -40,7 +40,7 @@ class AcademicTerm extends AppModel {
             $result = array_shift($results);
             return $result['academic_term_id'];
         }
-        return -1;
+        return '';
     }
     
     public function getCurrentTermName(){
@@ -68,7 +68,7 @@ class AcademicTerm extends AppModel {
             $result = array_shift($results);
             return $result['academic_year_id'];
         }
-        return -1;
+        return '';
     }
     
     public function getCurrentYearName(){
@@ -82,7 +82,7 @@ class AcademicTerm extends AppModel {
             $result = array_shift($results);
             return $result['academic_year'];
         }
-        return -1;
+        return '';
     }
     
     public function getYearID($term_id){
@@ -96,7 +96,7 @@ class AcademicTerm extends AppModel {
             $result = array_shift($results);
             return $result['academic_year_id'];
         }
-        return -1;
+        return '';
     }
     
 }

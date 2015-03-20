@@ -231,6 +231,21 @@ class SubjectsController extends AppController {
             $this->accessDenialError('You Are Not Authorize To Perform Such Task', 2);
         }
     }
+
+    //Delete Subject Assigned to a Class Level or Class Room
+    public function delete_assign() {
+        $this->autoRender = false;
+        $resultCheck = $this->Acl->check($this->group_alias, 'SubjectsController');
+        if($resultCheck){
+            $SubjectClasslevel = ClassRegistry::init('SubjectClasslevel');
+            if ($this->request->is('ajax')) {
+                $id = $this->request->data('subject_classlevel_id');
+                echo ($SubjectClasslevel->deleteSubjectClasslevel($id)) ? 1 : 0;
+            }
+        }else{
+            $this->accessDenialError('You Are Not Authorize To Perform Such Task', 2);
+        }
+    }
     
     //Seacrh for all the students in a classroom or classlevel offering that subject for a current academic term
     public function search_students() {
@@ -362,10 +377,11 @@ class SubjectsController extends AppController {
         if($resultCheck){
             //Decrypt the id sent
             $decrypt_id = $this->encryption->decode($encrypt_id);
-            $student_id = explode('/', $decrypt_id)[0];
-            $subject_id = explode('/', $decrypt_id)[1];
-            $class_id = explode('/', $decrypt_id)[2];
-            $term_id = explode('/', $decrypt_id)[3];
+            $encrypt = explode('/', $decrypt_id);
+            $student_id = $encrypt[0];
+            $subject_id = $encrypt[1];
+            $class_id = $encrypt[2];
+            $term_id = $encrypt[3];
 
             $results = $this->Subject->findStudentsSubjectSummary($student_id, $subject_id, $class_id, $term_id);
             $response = array();

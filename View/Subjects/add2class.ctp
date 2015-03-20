@@ -523,7 +523,36 @@
                 </div>
             </div>
         </div>      
-   </div><!-- /Modal For Managing Subjects Offered by Students-->
+    </div><!-- /Modal For Managing Subjects Offered by Students-->
+    <!-- Model for Deleting the subject assignment to classlevel or classroom -->
+    <div id="delete_subject_modal" class="modal fade" tabindex="-1" data-width="400" style="display: none;">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <div class="modal-title alert alert-info">Deleting Subject Assignment</div>
+        </div>
+        <form action="#" id="delete_subject_form" method="post">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12" id="delete_output"></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <p style="color: red">
+                            Are You Really Sure You Want To Delete This Subject Assigned To The Classlevel or Classroom
+                            <i class="fa fa-warning fa-2x"></i>
+                            <i class="fa fa-warning fa-2x"></i>
+                            <i class="fa fa-warning fa-2x"></i>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+                <button type="submit" name="delete_subject_button" id="delete_subject_button" class="btn btn-primary">Yes Confirm</button>
+            </div>
+            <div class="col-md-12" id="msg_box_modal4">     </div>
+        </form>
+    </div><!-- /Modal Form For deleting the subject assigned-->
 </div>
 <?php
     // OnChange Of Subject Groups Get Subjects

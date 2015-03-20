@@ -115,7 +115,7 @@
                            <?php if(!empty($MessageRecipients)) :?>
                                 <div class="col-sm-offset-4 col-sm-10"><br>
                                    <button type="button" class="mark_btn_rcp btn btn-success">Mark All</button>
-                                   <button type="button" class="msg_all_mark_rcp btn btn-primary" value="rcp">Message Marked Recipients</button>
+                                   <button type="button" class="msg_all_mark_rcp btn btn-primary" value="RCP">Message Marked Recipients</button>
                                    <span style="font-size: medium" class="label label-danger err"></span><br>
                                </div>
                               <thead>
@@ -135,10 +135,10 @@
                                 <?php $i=1; foreach ($MessageRecipients as $recipient): ?>
                                <tr class="gradeA">
                                    <?php 
-                                     $encrypted_recipient_id = $Encryption->encode($recipient['MessageRecipient']['message_recipient_id'] . '/rcp');
+                                     $encrypted_recipient_id = $Encryption->encode($recipient['MessageRecipient']['message_recipient_id'] . '/RCP');
                                    ?>
                                    <td><?php echo $i++;?></td>
-                                   <td><?php echo 'rcp' . str_pad($recipient['MessageRecipient']['message_recipient_id'], 4, '0', STR_PAD_LEFT); ?>&nbsp;</td>
+                                   <td><?php echo 'RCP' . str_pad($recipient['MessageRecipient']['message_recipient_id'], 4, '0', STR_PAD_LEFT); ?>&nbsp;</td>
                                    <td><?php echo h($recipient['MessageRecipient']['recipient_name']); ?>&nbsp;</td>
                                    <td><?php echo h($recipient['MessageRecipient']['mobile_number']); ?>&nbsp;</td>
                                    <td><?php echo (empty($recipient['MessageRecipient']['email'])) ? '<span class="label label-danger">nill</span>' : $recipient['MessageRecipient']['email']; ?>&nbsp;</td>
@@ -183,7 +183,7 @@
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10"><br><br><br>
                                 <button type="button" class="mark_btn_rcp btn btn-success">Mark All</button>
-                                <button type="button" class="msg_all_mark_rcp btn btn-primary" value="rcp">Message Marked Recipients</button>
+                                <button type="button" class="msg_all_mark_rcp btn btn-primary" value="RCP">Message Marked Recipients</button>
                                 <span style="font-size: medium" class="label label-danger err"></span>
                             </div>
                         </div>
@@ -260,7 +260,7 @@
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-9">
                             <input type="hidden" name="data[Send][hidden_id]" id="hidden_id" value=""> 
-                            <input type="hidden" name="data[Send][type]" id="type" value="rcp"> 
+                            <input type="hidden" name="data[Send][type]" id="type" value="RCP">
                             <button type="submit" class="btn btn-success">Send Message</button>
                         </div>
                     </div>

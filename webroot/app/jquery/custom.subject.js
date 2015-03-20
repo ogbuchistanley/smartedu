@@ -248,7 +248,9 @@ $('document').ready(function(){
                                         <th>Classlevels</th>\
                                         <th>Class Rooms</th>\
                                         <th>Exam Status</th>\
-                                        <th colspan="2">Action</th>\
+                                        <th>Modify</th>\
+                                        <th>Manage</th>\
+                                        <th>Delete</th>\
                                     </tr></thead>';
                     if(obj.Flag === 1){
                         output += '<tbody>';
@@ -266,13 +268,16 @@ $('document').ready(function(){
                                     <i class="fa fa-edit"></i> Modify</button><input type="hidden" class="input-small" value="'+ids+'">\</td>\
                                 <td>\
                                     <button type="submit" value="'+value.subject_classlevel_id+'" class="btn btn-success btn-xs manage_student_subject">\n\
-                                    <i class="fa fa-ticket"></i> Manage Students</button></td>\
+                                    <i class="fa fa-ticket"></i> Students</button></td>\
+                                <td>\
+                                    <button type="submit" value="'+value.subject_classlevel_id+'" class="btn btn-danger btn-xs delete_subject_classlevel">\n\
+                                    <i class="fa fa-thrash"></i> Delete</button></td>\
                             </tr>';
                         });
                         output += '</tbody>';
                         $('#modify_subjects_table_div').html(output);
                     }else if(obj.Flag === 0){
-                        output += '<tr><th colspan="8">No Assigned Subject Found</th></tr>';
+                        output += '<tr><th colspan="9">No Assigned Subject Found</th></tr>';
                         $('#modify_subjects_table_div').html(output);
                     }
                 } catch (exception) {
@@ -302,7 +307,34 @@ $('document').ready(function(){
         $('#class_modify_id').html('<option value="'+id[3]+'">'+tr.children(':nth-child(5)').text()+'</option>');
         $('#modify_subject_assign_modal').modal('show');
    });
-   
+
+   //When the Delete button is clicked show the modal for confirmation
+    $(document.body).on('click', '.delete_subject_classlevel', function(){
+        var id = $(this).val();
+        $('#delete_subject_button').val(id);
+        var tr = $(this).parent().parent('tr');
+        var last = (tr.children(':nth-child(5)').text() === 'nill') ? '' : '<li>' + tr.children(':nth-child(5)').text() + '</li>';
+        var out = '<li>' + tr.children(':nth-child(2)').text() + '</li><li>' + tr.children(':nth-child(3)').text() + '</li>';
+        out = out + '<li>' + tr.children(':nth-child(4)').text() + '</li>' + last;
+        $('#delete_output').html('<ul>' + out + '</ul>');
+        $('#delete_subject_modal').modal('show');
+   });
+
+
+    //Deleting the subject assigned to classlevel form
+    $(document.body).on('submit', '#delete_subject_form', function(){
+        var id = $('#delete_subject_button').val();
+        ajax_loading_image($('#msg_box_modal4'), ' Deleting Subject Assigned');
+        $.post(domain_name+'/subjects/delete_assign', {subject_classlevel_id:id}, function(data){
+            $('#modify_subjects_table_div').html('');
+            ajax_remove_loading_image($('#msg_box_modal4'));
+            $('#delete_subject_modal').modal('hide');
+            //if(data == '0')
+            //    $('#msg_box_modal4').html('<i class="fa fa-warning fa-2x"></i> Error...Try Again '+data);
+        });
+        return false;
+    });
+
     //Subject Assignment Form...Assign to teachers
     $(document.body).on('submit', '#modify_subject_form', function(){
         ajax_loading_image($('#msg_box2_modal'), ' Modifying Subject Assigned');

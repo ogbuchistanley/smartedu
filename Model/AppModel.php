@@ -16,7 +16,7 @@ App::uses('BlowfishPasswordHasher', 'Controller/Component/Auth');
 
 //Email Sending
 App::uses('CakeEmail', 'Network/Email');
-//App::import('Vendor', 'PHPMailer', array('file' => 'PHPMailer/PHPMailerAutoload.php'));
+App::import('Vendor', 'PHPMailer', array('file' => 'PHPMailer/PHPMailerAutoload.php'));
 
 /**
  * Application model for Cake.
@@ -123,14 +123,25 @@ class AppModel extends Model {
         //Save data
         $aro->save($users);
     }
-    
+
+    public function generatePassword(){
+        // WARNING: THIS CODE IS INSECURE. DO NOT USE THIS CODE.
+        $password = "";
+        $charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        for($i = 0; $i < 8; $i++){
+            $random_int = mt_rand();
+            $password .= $charset[$random_int % strlen($charset)];
+        }
+        return $password;
+    }
+
     //Send Mail
     function sendMail($message, $subject, $to, $name = null) {
         $Email = new CakeEmail();
         //$Email = new CakeEmail(array('from' => 'me@example.org', 'transport' => 'Mail'));
         //$Email->addHeaders(array('X-Mailer' => 'My Cool App (http://crithinks.com)'));
         //$Email->helpers(array('Html', 'Text'));
-        $Email->config('smtp')
+        $Email->config('default')
             ->viewVars( array('subject' => $subject, 'name'=>$name))
             ->template('default')
             ->emailFormat('html')
@@ -141,10 +152,10 @@ class AppModel extends Model {
         return ($Email->send($message)) ? "Mail Delivered!" : "Mail Not Delivered... Mail Error: ";
     }
     
-//    function sendMail($message, $messge_subject, $to, $name = null){
+//    function sendMail2($message, $messge_subject, $to, $name = null){
 //        $admin_email = 'crithink@crithinks.com';
 //        $admin_name = 'Crithinks SmartSchool App';
-//        
+//
 //        //Create a new PHPMailer instance
 //        $mail = new PHPMailer;
 //        //Tell PHPMailer to use SMTP
@@ -157,19 +168,19 @@ class AppModel extends Model {
 //        //Ask for HTML-friendly debug output
 //        //$mail->Debugoutput = 'html';
 //        //Set the hostname of the mail server
-//        $mail->Host = "crithinks.com";
+//        $mail->Host = "smartedu.io";
 //        //Set the SMTP port number - likely to be 25, 465 or 587
 //        $mail->Port = 25;
 //        //Whether to use SMTP authentication
 //        $mail->SMTPAuth = true;
 //        //Username to use for SMTP authentication
-//        $mail->Username = "crithink";
+//        $mail->Username = "smartedu";
 //        //Password to use for SMTP authentication
-//        $mail->Password = "Student_1";
+//        $mail->Password = "qwertyuiop101";
 //        //Set who the message is to be sent from
-//        $mail->setFrom($admin_email, $admin_name);
+//        $mail->setFrom(DEVELOPER_SITE_EMAIL, DEVELOPER_SITE_NAME);
 //        //Set an alternative reply-to address
-//        $mail->addReplyTo($admin_email, $admin_name);
+//        $mail->addReplyTo(DEVELOPER_SITE_EMAIL, DEVELOPER_SITE_NAME);
 //        //Set who the message is to be sent to
 //        $mail->addAddress($to, $name);
 //        //Set the subject line
@@ -183,12 +194,12 @@ class AppModel extends Model {
 //        $mail->msgHTML(nl2br($message_body));
 //
 //        //$mail->Body = 'This is a Test message body';
-//        
+//
 //        //Replace the plain text body with one created manually
 //        $mail->AltBody = nl2br($message_body);
 //        //Attach an image file
 //        //$mail->addAttachment('images/phpmailer_mini.png');
-//        
+//
 //        //send the message, check for errors
 //        if (!$mail->send()) {
 //            return "Mail Not Delivered... Mailer Error: " . $mail->ErrorInfo;
@@ -199,6 +210,7 @@ class AppModel extends Model {
     
     //Send SMS
     function SendSMS($mobile_no, $msg_body, $msg_sender=APP_NAME) {
+        $mobile_no = trim($mobile_no);
         if(substr($mobile_no, 0, 1) === '0'){
             $no = '234' . substr ($mobile_no, 1);
         }elseif (substr($mobile_no, 0, 3) === '234') {
@@ -212,6 +224,7 @@ class AppModel extends Model {
         $from = $msg_sender;
         // auth call
         $url = "http://107.20.195.151/mcast_ws/?user=$user&password=$password&from=$from&to=$no&message=$message";
+        //http://107.20.195.151/mcast_ws/?user=ZumaComm&password=zuma123456&from=Kheengz&to=2348030734377&message=message_testing
         // do auth call
         $ret = file($url);
         return $ret;

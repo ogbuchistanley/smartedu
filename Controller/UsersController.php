@@ -13,6 +13,7 @@ class UsersController extends AppController {
 
     public function beforeFilter() {
         parent::beforeFilter();
+        $this->masterRedirect();
     }
     
     public function login() {
@@ -124,7 +125,7 @@ class UsersController extends AppController {
             $result = (!empty($result['User'])) ? $result : false;
             if($result){
                 $email = null;
-                $pass = 'Password1';
+                $pass = $this->User->generatePassword();
                 $no = null;
                 $this->User->id = $result['User']['user_id'];
                 $this->User->data['User']['password'] = $pass;
@@ -143,15 +144,16 @@ class UsersController extends AppController {
                     $no = $spn['Employee']['mobile_number1'];
                 }
                 if ($this->User->save()) {
+                    $msg = 'Welcome To '.APP_NAME.' Application User: '.$username.', Your Password Has Been Reset To Password: '.$pass.' to access the portal, login via '.DOMAIN_URL;
+                    $msg_email = 'Welcome To '.APP_NAME.' Application <br><br>User: '.$username.', <br>Your Password Has Been Reset To Password: '.$pass.' <br><br>to access the portal, login via '.DOMAIN_URL;
                     //Send SMS
-                    $msg = 'User '.$username.', Your Password Has Been Reset To = '.$pass;
-                    //$this->User->SendSMS($no, $msg);
+                    $this->User->SendSMS($no, $msg);
                     //Send Mail
                     $check = null;
 
                     $name = $result['User']['display_name'];
                     $msg_body = 'Find Below your username and password to access the school app<br><br>';
-                    $msg_body .= 'Username: '.$username.' <br>Password: '.$pass;                    
+                    $msg_body .= $msg_email;
                     if($email){                                 
                         $check = $this->User->sendMail($msg_body, 'Password Reset', $email, $name);
                     } 

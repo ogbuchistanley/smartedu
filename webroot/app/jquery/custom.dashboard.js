@@ -6,33 +6,33 @@ $('document').ready(function(){
    // Pie chart on Dashboard // Displaying Students Gender
    td_loading_image($('#students_gender'));
    $.post(domain_name+'/dashboard/studentGender', function(data){
-        var result = $.parseJSON(data)
-        Morris.Donut({
-            element: "students_gender",
-            data: result.Gender,
-            labelColor: "#54728c",
-            colors: [ "#54728c", "#54b5df"],
-            formatter: function(e) {
-                return e.toFixed(2) + "%";
-            }
-        }).on("click", function(e, t) {
-            //console.log(e, t);
-            var sex_count = (t.label === "Male") ? result.Male : result.Female;
-            var active_count = (t.label === "Male") ? result.ActiveMale : result.ActiveFemale;
-            var sex = (t.label === "Male") ? 'Male' : 'Female';
-            $.gritter.add({
-                // (string | mandatory) the heading of the notification
-                title: sex_count+' '+sex+' Students out of Which '+active_count+' are Active',
-                // (string | mandatory) the text inside the notification
-                text: 'The Total Number Of Students are '+result.Count+' Both Past and Present',
-                // (string | optional) the image to display on the left
-                image: false,
-                // (bool | optional) if you want it to fade out on its own or just sit there
-                sticky: false,
-                // (int | optional) the time you want it to be alive for before fading out
-                time: 5000
-            });
-        });
+       var result = $.parseJSON(data)
+       Morris.Donut({
+           element: "students_gender",
+           data: result.Gender,
+           labelColor: "#54728c",
+           colors: ["#54728c", "#54b5df"],
+           formatter: function (e) {
+               return e.toFixed(2) + "%";
+           }
+       }).on("click", function (e, t) {
+           //console.log(e, t);
+           var sex_count = (t.label === "Male") ? result.Male : result.Female;
+           var active_count = (t.label === "Male") ? result.ActiveMale : result.ActiveFemale;
+           var sex = (t.label === "Male") ? 'Male' : 'Female';
+           $.gritter.add({
+               // (string | mandatory) the heading of the notification
+               title: sex_count + ' ' + sex + ' Students out of Which ' + active_count + ' are Active',
+               // (string | mandatory) the text inside the notification
+               text: 'The Total Number Of Students are ' + result.Count + ' Both Past and Present',
+               // (string | optional) the image to display on the left
+               image: false,
+               // (bool | optional) if you want it to fade out on its own or just sit there
+               sticky: false,
+               // (int | optional) the time you want it to be alive for before fading out
+               time: 5000
+           });
+       });
     });
     
     // Pie chart on Dashboard // Displaying Students Status

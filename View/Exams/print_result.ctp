@@ -16,7 +16,9 @@
                 background: #FFF;
                 display: block;
                 position:absolute;
-                width: 100%; margin: 0; float: none;
+                width: 100%;
+                margin: 0px;
+                float: none;
                 font-family: Verdana;
                 font-size: 9pt;
                 color: #000000;
@@ -34,7 +36,7 @@
         </style>
     </head>
     <body>
-        <div class="col-md-10 col-md-offset-1">
+        <div class="col-sm-12 col-md-10 col-md-offset-1">
             <div>
                 <div>
                     <img src="<?php echo APP_DIR_ROOT; ?>images/bells_logo.png" alt="School Logo"/>
@@ -49,7 +51,7 @@
                 </div>
             </div>
             <div class="row"><br><br>
-                <div class="col-md-6 pull-left">
+                <div class="col-sm-9 col-md-6 pull-left">
                     <table class="table table-bordered table-striped" style="font-size: 8pt;">
                         <caption style="font-weight: bolder">Student Information</caption>
                         <?php if($ClassPosition['ClassPositions']): ?>
@@ -76,7 +78,7 @@
                         <?php endif;?>
                     </table>
                 </div>
-                <div class="col-md-3 pull-right">
+                <div class="col-sm-3 col-md-3 pull-right">
                     <table class="table table-bordered table-striped" style="width: 200px;">
                         <?php if(!empty($SkillsAssess)): ?>
                             <thead>
@@ -108,7 +110,7 @@
                         <?php endif;?>
                     </table>
                 </div>
-                <div class="col-md-8 pull-left">
+                <div class="col-sm-9 col-md-9 pull-left">
                     <table  class="table table-bordered table-striped display" style="width: 800px;">
                         <caption style="font-weight: bolder">Subject Continuous Assessment (C.A) / Weightage Points (W.A)</caption>
                         <?php if(!empty($TermScores['Scores'])):?>

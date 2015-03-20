@@ -65,7 +65,7 @@ class SubjectClasslevel extends AppModel {
     public function validateIfExist($subject_id, $term_id, $classlevel_id, $class_id=null) {
         if($class_id === null){
             $result = $this->query('
-                SELECT * FROM subject_classlevels WHERE subject_id="'.$subject_id.'" AND classlevel_id="'.$classlevel_id.'" AND academic_term_id="'.$term_id.'"
+                SELECT * FROM subject_classlevels WHERE subject_id="'.$subject_id.'" AND class_id=NULL AND classlevel_id="'.$classlevel_id.'" AND academic_term_id="'.$term_id.'"
             ');
         }else{
             $result = $this->query('
@@ -116,5 +116,14 @@ class SubjectClasslevel extends AppModel {
             $this->query('INSERT INTO subject_students_registers(student_id, subject_classlevel_id) VALUES("'.$ids[$i].'", "'.$subject_classlevel_id.'")');
         }
         return 1;
+    }
+
+    //Delete Subjects Classlevel Record and its equivalent Subjects Students Registered
+    public function deleteSubjectClasslevel($subject_classlevel_id) {
+        $this->query('DELETE FROM subject_students_registers WHERE subject_classlevel_id="'.$subject_classlevel_id.'"');
+
+        $result = $this->query('DELETE FROM subject_classlevels WHERE subject_classlevel_id="'.$subject_classlevel_id.'"');
+
+        return $result;
     }
 }

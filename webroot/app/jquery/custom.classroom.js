@@ -257,7 +257,7 @@ $('document').ready(function(){
         return false;
    });
    
-   //When the edit button is clicked show Employees Drop Down
+   //When the edit button is clicked show Staffs Drop Down
    $(document.body).on('click', '.head_tutor_edit', function(){
         var employees = employeeNames.clone();
         var buttonTD = $(this).parent();
@@ -278,7 +278,7 @@ $('document').ready(function(){
         td.html(old_btn);
     });
     
-   //On Change of the employees name assign to the class
+   //On Change of the Staffs name assign to the class
    $(document.body).on('change', '.head_tutor_select', function(){
         var teac_class_id = $(this).attr('title');
         var class_id = $(this).parent().next().children(':nth-child(1)').val();

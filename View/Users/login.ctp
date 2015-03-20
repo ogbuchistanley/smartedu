@@ -3,7 +3,7 @@
 <section id="login">
     <div class="row animated fadeILeftBig">
          <div class="login-holder col-md-6 col-md-offset-3">
-           <h2 class="page-header text-center text-primary"> <?php echo substr(APP_NAME, 0, 5)?><img src="<?php echo APP_DIR_ROOT; ?>images/icon.png" /><?php echo substr(APP_NAME, 5)?> </h2>
+           <h2 class="page-header text-center text-primary"> <?php echo substr(APP_NAME, 0, 5)?><img style="width: 55px; height: 57px;" src="<?php echo APP_DIR_ROOT; ?>images/icon.png" /><?php echo substr(APP_NAME, 5)?> </h2>
            <div class="row">
                 <noscript>
                     <div style="margin:0 0 35px 0; text-align:center" class="alert alert-danger">
@@ -47,29 +47,29 @@
           </form>
         </div>
       </div>
-       </section>
-        <section id="forgot-password" style="background:#2F4051;">
-            <div class="row animated fadeILeftBig">
-                <div class="login-holder col-md-6 col-md-offset-3">
-                    <h2 class="page-header text-center text-primary">  <?php echo substr(APP_NAME, 0, 5)?><img src="<?php echo APP_DIR_ROOT; ?>images/icon.png" /><?php echo substr(APP_NAME, 5)?> </h2>
-                    <div class="alert alert-info" id="msg_box">Enter Your Valid Username</div>
-                    <?php
-                        // Flash Messages
-                        echo $this->Session->flash(); 
-                        //Creates The Form
-                        echo $this->Form->create('User', array(
-                                'id' => 'forget_password_form',
-                                'role' => 'form',
-                            )
-                        );  
-                    ?>
-                        <div class="form-group">
-                            <input type="text" name="data[User][username]" class="form-control" id="username" placeholder="Enter Username" required>
-                        </div>
-                        <div class="form-footer">
-                          <button type="submit" class="btn btn-info pull-right btn-submit">Send Instructions</button>
-                        </div>
-                    </form>
+</section>
+<section id="forgot-password" style="background:#2F4051;">
+    <div class="row animated fadeILeftBig">
+        <div class="login-holder col-md-6 col-md-offset-3">
+            <h2 class="page-header text-center text-primary">  <?php echo substr(APP_NAME, 0, 5)?><img style="width: 55px; height: 57px;" src="<?php echo APP_DIR_ROOT; ?>images/icon.png" /><?php echo substr(APP_NAME, 5)?> </h2>
+            <div class="alert alert-info" id="msg_box">Enter Your Valid Username</div>
+            <?php
+                // Flash Messages
+                echo $this->Session->flash();
+                //Creates The Form
+                echo $this->Form->create('User', array(
+                        'id' => 'forget_password_form',
+                        'role' => 'form',
+                    )
+                );
+            ?>
+                <div class="form-group">
+                    <input type="text" name="data[User][username]" class="form-control" id="username" placeholder="Enter Username" required>
                 </div>
-            </div>
-        </section>
+                <div class="form-footer">
+                  <button type="submit" class="btn btn-info pull-right btn-submit">Send Instructions</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

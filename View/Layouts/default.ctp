@@ -36,7 +36,7 @@ $cakeDescription = __d('app_dev', ':: '.APP_NAME.' :');
     $attend_index = Configure::read('attend_index');
     $user_index = Configure::read('user_index');
     
-    //Disable The Links For Sponsors if user role > 2
+    //Disable The Links For Parents if user role > 2
     $user_role = Configure::read('user_role');
 
     //Master Record Setup status
@@ -122,7 +122,7 @@ $cakeDescription = __d('app_dev', ':: '.APP_NAME.' :');
                     <i class="fa fa-list btn-nav-toggle-responsive text-white"></i>
                 </a>
                 <a class="navbar-brand" href="<?php echo DOMAIN_NAME ?>/dashboard">
-                    <span class="logo small"><?php echo substr(APP_NAME, 0, 5)?><img src="<?php echo APP_DIR_ROOT; ?>images/icon.png" /><?php echo substr(APP_NAME, 5); ?></span>
+                    <span class="logo small"><?php echo substr(APP_NAME, 0, 5)?><img style="width: 55px; height: 57px;" src="<?php echo APP_DIR_ROOT; ?>images/icon.png" /><?php echo substr(APP_NAME, 5); ?></span>
                 </a>
             </div>
 
@@ -135,9 +135,10 @@ $cakeDescription = __d('app_dev', ':: '.APP_NAME.' :');
                                 <?php 
                                     $fullnames = explode(' ', AuthComponent::user('display_name'));
                                     $temp = (isset($fullnames[1])) ? $fullnames[1] : '';
-                                    $name = $fullnames[0] . ' ' . strtoupper(substr($temp, 0, 1)) . '.';
+                                    $name = $fullnames[0] . ', ' . strtoupper(substr($temp, 0, 1)) . '.';
                                 ?>
-                                <img src="<?php echo DOMAIN_NAME ?>/img/uploads/<?php echo AuthComponent::user('image_url');?>" class="user-avatar" alt=""> <?php echo $name;?>
+                                <img src="<?php echo DOMAIN_NAME ?>/img/uploads/<?php echo (AuthComponent::user('image_url')) ? AuthComponent::user('image_url') : 'avatar.jpg';?>" class="user-avatar" alt="">
+                                <?php echo $name;?>
                             </span>
                         </a>
                         <ul class="dropdown-menu" id="user_profile">
@@ -147,14 +148,14 @@ $cakeDescription = __d('app_dev', ':: '.APP_NAME.' :');
                             <li><a href="<?php echo DOMAIN_NAME ?>/logout" class="text-danger"><i class="fa fa-lock"></i> Logout</a></li>
                         </ul>
                     </li>
-                    <li>
+                    <!--li>
                         <a href="javascript:void()" class=" dropdown-toggle" >
                             <span  class="username"> 
                                 <i class="fa fa-calendar fa-1x"></i> <?php echo '  ',date("D, jS M, Y");  ?> 
                                 <!--span id="timer"></span-->
                             </span>
                         </a>
-                    </li>
+                    </li-->
                 </ul>
             </div><!-- /.navbar-collapse -->
         </nav> <!-- /.navbar -->
@@ -172,7 +173,7 @@ $cakeDescription = __d('app_dev', ':: '.APP_NAME.' :');
                         <!--- Enable Links for Admin Users-->
                         <?php if($user_role > 2): ?>
                             <?php if($master_record_id > ($master_record_count) - 1): ?>
-                                <!--li class="active"><a href="<?php echo DOMAIN_NAME ?>/dashboard/" data-original-title="Dashboard"><i class="fa fa-dashboard"></i><span class="hidden-minibar"> Dashboard</span></a></li-->
+                                <li class="active"><a href="<?php echo DOMAIN_NAME ?>/dashboard/" data-original-title="Dashboard"><i class="fa fa-dashboard"></i><span class="hidden-minibar"> Dashboard</span></a></li>
                                 <?php if($student_index || $student_register): ?>
                                 <li class="submenu">
                                     <a class="dropdown" href="javascript:void(0)" data-original-title="Students"><i class="fa fa-group"></i><span class="hidden-minibar">  Students <span class="badge bg-primary pull-right" id="student_count"></span></span></a>
@@ -188,10 +189,10 @@ $cakeDescription = __d('app_dev', ':: '.APP_NAME.' :');
                                 <?php endif;?>
                                 <?php if($sponsor_index || $sponsor_register): ?>
                                 <li class="submenu">
-                                    <a class="dropdown" href="javascript:void(0)" data-original-title="Sponsors"><i class="fa fa-male"></i><span class="hidden-minibar">  Sponsors <span class="badge bg-primary pull-right" id="sponsor_count"></span></span></a>
+                                    <a class="dropdown" href="javascript:void(0)" data-original-title="Parents"><i class="fa fa-male"></i><span class="hidden-minibar">  Parents <span class="badge bg-primary pull-right" id="sponsor_count"></span></span></a>
                                     <ul>
                                     <?php if($sponsor_index): ?>
-                                        <li><a href="<?php echo DOMAIN_NAME ?>/sponsors/" data-original-title="Manage Sponsors"><i class="fa fa-gear"></i><span> Manage Sponsors</span></a></li>
+                                        <li><a href="<?php echo DOMAIN_NAME ?>/sponsors/" data-original-title="Manage Parents"><i class="fa fa-gear"></i><span> Manage Parents</span></a></li>
                                     <?php endif;?>
                                     <?php if($sponsor_register): ?>
                                         <li><a href="<?php echo DOMAIN_NAME ?>/sponsors/register" data-original-title="Register New"><i class="fa fa-plus-circle"></i><span> Register New</span></a></li>
@@ -201,10 +202,10 @@ $cakeDescription = __d('app_dev', ':: '.APP_NAME.' :');
                                 <?php endif;?>
                                 <?php if($employee_index || $employee_register || $employee_adjust): ?>
                                 <li class="submenu">
-                                    <a class="dropdown" href="javascript:void(0)" data-original-title="Employees"><i class="fa fa-user"></i><span class="hidden-minibar">  Employees <span class="badge bg-primary pull-right" id="employee_count"></span></span></a>
+                                    <a class="dropdown" href="javascript:void(0)" data-original-title="Staffs"><i class="fa fa-user"></i><span class="hidden-minibar">  Staffs <span class="badge bg-primary pull-right" id="employee_count"></span></span></a>
                                     <ul>
                                     <?php if($employee_index): ?>
-                                        <li><a href="<?php echo DOMAIN_NAME ?>/employees/" data-original-title="505"><i class="fa fa-gear"></i><span> Manage Employees</span></a></li>
+                                        <li><a href="<?php echo DOMAIN_NAME ?>/employees/" data-original-title="505"><i class="fa fa-gear"></i><span> Manage Staffs</span></a></li>
                                     <?php endif;?>
                                     <?php if($employee_register): ?>
                                         <li><a href="<?php echo DOMAIN_NAME ?>/employees/register" data-original-title="404"><i class="fa fa-plus-circle"></i><span> Register New</span></a></li>
@@ -243,15 +244,15 @@ $cakeDescription = __d('app_dev', ':: '.APP_NAME.' :');
                                         <?php if($classroom_index): ?>
                                             <li><a href="<?php echo DOMAIN_NAME ?>/classrooms/index#assign_students"><i class="fa fa-plus-circle"></i><span> Add Students </span></a></li>
                                             <li><a href="<?php echo DOMAIN_NAME ?>/classrooms/index#search_students"><i class="fa fa-search-plus"></i><span> Search For Students</span></a></li>
-                                            <li><a href="<?php echo DOMAIN_NAME ?>/classrooms/index#assign_head_tutor"><i class="fa fa-plus-square"></i><span> Assign Head Tutor</span></a></li>
+                                            <li><a href="<?php echo DOMAIN_NAME ?>/classrooms/index#assign_head_tutor"><i class="fa fa-plus-square"></i><span> Assign Class Teacher</span></a></li>
                                         <?php endif;?>
                                         <li><a href="<?php echo DOMAIN_NAME ?>/classrooms/myclass"><i class="fa fa-building"></i><span> My Classroom(s)</span></a></li>
                                     </ul>
                                 </li>
                                 <?php endif;?>
-                                <?php if($exam_index === 'hide'): ?>
+                                <?php if($exam_index): ?>
                                 <li class="submenu">
-                                    <a class="dropdown" href="javascript:void(0)" data-original-title="Exams"><i class="fa fa-bookmark"></i><span class="hidden-minibar"> Exams <span class="badge bg-primary pull-right" id="exams_count"></span></span></a>
+                                    <a class="dropdown" href="javascript:void(0)" data-original-title="Assessments"><i class="fa fa-bookmark"></i><span class="hidden-minibar"> Assessments <span class="badge bg-primary pull-right" id="exams_count"></span></span></a>
                                     <ul>
                                         <?php //if($exam_setup_exam): ?>
                                         <li><a href="<?php echo DOMAIN_NAME ?>/exams/index#setupExam" data-original-title="Setup / Adjust Exams"><i class="fa fa-gear"></i><span> Setup / Adjust Exams</span></a></li>
@@ -279,8 +280,8 @@ $cakeDescription = __d('app_dev', ':: '.APP_NAME.' :');
                                     <li class="submenu">
                                         <a href="javascript:void(0)" data-original-title="Message Center"><i class="fa fa-envelope"></i><span class="hidden-minibar"> Message Center <span class="badge bg-primary pull-right" id="message_count"></span></span></a>
                                         <ul>
-                                            <li><a href="<?php echo DOMAIN_NAME ?>/messages/index#sponsors" data-original-title="Sponsors"><i class="fa fa-user"></i><span> Sponsors</span></a></li>
-                                            <li><a href="<?php echo DOMAIN_NAME ?>/messages/index#employees" data-original-title="Employees"><i class="fa fa-male"></i><span> Employees</span></a></li>
+                                            <li><a href="<?php echo DOMAIN_NAME ?>/messages/index#sponsors" data-original-title="Parents"><i class="fa fa-user"></i><span> Parents</span></a></li>
+                                            <li><a href="<?php echo DOMAIN_NAME ?>/messages/index#employees" data-original-title="Staffs"><i class="fa fa-male"></i><span> Staffs</span></a></li>
                                             <li><a href="<?php echo DOMAIN_NAME ?>/messages/recipient" data-original-title="Recipient"><i class="fa fa-group"></i><span> Recipients</span></a></li>
                                         </ul>
                                     </li>
@@ -303,8 +304,8 @@ $cakeDescription = __d('app_dev', ':: '.APP_NAME.' :');
                                         <i class="fa fa-sitemap"></i><span class="hidden-minibar"> Master Records <span class="badge bg-primary pull-right" id="record_count"></span></span>
                                     </a>
                                     <ul>
-                                        <li><a href="<?php echo DOMAIN_NAME ?>/records/index" data-original-title="Academic Terms"><i class="fa fa-ticket"></i><span> Academic Terms</span></a></li>
                                         <li><a href="<?php echo DOMAIN_NAME ?>/records/academic_year" data-original-title="Academic Years"><i class="fa fa-outdent"></i><span> Academic Years</span></a></li>
+                                        <li><a href="<?php echo DOMAIN_NAME ?>/records/index" data-original-title="Academic Terms"><i class="fa fa-ticket"></i><span> Academic Terms</span></a></li>
                                         <li><a href="<?php echo DOMAIN_NAME ?>/records/class_group" data-original-title="Class Group"><i class="fa fa-xing"></i><span> Class Group</span></a></li>
                                         <li><a href="<?php echo DOMAIN_NAME ?>/records/class_level" data-original-title="Class Level"><i class="fa fa-trello"></i><span> Class Level</span></a></li>
                                         <li><a href="<?php echo DOMAIN_NAME ?>/records/class_room" data-original-title="Class Rooms"><i class="fa fa-group"></i><span> Class Rooms</span></a></li>
@@ -316,7 +317,7 @@ $cakeDescription = __d('app_dev', ':: '.APP_NAME.' :');
                                     </ul>
                                 </li>
                                 <?php endif;?>
-                                <?php if($user_index === 'hide'): ?>
+                                <?php if($user_index): ?>
                                     <li><a href="<?php echo DOMAIN_NAME ?>/users/index" data-original-title="Users"><i class="fa fa-user"></i><span> Manage Users</span></a></li>
                                     <!--li><a href="<?php echo DOMAIN_NAME ?>/users/register" data-original-title="Users"><i class="fa fa-exclamation-circle"></i><span> Register New</span></a></li-->
                                 <?php endif;?>
@@ -360,13 +361,13 @@ $cakeDescription = __d('app_dev', ':: '.APP_NAME.' :');
                                 <?php endif;?>
                             <?php endif;?>
                         <?php else:?>
-                            <!--- Enable Links for Sponsor Users-->
+                            <!--- Enable Links for Parent Users-->
                             <?php
                                 $encrypted_sponsor_id = $Encryption->encode(AuthComponent::user('type_id'));
                             ?>
                             <li><a href="<?php echo DOMAIN_NAME ?>/home" data-original-title="Class"><i class="fa fa-dashboard"></i> <span class="hidden-minibar"> Home</span></a></li>
                             <li class="submenu">
-                                <a class="dropdown" href="javascript:void(0)" data-original-title="Sponsor"><i class="fa fa-male"></i><span class="hidden-minibar">  Sponsor <span class="badge bg-primary pull-right" id="sponsor_count"></span></span></a>
+                                <a class="dropdown" href="javascript:void(0)" data-original-title="Parent"><i class="fa fa-male"></i><span class="hidden-minibar">  Parent <span class="badge bg-primary pull-right" id="sponsor_count"></span></span></a>
                                 <ul>
                                     <li><a href="<?php echo DOMAIN_NAME; ?>/sponsors/view/<?php echo $encrypted_sponsor_id; ?>" data-original-title="My Record"><i class="fa fa-eye"></i><span> My Record</span></a></li>
                                     <li><a href="<?php echo DOMAIN_NAME ?>/sponsors/adjust/<?php echo $encrypted_sponsor_id; ?>" data-original-title="Adjust Record"><i class="fa fa-edit"></i><span> Adjust Record</span></a></li>
@@ -393,11 +394,17 @@ $cakeDescription = __d('app_dev', ':: '.APP_NAME.' :');
                     <div class="col-mod-12">
                         <ul class="breadcrumb">
                              <?php if($user_role > 2){ ?>
-                                <!--li class="active"><a href="<?php echo DOMAIN_NAME ?>/dashboard/"><i class="fa fa-dashboard"></i> Dashboard</a></li-->
+                                <li class="active"><a href="<?php echo DOMAIN_NAME ?>/dashboard/"><i class="fa fa-dashboard"></i> Dashboard</a></li>
                              <?php }else{ ?>
                                 <li class="active"><a href="<?php echo DOMAIN_NAME ?>/home/"><i class="fa fa-dashboard"></i> Home</a></li>
                             <?php };?>
                             <li><a href="<?php echo DOMAIN_NAME ?>/logout" class="text-danger"><i class="fa fa-lock"></i> Logout</a></li>
+                            <li>
+                                    <span  class="username">
+                                        <i class="fa fa-calendar fa-1x"></i> <?php echo '  ',date("D, jS M, Y");  ?>
+                                        <span id="timer"></span>
+                                    </span>
+                            </li>
                         </ul>
                     </div>
                 </div>

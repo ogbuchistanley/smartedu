@@ -32,6 +32,8 @@ class SponsorsController extends AppController {
     }    
     
     public function register() {
+        //$this->Sponsor->sendMail('Work', 'Authentication', 'kingsley4united@yahoo.com', 'Kingsley Chinaka');
+        //$this->Sponsor->SendSMS('08030734377', 'Dude' );
         $result = $this->Acl->check($this->group_alias, 'SponsorsController/register', 'create');
         if($result){
             $this->loadModels('Salutation', 'salutation_name');
@@ -42,15 +44,15 @@ class SponsorsController extends AppController {
                 $results = $SponsorNew->query('SELECT * FROM sponsors WHERE mobile_number1="'.trim($data['mobile_number1']).'" LIMIT 1');
                 $results = ($results) ? array_shift($results) : false;
                 if($results && strtolower($results['sponsors']['first_name']) === strtolower(trim($data['first_name']))){
-                    $this->setFlashMessage(' The Sponsor '.$data['first_name'].' With Mobile Number '.$data['mobile_number1'].' Already Exist.', 2); 
+                    $this->setFlashMessage(' The Parent '.$data['first_name'].' With Mobile Number '.$data['mobile_number1'].' Already Exist.', 2);
                     return $this->redirect(array('action' => 'register'));
                 }else{
                     $SponsorNew->create();
                     if ($SponsorNew->save($data)){
-                        $this->setFlashMessage('The Sponsor '.$data['first_name'].' '.$data['other_name'].' has been saved.', 1);
+                        $this->setFlashMessage('The Parent '.$data['first_name'].' '.$data['other_name'].' has been saved.', 1);
                         return $this->redirect(array('controller' => 'sponsors', 'action' => 'register'));
                     }else {
-                        $this->setFlashMessage('The Sponsor could not be saved. Please, Kindly Fill the Form Properly.', 2);
+                        $this->setFlashMessage('The Parent could not be saved. Please, Kindly Fill the Form Properly.', 2);
                     }
                 } 
             }
@@ -65,7 +67,7 @@ class SponsorsController extends AppController {
             $decrypt_sponsor_id = $this->encryption->decode($encrypt_id);
             
             if (!$this->Sponsor->exists($decrypt_sponsor_id)) {
-                $this->accessDenialError('Invalid Sponsor Record Requested for Viewing', 2);
+                $this->accessDenialError('Invalid Parent Record Requested for Viewing', 2);
             }
             $options = array('conditions' => array('Sponsor.' . $this->Sponsor->primaryKey => $decrypt_sponsor_id));
             $this->set('sponsor', $this->Sponsor->find('first', $options));
@@ -84,7 +86,7 @@ class SponsorsController extends AppController {
             $decrypt_sponsor_id = $this->encryption->decode($encrypt_id);
 
             if (!$this->Sponsor->exists($decrypt_sponsor_id)) {
-                $this->accessDenialError('Invalid Sponsor Record Requested for Modification', 2);
+                $this->accessDenialError('Invalid Parent Record Requested for Modification', 2);
             }
             if ($this->request->is(array('post', 'put'))) {
                 $this->Sponsor->id = $decrypt_sponsor_id;
@@ -96,14 +98,14 @@ class SponsorsController extends AppController {
                     //Uploading The Image Provided
                     if(isset($data['image_url'])){
                         if($this->uploadImage($decrypt_sponsor_id, 'sponsors', $this->request->data['Sponsor'])) {
-                            $this->setFlashMessage('The Sponsor has been Updated.', 1);
+                            $this->setFlashMessage('The Parent has been Updated.', 1);
                         }
                     }else {
-                        $this->setFlashMessage('The Sponsor has been Updated... But New Image Was Not Uploaded', 1);
+                        $this->setFlashMessage('The Parent has been Updated... But New Image Was Not Uploaded', 1);
                     }
                     return $this->redirect(array('action' => 'adjust/'.$encrypt_id));
                 } else {
-                    $this->setFlashMessage('The sponsor could not be Updated. Please, try again.', 2);
+                    $this->setFlashMessage('The Parent could not be Updated. Please, try again.', 2);
                 }
             }
             $options = array('conditions' => array('Sponsor.' . $this->Sponsor->primaryKey => $decrypt_sponsor_id));
@@ -125,15 +127,15 @@ class SponsorsController extends AppController {
             $sponsor_record = $this->Sponsor->find('first', $options);
             
             if (!$this->Sponsor->exists()) {
-                $this->accessDenialError('Invalid Sponsor Record Requested for Deletion', 2);
+                $this->accessDenialError('Invalid Parent Record Requested for Deletion', 2);
             }
             $this->request->allowMethod('post', 'delete');
             if ($this->Sponsor->delete()) {
                 //Delete the equivalent users record
                 $user->query('DELETE FROM users WHERE username="'.$sponsor_record['Sponsor']['sponsor_no'].'" LIMIT 1');
-                $this->setFlashMessage('The Sponsor ' . $sponsor_record['Sponsor']['sponsor_no'] .' and its Equivalent User Record has been deleted.', 1);
+                $this->setFlashMessage('The Parent ' . $sponsor_record['Sponsor']['sponsor_no'] .' and its Equivalent User Record has been deleted.', 1);
             } else {
-                $this->setFlashMessage('The Sponsor could not be deleted. Please, try again.', 2);
+                $this->setFlashMessage('The Parent could not be deleted. Please, try again.', 2);
             }
             return $this->redirect(array('action' => 'index'));
         }else{

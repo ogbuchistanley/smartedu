@@ -235,12 +235,22 @@ class AppController extends Controller {
             return FALSE;
         }
         $image_url = $data['image_url']['name'];
-        $ext = explode('.', $image_url)[1];
+        $ext = pathinfo($image_url, PATHINFO_EXTENSION);
+        //$ext = explode('.', $image_url)[1];
         $name = $id.'.'.$ext;
+        $src = $data['image_url']['tmp_name'];
+        $des = getcwd() . DS . 'img' . DS . 'uploads' . DS . $type . DS . $name;
         if (!is_uploaded_file($data['image_url']['tmp_name'])) {
             return FALSE;
         }
-        if (!move_uploaded_file($data['image_url']['tmp_name'], WWW_ROOT . 'img' . DS . 'uploads' . DS . $type . DS . $name)) {
+
+        if (!is_readable($src))
+            die("Very bad hosting juju. The file was uploaded but I can't read it?!?");
+
+//        if (!is_writeable($des))
+//            die("As expected, you can't upload a file here. This is not a good thing.");
+
+        if (!move_uploaded_file($src, $des)) {
             return FALSE;
         }
         return TRUE;
@@ -338,68 +348,68 @@ class AppController extends Controller {
     }
 
     function initDB() {
-        //Deny access to everything ==> 1                   expired_users
-        $this->Acl->deny('expired_users', 'controllers');
+        //Deny access to everything ==> 1                   EXPIRED_USERS
+        $this->Acl->deny('EXPIRED_USERS', 'controllers');
         
-        //allow users (Students, Sponsors) ==> 2            web_users
-        $this->Acl->deny('spn_users', 'controllers');
-        $this->Acl->allow('spn_users', 'HomeController');
-        $this->Acl->allow('spn_users', 'StudentsController/view');
-        $this->Acl->allow('spn_users', 'SponsorsController/view');
-        $this->Acl->allow('spn_users', 'SponsorsController/adjust', 'update');
-        $this->Acl->deny('spn_users', 'SponsorsController/index');
+        //allow users (Students, Parents) ==> 2            PAR_USERS
+        $this->Acl->deny('PAR_USERS', 'controllers');
+        $this->Acl->allow('PAR_USERS', 'HomeController');
+        $this->Acl->allow('PAR_USERS', 'StudentsController/view');
+        $this->Acl->allow('PAR_USERS', 'SponsorsController/view');
+        $this->Acl->allow('PAR_USERS', 'SponsorsController/adjust', 'update');
+        $this->Acl->deny('PAR_USERS', 'SponsorsController/index');
 
         
-        //Access Controls (Employees or Teachers)==> 3      emp_users
-        $this->Acl->deny('emp_users', 'controllers'); 
-        $this->Acl->allow('emp_users', 'DashboardController');        
-        $this->Acl->allow('emp_users', 'ExamsController'); 
-        $this->Acl->allow('emp_users', 'AttendsController'); 
-        $this->Acl->allow('emp_users', 'StudentsController/view');
-        $this->Acl->allow('emp_users', 'ClassroomsController/myclass'); 
-        $this->Acl->allow('emp_users', 'ClassroomsController/view'); 
-        $this->Acl->allow('emp_users', 'EmployeesController/adjust', 'update');
+        //Access Controls (Staffs or Teachers)==> 3      STF_USERS
+        $this->Acl->deny('STF_USERS', 'controllers');
+        $this->Acl->allow('STF_USERS', 'DashboardController');
+        $this->Acl->allow('STF_USERS', 'ExamsController');
+        $this->Acl->allow('STF_USERS', 'AttendsController');
+        $this->Acl->allow('STF_USERS', 'StudentsController/view');
+        $this->Acl->allow('STF_USERS', 'ClassroomsController/myclass');
+        $this->Acl->allow('STF_USERS', 'ClassroomsController/view');
+        $this->Acl->allow('STF_USERS', 'EmployeesController/adjust', 'update');
         
-        //Access Controls (ICT)==> 4                        ict_users
-        $this->Acl->deny('ict_users', 'controllers');    
-        $this->Acl->allow('ict_users', 'DashboardController');        
-        $this->Acl->allow('ict_users', 'ExamsController');   
-        $this->Acl->allow('ict_users', 'RecordsController'); 
-        $this->Acl->allow('ict_users', 'AttendsController'); 
+        //Access Controls (ICT)==> 4                        ICT_USERS
+        $this->Acl->deny('ICT_USERS', 'controllers');
+        $this->Acl->allow('ICT_USERS', 'DashboardController');
+        $this->Acl->allow('ICT_USERS', 'ExamsController');
+        $this->Acl->allow('ICT_USERS', 'RecordsController');
+        $this->Acl->allow('ICT_USERS', 'AttendsController');
         //ClassroomsController
-        $this->Acl->allow('ict_users', 'ClassroomsController'); 
-        //$this->Acl->allow('ict_users', 'ClassroomsController/myclass'); 
-        //$this->Acl->allow('ict_users', 'ClassroomsController/view'); 
+        $this->Acl->allow('ICT_USERS', 'ClassroomsController');
+        //$this->Acl->allow('ICT_USERS', 'ClassroomsController/myclass');
+        //$this->Acl->allow('ICT_USERS', 'ClassroomsController/view');
         ////StudentsController
-        $this->Acl->allow('ict_users', 'StudentsController');
-        $this->Acl->allow('ict_users', 'StudentsController/index');
-        $this->Acl->allow('ict_users', 'StudentsController/view'); 
-        $this->Acl->allow('ict_users', 'StudentsController/register', 'create');
-        $this->Acl->allow('ict_users', 'StudentsController/adjust', 'update');
-        $this->Acl->deny('ict_users', 'StudentsController/delete', 'delete');
+        $this->Acl->allow('ICT_USERS', 'StudentsController');
+        $this->Acl->allow('ICT_USERS', 'StudentsController/index');
+        $this->Acl->allow('ICT_USERS', 'StudentsController/view');
+        $this->Acl->allow('ICT_USERS', 'StudentsController/register', 'create');
+        $this->Acl->allow('ICT_USERS', 'StudentsController/adjust', 'update');
+        $this->Acl->deny('ICT_USERS', 'StudentsController/delete', 'delete');
         //SponsorsController
-        $this->Acl->allow('ict_users', 'SponsorsController');
-        $this->Acl->allow('ict_users', 'SponsorsController/index');
-        $this->Acl->allow('ict_users', 'SponsorsController/view');
-        $this->Acl->allow('ict_users', 'SponsorsController/register', 'create');
-        $this->Acl->allow('ict_users', 'SponsorsController/adjust', 'update');
-        $this->Acl->deny('ict_users', 'SponsorsController/delete', 'delete');
+        $this->Acl->allow('ICT_USERS', 'SponsorsController');
+        $this->Acl->allow('ICT_USERS', 'SponsorsController/index');
+        $this->Acl->allow('ICT_USERS', 'SponsorsController/view');
+        $this->Acl->allow('ICT_USERS', 'SponsorsController/register', 'create');
+        $this->Acl->allow('ICT_USERS', 'SponsorsController/adjust', 'update');
+        $this->Acl->deny('ICT_USERS', 'SponsorsController/delete', 'delete');
         //EmployeesController
-        $this->Acl->allow('ict_users', 'EmployeesController');
-        $this->Acl->allow('ict_users', 'EmployeesController/index');
-        $this->Acl->allow('ict_users', 'EmployeesController/register', 'create');
-        $this->Acl->allow('ict_users', 'EmployeesController/adjust', 'update');
-        $this->Acl->deny('ict_users', 'EmployeesController/delete', 'delete');   
+        $this->Acl->allow('ICT_USERS', 'EmployeesController');
+        $this->Acl->allow('ICT_USERS', 'EmployeesController/index');
+        $this->Acl->allow('ICT_USERS', 'EmployeesController/register', 'create');
+        $this->Acl->allow('ICT_USERS', 'EmployeesController/adjust', 'update');
+        $this->Acl->deny('ICT_USERS', 'EmployeesController/delete', 'delete');
         //SubjectsController
-        $this->Acl->allow('ict_users', 'SubjectsController');
-        $this->Acl->allow('ict_users', 'SubjectsController/add2class');
+        $this->Acl->allow('ICT_USERS', 'SubjectsController');
+        $this->Acl->allow('ICT_USERS', 'SubjectsController/add2class');
         //ItemsController
-        $this->Acl->allow('ict_users', 'ItemsController');
-        $this->Acl->deny('ict_users', 'ItemsController/process_fees');
+        $this->Acl->allow('ICT_USERS', 'ItemsController');
+        $this->Acl->deny('ICT_USERS', 'ItemsController/process_fees');
         
 
-        //Access Control (Super Admin) to everything ==> 5    adm_users
-        $this->Acl->allow('adm_users', 'controllers');
-        $this->Acl->deny('adm_users', 'HomeController');
+        //Access Control (Super Admin) to everything ==> 5    ADM_USERS
+        $this->Acl->allow('ADM_USERS', 'controllers');
+        $this->Acl->deny('ADM_USERS', 'HomeController');
     }
 }

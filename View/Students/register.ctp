@@ -19,7 +19,7 @@
             <!-- / Info Boxes -->
             <div class="panel-heading text-primary">
                 <h3 class="panel-title">
-                   <i class="fa fa-pencil-square"></i> Create New Student <label class="label label-primary">Please fill the form properly and modify accurately...</label>
+                   <i class="fa fa-pencil-square"></i> Create New Student  <small class="text-danger"> <i class="fa fa-warning"></i>Note All Fields With * Need To Be Filled</small>
                     <span class="pull-right">
                         <a href="javascript:void(0)"  title="Refresh"><i class="fa fa-refresh"></i></a>
                         <a href="#" class="panel-minimize"><i class="fa fa-chevron-up"></i></a>
@@ -78,20 +78,20 @@
                                 </li>
                             </ul>
                                 <div id="step-1">	
-                                    <h2 class="StepTitle">Sponsor Details</h2>	
+                                    <h2 class="StepTitle">Parent Details <small class="text-danger"> <i class="fa fa-warning"></i>Note All Fields With * Need To Be Filled</small></h2>
                                     <div class="panel">
                                         <div class="panel-body">
                                             <div class="form-group">
-                                                <label for="sponsor_name" class="col-lg-2 col-md-3 control-label">Sponsor</label>
+                                                <label for="sponsor_name" class="col-lg-2 col-md-3 control-label">Parent <small class="text-danger"> * </small></label>
                                                 <div class="col-lg-7 col-md-9">
                                                     <input type="text" class="form-control form-cascade-control input-small" name="sponsor_name" 
-                                                    id="sponsor_name" placeholder="Student's Sponsor" required="required">
+                                                    id="sponsor_name" placeholder="Student's Parent" required="required">
                                                     <input type="hidden" class="form-control form-cascade-control input-small" name="data[Student][sponsor_id]" 
                                                     id="sponsor_id" required="required">
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                              <label for="relationtype_id" class="col-lg-2 col-md-3 control-label">Relationship Type</label>
+                                              <label for="relationtype_id" class="col-lg-2 col-md-3 control-label">Relationship Type <small class="text-danger"> * </small></label>
                                               <div class="col-lg-7 col-md-9">
                                                   <?php 
                                                         echo $this->Form->input('relationtype_id', array(
@@ -110,32 +110,32 @@
                                     </div>  		
                                 </div>             
                                 <div id="step-2">
-                                    <h2 class="StepTitle">Personal Details</h2>
+                                    <h2 class="StepTitle">Personal Details <small class="text-danger"> <i class="fa fa-warning"></i>Note All Fields With * Need To Be Filled</small></h2>
                                   <div class="panel">
                                     <div class="panel-body">
                                           <div class="form-group">
-                                              <label for="first_name" class="col-lg-2 col-md-3 control-label">First Name</label>
+                                              <label for="first_name" class="col-lg-2 col-md-3 control-label">First Name <small class="text-danger"> * </small></label>
                                             <div class="col-lg-7 col-md-9">
                                              <input type="text" class="form-control form-cascade-control input-small"
                                              name="data[Student][first_name]" id="first_name" placeholder="Type Student's first name" required="required"/>
                                            </div>
                                          </div>
                                          <div class="form-group">
-                                          <label for="surname" class="col-lg-2 col-md-3 control-label">Surname</label>
+                                          <label for="surname" class="col-lg-2 col-md-3 control-label">Last Name <small class="text-danger"> * </small></label>
                                           <div class="col-lg-7 col-md-9">
                                            <input type="text" class="form-control form-cascade-control input-small" name="data[Student][surname]" 
-                                           id="surname" placeholder="Type Student's surname" required="required"/>
+                                           id="surname" placeholder="Type Student's Last Name" required="required"/>
                                          </div>
                                        </div>
                                        <div class="form-group">
                                         <label for="other_name" class="col-lg-2 col-md-3 control-label">Other Names</label>
                                         <div class="col-lg-7 col-md-9">
                                          <input type="text" class="form-control form-cascade-control input-small" name="data[Student][other_name]"
-                                         id="other_name" placeholder="Type Student's other name if there's any">
+                                         id="other_name" placeholder="Type Student's Other name if there's any">
                                        </div>
                                       </div>
                                       <div class="form-group">
-                                        <label for="gender" class="col-lg-2 col-md-3 control-label">Gender</label>
+                                        <label for="gender" class="col-lg-2 col-md-3 control-label">Gender <small class="text-danger"> * </small></label>
                                         <div class="col-lg-7 col-md-9">
                                             <select class="form-control" id="gender" name="data[Student][gender]" required="required"/>
                                                 <option value="">  (Select Student's gender)  </option>
@@ -145,14 +145,14 @@
                                         </div>
                                      </div>
                                      <div class="form-group">
-                                        <label for="birth_date" class="col-lg-2 col-md-3 control-label">Date of Birth</label>
+                                        <label for="birth_date" class="col-lg-2 col-md-3 control-label">Date of Birth <small class="text-danger"> * </small></label>
                                         <div class="col-lg-7 col-md-9">
                                             <input type="text" class="form-control form-cascade-control input-small" name="data[Student][birth_date]" 
                                             id="birth_date" placeholder="Select Student's date of birth" required="required"/>
                                         </div>
                                      </div>
                                      <div class="form-group">
-                                        <label for="country_id" class="col-lg-2 col-md-3 control-label">Nationality</label>
+                                        <label for="country_id" class="col-lg-2 col-md-3 control-label">Nationality <small class="text-danger"> * </small></label>
                                         <div class="col-lg-7 col-md-9">
                                             <?php 
                                                 echo $this->Form->input('country_id', array(
@@ -170,7 +170,7 @@
                                      </div>
                                     <div id="state_lga_div">
                                      <div class="form-group">
-                                        <label for="state_id" class="col-lg-2 col-md-3 control-label">State of origin</label>
+                                        <label for="state_id" class="col-lg-2 col-md-3 control-label">State of origin <small class="text-danger"> * </small></label>
                                         <div class="col-lg-7 col-md-9">
                                             <?php 
                                                 echo $this->Form->input('state_id', array(
@@ -186,7 +186,7 @@
                                         </div>
                                      </div>
                                      <div class="form-group">
-                                        <label for="local_govt_id" class="col-lg-2 col-md-3 control-label">Local Govt.</label>
+                                        <label for="local_govt_id" class="col-lg-2 col-md-3 control-label">Local Govt. <small class="text-danger"> * </small></label>
                                         <div class="col-lg-7 col-md-9">
                                             <select class="form-control" name="data[Student][local_govt_id]" id="local_govt_id">
                                                 <option value="">  (Select Student's L.G.A)  </option>
