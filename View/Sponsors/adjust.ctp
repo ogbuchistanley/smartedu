@@ -89,18 +89,18 @@
                                </div>
                             </div>
                             <div class="form-group">
+                              <label class="col-lg-2 col-md-3 control-label">Last Name <small class="text-danger"> * </small></label>
+                              <div class="col-lg-7 col-md-9">
+                               <input type="text" class="form-control form-cascade-control input-small" name="data[Sponsor][other_name]" id="other_name"
+                                      value="<?php echo (empty($sponsor['Sponsor']['other_name'])) ? '' : $sponsor['Sponsor']['other_name']?>" placeholder="Type Parent's Last Name">
+                             </div>
+                            </div>
+                            <div class="form-group">
                                 <label class="col-lg-2 col-md-3 control-label" for="first_name">First Name <small class="text-danger"> * </small></label>
                                 <div class="col-lg-7 col-md-9">
                                     <input type="text" class="form-control form-cascade-control input-small" value="<?php echo $sponsor['Sponsor']['first_name']?>"
                                  name="data[Sponsor][first_name]" id="first_name" placeholder="Type Parent's first name" required>
                                </div>
-                            </div>
-                            <div class="form-group">
-                              <label class="col-lg-2 col-md-3 control-label">Last Names <small class="text-danger"> * </small></label>
-                              <div class="col-lg-7 col-md-9">
-                               <input type="text" class="form-control form-cascade-control input-small" name="data[Sponsor][other_name]" id="other_name"
-                                      value="<?php echo (empty($sponsor['Sponsor']['other_name'])) ? '' : $sponsor['Sponsor']['other_name']?>" placeholder="Type Parent's Last names">
-                             </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-lg-2 col-md-3 control-label" for="email">Email</label>

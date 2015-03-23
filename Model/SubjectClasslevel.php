@@ -65,7 +65,7 @@ class SubjectClasslevel extends AppModel {
     public function validateIfExist($subject_id, $term_id, $classlevel_id, $class_id=null) {
         if($class_id === null){
             $result = $this->query('
-                SELECT * FROM subject_classlevels WHERE subject_id="'.$subject_id.'" AND class_id=NULL AND classlevel_id="'.$classlevel_id.'" AND academic_term_id="'.$term_id.'"
+                SELECT * FROM subject_classlevels WHERE subject_id="'.$subject_id.'" AND classlevel_id="'.$classlevel_id.'" AND academic_term_id="'.$term_id.'"
             ');
         }else{
             $result = $this->query('
@@ -110,10 +110,18 @@ class SubjectClasslevel extends AppModel {
     
     //Update Subjects Students Registered Table with the list of students
     public function updateStudentsSubjects($subject_classlevel_id, $stud_ids) {
-        $this->query('DELETE FROM subject_students_registers WHERE subject_classlevel_id="'.$subject_classlevel_id.'"');
-        $ids = explode(',', $stud_ids);
-        for($i = 0; $i < count($ids); $i++){
-            $this->query('INSERT INTO subject_students_registers(student_id, subject_classlevel_id) VALUES("'.$ids[$i].'", "'.$subject_classlevel_id.'")');
+        $class_term = $this->query('SELECT a.* FROM subject_classlevels a WHERE a.subject_classlevel_id="'.$subject_classlevel_id.'" LIMIT 1');
+        $class_term = ($class_term) ? array_shift($class_term) : false;
+        if($class_term) {
+            $this->query('DELETE FROM subject_students_registers WHERE subject_classlevel_id="' . $subject_classlevel_id . '"');
+            $ids = explode(',', $stud_ids);
+            for ($i = 0; $i < count($ids); $i++) {
+                $this->query('INSERT INTO subject_students_registers(student_id, class_id, subject_classlevel_id)'
+                    . ' SELECT "' . $ids[$i] . '", b.class_id, "' . $subject_classlevel_id . '" FROM students a INNER JOIN students_classes b ON a.student_id=b.student_id INNER JOIN'
+                    . ' classrooms c ON c.class_id = b.class_id WHERE c.classlevel_id="' . $class_term['a']['classlevel_id'] . '" AND a.student_status_id = 1 AND a.student_id="'.$ids[$i].'" AND'
+                    . ' b.academic_year_id = (SELECT academic_year_id FROM academic_terms WHERE academic_term_id="' . $class_term['a']['academic_term_id'] . '" LIMIT 1)'
+                );
+            }
         }
         return 1;
     }

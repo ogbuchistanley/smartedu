@@ -59,7 +59,8 @@ class ExamsController extends AppController {
 
     //Returns all the exams that has been setup
     public function get_exam_setup() {
-        $this->set('title_for_layout', 'Exams');
+        $this->autoRender = false;
+        //$this->set('title_for_layout', 'Exams');
         $resultCheck = $this->Acl->check($this->group_alias, 'ExamsController');
         if($resultCheck){
             if ($this->request->is('ajax')) {

@@ -40,7 +40,7 @@
                             <b><i class="fa fa-search-plus"></i> Search Students by class</b></a>
                         </li>
                         <li><a href="<?php echo DOMAIN_NAME ?>/classrooms/index#assign_head_tutor" data-toggle="tab">
-                            <b><i class="fa fa-plus-square"></i> Assign Head Tutor</b></a>
+                            <b><i class="fa fa-plus-square"></i> Assign Class Teacher</b></a>
                         </li>
                     </ul>
                     <div id="myTabContent" class="tab-content">

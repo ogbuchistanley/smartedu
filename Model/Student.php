@@ -33,8 +33,6 @@ class Student extends AppModel {
     }
 
     public function afterSave($created, $options = array()) {
-        $studClass = ClassRegistry::init('StudentsClass');
-        $term_id = ClassRegistry::init('AcademicTerm');
         $id = $this->id;
         $no = trim('STD'. str_pad($id, 4, '0', STR_PAD_LEFT));
 
@@ -45,17 +43,8 @@ class Student extends AppModel {
         }else{
             //Update The Sponsor ID
             $this->saveField('student_no', $no);
-            //$this->query('UPDATE students SET student_no=CONCAT("stu", REPEAT("0", 4-LENGTH("'.$id.'")), '
+            //$this->query('UPDATE students SET student_no=CONCAT("STD", REPEAT("0", 4-LENGTH("'.$id.'")), '
             //. 'CAST("'.$id.'" AS CHAR(10))) WHERE student_id="'.$id.'"');
-        }
-        if($created){
-            if($this->data[$this->alias]['class_id'] !== ''){
-                $studClass->create();
-                $studClass->data['StudentsClass']['student_id'] = $id;
-                $studClass->data['StudentsClass']['class_id'] = $this->data[$this->alias]['class_id'];
-                $studClass->data['StudentsClass']['academic_year_id'] = $term_id->getCurrentYearID();
-                $studClass->save();
-            }
         }
     }
 

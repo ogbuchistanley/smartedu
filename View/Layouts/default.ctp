@@ -259,7 +259,7 @@ $cakeDescription = __d('app_dev', ':: '.APP_NAME.' :');
                                         <?php //endif;?>
                                         <li><a href="<?php echo DOMAIN_NAME ?>/exams/index#subjectScores" data-original-title="Input / Edit Scores"><i class="fa fa-th"></i><span> Input / Edit Scores</span></a></li>
                                         <li><a href="<?php echo DOMAIN_NAME ?>/exams/index#viewTAScores" data-original-title="Adjust Exams"><i class="fa fa-eye"></i><span> Terminal / Annual Scores</span></a></li>
-                                        <li><a href="<?php echo DOMAIN_NAME ?>/assessments" data-original-title="Skills Assessment"><i class="fa fa-magic"></i><span> Skills Assessment</span></a></li>
+                                        <li><a href="<?php echo DOMAIN_NAME ?>/assessments" data-original-title="Skills Assessment / Remark"><i class="fa fa-magic"></i><span> Skills Assessment / Remark</span></a></li>
                                     </ul>
                                 </li>
                                 <?php endif;?>

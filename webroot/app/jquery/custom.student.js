@@ -25,6 +25,8 @@ $('document').ready(function(){
     // OnChange Of Classlevel Get Class Room
     var url5 = "\/classrooms\/ajax_get_classes\/Student\/%23classlevel_id";
     getDependentListBox($("#classlevel_id"), $("#class_id"), url5);
+    var url7 = "\/classrooms\/ajax_get_classes\/StudentNew\/%23classlevel_id_new";
+    getDependentListBox($("#classlevel_id_new"), $("#class_id_new"), url7);
     //////////////////////////////////////////////////////////////////////////////////////////////////////
     
     

@@ -126,18 +126,18 @@
                                                </div>
                                             </div>
                                             <div class="form-group">
+                                              <label class="col-lg-2 col-md-3 control-label">Last Name <small class="text-danger"> * </small></label>
+                                              <div class="col-lg-7 col-md-9">
+                                               <input type="text" class="form-control form-cascade-control input-small" value="<?php echo $employee['Employee']['other_name']?>"
+                                                name="data[Employee][other_name]" id="other_name" placeholder="Type Staff's Last Name" required>
+                                             </div>
+                                            </div>
+                                            <div class="form-group">
                                                 <label class="col-lg-2 col-md-3 control-label">First Name <small class="text-danger"> * </small></label>
                                                 <div class="col-lg-7 col-md-9">
                                                  <input type="text" class="form-control form-cascade-control input-small" value="<?php echo $employee['Employee']['first_name']?>"
                                                     name="data[Employee][first_name]" id="first_name" placeholder="Type Staff's first name" required>
                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                              <label class="col-lg-2 col-md-3 control-label">Last Names <small class="text-danger"> * </small></label>
-                                              <div class="col-lg-7 col-md-9">
-                                               <input type="text" class="form-control form-cascade-control input-small" value="<?php echo $employee['Employee']['other_name']?>"
-                                                name="data[Employee][other_name]" id="other_name" placeholder="Type Staff's Last names" required>
-                                             </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="gender" class="col-lg-2 col-md-3 control-label">Gender <small class="text-danger"> * </small></label>
@@ -241,7 +241,7 @@
                                                         <div class="form-group">
                                                             <label for="spouse_employer" class="col-lg-2 col-md-3 control-label">Current Employer</label>
                                                             <div class="col-lg-7 col-md-">
-                                                                <input type="text" class="form-control form-cascade-control input-small" name="data[Employee][spouse_employer]"  placeholder="Type Employee's Spouse Employer"
+                                                                <input type="text" class="form-control form-cascade-control input-small" name="data[Employee][spouse_employer]"  placeholder="Type Staff's Spouse Employer"
                                                                 id="spouse_employer" value="<?php echo !empty($SpouseDetail['SpouseDetail']['spouse_employer']) ? $SpouseDetail['SpouseDetail']['spouse_employer'] : '';?>"/>
                                                             </div>
                                                         </div>

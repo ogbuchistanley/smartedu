@@ -1,6 +1,26 @@
 <?php echo $this->Html->script("../app/js/jquery-ui.js", FALSE);?>
 <?php echo $this->Html->script("../app/jquery/custom.employee.js", FALSE);?>
 
+<div class="row">
+    <?php
+    $errors = $this->validationErrors['EmployeeNew'];
+    $flatErrors = Set::flatten($errors);
+    $flatErrors2 = $flatErrors;
+    $test = array();
+    foreach($flatErrors as $key => $value){
+        $test[] = $value;
+    }
+    if(!empty($test[count($test) - 1])) {
+        echo '<div class="alert alert-danger">';
+        echo '<ul>';
+        foreach($flatErrors2 as $key => $value) {
+            echo (!empty($value)) ? '<li>'.$value.'</li>' : false;
+        }
+        echo '</ul>';
+        echo '</div>';
+    }
+    ?>
+</div>
 <div class="col-md-12">
     <div class="panel">
         <!-- Info Boxes -->
@@ -59,23 +79,23 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-2 col-md-3 control-label">First Name <small class="text-danger"> * </small></label>
+                        <label class="col-lg-2 col-md-3 control-label">Last Name <small class="text-danger"> * </small></label>
                         <div class="col-lg-7 col-md-9">
                             <input type="text" class="form-control form-cascade-control input-small"
-                                   name="data[EmployeeNew][first_name]" id="first_name" placeholder="Type Staff's First name" required>
+                                   name="data[EmployeeNew][other_name]" id="other_name" placeholder="Type Employee's Last Name" required>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-2 col-md-3 control-label">Last Names <small class="text-danger"> * </small></label>
+                        <label class="col-lg-2 col-md-3 control-label">First Name <small class="text-danger"> * </small></label>
                         <div class="col-lg-7 col-md-9">
                             <input type="text" class="form-control form-cascade-control input-small"
-                                   name="data[StaffNew][other_name]" id="other_name" placeholder="Type Employee's Last names" required>
+                                   name="data[EmployeeNew][first_name]" id="first_name" placeholder="Type Staff's First Name" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-lg-2 col-md-3 control-label">Email</label>
                         <div class="col-lg-7 col-md-9">
-                            <input type="email" class="form-control form-cascade-control input-small" name="data[StaffNew][email]"
+                            <input type="email" class="form-control form-cascade-control input-small" name="data[EmployeeNew][email]"
                                    id="email" placeholder="Staff's e-mail">
                         </div>
                     </div>

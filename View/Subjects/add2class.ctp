@@ -40,7 +40,7 @@
                         <li>
                             <a href="<?php echo DOMAIN_NAME ?>/subjects/add2class#adjust_subjects_assign" data-toggle="tab">
                                 <b><i class="fa fa-edit"></i> Modify Subjects /</b>
-                                <b><i class="fa fa-ticket"></i> Manage Students Subjects</b>
+                                <b><i class="fa fa-ticket"></i> Manage Students</b>
                             </a>
                         </li>
                     </ul>

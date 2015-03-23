@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 16, 2015 at 12:56 PM
+-- Generation Time: Mar 23, 2015 at 05:18 PM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -150,7 +150,7 @@ BEGIN
 	END IF;
 
 
-	IF @ClassID IS NULL THEN
+	IF @ClassID IS NULL OR @ClassID = -1 THEN
 		BEGIN
 			INSERT INTO subject_students_registers(student_id, class_id, subject_classlevel_id)
 			SELECT	b.student_id, b.class_id, @SubjectClasslevelID
@@ -991,12 +991,12 @@ CREATE TABLE IF NOT EXISTS `aros` (
 --
 
 INSERT INTO `aros` (`id`, `parent_id`, `model`, `foreign_key`, `alias`, `lft`, `rght`) VALUES
-(1, NULL, NULL, NULL, 'expired_users', 1, 2),
-(2, NULL, NULL, NULL, 'spn_users', 3, 4),
-(3, NULL, NULL, NULL, 'emp_users', 5, 6),
-(4, NULL, NULL, NULL, 'ict_users', 7, 8),
-(5, NULL, NULL, NULL, 'app_users', 9, 10),
-(6, NULL, NULL, NULL, 'adm_users', 11, 12);
+(1, NULL, NULL, NULL, 'EXPIRED_USERS', 1, 2),
+(2, NULL, NULL, NULL, 'PAR_USERS', 3, 4),
+(3, NULL, NULL, NULL, 'STF_USERS', 5, 6),
+(4, NULL, NULL, NULL, 'ICT_USERS', 7, 8),
+(5, NULL, NULL, NULL, 'APP_USERS', 9, 10),
+(6, NULL, NULL, NULL, 'ADM_USERS', 11, 12);
 
 -- --------------------------------------------------------
 
@@ -1688,7 +1688,7 @@ CREATE TABLE IF NOT EXISTS `employees` (
   `marital_status` varchar(20) DEFAULT NULL,
   `country_id` int(11) DEFAULT NULL,
   `state_id` int(11) DEFAULT NULL,
-  `local_govt_id` int(11) DEFAULT NULL,
+  `local_govt_id` int(11) unsigned DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
   `next_ofkin_name` varchar(70) DEFAULT NULL,
   `next_ofkin_number` varchar(15) DEFAULT NULL,
@@ -1696,11 +1696,11 @@ CREATE TABLE IF NOT EXISTS `employees` (
   `form_of_identity` varchar(100) DEFAULT NULL,
   `identity_no` varchar(30) DEFAULT NULL,
   `identity_expiry_date` date DEFAULT NULL,
-  `status_id` int(2) NOT NULL DEFAULT '2',
+  `status_id` int(2) NOT NULL DEFAULT '1',
   `created_by` int(11) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
 
 --
 -- Dumping data for table `employees`
@@ -1723,8 +1723,7 @@ INSERT INTO `employees` (`employee_id`, `employee_no`, `salutation_id`, `first_n
 (15, 'emp0015', 6, 'Jude', 'Eze Ebunafor', 'male', '1955-02-25', 'employees/15.jpg', 'K/M 24, Lagos-Badagry Express Way, Lagos', NULL, '08058472593', '09474853738', 'Married', 140, 1, 3, 'judeemma@yahoo.com', 'Mrs. Judith Eze Ebunafor', '08049504784', 'Wife', 'National I.D Card', '048595639478', '2016-05-03', 1, 2, '2014-10-27 07:10:06', '2014-10-27 18:10:07'),
 (16, 'emp0016', 7, 'Mary', 'Jane', 'female', '1983-08-16', 'employees/16.jpg', 'First Bank Quaters Lagos', NULL, '08058472593', '09474853738', 'Married', 140, 37, 212, 'okon@ymail.com', 'Moses Mark', '98764786549867', 'Brother', 'Drivers Licence', '34567897435', '2015-07-27', 1, 2, '2014-10-27 07:23:56', '2014-10-27 18:23:56'),
 (19, 'emp0019', 11, 'Sulieman', 'Bala Audu', 'male', '1970-01-01', NULL, '345 dogon Bauchi Road S/G Zaria', NULL, '07034825391', '', 'Married', 140, 13, 315, 'kheengz@gmail.com', 'Mr. & Mrs Ibrahim Juniadu', '08136583745', 'Parent', '', '', '1970-01-01', 1, 2, '2014-10-27 07:40:14', '2014-10-27 19:58:36'),
-(20, 'emp0020', 5, 'Attama', 'Benjamin', 'Male', '2014-10-29', 'employees/20.jpg', 'Sokoto Road, Zaria', NULL, '08030734377', '07033456863', 'Single', 140, 15, 363, 'kingsley4united@yahoo.com', 'Mr. Mrs Atama', '08134857694', 'Parent', '', '', NULL, 2, 2, '2014-10-29 02:51:01', '2014-10-29 15:31:55'),
-(21, 'emp0021', 8, 'Nonso', 'Okafor', NULL, NULL, NULL, NULL, NULL, '0938366283', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, 2, '2015-03-12 04:17:34', '2015-03-12 15:17:35');
+(20, 'emp0020', 5, 'Attama', 'Benjamin', 'Male', '2014-10-29', 'employees/20.jpg', 'Sokoto Road, Zaria', NULL, '08030734377', '07033456863', 'Single', 140, 15, 363, 'kingsley4united@yahoo.com', 'Mr. Mrs Atama', '08134857694', 'Parent', '', '', NULL, 2, 2, '2014-10-29 02:51:01', '2014-10-29 15:31:55');
 
 -- --------------------------------------------------------
 
@@ -3169,6 +3168,29 @@ INSERT INTO `relationship_types` (`relationship_type_id`, `relationship_type`) V
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `remarks`
+--
+
+CREATE TABLE IF NOT EXISTS `remarks` (
+`remark_id` int(11) NOT NULL,
+  `house_master_remark` varchar(300) DEFAULT 'None',
+  `principal_remark` varchar(300) DEFAULT 'None',
+  `student_id` int(11) NOT NULL,
+  `academic_term_id` int(11) NOT NULL,
+  `employee_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `remarks`
+--
+
+INSERT INTO `remarks` (`remark_id`, `house_master_remark`, `principal_remark`, `student_id`, `academic_term_id`, `employee_id`) VALUES
+(1, 'joker', 'dude', 3, 4, 2),
+(2, 'gallant', 'lazy', 11, 4, 2);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `salutations`
 --
 
@@ -3343,7 +3365,7 @@ CREATE TABLE IF NOT EXISTS `sponsors` (
   `sponsorship_type_id` int(11) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=35 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=33 ;
 
 --
 -- Dumping data for table `sponsors`
@@ -3380,9 +3402,7 @@ INSERT INTO `sponsors` (`sponsor_id`, `sponsor_no`, `first_name`, `other_name`, 
 (28, 'spn0028', 'Vivian', 'George', 8, 'Banker', NULL, 'GTBank Owerri', 'vivian@gmail.com', NULL, 'World Banking Estate Owerri', 290, 12, 140, '08030734377', '094387324', 2, NULL, '2014-10-24 11:17:22', '2014-10-24 10:17:22'),
 (29, 'spn0029', 'Ibrahim ', 'Bala', 6, 'Trader', NULL, '', '', NULL, 'Line Zumo', 277, 33, 140, '08030734377', '', 2, NULL, '2014-10-26 12:53:05', '2014-12-22 11:42:39'),
 (30, 'spn0030', 'Ebube', 'Chidi', 7, 'Business', NULL, '', 'vivian@gmail.com', NULL, 'Samaru', 288, 12, 140, '08024262994', '', 2, NULL, '2014-10-26 12:59:27', '2014-10-26 11:59:27'),
-(32, 'spn0032', 'Peter', 'Malgwi', 8, 'Lecturer', NULL, 'Kebbi State University', 'peter@gmail.com', NULL, 'Katsina Ala', 142, 7, 140, '08135201037', '', 2, NULL, '2014-10-26 01:11:21', '2014-10-26 12:11:21'),
-(33, 'spn0033', 'Obinna', 'Ekwueme', 8, NULL, NULL, NULL, 'kingsley4united@yahoo.com', NULL, NULL, NULL, NULL, NULL, '08030734377', NULL, 2, NULL, '2015-03-10 03:07:43', '2015-03-10 14:07:44'),
-(34, 'spn0034', 'Okafor', 'Emmanuel Nonso', 6, NULL, NULL, NULL, 'nondefyde@gmail.com', NULL, NULL, NULL, NULL, NULL, '08061539278', NULL, 2, NULL, '2015-03-12 04:23:49', '2015-03-12 15:23:49');
+(32, 'spn0032', 'Peter', 'Malgwi', 8, 'Lecturer', NULL, 'Kebbi State University', 'peter@gmail.com', NULL, 'Katsina Ala', 142, 7, 140, '08135201037', '', 2, NULL, '2014-10-26 01:11:21', '2014-10-26 12:11:21');
 
 -- --------------------------------------------------------
 
@@ -3612,7 +3632,7 @@ CREATE TABLE IF NOT EXISTS `students` (
   `created_by` int(11) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=64 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=65 ;
 
 --
 -- Dumping data for table `students`
@@ -3620,8 +3640,8 @@ CREATE TABLE IF NOT EXISTS `students` (
 
 INSERT INTO `students` (`student_id`, `sponsor_id`, `first_name`, `surname`, `other_name`, `student_no`, `image_url`, `gender`, `birth_date`, `class_id`, `religion`, `previous_school`, `academic_term_id`, `term_admitted`, `student_status_id`, `local_govt_id`, `state_id`, `country_id`, `relationtype_id`, `created_by`, `created_at`, `updated_at`) VALUES
 (1, 2, 'John', 'Adamu', 'Inua', 'stu0001', 'students/1.jpg', 'Female', '2014-05-27', 8, 'Traditional', 'L.E.A school dogon bauchi, Katsina', 4, 'Third Term 2013-2014', 1, 22, 2, 140, 5, 1, '2014-06-13 12:51:15', '2014-10-23 08:47:26'),
-(2, 4, 'Samuel', 'Makus', 'Mark', 'stu0002', 'students/2.jpg', 'Male', '2012-12-25', NULL, 'Christainity', 'St. Micheal Anglican High School', 4, 'Third Term 2013-2014', 4, 1, 1, 140, 1, 1, '2014-06-24 11:13:50', '2014-09-12 09:23:56'),
-(3, 3, 'Musa', 'Usman', 'Abdulahi', 'stu0003', 'students/3.JPG', 'Male', '2010-06-10', 9, 'Muslim', '', 4, 'Third Term 2013-2014', 3, 330, 13, 140, 3, 1, '2014-06-30 11:56:29', '2015-01-10 19:34:08'),
+(2, 4, 'Samuel', 'Makus', 'Mark', 'STD0002', 'students/2.jpg', 'Male', '1970-01-01', NULL, 'Christainity', 'St. Micheal Anglican High School', 4, 'Third Term 2013-2014', 4, 1, 1, 140, 1, 1, '2014-06-24 11:13:50', '2015-03-20 12:06:17'),
+(3, 3, 'Musa', 'Usman', 'Abdulahi', 'stu0003', 'students/3.JPG', 'Male', '2010-06-10', 9, 'Muslim', '', 4, 'Third Term 2013-2014', 3, 330, 13, 140, 3, 1, '2014-06-30 11:56:29', '2015-03-16 14:04:11'),
 (4, 6, 'Jamila', 'Audu ', 'Ibrahim', 'stu0004', 'students/4.png', 'Female', '2007-08-15', 15, 'Muslim', '', 4, 'Third Term 2013-2014', 1, 158, 7, 140, 1, 1, '2014-06-30 12:05:17', '2015-03-12 09:45:47'),
 (5, 1, 'Kheengz', 'China', 'Odi', 'stu0005', 'students/5.JPG', 'Male', '1988-05-05', 36, 'Christian', 'Depot NA Chindict Barracks Zaria', 4, 'Third Term 2013-2014', 1, 290, 12, 140, 1, 1, '2014-06-30 12:22:47', '2015-01-10 20:33:44'),
 (6, 1, 'Emmanuel', 'Dick', 'Dude', 'stu0006', 'students/6.jpg', 'Female', '2014-06-19', 106, 'Traditional', 'Efiong Topko Secondary School', 4, 'Third Term 2013-2014', 1, 178, 8, 140, 6, 1, '2014-06-30 04:33:24', '2014-09-12 09:23:56'),
@@ -3659,7 +3679,7 @@ INSERT INTO `students` (`student_id`, `sponsor_id`, `first_name`, `surname`, `ot
 (38, 8, 'Angel', 'George', 'Anita', 'stu0038', 'students/38.jpg', 'Female', '1995-05-06', 45, 'Muslim', 'Precious primary school', 4, '3rd Term', 1, 249, 36, 140, 4, 6, '2014-09-11 10:05:09', '2014-09-12 09:23:56'),
 (39, 20, 'Olaolu ', 'Bimbo', 'Tobi', 'stu0039', 'students/39.jpg', 'Female', '1994-07-08', 79, 'Christian', 'Redrose school', 4, '1st Term', 1, 496, 19, 140, 2, 6, '2014-09-11 10:17:52', '2014-09-12 09:23:56'),
 (40, 20, 'Remilekun', 'Olamiposi', 'Kikelomo', 'stu0040', 'students/40.jpg', 'Female', '2010-08-09', 108, 'Traditional', 'Santa Maria Private School', 4, '3rd Term', 1, 585, 22, 140, 5, 6, '2014-09-11 10:31:25', '2014-09-12 09:23:56'),
-(41, 21, 'Muhammed', 'Amir', 'inuwa', 'stu0041', 'students/41.jpg', 'Male', '2014-12-05', NULL, 'Muslim', '', 4, '', 1, 149, 7, 140, 4, 6, '2014-09-11 10:42:15', '2014-10-17 08:30:12'),
+(41, 21, 'Muhammed', 'Amir', 'inuwa', 'stu0041', 'students/41.jpg', 'Male', '2014-12-05', NULL, 'Muslim', '', 4, '', 1, 149, 7, 140, 4, 6, '2014-09-11 10:42:15', '2015-03-16 13:59:42'),
 (42, 12, 'ZAINAB', 'LUKAMAN', 'HAJIA', 'stu0042', 'students/42.jpg', 'Female', '1992-04-22', 100, 'Muslim', '', 4, '1st term', 1, 239, 36, 140, 3, 6, '2014-09-11 11:16:59', '2014-09-12 09:23:56'),
 (43, 12, 'ADEYERI ', 'FOLAGBADE', 'FOLLY', 'stu0043', 'students/43.jpg', 'Male', '1992-05-15', 106, 'Christian', '', 4, '', 1, 253, 36, 140, 5, 6, '2014-09-11 12:07:58', '2014-09-12 09:23:56'),
 (44, 12, 'USMAN', 'AMINU', 'MOHAMMED', 'stu0044', 'students/44.jpg', 'Male', '1994-06-23', 79, 'Muslim', '', 4, '', 1, 320, 13, 140, 5, 6, '2014-09-11 12:12:48', '2014-09-12 09:23:56'),
@@ -3678,7 +3698,8 @@ INSERT INTO `students` (`student_id`, `sponsor_id`, `first_name`, `surname`, `ot
 (60, 16, 'Florence', 'Mary', 'John', 'stu0060', 'students/60.jpg', 'Female', '2011-04-15', 40, NULL, NULL, 4, 'Third Term', 1, 134, 6, 140, 2, 2, '2014-10-24 10:26:23', '2014-10-24 09:26:23'),
 (61, 13, 'Judith', 'John', 'Grace', 'stu0061', NULL, 'Female', '2005-11-11', 10, NULL, NULL, 4, 'Second Term 2014-2015', 1, 288, 12, 140, 1, 2, '2014-11-17 01:14:45', '2014-11-17 12:14:45'),
 (62, 3, 'Mariah', 'Usman', 'Fade', 'stu0062', NULL, 'Female', '1995-07-05', 106, NULL, NULL, 4, 'Second Term 2014-2015', 1, 19, 2, 140, 3, 2, '2014-11-17 10:52:14', '2014-11-17 09:52:14'),
-(63, 9, 'JohnBull', 'Desmond', 'Jude', 'stu0063', 'students/63.jpg', 'Male', '2007-06-04', 106, NULL, NULL, 4, 'First Term 2014-2015', 1, 270, 11, 140, 2, 4, '2015-03-12 10:39:38', '2015-03-12 09:39:38');
+(63, 9, 'JohnBull', 'Desmond', 'Jude', 'stu0063', 'students/63.jpg', 'Male', '2007-06-04', 106, NULL, NULL, 4, 'First Term 2014-2015', 1, 270, 11, 140, 2, 4, '2015-03-12 10:39:38', '2015-03-12 09:39:38'),
+(64, 2, 'Maza', 'Okufor', '', 'STD0064', 'students/64.jpg', 'Male', '2007-06-04', 22, NULL, NULL, 4, 'Second Term 2014-2015', 1, 315, 13, 140, 1, 2, '2015-03-20 11:41:19', '2015-03-20 10:41:19');
 
 -- --------------------------------------------------------
 
@@ -3691,7 +3712,7 @@ CREATE TABLE IF NOT EXISTS `students_classes` (
   `student_id` int(11) NOT NULL,
   `class_id` int(11) NOT NULL,
   `academic_year_id` int(11) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=59 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=60 ;
 
 --
 -- Dumping data for table `students_classes`
@@ -3752,7 +3773,8 @@ INSERT INTO `students_classes` (`student_class_id`, `student_id`, `class_id`, `a
 (55, 60, 40, 2),
 (56, 61, 10, 2),
 (57, 62, 106, 2),
-(58, 63, 106, 2);
+(58, 63, 106, 2),
+(59, 64, 22, 2);
 
 -- --------------------------------------------------------
 
@@ -3821,36 +3843,37 @@ CREATE TABLE IF NOT EXISTS `subject_classlevels` (
   `class_id` int(11) DEFAULT NULL,
   `academic_term_id` int(11) DEFAULT NULL,
   `examstatus_id` int(11) DEFAULT '2'
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=38 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=40 ;
 
 --
 -- Dumping data for table `subject_classlevels`
 --
 
 INSERT INTO `subject_classlevels` (`subject_classlevel_id`, `subject_id`, `classlevel_id`, `class_id`, `academic_term_id`, `examstatus_id`) VALUES
-(1, 14, 12, 84, 4, 2),
-(2, 12, 16, NULL, 4, 1),
-(3, 7, 2, NULL, 4, 2),
-(4, 15, 16, 106, 4, 2),
 (5, 1, 1, NULL, 4, 2),
+(3, 7, 2, NULL, 4, 2),
+(14, 7, 3, 15, 4, 2),
+(13, 7, 6, NULL, 4, 1),
+(19, 8, 2, NULL, 4, 1),
+(23, 8, 2, NULL, 5, 1),
 (6, 9, 2, 8, 4, 2),
-(7, 20, 4, 22, 4, 2),
-(9, 21, 6, NULL, 4, 1),
-(10, 25, 2, NULL, 4, 1),
+(2, 12, 16, NULL, 4, 1),
+(17, 13, 2, NULL, 4, 1),
+(21, 13, 2, NULL, 5, 1),
+(16, 14, 2, NULL, 4, 1),
+(20, 14, 2, NULL, 5, 1),
+(24, 14, 6, -1, 4, 1),
+(1, 14, 12, 84, 4, 2),
+(15, 14, 16, NULL, 4, 1),
+(18, 15, 2, NULL, 4, 1),
+(22, 15, 2, NULL, 5, 1),
+(4, 15, 16, 106, 4, 2),
 (11, 16, 2, 9, 4, 1),
 (12, 18, 2, NULL, 4, 1),
-(13, 7, 6, NULL, 4, 1),
-(14, 7, 3, 15, 4, 2),
-(15, 14, 16, NULL, 4, 1),
-(16, 14, 2, NULL, 4, 1),
-(17, 13, 2, NULL, 4, 1),
-(18, 15, 2, NULL, 4, 1),
-(19, 8, 2, NULL, 4, 1),
-(20, 14, 2, NULL, 5, 1),
-(21, 13, 2, NULL, 5, 1),
-(22, 15, 2, NULL, 5, 1),
-(23, 8, 2, NULL, 5, 1),
-(24, 14, 6, -1, 4, 1),
+(39, 20, 2, -1, 4, 2),
+(7, 20, 4, 22, 4, 2),
+(9, 21, 6, -1, 4, 1),
+(38, 23, 2, -1, 4, 2),
 (36, 23, 6, NULL, 4, 1),
 (37, 25, 2, 8, 4, 1);
 
@@ -3868,7 +3891,7 @@ CREATE TABLE IF NOT EXISTS `subject_classlevelviews` (
 ,`subject_classlevel_id` int(11)
 ,`classlevel` varchar(50)
 ,`examstatus_id` int(11)
-,`exam_status` varchar(18)
+,`exam_status` varchar(13)
 ,`academic_term_id` int(11)
 ,`academic_term` varchar(50)
 ,`academic_year_id` int(11) unsigned
@@ -3915,62 +3938,71 @@ CREATE TABLE IF NOT EXISTS `subject_students_registers` (
 --
 
 INSERT INTO `subject_students_registers` (`student_id`, `class_id`, `subject_classlevel_id`) VALUES
-(5, NULL, 13),
-(12, NULL, 13),
-(13, NULL, 13),
-(4, NULL, 14),
-(3, NULL, 11),
-(11, NULL, 11),
-(1, NULL, 12),
-(9, NULL, 12),
-(10, NULL, 12),
-(11, NULL, 12),
 (1, NULL, 3),
-(3, NULL, 3),
-(9, NULL, 3),
-(10, NULL, 3),
-(11, NULL, 3),
-(14, NULL, 3),
-(6, NULL, 15),
+(1, NULL, 12),
 (1, NULL, 16),
-(9, NULL, 16),
-(10, NULL, 16),
-(11, NULL, 16),
-(14, NULL, 16),
 (1, NULL, 17),
-(9, NULL, 17),
-(10, NULL, 17),
-(11, NULL, 17),
-(14, NULL, 17),
-(22, NULL, 17),
 (1, NULL, 18),
-(9, NULL, 18),
-(10, NULL, 18),
-(11, NULL, 18),
-(14, NULL, 18),
-(22, NULL, 18),
 (1, NULL, 19),
-(9, NULL, 19),
-(10, NULL, 19),
-(11, NULL, 19),
-(14, NULL, 19),
-(22, NULL, 19),
+(1, 8, 37),
+(1, 8, 38),
+(3, NULL, 3),
+(3, NULL, 11),
+(4, NULL, 14),
+(5, NULL, 13),
 (5, 36, 36),
+(6, NULL, 15),
+(9, NULL, 3),
+(9, NULL, 12),
+(9, NULL, 16),
+(9, NULL, 17),
+(9, NULL, 18),
+(9, NULL, 19),
+(9, 8, 37),
+(9, 8, 38),
+(10, NULL, 3),
+(10, NULL, 12),
+(10, NULL, 16),
+(10, NULL, 17),
+(10, NULL, 18),
+(10, NULL, 19),
+(10, 8, 37),
+(10, 8, 38),
+(11, NULL, 3),
+(11, NULL, 11),
+(11, NULL, 12),
+(11, NULL, 16),
+(11, NULL, 17),
+(11, NULL, 18),
+(11, NULL, 19),
+(11, 9, 38),
+(12, NULL, 13),
 (12, 36, 36),
+(13, NULL, 13),
 (13, 37, 36),
+(14, NULL, 3),
+(14, NULL, 16),
+(14, NULL, 17),
+(14, NULL, 18),
+(14, NULL, 19),
+(14, 8, 37),
+(14, 8, 38),
 (15, 36, 36),
 (18, 41, 36),
 (19, 41, 36),
+(22, NULL, 17),
+(22, NULL, 18),
+(22, NULL, 19),
+(22, 11, 38),
+(22, 11, 39),
 (31, 37, 36),
 (32, 37, 36),
 (50, 39, 36),
 (51, 39, 36),
 (53, 38, 36),
 (54, 40, 36),
-(1, 8, 37),
-(9, 8, 37),
-(10, 8, 37),
-(14, 8, 37);
+(61, 10, 38),
+(61, 10, 39);
 
 -- --------------------------------------------------------
 
@@ -4142,12 +4174,12 @@ CREATE TABLE IF NOT EXISTS `user_roles` (
 --
 
 INSERT INTO `user_roles` (`user_role_id`, `user_role`, `group_alias`) VALUES
-(1, 'Sponsor', 'spn_users'),
-(2, 'Student', 'spn_users'),
-(3, 'Employee', 'emp_users'),
-(4, 'ICT', 'ict_users'),
-(5, 'Admin', 'app_users'),
-(6, 'Super Admin', 'adm_users');
+(1, 'Parent', 'PAR_USERS'),
+(2, 'Student', 'PAR_USERS'),
+(3, 'Staff', 'STF_USERS'),
+(4, 'ICT', 'ICT_USERS'),
+(5, 'Admin', 'APP_USERS'),
+(6, 'Super Admin', 'ADM_USERS');
 
 -- --------------------------------------------------------
 
@@ -4175,13 +4207,11 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`user_id`, `username`, `password`, `display_name`, `type_id`, `image_url`, `user_role_id`, `group_alias`, `status_id`, `created_by`, `created_at`, `updated_at`) VALUES
-(1, 'emp0002', '$2a$10$hcl7ySmI/9NxTnEMp6GFQOA8dnJezUk/Kn7OQqjphpQEqKmLy2oUe', 'GEORGE, UCHE', 2, 'employees/2.jpg', 6, 'adm_users', 1, 2, '2014-06-16 02:39:58', '2015-03-11 12:06:22'),
-(2, 'spn0001', '$2a$10$uLb3awX5tZDRLz4PU/WGLuCCWi5duSkO8BijIpdBVy83GHbiXSUmq', 'KAYOH, CHINA', 1, 'sponsors/1.jpg', 1, 'spn_users', 1, 2, '2014-07-17 11:14:00', '2015-03-11 18:48:14'),
-(3, 'emp0006', '$2a$10$QG2RqGT8ZAMHXaPdEunG4OUcH4Sez52PbRO.DY1jmVvZCj4wrBLcW', 'KINGSLEY, CHINAKA', 6, 'employees/6.JPG', 3, 'emp_users', 1, 2, '2014-10-14 01:43:13', '2014-10-15 08:07:53'),
-(4, 'emp0004', '$2a$10$oncEz7DKJm4EqJUQYn/GmuTpz0JLLaMg.KgqBuKUyM2/vpGkpYXT2', 'BOLA, YUSRAH INUA', 4, 'employees/4.jpg', 4, 'ict_users', 1, 4, '2014-06-24 04:01:20', '2015-03-04 11:22:12'),
-(5, 'spn0033', '$2a$10$2mmZphckyEYGq6DR78B.XOn/f7dxv09BnjM8D/URqw9FpFcPtit8i', 'OBINNA EKWUEME', 33, 'sponsors/33.jpg', 1, 'spn_users', 1, 2, '2015-03-10 03:07:44', '2015-03-11 12:36:10'),
-(6, 'emp0021', '$2a$10$FJWcHNDR.ABY4/7jQu3XSePl6/.7DJRXmnuYI.9B9FYGkJaQ9srqK', 'NONSO Okafor', 21, 'employees/21.jpg', 3, 'emp_users', 1, 2, '2015-03-12 04:17:34', '2015-03-12 15:17:35'),
-(7, 'spn0034', '$2a$10$MEbGvwX4b.5naswjy4qwA.vb41d8eLA3N83LVwueRIu0tvx3GUHb6', 'OKAFOR EMMANUEL NONSO', 34, 'sponsors/34.jpg', 1, 'spn_users', 1, 2, '2015-03-12 04:23:49', '2015-03-12 15:23:49');
+(1, 'emp0002', '$2a$10$hcl7ySmI/9NxTnEMp6GFQOA8dnJezUk/Kn7OQqjphpQEqKmLy2oUe', 'GEORGE, UCHE', 2, 'employees/2.jpg', 6, 'ADM_USERS', 1, 2, '2014-06-16 02:39:58', '2015-03-18 19:32:56'),
+(2, 'spn0001', '$2a$10$uLb3awX5tZDRLz4PU/WGLuCCWi5duSkO8BijIpdBVy83GHbiXSUmq', 'KAYOH, CHINA', 1, 'sponsors/1.jpg', 1, 'PAR_USERS', 1, 2, '2014-07-17 11:14:00', '2015-03-18 19:33:02'),
+(3, 'emp0006', '$2a$10$QG2RqGT8ZAMHXaPdEunG4OUcH4Sez52PbRO.DY1jmVvZCj4wrBLcW', 'KINGSLEY, CHINAKA', 6, 'employees/6.JPG', 3, 'STAFF_USERS', 1, 2, '2014-10-14 01:43:13', '2015-03-18 19:33:09'),
+(4, 'emp0004', '$2a$10$oncEz7DKJm4EqJUQYn/GmuTpz0JLLaMg.KgqBuKUyM2/vpGkpYXT2', 'BOLA, YUSRAH INUA', 4, 'employees/4.jpg', 4, 'ICT_USERS', 1, 4, '2014-06-24 04:01:20', '2015-03-18 19:33:14'),
+(7, 'STF0021', '$2a$10$elYbi3i3AZw9MeDKzCqnEuAof0AaufzAn/t6WFI6q9O1yv//6zNh2', 'SDC Ddc', 21, 'employees/21.jpg', 3, 'STF_USERS', 1, 2, '2015-03-18 08:38:33', '2015-03-18 19:38:33');
 
 -- --------------------------------------------------------
 
@@ -4262,7 +4292,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `subject_classlevelviews`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `subject_classlevelviews` AS select `classrooms`.`class_name` AS `class_name`,`subjects`.`subject_name` AS `subject_name`,`subjects`.`subject_id` AS `subject_id`,`classrooms`.`class_id` AS `class_id`,`classlevels`.`classlevel_id` AS `classlevel_id`,`subject_classlevels`.`subject_classlevel_id` AS `subject_classlevel_id`,`classlevels`.`classlevel` AS `classlevel`,`subject_classlevels`.`examstatus_id` AS `examstatus_id`,(case `subject_classlevels`.`examstatus_id` when 1 then 'Exam Already Setup' when 2 then 'Exam Not Setup' end) AS `exam_status`,`subject_classlevels`.`academic_term_id` AS `academic_term_id`,`academic_terms`.`academic_term` AS `academic_term`,`academic_terms`.`academic_year_id` AS `academic_year_id`,`academic_years`.`academic_year` AS `academic_year` from (((((`subject_classlevels` join `academic_terms` on((`subject_classlevels`.`academic_term_id` = `academic_terms`.`academic_term_id`))) join `academic_years` on((`academic_terms`.`academic_year_id` = `academic_years`.`academic_year_id`))) left join `classrooms` on((`subject_classlevels`.`class_id` = `classrooms`.`class_id`))) left join `classlevels` on((`subject_classlevels`.`classlevel_id` = `classlevels`.`classlevel_id`))) left join `subjects` on((`subject_classlevels`.`subject_id` = `subjects`.`subject_id`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `subject_classlevelviews` AS select `classrooms`.`class_name` AS `class_name`,`subjects`.`subject_name` AS `subject_name`,`subjects`.`subject_id` AS `subject_id`,`classrooms`.`class_id` AS `class_id`,`classlevels`.`classlevel_id` AS `classlevel_id`,`subject_classlevels`.`subject_classlevel_id` AS `subject_classlevel_id`,`classlevels`.`classlevel` AS `classlevel`,`subject_classlevels`.`examstatus_id` AS `examstatus_id`,(case `subject_classlevels`.`examstatus_id` when 1 then 'Already Setup' when 2 then 'Not Setup' end) AS `exam_status`,`subject_classlevels`.`academic_term_id` AS `academic_term_id`,`academic_terms`.`academic_term` AS `academic_term`,`academic_terms`.`academic_year_id` AS `academic_year_id`,`academic_years`.`academic_year` AS `academic_year` from (((((`subject_classlevels` join `academic_terms` on((`subject_classlevels`.`academic_term_id` = `academic_terms`.`academic_term_id`))) join `academic_years` on((`academic_terms`.`academic_year_id` = `academic_years`.`academic_year_id`))) left join `classrooms` on((`subject_classlevels`.`class_id` = `classrooms`.`class_id`))) left join `classlevels` on((`subject_classlevels`.`classlevel_id` = `classlevels`.`classlevel_id`))) left join `subjects` on((`subject_classlevels`.`subject_id` = `subjects`.`subject_id`)));
 
 -- --------------------------------------------------------
 
@@ -4320,7 +4350,7 @@ ALTER TABLE `aros_acos`
 -- Indexes for table `assessments`
 --
 ALTER TABLE `assessments`
- ADD PRIMARY KEY (`assessment_id`);
+ ADD PRIMARY KEY (`assessment_id`), ADD KEY `student_id` (`student_id`), ADD KEY `academic_term_id` (`academic_term_id`);
 
 --
 -- Indexes for table `attend_details`
@@ -4362,7 +4392,7 @@ ALTER TABLE `countries`
 -- Indexes for table `employee_qualifications`
 --
 ALTER TABLE `employee_qualifications`
- ADD PRIMARY KEY (`employee_qualification_id`);
+ ADD PRIMARY KEY (`employee_qualification_id`), ADD KEY `employee_id` (`employee_id`);
 
 --
 -- Indexes for table `employee_types`
@@ -4374,31 +4404,31 @@ ALTER TABLE `employee_types`
 -- Indexes for table `employees`
 --
 ALTER TABLE `employees`
- ADD PRIMARY KEY (`employee_id`);
+ ADD PRIMARY KEY (`employee_id`), ADD KEY `salutation_id` (`salutation_id`), ADD KEY `employee_type_id` (`employee_type_id`), ADD KEY `state_id` (`state_id`), ADD KEY `local_govt_id` (`local_govt_id`);
 
 --
 -- Indexes for table `exam_details`
 --
 ALTER TABLE `exam_details`
- ADD PRIMARY KEY (`exam_detail_id`);
+ ADD PRIMARY KEY (`exam_detail_id`), ADD KEY `exam_id` (`exam_id`,`student_id`);
 
 --
 -- Indexes for table `exams`
 --
 ALTER TABLE `exams`
- ADD PRIMARY KEY (`exam_id`);
+ ADD PRIMARY KEY (`exam_id`), ADD KEY `class_id` (`class_id`,`employee_id`);
 
 --
 -- Indexes for table `grades`
 --
 ALTER TABLE `grades`
- ADD PRIMARY KEY (`grades_id`);
+ ADD PRIMARY KEY (`grades_id`), ADD KEY `classgroup_id` (`classgroup_id`);
 
 --
 -- Indexes for table `item_bills`
 --
 ALTER TABLE `item_bills`
- ADD PRIMARY KEY (`item_bill_id`);
+ ADD PRIMARY KEY (`item_bill_id`), ADD KEY `item_id` (`item_id`,`classlevel_id`);
 
 --
 -- Indexes for table `item_types`
@@ -4410,19 +4440,19 @@ ALTER TABLE `item_types`
 -- Indexes for table `item_variables`
 --
 ALTER TABLE `item_variables`
- ADD PRIMARY KEY (`item_variable_id`);
+ ADD PRIMARY KEY (`item_variable_id`), ADD KEY `item_id` (`item_id`,`student_id`,`class_id`,`academic_term_id`);
 
 --
 -- Indexes for table `items`
 --
 ALTER TABLE `items`
- ADD PRIMARY KEY (`item_id`);
+ ADD PRIMARY KEY (`item_id`), ADD KEY `item_type_id` (`item_type_id`);
 
 --
 -- Indexes for table `local_govts`
 --
 ALTER TABLE `local_govts`
- ADD PRIMARY KEY (`local_govt_id`);
+ ADD PRIMARY KEY (`local_govt_id`), ADD KEY `state_id` (`state_id`);
 
 --
 -- Indexes for table `master_setups`
@@ -4446,13 +4476,13 @@ ALTER TABLE `messages`
 -- Indexes for table `order_items`
 --
 ALTER TABLE `order_items`
- ADD PRIMARY KEY (`order_item_id`);
+ ADD PRIMARY KEY (`order_item_id`), ADD KEY `item_id` (`item_id`,`order_id`);
 
 --
 -- Indexes for table `orders`
 --
 ALTER TABLE `orders`
- ADD PRIMARY KEY (`order_id`);
+ ADD PRIMARY KEY (`order_id`), ADD KEY `student_id` (`student_id`,`sponsor_id`,`academic_term_id`,`process_item_id`);
 
 --
 -- Indexes for table `process_items`
@@ -4465,6 +4495,12 @@ ALTER TABLE `process_items`
 --
 ALTER TABLE `relationship_types`
  ADD PRIMARY KEY (`relationship_type_id`);
+
+--
+-- Indexes for table `remarks`
+--
+ALTER TABLE `remarks`
+ ADD PRIMARY KEY (`remark_id`);
 
 --
 -- Indexes for table `salutations`
@@ -4482,7 +4518,7 @@ ALTER TABLE `setups`
 -- Indexes for table `skill_assessments`
 --
 ALTER TABLE `skill_assessments`
- ADD PRIMARY KEY (`skill_assessment_id`);
+ ADD PRIMARY KEY (`skill_assessment_id`), ADD KEY `skill_id` (`skill_id`,`assessment_id`);
 
 --
 -- Indexes for table `skills`
@@ -4494,7 +4530,7 @@ ALTER TABLE `skills`
 -- Indexes for table `sponsors`
 --
 ALTER TABLE `sponsors`
- ADD PRIMARY KEY (`sponsor_id`);
+ ADD PRIMARY KEY (`sponsor_id`), ADD KEY `salutation_id` (`salutation_id`,`local_govt_id`,`state_id`,`sponsorship_type_id`,`country_id`);
 
 --
 -- Indexes for table `sponsorship_types`
@@ -4506,7 +4542,7 @@ ALTER TABLE `sponsorship_types`
 -- Indexes for table `spouse_details`
 --
 ALTER TABLE `spouse_details`
- ADD PRIMARY KEY (`spouse_detail_id`);
+ ADD PRIMARY KEY (`spouse_detail_id`), ADD KEY `employee_id` (`employee_id`);
 
 --
 -- Indexes for table `states`
@@ -4530,19 +4566,19 @@ ALTER TABLE `student_status`
 -- Indexes for table `students`
 --
 ALTER TABLE `students`
- ADD PRIMARY KEY (`student_id`);
+ ADD PRIMARY KEY (`student_id`), ADD KEY `class_id` (`class_id`,`academic_term_id`,`local_govt_id`,`student_status_id`,`state_id`,`country_id`,`relationtype_id`);
 
 --
 -- Indexes for table `students_classes`
 --
 ALTER TABLE `students_classes`
- ADD PRIMARY KEY (`student_class_id`);
+ ADD PRIMARY KEY (`student_class_id`), ADD KEY `student_id` (`student_id`,`class_id`,`academic_year_id`);
 
 --
 -- Indexes for table `subject_classlevels`
 --
 ALTER TABLE `subject_classlevels`
- ADD PRIMARY KEY (`subject_classlevel_id`);
+ ADD PRIMARY KEY (`subject_classlevel_id`), ADD KEY `subject_id` (`subject_id`,`classlevel_id`,`class_id`,`academic_term_id`,`examstatus_id`);
 
 --
 -- Indexes for table `subject_groups`
@@ -4551,22 +4587,28 @@ ALTER TABLE `subject_groups`
  ADD PRIMARY KEY (`subject_group_id`);
 
 --
+-- Indexes for table `subject_students_registers`
+--
+ALTER TABLE `subject_students_registers`
+ ADD KEY `student_id` (`student_id`,`class_id`,`subject_classlevel_id`);
+
+--
 -- Indexes for table `subjects`
 --
 ALTER TABLE `subjects`
- ADD PRIMARY KEY (`subject_id`);
+ ADD PRIMARY KEY (`subject_id`), ADD KEY `subject_group_id` (`subject_group_id`);
 
 --
 -- Indexes for table `teachers_classes`
 --
 ALTER TABLE `teachers_classes`
- ADD PRIMARY KEY (`teacher_class_id`);
+ ADD PRIMARY KEY (`teacher_class_id`), ADD KEY `class_id` (`class_id`,`employee_id`,`academic_year_id`);
 
 --
 -- Indexes for table `teachers_subjects`
 --
 ALTER TABLE `teachers_subjects`
- ADD PRIMARY KEY (`teachers_subjects_id`);
+ ADD PRIMARY KEY (`teachers_subjects_id`), ADD KEY `employee_id` (`employee_id`,`class_id`,`subject_classlevel_id`);
 
 --
 -- Indexes for table `user_roles`
@@ -4653,7 +4695,7 @@ MODIFY `employee_type_id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMEN
 -- AUTO_INCREMENT for table `employees`
 --
 ALTER TABLE `employees`
-MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=22;
+MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT for table `exam_details`
 --
@@ -4730,6 +4772,11 @@ MODIFY `process_item_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 ALTER TABLE `relationship_types`
 MODIFY `relationship_type_id` int(3) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
 --
+-- AUTO_INCREMENT for table `remarks`
+--
+ALTER TABLE `remarks`
+MODIFY `remark_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
 -- AUTO_INCREMENT for table `salutations`
 --
 ALTER TABLE `salutations`
@@ -4753,7 +4800,7 @@ MODIFY `skill_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=18;
 -- AUTO_INCREMENT for table `sponsors`
 --
 ALTER TABLE `sponsors`
-MODIFY `sponsor_id` int(3) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=35;
+MODIFY `sponsor_id` int(3) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=33;
 --
 -- AUTO_INCREMENT for table `sponsorship_types`
 --
@@ -4783,17 +4830,17 @@ MODIFY `student_status_id` int(3) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMEN
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-MODIFY `student_id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=64;
+MODIFY `student_id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=65;
 --
 -- AUTO_INCREMENT for table `students_classes`
 --
 ALTER TABLE `students_classes`
-MODIFY `student_class_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=59;
+MODIFY `student_class_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=60;
 --
 -- AUTO_INCREMENT for table `subject_classlevels`
 --
 ALTER TABLE `subject_classlevels`
-MODIFY `subject_classlevel_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=38;
+MODIFY `subject_classlevel_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=40;
 --
 -- AUTO_INCREMENT for table `subject_groups`
 --
@@ -4824,28 +4871,6 @@ MODIFY `user_role_id` int(3) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 ALTER TABLE `users`
 MODIFY `user_id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `academic_terms`
---
-ALTER TABLE `academic_terms`
-ADD CONSTRAINT `academic_year_id` FOREIGN KEY (`academic_year_id`) REFERENCES `academic_years` (`academic_year_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table `classlevels`
---
-ALTER TABLE `classlevels`
-ADD CONSTRAINT `classgroup_id` FOREIGN KEY (`classgroup_id`) REFERENCES `classgroups` (`classgroup_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table `classrooms`
---
-ALTER TABLE `classrooms`
-ADD CONSTRAINT `classlevel_id` FOREIGN KEY (`classlevel_id`) REFERENCES `classlevels` (`classlevel_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

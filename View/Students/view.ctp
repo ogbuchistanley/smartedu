@@ -68,7 +68,7 @@
                             </tr>
                             <tr>
                                 <th>Birth Date</th>
-                                <td><?php echo h($student['Student']['birth_date']); ?></td>
+                                <td><?php echo (!empty($student['Student']['birth_date'])) ? h($student['Student']['birth_date']) : '<span class="label label-danger">nill</span>'; ?></td>
                             </tr>
                             <tr>
                                 <th>Nationality</th>

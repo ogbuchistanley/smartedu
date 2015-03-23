@@ -1,5 +1,25 @@
 <?php echo $this->Html->script("../app/jquery/custom.sponsor.js", FALSE);?>
 
+    <div class="row">
+        <?php
+        $errors = $this->validationErrors['SponsorNew'];
+        $flatErrors = Set::flatten($errors);
+        $flatErrors2 = $flatErrors;
+        $test = array();
+        foreach($flatErrors as $key => $value){
+            $test[] = $value;
+        }
+        if(!empty($test[count($test) - 1])) {
+            echo '<div class="alert alert-danger">';
+            echo '<ul>';
+            foreach($flatErrors2 as $key => $value) {
+                echo (!empty($value)) ? '<li>'.$value.'</li>' : false;
+            }
+            echo '</ul>';
+            echo '</div>';
+        }
+        ?>
+    </div>
     <div class="col-md-12">
         <div class="panel">
             <!-- Info Boxes -->
@@ -59,18 +79,18 @@
                                </div>
                             </div>
                             <div class="form-group">
+                                <label class="col-lg-2 col-md-3 control-label">Last Name</label>
+                                <div class="col-lg-7 col-md-9">
+                                    <input type="text" class="form-control form-cascade-control input-small"
+                                           name="data[SponsorNew][other_name]" id="other_name" placeholder="Type Parent's Last name">
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label class="col-lg-2 col-md-3 control-label">First Name <small class="text-danger"> * </small></label>
                                 <div class="col-lg-7 col-md-9">
                                  <input type="text" class="form-control form-cascade-control input-small"
-                                 name="data[SponsorNew][first_name]" id="first_name" placeholder="Type Parent's first name" required>
+                                 name="data[SponsorNew][first_name]" id="first_name" placeholder="Type Parent's First Name" required>
                                </div>
-                            </div>
-                            <div class="form-group">
-                              <label class="col-lg-2 col-md-3 control-label">Last Names</label>
-                              <div class="col-lg-7 col-md-9">
-                               <input type="text" class="form-control form-cascade-control input-small" 
-                               name="data[SponsorNew][other_name]" id="other_name" placeholder="Type Parent's Last names">
-                             </div>
                             </div>
                             <div class="form-group">
                               <label class="col-lg-2 col-md-3 control-label">Email</label>

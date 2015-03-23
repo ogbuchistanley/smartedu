@@ -225,7 +225,9 @@ class SubjectsController extends AppController {
                 if($SubjectClasslevel->save()) {
                     $this->Subject->proc_assignSubject2Students($data['subject_classlevel_modify_id']);
                     echo $data['subject_classlevel_modify_id'];
-                }else echo 0;
+                }else {
+                    echo 0;
+                }
             }
         }else{
             $this->accessDenialError('You Are Not Authorize To Perform Such Task', 2);

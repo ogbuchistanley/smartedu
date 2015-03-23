@@ -53,28 +53,41 @@ class StudentsController extends AppController {
         $this->set('title_for_layout','Create New Student Record');
         $result = $this->Acl->check($this->group_alias, 'StudentsController/register', 'create');
         if($result){
-            $this->loadModels('Country');
-            $this->loadModels('State', 'state_name');
             $this->loadModels('RelationshipType');
             $this->loadModels('Classlevel');
+            $StudentNew = ClassRegistry::init('StudentNew');
 
             if ($this->request->is('post')) {
                 $this->Student->create();
-                $data = $this->request->data['Student'];
-                if(!$data['image_url']['name']){
-                    unset($data['image_url']);
-                }
-                if ($this->Student->save($data)) {
-                    if(isset($data['image_url'])){
-                        $this->uploadImage($this->Student->getLastInsertId(), 'students', $this->request->data['Student']);
-                        $this->setFlashMessage('The Student '.$data['first_name'].' '.$data['surname'].' has been saved.', 1);
+                $data = $this->request->data['StudentNew'];
+
+                $results = $StudentNew->query('SELECT a.*, b.first_name FROM students a INNER JOIN sponsors b ON a.sponsor_id=b.sponsor_id
+                  WHERE a.sponsor_id="'.trim($data['sponsor_id']).'" AND a.first_name="'.trim($data['first_name']).'" LIMIT 1');
+                $results = ($results) ? array_shift($results) : false;
+                if($results){
+                    $this->setFlashMessage(' The Student '.$data['first_name'].' With Sponsor Name '.$results['b']['first_name'].' Already Exist.', 2);
+                    return $this->redirect(array('controller' => 'students', 'action' => 'register'));
+                }else{
+                    $StudentNew->create();
+                    if ($StudentNew->save($data)) {
+                        $this->setFlashMessage('The Student '.$data['first_name'].' '.$data['other_name'].' has been saved.', 1);
+                        return $this->redirect(array('controller' => 'students', 'action' => 'register'));
                     }else {
-                        $this->setFlashMessage('The Student '.$data['first_name'].' '.$data['surname'].' has been saved... But Image Was Not Uploaded', 1);
+                        $this->setFlashMessage('The Student could not be saved. Please,  Kindly Fill the Form Properly.', 2);
                     }
-                    return $this->redirect(array('action' => 'register'));
-                } else {
-                    $this->setFlashMessage('The student could not be saved. Please, try again.', 2);
                 }
+//
+//                if ($this->Student->save($data)) {
+//                    if(isset($data['image_url'])){
+//                        $this->uploadImage($this->Student->getLastInsertId(), 'students', $this->request->data['Student']);
+//                        $this->setFlashMessage('The Student '.$data['first_name'].' '.$data['surname'].' has been saved.', 1);
+//                    }else {
+//                        $this->setFlashMessage('The Student '.$data['first_name'].' '.$data['surname'].' has been saved... But Image Was Not Uploaded', 1);
+//                    }
+//                    return $this->redirect(array('action' => 'register'));
+//                } else {
+//                    $this->setFlashMessage('The student could not be saved. Please, try again.', 2);
+//                }
             }
         }else{
             $this->accessDenialError();

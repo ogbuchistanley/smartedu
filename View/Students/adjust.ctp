@@ -176,8 +176,15 @@
                                      <div class="form-group">
                                         <label for="birth_date" class="col-lg-2 col-md-3 control-label">Date of Birth <small class="text-danger"> * </small></label>
                                         <div class="col-lg-7 col-md-9">
+                                            <?php
+                                                $dob = '';
+                                                if(!empty($student['Student']['birth_date'])) {
+                                                    $a = explode('-', $student['Student']['birth_date']);
+                                                    $dob = $a[2].'/'.$a[1].'/'.$a[0];
+                                                }
+                                            ?>
                                             <input type="text" class="form-control form-cascade-control input-small" name="data[Student][birth_date]" 
-                                            value="<?php $a = explode('-', $student['Student']['birth_date']); echo $a[2].'/'.$a[1].'/'.$a[0]; ?>" id="birth_date" placeholder="Select Student's date of birth" required="required"/>
+                                            value="<?php echo $dob; ?>" id="birth_date" placeholder="Select Student's date of birth" required="required"/>
                                         </div>
                                      </div>
                                      <div class="form-group">

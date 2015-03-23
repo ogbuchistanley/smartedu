@@ -140,12 +140,12 @@ class UsersController extends AppController {
                 else {
                     $Sponsor = ClassRegistry::init('Sponsor');
                     $spn = $Sponsor->find('first', array('conditions' => array('Sponsor.sponsor_id' => $result['User']['type_id'])));
-                    $email = $spn['Employee']['email'];
-                    $no = $spn['Employee']['mobile_number1'];
+                    $email = $spn['Sponsor']['email'];
+                    $no = $spn['Sponsor']['mobile_number1'];
                 }
                 if ($this->User->save()) {
-                    $msg = 'Welcome To '.APP_NAME.' Application User: '.$username.', Your Password Has Been Reset To Password: '.$pass.' to access the portal, login via '.DOMAIN_URL;
-                    $msg_email = 'Welcome To '.APP_NAME.' Application <br><br>User: '.$username.', <br>Your Password Has Been Reset To Password: '.$pass.' <br><br>to access the portal, login via '.DOMAIN_URL;
+                    $msg = 'Welcome To '.APP_NAME.' Application Username: '.$username.', Your Password Has Been Reset To Password: '.$pass.' to access the portal, login via '.DOMAIN_URL;
+                    $msg_email = 'Welcome To '.APP_NAME.' Application <br><br>Username: '.$username.', <br>Your Password Has Been Reset To Password: '.$pass.' <br><br>to access the portal, login via '.DOMAIN_URL;
                     //Send SMS
                     $this->User->SendSMS($no, $msg);
                     //Send Mail

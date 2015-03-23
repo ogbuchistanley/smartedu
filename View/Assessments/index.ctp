@@ -1,12 +1,12 @@
 <!-- Page Scripts =============================-->
 <?php echo $this->Html->script("../app/js/bootstrap-datatables.js", FALSE);?>
 <?php echo $this->Html->script("../app/js/dataTables-custom.js", FALSE);?>
-<?php echo $this->Html->script("../app/jquery/custom.assessment.js", FALSE);?>
+<?php //echo $this->Html->script("../app/jquery/custom.assessment.js", FALSE);?>
 
 <div class="col-md-12">
     <div class="panel">
         <!-- Info Boxes -->
-        <div class="row">
+        <!--div class="row">
             <div class="col-md-12">
                 <div class="info-box  bg-info  text-white">
                     <div class="info-icon bg-info-dark">
@@ -30,7 +30,7 @@
                 </span>
             </h3>
         </div>
-        <div class="col-md-9">
+        <div class="col-md-10">
             <div class="panel-body">
                 <div class="panel panel-info">
                     <div class="panel-heading panel-title  text-white">Table Displaying List of Class Room(s) Assigned</div>
@@ -44,7 +44,8 @@
                                     <th>Academic Year</th>
                                     <th>Head Tutor</th>
                                     <th>Date Assign</th>
-                                    <th>View Students</th>
+                                    <th>Assessment</th>
+                                    <th>Remark</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -60,7 +61,11 @@
                                         <td><?php echo h($ClassRoom['created_at']); ?>&nbsp;</td>
                                         <td>
                                             <a target="__blank" href="<?php echo DOMAIN_NAME ?>/assessments/view/<?php echo $ClassRoom['cls_yr_id']; ?>" class="btn btn-info btn-xs">
-                                                <i class="fa fa-eye"></i> View</a>
+                                                <i class="fa fa-eye"></i> Assess</a>
+                                        </td>
+                                        <td>
+                                            <a target="__blank" href="<?php echo DOMAIN_NAME ?>/assessments/remark/<?php echo $ClassRoom['cls_yr_id']; ?>" class="btn btn-warning btn-xs">
+                                                <i class="fa fa-comments"></i> Remark</a>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
@@ -72,7 +77,8 @@
                                     <th>Academic Year</th>
                                     <th>Head Tutor</th>
                                     <th>Date Assign</th>
-                                    <th>View Students</th>
+                                    <th>Assessment</th>
+                                    <th>Remark</th>
                                 </tr>
                                 </tfoot>
                             <?php else :?>
