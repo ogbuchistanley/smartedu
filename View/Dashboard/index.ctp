@@ -12,7 +12,7 @@
 <?php echo $this->Html->script("../app/js/nvd3/src/utils.js", FALSE);?>
 <?php //echo $this->Html->script("../app/js/nvd3/sample.nvd3.js", FALSE);?>
 
-<?php echo $this->Html->script("../app/js/bootstrap-tour.js", FALSE);?>
+<?php //echo $this->Html->script("../app/js/bootstrap-tour.js", FALSE);?>
 <!-- Core Jquery File  =============================-->
 <?php echo $this->Html->script("../app/jquery/custom.dashboard.js", FALSE);?>
 <?php echo $this->Html->script("../app/js/dashboard-custom.js", FALSE);?>
@@ -38,7 +38,7 @@
                     </div>
                     <div class="info-details">
                         <h4><?php echo $term_id->getCurrentYearName();?> Academic Year<span class="pull-right"><?php echo $class_count;?></span></h4>
-                        <p>No. of Class Room Assigned to you as Head Tutor</p>
+                        <p>Class Room(s) Assigned to you as Class Teacher</p>
                     </div>
                 </div>
             </div>
@@ -49,7 +49,7 @@
                     </div>
                     <div class="info-details">
                         <h4><?php echo $term_id->getCurrentTermName();?><span class="pull-right"><?php echo $subject_count;?></span></h4>
-                        <p>No. of Subjects Assigned to you in a Class</p>
+                        <p>Subject(s) Assigned to you in a Class</p>
                     </div>
                 </div>
             </div>

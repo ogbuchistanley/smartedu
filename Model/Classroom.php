@@ -33,13 +33,13 @@ class Classroom extends AppModel {
     
     //Find the head Tutors assigned to a class
     public function findHeadTutorClassrooms() {
-        return $this->query('SELECT a.* FROM teachers_classviews a WHERE a.employee_id="'.AuthComponent::user('type_id').'"');
+        return $this->query('SELECT a.* FROM teachers_classviews a WHERE a.employee_id="'.AuthComponent::user('type_id').'" ORDER BY a.employee_name');
     }
     
     //Find the head Tutors assigned to a class for the current academic year
     public function findHeadTutorCurrentClassrooms() {
         $AcademicTerm = ClassRegistry::init('AcademicTerm');
         return $this->query('SELECT a.* FROM teachers_classviews a WHERE a.employee_id="'.AuthComponent::user('type_id').'"'
-                . ' AND academic_year_id="'.$AcademicTerm->getCurrentYearID().'"');
+                . ' AND academic_year_id="'.$AcademicTerm->getCurrentYearID().'" ORDER BY a.employee_name');
     }
 }

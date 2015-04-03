@@ -13,6 +13,7 @@ class SubjectsController extends AppController {
         $id = $this->request->data[$model][$parentLB];
         $subjects = $this->Subject->find('list', array(
 			'conditions' => array('Subject.subject_group_id' => $id),
+            'order'=>array('Subject.subject_name'),
 			'recursive' => -1
 			));
         $this->set('subjects', $subjects);
@@ -118,7 +119,7 @@ class SubjectsController extends AppController {
                             "exam_id"=>(empty($result['c']['exam_id'])) ? '-1' : $result['c']['exam_id'],
                             "classlevel"=>$result['a']['classlevel'],
                             "subject_classlevel_id"=>$result['a']['subject_classlevel_id'],
-                            "exam_status"=>(empty($result['c']['exam_id'])) ? '<span class="label label-danger">Exam Not Setup</span>' : '<span class="label label-success">Exam Already Setup</span>',
+                            "exam_status"=>(empty($result['c']['exam_id'])) ? '<span class="label label-danger">Not Setup</span>' : '<span class="label label-success">Already Setup</span>',
                             "examstatus_id"=>$result['a']['examstatus_id'],
                             "employee_id"=>(empty($result['b']['employee_id'])) ? -1 : $result['b']['employee_id'],
                             "teachers_subjects_id"=>(empty($result['b']['teachers_subjects_id'])) ? -1 : $result['b']['teachers_subjects_id'],
@@ -185,8 +186,8 @@ class SubjectsController extends AppController {
                             "subject_id"=>$result['a']['subject_id'],
                             "class_name"=>(empty($result['a']['class_name'])) ? '<span class="label label-danger">nill</span>' : $result['a']['class_name'],
                             "class_id"=>(empty($result['a']['class_id'])) ? -1 : $result['a']['class_id'],
-                            "classlevel"=>$result['a']['classlevel'],
-                            "classlevel_id"=>$result['a']['classlevel_id'],
+                            "classlevel"=>$result['classlevels']['classlevel'],
+                            "classlevel_id"=>$result['classlevels']['classlevel_id'],
                             "academic_term"=>$result['a']['academic_term'],
                             "academic_term_id"=>$result['a']['academic_term_id'],
                             "subject_classlevel_id"=>$result['a']['subject_classlevel_id'],

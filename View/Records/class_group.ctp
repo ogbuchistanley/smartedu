@@ -35,11 +35,11 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-md-7">
+                        <div class="col-md-10">
                            <div class="panel">
                                 <div class="panel-body">
                                     <div class="panel panel-info">
-                                        <div class="panel-heading panel-title  text-white">Class Groups Record Table</div>
+                                        <div class="panel-heading panel-title  text-white">Class Groups and Weight Point Record Table</div>
                                         <div style="overflow-x: scroll" class="panel-body">                                            
                                             <?php 
                                                 //Creates The Form
@@ -54,6 +54,9 @@
                                                  <tr>
                                                   <th>#</th>
                                                   <th>Class Groups</th>
+                                                  <th>1st C.A</th>
+                                                  <th>2nd C.A</th>
+                                                  <th>Exam</th>
                                                   <th>Action</th>
                                                 </tr>
                                               </thead>
@@ -66,6 +69,15 @@
                                                                <input class="form-control form-cascade-control" required name="data[Classgroup][classgroup][]" value="<?php echo h($Classgroup['Classgroup']['classgroup']);?>">
                                                                <input type="hidden" name="data[Classgroup][classgroup_id][]" value="<?php echo h($Classgroup['Classgroup']['classgroup_id']);?>">
                                                            </td>
+                                                            <td>
+                                                                <input size="6" class="form-control form-cascade-control" required name="data[Classgroup][weightageCA1][]" value="<?php echo h($Classgroup['Classgroup']['weightageCA1']);?>">
+                                                            </td>
+                                                            <td>
+                                                                <input size="6" class="form-control form-cascade-control" required name="data[Classgroup][weightageCA2][]" value="<?php echo h($Classgroup['Classgroup']['weightageCA2']);?>">
+                                                            </td>
+                                                            <td>
+                                                                <input size="6" class="form-control form-cascade-control" required name="data[Classgroup][weightageExam][]" value="<?php echo h($Classgroup['Classgroup']['weightageExam']);?>">
+                                                            </td>
                                                            <td>
                                                                <input type="checkbox" class="polaris-input delete_ids" value="<?php echo h($Classgroup['Classgroup']['classgroup_id']);?>">&nbsp;Delete
                                                            </td>
@@ -80,6 +92,15 @@
                                                                <input class="form-control form-cascade-control" required name="data[Classgroup][classgroup][]" value="">
                                                                <input type="hidden" name="data[Classgroup][classgroup_id][]" value="">
                                                            </td>
+                                                            <td>
+                                                               <input size="6" class="form-control form-cascade-control" required name="data[Classgroup][weightageCA1][]" value="">
+                                                           </td>
+                                                            <td>
+                                                                <input size="6" class="form-control form-cascade-control" required name="data[Classgroup][weightageCA2][]" value="">
+                                                            </td>
+                                                            <td>
+                                                                <input size="6" class="form-control form-cascade-control" required name="data[Classgroup][weightageExam][]" value="">
+                                                            </td>
                                                            <td></td>
                                                         </tr>
                                                     <?php endif;?>
@@ -91,6 +112,9 @@
                                                  <tr>
                                                   <th>#</th>
                                                   <th>Class Groups</th>
+                                                  <th>1st C.A</th>
+                                                  <th>2nd C.A</th>
+                                                  <th>Exam</th>
                                                   <th>Action</th>
                                                 </tr>
                                               </tfoot>                                              

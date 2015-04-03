@@ -1,3 +1,4 @@
+<?php echo $this->Html->script("../app/js/jquery-ui.js", FALSE);?>
 <?php echo $this->Html->script("../app/js/bootstrap-datatables.js", FALSE);?>
 <?php echo $this->Html->script("../app/js/dataTables-custom.js", FALSE);?>
 <?php echo $this->Html->script("../app/js/icheck/icheck.js", FALSE);?>
@@ -101,8 +102,10 @@
                                                   <th>#</th>
                                                   <th>Academic Term</th>
                                                   <th>Academic Year</th>
-                                                  <th>Academic Term Status</th>
-                                                  <th>Academic Term Type</th>
+                                                  <th>Term Status</th>
+                                                  <th>Term Type</th>
+                                                  <th>Term Begins</th>
+                                                  <th>Term Ends</th>
                                                   <th>Action</th>
                                                 </tr>
                                               </thead>
@@ -160,6 +163,12 @@
                                                                   ); 
                                                               ?>
                                                            </td>
+                                                            <td style="width: 112px;">
+                                                                <input class="form-control form-cascade-control date_picker" name="data[AcademicTerm][term_begins][]" value="<?php echo h($AcademicTerm['AcademicTerm']['term_begins']);?>">
+                                                            </td>
+                                                            <td style="width: 112px;">
+                                                                <input class="form-control form-cascade-control date_picker" name="data[AcademicTerm][term_ends][]" value="<?php echo h($AcademicTerm['AcademicTerm']['term_ends']);?>">
+                                                            </td>
                                                            <td>
                                                                <input type="checkbox" class="polaris-input delete_ids" value="<?php echo h($AcademicTerm['AcademicTerm']['academic_term_id']);?>">&nbsp;Delete
                                                            </td>
@@ -216,6 +225,13 @@
                                                                   ); 
                                                               ?>
                                                            </td>
+                                                           <td style="width: 112px;">
+                                                               <input class="form-control form-cascade-control date_picker" name="data[AcademicTerm][term_begins][]" value="">
+                                                           </td>
+                                                            <td style="width: 112px;">
+                                                               <input class="form-control form-cascade-control date_picker" name="data[AcademicTerm][term_ends][]" value="">
+                                                           </td>
+                                                           <td></td>
                                                            <td></td>
                                                         </tr>
                                                     <?php endif;?>
@@ -225,12 +241,14 @@
                                                 </tbody>
                                                 <tfoot>
                                                  <tr>
-                                                  <th>#</th>
-                                                  <th>Academic Term</th>
-                                                  <th>Academic Year</th>
-                                                  <th>Academic Term Status</th>
-                                                  <th>Academic Term Type</th>
-                                                  <th>Action</th>
+                                                     <th>#</th>
+                                                     <th>Academic Term</th>
+                                                     <th>Academic Year</th>
+                                                     <th>Term Status</th>
+                                                     <th>Term Type</th>
+                                                     <th>Term Begins</th>
+                                                     <th>Term Ends</th>
+                                                     <th>Action</th>
                                                 </tr>
                                               </tfoot>                                              
                                             </table> 

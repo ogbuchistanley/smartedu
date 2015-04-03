@@ -107,7 +107,7 @@
                                              ?>
                                          </td>
                                          <td><?php echo h($TermScore['student_sum_total']);?></td>
-                                         <td><?php echo h($TermScore['class_position']);?></td>
+                                         <td><?php echo $this->Utility->formatPosition(h($TermScore['class_position']));?></td>
                                      </tr>
                                      <?php endforeach; ?>
                                     </tbody>

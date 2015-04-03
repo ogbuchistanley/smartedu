@@ -78,7 +78,7 @@
                                     </tr>
                                     <tr>
                                         <th>Class Position</th>
-                                        <td><?php echo $ClassPosition['ClassPositions']['class_position'];?></td>
+                                        <td><?php echo $this->Utility->formatPosition($ClassPosition['ClassPositions']['class_position']);?></td>
                                     </tr>
                                     <tr>
                                         <th>No. of Students in Class</th>

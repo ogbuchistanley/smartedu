@@ -165,6 +165,8 @@ class AppController extends Controller {
         Configure::write('classroom_myclass', $this->Acl->check($auth, 'ClassroomsController/myclass'));
         
         Configure::write('exam_index', $this->Acl->check($auth, 'ExamsController/index'));
+        Configure::write('setup_exam', $this->Acl->check($auth, 'ExamsController/setup_exam'));
+
         Configure::write('subject_add2class', $this->Acl->check($auth, 'SubjectsController'));
         Configure::write('attend_index', $this->Acl->check($auth, 'AttendsController'));
         Configure::write('msg_index', $this->Acl->check($auth, 'MessagesController'));
@@ -364,6 +366,7 @@ class AppController extends Controller {
         $this->Acl->deny('STF_USERS', 'controllers');
         $this->Acl->allow('STF_USERS', 'DashboardController');
         $this->Acl->allow('STF_USERS', 'ExamsController');
+        $this->Acl->deny('STF_USERS', 'ExamsController/setup_exam');
         $this->Acl->allow('STF_USERS', 'AttendsController');
         $this->Acl->allow('STF_USERS', 'StudentsController/view');
         $this->Acl->allow('STF_USERS', 'ClassroomsController/myclass');
@@ -373,9 +376,11 @@ class AppController extends Controller {
         //Access Controls (ICT)==> 4                        ICT_USERS
         $this->Acl->deny('ICT_USERS', 'controllers');
         $this->Acl->allow('ICT_USERS', 'DashboardController');
-        $this->Acl->allow('ICT_USERS', 'ExamsController');
         $this->Acl->allow('ICT_USERS', 'RecordsController');
         $this->Acl->allow('ICT_USERS', 'AttendsController');
+        //ExamsController
+        $this->Acl->allow('ICT_USERS', 'ExamsController');
+        $this->Acl->deny('ICT_USERS', 'ExamsController/setup_exam');
         //ClassroomsController
         $this->Acl->allow('ICT_USERS', 'ClassroomsController');
         //$this->Acl->allow('ICT_USERS', 'ClassroomsController/myclass');

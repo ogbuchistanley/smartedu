@@ -23,7 +23,9 @@ $('document').ready(function(){
     
     //////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////           Dependent ListBox
-    var url = "\/academic_terms\/ajax_get_terms\/SubjectClasslevel\/%23academic_year_id_all";
+    //var url = "\/academic_terms\/ajax_get_terms\/SubjectClasslevel\/%23academic_year_id_all";
+    //getDependentListBox($("#academic_year_id_all"), $("#academic_term_id_all"), url);
+    var url = "\/academic_terms\/ajax_get_terms\/Exam\/%23academic_year_id_all";
     getDependentListBox($("#academic_year_id_all"), $("#academic_term_id_all"), url);
     
     var url2 = "\/academic_terms\/ajax_get_terms\/SearchExamSetup\/%23academic_year_examSetup_id";
@@ -40,90 +42,122 @@ $('document').ready(function(){
     //////////////////////////////////////////////////////////////////////////////////////////////////////
     
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //Search Form For displaying Subjects Assigned to a Class
-    $(document.body).on('submit', '#search_subject_assigned_form', function() {
-        ajax_loading_image($('#msg_box'), ' Loading Contents');
-        var values = $('#search_subject_assigned_form').serialize();
+
+    // When setup exam button is clicked validate
+    $(document.body).on('submit', '#setup_exam', function(){
+        ajax_loading_image($('#msg_box'), ' SettingUp Exam...');
+        var values = $('#setup_exam').serialize();
         $.ajax({
-            type: "POST",
-            url: domain_name+'/exams/search_subjects_assigned',
-            data: values,
-            success: function(data){
-                try{
-                    var obj = $.parseJSON(data);
-                    var pre = '0';
-                    var term = $('#academic_term_search_id').children('option:selected').text();
-                    var output = '<caption><strong>Results Output From The Search ::: <u>'+term+' Academic Year</u></strong></caption>\
-                                    <thead><tr>\
-                                        <th>Subjects</th>\
-                                        <th>Classlevels</th>\
-                                        <th>#</th>\
-                                        <th>Class Rooms</th>\
-                                        <th>Teacher</th>\
-                                        <th>Exam Status</th>\
-                                        <th>Action</th>\
-                                        <th></th>\
-                                    </tr></thead>';
-                    if(obj.Flag === 1){
-                        output += '<tbody>';
-                        $.each(obj.SubjectClasslevel, function(key, value) {
-                            var cur = value.subject_id;
-                            if(cur !== pre){
-                                output += '<tr>\
-                                    <th>'+value.subject_name+'</th>\n\
-                                    <th>'+value.classlevel+'</th><th></th><th></th><th></th><th></th><th></th><th></th>\\n\
-                                </tr>';
-                            }
-                            pre = cur;
-                            output += '<tr>\
-                                <td></td><td></td>\n\\n\
-                                <td>'+(key + 1)+'</td>\n\
-                                <td>'+value.class_name+'</td>\n\
-                                <td style="font-size:medium">'+value.employee_name+'</td>\
-                                <td style="font-size:medium">'+value.exam_status+'</td>';
-                                if(value.exam_id === '-1'){
-                                    output += '<td>\
-                                        <button type="button" value="'+value.subject_classlevel_id+'" title="'+value.class_id+'"  class="btn btn-warning btn-xs setup_exam_btn">\n\
-                                        <i class="fa fa-gear"></i> Setup Exam</button></td>';
-                                }else if(value.exam_id > 0){
-                                    output += '<td>\
-                                        <button type="button" value="'+value.exam_id+'" class="btn btn-success btn-xs edit_setup_exam_btn">\n\
-                                        <i class="fa fa-edit"></i> Edit Exam</button></td>';
-                                }
-                            output += '<td></td></tr>';
-                        });
-                        output += '</tbody>';
-                        $('#search_subjects_assigned_table').html(output);
-                    }else if(obj.Flag === 0){
-                        output += '<tr><th colspan="7">No Subject Found</th></tr>';
-                        $('#search_subjects_assigned_table').html(output);
-                    }
-                } catch (exception) {
-                    $('#search_subjects_assigned_table').html(data);
-                }
-                ajax_remove_loading_image($('#msg_box'));
-                //Scroll To Div
-                scroll2Div($('#search_subjects_assigned_table'));
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown) {
-               $('#search_subjects_assigned_table').html(errorThrown);
-                ajax_remove_loading_image($('#msg_box'));
-            }            
+             type: "POST",
+             url: domain_name+'/exams/setup_validate',
+             data: values,
+             success: function(data){
+                 if(data === '2'){
+                     ajax_remove_loading_image($('#msg_box1_modal'));
+                 }else{
+                     set_msg_box($('#msg_box1_modal'), data, 3);
+                 }
+                 $('#hidden_term_id').val($('#academic_term_id_all').val());
+                 ajax_remove_loading_image($('#msg_box'));
+                 $('#setup_exam_modal').modal('show');
+             },
+             error: function(XMLHttpRequest, textStatus, errorThrown) {
+                $('#msg_box').html(errorThrown);
+             }
         });
         return false;
     });
+
+    //When the modal form is submitted... setup the exam
+    $(document.body).on('submit', '#exam_setup_modal_form', function(){
+         ajax_loading_image($('#msg_box1_modal'), ' SettingUp Exam...');
+        ajax_loading_image($('#msg_box'), ' SettingUp Exam...');
+    });
+
+    //Search Form For displaying Subjects Assigned to a Class
+    //$(document.body).on('submit', '#search_subject_assigned_form', function() {
+    //    ajax_loading_image($('#msg_box'), ' Loading Contents');
+    //    var values = $('#search_subject_assigned_form').serialize();
+    //    $.ajax({
+    //        type: "POST",
+    //        url: domain_name+'/exams/search_subjects_assigned',
+    //        data: values,
+    //        success: function(data){
+    //            try{
+    //                var obj = $.parseJSON(data);
+    //                var pre = '0';
+    //                var term = $('#academic_term_search_id').children('option:selected').text();
+    //                var output = '<caption><strong>Results Output From The Search ::: <u>'+term+' Academic Year</u></strong></caption>\
+    //                                <thead><tr>\
+    //                                    <th>Subjects</th>\
+    //                                    <th>Classlevels</th>\
+    //                                    <th>#</th>\
+    //                                    <th>Class Rooms</th>\
+    //                                    <th>Teacher</th>\
+    //                                    <th>Exam Status</th>\
+    //                                    <th>Action</th>\
+    //                                    <th></th>\
+    //                                </tr></thead>';
+    //                if(obj.Flag === 1){
+    //                    output += '<tbody>';
+    //                    $.each(obj.SubjectClasslevel, function(key, value) {
+    //                        var cur = value.subject_id;
+    //                        if(cur !== pre){
+    //                            output += '<tr>\
+    //                                <th>'+value.subject_name+'</th>\n\
+    //                                <th>'+value.classlevel+'</th><th></th><th></th><th></th><th></th><th></th><th></th>\\n\
+    //                            </tr>';
+    //                        }
+    //                        pre = cur;
+    //                        output += '<tr>\
+    //                            <td></td><td></td>\n\\n\
+    //                            <td>'+(key + 1)+'</td>\n\
+    //                            <td>'+value.class_name+'</td>\n\
+    //                            <td style="font-size:medium">'+value.employee_name+'</td>\
+    //                            <td style="font-size:medium">'+value.exam_status+'</td>';
+    //                            if(value.exam_id === '-1'){
+    //                                output += '<td>\
+    //                                    <button type="button" value="'+value.subject_classlevel_id+'" title="'+value.class_id+'"  class="btn btn-warning btn-xs setup_exam_btn">\n\
+    //                                    <i class="fa fa-gear"></i> Setup Exam</button></td>';
+    //                            }else if(value.exam_id > 0){
+    //                                output += '<td>\
+    //                                    <button type="button" value="'+value.exam_id+'" class="btn btn-success btn-xs edit_setup_exam_btn">\n\
+    //                                    <i class="fa fa-edit"></i> Edit Exam</button></td>';
+    //                            }
+    //                        output += '<td></td></tr>';
+    //                    });
+    //                    output += '</tbody>';
+    //                    $('#search_subjects_assigned_table').html(output);
+    //                }else if(obj.Flag === 0){
+    //                    output += '<tr><th colspan="7">No Subject Found</th></tr>';
+    //                    $('#search_subjects_assigned_table').html(output);
+    //                }
+    //            } catch (exception) {
+    //                $('#search_subjects_assigned_table').html(data);
+    //            }
+    //            ajax_remove_loading_image($('#msg_box'));
+    //            //Scroll To Div
+    //            scroll2Div($('#search_subjects_assigned_table'));
+    //        },
+    //        error: function(XMLHttpRequest, textStatus, errorThrown) {
+    //           $('#search_subjects_assigned_table').html(errorThrown);
+    //            ajax_remove_loading_image($('#msg_box'));
+    //        }
+    //    });
+    //    return false;
+    //});
    
    //When the setup exam button is clicked show the form
-   $(document.body).on('click', '.setup_exam_btn', function(){
-        $('#exam_setup_modal_form')[0].reset();
-        ajax_loading_image($('#msg_box'), ' Loading Contents');
-        //var subject = $(this).parent().parent().children(':nth-child(2)').html();
-        $('#setup_exam_modal').modal('show');
-        $('#edit_exam_id').val(-1);
-        $('#class_id').val($(this).attr('title'));
-        $('#subject_classlevel_id').val($(this).val());
-        ajax_remove_loading_image($('#msg_box'));
-   });
+   //$(document.body).on('click', '.setup_exam_btn', function(){
+   //     $('#exam_setup_modal_form')[0].reset();
+   //     ajax_loading_image($('#msg_box'), ' Loading Contents');
+   //     //var subject = $(this).parent().parent().children(':nth-child(2)').html();
+   //     $('#setup_exam_modal').modal('show');
+   //     $('#edit_exam_id').val(-1);
+   //     $('#class_id').val($(this).attr('title'));
+   //     $('#subject_classlevel_id').val($(this).val());
+   //     ajax_remove_loading_image($('#msg_box'));
+   //});
    
    //When the Edit setup exam button is clicked show the form with the existing values
    $(document.body).on('click', '.edit_setup_exam_btn', function(){
@@ -160,29 +194,29 @@ $('document').ready(function(){
    
    
    //When the modal form is submitted... setup the exam
-    $(document.body).on('submit', '#exam_setup_modal_form', function(){
-        ajax_loading_image($('#msg_box1_modal'), ' SettingUp...');
-        var values = $('#exam_setup_modal_form').serialize();
-        $.ajax({
-            type: "POST",
-            url: domain_name+'/exams/setup_exam',
-            data: values,
-            success: function(data){
-            //$.post(domain_name+'/exams/setup_exam', $(this).serialize(), function(data){
-                if(data !== '0'){
-                    ajax_remove_loading_image($('#msg_box1_modal'));
-                    $('#search_subjects_assigned_table').html('');
-                    $('#exam_setup_modal_form')[0].reset();
-                    $('#setup_exam_modal').modal('hide');
-                }
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown) {
-               $('#search_subjects_assigned_table').html(errorThrown);
-                ajax_remove_loading_image($('#msg_box1_modal'));
-            } 
-        });
-        return false;
-    });
+   // $(document.body).on('submit', '#exam_setup_modal_form', function(){
+   //     ajax_loading_image($('#msg_box1_modal'), ' SettingUp...');
+   //     var values = $('#exam_setup_modal_form').serialize();
+   //     $.ajax({
+   //         type: "POST",
+   //         url: domain_name+'/exams/setup_exam',
+   //         data: values,
+   //         success: function(data){
+   //         //$.post(domain_name+'/exams/setup_exam', $(this).serialize(), function(data){
+   //             if(data !== '0'){
+   //                 ajax_remove_loading_image($('#msg_box1_modal'));
+   //                 $('#search_subjects_assigned_table').html('');
+   //                 $('#exam_setup_modal_form')[0].reset();
+   //                 $('#setup_exam_modal').modal('hide');
+   //             }
+   //         },
+   //         error: function(XMLHttpRequest, textStatus, errorThrown) {
+   //            $('#search_subjects_assigned_table').html(errorThrown);
+   //             ajax_remove_loading_image($('#msg_box1_modal'));
+   //         }
+   //     });
+   //     return false;
+   // });
     
     //Search Form For displaying Subjects Exams Has Been Setup for editing
     $(document.body).on('submit', '#search_examSetup_form', function(){
@@ -211,7 +245,7 @@ $('document').ready(function(){
                                         <th>C.A. 1</th>\
                                         <th>C.A. 2</th>\
                                         <th>Exam</th>\
-                                        <th>Subject Exam Status</th>\
+                                        <th>Exam Status</th>\
                                         <th colspan="2" style="text-align: center">Action</th>\
                                     </tr></thead>';
                     if(obj.Flag === 1){
@@ -306,6 +340,8 @@ $('document').ready(function(){
                                         <th>#</th>\
                                         <th>ID Code</th>\
                                         <th>Student Name</th>\
+                                        <th>Print</th>\
+                                        <th>Chart Analysis</th>\
                                         <th>Terminal Scores</th>\
                                         <th>Annual Scores</th>\
                                     </tr></thead>';
@@ -324,6 +360,14 @@ $('document').ready(function(){
                                 <td>'+(key + 1)+'</td>\n\
                                 <td>'+value.student_no+'</td>\
                                 <td>'+value.student_name+'</td>\n\
+                                <td>\
+                                    <a target="__blank" href="'+domain_name+'/exams/print_result/'+value.std_cls_term_id+'" class="btn btn-success btn-xs">\n\
+                                    <i class="fa fa-print"></i> Print</a>\
+                                </td>\n\
+                                <td>\
+                                    <a target="__blank" href="'+domain_name+'/exams/chart/'+value.std_cls_term_id+'" class="btn btn-primary btn-xs">\n\
+                                    <i class="fa fa-bar-chart-o"></i> View Chart</a>\
+                                </td>\n\
                                 <td>\
                                     <a target="__blank" href="'+domain_name+'/exams/term_scorestd/'+value.std_cls_term_id+'" class="btn btn-info btn-xs">\n\
                                     <i class="fa fa-eye-slash"></i> View Scores</a>\
@@ -374,5 +418,86 @@ $('document').ready(function(){
     });
     
    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-   
+
+
+
+   ////////////////////////////////////////////// Exam Chart  //////////////////////////////////////////////////////////////////////
+    // Discrete Bar chart on Dashboard // Displaying Students Exams Result
+    $.ajax({
+        type: "POST",
+        url: domain_name+'/exams/chart_analysis/'+$('#encrypt_id').val(),
+        success: function(data){
+            try{
+                var result = $.parseJSON(data)
+                if(result.Flag > 0) {
+                    Morris.Bar ({
+                        element: 'visitors',
+                        data: result.Subject,
+                        xkey: 'subject_name',
+                        ykeys: ['ca', 'exam', 'total'],
+                        labels: ['C.A', 'Exams', 'Total(100%)'],
+                        //barSizeRatio:0.4, //I think you meant barSizeRatio, not barSize
+                        xLabelAngle: 35,
+                        hideHover: 'auto'
+                    });
+                }else{
+                    $('#visitors').html('<div class="info-box  bg-info-dark  text-white"><div class="info-details"><h4>No Record Found</h4></div></div>');
+                }
+            } catch (exception) {
+                $('#visitors').html('<div class="info-box  bg-info-dark  text-white"><div class="info-details"><h4>'+data+'</h4></div></div>');
+                $('#visitors').next('p').html('');
+            }
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+            $('#visitors').html(errorThrown);
+        }
+    });
+
+
+    // Discrete Bar chart on Dashboard // Displaying Students Exams Result
+    //$.ajax({
+    //    type: "POST",
+    //    url: domain_name+'/exams/chart_anal/'+$('#encrypt_id').val(),
+    //    success: function(data){
+    //        try{
+    //            var result = $.parseJSON(data)
+    //            console.log(result.Subject);
+    //            nv.addGraph(function() {
+    //                var chart = nv.models.multiBarChart()
+    //                        .transitionDuration(350)
+    //                        .reduceXTicks(true)   //If 'false', every single x-axis tick label will be rendered.
+    //                        //.rotateLabels(-30)      //Angle to rotate x-axis labels.
+    //                        .showControls(true)   //Allow user to switch between 'Grouped' and 'Stacked' mode.
+    //                        .groupSpacing(0.1)    //Distance between each group of bars.
+    //                        .showLegend(true)
+    //                        .staggerLabels(true)
+    //                    ;
+    //
+    //                chart.yAxis
+    //                    .tickFormat(d3.format(',.1f'));
+    //
+    //                chart.tooltip(function(key, x, y, e, graph) {
+    //                    return '<h4>' + key + '</h4>' +
+    //                        '<p>Score: ' +  y + ' on ' + x + '</p>';
+    //                });
+    //
+    //                d3.select('#chart1 svg')
+    //                    .datum(result.Subject)
+    //                    .call(chart);
+    //
+    //                nv.utils.windowResize(chart.update);
+    //
+    //                return chart;
+    //            });
+    //        } catch (exception) {
+    //            $('#chart1').html('<div class="info-box  bg-info-dark  text-white"><div class="info-details"><h4>'+data+'</h4></div></div>');
+    //            $('#chart1').next('p').html('');
+    //        }
+    //    },
+    //    error: function(XMLHttpRequest, textStatus, errorThrown) {
+    //        $('#chart1').html(errorThrown);
+    //    }
+    //});
+////////////////////////////// Exam Bar Chat Ends/////////////////////////////////////////////////////////////
+
 });

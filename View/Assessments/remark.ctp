@@ -48,15 +48,20 @@
                             <?php if(!empty($Students['StudentsClass'])):?>
                                 <table  class="table table-bordered table-hover table-striped display">
                                     <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>No.</th>
-                                        <th>Full Name</th>
-                                        <th>Gender</th>
-                                        <th>Class</th>
-                                        <th>Principal Remark</th>
-                                        <th>House Master Remark</th>
-                                    </tr>
+                                        <tr>
+                                            <th colspan="5" style="text-align: center">Student Info</th>
+                                            <th colspan="3" style="text-align: center">Remark</th>
+                                        </tr>
+                                        <tr>
+                                            <th style="text-align: center">#</th>
+                                            <th style="text-align: center">No.</th>
+                                            <th style="text-align: center">Full Name</th>
+                                            <th style="text-align: center">Gender</th>
+                                            <th style="text-align: center">Class</th>
+                                            <th style="text-align: center">Class Teacher</th>
+                                            <th style="text-align: center">House Master/Mistress</th>
+                                            <th style="text-align: center">Principal</th>
+                                        </tr>
                                     </thead>
                                     <tbody>
                                     <?php $i=1; foreach ($Students['StudentsClass'] as $Student): ?>
@@ -64,35 +69,40 @@
                                         $option = array('conditions' => array('Assessment.student_id' => $Student['student_id'], 'Assessment.academic_term_id' => $term_id->getCurrentTermID()));
                                         $assess = $AssessmentModel->find('first', $option);
                                         ?>
-                                        <tr class="gradeA">
+                                        <tr class="gradeA" style="text-align: center">
                                             <td><?php echo $i++; ?></td>
                                             <td><?php echo h($Student['student_no']); ?>&nbsp;</td>
                                             <td><?php echo h($Student['first_name']), ' ', h($Student['surname']), ' ', h($Student['other_name']); ?>&nbsp;</td>
                                             <td><?php echo h($Student['gender']); ?>&nbsp;</td>
                                             <td><?php echo h($Student['class_name']); ?>&nbsp;</td>
                                             <td>
-                                                <input type="hidden" name="data[Remark][remark_id][]" value="<?php echo h($Student['remark_id']);?>">
-                                                <input type="hidden" name="data[Remark][student_id][]" id="student_d" value="<?php echo  h($Student['student_id']); ?>">
-                                                <textarea class="form-control form-cascade-control input-small" name="data[Remark][principal_remark][]"
-                                                  id="remark" placeholder="Student's Exam Remark" required><?php echo  h($Student['principal_remark']); ?></textarea>
+                                                <textarea class="form-control form-cascade-control input-small" name="data[Remark][class_teacher_remark][]"
+                                                  id="class_teacher_remark" placeholder="Class Teacher's Remark"><?php echo  h($Student['class_teacher_remark']); ?></textarea>
                                             </td>
                                             <td>
                                                 <textarea class="form-control form-cascade-control input-small" name="data[Remark][house_master_remark][]"
-                                                  id="remark" placeholder="Student's Exam Remark" required><?php echo  h($Student['house_master_remark']); ?></textarea>
+                                                  id="remark" placeholder="House Master/Mistress Remark"><?php echo  h($Student['house_master_remark']); ?></textarea>
+                                            </td>
+                                            <td>
+                                                <input type="hidden" name="data[Remark][remark_id][]" value="<?php echo h($Student['remark_id']);?>">
+                                                <input type="hidden" name="data[Remark][student_id][]" id="student_d" value="<?php echo  h($Student['student_id']); ?>">
+                                                <textarea class="form-control form-cascade-control input-small" name="data[Remark][principal_remark][]"
+                                                  id="principal_remark" placeholder="Principal's Remark"><?php echo  h($Student['principal_remark']); ?></textarea>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
                                     </tbody>
                                     <tfoot>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>No.</th>
-                                        <th>Full Name</th>
-                                        <th>Gender</th>
-                                        <th>Class</th>
-                                        <th>Principal Remark</th>
-                                        <th>House Master Remark</th>
-                                    </tr>
+                                        <tr>
+                                            <th style="text-align: center">#</th>
+                                            <th style="text-align: center">No.</th>
+                                            <th style="text-align: center">Full Name</th>
+                                            <th style="text-align: center">Gender</th>
+                                            <th style="text-align: center">Class</th>
+                                            <th style="text-align: center">Class Teacher</th>
+                                            <th style="text-align: center">House Master/Mistress</th>
+                                            <th style="text-align: center">Principal</th>
+                                        </tr>
                                     </tfoot>
                                 </table><br>
                                 <div class="form-group">

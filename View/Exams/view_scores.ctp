@@ -66,8 +66,6 @@
                                         <td><?php echo ($ExamSubject['Exam']['weightageCA1']+$ExamSubject['Exam']['weightageCA2']+$ExamSubject['Exam']['weightageExam']);?></td>
                                     </tr>
                                     <tr>
-                                        <th>Exam Description</th>
-                                        <td><?php echo $ExamSubject['Exam']['exam_desc'];?></td>
                                         <th>Marked Status</th>
                                         <td style="font-size: medium"><?php echo ($ExamSubject['Exam']['exammarked_status_id'] === '2') ? '<span class="label label-danger">Subject Not Marked</span>' : '<span class="label label-success">Subject Marked</span>';?></td>                                        
                                     </tr>

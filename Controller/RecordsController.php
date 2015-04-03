@@ -97,6 +97,8 @@ class RecordsController extends AppController {
                     $data['academic_year_id'] = $data_array['academic_year_id'][$i];
                     $data['term_status_id'] = $data_array['term_status_id'][$i];
                     $data['term_type_id'] = $data_array['term_type_id'][$i];
+                    $data['term_begins'] = $data_array['term_begins'][$i];
+                    $data['term_ends'] = $data_array['term_ends'][$i];
                     if($AcademicTerm->save($data)){ $count++; }
                 }
 
@@ -141,6 +143,9 @@ class RecordsController extends AppController {
                     $data['classgroup_id'] = ($data_array['classgroup_id'][$i] === '') ? null : $data_array['classgroup_id'][$i];
 
                     $data['classgroup'] = $data_array['classgroup'][$i];
+                    $data['weightageCA1'] = $data_array['weightageCA1'][$i];
+                    $data['weightageCA2'] = $data_array['weightageCA2'][$i];
+                    $data['weightageExam'] = $data_array['weightageExam'][$i];
                     if($Classgroup->save($data)){   $count++;  }
                 }
                 //Delete The ID's Checked

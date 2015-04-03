@@ -46,7 +46,7 @@ class SubjectClasslevel extends AppModel {
                 $result = $this->query('SELECT c.exam_id, a.*, b.employee_id, b.employee_name, b.teachers_subjects_id from SubjectClasslevelResultTable a
                     LEFT OUTER JOIN teachers_subjectsviews b ON a.subject_classlevel_id=b.subject_classlevel_id AND a.class_id=b.class_id
                     LEFT OUTER JOIN exams c ON a.subject_classlevel_id=c.subject_classlevel_id AND a.class_id=c.class_id 
-                    WHERE classlevel_id="'.$classlevel_id.'" AND a.academic_term_id="'.$term_id.'"
+                    WHERE classlevel_id="'.$classlevel_id.'" AND a.academic_term_id="'.$term_id.'" ORDER BY a.subject_name
                 ');
             }
         }else{
@@ -54,7 +54,7 @@ class SubjectClasslevel extends AppModel {
                 $result = $this->query('SELECT c.exam_id, a.*, b.employee_id, b.employee_name, b.teachers_subjects_id from SubjectClasslevelResultTable a
                     LEFT OUTER JOIN teachers_subjectsviews b ON a.subject_classlevel_id=b.subject_classlevel_id AND a.class_id=b.class_id
                     LEFT OUTER JOIN exams c ON a.subject_classlevel_id=c.subject_classlevel_id AND a.class_id=c.class_id
-                    WHERE a.class_id="'.$class_id.'" AND a.academic_term_id="'.$term_id.'"
+                    WHERE a.class_id="'.$class_id.'" AND a.academic_term_id="'.$term_id.'" ORDER BY a.subject_name
                 ');
             }
         }
@@ -77,12 +77,12 @@ class SubjectClasslevel extends AppModel {
     
     //Find all subjects assigned to a classlevel in a specify academic term
     public function findSubjectsAssigned($term_id, $classlevel_id) {
-        return $this->query('SELECT a.* FROM subject_classlevelviews a WHERE a.classlevel_id="'.$classlevel_id.'" AND academic_term_id="'.$term_id.'"');
+        return $this->query('SELECT a.* FROM subject_classlevelviews a WHERE a.classlevel_id="'.$classlevel_id.'" AND academic_term_id="'.$term_id.'" ORDER BY a.subject_name');
     }
     
     //Find all the students offering the subjects in a classroom or classlevel
     public function findStudentsBySubjectClasslevel($subject_classlevel_id) {
-        $result = $this->query('SELECT * FROM students_subjectsviews a WHERE subject_classlevel_id="'.$subject_classlevel_id.'"');
+        $result = $this->query('SELECT * FROM students_subjectsviews a WHERE subject_classlevel_id="'.$subject_classlevel_id.'" ORDER BY a.student_name');
         return $result;
     }
     
@@ -97,12 +97,12 @@ class SubjectClasslevel extends AppModel {
         if($class_id === -1) {
             $result = $this->query(
                 'SELECT * FROM students_classlevelviews a WHERE a.classlevel_id="'.$classlevel_id.'" AND a.academic_year_id="'.$academic_year_id.'" '
-                . 'AND a.student_id NOT IN (SELECT student_id FROM students_subjectsviews a WHERE subject_classlevel_id="'.$subject_classlevel_id.'")'
+                . 'AND a.student_id NOT IN (SELECT student_id FROM students_subjectsviews a WHERE subject_classlevel_id="'.$subject_classlevel_id.'") ORDER BY a.student_name'
             );
         }  else {
             $result = $this->query(
                 'SELECT * FROM students_classlevelviews a WHERE a.class_id="'.$class_id.'" AND a.academic_year_id="'.$academic_year_id.'" '
-                . 'AND a.student_id NOT IN (SELECT student_id FROM students_subjectsviews a WHERE subject_classlevel_id="'.$subject_classlevel_id.'")'
+                . 'AND a.student_id NOT IN (SELECT student_id FROM students_subjectsviews a WHERE subject_classlevel_id="'.$subject_classlevel_id.'") ORDER BY a.student_name'
             );
         }
         return $result;
@@ -118,7 +118,7 @@ class SubjectClasslevel extends AppModel {
             for ($i = 0; $i < count($ids); $i++) {
                 $this->query('INSERT INTO subject_students_registers(student_id, class_id, subject_classlevel_id)'
                     . ' SELECT "' . $ids[$i] . '", b.class_id, "' . $subject_classlevel_id . '" FROM students a INNER JOIN students_classes b ON a.student_id=b.student_id INNER JOIN'
-                    . ' classrooms c ON c.class_id = b.class_id WHERE c.classlevel_id="' . $class_term['a']['classlevel_id'] . '" AND a.student_status_id = 1 AND a.student_id="'.$ids[$i].'" AND'
+                    . ' classrooms c ON c.class_id = b.class_id WHERE c.classlevel_id="' . $class_term['a']['classlevel_id'] . '" AND a.student_status_id=1 AND a.student_id="'.$ids[$i].'" AND'
                     . ' b.academic_year_id = (SELECT academic_year_id FROM academic_terms WHERE academic_term_id="' . $class_term['a']['academic_term_id'] . '" LIMIT 1)'
                 );
             }

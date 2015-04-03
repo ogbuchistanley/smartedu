@@ -38,9 +38,8 @@ class Exam extends AppModel {
         return parent::beforeSave($options);
     }
     
-    public function proc_insertExamDetails($ExamID){
-        $result = $this->query('CALL `proc_insertExamDetails`("'.$ExamID.'")');
-        return $result;
+    public function proc_processExams($TermID){
+        return $this->query('CALL `proc_processExams`("'.$TermID.'")');
     }
     
     //Find all subjects exams has been setup to a classlevel in a specify academic term
@@ -48,7 +47,7 @@ class Exam extends AppModel {
         return $this->query('SELECT a.* FROM exam_subjectviews a INNER JOIN teachers_subjectsviews b '
                 . 'ON a.subject_classlevel_id=b.subject_classlevel_id AND a.class_id=b.class_id '
                 . 'WHERE a.classlevel_id="'.$classlevel_id.'" AND a.academic_term_id="'.$term_id.'" '
-                . 'AND b.employee_id="'.AuthComponent::user('type_id').'"');
+                . 'AND b.employee_id="'.AuthComponent::user('type_id').'" ORDER BY a.subject_name');
     }
     
     //Find all subjects exams has been setup to a classlevel in a specify academic term
@@ -65,7 +64,7 @@ class Exam extends AppModel {
                 $result = $this->query('SELECT c.exam_id, a.*, b.employee_id, b.employee_name, b.teachers_subjects_id from SubjectClasslevelResultTable a
                     LEFT OUTER JOIN teachers_subjectsviews b ON a.subject_classlevel_id=b.subject_classlevel_id AND a.class_id=b.class_id
                     LEFT OUTER JOIN exams c ON a.subject_classlevel_id=c.subject_classlevel_id AND a.class_id=c.class_id 
-                    WHERE classlevel_id="'.$classlevel_id.'" AND a.academic_term_id="'.$term_id.'" AND b.employee_id="'.AuthComponent::user('type_id').'"
+                    WHERE classlevel_id="'.$classlevel_id.'" AND a.academic_term_id="'.$term_id.'" AND b.employee_id="'.AuthComponent::user('type_id').'" ORDER BY a.subject_name
                 ');
             }
         }else{
@@ -73,7 +72,7 @@ class Exam extends AppModel {
                 $result = $this->query('SELECT c.exam_id, a.*, b.employee_id, b.employee_name, b.teachers_subjects_id from SubjectClasslevelResultTable a
                     LEFT OUTER JOIN teachers_subjectsviews b ON a.subject_classlevel_id=b.subject_classlevel_id AND a.class_id=b.class_id
                     LEFT OUTER JOIN exams c ON a.subject_classlevel_id=c.subject_classlevel_id AND a.class_id=c.class_id
-                    WHERE a.class_id="'.$class_id.'" AND a.academic_term_id="'.$term_id.'" AND b.employee_id="'.AuthComponent::user('type_id').'"
+                    WHERE a.class_id="'.$class_id.'" AND a.academic_term_id="'.$term_id.'" AND b.employee_id="'.AuthComponent::user('type_id').'" ORDER BY a.subject_name
                 ');
             }
         }
@@ -84,12 +83,12 @@ class Exam extends AppModel {
     public function findStudentClasslevel($year_id, $classlevel_id, $class_id=null) {
         if($class_id !== null) {
             $result = $this->query(
-                'SELECT a.* FROM students_classlevelviews a WHERE a.class_id="'.$class_id.'" AND a.academic_year_id="'.$year_id.'" '
+                'SELECT a.* FROM students_classlevelviews a WHERE a.class_id="'.$class_id.'" AND a.academic_year_id="'.$year_id.'" ORDER BY a.student_name'
             );
         }else if($class_id === null) {
             $result = $this->query(
                 'SELECT a.*, b.classlevel FROM classrooms a INNER JOIN classlevels b ON '
-                .'a.classlevel_id=b.classlevel_id WHERE b.classlevel_id="'.$classlevel_id.'" '
+                .'a.classlevel_id=b.classlevel_id WHERE b.classlevel_id="'.$classlevel_id.'"'
             );
         }
         return $result;
@@ -97,7 +96,7 @@ class Exam extends AppModel {
     
     //Find all students for a sponsor
     public function findSponsorStudents($year_id) {
-        return $this->query('SELECT a.* FROM students_classlevelviews a WHERE a.sponsor_id="'.AuthComponent::user('type_id').'" AND a.academic_year_id="'.$year_id.'"');
+        return $this->query('SELECT a.* FROM students_classlevelviews a WHERE a.sponsor_id="'.AuthComponent::user('type_id').'" AND a.academic_year_id="'.$year_id.'" ORDER BY a.student_name');
     }
     
     //Get the Students Terminal Exam Details and position
@@ -126,7 +125,7 @@ class Exam extends AppModel {
         $result = null;
         $res = $this->query('CALL proc_terminalClassPositionViews("'.$class_id.'", "'.$term_id.'")');
         if($res) {
-            $result = $this->query('SELECT a.* FROM ExamsDetailsResultTable a WHERE a.student_id="'.$student_id.'" '
+            $result = $this->query('SELECT a.* FROM ExamsDetailsResultTable a WHERE a.student_id="'.$student_id.'"'
                 . 'AND a.academic_term_id="'.$term_id.'"');
         }
         return $result;
@@ -157,9 +156,16 @@ class Exam extends AppModel {
         $result = null;
         $res = $this->query('CALL proc_annualClassPositionViews("'.$class_id.'", "'.$year_id.'")');
         if($res) {
-            $result = $this->query('SELECT a.* FROM AnnualClassPositionResultTable a WHERE a.academic_year_id="'.$year_id.'" '
+            $result = $this->query('SELECT a.* FROM AnnualClassPositionResultTable a WHERE a.academic_year_id="'.$year_id.'"'
                     . 'ORDER BY a.class_annual_position');
         }
+        return $result;
+    }
+
+    //Get the Classroom Grading System
+    public function findClassroomGrade($class_id) {
+        $result = $this->query('SELECT a.* FROM grades a WHERE a.classgroup_id=(SELECT classgroup_id FROM classlevels WHERE classlevel_id=('
+            . 'SELECT classlevel_id FROM classrooms WHERE class_id="'.$class_id.'")) ORDER BY a.upper_bound DESC');
         return $result;
     }
 }

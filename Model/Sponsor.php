@@ -109,24 +109,24 @@ class Sponsor extends AppModel {
                 'message' => 'A Valid Mobile Number is required',                
             )
         ),
-        'contact_address' => array(
-            'notEmpty' => array(
-                'rule' => array('notEmpty'),
-                'message' => 'A Contact Address is required',                
-            )
-        ),
-        'country_id' => array(
-            'notEmpty' => array(
-                'rule' => array('notEmpty'),
-                'message' => 'A Nationality is required',                
-            )
-        ),
-        'occupation' => array(
-            'notEmpty' => array(
-                'rule' => array('notEmpty'),
-                'message' => 'A Occupation is required',                
-            )
-        ),
+//        'contact_address' => array(
+//            'notEmpty' => array(
+//                'rule' => array('notEmpty'),
+//                'message' => 'A Contact Address is required',
+//            )
+//        ),
+//        'country_id' => array(
+//            'notEmpty' => array(
+//                'rule' => array('notEmpty'),
+//                'message' => 'A Nationality is required',
+//            )
+//        ),
+//        'occupation' => array(
+//            'notEmpty' => array(
+//                'rule' => array('notEmpty'),
+//                'message' => 'A Occupation is required',
+//            )
+//        ),
         'image_url' => array(
             'uploadError' => array(
                 'rule' => 'uploadError',

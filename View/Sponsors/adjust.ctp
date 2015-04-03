@@ -89,17 +89,17 @@
                                </div>
                             </div>
                             <div class="form-group">
-                              <label class="col-lg-2 col-md-3 control-label">Last Name <small class="text-danger"> * </small></label>
+                              <label class="col-lg-2 col-md-3 control-label" for="first_name">Surname <small class="text-danger"> * </small></label>
                               <div class="col-lg-7 col-md-9">
-                               <input type="text" class="form-control form-cascade-control input-small" name="data[Sponsor][other_name]" id="other_name"
-                                      value="<?php echo (empty($sponsor['Sponsor']['other_name'])) ? '' : $sponsor['Sponsor']['other_name']?>" placeholder="Type Parent's Last Name">
+                               <input type="text" class="form-control form-cascade-control input-small" name="data[Sponsor][first_name]" id="other_name"
+                                  value="<?php echo (empty($sponsor['Sponsor']['first_name'])) ? '' : $sponsor['Sponsor']['first_name']?>" placeholder="Type Parent's Surname">
                              </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-lg-2 col-md-3 control-label" for="first_name">First Name <small class="text-danger"> * </small></label>
+                                <label class="col-lg-2 col-md-3 control-label" for="other_name">First Name <small class="text-danger"> * </small></label>
                                 <div class="col-lg-7 col-md-9">
-                                    <input type="text" class="form-control form-cascade-control input-small" value="<?php echo $sponsor['Sponsor']['first_name']?>"
-                                 name="data[Sponsor][first_name]" id="first_name" placeholder="Type Parent's first name" required>
+                                    <input type="text" class="form-control form-cascade-control input-small" value="<?php echo $sponsor['Sponsor']['other_name']?>"
+                                 name="data[Sponsor][other_name]" id="other_name" placeholder="Type Parent's first name" required>
                                </div>
                             </div>
                             <div class="form-group">
@@ -124,7 +124,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-lg-2 col-md-3 control-label" for="contact_address">Contact Address <small class="text-danger"> * </small></label>
+                                <label class="col-lg-2 col-md-3 control-label" for="contact_address">Contact Address</label>
                                 <div class="col-lg-7 col-md-9">
                                     <textarea class="form-control form-cascade-control input-small" name="data[Sponsor][contact_address]" 
                                     id="contact_address" placeholder="Parent's Contact Address" required><?php echo $sponsor['Sponsor']['contact_address']?></textarea>
@@ -147,7 +147,7 @@
                                 </div>
                             </div-->
                             <div class="form-group">
-                                <label class="col-lg-2 col-md-3 control-label" for="country_id">Nationality <small class="text-danger"> * </small></label>
+                                <label class="col-lg-2 col-md-3 control-label" for="country_id">Nationality</label>
                                 <div class="col-lg-7 col-md-9">
                                     <?php 
                                         echo $this->Form->input('country_id', array(
@@ -165,7 +165,7 @@
                             </div>
                             <div id="state_lga_div">
                                 <div class="form-group">
-                                    <label for="state_id" class="col-lg-2 col-md-3 control-label">State of origin <small class="text-danger"> * </small></label>
+                                    <label for="state_id" class="col-lg-2 col-md-3 control-label">State of origin </label>
                                     <div class="col-lg-7 col-md-9">
                                         <?php 
                                             echo $this->Form->input('state_id', array(
@@ -181,7 +181,7 @@
                                     </div>
                                  </div>
                                  <div class="form-group">
-                                    <label for="local_govt_id" class="col-lg-2 col-md-3 control-label">Local Govt. <small class="text-danger"> * </small></label>
+                                    <label for="local_govt_id" class="col-lg-2 col-md-3 control-label">Local Govt. </label>
                                     <div class="col-lg-7 col-md-9">
                                         <select class="form-control" name="data[Sponsor][local_govt_id]" id="local_govt_id">
                                             <?php 
@@ -195,7 +195,7 @@
                                  </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-lg-2 col-md-3 control-label" for="occupation">Occupation <small class="text-danger"> * </small></label>
+                                <label class="col-lg-2 col-md-3 control-label" for="occupation">Occupation </label>
                                 <div class="col-lg-7 col-md-9">
                                     <input type="text" class="form-control form-cascade-control input-small" name="data[Sponsor][occupation]" 
                                     value="<?php echo $sponsor['Sponsor']['occupation']?>" id="occupation" placeholder="Parent's Occupation" required>

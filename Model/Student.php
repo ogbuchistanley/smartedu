@@ -8,6 +8,10 @@ class Student extends AppModel {
 	public $primaryKey = 'student_id';
 
 	public $displayField = 'first_name';
+
+    public $virtualFields = array(
+        'full_name' => "CONCAT(UCASE(Student.first_name), ', ', Student.surname)"
+    );
     
     public function beforeSave($options = array()) {
         $term_id = ClassRegistry::init('AcademicTerm');
@@ -116,18 +120,18 @@ class Student extends AppModel {
                 'message' => 'A Gender is required',                
             )
         ),
-        'birth_date' => array(
-            'notEmpty' => array(
-                'rule' => array('notEmpty'),
-                'message' => 'A Date of Birth is required',                
-            )
-        ),
-        'country_id' => array(
-            'notEmpty' => array(
-                'rule' => array('notEmpty'),
-                'message' => 'A Nationality is required',                
-            )
-        ),
+//        'birth_date' => array(
+//            'notEmpty' => array(
+//                'rule' => array('notEmpty'),
+//                'message' => 'A Date of Birth is required',
+//            )
+//        ),
+//        'country_id' => array(
+//            'notEmpty' => array(
+//                'rule' => array('notEmpty'),
+//                'message' => 'A Nationality is required',
+//            )
+//        ),
 //        'religion' => array(
 //            'notEmpty' => array(
 //                'rule' => array('notEmpty'),

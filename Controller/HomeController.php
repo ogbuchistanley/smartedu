@@ -79,12 +79,12 @@ class HomeController extends AppController
                         $res[] = array(
                             "student_name" => $result['a']['student_name'],
                             "student_no" => $result['a']['student_no'],
-                            "class_name" => $result['a']['class_name'],
-                            "class_id" => $this->encryption->encode($result['a']['class_id']),
-                            "classlevel" => $result['a']['classlevel'],
+                            "class_name" => $result['classrooms']['class_name'],
+                            "class_id" => $this->encryption->encode($result['classrooms']['class_id']),
+                            "classlevel" => $result['classlevels']['classlevel'],
                             "std_term_id" => $this->encryption->encode($result['a']['student_id'] . '/' . $term_id),
-                            "std_cls_yr_id" => $this->encryption->encode($result['a']['student_id'] . '/' . $result['a']['class_id'] . '/' . $year_id),
-                            "std_cls_term_id" => $this->encryption->encode($result['a']['student_id'] . '/' . $result['a']['class_id'] . '/' . $term_id),
+                            "std_cls_yr_id" => $this->encryption->encode($result['a']['student_id'] . '/' . $result['classrooms']['class_id'] . '/' . $year_id),
+                            "std_cls_term_id" => $this->encryption->encode($result['a']['student_id'] . '/' . $result['classrooms']['class_id'] . '/' . $term_id),
                             "student_id" => $this->encryption->encode($result['a']['student_id'])
                         );
                     }

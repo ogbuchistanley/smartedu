@@ -144,10 +144,10 @@
                                            </div>
                                          </div>
                                          <div class="form-group">
-                                          <label for="surname" class="col-lg-2 col-md-3 control-label">Last Name <small class="text-danger"> * </small></label>
+                                          <label for="surname" class="col-lg-2 col-md-3 control-label">Surname <small class="text-danger"> * </small></label>
                                           <div class="col-lg-7 col-md-9">
                                            <input type="text" class="form-control form-cascade-control input-small" name="data[Student][surname]" 
-                                           value="<?php echo $student['Student']['surname']?>" id="surname" placeholder="Type Student's Last Name" required="required"/>
+                                           value="<?php echo $student['Student']['surname']?>" id="surname" placeholder="Type Student's Surname" required="required"/>
                                          </div>
                                        </div>
                                        <div class="form-group">
@@ -174,7 +174,7 @@
                                         </div>
                                      </div>
                                      <div class="form-group">
-                                        <label for="birth_date" class="col-lg-2 col-md-3 control-label">Date of Birth <small class="text-danger"> * </small></label>
+                                        <label for="birth_date" class="col-lg-2 col-md-3 control-label">Date of Birth</label>
                                         <div class="col-lg-7 col-md-9">
                                             <?php
                                                 $dob = '';
@@ -184,11 +184,11 @@
                                                 }
                                             ?>
                                             <input type="text" class="form-control form-cascade-control input-small" name="data[Student][birth_date]" 
-                                            value="<?php echo $dob; ?>" id="birth_date" placeholder="Select Student's date of birth" required="required"/>
+                                            value="<?php echo $dob; ?>" id="birth_date" placeholder="Select Student's date of birth"/>
                                         </div>
                                      </div>
                                      <div class="form-group">
-                                        <label for="country_id" class="col-lg-2 col-md-3 control-label">Nationality <small class="text-danger"> * </small></label>
+                                        <label for="country_id" class="col-lg-2 col-md-3 control-label">Nationality</label>
                                         <div class="col-lg-7 col-md-9">
                                             <?php 
                                                 echo $this->Form->input('country_id', array(

@@ -82,7 +82,7 @@
                                 </tr>
                                 </tfoot>
                             <?php else :?>
-                                <tr><th>No Class Has Been Assign to you Yet</th></tr>
+                                <tr><th>No Class Has Been Assign to you as a Class Teacher Yet</th></tr>
                             <?php endif;?>
                         </table>
                     </div> <!-- /panel body -->

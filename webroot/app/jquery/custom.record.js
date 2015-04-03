@@ -25,6 +25,16 @@ $('document').ready(function(){
         });
         $("#deleted_term").val(ids.substr(0, (ids.length-1)));
     }
+
+
+    //Date Qualification
+    $('.date_picker').datepicker({
+        changeMonth: true,
+        changeYear: true,
+        yearRange: "-40:+10"
+    });
+
+
     
     //Add a new row for inputting new record
     $(document.body).on('click', '.add_new_record_btn', function(){

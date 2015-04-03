@@ -15,6 +15,7 @@ class DATABASE_CONFIG {
 		'password' => '',
 		//'password' => 'Student_1',
 		//'database' => 'zumasoftware_smartschool',
-		'database' => 'smartedu',
+		'database' => 'smartedu_online',
+		//'database' => 'smartedu',
 	);
 }

@@ -1,7 +1,7 @@
 <?php echo $this->Html->script("../app/jquery/custom.exam.js", FALSE);?>
-<?php //$exam_setup_exam = Configure::read('exam_setup_exam'); ?>
+<?php $setup_exam = Configure::read('setup_exam'); ?>
 
-<?php $term_id = ClassRegistry::init('AcademicTerm'); ?>
+<?php $term_id = ClassRegistry::init('AcademicTerm'); //echo date('Y-m-d h:m:s');?>
 <div class="col-md-12">
     <div class="panel">
         <!-- Info Boxes -->
@@ -33,11 +33,11 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     <ul id="myTab" class="nav nav-tabs">
-                        <?php //if ($exam_setup_exam) :?>
-                        <li class="active">
-                            <a href="<?php echo DOMAIN_NAME ?>/exams/index#setupExam" data-toggle="tab"><b><i class="fa fa-gear"></i> Setup / <i class="fa fa-edit"></i> Adjust Exams Subject</b></a>                            
-                        </li>
-                        <?php //endif; ?>
+                        <?php if ($setup_exam) :?>
+                            <li class="active">
+                                <a href="<?php echo DOMAIN_NAME ?>/exams/index#setupExam" data-toggle="tab"><b><i class="fa fa-gear"></i> Setup All Exams</b></a>
+                            </li>
+                        <?php endif; ?>
                         <li>
                             <a href="<?php echo DOMAIN_NAME ?>/exams/index#subjectScores" data-toggle="tab"><b><i class="fa fa-th"></i> Input / <i class="fa fa-edit"></i> Edit Scores</b></a>
                         </li>
@@ -46,71 +46,123 @@
                         </li>
                     </ul>
                     <div id="myTabContent" class="tab-content"> 
-                        <?php //if ($exam_setup_exam) :?>
-                        <div class="tab-pane fade in active" id="setupExam"><br> <!-- setupExam -->
-                            <div class="col-md-7">
-                                <div class="panel panel-cascade">
-                                    <div class="panel-body">
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading"><i class="fa fa-search fa-1x"></i> Search Subjects Assigned</div>                                            
-                                            <div class="panel-body">
-                                                <?php 
-                                                    //Creates The Form
-                                                    echo $this->Form->create('SubjectClasslevel', array(
-                                                            'action' => 'search',
-                                                            'class' => 'form-horizontal',
-                                                            'id' => 'search_subject_assigned_form'
-                                                        )
-                                                    );     
-                                                ?>
-                                                    <div class="form-group">
-                                                        <label for="classlevel_id_all" class="col-sm-4 control-label">Class Levels</label>
-                                                        <div class="col-sm-8">
-                                                            <?php 
-                                                                echo $this->Form->input('classlevel_id_all', array(
-                                                                        'div' => false,
-                                                                        'label' => false,
-                                                                        'class' => 'form-control',
-                                                                        'id' => 'classlevel_id_all',
-                                                                         'required' => "required",
-                                                                        'options' => $Classlevels,
-                                                                        'empty' => '(Select Classlevel)'
-                                                                    )
-                                                                ); 
-                                                            ?>
+                        <?php if ($setup_exam) :?>
+                            <div class="tab-pane fade in active" id="setupExam"><br> <!-- setupExam -->
+                                <!--div class="col-md-7">
+                                    <div class="panel panel-cascade">
+                                        <div class="panel-body">
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading"><i class="fa fa-search fa-1x"></i> Search Subjects Assigned</div>
+                                                <div class="panel-body">
+                                                    <?php
+                                                        //Creates The Form
+    //                                                    echo $this->Form->create('SubjectClasslevel', array(
+    //                                                            'action' => 'search',
+    //                                                            'class' => 'form-horizontal',
+    //                                                            'id' => 'search_subject_assigned_form'
+    //                                                        )
+    //                                                    );
+                                                    ?>
+                                                        <div class="form-group">
+                                                            <label for="classlevel_id_all" class="col-sm-4 control-label">Class Levels</label>
+                                                            <div class="col-sm-8">
+                                                                <?php
+    //                                                                echo $this->Form->input('classlevel_id_all', array(
+    //                                                                        'div' => false,
+    //                                                                        'label' => false,
+    //                                                                        'class' => 'form-control',
+    //                                                                        'id' => 'classlevel_id_all',
+    //                                                                         'required' => "required",
+    //                                                                        'options' => $Classlevels,
+    //                                                                        'empty' => '(Select Classlevel)'
+    //                                                                    )
+    //                                                                );
+                                                                ?>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="class_id_all" class="col-sm-4 control-label">Class Rooms</label>
-                                                        <div class="col-sm-8">
-                                                            <select class="form-control" name="data[SubjectClasslevel][class_id_all]" id="class_id_all">
-                                                                <option value="">  (Select Class Room)  </option>
+                                                        <div class="form-group">
+                                                            <label for="class_id_all" class="col-sm-4 control-label">Class Rooms</label>
+                                                            <div class="col-sm-8">
+                                                                <select class="form-control" name="data[SubjectClasslevel][class_id_all]" id="class_id_all">
+                                                                    <option value="">  (Select Class Room)  </option>
 
-                                                            </select>
+                                                                </select>
+                                                            </div>
                                                         </div>
-                                                    </div>  
+                                                        <div class="form-group">
+                                                            <label for="academic_year_id_all" class="col-sm-4 control-label">Academic Years</label>
+                                                            <div class="col-sm-8">
+                                                                <?php
+    //                                                                echo $this->Form->input('academic_year_id_all', array(
+    //                                                                        'div' => false,
+    //                                                                        'label' => false,
+    //                                                                        'class' => 'form-control',
+    //                                                                        'id' => 'academic_year_id_all',
+    //                                                                        'required' => "required",
+    //                                                                        'selected' => $term_id->getCurrentYearID(),
+    //                                                                        'options' => $AcademicYears,
+    //                                                                        'empty' => '(Select Academic Year)'
+    //                                                                    )
+    //                                                                );
+                                                                ?>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="academic_term_id_all" class="col-sm-4 control-label">Academic Terms</label>
+                                                            <div class="col-sm-8">
+                                                                <select class="form-control" name="data[SubjectClasslevel][academic_term_id_all]" id="academic_term_id_all" required="required">
+                                                                    <option value="<?php //echo $term_id->getCurrentTermID();?>"><?php //echo $term_id->getCurrentTermName();?></option>
+
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-offset-2 col-sm-10">
+                                                                <button type="submit" class="btn btn-info">Search Assigned Subject</button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div-->
+                                <div class="col-md-6">
+                                    <div class="panel panel-cascade">
+                                        <div class="panel-body">
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading"><i class="fa fa-search fa-1x"></i> Search Subjects Assigned</div>
+                                                <div class="panel-body">
+                                                    <?php
+                                                        //Creates The Form
+                                                        echo $this->Form->create('ExamSetup', array(
+                                                                'class' => 'form-horizontal',
+                                                                'id' => 'setup_exam'
+                                                            )
+                                                        );
+                                                    ?>
                                                     <div class="form-group">
                                                         <label for="academic_year_id_all" class="col-sm-4 control-label">Academic Years</label>
                                                         <div class="col-sm-8">
-                                                            <?php 
-                                                                echo $this->Form->input('academic_year_id_all', array(
-                                                                        'div' => false,
-                                                                        'label' => false,
-                                                                        'class' => 'form-control',
-                                                                        'id' => 'academic_year_id_all',
-                                                                        'required' => "required",
-                                                                        'selected' => $term_id->getCurrentYearID(),
-                                                                        'options' => $AcademicYears,
-                                                                        'empty' => '(Select Academic Year)'
-                                                                    )
-                                                                ); 
+                                                            <?php
+                                                            echo $this->Form->input('academic_year_id_all', array(
+                                                                    'div' => false,
+                                                                    'label' => false,
+                                                                    'class' => 'form-control',
+                                                                    'id' => 'academic_year_id_all',
+                                                                    'required' => "required",
+                                                                    'selected' => $term_id->getCurrentYearID(),
+                                                                    'options' => $AcademicYears,
+                                                                    'empty' => '(Select Academic Year)'
+                                                                )
+                                                            );
                                                             ?>
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="academic_term_id_all" class="col-sm-4 control-label">Academic Terms</label>
                                                         <div class="col-sm-8">
-                                                            <select class="form-control" name="data[SubjectClasslevel][academic_term_id_all]" id="academic_term_id_all" required="required">
+                                                            <select class="form-control" name="data[ExamSetup][academic_term_id_all]" id="academic_term_id_all" required="required">
                                                                 <option value="<?php echo $term_id->getCurrentTermID();?>"><?php echo $term_id->getCurrentTermName();?></option>
 
                                                             </select>
@@ -118,26 +170,26 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <div class="col-sm-offset-2 col-sm-10">
-                                                            <button type="submit" class="btn btn-info">Search Assigned Subject</button>
+                                                            <button type="submit" class="btn btn-info">Setup Exam</button>
                                                         </div>
                                                     </div>
-                                                </form>
+                                                    </form>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-md-5" id="msg_box"> </div>
+                                <div class="col-md-12">
+                                    <div style="overflow-x: scroll" class="panel-body">
+                                        <table  class="table table-bordered table-hover table-striped display" id="search_subjects_assigned_table" >
+
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-md-5" id="msg_box"> </div>
-                            <div class="col-md-12">
-                                <div style="overflow-x: scroll" class="panel-body">
-                                    <table  class="table table-bordered table-hover table-striped display" id="search_subjects_assigned_table" >
-                                        
-                                    </table>
-                                </div> 
-                            </div>                            
-                        </div>
-                        <?php //endif;?><!-- / setupExam -->
-                        <div class="tab-pane fade in" id="subjectScores"><br><!-- Input subject Scores -->
+                        <?php endif;?><!-- / setupExam -->
+                        <div class="tab-pane fade in <?php echo !($setup_exam) ? 'active' : '';?>" id="subjectScores"><br><!-- Input subject Scores -->
                             <div class="col-md-7">
                                 <div class="panel panel-cascade">
                                     <div class="panel-body">
@@ -311,9 +363,43 @@
             </div>
         </div>
     </div>
+
+    <!-- Model for modifying subjects assigned to classrooms-->
+    <div id="setup_exam_modal" class="modal fade" tabindex="-1" data-width="400" style="display: none;">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">Setup Exam Confirmation</h4>
+        </div>
+        <div class="panel-body">
+            <?php
+                //Creates The Form
+                echo $this->Form->create('Exam', array(
+                        'action' => 'setup_exam',
+                        'class' => 'form-horizontal',
+                        'id' => 'exam_setup_modal_form'
+                    )
+                );
+            ?>
+
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p>Are You Sure You Want Setup The Exam</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12" id="msg_box1_modal">     </div>
+                <div class="modal-footer">
+                    <input type="hidden" name="data[Exam][hidden_term_id]" id="hidden_term_id" value="">
+                    <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+                    <button type="submit" class="btn btn-primary">Yes Setup</button>
+                </div>
+            </form>
+        </div>
+   </div><!--/ Modal Modifying Subjects Assigned-->
     
     <!-- Model for modifying subjects assigned to classrooms-->
-    <div id="setup_exam_modal" class="modal fade" tabindex="-1" data-width="530" style="display: none;">
+    <!--div id="setup_exam_modal" class="modal fade" tabindex="-1" data-width="530" style="display: none;">
        <div class="modal-header">
            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
            <div class="modal-title alert alert-info">Setting up Exams Weight Points <b>(WP)</b> </div>
@@ -321,15 +407,15 @@
         <div class="panel-body">
             <?php 
                 //Creates The Form
-                echo $this->Form->create('Exam', array(
-                        'action' => 'setup_exam',
-                        'class' => 'form-horizontal',
-                        'id' => 'exam_setup_modal_form'
-                    )
-                );     
+//                echo $this->Form->create('Exam', array(
+//                        'action' => 'setup_exam',
+//                        'class' => 'form-horizontal',
+//                        'id' => 'exam_setup_modal_form'
+//                    )
+//                );
             ?>
                 
-                <div class="form-group">
+                <!--div class="form-group">
                     <label for="weightageCA1" class="col-sm-4 control-label">First CA (W.P)</label>
                     <div class="col-sm-8">
                         <input type="text" class="form-control form-cascade-control input-small"
@@ -368,9 +454,9 @@
                     </div>
                 </div>
             <div class="col-md-12" id="msg_box1_modal">     </div>
-            </form>					
+            </form>
         </div>
-   </div><!--/ Modal Modifying Subjects Assigned-->
+   </div--><!--/ Modal Modifying Subjects Assigned-->
 </div>
 <?php
     // OnChange Of Classlevel Get Class Room

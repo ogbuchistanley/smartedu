@@ -126,12 +126,14 @@ function td_loading_image(div) {
     div.html('<img src="'+domain_name+'/img/ajax-loader2.gif" style="width:30px; height:30px"/>');
 }
 
-//Set Error 2, Info 0 or success 1 messages
+//Set Warning 3, Error 2, Info 0 or success 1 messages
 function set_msg_box(div, text, type) {
     if(type === 1)
         div.html('<div class="alert alert-success"><h4><i class="fa fa-thumbs-up fa-1x"></i> '+text+'</h4></div>');
     else if(type === 2)
         div.html('<div class="alert alert-danger"><h4><i class="fa fa-thumbs-down fa-1x"></i> '+text+'</h4></div>');
+    else if(type === 3)
+        div.html('<div class="alert alert-warning"><h4><i class="fa fa-warning fa-1x"></i> '+text+'</h4></div>');
     else
         div.html('<div class="alert alert-info"><h4><i class="fa fa-info fa-1x"></i> '+text+'</h4></div>');
 }

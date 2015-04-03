@@ -123,8 +123,9 @@ class AssessmentsController extends AppController {
                         $data['remark_id'] = ($data_array['remark_id'][$i] === '') ? null : $data_array['remark_id'][$i];
 
                         $data['student_id'] = $data_array['student_id'][$i];
-                        $data['principal_remark'] = $data_array['principal_remark'][$i];
-                        $data['house_master_remark'] = $data_array['house_master_remark'][$i];
+                        $data['principal_remark'] = ($data_array['principal_remark'][$i] == '') ? 'None' : $data_array['principal_remark'][$i];
+                        $data['class_teacher_remark'] = ($data_array['class_teacher_remark'][$i] == '') ? 'None' : $data_array['class_teacher_remarks'][$i];
+                        $data['house_master_remark'] = ($data_array['house_master_remark'][$i] == '') ? 'None' : $data_array['house_master_remark'][$i];
                         if ($RemarkModel->save($data)) {
                             $count++;
                         }
@@ -154,6 +155,7 @@ class AssessmentsController extends AppController {
                             "gender"=>$result['b']['gender'],
                             "remark_id"=> (!empty($remark)) ? $remark['Remark']['remark_id'] : '',
                             "principal_remark"=> (!empty($remark)) ? $remark['Remark']['principal_remark'] : '',
+                            "class_teacher_remark"=> (!empty($remark)) ? $remark['Remark']['class_teacher_remark'] : '',
                             "house_master_remark"=> (!empty($remark)) ? $remark['Remark']['house_master_remark'] : ''
                         );
                     }

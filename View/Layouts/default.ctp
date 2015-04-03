@@ -16,7 +16,7 @@ $cakeDescription = __d('app_dev', ':: '.APP_NAME.' :');
     $employee_adjust = Configure::read('employee_adjust');
     
     $exam_index = Configure::read('exam_index');
-    //$exam_setup_exam = Configure::read('exam_setup_exam');
+    $setup_exam = Configure::read('setup_exam');
     
     $student_index = Configure::read('student_index');
     $student_register = Configure::read('student_register');
@@ -254,9 +254,9 @@ $cakeDescription = __d('app_dev', ':: '.APP_NAME.' :');
                                 <li class="submenu">
                                     <a class="dropdown" href="javascript:void(0)" data-original-title="Assessments"><i class="fa fa-bookmark"></i><span class="hidden-minibar"> Assessments <span class="badge bg-primary pull-right" id="exams_count"></span></span></a>
                                     <ul>
-                                        <?php //if($exam_setup_exam): ?>
-                                        <li><a href="<?php echo DOMAIN_NAME ?>/exams/index#setupExam" data-original-title="Setup / Adjust Exams"><i class="fa fa-gear"></i><span> Setup / Adjust Exams</span></a></li>
-                                        <?php //endif;?>
+                                        <?php if($setup_exam): ?>
+                                        <li><a href="<?php echo DOMAIN_NAME ?>/exams/index#setupExam" data-original-title="Setup Exams"><i class="fa fa-gear"></i><span> Setup Exams</span></a></li>
+                                        <?php endif;?>
                                         <li><a href="<?php echo DOMAIN_NAME ?>/exams/index#subjectScores" data-original-title="Input / Edit Scores"><i class="fa fa-th"></i><span> Input / Edit Scores</span></a></li>
                                         <li><a href="<?php echo DOMAIN_NAME ?>/exams/index#viewTAScores" data-original-title="Adjust Exams"><i class="fa fa-eye"></i><span> Terminal / Annual Scores</span></a></li>
                                         <li><a href="<?php echo DOMAIN_NAME ?>/assessments" data-original-title="Skills Assessment / Remark"><i class="fa fa-magic"></i><span> Skills Assessment / Remark</span></a></li>

@@ -94,9 +94,10 @@
                                         )
                                     );     
                                 ?>
-                                <table  class="table table-bordered table-hover table-striped display" id="exam_scores_table" >
+                                <table  class="table table-bordered table-hover table-striped display">
                                     <thead>
                                      <tr>
+                                      <th>#</th>
                                       <th>Student ID</th>
                                       <th>Full Name</th>
                                       <th>Gender</th>
@@ -113,19 +114,21 @@
                                             $options = array('conditions' => array('Student.' . $StudentModel->primaryKey => $ExamDetail['Student']['student_id']));
                                             $Student = $StudentModel->find('first', $options);
                                          ?>
+                                         <td><?php echo $i++; ?></td>
                                          <td><input type="hidden" class="input-small col-md-5" name="data[ExamDetail][exam_detail_id][]" value="<?php echo h($ExamDetail['ExamDetail']['exam_detail_id']).'-'.$exam_id;?>">
                                          <?php echo h($ExamDetail['Student']['student_no']); ?>&nbsp;</td>
                                          <td><?php echo h($ExamDetail['Student']['first_name']), ' ', h($ExamDetail['Student']['surname']), ' '; echo (!empty($ExamDetail['Student']['other_name'])) ? h($ExamDetail['Student']['other_name']) : '' ?>&nbsp;</td>
                                          <td><?php echo h($ExamDetail['Student']['gender']); ?>&nbsp;</td>
                                          <td><?php echo (!empty($ExamDetail['Student']['class_id'])) ? h($Student['Classroom']['class_name']) : '<span class="label label-danger">nill</span>'; ?>&nbsp;</td>
-                                         <td><input class="form-cascade-control input-sm ca1_value" name="data[ExamDetail][ca1][]" value="<?php echo h($ExamDetail['ExamDetail']['ca1']);?>" maxlength="4"><span></span></td>
-                                         <td><input class="form-cascade-control input-sm ca2_value" name="data[ExamDetail][ca2][]" value="<?php echo h($ExamDetail['ExamDetail']['ca2']);?>" maxlength="4"><span></span></td>
-                                         <td><input class="form-cascade-control input-sm exam_value" name="data[ExamDetail][exam][]" value="<?php echo h($ExamDetail['ExamDetail']['exam']);?>" maxlength="4"><span></span></td>
+                                         <td><input style="width: 100px;" class="form-cascade-control input-sm ca1_value" name="data[ExamDetail][ca1][]" value="<?php echo h($ExamDetail['ExamDetail']['ca1']);?>" maxlength="4"><span></span></td>
+                                         <td><input style="width: 100px;" class="form-cascade-control input-sm ca2_value" name="data[ExamDetail][ca2][]" value="<?php echo h($ExamDetail['ExamDetail']['ca2']);?>" maxlength="4"><span></span></td>
+                                         <td><input style="width: 100px;" class="form-cascade-control input-sm exam_value" name="data[ExamDetail][exam][]" value="<?php echo h($ExamDetail['ExamDetail']['exam']);?>" maxlength="4"><span></span></td>
                                      </tr>
                                      <?php endforeach; ?>
                                     </tbody>
                                     <tfoot>
                                      <tr>
+                                      <th>#</th>
                                       <th>Student ID</th>
                                       <th>Full Name</th>
                                       <th>Gender</th>

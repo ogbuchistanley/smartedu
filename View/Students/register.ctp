@@ -96,10 +96,10 @@
                                        </div>
                                      </div>
                                      <div class="form-group">
-                                      <label for="surname" class="col-lg-2 col-md-3 control-label">Last Name <small class="text-danger"> * </small></label>
+                                      <label for="surname" class="col-lg-2 col-md-3 control-label">Surname <small class="text-danger"> * </small></label>
                                       <div class="col-lg-7 col-md-9">
                                        <input type="text" class="form-control form-cascade-control input-small" name="data[StudentNew][surname]"
-                                       id="surname" placeholder="Type Student's Last Name" required="required"/>
+                                       id="surname" placeholder="Type Student's Surname" required="required"/>
                                      </div>
                                    </div>
                                    <div class="form-group">

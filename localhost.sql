@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 23, 2015 at 05:18 PM
+-- Generation Time: Apr 02, 2015 at 03:16 PM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -767,6 +767,8 @@ CREATE TABLE IF NOT EXISTS `academic_terms` (
   `academic_year_id` int(11) unsigned DEFAULT NULL,
   `term_status_id` int(11) unsigned DEFAULT NULL,
   `term_type_id` int(11) unsigned DEFAULT NULL,
+  `term_begins` date DEFAULT NULL,
+  `term_ends` date DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
@@ -775,13 +777,13 @@ CREATE TABLE IF NOT EXISTS `academic_terms` (
 -- Dumping data for table `academic_terms`
 --
 
-INSERT INTO `academic_terms` (`academic_term_id`, `academic_term`, `academic_year_id`, `term_status_id`, `term_type_id`, `created_at`, `updated_at`) VALUES
-(1, 'First Term 2013-2014', 1, 2, 1, '2014-06-06 00:00:00', '2014-10-01 17:45:10'),
-(2, 'Second Term 2013-2014', 1, 2, 2, '2014-06-06 00:00:00', '2014-10-02 08:57:29'),
-(3, 'Third Term 2013-2014', 1, 2, 3, '2014-06-06 00:00:00', '2014-10-01 17:45:10'),
-(4, 'First Term 2014-2015', 2, 1, 1, '2014-06-06 00:00:00', '2014-06-05 23:00:00'),
-(5, 'Second Term 2014-2015', 2, 2, 2, '2014-06-06 00:00:00', '2014-06-05 23:00:00'),
-(6, 'Third Term 2014-2015', 2, 2, 3, '2014-06-06 00:00:00', '2014-06-05 23:00:00');
+INSERT INTO `academic_terms` (`academic_term_id`, `academic_term`, `academic_year_id`, `term_status_id`, `term_type_id`, `term_begins`, `term_ends`, `created_at`, `updated_at`) VALUES
+(1, 'First Term 2013-2014', 1, 2, 1, NULL, NULL, '2014-06-06 00:00:00', '2015-03-24 11:07:43'),
+(2, 'Second Term 2013-2014', 1, 2, 2, NULL, NULL, '2014-06-06 00:00:00', '2015-03-24 11:07:43'),
+(3, 'Third Term 2013-2014', 1, 2, 3, NULL, NULL, '2014-06-06 00:00:00', '2015-03-24 11:07:43'),
+(4, 'First Term 2014-2015', 2, 1, 1, '2014-10-06', '2014-12-19', '2014-06-06 00:00:00', '2015-03-24 11:06:12'),
+(5, 'Second Term 2014-2015', 2, 2, 2, '2015-01-05', '2015-03-25', '2014-06-06 00:00:00', '2015-03-24 11:08:47'),
+(6, 'Third Term 2014-2015', 2, 2, 3, '2015-04-27', '2015-07-31', '2014-06-06 00:00:00', '2015-03-24 11:08:47');
 
 -- --------------------------------------------------------
 
@@ -1859,7 +1861,7 @@ CREATE TABLE IF NOT EXISTS `exams` (
   `employee_id` int(11) DEFAULT NULL,
   `exammarked_status_id` int(11) DEFAULT '2',
   `setup_date` datetime DEFAULT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=24 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
 
 --
 -- Dumping data for table `exams`
@@ -1887,7 +1889,8 @@ INSERT INTO `exams` (`exam_id`, `exam_desc`, `class_id`, `subject_classlevel_id`
 (20, 'Igbo Lang.', 11, 12, 20, 20, 60, 4, 2, '2014-10-16 11:03:20'),
 (21, 'English Primary', 36, 24, 25, 25, 50, 4, 2, '2014-10-23 09:01:30'),
 (22, 'Intro Tech Exams', 8, 10, 30, 30, 60, 2, 2, '2014-10-23 09:27:56'),
-(23, 'Intro Tech Exam', 8, 37, 20, 20, 60, 4, 2, '2014-10-23 09:32:09');
+(23, 'Intro Tech Exam', 8, 37, 20, 20, 60, 4, 2, '2014-10-23 09:32:09'),
+(24, '', 9, 3, 20, 20, 60, 2, 2, '2015-03-26 01:28:00');
 
 -- --------------------------------------------------------
 
@@ -3173,20 +3176,24 @@ INSERT INTO `relationship_types` (`relationship_type_id`, `relationship_type`) V
 
 CREATE TABLE IF NOT EXISTS `remarks` (
 `remark_id` int(11) NOT NULL,
+  `class_teacher_remark` varchar(300) NOT NULL DEFAULT 'None',
   `house_master_remark` varchar(300) DEFAULT 'None',
   `principal_remark` varchar(300) DEFAULT 'None',
   `student_id` int(11) NOT NULL,
   `academic_term_id` int(11) NOT NULL,
   `employee_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `remarks`
 --
 
-INSERT INTO `remarks` (`remark_id`, `house_master_remark`, `principal_remark`, `student_id`, `academic_term_id`, `employee_id`) VALUES
-(1, 'joker', 'dude', 3, 4, 2),
-(2, 'gallant', 'lazy', 11, 4, 2);
+INSERT INTO `remarks` (`remark_id`, `class_teacher_remark`, `house_master_remark`, `principal_remark`, `student_id`, `academic_term_id`, `employee_id`) VALUES
+(1, 'Odonkor', 'joker', 'dude', 3, 4, 2),
+(2, 'Yes', 'gallant', 'lazy', 11, 4, 2),
+(3, 'Good and hard work boy', 'Gallant Dude, Good human relationship', 'Well Done lad, keep it up', 5, 4, 2),
+(4, 'None', 'None', 'None', 12, 4, 2),
+(5, 'None', 'None', 'None', 15, 4, 2);
 
 -- --------------------------------------------------------
 
@@ -3374,7 +3381,7 @@ CREATE TABLE IF NOT EXISTS `sponsors` (
 INSERT INTO `sponsors` (`sponsor_id`, `sponsor_no`, `first_name`, `other_name`, `salutation_id`, `occupation`, `company_name`, `company_address`, `email`, `image_url`, `contact_address`, `local_govt_id`, `state_id`, `country_id`, `mobile_number1`, `mobile_number2`, `created_by`, `sponsorship_type_id`, `created_at`, `updated_at`) VALUES
 (1, 'spn0001', 'KayOh', 'China', 9, ' Software Developer', 'Softsmart Business Solutions', '25 Durban Street, Off Ademola Adetokumbo Creasent, Wuse II, Abuja', 'kheengz@gmail.com', 'sponsors/1.jpg', 'CBN Quarters Wuse II FCT Abuja, Nigeria', 212, 37, 140, '08030734377', '08022020075', 1, 1, '2015-03-11 06:18:18', '2015-03-12 08:45:24'),
 (2, 'spn0002', 'Maazi', 'Okarfor', 4, 'Freelancer Programmer', 'Joker''s Club', 'Ikuna, Ilewe Ikotun', 'nondefyde@yahoo.com', NULL, '', 7, 1, 140, '080294834889', '090383662892', 1, 3, '2014-06-14 05:46:46', '2014-07-03 11:59:37'),
-(3, 'spn0003', 'Usman', 'Abrahim Mohammed', 11, 'Farmer', '', '', 'usman@yahoo.com', NULL, '', NULL, 0, 134, '07034555544', '07032345267', 1, 2, '2014-06-14 05:53:01', '2014-07-03 11:59:37'),
+(3, 'spn0003', 'Usman', 'Ibrahim', 11, 'Farmer', '', '', 'usman@yahoo.com', NULL, '', NULL, 0, 134, '07034555544', '07032345267', 1, 2, '2014-06-14 05:53:01', '2015-03-24 18:56:37'),
 (4, 'spn0004', 'Emmanuel', 'Skele Jigawa', 9, 'Programmer', '', 'Dogon Bauchi Road S/G Zaria', 'emma@gmail.com', NULL, 'No 22 Jigawa Road S/G Lagos', NULL, 0, 137, '039474625278', '', 1, 1, '2014-06-14 06:02:44', '2014-07-03 11:59:37'),
 (5, 'spn0005', 'Dickson', 'Emmanuel Akpan', 9, 'Programmer', 'Agent Dickson Consultance', '', 'dickson@hotmail.co.za', NULL, 'CBN Quarters Wuse II FCT Abuja', 5, 1, 140, '04950585080', '07032345267', 9, 1, '2014-06-17 10:21:25', '2014-07-03 11:59:37'),
 (6, 'spn0006', 'Ibrahim', 'Audu', 6, 'Business', '', '', 'audu@gmail.com', NULL, 'No 21 Lagos street S/G', 178, 8, 140, '0930738865', '092985479', 1, 1, '2014-06-27 04:15:34', '2014-07-03 11:59:37'),
@@ -3388,7 +3395,7 @@ INSERT INTO `sponsors` (`sponsor_id`, `sponsor_no`, `first_name`, `other_name`, 
 (14, 'spn0014', 'Ben', 'Affleck', 8, 'Engineer', 'Benson&co', '909, Iju Lagos', 'benafleck@gmail.com', NULL, '5, washway Town', 477, 16, 140, '08122224455', '09077665544', 6, 2, '2014-09-10 02:15:40', '2014-09-10 13:15:40'),
 (15, 'spn0015', 'Casey', 'Affleck', 7, 'Barrister', 'God''s gift', '3, Fapounda street', 'afflecttings@gmail.com', NULL, '3, Falolu street', 203, 9, 140, '08099776655', '08155667788', 6, 3, '2014-09-10 03:19:39', '2014-09-10 14:19:40'),
 (16, 'spn0016', 'Johnny', 'Depp', 5, 'Doctor', 'Living Spring Hospital', '1, Ojuelegba street', 'johnde@gmail.com', NULL, '4, olorunda street', 220, 37, 140, '09055667788', '09055443322', 6, 1, '2014-09-10 03:30:55', '2014-09-10 14:30:55'),
-(17, 'spn0017', 'Abdullahi', 'Oseni', 6, 'Accountant', 'Zuma Communications Limited', '124c Ayilara Street', 'abdul@yahoo.com', NULL, '35, Fectac Town', 176, 8, 140, '09024556634', '08029554324', 6, 1, '2014-09-10 03:42:06', '2014-09-10 14:42:06'),
+(17, 'spn0017', 'Abdullahi', 'Ibrahim', 6, 'Accountant', 'Zuma Communications Limited', '124c Ayilara Street', 'abdul@yahoo.com', NULL, '35, Fectac Town', 176, 8, 140, '09024556634', '08029554324', 6, 1, '2014-09-10 03:42:06', '2015-03-24 18:56:48'),
 (18, 'spn0018', 'Mohammed', 'Nuhu', 4, 'Accountant', 'First Bank', 'Victoria Island City', 'nuhluvchide@gmail.com', NULL, '24, Adewuyi street', 339, 13, 140, '08024262994', '07033560739', 6, 2, '2014-09-10 03:56:35', '2014-09-10 14:56:35'),
 (19, 'spn0019', 'MOHAMMED', 'INUWA', 9, 'LAWYER', '', '', 'MCKUMDO@YAHOO.COM', NULL, '24 ADEWUYI STREET OF IJESHA ', NULL, 13, 140, '08081593158', '08080204017', 6, 1, '2014-09-10 04:02:39', '2014-09-10 15:02:40'),
 (20, 'spn0020', 'Hassan', 'Oseni', 1, 'Accountant', 'Guarantee Trust Bank', '123, Agbebi raod', 'osehass@gmail.com', NULL, '97, Ijesha road', 343, 15, 140, '09077665544', '08055443322', 6, 2, '2014-09-11 10:08:49', '2014-09-11 09:08:50'),
@@ -3397,11 +3404,11 @@ INSERT INTO `sponsors` (`sponsor_id`, `sponsor_no`, `first_name`, `other_name`, 
 (23, 'spn0023', 'Emmanuel', 'Sylvester', 10, 'Doctor', '', '', 'sylvester@yahoo.com', NULL, '45, Adae street', 274, 31, 140, '09033445566', '09011223344', 6, 1, '2014-09-11 12:37:49', '2014-09-11 11:37:49'),
 (24, 'spn0024', 'MOHAMMED', 'ISSAH', 5, 'CUSTOM', '', '', 'MOHAMMEDISSAH@GMAIL.COM', NULL, '1 ILE OGBO STREET OFF IJESHA LAGOS', NULL, 13, 140, '08024387677', '08024387677', 6, 1, '2014-09-11 01:03:32', '2014-09-11 12:03:32'),
 (25, 'spn0025', 'Peter', 'Peterson', 4, 'Business ', '', '', 'peter@gmail.com', NULL, '456, Adedeji street', 181, 8, 140, '08122223355', '07088996655', 6, 1, '2014-09-11 01:14:12', '2014-09-11 12:14:12'),
-(26, 'spn0026', 'Joshua', 'Johnson', 10, 'Barrister', '', '', 'johns@yahoo.com', NULL, '3,Tapa Street', 286, 33, 140, '07033560738', '', 6, 1, '2014-09-11 01:32:09', '2014-09-11 12:32:09'),
+(26, 'spn0026', 'Joshua', 'Emmanuel', 10, 'Barrister', '', '', 'johns@yahoo.com', NULL, '3,Tapa Street', 286, 33, 140, '07033560738', '', 6, 1, '2014-09-11 01:32:09', '2015-03-24 18:57:04'),
 (27, 'spn0027', 'Ebube', 'Chima', 8, 'Accountant', '', '', 'ebu@yahoo.com', NULL, '3, Adeniran Ogunsanya way', 316, 13, 140, '08024262994', '', 6, 1, '2014-09-11 01:41:38', '2014-09-11 12:41:38'),
 (28, 'spn0028', 'Vivian', 'George', 8, 'Banker', NULL, 'GTBank Owerri', 'vivian@gmail.com', NULL, 'World Banking Estate Owerri', 290, 12, 140, '08030734377', '094387324', 2, NULL, '2014-10-24 11:17:22', '2014-10-24 10:17:22'),
 (29, 'spn0029', 'Ibrahim ', 'Bala', 6, 'Trader', NULL, '', '', NULL, 'Line Zumo', 277, 33, 140, '08030734377', '', 2, NULL, '2014-10-26 12:53:05', '2014-12-22 11:42:39'),
-(30, 'spn0030', 'Ebube', 'Chidi', 7, 'Business', NULL, '', 'vivian@gmail.com', NULL, 'Samaru', 288, 12, 140, '08024262994', '', 2, NULL, '2014-10-26 12:59:27', '2014-10-26 11:59:27'),
+(30, 'spn0030', 'Ebube', 'Emmanuel', 7, 'Business', NULL, '', 'vivian@gmail.com', NULL, 'Samaru', 288, 12, 140, '08024262994', '', 2, NULL, '2014-10-26 12:59:27', '2015-03-24 18:56:58'),
 (32, 'spn0032', 'Peter', 'Malgwi', 8, 'Lecturer', NULL, 'Kebbi State University', 'peter@gmail.com', NULL, 'Katsina Ala', 142, 7, 140, '08135201037', '', 2, NULL, '2014-10-26 01:11:21', '2014-10-26 12:11:21');
 
 -- --------------------------------------------------------
@@ -3851,7 +3858,7 @@ CREATE TABLE IF NOT EXISTS `subject_classlevels` (
 
 INSERT INTO `subject_classlevels` (`subject_classlevel_id`, `subject_id`, `classlevel_id`, `class_id`, `academic_term_id`, `examstatus_id`) VALUES
 (5, 1, 1, NULL, 4, 2),
-(3, 7, 2, NULL, 4, 2),
+(3, 7, 2, NULL, 4, 1),
 (14, 7, 3, 15, 4, 2),
 (13, 7, 6, NULL, 4, 1),
 (19, 8, 2, NULL, 4, 1),
@@ -4705,7 +4712,7 @@ MODIFY `exam_detail_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=72;
 -- AUTO_INCREMENT for table `exams`
 --
 ALTER TABLE `exams`
-MODIFY `exam_id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=24;
+MODIFY `exam_id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=25;
 --
 -- AUTO_INCREMENT for table `grades`
 --
@@ -4775,7 +4782,7 @@ MODIFY `relationship_type_id` int(3) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCRE
 -- AUTO_INCREMENT for table `remarks`
 --
 ALTER TABLE `remarks`
-MODIFY `remark_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+MODIFY `remark_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `salutations`
 --

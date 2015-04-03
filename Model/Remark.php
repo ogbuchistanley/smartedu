@@ -39,6 +39,4 @@ class Remark extends AppModel {
         $this->data[$this->alias]['academic_term_id'] = $AcademicTerm->getCurrentTermID();
         return parent::beforeSave($options);
     }
-
-
 }
