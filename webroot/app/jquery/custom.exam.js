@@ -280,7 +280,7 @@ $('document').ready(function(){
                         output += '</tbody>';
                         $('#search_subjects_scores_table').html(output);
                     }else if(obj.Flag === 0){
-                        output += '<tr><th colspan="10">No Subject Exams Has Been Setup</th></tr>';
+                        output += '<tr><th colspan="10">No Subject Assigned To You In The Class Level</th></tr>';
                         $('#search_subjects_scores_table').html(output);
                     }
                 } catch (exception) {

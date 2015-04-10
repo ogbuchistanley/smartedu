@@ -11,7 +11,8 @@ $('document').ready(function(){
      $('[href="'+domain_name+'/subjects/add2class#assign2class"]').attr('data-toggle', 'tab');
      $('[href="'+domain_name+'/subjects/add2class#assign2teachers"]').attr('data-toggle', 'tab');
      $('[href="'+domain_name+'/subjects/add2class#adjust_subjects_assign"]').attr('data-toggle', 'tab');
-//    var hash = window.location.hash;		
+
+//    var hash = window.location.hash;
 //    if(hash === "#assign2teachers" || hash === ''){
 //        $('#myTab a[href="'+domain_name+'/subjects/add2class#assign2teachers"]').tab('show');
 //        setTabActive('[href="'+domain_name+'/subjects/add2class#assign2teachers"]', 1);
@@ -36,8 +37,7 @@ $('document').ready(function(){
         $('#myTab a[href="'+domain_name+'/subjects/add2class#adjust_subjects_assign"]').tab('show');
         setTabActive('[href="'+domain_name+'/subjects/add2class#adjust_subjects_assign"]', 1);
     });
-    
-    
+
     //////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////           Dependent ListBox
     // OnChange Of Subject Groups Get Subjects
@@ -350,6 +350,7 @@ $('document').ready(function(){
     
     //When the Manage Student button is clicked show the modal for modifications
     $(document.body).on('click', '.manage_student_subject', function(){
+        ajax_loading_image($('#msg_box3'), ' Loading Contents');
         var id = $(this).val();        
         var tr = $(this).parent().parent();
         $.post(domain_name+'/subjects/search_students', {subject_classlevel_id:id}, function(data){
@@ -377,6 +378,7 @@ $('document').ready(function(){
             } catch (exception) {
                 $('#msg_box3_modal').html(data);
             }
+            ajax_remove_loading_image($('#msg_box3'));
         });
         return false; 
     });
@@ -462,9 +464,118 @@ $('document').ready(function(){
     });
 
 
+///////////////////////////////////////////// Teacher Subjects  //////////////////////////////////////////////////////////////////////////
+    //When the Search button is clicked for managing students subjects assigned to a staff
+    $(document.body).on('submit', '#manage_student_subject_form', function(){
+        ajax_loading_image($('#msg_box'), ' Loading Contents');
+        $.ajax({
+            type: "POST",
+            url: domain_name+'/subjects/search_assigned2Staff',
+            data: $(this).serialize(),
+            success: function(data){
+                //$.post(domain_name+'/subjects/search_assigned', $(this).serialize(), function(data){
+                try{
+                    var obj = $.parseJSON(data);
+                    var output = '<caption><strong>Results Output From The Search</strong></caption>\
+                                    <thead><tr>\
+                                        <th>#</th>\
+                                        <th>Academic Term</th>\
+                                        <th>Subjects</th>\
+                                        <th>Classlevels</th>\
+                                        <th>Class Rooms</th>\
+                                        <th>Exam Status</th>\
+                                        <th>Manage</th>\
+                                    </tr></thead>';
+                    if(obj.Flag === 1){
+                        output += '<tbody>';
+                        $.each(obj.SubjectClasslevel, function(key, value) {
+                            output += '<tr>\
+                                <td>'+(key + 1)+'</td>\n\
+                                <td>'+value.academic_term+'</td>\n\
+                                <td>'+value.subject_name+'</td>\n\
+                                <td>'+value.classlevel+'</td>\n\
+                                <td>'+value.class_name+'</td>\n\
+                                <td style="font-size:medium">'+value.exam_status+'</td>\n\
+                                <td>\
+                                    <button type="submit" value="'+value.subject_classlevel_id+'" rel="'+value.class_id+'" class="btn btn-success btn-xs manage_student_subject_btn">\n\
+                                    <i class="fa fa-ticket"></i> Students</button></td>\
+                            </tr>';
+                        });
+                        output += '</tbody>';
+                        $('#manage_student_subject_table').html(output);
+                    }else if(obj.Flag === 0){
+                        output += '<tr><th colspan="9">No Assigned Subject Found</th></tr>';
+                        $('#manage_student_subject_table').html(output);
+                    }
+                } catch (exception) {
+                    $('#manage_student_subject_table').html(data);
+                }
+                ajax_remove_loading_image($('#msg_box'));
+                //Scroll To Div
+                scroll2Div($('#manage_student_subject_table'));
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                $('#manage_student_subject_table').html(errorThrown);
+                ajax_remove_loading_image($('#msg_box'));
+            }
+        });
+        return false;
+    });
+
+    //When the Manage Student button is clicked show the modal for modifications for only subjects assigned to the login staff
+    $(document.body).on('click', '.manage_student_subject_btn', function(){
+        ajax_loading_image($('#msg_box'), ' Loading Contents');
+        var sub_id = $(this).val();
+        var class_id = $(this).attr('rel');
+        var tr = $(this).parent().parent();
+        $.post(domain_name+'/subjects/search_students_subjects', {subject_classlevel_id:sub_id, class_id:class_id}, function(data){
+            try{
+                var obj = $.parseJSON(data);
+                var assign = ''; var avaliable = '';
+                if(obj.Flag === 1){
+                    $.each(obj.SubjectClasslevel, function(key, value) {
+                        //ids += value.student_id+',';
+                        assign += '<option value="'+value.student_id+'">'+value.student_no.toUpperCase()+': '+value.student_name+'</option>';
+                    });
+                    //ids = ids.substr(0, ids.length - 1);
+                }
+                if(obj.Flag2 === 1){
+                    $.each(obj.SubjectNoClasslevel, function(key, value) {
+                        avaliable += '<option value="'+value.student_id+'">'+value.student_no.toUpperCase()+': '+value.student_name+'</option>';
+                    });
+                }
+                var cls = (tr.children(':nth-child(5)').text() === 'nill') ? tr.children(':nth-child(4)').text() : tr.children(':nth-child(5)').text();
+                $('#msg_box_modal').html('Managing <b>'+tr.children(':nth-child(3)').html()+'</b> Subject Offered by Students in <b>'+cls+'</b>');
+                $('#LinkedLB').html(assign);
+                $('#AvailableLB').html(avaliable);
+                $('#manage_student_sub_btn').val(sub_id);
+                $('#manage_class_sub_hidden').val(class_id);
+                $('#manage_students_modal').modal('show');
+            } catch (exception) {
+                $('#msg_box_modal').html(data);
+            }
+            ajax_remove_loading_image($('#msg_box'));
+        });
+        return false;
+    });
 
 
-
+    //OnClick Of The Update Student Button	//Insert or Update The Records
+    $(document.body).on('click', '#manage_student_sub_btn', function(){
+        getNewValues($("#LinkedLB"), $("#manage_student_sub_hidden"));
+        $('#msg_box_modal').html('<i class="fa fa-refresh"></i> Updating Record... <img src="'+domain_name+'/img/ajax-loader.gif" alt="Loading Image"/>');
+        var sub_cls_id = $(this).val();
+        var stud_ids = $("#manage_student_sub_hidden").val();
+        var class_id = $("#manage_class_sub_hidden").val();
+        $.post(domain_name+'/subjects/updateStudentsStaffSubjects', {sub_cls_id:sub_cls_id, stud_ids:stud_ids, class_id:class_id}, function(data){
+            if(data === '0')
+                $('#msg_box_modal').html('<i class="fa fa-warning fa-1x"></i> Error...Updating Record ' + data);
+            else
+                ajax_remove_loading_image($('#msg_box_modal'));
+            $('#manage_students_modal').modal('hide');
+        });
+    });
+    
 
     //Functions Triggers
     //Moves Each Selected Option From Left 2 Right
@@ -489,27 +600,6 @@ $('document').ready(function(){
     $(document.body).on('click', '#student_LeftAllButton', function(){
         moveAll($("#assign_span"), $("#LinkedLB"), $("#available_span"), $("#AvailableLB"));
     });
-   
-   // Auto Complete of Employee Name
-//   $(document.body).on('keydown.autocomplete', '#employee_name', function(){
-//        $(this).autocomplete({
-//            source: domain_name+'/employees/autoComplete',
-//            minLength: 0
-//        });
-//        $(this).autocomplete("option", "appendTo", "#display_autoComplete");
-//        $(this).autocomplete({
-//            select: function(event, ui) {
-//                selected_id = ui.item.id;
-//                $("#employee_id").val(selected_id);
-//                $('#employee_nameerrorDiv').remove();
-//            }
-//        });
-//        $(this).autocomplete({
-//            open: function(event, ui) {
-//                $("#employee_id").val(-1);
-//            }
-//        });
-//    });
-   
+
    
 });

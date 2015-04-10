@@ -167,7 +167,9 @@ class AppController extends Controller {
         Configure::write('exam_index', $this->Acl->check($auth, 'ExamsController/index'));
         Configure::write('setup_exam', $this->Acl->check($auth, 'ExamsController/setup_exam'));
 
-        Configure::write('subject_add2class', $this->Acl->check($auth, 'SubjectsController'));
+        Configure::write('subject_index', $this->Acl->check($auth, 'SubjectsController'));
+        Configure::write('subject_add2class', $this->Acl->check($auth, 'SubjectsController/add2class'));
+
         Configure::write('attend_index', $this->Acl->check($auth, 'AttendsController'));
         Configure::write('msg_index', $this->Acl->check($auth, 'MessagesController'));
         Configure::write('record_index', $this->Acl->check($auth, 'RecordsController'));
@@ -366,6 +368,8 @@ class AppController extends Controller {
         $this->Acl->deny('STF_USERS', 'controllers');
         $this->Acl->allow('STF_USERS', 'DashboardController');
         $this->Acl->allow('STF_USERS', 'ExamsController');
+        $this->Acl->allow('STF_USERS', 'SubjectsController');
+        $this->Acl->deny('STF_USERS', 'SubjectsController/add2class');
         $this->Acl->deny('STF_USERS', 'ExamsController/setup_exam');
         $this->Acl->allow('STF_USERS', 'AttendsController');
         $this->Acl->allow('STF_USERS', 'StudentsController/view');

@@ -1,7 +1,7 @@
 <?php echo $this->Html->script("../app/jquery/custom.exam.js", FALSE);?>
 <?php $setup_exam = Configure::read('setup_exam'); ?>
-
 <?php $term_id = ClassRegistry::init('AcademicTerm'); //echo date('Y-m-d h:m:s');?>
+<?php $AcademicYear = ClassRegistry::init('AcademicYear'); //echo date('Y-m-d h:m:s');?>
 <div class="col-md-12">
     <div class="panel">
         <!-- Info Boxes -->
@@ -350,7 +350,7 @@
                                 </div>
                             </div>
                             <div class="col-md-5" id="msg_box3"> </div>
-                            <div class="col-md-9">
+                            <div class="col-md-11">
                                 <div style="overflow-x: scroll" class="panel-body">
                                     <table  class="table table-bordered table-hover table-striped display" id="view_TA_scores_table" >
                                         

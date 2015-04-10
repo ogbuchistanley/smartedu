@@ -202,7 +202,7 @@ $('document').ready(function(){
    });
    
    
-   //Search Form For displaying classrooms and thier head tutors
+   //Search Form For displaying classrooms and thier class teacher
     $('#search_classes_form').bind('submit', function(){
         ajax_loading_image($('#msg_box3'), ' Loading Contents');
         var val = $('#search_classes_form').serialize();
@@ -219,7 +219,7 @@ $('document').ready(function(){
                                         <th>#</th>\
                                         <th>Class Room</th>\
                                         <th>No. of Students</th>\
-                                        <th>Head Tutor</th>\
+                                        <th>Class Teacher</th>\
                                         <th></th>\
                                     </tr></thead>';
                     if(obj.Flag === 1){
@@ -272,7 +272,7 @@ $('document').ready(function(){
    });
    
    
-   //When No Changes is made to the Head Tutor Listbox //On Blur 
+   //When No Changes is made to the Class Teacher Listbox //On Blur
     $(document.body).on('blur', '.head_tutor_select', function(){
         var td = $(this).parent();
         td.html(old_btn);

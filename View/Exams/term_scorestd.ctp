@@ -51,7 +51,7 @@
                                                     echo '<span class="label label-info" style="font-size: medium">'.h($ClassPosition['ClassPositions']['full_name']).'</span>';
                                                 }else if ($ClassPosition['ClassPositions']['class_position'] === '3') {
                                                     echo '<span class="label label-warning" style="font-size: medium">'.h($ClassPosition['ClassPositions']['full_name']).'</span>';
-                                                }else if ($ClassPosition['ClassPositions']['class_position'] === $ClassPosition['ClassPositions']['clas_size']) {
+                                                }else if ($ClassPosition['ClassPositions']['class_position'] === $ClassPosition['ClassPositions']['class_size']) {
                                                     echo '<span class="label label-danger" style="font-size: medium">'.h($ClassPosition['ClassPositions']['full_name']).'</span>';
                                                 }else{
                                                     echo h($ClassPosition['ClassPositions']['full_name']);
@@ -69,7 +69,7 @@
                                         <td><?php echo $ClassPosition['ClassPositions']['academic_term'];?></td>
                                     </tr>
                                     <tr>
-                                        <th>Student Sum Total Score</th>
+                                        <th>Total Score</th>
                                         <td><?php echo $ClassPosition['ClassPositions']['student_sum_total'];?></td>
                                     </tr>
                                     <tr>
@@ -77,12 +77,12 @@
                                         <td><?php echo $ClassPosition['ClassPositions']['exam_perfect_score'];?></td>
                                     </tr>
                                     <tr>
-                                        <th>Class Position</th>
+                                        <th>Position</th>
                                         <td><?php echo $this->Utility->formatPosition($ClassPosition['ClassPositions']['class_position']);?></td>
                                     </tr>
                                     <tr>
-                                        <th>No. of Students in Class</th>
-                                        <td><?php echo $ClassPosition['ClassPositions']['clas_size'];?></td>
+                                        <th>Out of.</th>
+                                        <td><?php echo $ClassPosition['ClassPositions']['class_size'];?></td>
                                         <!--td><span class="label label-danger">Subject Not Marked</span></td-->
                                     </tr>
                                 <?php else:?>

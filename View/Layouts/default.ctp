@@ -30,7 +30,9 @@ $cakeDescription = __d('app_dev', ':: '.APP_NAME.' :');
     $classroom_index = Configure::read('classroom_index');
     $classroom_myclass = Configure::read('classroom_myclass');
     
+    $subject_index = Configure::read('subject_index');
     $subject_add2class = Configure::read('subject_add2class');
+
     $record_index = Configure::read('record_index');
     $msg_index = Configure::read('msg_index');
     $attend_index = Configure::read('attend_index');
@@ -216,14 +218,16 @@ $cakeDescription = __d('app_dev', ':: '.APP_NAME.' :');
                                     </ul>
                                 </li>
                                 <?php endif;?>
-                                <?php if($subject_add2class): ?>
+                                <?php if($subject_index): ?>
                                 <li class="submenu">
                                     <a class="dropdown" href="javascript:void(0)" data-original-title="Subjects"><i class="fa fa-book"></i><span class="hidden-minibar">  Subjects <span class="badge bg-primary pull-right" id="subject_count"></span></span></a>
                                     <ul>
-                                        <li><a href="<?php echo DOMAIN_NAME ?>/subjects/add2class#assign2class" data-original-title="404"><i class="fa fa-plus-square"></i><span> Assign To Classes</span></a></li>
-                                        <li><a href="<?php echo DOMAIN_NAME ?>/subjects/add2class#assign2teachers" data-original-title="404"><i class="fa fa-plus-circle"></i><span>  Assign Tutor</span></a></li>
-                                        <li><a href="<?php echo DOMAIN_NAME ?>/subjects/add2class#adjust_subjects_assign" data-original-title="404"><i class="fa fa-edit"></i><span> Modify/Manage Students</span></a></li>
-                                        <li><a href="<?php echo DOMAIN_NAME ?>/subjects/index" data-original-title="404"><i class="fa fa-eye-slash"></i><span> View Scores</span></a></li>
+                                        <?php if($subject_add2class): ?>
+                                            <li><a href="<?php echo DOMAIN_NAME ?>/subjects/add2class#assign2class" data-original-title="404"><i class="fa fa-plus-square"></i><span> Assign To Classes</span></a></li>
+                                            <li><a href="<?php echo DOMAIN_NAME ?>/subjects/add2class#assign2teachers" data-original-title="404"><i class="fa fa-plus-circle"></i><span>  Assign Tutor</span></a></li>
+                                            <li><a href="<?php echo DOMAIN_NAME ?>/subjects/add2class#adjust_subjects_assign" data-original-title="404"><i class="fa fa-edit"></i><span> Modify/Manage Students</span></a></li>
+                                        <?php endif;?>
+                                        <li><a href="<?php echo DOMAIN_NAME ?>/subjects/index" data-original-title="Manage My Students"><i class="fa fa-ticket"></i><span> My Students/View Scores</span></a></li>
                                     </ul>
                                 </li>
                                 <?php endif;?>

@@ -1,4 +1,4 @@
-<?php $TermModel = ClassRegistry::init('AcademicTerm'); ?>
+<?php $TermModel = ClassRegistry::init('AcademicTerm');  //print_r($test);?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -64,20 +64,20 @@
                             <caption style="font-weight: bolder">Student's Information</caption>
                             <?php if($ClassPosition['ClassPositions']): ?>
                                 <tr>
-                                    <th width="200" style="background-color: #F2F0F0 !important;">Full Name: </th>
-                                    <td width="200"><?php echo h($ClassPosition['ClassPositions']['full_name']);?></td>
+                                    <th width="120" style="background-color: #F2F0F0 !important;">Full Name: </th>
+                                    <td width="280"><?php echo h($ClassPosition['ClassPositions']['full_name']);?></td>
                                     <th width="100" style="background-color: #F2F0F0 !important;">Position: </th>
                                     <td width="100"><?php echo $this->Utility->formatPosition($ClassPosition['ClassPositions']['class_position']);?></td>
                                     <th width="100" style="background-color: #F2F0F0 !important;">Total: </th>
                                     <td width="100"><?php echo $ClassPosition['ClassPositions']['student_sum_total'];?></td>
                                 </tr>
                                 <tr>
-                                    <th width="200" style="background-color: #F2F0F0 !important;">Class Name: </th>
-                                    <td width="200"><?php echo $ClassPosition['ClassPositions']['class_name'];?></td>
+                                    <th width="120" style="background-color: #F2F0F0 !important;">Classroom: </th>
+                                    <td width="280"><?php echo $ClassPosition['ClassPositions']['class_name'];?></td>
                                     <th width="100" style="background-color: #F2F0F0 !important;">Out of: </th>
-                                    <td width="100"><?php echo $ClassPosition['ClassPositions']['clas_size'];?></td>
+                                    <td width="100"><?php echo $ClassPosition['ClassPositions']['class_size'];?></td>
                                     <th width="100" style="background-color: #F2F0F0 !important;">Average: </th>
-                                    <td width="100"><?php echo number_format($TermScores['Average'], 2);?></td>
+                                    <td width="100"><?php echo number_format($ClassPosition['Average'], 2);?></td>
                                 </tr>
                             <?php else:?>
                                 <tr>
@@ -92,19 +92,19 @@
                             <?php if(!empty($TermScores['Scores'])):?>
                                 <thead>
                                     <tr style="font-weight:bold; background-color:#CCCCCC;">
-                                        <th width="10"></th>
-                                        <th width="150"></th>
+                                        <th width="8"></th>
+                                        <th width="232"></th>
                                         <th width="300" colspan="3" style="text-align: center">Assessment Scores</th>
                                         <th width="200" colspan="2" style="text-align: center">Total</th>
                                         <th width="200" colspan="2" style="text-align: center">Grade/Remark</th>
                                     </tr>
                                     <tr style="font-weight:bold; background-color:#CCCCCC;">
-                                        <th width="10">#</th>
-                                        <th width="150">Subject</th>
-                                        <th width="100">1st C.A</th>
-                                        <th width="100">2nd C.A</th>
-                                        <th width="100">Exam</th>
-                                        <th width="100">Score</th>
+                                        <th width="8">#</th>
+                                        <th width="232">Subject</th>
+                                        <th width="80">1st</th>
+                                        <th width="80">2nd</th>
+                                        <th width="80">Exam</th>
+                                        <th width="80">Score</th>
                                         <th width="100">(100%)</th>
                                         <th width="50">Grade</th>
                                         <th width="150">Remark</th>
@@ -112,13 +112,23 @@
                                 </thead>
                                 <tbody>
                                     <?php $i=1; foreach ($TermScores['Scores'] as $TermScore): ?>
+                                        <?php if($i === 1): ?>
+                                            <tr style="font-weight:bold; background-color:#CCCCCC;">
+                                                <th colspan="2">Scores Obtainable</th>
+                                                <th><?php echo h($TermScore['weightageCA1']);?></th>
+                                                <th><?php echo h($TermScore['weightageCA2']);?></th>
+                                                <th><?php echo h($TermScore['weightageExam']);?></th>
+                                                <th><?php echo intval(h($TermScore['weightageTotal']));?></th>
+                                                <th colspan="3"></th>
+                                            </tr>
+                                        <?php endif; ?>
                                         <tr style="background-color: #F2F0F0 !important;" style="font-weight:bold">
                                             <td><?php echo $i++;?></td>
                                             <td><?php echo h($TermScore['subject_name']);?></td>
-                                            <td><?php echo h($TermScore['ca1']), ' / ', h($TermScore['weightageCA1']);?></td>
-                                            <td><?php echo h($TermScore['ca2']), ' / ', h($TermScore['weightageCA2']);?></td>
-                                            <td><?php echo h($TermScore['exam']), ' / ', h($TermScore['weightageExam']);?></td>
-                                            <td><?php echo intval(h($TermScore['studentSubjectTotal'])), ' / ', intval(h($TermScore['weightageTotal']));?></td>
+                                            <td><?php echo h($TermScore['ca1']);?></td>
+                                            <td><?php echo h($TermScore['ca2']);?></td>
+                                            <td><?php echo h($TermScore['exam']);?></td>
+                                            <td><?php echo intval(h($TermScore['studentSubjectTotal']));?></td>
                                             <td><?php echo h($TermScore['studentPercentTotal']);?></td>
                                             <td><?php echo h($TermScore['grade_abbr']);?></td>
                                             <td><?php echo h($TermScore['grade']);?></td>
@@ -127,12 +137,12 @@
                                 </tbody>
                                 <tfoot>
                                     <tr style="font-weight:bold; background-color:#CCCCCC;">
-                                        <th width="10">#</th>
-                                        <th width="150">Subject</th>
-                                        <th width="100">1st C.A</th>
-                                        <th width="100">2nd C.A</th>
-                                        <th width="100">Exam</th>
-                                        <th width="100">Score</th>
+                                        <th width="8">#</th>
+                                        <th width="232">Subject</th>
+                                        <th width="80">1st C.A</th>
+                                        <th width="80">2nd C.A</th>
+                                        <th width="80">Exam</th>
+                                        <th width="80">Score</th>
                                         <th width="100">(100%)</th>
                                         <th width="50">Grade</th>
                                         <th width="150">Remark</th>

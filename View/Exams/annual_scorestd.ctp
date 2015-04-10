@@ -42,7 +42,7 @@
                                         $AnnualPosition = array_shift($AnnualPosition);
                                 ?>
                                     <tr>
-                                        <th>Student Full Name</th>
+                                        <th>Student Name</th>
                                         <td>
                                             <?php 
                                                 if ($AnnualPosition['class_annual_position'] === '1') {
@@ -51,7 +51,7 @@
                                                     echo '<span class="label label-info" style="font-size: medium">'.h($AnnualPosition['full_name']).'</span>';
                                                 }else if ($AnnualPosition['class_annual_position'] === '3') {
                                                     echo '<span class="label label-warning" style="font-size: medium">'.h($AnnualPosition['full_name']).'</span>';
-                                                }else if ($AnnualPosition['class_annual_position'] === $AnnualPosition['clas_size']) {
+                                                }else if ($AnnualPosition['class_annual_position'] === $AnnualPosition['class_size']) {
                                                     echo '<span class="label label-danger" style="font-size: medium">'.h($AnnualPosition['full_name']).'</span>';
                                                 }else{
                                                     echo h($AnnualPosition['full_name']);
@@ -61,23 +61,23 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th>Annual Class Position</th>
+                                        <th>Class Position</th>
                                         <td><?php echo $AnnualPosition['class_annual_position'];?></td>
                                     </tr>
                                     <tr>
-                                        <th>No. of Students in Class</th>
-                                        <td><?php echo $AnnualPosition['clas_size'];?></td>
+                                        <th>No. of Students</th>
+                                        <td><?php echo $AnnualPosition['class_size'];?></td>
                                     </tr>
                                     <tr>
                                         <th>Class Room</th>
                                         <td><?php echo $AnnualPosition['class_name'];?></td>
                                     </tr>
                                     <tr>
-                                        <th>Annual Total Sum</th>
+                                        <th>Total Sum</th>
                                         <td><?php echo $AnnualPosition['student_annual_total_score'];?></td>
                                     </tr>
                                     <tr>
-                                        <th>Annual Perfect Score</th>
+                                        <th>Perfect Score</th>
                                         <td><?php echo $AnnualPosition['exam_annual_perfect_score'];?></td>
                                     </tr>
                                     <tr>

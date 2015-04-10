@@ -21,6 +21,16 @@ class ExamsController extends AppController {
         if($resultCheck){
             $this->loadModels('Classlevel');
             $this->loadModels('AcademicYear', 'academic_year', 'DESC');
+            $ExamDetail = ClassRegistry::init('ExamDetail');
+            $all = $ExamDetail->find('all');
+
+//            foreach($all as $each){
+//                $ExamDetail->id = $each['ExamDetail']['exam_detail_id'];
+//                $updateData['ca1'] = rand(2,15);
+//                $updateData['ca2'] = rand(2,15);
+//                $updateData['exam'] = rand(5,70);
+//                $ExamDetail->save($updateData);
+//            }
         }else{
             $this->accessDenialError();
         }
@@ -399,7 +409,7 @@ class ExamsController extends AppController {
                        "student_sum_total"=>$result['a']['student_sum_total'],
                        "exam_perfect_score"=>$result['a']['exam_perfect_score'],
                        "class_position"=>$result['a']['class_position'],
-                       "clas_size"=>$result['a']['clas_size'],
+                       "class_size"=>$result['a']['class_size'],
                    );
                }
                $response2['ClassPositions'] = $res2;
@@ -439,7 +449,7 @@ class ExamsController extends AppController {
                        "student_sum_total"=>$result['a']['student_sum_total'],
                        "exam_perfect_score"=>$result['a']['exam_perfect_score'],
                        "class_position"=>$result['a']['class_position'],
-                       "clas_size"=>$result['a']['clas_size']
+                       "class_size"=>$result['a']['class_size']
                    );
                }
                $response['ScoresCLS'] = $res;
@@ -528,7 +538,7 @@ class ExamsController extends AppController {
                     $resPos[] = array(						
                         "full_name"=>$result['a']['full_name'],
                         "class_annual_position"=>$result['a']['class_annual_position'],
-                        "clas_size"=>$result['a']['clas_size'],
+                        "class_size"=>$result['a']['class_size'],
                         "class_name"=>$result['a']['class_name'],
                         "student_annual_total_score"=>$result['a']['student_annual_total_score'],
                         "exam_annual_perfect_score"=>$result['a']['exam_annual_perfect_score'],
@@ -611,7 +621,6 @@ class ExamsController extends AppController {
         $response = array();
         $response2 = array();
         if(!empty($results[0])) {
-            $average = 0; $count = 0;
             //All the students by classroom
             foreach ($results[0] as $result){
                 $res[] = array(
@@ -628,10 +637,8 @@ class ExamsController extends AppController {
                     "weightageExam"=>$result['a']['weightageExam'],
                     "weightageTotal"=>$result['a']['weightageTotal'],
                 );
-                $count++;
-                $average += $result['a']['studentSubjectTotal'];
+
             }
-            $response['Average'] = $average / $count;
             $response['Scores'] = $res;
             $response['Flag'] = 1;
         } else {
@@ -640,6 +647,7 @@ class ExamsController extends AppController {
             $response['Flag'] = 0;
         }
         if(!empty($results[1])) {
+            $average = 0;
             //All the students by classroom
             foreach ($results[1] as $result){
                 $res2 = array(
@@ -649,9 +657,11 @@ class ExamsController extends AppController {
                     "student_sum_total"=>$result['a']['student_sum_total'],
                     "exam_perfect_score"=>$result['a']['exam_perfect_score'],
                     "class_position"=>$result['a']['class_position'],
-                    "clas_size"=>$result['a']['clas_size'],
+                    "class_size"=>$result['a']['class_size'],
                 );
+                $average = $result['a']['class_average'];
             }
+            $response2['Average'] = $average;
             $response2['ClassPositions'] = $res2;
             $response2['Flag'] = 1;
         } else {
@@ -659,6 +669,7 @@ class ExamsController extends AppController {
             $response2['Flag'] = 0;
         }
 
+        $this->set('test', $results[0]);
         $this->set('TermScores', $response);
         $this->set('ClassPosition', $response2);
         $this->set('SkillsAssess', $skill_assess);

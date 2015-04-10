@@ -79,6 +79,13 @@ class SubjectClasslevel extends AppModel {
     public function findSubjectsAssigned($term_id, $classlevel_id) {
         return $this->query('SELECT a.* FROM subject_classlevelviews a WHERE a.classlevel_id="'.$classlevel_id.'" AND academic_term_id="'.$term_id.'" ORDER BY a.subject_name');
     }
+
+    //Find subjects assigned to a Staff for a classlevel in a specify academic term
+    public function findSubjectsAssigned2Staff($term_id, $classlevel_id) {
+        return $this->query('SELECT a.*, b.class_name, b.class_id FROM subject_classlevelviews a INNER JOIN teachers_subjectsviews b ON
+          a.subject_classlevel_id=b.subject_classlevel_id WHERE a.classlevel_id="'.$classlevel_id.'"
+          AND b.employee_id="'.AuthComponent::user('type_id').'" AND a.academic_term_id="'.$term_id.'" ORDER BY a.subject_name');
+    }
     
     //Find all the students offering the subjects in a classroom or classlevel
     public function findStudentsBySubjectClasslevel($subject_classlevel_id) {

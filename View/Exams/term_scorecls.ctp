@@ -30,7 +30,7 @@
         </div>        
         <div class="row">
             <!-- Panel with Tables -->
-            <div class="col-md-4">
+            <div class="col-md-5">
                 <div class="panel">
                     <div class="panel-body">
                         <div class="panel panel-primary">
@@ -55,7 +55,7 @@
                                     </tr>
                                     <tr>
                                         <th>No. of Students in Class</th>
-                                        <td><?php echo $Temp['clas_size'];?></td>
+                                        <td><?php echo $Temp['class_size'];?></td>
                                     </tr>
                                 <?php else:?>
                                     <tr>
@@ -82,8 +82,8 @@
                                      <tr>
                                       <th>#</th>
                                       <th>Student Full Name</th>
-                                      <th>Student Sum Total Score</th>
-                                      <th>Class Position</th>
+                                      <th>Total Score</th>
+                                      <th>Position</th>
                                     </tr>
                                   </thead>
                                   <tbody>
@@ -98,7 +98,7 @@
                                                     echo '<span class="label label-info" style="font-size: medium">'.h($TermScore['full_name']).'</span>';
                                                 }else if ($TermScore['class_position'] === '3') {
                                                     echo '<span class="label label-warning" style="font-size: medium">'.h($TermScore['full_name']).'</span>';
-                                                }else if ($TermScore['class_position'] === $Temp['clas_size']) {
+                                                }else if ($TermScore['class_position'] === $Temp['class_size']) {
                                                     echo '<span class="label label-danger" style="font-size: medium">'.h($TermScore['full_name']).'</span>';
                                                 }else{
                                                     echo h($TermScore['full_name']);
@@ -115,8 +115,8 @@
                                      <tr>
                                       <th>#</th>
                                       <th>Student Full Name</th>
-                                      <th>Student Sum Total Score</th>
-                                      <th>Class Position</th>
+                                     <th>Total Score</th>
+                                     <th>Position</th>
                                     </tr>
                                   </tfoot>
                                 </table> 

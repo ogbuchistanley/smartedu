@@ -82,8 +82,8 @@
                                      <tr>
                                       <th>#</th>
                                       <th>Student Full Name</th>
-                                      <th>Student Annual Total Sum</th>
-                                      <th>Class Position</th>
+                                      <th>Annual Total Sum</th>
+                                      <th>Position</th>
                                     </tr>
                                   </thead>
                                   <tbody>
@@ -107,7 +107,7 @@
                                              ?>
                                          </td>
                                          <td><?php echo h($AnnualScore['student_annual_total_score']);?></td>
-                                         <td><?php echo h($AnnualScore['class_annual_position']);?></td>
+                                         <td><?php echo $this->Utility->formatPosition(h($AnnualScore['class_annual_position']));?></td>
                                      </tr>
                                      <?php endforeach; ?>
                                     </tbody>
@@ -115,8 +115,8 @@
                                      <tr>
                                       <th>#</th>
                                       <th>Student Full Name</th>
-                                      <th>Student Annual Total Sum</th>
-                                      <th>Class Position</th>
+                                      <th>Annual Total Sum</th>
+                                      <th>Position</th>
                                     </tr>
                                   </tfoot>
                                 </table> 

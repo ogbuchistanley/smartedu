@@ -27,6 +27,43 @@ class Subject extends AppModel {
                 . ' AND academic_term_id="'.$AcademicTerm->getCurrentTermID().'"');
     }
 
+    //Find all the students offering the subjects in a classroom
+    public function findStudentsBySubjectClassroom($subject_classlevel_id, $class_id) {
+        $result = $this->query('SELECT a.* FROM students_subjectsviews a WHERE a.subject_classlevel_id="'.$subject_classlevel_id.'"
+            AND a.class_id="'.$class_id.'" ORDER BY a.student_name');
+        return $result;
+    }
+
+    //Find the students in a classroom not offering the subject
+    public function findStudentsBySubjectsNotClassroom($subject_classlevel_id, $class_id) {
+        $query = $this->query('SELECT * FROM subject_classlevelviews a WHERE subject_classlevel_id="'.$subject_classlevel_id.'" LIMIT 1');
+        $record = array_shift($query);
+        $academic_year_id = $record['a']['academic_year_id'];
+
+        $result = $this->query(
+            'SELECT * FROM students_classlevelviews a WHERE a.class_id="'.$class_id.'" AND a.academic_year_id="'.$academic_year_id.'" '
+            . 'AND a.student_id NOT IN (SELECT student_id FROM students_subjectsviews a WHERE subject_classlevel_id="'.$subject_classlevel_id.'") ORDER BY a.student_name'
+        );
+        return $result;
+    }
+
+    //Update Subjects Students Registered Table with the list of students
+    public function updateStudentsSubjects($subject_classlevel_id, $stud_ids, $class_id) {
+        $class_term = $this->query('SELECT a.* FROM subject_classlevels a WHERE a.subject_classlevel_id="'.$subject_classlevel_id.'" LIMIT 1');
+        $class_term = ($class_term) ? array_shift($class_term) : false;
+        $count = 0;
+        if($class_term) {
+            $this->query('DELETE FROM subject_students_registers WHERE subject_classlevel_id="'.$subject_classlevel_id.'" AND class_id="'.$class_id.'"');
+            $ids = explode(',', $stud_ids);
+            for ($i = 0; $i < count($ids); $i++) {
+                $out = $this->query('INSERT INTO subject_students_registers(student_id, class_id, subject_classlevel_id)
+                              VALUES("'.$ids[$i].'", "'.$class_id.'", "'.$subject_classlevel_id.'")');
+                if($out) $count++;
+            }
+        }
+        return $count;
+    }
+
     //Find students that offered a subject in a class for an academic term
     public function findStudentsSubject($term_id, $subject_id, $class_id) {
         return $this->query('SELECT a.*, a.ca1+a.ca2+a.exam AS sum_total'

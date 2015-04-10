@@ -42,11 +42,12 @@ class UtilityHelper extends AppHelper {
     //Format Class Position
     public function formatPosition($position=0){
         $lastDigit = substr($position, -1, 1);
-        if($lastDigit == 1) {
+        $position = intval($position);
+        if($lastDigit == 1 && ($position < 10 || $position > 19)) {
             $fomatedPosition = $position . 'st';
-        }elseif($lastDigit == 2) {
+        }elseif($lastDigit == 2 && ($position < 10 || $position > 19)) {
             $fomatedPosition = $position . 'nd';
-        }elseif($lastDigit == 3) {
+        }elseif($lastDigit == 3 && ($position < 10 || $position > 19)) {
             $fomatedPosition = $position . 'rd';
         }else{
             $fomatedPosition = $position . 'th';

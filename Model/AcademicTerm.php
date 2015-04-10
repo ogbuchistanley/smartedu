@@ -36,10 +36,12 @@ class AcademicTerm extends AppModel {
     }
 
     public function getNextTerm($term_id=null){
+        $AcademicYear = ClassRegistry::init('AcademicYear');
         $term_id = ($term_id === null) ? $this->getCurrentTermID() : $term_id;
         $record = $this->find('first', array('conditions' => array('AcademicTerm.academic_term_id' => $term_id)));
         $year_id = $record['AcademicTerm']['academic_year_id'];
         $term_type_id = $record['AcademicTerm']['term_type_id'];
+        $next_year_id = $AcademicYear->getNextYearID($year_id);
 
         if($term_type_id == 1) {
             //if its first term then get second term
@@ -49,7 +51,7 @@ class AcademicTerm extends AppModel {
             return $this->find('first', array('conditions' => array('AcademicTerm.academic_year_id' => $year_id, 'AcademicTerm.term_type_id' => 3)));
         }elseif($term_type_id == 3) {
             //if its second term then get third term
-            return $this->find('first', array('conditions' => array('AcademicTerm.academic_year_id' => $year_id, 'AcademicTerm.term_type_id' => 1)));
+            return $this->find('first', array('conditions' => array('AcademicTerm.academic_year_id' => $next_year_id, 'AcademicTerm.term_type_id' => 1)));
         }
         return null;
     }
