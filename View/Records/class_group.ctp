@@ -23,7 +23,7 @@
         <div class="panel-heading text-primary">
             <h3 class="panel-title">
                <i class="fa fa-plus"></i> Add New / <i class="fa fa-edit"></i>  Modify Existing Records
-                <span class="label label-primary">Class Group Master Record</span>
+                <span class="label label-primary">Class Group / Weight Point Master Record</span>
                 <span class="pull-right">
                     <a href="javascript:void(0)"  title="Refresh"><i class="fa fa-refresh"></i></a>
                     <a href="#" class="panel-minimize"><i class="fa fa-chevron-up"></i></a>

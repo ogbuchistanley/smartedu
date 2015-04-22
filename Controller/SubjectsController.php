@@ -23,7 +23,7 @@ class SubjectsController extends AppController {
     public function add2class() {
         $result = $this->Acl->check($this->group_alias, 'SubjectsController/add2class');
         if($result){
-            $this->loadModels('SubjectGroup');
+            $this->loadModels('Subject', 'subject_name');
             $this->loadModels('Classlevel');
             $this->loadModels('AcademicYear', 'academic_year', 'DESC');
             $Employee = ClassRegistry::init('Employee');
@@ -36,42 +36,135 @@ class SubjectsController extends AppController {
         }
     }
 
-    //Assign a subject to a classlevel or classroom
-    public function assign(){
+    //Search For Subjects Assigned to a classroom
+    public function search_assign(){
         $this->autoRender = false;
         $result = $this->Acl->check($this->group_alias, 'SubjectsController');
         if ($result) {
-            $subjectClasslevel = ClassRegistry::init('SubjectClasslevel');
+            $SubjectClasslevel = ClassRegistry::init('SubjectClasslevel');
             if ($this->request->is('ajax')) {
-                $subjectClasslevel->create();
-                $data = $subjectClasslevel->data['SubjectClasslevel'];
-                $data['class_id'] = $this->request->data['SubjectClasslevel']['class_id'];
-                $data['subject_id'] = $this->request->data['SubjectClasslevel']['subject_id'];
-                $data['classlevel_id'] = $this->request->data['SubjectClasslevel']['classlevel_id'];
-                $data['academic_term_id'] = $this->request->data['SubjectClasslevel']['academic_term_id'];
-                if ($subjectClasslevel->save($data)) {
-                    $this->Subject->proc_assignSubject2Students($subjectClasslevel->getLastInsertId());
-                    echo $subjectClasslevel->getLastInsertId();
+                $class = $this->request->data['SubjectClasslevel']['class_id'];
+                $term = $this->request->data['SubjectClasslevel']['academic_term_id'];
+                $results = $SubjectClasslevel->findSubjectsInClasslevel($class, $term);
+                $results2 = $SubjectClasslevel->findSubjectsNotInClasslevel($class, $term);
+                $response = array();
+                if($results) {
+                    //All the subjects in a classroom
+                    foreach ($results as $result){
+                        $res[] = array(
+                            "subject_id"=>$result['a']['subject_id'],
+                            "subject_name"=>$result['a']['subject_name']
+                        );
+                    }
+                    $response['SubjectClasslevel'] = $res;
+                    $response['Flag'] = 1;
+                } else {
+                    $response['SubjectClasslevel'] = null;
                 }
+                if($results2) {
+                    //All the subjects not in a classroom
+                    foreach ($results2 as $result){
+                        $res2[] = array(
+                            "subject_id"=>$result['a']['subject_id'],
+                            "subject_name"=>$result['a']['subject_name']
+                        );
+                    }
+                    $response['SubjectNoClasslevel'] = $res2;
+                    $response['Flag2'] = 1;
+                }  else {
+                    $response['SubjectNoClasslevel'] = null;
+                }
+                echo json_encode($response);
+            }
+        }else{
+            $this->accessDenialError('You Are Not Authorize To Perform Such Task', 2);
+        }
+    }
+
+    //Assign a subject to a classroom
+    public function assign(){
+        $result = $this->Acl->check($this->group_alias, 'SubjectsController');
+        if ($result) {
+            if ($this->request->is('post')) {
+                $class = $this->request->data['Subject']['class_id'];
+                $level = $this->request->data['Subject']['classlevel_id'];
+                $term = $this->request->data['Subject']['academic_term_id'];
+                $subject_ids = $this->request->data['Subject']['subject_ids'];
+
+                $this->Subject->proc_assignSubject2Classrooms($class, $level, $term, $subject_ids);
+
+                $this->setFlashMessage(count(explode(',', $subject_ids)).' Subjects Has Been Assigned to the Class Room.', 1);
+                return $this->redirect(array('action' => 'add2class'));
             } else {
                 $this->accessDenialError('You Are Not Authorize To Perform Such Task', 2);
             }
         }
     }
 
-    //Validate if the subject has been assigned to a classlevel or classroom
-    public function validateIfExist() {        
+
+    //Search For Subjects Assigned to a classlevel
+    public function search_assignlevel(){
         $this->autoRender = false;
-        $SubjectClasslevel = ClassRegistry::init('SubjectClasslevel');
-        if ($this->request->is('ajax')) {
-            $class = ($this->request->data['SubjectClasslevel']['class_id'] !== '') ? $this->request->data['SubjectClasslevel']['class_id'] : null;
-            $classlevel = $this->request->data['SubjectClasslevel']['classlevel_id'];
-            $term_id = $this->request->data['SubjectClasslevel']['academic_term_id'];
-            $subject_id = $this->request->data['SubjectClasslevel']['subject_id'];
-            $results = $SubjectClasslevel->validateIfExist($subject_id, $term_id, $classlevel, $class);
-            echo (($results)) ? 1 : 0;
+        $result = $this->Acl->check($this->group_alias, 'SubjectsController');
+        if ($result) {
+            if ($this->request->is('ajax')) {
+                $level = $this->request->data['SubjectAssignLevel']['classlevel_id_level'];
+                $term = $this->request->data['SubjectAssignLevel']['academic_term_id_level'];
+                $results = $this->Subject->findSubjectsInlevel($term, $level);
+                $results2 = $this->Subject->findSubjectsNotInlevel();
+                $response = array();
+                if($results) {
+                    //All the subjects in a classlevel
+                    foreach ($results as $result){
+                        $res[] = array(
+                            "subject_id"=>$result['a']['subject_id'],
+                            "subject_name"=>$result['a']['subject_name']
+                        );
+                    }
+                    $response['SubjectClasslevel'] = $res;
+                    $response['Flag'] = 1;
+                } else {
+                    $response['SubjectClasslevel'] = null;
+                }
+                if($results2) {
+                    //All the subjects not in a classlevel
+                    foreach ($results2 as $result){
+                        $res2[] = array(
+                            "subject_id"=>$result['a']['subject_id'],
+                            "subject_name"=>$result['a']['subject_name']
+                        );
+                    }
+                    $response['SubjectNoClasslevel'] = $res2;
+                    $response['Flag2'] = 1;
+                }  else {
+                    $response['SubjectNoClasslevel'] = null;
+                }
+                echo json_encode($response);
+            }
+        }else{
+            $this->accessDenialError('You Are Not Authorize To Perform Such Task', 2);
         }
     }
+
+    //Assign a subject to a classroom
+    public function assign_level(){
+        $result = $this->Acl->check($this->group_alias, 'SubjectsController');
+        if ($result) {
+            if ($this->request->is('post')) {
+                $level = $this->request->data['Subject']['classlevel_id'];
+                $term = $this->request->data['Subject']['academic_term_id'];
+                $subject_ids = $this->request->data['Subject']['subject_ids'];
+
+                $this->Subject->proc_assignSubject2Classlevels($level, $term, $subject_ids);
+
+                $this->setFlashMessage(count(explode(',', $subject_ids)).' Subjects Has Been Assigned to the Class Level.', 1);
+                return $this->redirect(array('action' => 'add2class'));
+            } else {
+                $this->accessDenialError('You Are Not Authorize To Perform Such Task', 2);
+            }
+        }
+    }
+
 
     //Seacrh for all the subjects assigned to a classlevel or classroom for a specific academic year
     public function search_all() {
@@ -144,6 +237,7 @@ class SubjectsController extends AppController {
         }
     }
 
+
     //Search for subjects Assigned to a classlevel or classroom for modifications
     public function search_assigned() {
         $this->autoRender = false;
@@ -154,18 +248,19 @@ class SubjectsController extends AppController {
                 //$class = ($this->request->data['SubjectClasslevel']['class_search_id'] !== '') ? $this->request->data['SubjectClasslevel']['class_search_id'] : null;
                 $classlevel = $this->request->data['SubjectClasslevel']['classlevel_search_id'];
                 $term_id = $this->request->data['SubjectClasslevel']['academic_term_search_id'];
-                $results = $SubjectClasslevel->findSubjectsAssigned($term_id, $classlevel);
+                $subject_id = $this->request->data['SubjectClasslevel']['subject_search_id'];
+                $results = $SubjectClasslevel->findSubjectsAssigned($term_id, $classlevel, $subject_id);
                 $response = array();            
                 if($results) {   
                     //All the subjects by classlevel or classroom
                     foreach ($results as $result){
-                        $res[] = array(						
+                        $res[] = array(
                             "subject_name"=>$result['a']['subject_name'],
                             "subject_id"=>$result['a']['subject_id'],
                             "class_name"=>(empty($result['a']['class_name'])) ? '<span class="label label-danger">nill</span>' : $result['a']['class_name'],
                             "class_id"=>(empty($result['a']['class_id'])) ? -1 : $result['a']['class_id'],
-                            "classlevel"=>$result['classlevels']['classlevel'],
-                            "classlevel_id"=>$result['classlevels']['classlevel_id'],
+                            "classlevel"=>(!empty($result['classlevels']['classlevel'])) ? $result['classlevels']['classlevel'] : $result['a']['classlevel'],
+                            "classlevel_id"=>(!empty($result['classlevels']['classlevel_id'])) ? $result['classlevels']['classlevel_id'] : $result['a']['classlevel_id'],
                             "academic_term"=>$result['a']['academic_term'],
                             "academic_term_id"=>$result['a']['academic_term_id'],
                             "subject_classlevel_id"=>$result['a']['subject_classlevel_id'],
@@ -187,31 +282,6 @@ class SubjectsController extends AppController {
         }
     }
     
-    //Modify Subject Assigned to a Class Level or Class Room
-    public function modify_assign() {
-        $this->autoRender = false;
-        $resultCheck = $this->Acl->check($this->group_alias, 'SubjectsController');
-        if($resultCheck){
-            $SubjectClasslevel = ClassRegistry::init('SubjectClasslevel');
-            if ($this->request->is('ajax')) {
-                //when teachers_subjects_id => -1 assign new else update existing
-                $data = $this->request->data['ModifySubjectClasslevel'];
-                $SubjectClasslevel->id = $data['subject_classlevel_modify_id'];
-                $SubjectClasslevel->data['SubjectClasslevel']['subject_id'] = $data['subject_modify_id'];
-                $SubjectClasslevel->data['SubjectClasslevel']['classlevel_id'] = $data['classlevel_modify_id'];
-                $SubjectClasslevel->data['SubjectClasslevel']['class_id'] = ($data['class_modify_id'] === -1) ? NULL : $data['class_modify_id'];
-                $SubjectClasslevel->data['SubjectClasslevel']['academic_term_id'] = $data['academic_term_modify_id'];
-                if($SubjectClasslevel->save()) {
-                    $this->Subject->proc_assignSubject2Students($data['subject_classlevel_modify_id']);
-                    echo $data['subject_classlevel_modify_id'];
-                }else {
-                    echo 0;
-                }
-            }
-        }else{
-            $this->accessDenialError('You Are Not Authorize To Perform Such Task', 2);
-        }
-    }
 
     //Delete Subject Assigned to a Class Level or Class Room
     public function delete_assign() {

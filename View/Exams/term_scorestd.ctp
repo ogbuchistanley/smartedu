@@ -156,7 +156,7 @@
                                      <tr>
                                         <th colspan="2"></th>
                                         <th colspan="6" style="text-align: center">Student Score(s) and Grade</th>
-                                        <th colspan="4" style="text-align: center">Weightage</th>
+                                        <th colspan="4" style="text-align: center">Weight Point</th>
                                      </tr>
                                     </thead>
                                     <thead>

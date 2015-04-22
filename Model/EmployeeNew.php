@@ -30,7 +30,7 @@ class EmployeeNew extends AppModel {
         $val = 'employees/'.$id.'.jpg';
         if($created){
             $mobile_no = $this->data[$this->alias]['mobile_number1'];
-            $pass = $this->generatePassword();
+            $pass = '123456';//$this->generatePassword();
             $msg = 'Welcome To '.APP_NAME.' Application here is your Username='.$no.' and Password='.$pass.' to access the portal, login via '.DOMAIN_URL;
             $msg_email = 'Welcome To '.APP_NAME.' Application here is your <br><br>Username: '.$no.' <br>Password: '.$pass.' <br><br>to access the portal, login via '.DOMAIN_URL;
             $email = $this->data[$this->alias]['email'];

@@ -12,17 +12,6 @@ $('document').ready(function(){
      $('[href="'+domain_name+'/subjects/add2class#assign2teachers"]').attr('data-toggle', 'tab');
      $('[href="'+domain_name+'/subjects/add2class#adjust_subjects_assign"]').attr('data-toggle', 'tab');
 
-//    var hash = window.location.hash;
-//    if(hash === "#assign2teachers" || hash === ''){
-//        $('#myTab a[href="'+domain_name+'/subjects/add2class#assign2teachers"]').tab('show');
-//        setTabActive('[href="'+domain_name+'/subjects/add2class#assign2teachers"]', 1);
-//    } else if(hash === "#assign2class") {
-//        $('#myTab a[href="'+domain_name+'/subjects/add2class#assign2class"]').tab('show');
-//        setTabActive('[href="'+domain_name+'/subjects/add2class#assign2class"]', 1);
-//    } else if(hash === "#adjust_subjects_assign") {
-//        $('#myTab a[href="'+domain_name+'/subjects/add2class#adjust_subjects_assign"]').tab('show'); 
-//        setTabActive('[href="'+domain_name+'/subjects/add2class#adjust_subjects_assign"]', 1);
-//    }
     $('[href="'+domain_name+'/subjects/add2class#assign2class"]').click(function(){
         $('#myTab a[href="'+domain_name+'/subjects/add2class#assign2class"]').tab('show');
         setTabActive('[href="'+domain_name+'/subjects/add2class#assign2class"]', 1);
@@ -41,10 +30,8 @@ $('document').ready(function(){
     //////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////           Dependent ListBox
     // OnChange Of Subject Groups Get Subjects
-    var url11 = "\/subjects\/ajax_get_subjects\/SubjectClasslevel\/%23subject_group_id";
-    getDependentListBox($("#subject_group_id"), $("#subject_id"), url11);
-    var url12 = "\/subjects\/ajax_get_subjects\/ModifySubjectClasslevel\/%23subject_group_modify_id";
-    getDependentListBox($("#subject_group_modify_id"), $("#subject_modify_id"), url12);
+    //var url11 = "\/subjects\/ajax_get_subjects\/SubjectClasslevel\/%23subject_group_id";
+    //getDependentListBox($("#subject_group_id"), $("#subject_id"), url11);
     var url_sub = "\/subjects\/ajax_get_subjects\/SubjectStudentView\/%23subject_view_group_id";
     getDependentListBox($("#subject_view_group_id"), $("#subject_view_id"), url_sub);
 
@@ -55,8 +42,8 @@ $('document').ready(function(){
     getDependentListBox($("#academic_year_id_all"), $("#academic_term_id_all"), url2);
     var url21 = "\/academic_terms\/ajax_get_terms\/SubjectClasslevel\/%23academic_year_search_id";
     getDependentListBox($("#academic_year_search_id"), $("#academic_term_search_id"), url21);
-    var url22 = "\/academic_terms\/ajax_get_terms\/ModifySubjectClasslevel\/%23academic_year_modify_id";
-    getDependentListBox($("#academic_year_modify_id"), $("#academic_term_modify_id"), url22);
+    var url22 = "\/academic_terms\/ajax_get_terms\/SubjectAssignLevel\/%23academic_year_id_level";
+    getDependentListBox($("#academic_year_id_level"), $("#academic_term_id_level"), url22);
     var url_acad = "\/academic_terms\/ajax_get_terms\/SubjectStudentView\/%23academic_view_year_id";
     getDependentListBox($("#academic_view_year_id"), $("#academic_view_term_id"), url_acad);
     
@@ -65,56 +52,98 @@ $('document').ready(function(){
     getDependentListBox($("#classlevel_id"), $("#class_id"), url3);
     var url31 = "\/classrooms\/ajax_get_classes\/SubjectClasslevel\/%23classlevel_id_all";
     getDependentListBox($("#classlevel_id_all"), $("#class_id_all"), url31);
-    var url32 = "\/classrooms\/ajax_get_classes\/ModifySubjectClasslevel\/%23classlevel_modify_id";
-    getDependentListBox($("#classlevel_modify_id"), $("#class_modify_id"), url32);
     var url_cla = "\/classrooms\/ajax_get_classes\/SubjectStudentView\/%23classlevel_view_id";
     getDependentListBox($("#classlevel_view_id"), $("#class_view_id"), url_cla);
     //////////////////////////////////////////////////////////////////////////////////////////////////////
     
     
     //When The Form assign_subject_form is submitted
-    $(document.body).on('submit', '#assign_subject_form', function(){
+     $(document.body).on('submit', '#assign_subject_form', function(){
         ajax_loading_image($('#msg_box2'), ' Loading');
-        val = $('#assign_subject_form').serialize();
-        $.post(domain_name+'/subjects/validateIfExist', val, function(data){
-            if(data === '1'){
-                set_msg_box($('#msg_box2'), ' Sorry This Subject Has Been Assigned Already... You Can Only Modify', 2)
-            }else{
-                ajax_remove_loading_image($('#msg_box2'));
-                var output = '<ol>';
-                $.each($('#assign_subject_form :selected'), function(key, value) {
-                    if(key === 1 && $(value).val() !== '')
-                        output += ' <li><b>Subject Name</b> : ' + $(value).html() + '</li>';
-                    else if(key === 2 && $(value).val() !== '')
-                        output += ' <li><b>Class Level</b> : ' + $(value).html() + '</li>';
-                    else if(key === 3 && $(value).val() !== '')
-                        output += ' <li><b>Class Room</b> : ' + $(value).html() + '</li>';
-                    else if(key === 5 && $(value).val() !== '')
-                        output += ' <li><b>Academic Term</b> : ' + $(value).html() + '</li>';
-                });
-                output += '</ol>';
-                $('#confirm_output').html(output);
-                $('#confirm_subject_modal').modal('show');
+        var values = $('#assign_subject_form').serialize();
+        $.post(domain_name+'/subjects/search_assign', values, function(data){
+            try{
+                var obj = $.parseJSON(data);
+                var assign = ''; var avaliable = '';
+                if(obj.Flag === 1){
+                    $.each(obj.SubjectClasslevel, function(key, value) {
+                        //ids += value.student_id+',';
+                        assign += '<option value="'+value.subject_id+'">'+value.subject_name+'</option>';
+                    });
+                    //ids = ids.substr(0, ids.length - 1);
+                }
+                if(obj.Flag2 === 1){
+                    $.each(obj.SubjectNoClasslevel, function(key, value) {
+                        avaliable += '<option value="'+value.subject_id+'">'+value.subject_name+'</option>';
+                    });
+                }
+                var cls = ($('#class_id').text() === 'nill') ? $('#classlevel_id').children('option:selected').text() : $('#class_id').children('option:selected').text();
+                $('#msg_box_modal_1').html('<b>Assign Subjects Offered by Students in '+cls+'</b>');
+                $('#class_id_1').val($('#class_id').val());
+                $('#classlevel_id_1').val($('#classlevel_id').val());
+                $('#academic_term_id_1').val($('#academic_term_id').val());
+
+                $('#LinkedLB_1').html(assign);
+                $('#AvailableLB_1').html(avaliable);
+                $("#available_span_1").html('');
+                $("#assign_span_1").html('');
+                $('#assign_subject_modal_1').modal('show');
+            } catch (exception) {
+                $('#msg_box_modal_1').html(data);
             }
+            ajax_remove_loading_image($('#msg_box2'));
         });
-        return false; 
+        return false;
     });
-    
-    //When the confirm form is submitted
-    $(document.body).on('submit', '#confirm_subject_form', function(){
-        ajax_loading_image($('#msg_box_modal'), ' Assigning Subject');
-        $.post(domain_name+'/subjects/assign', val, function(data){
-            val = '';
-            if(data === '0'){
-                $('#msg_box_modal').html('<i class="fa fa-warning fa-1x"></i> Error... Please Try Again '+data);
-                $('#msg_box2').html('<i class="fa fa-warning fa-1x"></i> Error... Please Try Again '+data);
-            }else{
-                $('#assign_subject_form')[0].reset();
-                $('#confirm_subject_modal').modal('hide');
-                ajax_remove_loading_image($('#msg_box_modal'));            
+
+    //OnClick Of The Assign Subjects Button	//Insert or Update The Records
+    $(document.body).on('click', '#assign_subject_btn', function(){
+        getNewValues($("#LinkedLB_1"), $("#subject_ids_1"));
+        $('#msg_box_modal_1').html('<i class="fa fa-refresh"></i> Updating Record... <img src="'+domain_name+'/img/ajax-loader.gif" alt="Loading Image"/>');
+        $("#confirm_subject_form").submit();
+    });
+
+
+    //When The Form assign_subject_form is submitted
+    $(document.body).on('submit', '#assign_subjectlevel_form', function(){
+        ajax_loading_image($('#msg_box1'), ' Loading');
+        var values = $('#assign_subjectlevel_form').serialize();
+        $.post(domain_name+'/subjects/search_assignlevel', values, function(data){
+            try{
+                var obj = $.parseJSON(data);
+                var assign = ''; var avaliable = '';
+                if(obj.Flag === 1){
+                    $.each(obj.SubjectClasslevel, function(key, value) {
+                        assign += '<option value="'+value.subject_id+'">'+value.subject_name+'</option>';
+                    });
+                }
+                if(obj.Flag2 === 1){
+                    $.each(obj.SubjectNoClasslevel, function(key, value) {
+                        avaliable += '<option value="'+value.subject_id+'">'+value.subject_name+'</option>';
+                    });
+                }
+                $('#msg_box_modal_2').html('<b>Assign Subjects Offered by Students in '+$('#classlevel_id_level').children('option:selected').text()+'</b>');
+                $('#classlevel_id_2').val($('#classlevel_id_level').val());
+                $('#academic_term_id_2').val($('#academic_term_id_level').val());
+
+                $('#LinkedLB_2').html(assign);
+                $('#AvailableLB_2').html(avaliable);
+                $("#available_span_2").html('');
+                $("#assign_span_2").html('');
+                $('#assign_subject_modal_2').modal('show');
+            } catch (exception) {
+                $('#msg_box_modal_2').html(data);
             }
+            ajax_remove_loading_image($('#msg_box1'));
         });
-        return false; 
+        return false;
+    });
+
+    //OnClick Of The Assign Subjects Button	//Insert or Update The Records
+    $(document.body).on('click', '#assign_levelsubject_btn', function(){
+        getNewValues($("#LinkedLB_2"), $("#subject_ids_2"));
+        $('#msg_box_modal_2').html('<i class="fa fa-refresh"></i> Updating Record... <img src="'+domain_name+'/img/ajax-loader.gif" alt="Loading Image"/>');
+        $("#subjectclasslevel_form").submit();
     });
     
     //Search Form For displaying Subjects Assigned to a Class
@@ -248,7 +277,6 @@ $('document').ready(function(){
                                         <th>Classlevels</th>\
                                         <th>Class Rooms</th>\
                                         <th>Exam Status</th>\
-                                        <th>Modify</th>\
                                         <th>Manage</th>\
                                         <th>Delete</th>\
                                     </tr></thead>';
@@ -264,9 +292,6 @@ $('document').ready(function(){
                                 <td>'+value.class_name+'</td>\n\
                                 <td style="font-size:medium">'+value.exam_status+'</td>\n\
                                 <td>\
-                                    <button type="submit" value="'+value.subject_classlevel_id+'" class="btn btn-warning btn-xs modify_subject_assign">\n\
-                                    <i class="fa fa-edit"></i> Modify</button><input type="hidden" class="input-small" value="'+ids+'">\</td>\
-                                <td>\
                                     <button type="submit" value="'+value.subject_classlevel_id+'" class="btn btn-success btn-xs manage_student_subject">\n\
                                     <i class="fa fa-ticket"></i> Students</button></td>\
                                 <td>\
@@ -277,7 +302,7 @@ $('document').ready(function(){
                         output += '</tbody>';
                         $('#modify_subjects_table_div').html(output);
                     }else if(obj.Flag === 0){
-                        output += '<tr><th colspan="9">No Assigned Subject Found</th></tr>';
+                        output += '<tr><th colspan="8">No Assigned Subject Found</th></tr>';
                         $('#modify_subjects_table_div').html(output);
                     }
                 } catch (exception) {
@@ -290,23 +315,10 @@ $('document').ready(function(){
             error: function(XMLHttpRequest, textStatus, errorThrown) {
                $('#modify_subjects_table_div').html(errorThrown);
                 ajax_remove_loading_image($('#msg_box3'));
-            }   
+            }
         });
         return false;
     });
-    
-    //When the Modify button is clicked show the modal for modifications
-    $(document.body).on('click', '.modify_subject_assign', function(){
-        var ids = $(this).next().val();
-        var id = ids.split('_');
-        var tr = $(this).parent().parent();
-        $('#subject_classlevel_modify_id').val($(this).val());
-        $('#academic_term_modify_id').html('<option value="'+id[0]+'">'+tr.children(':nth-child(2)').text()+'</option>');
-        $('#subject_modify_id').html('<option value="'+id[1]+'">'+tr.children(':nth-child(3)').text()+'</option>');
-        $('#classlevel_modify_id').val(id[2]);
-        $('#class_modify_id').html('<option value="'+id[3]+'">'+tr.children(':nth-child(5)').text()+'</option>');
-        $('#modify_subject_assign_modal').modal('show');
-   });
 
    //When the Delete button is clicked show the modal for confirmation
     $(document.body).on('click', '.delete_subject_classlevel', function(){
@@ -335,19 +347,6 @@ $('document').ready(function(){
         return false;
     });
 
-    //Subject Assignment Form...Assign to teachers
-    $(document.body).on('submit', '#modify_subject_form', function(){
-        ajax_loading_image($('#msg_box2_modal'), ' Modifying Subject Assigned');
-        $.post(domain_name+'/subjects/modify_assign', $(this).serialize(), function(data){
-            $('#modify_subjects_table_div').html('');
-            ajax_remove_loading_image($('#msg_box2_modal'));            
-            $('#modify_subject_assign_modal').modal('hide');
-            if(data === '0')
-                $('#msg_box2_modal').html('<i class="fa fa-warning fa-1x"></i> Error...Try Again '+data);
-        });
-        return false; 
-    });    
-    
     //When the Manage Student button is clicked show the modal for modifications
     $(document.body).on('click', '.manage_student_subject', function(){
         ajax_loading_image($('#msg_box3'), ' Loading Contents');
@@ -373,6 +372,8 @@ $('document').ready(function(){
                 $('#msg_box3_modal').html('Managing <b>'+tr.children(':nth-child(3)').html()+'</b> Subject Offered by Students in <b>'+cls+'</b>');
                 $('#LinkedLB').html(assign);
                 $('#AvailableLB').html(avaliable);
+                $("#available_span").html('');
+                $("#assign_span").html('');
                 $('#manage_student_btn').val(id);
                 $('#manage_students_modal').modal('show');
             } catch (exception) {
@@ -578,6 +579,54 @@ $('document').ready(function(){
     
 
     //Functions Triggers
+    //Moves Each Selected Option From Left 2 Right
+    $(document.body).on('dblclick', '#AvailableLB_1', function(){
+        moveSelection($("#available_span_1"), $("#AvailableLB_1"), $("#assign_span_1"), $("#LinkedLB_1"));
+    });
+    $(document.body).on('click', '#student_RightButton_1', function(){
+        moveSelection($("#available_span_1"), $("#AvailableLB_1"), $("#assign_span_1"), $("#LinkedLB_1"));
+    });
+    //Moves Each Selected Option From Right 2 Left
+    $(document.body).on('dblclick', '#LinkedLB_1', function(){
+        moveSelection($("#assign_span_1"), $("#LinkedLB_1"), $("#available_span_1"), $("#AvailableLB_1"));
+    });
+    $(document.body).on('click', '#student_LeftButton_1', function(){
+        moveSelection($("#assign_span_1"), $("#LinkedLB_1"), $("#available_span_1"), $("#AvailableLB_1"));
+    });
+    //Moves All Selected Option From Left 2 Right
+    $(document.body).on('click', '#student_RightAllButton_1', function(){
+        moveAll($("#available_span_1"), $("#AvailableLB_1"), $("#assign_span_1"), $("#LinkedLB_1"));
+    });
+    //Moves All Selected Option From Right 2 Left
+    $(document.body).on('click', '#student_LeftAllButton_1', function(){
+        moveAll($("#assign_span_1"), $("#LinkedLB_1"), $("#available_span_1"), $("#AvailableLB_1"));
+    });
+
+
+    //Moves Each Selected Option From Left 2 Right
+    $(document.body).on('dblclick', '#AvailableLB_2', function(){
+        moveSelection($("#available_span_2"), $("#AvailableLB_2"), $("#assign_span_2"), $("#LinkedLB_2"));
+    });
+    $(document.body).on('click', '#student_RightButton_2', function(){
+        moveSelection($("#available_span_2"), $("#AvailableLB_2"), $("#assign_span_2"), $("#LinkedLB_2"));
+    });
+    //Moves Each Selected Option From Right 2 Left
+    $(document.body).on('dblclick', '#LinkedLB_2', function(){
+        moveSelection($("#assign_span_2"), $("#LinkedLB_2"), $("#available_span_2"), $("#AvailableLB_2"));
+    });
+    $(document.body).on('click', '#student_LeftButton_2', function(){
+        moveSelection($("#assign_span_2"), $("#LinkedLB_2"), $("#available_span_2"), $("#AvailableLB_2"));
+    });
+    //Moves All Selected Option From Left 2 Right
+    $(document.body).on('click', '#student_RightAllButton_2', function(){
+        moveAll($("#available_span_2"), $("#AvailableLB_2"), $("#assign_span_2"), $("#LinkedLB_2"));
+    });
+    //Moves All Selected Option From Right 2 Left
+    $(document.body).on('click', '#student_LeftAllButton_2', function(){
+        moveAll($("#assign_span_2"), $("#LinkedLB_2"), $("#available_span_2"), $("#AvailableLB_2"));
+    });
+
+
     //Moves Each Selected Option From Left 2 Right
     $(document.body).on('dblclick', '#AvailableLB', function(){
         moveSelection($("#available_span"), $("#AvailableLB"), $("#assign_span"), $("#LinkedLB"));

@@ -56,13 +56,13 @@
                                     <tr>
                                         <th>Marked Status</th>
                                         <td style="font-size: medium"><?php echo ($ExamSubject['Exam']['exammarked_status_id'] === '2') ? '<span class="label label-danger">Subject Not Marked</span>' : '<span class="label label-success">Subject Marked</span>';?></td>
-                                        <th>Weightage CA1</th>
+                                        <th>Weight Point CA1</th>
                                         <td><?php echo $ExamSubject['Exam']['weightageCA1'];?></td>
                                     </tr>
                                     <tr>
-                                        <th>Weightage CA2</th>
+                                        <th>Weight Point CA2</th>
                                         <td><?php echo $ExamSubject['Exam']['weightageCA2'];?></td>
-                                        <th>Weightage Exam</th>
+                                        <th>Weight Point Exam</th>
                                         <td><?php echo $ExamSubject['Exam']['weightageExam'];?></td>
                                         <input type="hidden" id="hidden_WA_value" value="<?php echo $ExamSubject['Exam']['weightageCA1'].'-'.$ExamSubject['Exam']['weightageCA2'].'-'.$ExamSubject['Exam']['weightageExam'];?>">
                                     </tr>

@@ -88,7 +88,7 @@
                     </div>
                     <div id="apDiv1">
                         <table class="table table-bordered" width="750" style="margin-top: 65px;">
-                            <caption style="font-weight: bolder">Subject Continuous Assessment (C.A) / Weightage Points (W.A)</caption>
+                            <caption style="font-weight: bolder">Subject Continuous Assessment (C.A) / Weight Points (W.A)</caption>
                             <?php if(!empty($TermScores['Scores'])):?>
                                 <thead>
                                     <tr style="font-weight:bold; background-color:#CCCCCC;">

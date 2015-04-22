@@ -65,19 +65,25 @@ class SubjectClasslevel extends AppModel {
     public function validateIfExist($subject_id, $term_id, $classlevel_id, $class_id=null) {
         if($class_id === null){
             $result = $this->query('
-                SELECT * FROM subject_classlevels WHERE subject_id="'.$subject_id.'" AND classlevel_id="'.$classlevel_id.'" AND academic_term_id="'.$term_id.'"
+                SELECT a.* FROM subject_classlevels a WHERE subject_id="'.$subject_id.'" AND classlevel_id="'.$classlevel_id.'" AND academic_term_id="'.$term_id.'"
             ');
         }else{
             $result = $this->query('
-                SELECT * FROM subject_classlevels WHERE subject_id="'.$subject_id.'" AND class_id="'.$class_id.'" AND academic_term_id="'.$term_id.'"
+                SELECT a.* FROM subject_classlevels a WHERE subject_id="'.$subject_id.'" AND class_id="'.$class_id.'" AND academic_term_id="'.$term_id.'"
             ');
         }
         return $result;
     }
     
     //Find all subjects assigned to a classlevel in a specify academic term
-    public function findSubjectsAssigned($term_id, $classlevel_id) {
-        return $this->query('SELECT a.* FROM subject_classlevelviews a WHERE a.classlevel_id="'.$classlevel_id.'" AND academic_term_id="'.$term_id.'" ORDER BY a.subject_name');
+    public function findSubjectsAssigned($term_id, $classlevel_id, $subject_id) {
+        if($subject_id === '' || $subject_id === null){
+            return $this->query('SELECT a.* FROM subject_classlevelviews a WHERE a.classlevel_id="'.$classlevel_id.'"
+            AND a.academic_term_id="'.$term_id.'" ORDER BY a.subject_name');
+        }else{
+            return $this->query('SELECT a.* FROM subject_classlevelviews a WHERE a.classlevel_id="'.$classlevel_id.'"
+            AND a.subject_id="'.$subject_id.'" AND a.academic_term_id="'.$term_id.'" ORDER BY a.subject_name');
+        }
     }
 
     //Find subjects assigned to a Staff for a classlevel in a specify academic term
@@ -140,5 +146,20 @@ class SubjectClasslevel extends AppModel {
         $result = $this->query('DELETE FROM subject_classlevels WHERE subject_classlevel_id="'.$subject_classlevel_id.'"');
 
         return $result;
+    }
+
+
+    //Find all the students offering the subjects in a classroom or classlevel
+    public function findSubjectsInClasslevel($class, $term) {
+        $result = $this->query('SELECT * FROM subject_classlevelviews a WHERE academic_term_id="'.$term.'" AND class_id="'.$class.'" ORDER BY a.subject_name');
+        return $result;
+    }
+
+    //Find the students in a classroom or classlevel not offering the subject
+    public function findSubjectsNotInClasslevel($class, $term) {
+        $query = $this->query('SELECT * FROM subjects a WHERE subject_id NOT IN
+        (SELECT subject_id FROM subject_classlevelviews a WHERE academic_term_id="'.$term.'" AND class_id="'.$class.'") ORDER BY a.subject_name');
+
+        return $query;
     }
 }

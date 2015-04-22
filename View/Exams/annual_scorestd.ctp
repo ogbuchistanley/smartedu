@@ -166,7 +166,7 @@
                                      <tr class="text-white" style="background-color: #999;">
                                         <th colspan="3"></th>
                                         <th colspan="6" style="text-align: center">Student Score(s) and Grade</th>
-                                        <th colspan="4" style="text-align: center">Weightage</th>
+                                        <th colspan="4" style="text-align: center">Weight Point</th>
                                      </tr>
                                     <tr class="text-white" style="background-color: #999;">
                                       <th>#</th>

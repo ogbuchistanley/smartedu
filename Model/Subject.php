@@ -14,10 +14,40 @@ class Subject extends AppModel {
             'foreignKey' => 'subject_group_id'
         ),
     );
-    
+
+    //Assign Subjects to Students
     public function proc_assignSubject2Students($subject_classlevel_id){
         $result = $this->query('CALL `proc_assignSubject2Students`("'.$subject_classlevel_id.'")');
         return $result;
+    }
+
+    //Assign Subjects to Class Room
+    public function proc_assignSubject2Classrooms($class, $level, $term, $subject_ids){
+        $result = $this->query('CALL `proc_assignSubject2Classrooms`("'.$class.'", "'.$level.'", "'.$term.'", "'.$subject_ids.'")');
+        return $result;
+    }
+
+    //Assign Subjects to Class Level
+    public function proc_assignSubject2Classlevels($level, $term, $subject_ids){
+        $result = $this->query('CALL `proc_assignSubject2Classlevels`("'.$level.'", "'.$term.'", "'.$subject_ids.'")');
+        return $result;
+    }
+
+    //Find the Subjects that has been assigned to the classlevel
+    public function findSubjectsInlevel($term, $level) {
+        $result = null;
+        $res = $this->query('SELECT fun_getClasslevelSub("'.$term.'", "'.$level.'")');
+        if($res > 0) {
+            $result = $this->query('SELECT a.* FROM SubjectClasslevelTemp a');
+        }
+        return $result;
+    }
+
+    //Find the Subjects that has not been assigned to the classlevel
+    public function findSubjectsNotInlevel() {
+        $query = $this->query('SELECT * FROM subjects a WHERE subject_id NOT IN
+        (SELECT subject_id FROM SubjectClasslevelTemp) ORDER BY a.subject_name');
+        return $query;
     }
     
     //Find the Subjects assigned to a tutor for the current academic term
@@ -88,6 +118,5 @@ class Subject extends AppModel {
             . ' AND a.class_id="'.$class_id.'" ORDER BY sum_total DESC');
 
         return $result;
-
     }
 }

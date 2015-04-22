@@ -223,9 +223,10 @@ $cakeDescription = __d('app_dev', ':: '.APP_NAME.' :');
                                     <a class="dropdown" href="javascript:void(0)" data-original-title="Subjects"><i class="fa fa-book"></i><span class="hidden-minibar">  Subjects <span class="badge bg-primary pull-right" id="subject_count"></span></span></a>
                                     <ul>
                                         <?php if($subject_add2class): ?>
-                                            <li><a href="<?php echo DOMAIN_NAME ?>/subjects/add2class#assign2class" data-original-title="404"><i class="fa fa-plus-square"></i><span> Assign To Classes</span></a></li>
-                                            <li><a href="<?php echo DOMAIN_NAME ?>/subjects/add2class#assign2teachers" data-original-title="404"><i class="fa fa-plus-circle"></i><span>  Assign Tutor</span></a></li>
-                                            <li><a href="<?php echo DOMAIN_NAME ?>/subjects/add2class#adjust_subjects_assign" data-original-title="404"><i class="fa fa-edit"></i><span> Modify/Manage Students</span></a></li>
+                                            <li><a href="<?php echo DOMAIN_NAME ?>/subjects/add2class#assign2class"><i class="fa fa-plus-square"></i><span> Assign To Classroom</span></a></li>
+                                            <li><a href="<?php echo DOMAIN_NAME ?>/subjects/add2class#assign2classlevel"><i class="fa fa-ticket"></i><span> Assign To Classlevel</span></a></li>
+                                            <li><a href="<?php echo DOMAIN_NAME ?>/subjects/add2class#assign2teachers"><i class="fa fa-plus-circle"></i><span>  Assign To Teacher</span></a></li>
+                                            <li><a href="<?php echo DOMAIN_NAME ?>/subjects/add2class#adjust_subjects_assign"><i class="fa fa-edit"></i><span> Manage Subjects/Students</span></a></li>
                                         <?php endif;?>
                                         <li><a href="<?php echo DOMAIN_NAME ?>/subjects/index" data-original-title="Manage My Students"><i class="fa fa-ticket"></i><span> My Students/View Scores</span></a></li>
                                     </ul>
@@ -310,7 +311,7 @@ $cakeDescription = __d('app_dev', ':: '.APP_NAME.' :');
                                     <ul>
                                         <li><a href="<?php echo DOMAIN_NAME ?>/records/academic_year" data-original-title="Academic Years"><i class="fa fa-outdent"></i><span> Academic Years</span></a></li>
                                         <li><a href="<?php echo DOMAIN_NAME ?>/records/index" data-original-title="Academic Terms"><i class="fa fa-ticket"></i><span> Academic Terms</span></a></li>
-                                        <li><a href="<?php echo DOMAIN_NAME ?>/records/class_group" data-original-title="Class Group"><i class="fa fa-xing"></i><span> Class Group</span></a></li>
+                                        <li><a href="<?php echo DOMAIN_NAME ?>/records/class_group" data-original-title="Class Group / Weight Point"><i class="fa fa-xing"></i><span> Class Group / Weight Point</span></a></li>
                                         <li><a href="<?php echo DOMAIN_NAME ?>/records/class_level" data-original-title="Class Level"><i class="fa fa-trello"></i><span> Class Level</span></a></li>
                                         <li><a href="<?php echo DOMAIN_NAME ?>/records/class_room" data-original-title="Class Rooms"><i class="fa fa-group"></i><span> Class Rooms</span></a></li>
                                         <li><a href="<?php echo DOMAIN_NAME ?>/records/subject_group" data-original-title="Subject Group"><i class="fa fa-align-left"></i><span> Subject Groups</span></a></li>
@@ -337,7 +338,7 @@ $cakeDescription = __d('app_dev', ':: '.APP_NAME.' :');
                                                 <li><a href="<?php echo DOMAIN_NAME ?>/records/index" data-original-title="Academic Terms"><i class="fa fa-ticket"></i><span> Academic Terms</span></a></li>
                                             <?php endif;?>
                                             <?php if($master_record_id > 1): ?>
-                                                <li><a href="<?php echo DOMAIN_NAME ?>/records/class_group" data-original-title="Class Group"><i class="fa fa-xing"></i><span> Class Group</span></a></li>
+                                                <li><a href="<?php echo DOMAIN_NAME ?>/records/class_group" data-original-title="Class Group / Weight Point"><i class="fa fa-xing"></i><span> Class Group / Weight Point</span></a></li>
                                             <?php endif;?>
                                             <?php if($master_record_id > 2): ?>
                                                 <li><a href="<?php echo DOMAIN_NAME ?>/records/class_level" data-original-title="Class Level"><i class="fa fa-trello"></i><span> Class Level</span></a></li>

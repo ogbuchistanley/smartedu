@@ -30,13 +30,16 @@ class Sponsor extends AppModel {
          $id = $this->id;
          $UserModel = ClassRegistry::init('User');
          $UserModel->id = AuthComponent::user('user_id');
+         $name = trim(strtoupper($this->data[$this->alias]['first_name'] . ' ' . ucwords($this->data[$this->alias]['other_name'])));
+         $UserModel->saveField('display_name', $name);
+
          //$no = 'emp'. str_pad($id, 4, '0', STR_PAD_LEFT);
          if(isset($this->data[$this->alias]['image_url'])){
              $image_url = $this->data[$this->alias]['image_url'];
              $ext = pathinfo($image_url, PATHINFO_EXTENSION);
-             $name = 'sponsors/' . $id . '.' . $ext;
+             $url = 'sponsors/' . $id . '.' . $ext;
              //User Image URL
-             $UserModel->saveField('image_url', $name);
+             $UserModel->saveField('image_url', $url);
         }
     }
     

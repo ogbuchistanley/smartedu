@@ -54,15 +54,15 @@
                                         <td><?php echo (empty($ExamSubject['Exam']['class_name'])) ? '<span class="label label-danger">nill</span>' : $ExamSubject['Exam']['class_name'];?></td>
                                     </tr>
                                     <tr>
-                                        <th>Weightage CA1</th>
+                                        <th>Weight Point CA1</th>
                                         <td><?php echo $ExamSubject['Exam']['weightageCA1'];?></td>
-                                        <th>Weightage CA2</th>
+                                        <th>Weight Point CA2</th>
                                         <td><?php echo $ExamSubject['Exam']['weightageCA2'];?></td>
                                     </tr>
                                     <tr>
-                                        <th>Weightage Exam</th>
+                                        <th>Weight Point Exam</th>
                                         <td><?php echo $ExamSubject['Exam']['weightageExam'];?></td>
-                                        <th>Weightage Total Sum</th>
+                                        <th>Weight Point Total Sum</th>
                                         <td><?php echo ($ExamSubject['Exam']['weightageCA1']+$ExamSubject['Exam']['weightageCA2']+$ExamSubject['Exam']['weightageExam']);?></td>
                                     </tr>
                                     <tr>
