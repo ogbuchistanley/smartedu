@@ -14,6 +14,14 @@ $('document').ready(function(){
 //        $('#myTab a[href="'+domain_name+'/records/index#years"]').tab('show');
 //        //setTabActive('[href="'+domain_name+'/records/index#terms"]', 1);
 //    });
+
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////           Dependent ListBox
+    // OnChange of Academic Year Get Academic Term
+    var url = "\/academic_terms\/ajax_get_terms\/SearchWeeklyReport\/%23academic_year_search_id";
+    getDependentListBox($("#academic_year_search_id"), $("#academic_term_search_id"), url);
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
     
     //// Get all the id's of the records to be deleted and set it into the "deleted_term" input textbox
     function setDeleteIDs(){
@@ -26,12 +34,12 @@ $('document').ready(function(){
         $("#deleted_term").val(ids.substr(0, (ids.length-1)));
     }
 
-
-    //Date Qualification
+    //Submission Date
     $('.date_picker').datepicker({
+        minDate: 0,
         changeMonth: true,
         changeYear: true,
-        yearRange: "-40:+10"
+        yearRange: "-0:+10"
     });
 
 
@@ -57,6 +65,13 @@ $('document').ready(function(){
     //Remove the row added
     $(document.body).on('click', '.remove_tr_btn', function(){
        var parentTR = $(this).parent().parent().parent();
+       parentTR.remove();
+    });
+
+    //Remove the row added for weekly reports setup
+    $(document.body).on('click', '.remove_report_btn', function(){
+       var parentTR = $(this).parent().parent();
+        //alert(parentTR.html());
        parentTR.remove();
     });
     
@@ -108,6 +123,16 @@ $('document').ready(function(){
     
     ////////////////////    Class Room   ////////////////////////////////////////////////////////////////////////////
     $(document.body).on('click', '#save_classroom_btn', function(){
+        setDeleteIDs();
+    });
+
+    ////////////////////    Weekly Reports   ////////////////////////////////////////////////////////////////////////////
+    $(document.body).on('click', '#save_weekly_report_btn', function(){
+        setDeleteIDs();
+    });
+
+    ////////////////////    Weekly Report Details  ////////////////////////////////////////////////////////////////////////////
+    $(document.body).on('click', '#save_weekly_detail_btn', function(){
         setDeleteIDs();
     });
     

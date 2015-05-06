@@ -42,4 +42,14 @@ class Classroom extends AppModel {
         return $this->query('SELECT a.* FROM teachers_classviews a WHERE a.employee_id="'.AuthComponent::user('type_id').'"'
                 . ' AND academic_year_id="'.$AcademicTerm->getCurrentYearID().'" ORDER BY a.employee_name');
     }
+
+    //Get the class group id given class id
+    public function getClassgroupID($class_id){
+        $results = $this->query('SELECT classgroup_id FROM classlevels WHERE classlevel_id=(SELECT classlevel_id FROM classrooms WHERE class_id="'.$class_id.'") LIMIT 1');
+        if($results) {
+            $result = array_shift($results);
+            return $result['classlevels']['classgroup_id'];
+        }
+        return null;
+    }
 }

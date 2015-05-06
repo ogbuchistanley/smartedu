@@ -234,7 +234,7 @@ $('document').ready(function(){
                     var output = '<caption><strong>Results Output From The Search ::: <u>'+term+' Academic Year</u></strong></caption>\
                                     <thead><tr>\
                                         <th colspan="4"></th>\
-                                        <th colspan="3" style="text-align: center">Weightage</th>\
+                                        <th colspan="3" style="text-align: center">Weight Point</th>\
                                         <th colspan="3"></th>\
                                     </tr></thead>\
                                     <thead><tr>\
@@ -299,7 +299,7 @@ $('document').ready(function(){
     });
     
     
-    //Validate Weightage Point
+    //Validate Weight Point
     $(document.body).on('blur', '.ca1_value, .ca2_value, .exam_value', function(){
         var ca1 = parseInt($(this).val());
         var WA = $('#hidden_WA_value').val().split('-');
@@ -318,6 +318,27 @@ $('document').ready(function(){
         }else{
             $(this).parent().children(':nth-child(2)').html('');
         }
+    });
+
+    //Validate The Weekly Report Form Before Submission
+    $(document.body).on('click', '#exam_form_btn', function(){
+        var validate = '';
+        $('.ca1_value').each(function(){
+            var span = $(this).next('span').html();
+            validate += span;
+        });
+        $('.ca2_value').each(function(){
+            var span = $(this).next('span').html();
+            validate += span;
+        });
+        $('.exam_value').each(function(){
+            var span = $(this).next('span').html();
+            validate += span;
+        });
+        if(validate.trim() == '')
+            return true;
+        else
+            return false;
     });
     
     //Search Form For displaying Subjects Exams Has Been Setup for editing

@@ -212,9 +212,11 @@ class AppModel extends Model {
     function SendSMS($mobile_no, $msg_body, $msg_sender=APP_NAME) {
         $mobile_no = trim($mobile_no);
         if(substr($mobile_no, 0, 1) === '0'){
-            $no = '234' . substr ($mobile_no, 1);
+            $no = '234' . substr($mobile_no, 1);
         }elseif (substr($mobile_no, 0, 3) === '234') {
             $no = $mobile_no;
+        }elseif (substr($mobile_no, 0, 1) === '+') {
+            $no = substr($mobile_no, 1);
         }else{
             $no = '234' . $mobile_no;
         }
@@ -228,5 +230,21 @@ class AppModel extends Model {
         // do auth call
         $ret = file($url);
         return $ret;
+    }
+
+    //Format Position
+    public function formatPosition($position=0){
+        $lastDigit = substr($position, -1, 1);
+        $position = intval($position);
+        if($lastDigit == 1 && ($position < 10 || $position > 19)) {
+            $fomatedPosition = $position . 'st';
+        }elseif($lastDigit == 2 && ($position < 10 || $position > 19)) {
+            $fomatedPosition = $position . 'nd';
+        }elseif($lastDigit == 3 && ($position < 10 || $position > 19)) {
+            $fomatedPosition = $position . 'rd';
+        }else{
+            $fomatedPosition = $position . 'th';
+        }
+        return $fomatedPosition;
     }
 }

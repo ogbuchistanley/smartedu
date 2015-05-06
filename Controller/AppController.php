@@ -114,7 +114,7 @@ class AppController extends Controller {
 
         //Set the master_setup_id to be accessed globally both in views and controllers
         $this->master_record_id = $val;
-        $this->master_record_count = 8;
+        $this->master_record_count = 9;
         Configure::write('master_record_id', $val);
         Configure::write('master_record_count', $this->master_record_count);
 

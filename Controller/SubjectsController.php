@@ -395,6 +395,7 @@ class SubjectsController extends AppController {
                             "class_id"=>$result['b']['class_id'],
                             "academic_term"=>$result['a']['academic_term'],
                             "subject_classlevel_id"=>$result['a']['subject_classlevel_id'],
+                            "encrypt_sub_cls_id"=>$this->encryption->encode($result['a']['subject_classlevel_id']),
                             "exam_status"=>($result['a']['examstatus_id'] === '2') ? '<span class="label label-danger">'.$result['a']['exam_status'].'</span>' : '<span class="label label-success">'.$result['a']['exam_status'].'</span>',
                         );
                     }

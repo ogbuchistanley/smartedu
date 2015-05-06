@@ -141,7 +141,7 @@
                                 </table> 
                                     <div class="form-group">
                                         <div class="col-sm-offset-2 col-sm-10">
-                                            <button type="submit" class="btn btn-info">Submit Input Scores</button>
+                                            <button type="submit" class="btn btn-info" id="exam_form_btn">Submit Input Scores</button>
                                         </div>
                                     </div>
                                 </form>

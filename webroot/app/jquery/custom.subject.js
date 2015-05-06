@@ -9,12 +9,18 @@ $('document').ready(function(){
      //Set The Active Tab
      setTabActive('[href="'+domain_name+'/subjects/add2class#assign2class"]', 1);
      $('[href="'+domain_name+'/subjects/add2class#assign2class"]').attr('data-toggle', 'tab');
+     $('[href="'+domain_name+'/subjects/add2class#assign2classlevel"]').attr('data-toggle', 'tab');
      $('[href="'+domain_name+'/subjects/add2class#assign2teachers"]').attr('data-toggle', 'tab');
      $('[href="'+domain_name+'/subjects/add2class#adjust_subjects_assign"]').attr('data-toggle', 'tab');
 
     $('[href="'+domain_name+'/subjects/add2class#assign2class"]').click(function(){
         $('#myTab a[href="'+domain_name+'/subjects/add2class#assign2class"]').tab('show');
         setTabActive('[href="'+domain_name+'/subjects/add2class#assign2class"]', 1);
+    });
+
+    $('[href="'+domain_name+'/subjects/add2class#assign2classlevel"]').click(function(){
+        $('#myTab a[href="'+domain_name+'/subjects/add2class#assign2classlevel"]').tab('show');
+        setTabActive('[href="'+domain_name+'/subjects/add2class#assign2classlevel"]', 1);
     });
     
     $('[href="'+domain_name+'/subjects/add2class#assign2teachers"]').click(function(){
@@ -59,22 +65,25 @@ $('document').ready(function(){
     
     //When The Form assign_subject_form is submitted
      $(document.body).on('submit', '#assign_subject_form', function(){
-        ajax_loading_image($('#msg_box2'), ' Loading');
+        ajax_loading_image($('#msg_box_1'), ' Loading Contents');
         var values = $('#assign_subject_form').serialize();
         $.post(domain_name+'/subjects/search_assign', values, function(data){
             try{
                 var obj = $.parseJSON(data);
                 var assign = ''; var avaliable = '';
+                var assign_count = 0; var avaliable_count = 0;
                 if(obj.Flag === 1){
                     $.each(obj.SubjectClasslevel, function(key, value) {
                         //ids += value.student_id+',';
                         assign += '<option value="'+value.subject_id+'">'+value.subject_name+'</option>';
+                        assign_count++;
                     });
                     //ids = ids.substr(0, ids.length - 1);
                 }
                 if(obj.Flag2 === 1){
                     $.each(obj.SubjectNoClasslevel, function(key, value) {
                         avaliable += '<option value="'+value.subject_id+'">'+value.subject_name+'</option>';
+                        avaliable_count++;
                     });
                 }
                 var cls = ($('#class_id').text() === 'nill') ? $('#classlevel_id').children('option:selected').text() : $('#class_id').children('option:selected').text();
@@ -85,13 +94,13 @@ $('document').ready(function(){
 
                 $('#LinkedLB_1').html(assign);
                 $('#AvailableLB_1').html(avaliable);
-                $("#available_span_1").html('');
-                $("#assign_span_1").html('');
+                $("#available_span_1").html(avaliable_count);
+                $("#assign_span_1").html(assign_count);
                 $('#assign_subject_modal_1').modal('show');
             } catch (exception) {
                 $('#msg_box_modal_1').html(data);
             }
-            ajax_remove_loading_image($('#msg_box2'));
+            ajax_remove_loading_image($('#msg_box_1'));
         });
         return false;
     });
@@ -104,22 +113,25 @@ $('document').ready(function(){
     });
 
 
-    //When The Form assign_subject_form is submitted
+    //When The Form assign_subjectlevel_form is submitted
     $(document.body).on('submit', '#assign_subjectlevel_form', function(){
-        ajax_loading_image($('#msg_box1'), ' Loading');
+        ajax_loading_image($('#msg_box_2'), ' Loading Contents');
         var values = $('#assign_subjectlevel_form').serialize();
         $.post(domain_name+'/subjects/search_assignlevel', values, function(data){
             try{
                 var obj = $.parseJSON(data);
                 var assign = ''; var avaliable = '';
+                var assign_count = 0; var avaliable_count = 0;
                 if(obj.Flag === 1){
                     $.each(obj.SubjectClasslevel, function(key, value) {
                         assign += '<option value="'+value.subject_id+'">'+value.subject_name+'</option>';
+                        assign_count++;
                     });
                 }
                 if(obj.Flag2 === 1){
                     $.each(obj.SubjectNoClasslevel, function(key, value) {
                         avaliable += '<option value="'+value.subject_id+'">'+value.subject_name+'</option>';
+                        avaliable_count++;
                     });
                 }
                 $('#msg_box_modal_2').html('<b>Assign Subjects Offered by Students in '+$('#classlevel_id_level').children('option:selected').text()+'</b>');
@@ -128,13 +140,13 @@ $('document').ready(function(){
 
                 $('#LinkedLB_2').html(assign);
                 $('#AvailableLB_2').html(avaliable);
-                $("#available_span_2").html('');
-                $("#assign_span_2").html('');
+                $("#available_span_2").html(avaliable_count);
+                $("#assign_span_2").html(assign_count);
                 $('#assign_subject_modal_2').modal('show');
             } catch (exception) {
                 $('#msg_box_modal_2').html(data);
             }
-            ajax_remove_loading_image($('#msg_box1'));
+            ajax_remove_loading_image($('#msg_box_2'));
         });
         return false;
     });
@@ -356,24 +368,27 @@ $('document').ready(function(){
             try{
                 var obj = $.parseJSON(data);
                 var assign = ''; var avaliable = '';
+                var assign_count = 0; var avaliable_count = 0;
                 if(obj.Flag === 1){
                     $.each(obj.SubjectClasslevel, function(key, value) {
                         //ids += value.student_id+',';
                         assign += '<option value="'+value.student_id+'">'+value.student_no.toUpperCase()+': '+value.student_name+'</option>';
+                        assign_count++;
                     });
                     //ids = ids.substr(0, ids.length - 1);
                 }
                 if(obj.Flag2 === 1){
                     $.each(obj.SubjectNoClasslevel, function(key, value) {
                         avaliable += '<option value="'+value.student_id+'">'+value.student_no.toUpperCase()+': '+value.student_name+'</option>';
+                        avaliable_count++;
                     });
                 }
                 var cls = (tr.children(':nth-child(5)').text() === 'nill') ? tr.children(':nth-child(4)').text() : tr.children(':nth-child(5)').text();
                 $('#msg_box3_modal').html('Managing <b>'+tr.children(':nth-child(3)').html()+'</b> Subject Offered by Students in <b>'+cls+'</b>');
                 $('#LinkedLB').html(assign);
                 $('#AvailableLB').html(avaliable);
-                $("#available_span").html('');
-                $("#assign_span").html('');
+                $("#available_span").html(avaliable_count);
+                $("#assign_span").html(assign_count);
                 $('#manage_student_btn').val(id);
                 $('#manage_students_modal').modal('show');
             } catch (exception) {

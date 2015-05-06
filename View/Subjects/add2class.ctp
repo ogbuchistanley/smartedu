@@ -125,7 +125,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-5" id="msg_box2">     </div>
+                            <div class="col-md-5" id="msg_box_1">     </div>
                         </div>
                         <div class="tab-pane fade in" id="assign2classlevel"><br>
                             <div class="col-md-7">
@@ -189,7 +189,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-sm-offset-2 col-sm-10">
-                                                        <button type="submit" class="btn btn-info">Assign Subject</button>
+                                                        <button type="submit" class="btn btn-info">Assign Subjects </button>
                                                     </div>
                                                 </div>
                                                 </form>
@@ -198,7 +198,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-5" id="msg_box1">     </div>
+                            <div class="col-md-5" id="msg_box_2">     </div>
                         </div>
                         <div class="tab-pane fade in" id="assign2teachers"><br>
                             <div class="col-md-7">
@@ -453,7 +453,7 @@
                             <tr>
                                 <td>
                                     <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
-                                    <button type="button" id="assign_subject_btn" class="btn btn-sm btn-success">Assign Subjects</button>
+                                    <button type="button" id="assign_subject_btn" class="btn btn-sm btn-success">Assign To Classroom</button>
                                     <input type="hidden" name="data[Subject][subject_ids]" id="subject_ids_1">
                                     <input type="hidden" name="data[Subject][class_id]" id="class_id_1">
                                     <input type="hidden" name="data[Subject][classlevel_id]" id="classlevel_id_1">

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 22, 2015 at 12:25 PM
+-- Generation Time: May 06, 2015 at 06:49 PM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `smartedu_online`
+-- Database: `smartedu`
 --
 
 DELIMITER $$
@@ -393,6 +393,29 @@ BEGIN
 				INSERT INTO attend_details(attend_id, student_id)
 				SELECT AttendID, student_id;
 		   END LOOP simple_loop;
+		END;
+	END IF;
+END$$
+
+DROP PROCEDURE IF EXISTS `proc_insertWeeklyReportDetail`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_insertWeeklyReportDetail`(IN `WeeklyReportID` INT)
+BEGIN
+	# Delete The Record if it exists
+	SELECT weekly_detail_setup_id, subject_classlevel_id, marked_status, notification_status 
+    INTO @WDS_ID, @SCL_ID, @MStatus, @NStatus 
+    FROM weekly_reports WHERE weekly_report_id=WeeklyReportID;
+    
+    # Check if the weekly report has been marked before
+	IF @NStatus = 2 THEN
+		BEGIN
+			# Insert into the weekly reports details table the students
+            INSERT INTO weekly_report_details(weekly_report_id, student_id)
+			SELECT WeeklyReportID, student_id FROM subject_students_registers WHERE subject_classlevel_id=@SCL_ID
+            AND student_id NOT IN (SELECT student_id FROM weekly_report_details WHERE weekly_report_id=WeeklyReportID);
+            
+			# remove the students that was just removed from the list of students to offer the subject
+			DELETE FROM weekly_report_details WHERE weekly_report_id=WeeklyReportID AND student_id NOT IN 
+			(SELECT student_id FROM subject_students_registers WHERE subject_classlevel_id=@SCL_ID);
 		END;
 	END IF;
 END$$
@@ -2885,7 +2908,7 @@ CREATE TABLE IF NOT EXISTS `master_setups` (
 --
 
 INSERT INTO `master_setups` (`master_setup_id`, `setup`, `master_record_id`) VALUES
-(1, 'smartedu', 8);
+(1, 'smartedu', 9);
 
 -- --------------------------------------------------------
 
@@ -4280,7 +4303,41 @@ CREATE TABLE IF NOT EXISTS `subject_classlevels` (
   `class_id` int(11) DEFAULT NULL,
   `academic_term_id` int(11) DEFAULT NULL,
   `examstatus_id` int(11) DEFAULT '2'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=29 ;
+
+--
+-- Dumping data for table `subject_classlevels`
+--
+
+INSERT INTO `subject_classlevels` (`subject_classlevel_id`, `subject_id`, `classlevel_id`, `class_id`, `academic_term_id`, `examstatus_id`) VALUES
+(1, 1, 1, 1, 1, 2),
+(5, 1, 1, 2, 1, 2),
+(9, 1, 1, 4, 1, 2),
+(13, 1, 1, 5, 1, 2),
+(19, 1, 4, 17, 1, 2),
+(23, 1, 4, 19, 1, 2),
+(27, 1, 4, 20, 1, 2),
+(2, 2, 1, 1, 1, 2),
+(6, 2, 1, 2, 1, 2),
+(10, 2, 1, 4, 1, 2),
+(14, 2, 1, 5, 1, 2),
+(20, 2, 4, 17, 1, 2),
+(24, 2, 4, 19, 1, 2),
+(28, 2, 4, 20, 1, 2),
+(18, 9, 4, 17, 1, 2),
+(22, 9, 4, 19, 1, 2),
+(26, 9, 4, 20, 1, 2),
+(4, 16, 1, 1, 1, 2),
+(8, 16, 1, 2, 1, 2),
+(12, 16, 1, 4, 1, 2),
+(16, 16, 1, 5, 1, 2),
+(3, 17, 1, 1, 1, 2),
+(7, 17, 1, 2, 1, 2),
+(11, 17, 1, 4, 1, 2),
+(15, 17, 1, 5, 1, 2),
+(17, 23, 4, 17, 1, 2),
+(21, 23, 4, 19, 1, 2),
+(25, 23, 4, 20, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -4339,6 +4396,336 @@ CREATE TABLE IF NOT EXISTS `subject_students_registers` (
   `class_id` int(11) DEFAULT NULL,
   `subject_classlevel_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `subject_students_registers`
+--
+
+INSERT INTO `subject_students_registers` (`student_id`, `class_id`, `subject_classlevel_id`) VALUES
+(1, 2, 5),
+(1, 2, 6),
+(1, 2, 7),
+(1, 2, 8),
+(2, 2, 5),
+(2, 2, 6),
+(2, 2, 7),
+(2, 2, 8),
+(3, 2, 5),
+(3, 2, 6),
+(3, 2, 7),
+(3, 2, 8),
+(4, 2, 5),
+(4, 2, 6),
+(4, 2, 7),
+(4, 2, 8),
+(5, 2, 5),
+(5, 2, 6),
+(5, 2, 7),
+(5, 2, 8),
+(6, 2, 5),
+(6, 2, 6),
+(6, 2, 7),
+(6, 2, 8),
+(7, 2, 5),
+(7, 2, 6),
+(7, 2, 7),
+(7, 2, 8),
+(10, 2, 5),
+(10, 2, 6),
+(10, 2, 7),
+(10, 2, 8),
+(11, 2, 5),
+(11, 2, 6),
+(11, 2, 7),
+(11, 2, 8),
+(12, 2, 5),
+(12, 2, 6),
+(12, 2, 7),
+(12, 2, 8),
+(13, 2, 5),
+(13, 2, 6),
+(13, 2, 7),
+(13, 2, 8),
+(14, 2, 5),
+(14, 2, 6),
+(14, 2, 7),
+(14, 2, 8),
+(15, 2, 5),
+(15, 2, 6),
+(15, 2, 7),
+(15, 2, 8),
+(16, 2, 5),
+(16, 2, 6),
+(16, 2, 7),
+(16, 2, 8),
+(17, 2, 5),
+(17, 2, 6),
+(17, 2, 7),
+(17, 2, 8),
+(18, 2, 5),
+(18, 2, 6),
+(18, 2, 7),
+(18, 2, 8),
+(57, 4, 9),
+(57, 4, 10),
+(57, 4, 11),
+(57, 4, 12),
+(58, 4, 9),
+(58, 4, 10),
+(58, 4, 11),
+(58, 4, 12),
+(59, 4, 9),
+(59, 4, 10),
+(59, 4, 11),
+(59, 4, 12),
+(60, 4, 9),
+(60, 4, 10),
+(60, 4, 11),
+(60, 4, 12),
+(61, 4, 9),
+(61, 4, 10),
+(61, 4, 11),
+(61, 4, 12),
+(62, 4, 9),
+(62, 4, 10),
+(62, 4, 11),
+(62, 4, 12),
+(63, 4, 9),
+(63, 4, 10),
+(63, 4, 11),
+(63, 4, 12),
+(64, 4, 9),
+(64, 4, 10),
+(64, 4, 11),
+(64, 4, 12),
+(65, 4, 9),
+(65, 4, 10),
+(65, 4, 11),
+(65, 4, 12),
+(118, 1, 1),
+(118, 1, 2),
+(118, 1, 3),
+(118, 1, 4),
+(129, 1, 1),
+(129, 1, 2),
+(129, 1, 3),
+(129, 1, 4),
+(131, 1, 1),
+(131, 1, 2),
+(131, 1, 3),
+(131, 1, 4),
+(137, 1, 1),
+(137, 1, 2),
+(137, 1, 3),
+(137, 1, 4),
+(138, 1, 1),
+(138, 1, 2),
+(138, 1, 3),
+(138, 1, 4),
+(140, 1, 1),
+(140, 1, 2),
+(140, 1, 3),
+(140, 1, 4),
+(142, 1, 1),
+(142, 1, 2),
+(142, 1, 3),
+(142, 1, 4),
+(143, 1, 1),
+(143, 1, 2),
+(143, 1, 3),
+(143, 1, 4),
+(144, 1, 1),
+(144, 1, 2),
+(144, 1, 3),
+(144, 1, 4),
+(145, 1, 1),
+(145, 1, 2),
+(145, 1, 3),
+(145, 1, 4),
+(146, 20, 25),
+(146, 20, 26),
+(146, 20, 27),
+(146, 20, 28),
+(147, 20, 25),
+(147, 20, 26),
+(147, 20, 27),
+(147, 20, 28),
+(150, 20, 25),
+(150, 20, 26),
+(150, 20, 27),
+(150, 20, 28),
+(154, 20, 25),
+(154, 20, 26),
+(154, 20, 27),
+(154, 20, 28),
+(158, 20, 25),
+(158, 20, 26),
+(158, 20, 27),
+(158, 20, 28),
+(159, 20, 25),
+(159, 20, 26),
+(159, 20, 27),
+(159, 20, 28),
+(167, 20, 25),
+(167, 20, 26),
+(167, 20, 27),
+(167, 20, 28),
+(168, 20, 25),
+(168, 20, 26),
+(168, 20, 27),
+(168, 20, 28),
+(169, 20, 25),
+(169, 20, 26),
+(169, 20, 27),
+(169, 20, 28),
+(170, 20, 25),
+(170, 20, 26),
+(170, 20, 27),
+(170, 20, 28),
+(172, 20, 25),
+(172, 20, 26),
+(172, 20, 27),
+(172, 20, 28),
+(173, 20, 25),
+(173, 20, 26),
+(173, 20, 27),
+(173, 20, 28),
+(174, 20, 25),
+(174, 20, 26),
+(174, 20, 27),
+(174, 20, 28),
+(176, 20, 25),
+(176, 20, 26),
+(176, 20, 27),
+(176, 20, 28),
+(177, 20, 25),
+(177, 20, 26),
+(177, 20, 27),
+(177, 20, 28),
+(178, 20, 25),
+(178, 20, 26),
+(178, 20, 27),
+(178, 20, 28),
+(179, 20, 25),
+(179, 20, 26),
+(179, 20, 27),
+(179, 20, 28),
+(189, 19, 21),
+(189, 19, 22),
+(189, 19, 23),
+(189, 19, 24),
+(190, 19, 21),
+(190, 19, 22),
+(190, 19, 23),
+(190, 19, 24),
+(191, 19, 21),
+(191, 19, 22),
+(191, 19, 23),
+(191, 19, 24),
+(192, 19, 21),
+(192, 19, 22),
+(192, 19, 23),
+(192, 19, 24),
+(193, 19, 21),
+(193, 19, 22),
+(193, 19, 23),
+(193, 19, 24),
+(194, 19, 21),
+(194, 19, 22),
+(194, 19, 23),
+(194, 19, 24),
+(195, 19, 21),
+(195, 19, 22),
+(195, 19, 23),
+(195, 19, 24),
+(196, 19, 21),
+(196, 19, 22),
+(196, 19, 23),
+(196, 19, 24),
+(197, 5, 13),
+(197, 5, 14),
+(197, 5, 15),
+(197, 5, 16),
+(198, 5, 13),
+(198, 5, 14),
+(198, 5, 15),
+(198, 5, 16),
+(199, 5, 13),
+(199, 5, 14),
+(199, 5, 15),
+(199, 5, 16),
+(200, 5, 13),
+(200, 5, 14),
+(200, 5, 15),
+(200, 5, 16),
+(201, 5, 13),
+(201, 5, 14),
+(201, 5, 15),
+(201, 5, 16),
+(202, 5, 13),
+(202, 5, 14),
+(202, 5, 15),
+(202, 5, 16),
+(204, 5, 13),
+(204, 5, 14),
+(204, 5, 15),
+(204, 5, 16),
+(205, 5, 13),
+(205, 5, 14),
+(205, 5, 15),
+(205, 5, 16),
+(223, 5, 13),
+(223, 5, 14),
+(223, 5, 15),
+(223, 5, 16),
+(227, 5, 13),
+(227, 5, 14),
+(227, 5, 15),
+(227, 5, 16),
+(228, 5, 13),
+(228, 5, 14),
+(228, 5, 15),
+(228, 5, 16),
+(269, 17, 17),
+(269, 17, 18),
+(269, 17, 19),
+(269, 17, 20),
+(270, 17, 17),
+(270, 17, 18),
+(270, 17, 19),
+(270, 17, 20),
+(271, 17, 17),
+(271, 17, 18),
+(271, 17, 19),
+(271, 17, 20),
+(272, 17, 17),
+(272, 17, 18),
+(272, 17, 19),
+(272, 17, 20),
+(273, 17, 17),
+(273, 17, 18),
+(273, 17, 19),
+(273, 17, 20),
+(274, 17, 17),
+(274, 17, 18),
+(274, 17, 19),
+(274, 17, 20),
+(275, 17, 17),
+(275, 17, 18),
+(275, 17, 19),
+(275, 17, 20),
+(276, 17, 17),
+(276, 17, 18),
+(276, 17, 19),
+(276, 17, 20),
+(283, 17, 17),
+(283, 17, 18),
+(283, 17, 19),
+(283, 17, 20),
+(284, 1, 1),
+(284, 1, 2),
+(284, 1, 3),
+(284, 1, 4);
 
 -- --------------------------------------------------------
 
@@ -4422,12 +4809,12 @@ CREATE TABLE IF NOT EXISTS `teachers_classes` (
 --
 
 INSERT INTO `teachers_classes` (`teacher_class_id`, `employee_id`, `class_id`, `academic_year_id`, `created_at`, `updated_at`) VALUES
-(1, 14, 4, 1, '2015-03-23 12:32:00', '2015-03-23 11:32:00'),
+(1, 1, 4, 1, '2015-03-23 12:32:00', '2015-04-29 09:00:21'),
 (2, 48, 3, 1, '2015-03-23 12:32:28', '2015-03-23 11:32:28'),
-(3, 17, 2, 1, '2015-03-23 12:32:49', '2015-03-23 11:32:49'),
+(3, 1, 2, 1, '2015-03-23 12:32:49', '2015-04-29 09:00:10'),
 (4, 50, 1, 1, '2015-03-23 12:35:55', '2015-03-23 11:36:11'),
 (5, 54, 5, 1, '2015-03-23 12:36:41', '2015-03-23 11:36:41'),
-(6, 13, 7, 1, '2015-03-23 12:37:27', '2015-03-23 11:37:27'),
+(6, 6, 7, 1, '2015-03-23 12:37:27', '2015-04-29 09:00:51'),
 (7, 52, 10, 1, '2015-03-23 12:38:31', '2015-03-23 11:38:31'),
 (8, 23, 9, 1, '2015-03-23 12:38:52', '2015-03-23 11:38:52'),
 (9, 44, 13, 1, '2015-03-23 12:43:15', '2015-03-23 11:43:15'),
@@ -4436,8 +4823,8 @@ INSERT INTO `teachers_classes` (`teacher_class_id`, `employee_id`, `class_id`, `
 (12, 46, 11, 1, '2015-03-23 12:44:57', '2015-03-23 11:44:57'),
 (13, 53, 15, 1, '2015-03-23 12:45:16', '2015-03-23 11:45:21'),
 (14, 62, 20, 1, '2015-03-23 12:53:48', '2015-03-23 11:53:48'),
-(15, 38, 19, 1, '2015-03-23 12:54:56', '2015-03-23 11:54:56'),
-(16, 32, 17, 1, '2015-03-23 12:55:08', '2015-03-23 11:55:08'),
+(15, 1, 19, 1, '2015-03-23 12:54:56', '2015-04-29 09:01:18'),
+(16, 1, 17, 1, '2015-03-23 12:55:08', '2015-04-29 09:01:14'),
 (17, 60, 24, 1, '2015-03-23 12:58:14', '2015-03-23 11:58:14'),
 (18, 42, 22, 1, '2015-03-23 12:58:35', '2015-03-23 11:58:35'),
 (19, 40, 25, 1, '2015-03-23 12:58:52', '2015-03-23 11:58:52'),
@@ -4477,7 +4864,25 @@ CREATE TABLE IF NOT EXISTS `teachers_subjects` (
   `class_id` int(11) DEFAULT NULL,
   `subject_classlevel_id` int(11) DEFAULT NULL,
   `assign_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+
+--
+-- Dumping data for table `teachers_subjects`
+--
+
+INSERT INTO `teachers_subjects` (`teachers_subjects_id`, `employee_id`, `class_id`, `subject_classlevel_id`, `assign_date`) VALUES
+(1, 19, 17, 17, '2015-04-29 09:05:11'),
+(2, 19, 19, 21, '2015-04-29 09:05:16'),
+(3, 1, 19, 24, '2015-04-29 09:05:31'),
+(4, 1, 20, 28, '2015-04-29 09:05:40'),
+(5, 1, 20, 26, '2015-04-29 09:05:49'),
+(6, 1, 19, 22, '2015-04-29 09:05:56'),
+(7, 19, 19, 23, '2015-04-29 09:06:46'),
+(8, 19, 20, 27, '2015-04-29 09:06:51'),
+(9, 19, 2, 5, '2015-04-29 09:07:21'),
+(10, 19, 4, 9, '2015-04-29 09:07:25'),
+(11, 1, 4, 10, '2015-04-29 09:07:36'),
+(12, 1, 2, 6, '2015-04-29 09:07:43');
 
 -- --------------------------------------------------------
 
@@ -4867,6 +5272,206 @@ INSERT INTO `users` (`user_id`, `username`, `password`, `display_name`, `type_id
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `weekly_detail_setups`
+--
+
+DROP TABLE IF EXISTS `weekly_detail_setups`;
+CREATE TABLE IF NOT EXISTS `weekly_detail_setups` (
+`weekly_detail_setup_id` int(11) NOT NULL,
+  `weekly_report_setup_id` int(11) NOT NULL,
+  `weekly_report_no` int(11) NOT NULL,
+  `weekly_weight_point` int(11) NOT NULL DEFAULT '0',
+  `weekly_weight_percent` int(11) NOT NULL DEFAULT '0',
+  `submission_date` date NOT NULL,
+  `report_description` text
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+
+--
+-- Dumping data for table `weekly_detail_setups`
+--
+
+INSERT INTO `weekly_detail_setups` (`weekly_detail_setup_id`, `weekly_report_setup_id`, `weekly_report_no`, `weekly_weight_point`, `weekly_weight_percent`, `submission_date`, `report_description`) VALUES
+(1, 1, 1, 10, 15, '2015-05-05', 'Opening'),
+(2, 1, 2, 15, 15, '2015-05-06', 'Second Week'),
+(3, 1, 3, 20, 20, '2015-05-15', 'Mid Term'),
+(4, 1, 4, 30, 50, '2015-05-22', 'General C.A'),
+(5, 2, 1, 5, 5, '2015-05-05', 'Opening Week'),
+(6, 2, 2, 10, 10, '2015-05-06', 'Second Week'),
+(7, 2, 3, 15, 20, '2015-05-07', 'Mid Term'),
+(8, 2, 4, 20, 15, '2015-05-29', 'Assignment'),
+(9, 2, 5, 25, 15, '2015-06-05', 'Class Work'),
+(10, 2, 6, 30, 35, '2015-06-12', 'General C.A');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `weekly_report_details`
+--
+
+DROP TABLE IF EXISTS `weekly_report_details`;
+CREATE TABLE IF NOT EXISTS `weekly_report_details` (
+`weekly_report_detail_id` int(11) NOT NULL,
+  `weekly_report_id` int(11) DEFAULT NULL,
+  `student_id` int(11) DEFAULT NULL,
+  `weekly_ca` decimal(4,1) DEFAULT '0.0'
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=69 ;
+
+--
+-- Dumping data for table `weekly_report_details`
+--
+
+INSERT INTO `weekly_report_details` (`weekly_report_detail_id`, `weekly_report_id`, `student_id`, `weekly_ca`) VALUES
+(1, 1, 189, '8.0'),
+(2, 1, 190, '5.0'),
+(3, 1, 191, '9.0'),
+(4, 1, 192, '6.0'),
+(5, 1, 193, '4.0'),
+(6, 1, 194, '7.0'),
+(7, 1, 195, '7.0'),
+(8, 1, 196, '5.0'),
+(16, 2, 189, '5.6'),
+(17, 2, 190, '2.0'),
+(18, 2, 191, '3.0'),
+(19, 2, 192, '9.0'),
+(20, 2, 193, '8.0'),
+(21, 2, 194, '7.0'),
+(22, 2, 195, '7.0'),
+(23, 2, 196, '6.0'),
+(31, 3, 189, '6.0'),
+(32, 3, 190, '9.0'),
+(33, 3, 191, '8.0'),
+(34, 3, 192, '7.0'),
+(35, 3, 193, '6.0'),
+(36, 3, 194, '9.0'),
+(37, 3, 195, '5.0'),
+(38, 3, 196, '8.0'),
+(46, 4, 189, '5.0'),
+(47, 4, 190, '6.0'),
+(48, 4, 191, '3.0'),
+(49, 4, 192, '8.0'),
+(50, 4, 193, '9.0'),
+(51, 4, 194, '7.0'),
+(52, 4, 195, '6.0'),
+(53, 4, 196, '8.0'),
+(54, 5, 189, '11.0'),
+(55, 5, 190, '9.0'),
+(56, 5, 191, '12.0'),
+(57, 5, 192, '9.0'),
+(58, 5, 193, '8.0'),
+(59, 5, 194, '10.0'),
+(60, 5, 195, '8.0'),
+(61, 5, 196, '7.0');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `weekly_report_setups`
+--
+
+DROP TABLE IF EXISTS `weekly_report_setups`;
+CREATE TABLE IF NOT EXISTS `weekly_report_setups` (
+`weekly_report_setup_id` int(11) unsigned NOT NULL,
+  `weekly_report` int(11) DEFAULT NULL,
+  `classgroup_id` int(11) DEFAULT NULL,
+  `academic_term_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `weekly_report_setups`
+--
+
+INSERT INTO `weekly_report_setups` (`weekly_report_setup_id`, `weekly_report`, `classgroup_id`, `academic_term_id`) VALUES
+(1, 4, 1, 1),
+(2, 6, 2, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `weekly_reports`
+--
+
+DROP TABLE IF EXISTS `weekly_reports`;
+CREATE TABLE IF NOT EXISTS `weekly_reports` (
+`weekly_report_id` int(11) unsigned NOT NULL,
+  `subject_classlevel_id` int(11) DEFAULT NULL,
+  `weekly_detail_setup_id` int(11) DEFAULT NULL,
+  `marked_status` int(11) NOT NULL DEFAULT '2',
+  `notification_status` int(11) NOT NULL DEFAULT '2'
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+
+--
+-- Dumping data for table `weekly_reports`
+--
+
+INSERT INTO `weekly_reports` (`weekly_report_id`, `subject_classlevel_id`, `weekly_detail_setup_id`, `marked_status`, `notification_status`) VALUES
+(1, 22, 5, 1, 1),
+(2, 24, 5, 1, 2),
+(3, 23, 5, 1, 2),
+(4, 21, 5, 1, 2),
+(5, 22, 7, 1, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `weekly_setupviews`
+--
+DROP VIEW IF EXISTS `weekly_setupviews`;
+CREATE TABLE IF NOT EXISTS `weekly_setupviews` (
+`weekly_report_setup_id` int(11) unsigned
+,`weekly_report` int(11)
+,`weekly_weight_point` int(11)
+,`weekly_weight_percent` int(11)
+,`classgroup_id` int(11)
+,`academic_term_id` int(11)
+,`weekly_detail_setup_id` int(11)
+,`weekly_report_no` int(11)
+,`report_description` text
+,`submission_date` date
+,`classgroup` varchar(50)
+,`academic_term` varchar(50)
+,`academic_year_id` int(11) unsigned
+);
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `weeklyreport_studentdetailsviews`
+--
+DROP VIEW IF EXISTS `weeklyreport_studentdetailsviews`;
+CREATE TABLE IF NOT EXISTS `weeklyreport_studentdetailsviews` (
+`weekly_report_id` int(11) unsigned
+,`subject_classlevel_id` int(11)
+,`weekly_detail_setup_id` int(11)
+,`marked_status` int(11)
+,`notification_status` int(11)
+,`weekly_report_detail_id` int(11)
+,`student_id` int(11)
+,`student_no` varchar(50)
+,`student_name` varchar(101)
+,`gender` varchar(10)
+,`weekly_ca` decimal(4,1)
+,`weekly_report_no` int(11)
+,`weekly_weight_percent` int(11)
+,`report_description` text
+,`submission_date` date
+,`weekly_report_setup_id` int(11) unsigned
+,`weekly_weight_point` int(11)
+,`sponsor_id` int(11)
+,`sponsor_no` varchar(10)
+,`mobile_number1` varchar(20)
+,`email` varchar(100)
+,`sponsor_name` varchar(101)
+,`subject_name` varchar(50)
+,`class_id` int(11)
+,`class_name` varchar(50)
+,`classlevel_id` int(11)
+,`classlevel` varchar(50)
+,`classgroup_id` int(11) unsigned
+,`academic_term_id` int(11)
+,`academic_term` varchar(50)
+);
+-- --------------------------------------------------------
+
+--
 -- Structure for view `attend_headerviews`
 --
 DROP TABLE IF EXISTS `attend_headerviews`;
@@ -4971,6 +5576,24 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 DROP TABLE IF EXISTS `teachers_subjectsviews`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `teachers_subjectsviews` AS select `b`.`teachers_subjects_id` AS `teachers_subjects_id`,`b`.`employee_id` AS `employee_id`,`b`.`class_id` AS `class_id`,`d`.`subject_id` AS `subject_id`,`f`.`subject_name` AS `subject_name`,`b`.`subject_classlevel_id` AS `subject_classlevel_id`,`b`.`assign_date` AS `assign_date`,`a`.`class_name` AS `class_name`,concat(ucase(`c`.`first_name`),', ',`c`.`other_name`) AS `employee_name`,`c`.`status_id` AS `status_id`,`d`.`academic_term_id` AS `academic_term_id`,`e`.`academic_term` AS `academic_term` from (((((`classrooms` `a` join `teachers_subjects` `b` on((`a`.`class_id` = `b`.`class_id`))) join `employees` `c` on((`c`.`employee_id` = `b`.`employee_id`))) join `subject_classlevels` `d` on((`d`.`subject_classlevel_id` = `b`.`subject_classlevel_id`))) join `academic_terms` `e` on((`e`.`academic_term_id` = `d`.`academic_term_id`))) join `subjects` `f` on((`f`.`subject_id` = `d`.`subject_id`)));
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `weekly_setupviews`
+--
+DROP TABLE IF EXISTS `weekly_setupviews`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `weekly_setupviews` AS select `a`.`weekly_report_setup_id` AS `weekly_report_setup_id`,`a`.`weekly_report` AS `weekly_report`,`b`.`weekly_weight_point` AS `weekly_weight_point`,`b`.`weekly_weight_percent` AS `weekly_weight_percent`,`a`.`classgroup_id` AS `classgroup_id`,`a`.`academic_term_id` AS `academic_term_id`,`b`.`weekly_detail_setup_id` AS `weekly_detail_setup_id`,`b`.`weekly_report_no` AS `weekly_report_no`,`b`.`report_description` AS `report_description`,`b`.`submission_date` AS `submission_date`,`c`.`classgroup` AS `classgroup`,`d`.`academic_term` AS `academic_term`,`d`.`academic_year_id` AS `academic_year_id` from (((`weekly_report_setups` `a` join `weekly_detail_setups` `b` on((`a`.`weekly_report_setup_id` = `b`.`weekly_report_setup_id`))) join `classgroups` `c` on((`a`.`classgroup_id` = `c`.`classgroup_id`))) join `academic_terms` `d` on((`a`.`academic_term_id` = `d`.`academic_term_id`)));
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `weeklyreport_studentdetailsviews`
+--
+DROP TABLE IF EXISTS `weeklyreport_studentdetailsviews`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `weeklyreport_studentdetailsviews` AS select `f`.`weekly_report_id` AS `weekly_report_id`,`f`.`subject_classlevel_id` AS `subject_classlevel_id`,`f`.`weekly_detail_setup_id` AS `weekly_detail_setup_id`,`f`.`marked_status` AS `marked_status`,`f`.`notification_status` AS `notification_status`,`g`.`weekly_report_detail_id` AS `weekly_report_detail_id`,`g`.`student_id` AS `student_id`,`j`.`student_no` AS `student_no`,concat(`j`.`first_name`,' ',`j`.`surname`) AS `student_name`,`j`.`gender` AS `gender`,`g`.`weekly_ca` AS `weekly_ca`,`h`.`weekly_report_no` AS `weekly_report_no`,`h`.`weekly_weight_percent` AS `weekly_weight_percent`,`h`.`report_description` AS `report_description`,`h`.`submission_date` AS `submission_date`,`i`.`weekly_report_setup_id` AS `weekly_report_setup_id`,`h`.`weekly_weight_point` AS `weekly_weight_point`,`j`.`sponsor_id` AS `sponsor_id`,`k`.`sponsor_no` AS `sponsor_no`,`k`.`mobile_number1` AS `mobile_number1`,`k`.`email` AS `email`,concat(`k`.`first_name`,' ',`k`.`other_name`) AS `sponsor_name`,`b`.`subject_name` AS `subject_name`,`a`.`class_id` AS `class_id`,`c`.`class_name` AS `class_name`,`c`.`classlevel_id` AS `classlevel_id`,`d`.`classlevel` AS `classlevel`,`d`.`classgroup_id` AS `classgroup_id`,`a`.`academic_term_id` AS `academic_term_id`,`e`.`academic_term` AS `academic_term` from ((((((((((`subject_classlevels` `a` join `subjects` `b` on((`a`.`subject_id` = `b`.`subject_id`))) join `classrooms` `c` on((`a`.`class_id` = `c`.`class_id`))) join `classlevels` `d` on((`a`.`classlevel_id` = `d`.`classlevel_id`))) join `academic_terms` `e` on((`a`.`academic_term_id` = `e`.`academic_term_id`))) join `weekly_reports` `f` on((`a`.`subject_classlevel_id` = `f`.`subject_classlevel_id`))) join `weekly_report_details` `g` on((`f`.`weekly_report_id` = `g`.`weekly_report_id`))) join `weekly_detail_setups` `h` on((`f`.`weekly_detail_setup_id` = `h`.`weekly_detail_setup_id`))) join `weekly_report_setups` `i` on((`h`.`weekly_report_setup_id` = `i`.`weekly_report_setup_id`))) join `students` `j` on((`g`.`student_id` = `j`.`student_id`))) join `sponsors` `k` on((`j`.`sponsor_id` = `k`.`sponsor_id`)));
 
 --
 -- Indexes for dumped tables
@@ -5283,6 +5906,30 @@ ALTER TABLE `users`
  ADD PRIMARY KEY (`user_id`), ADD KEY `user_role_id` (`user_role_id`);
 
 --
+-- Indexes for table `weekly_detail_setups`
+--
+ALTER TABLE `weekly_detail_setups`
+ ADD PRIMARY KEY (`weekly_detail_setup_id`);
+
+--
+-- Indexes for table `weekly_report_details`
+--
+ALTER TABLE `weekly_report_details`
+ ADD PRIMARY KEY (`weekly_report_detail_id`), ADD KEY `exam_id` (`weekly_report_id`,`student_id`);
+
+--
+-- Indexes for table `weekly_report_setups`
+--
+ALTER TABLE `weekly_report_setups`
+ ADD PRIMARY KEY (`weekly_report_setup_id`), ADD KEY `class_id` (`weekly_report`);
+
+--
+-- Indexes for table `weekly_reports`
+--
+ALTER TABLE `weekly_reports`
+ ADD PRIMARY KEY (`weekly_report_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -5500,7 +6147,7 @@ MODIFY `student_class_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=288;
 -- AUTO_INCREMENT for table `subject_classlevels`
 --
 ALTER TABLE `subject_classlevels`
-MODIFY `subject_classlevel_id` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `subject_classlevel_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=29;
 --
 -- AUTO_INCREMENT for table `subject_groups`
 --
@@ -5520,7 +6167,7 @@ MODIFY `teacher_class_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=23;
 -- AUTO_INCREMENT for table `teachers_subjects`
 --
 ALTER TABLE `teachers_subjects`
-MODIFY `teachers_subjects_id` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `teachers_subjects_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `user_roles`
 --
@@ -5531,6 +6178,26 @@ MODIFY `user_role_id` int(3) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 --
 ALTER TABLE `users`
 MODIFY `user_id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=343;
+--
+-- AUTO_INCREMENT for table `weekly_detail_setups`
+--
+ALTER TABLE `weekly_detail_setups`
+MODIFY `weekly_detail_setup_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
+--
+-- AUTO_INCREMENT for table `weekly_report_details`
+--
+ALTER TABLE `weekly_report_details`
+MODIFY `weekly_report_detail_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=69;
+--
+-- AUTO_INCREMENT for table `weekly_report_setups`
+--
+ALTER TABLE `weekly_report_setups`
+MODIFY `weekly_report_setup_id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `weekly_reports`
+--
+ALTER TABLE `weekly_reports`
+MODIFY `weekly_report_id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

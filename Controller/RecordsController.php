@@ -250,13 +250,13 @@ class RecordsController extends AppController {
                 //Delete The ID's Checked
                 $this->deleteIDs($delete_terms_id, $Classroom);
 
-                //Save The Master Record State Then Redirect To the next level (Subject Group)
+                //Save The Master Record State Then Redirect To the next level (Weekly Reports)
                 if($count > 0) {
                     $this->setFlashMessage('Class Room Has Been Saved', 1);
                     if($this->master_record_id < $this->master_record_count) {
                         $this->MasterSetupModel->id = 1;
                         $this->MasterSetupModel->saveField('master_record_id', 5);
-                        $this->redirect(array('controller' => 'records', 'action' => 'subject_group'));
+                        $this->redirect(array('controller' => 'records', 'action' => 'weekly_report'));
                     }else{
                         $this->set('Classrooms', $Classroom->find('all'));
                     }
@@ -268,8 +268,111 @@ class RecordsController extends AppController {
             $this->accessDenialError();
         }
     }
+
+    /////// Weekly Reports  Master Record  ////////////////////// 6th Step //////////////////////////////////////////////////////////////
+    public function weekly_report() {
+        $this->set('title_for_layout', 'Weekly Reports Records');
+        $resultCheck = $this->Acl->check($this->group_alias, 'RecordsController');
+        if($resultCheck){
+            $this->loadModels('AcademicYear', 'academic_year', 'DESC');
+            $this->loadModels('Classgroup', 'classgroup');
+            $WeeklyReportSetup = ClassRegistry::init('WeeklyReportSetup');
+            $AcademicTerm = ClassRegistry::init('AcademicTerm');
+            $this->set('Terms', $AcademicTerm->find('list', array('conditions' => array('AcademicTerm.academic_year_id' => $AcademicTerm->getCurrentYearID()))));
+            $count = 0;
+
+            if ($this->request->is('post') and isset($this->request->data['SearchWeeklyReportSetup'])) {
+                $data = $this->request->data['SearchWeeklyReportSetup'];
+                $options = array('conditions' => array('WeeklyReportSetup.academic_term_id' => $data['academic_term_search_id']));
+                $this->set('WeeklyReports', $WeeklyReportSetup->find('all', $options));
+
+            }else if ($this->request->is('post') and isset($this->request->data['WeeklyReportSetup'])) {
+                $data_array = $this->request->data['WeeklyReportSetup'];
+                $delete = $this->request->data['WeeklyReportSetup']['deleted_term'];
+                $delete_id = (!empty($delete)) ? explode(',', $delete) : null;
+                for ($i=0; $i<count($data_array['weekly_report_setup_id']); $i++){
+                    $data = $this->request->data['WeeklyReportSetup'];
+                    //Save Record if its New Else // Update Existing Record
+                    $data['weekly_report_setup_id'] = ($data_array['weekly_report_setup_id'][$i] === '') ? null : $data_array['weekly_report_setup_id'][$i];
+
+                    $data['weekly_report'] = $data_array['weekly_report'][$i];
+                    $data['classgroup_id'] = $data_array['classgroup_id'][$i];
+                    $data['academic_term_id'] = $data_array['academic_term_id'][$i];
+                    if($WeeklyReportSetup->save($data)){   $count++;  }
+                }
+                //Delete The ID's Checked
+                $this->deleteIDs($delete_id, $WeeklyReportSetup);
+
+                //Save The Master Record State Then Redirect To the next level (Weekly Report Details )
+                if($count > 0) {
+                    $this->setFlashMessage('Weekly Report Has Been Saved', 1);
+                    if($this->master_record_id < $this->master_record_count) {
+                        $this->MasterSetupModel->id = 1;
+                        $this->MasterSetupModel->saveField('master_record_id', 6);
+                        $this->redirect(array('controller' => 'records', 'action' => 'weeklyRep_detail'));
+                    }else{
+                        $this->set('WeeklyReports', $WeeklyReportSetup->find('all'));
+                    }
+                }
+            }else{
+                $this->set('WeeklyReports', $WeeklyReportSetup->find('all'));
+            }
+        }else{
+            $this->accessDenialError();
+        }
+    }
+
+
+    /////// Weekly Report Details  Master Record  ////////////////////// 7th Step //////////////////////////////////////////////////////////////
+    public function weeklyrep_detail() {
+        $this->set('title_for_layout', 'Weekly Report Details Records');
+        $resultCheck = $this->Acl->check($this->group_alias, 'RecordsController');
+        if($resultCheck){
+            $WeeklyDetailSetup = ClassRegistry::init('WeeklyDetailSetup');
+            $Classgroup = ClassRegistry::init('Classgroup');
+            $count = 0;
+
+            if ($this->request->is('post') and isset($this->request->data['WeeklyDetailSetup'])) {
+                $data_array = $this->request->data['WeeklyDetailSetup'];
+                $delete = $this->request->data['WeeklyDetailSetup']['deleted_term'];
+                $delete_id = (!empty($delete)) ? explode(',', $delete) : null;
+
+                for ($i=0; $i<count($data_array['weekly_detail_setup_id']); $i++){
+                    $data = $this->request->data['WeeklyDetailSetup'];
+                    //Save Record if its New Else // Update Existing Record
+                    $data['weekly_detail_setup_id'] = ($data_array['weekly_detail_setup_id'][$i] === '') ? null : $data_array['weekly_detail_setup_id'][$i];
+                    $data['weekly_report_setup_id'] = $data_array['weekly_report_setup_id'][$i];
+                    $data['weekly_report_no'] = $data_array['weekly_report_no'][$i];
+                    $data['weekly_weight_point'] = $data_array['weekly_weight_point'][$i];
+                    $data['weekly_weight_percent'] = $data_array['weekly_weight_percent'][$i];
+                    $data['submission_date'] = $data_array['submission_date'][$i];
+                    $data['report_description'] = $data_array['report_description'][$i];
+                    if($WeeklyDetailSetup->save($data)){   $count++;  }
+                }
+
+                //Delete The ID's Checked
+                $this->deleteIDs($delete_id, $WeeklyDetailSetup);
+
+                //Save The Master Record State Then Redirect To the next level (Subject Group)
+                if($count > 0) {
+                    $this->setFlashMessage('Weekly Details Report Setup Has Been Saved', 1);
+                    if($this->master_record_id < $this->master_record_count) {
+                        $this->MasterSetupModel->id = 1;
+                        $this->MasterSetupModel->saveField('master_record_id', 7);
+                        $this->redirect(array('controller' => 'records', 'action' => 'subject_group'));
+                    }else{
+                        $this->set('Classgroups', $Classgroup->find('all'));
+                    }
+                }
+            }else{
+                $this->set('Classgroups', $Classgroup->find('all'));
+            }
+        }else{
+            $this->accessDenialError();
+        }
+    }
     
-    //// Subject Groups Master Record  //////////////////////// 6th Step ////////////////////////////////////////////////////////////
+    //// Subject Groups Master Record  //////////////////////// 8th Step ////////////////////////////////////////////////////////////
     public function subject_group() {
         $this->set('title_for_layout', 'Subject Group Records');
         $resultCheck = $this->Acl->check($this->group_alias, 'RecordsController');
@@ -297,7 +400,7 @@ class RecordsController extends AppController {
                     $this->setFlashMessage('Subject Group Has Been Saved', 1);
                     if($this->master_record_id < $this->master_record_count) {
                         $this->MasterSetupModel->id = 1;
-                        $this->MasterSetupModel->saveField('master_record_id', 6);
+                        $this->MasterSetupModel->saveField('master_record_id', 8);
                         $this->redirect(array('controller' => 'records', 'action' => 'subject'));
                     }else{
                         $this->set('SubjectGroups', $SubjectGroup->find('all'));
@@ -311,7 +414,7 @@ class RecordsController extends AppController {
         }
     }
     
-    //////  Subject Master Record  //////////////////////// 7th Step ////////////////////////////////////////////////////////////
+    //////  Subject Master Record  //////////////////////// 9th Step ////////////////////////////////////////////////////////////
     public function subject() {
         $this->set('title_for_layout', 'Subject Records');
         $resultCheck = $this->Acl->check($this->group_alias, 'RecordsController');
@@ -346,7 +449,7 @@ class RecordsController extends AppController {
                     $this->setFlashMessage('Subject Has Been Saved', 1);
                     if($this->master_record_id < $this->master_record_count) {
                         $this->MasterSetupModel->id = 1;
-                        $this->MasterSetupModel->saveField('master_record_id', 7);
+                        $this->MasterSetupModel->saveField('master_record_id', 9);
                         $this->redirect(array('controller' => 'records', 'action' => 'grade'));
                     }else{
                         $this->set('Subjects', $Subject->find('all'));
@@ -360,7 +463,7 @@ class RecordsController extends AppController {
         }
     }
 
-    //// Grade Groupings Master Record  //////////////////////////// 8th Step ////////////////////////////////////////////////////////
+    //// Grade Groupings Master Record  //////////////////////////// 10th Step ////////////////////////////////////////////////////////
     public function grade() {
         $this->set('title_for_layout', 'Grade Records');
         $resultCheck = $this->Acl->check($this->group_alias, 'RecordsController');
@@ -398,7 +501,7 @@ class RecordsController extends AppController {
                     $this->setFlashMessage('Grade Has Been Saved', 1);
                     if($this->master_record_id < $this->master_record_count) {
                         $this->MasterSetupModel->id = 1;
-                        $this->MasterSetupModel->saveField('master_record_id', 8);
+                        $this->MasterSetupModel->saveField('master_record_id', 10);
                         //Change Your Password
                         $this->redirect(array('controller' => 'users', 'action' => 'change'));
                     }else{
@@ -413,7 +516,7 @@ class RecordsController extends AppController {
         }
     }
     
-    ///// Items Master Record  //////////////////////// 9th Step ////////////////////////////////////////////////////////////
+    ///// Items Master Record  //////////////////////// 11th Step ////////////////////////////////////////////////////////////
     public function item() {
         $this->set('title_for_layout', 'Item Records');
         $resultCheck = $this->Acl->check($this->group_alias, 'RecordsController');
@@ -445,7 +548,7 @@ class RecordsController extends AppController {
                     $this->setFlashMessage('Items Has Been Saved', 1);
                     if($this->master_record_id < $this->master_record_count) {
                         $this->MasterSetupModel->id = 1;
-                        $this->MasterSetupModel->saveField('master_record_id', 9);
+                        $this->MasterSetupModel->saveField('master_record_id', 11);
                         $this->redirect(array('controller' => 'records', 'action' => 'item_bill'));
                     }else{
                         $this->set('Items', $Item->find('all'));
@@ -459,7 +562,7 @@ class RecordsController extends AppController {
         }
     }
     
-    //// Item Bills Master Record  ///////////////////// 10th Step ///////////////////////////////////////////////////////////////
+    //// Item Bills Master Record  ///////////////////// 12th Step ///////////////////////////////////////////////////////////////
     public function item_bill() {
         $this->set('title_for_layout', 'Item Bills Records');
         $resultCheck = $this->Acl->check($this->group_alias, 'RecordsController');
@@ -507,7 +610,7 @@ class RecordsController extends AppController {
                     $this->setFlashMessage('Item Bills Has Been Saved', 1);
                     if($this->master_record_id < $this->master_record_count) {
                         $this->MasterSetupModel->id = 1;
-                        $this->MasterSetupModel->saveField('master_record_id', 9);
+                        $this->MasterSetupModel->saveField('master_record_id', 12);
                         //$this->redirect(array('controller' => 'dashboard', 'action' => 'index'));
                     }else{
                         $this->set('ItemBills', $ItemBill->find('all'));
@@ -519,6 +622,6 @@ class RecordsController extends AppController {
         }else{
             $this->accessDenialError();
         }
-    }    
+    }
 }
 ?>
