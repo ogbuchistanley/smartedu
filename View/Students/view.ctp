@@ -70,18 +70,18 @@
                                 <th>Birth Date</th>
                                 <td><?php echo (!empty($student['Student']['birth_date'])) ? h($student['Student']['birth_date']) : '<span class="label label-danger">nill</span>'; ?></td>
                             </tr>
-                            <tr>
+                            <!--tr>
                                 <th>Nationality</th>
-                                <td><?php echo (!empty($student['Student']['country_id'])) ? h($student['Country']['country_name']) : '<span class="label label-danger">nill</span>';?></td>
+                                <td><?php //echo (!empty($student['Student']['country_id'])) ? h($student['Country']['country_name']) : '<span class="label label-danger">nill</span>';?></td>
                             </tr>
                             <tr>
                                 <th>State of Origin</th>
-                                <td><?php echo (!empty($student['Student']['state_id'])) ? h($student['State']['state_name']).' State' : '<span class="label label-danger">nill</span>';?></td>
+                                <td><?php //echo (!empty($student['Student']['state_id'])) ? h($student['State']['state_name']).' State' : '<span class="label label-danger">nill</span>';?></td>
                             </tr>
                             <tr>
                                 <th>Local Govt. Area</th>
-                                <td><?php echo (!empty($student['Student']['local_govt_id'])) ? h($student['LocalGovt']['local_govt_name']) : '<span class="label label-danger">nill</span>';?></td>
-                            </tr>
+                                <td><?php //echo (!empty($student['Student']['local_govt_id'])) ? h($student['LocalGovt']['local_govt_name']) : '<span class="label label-danger">nill</span>';?></td>
+                            </tr-->
                         </tbody>
                     </table>
                 </div> <!-- /panel body -->

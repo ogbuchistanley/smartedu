@@ -70,7 +70,7 @@ class StudentsController extends AppController {
                 }else{
                     $StudentNew->create();
                     if ($StudentNew->save($data)) {
-                        $this->setFlashMessage('The Student '.$data['first_name'].' '.$data['other_name'].' has been saved.', 1);
+                        $this->setFlashMessage('The Student '.$data['first_name'].' '.$data['surname'].' has been saved.', 1);
                         return $this->redirect(array('controller' => 'students', 'action' => 'register'));
                     }else {
                         $this->setFlashMessage('The Student could not be saved. Please,  Kindly Fill the Form Properly.', 2);
@@ -95,6 +95,43 @@ class StudentsController extends AppController {
     }
 
     public function adjust($encrypt_id = null) {
+        $this->set('title_for_layout','Modify Existing Student Record');
+        $result = $this->Acl->check($this->group_alias, 'StudentsController/adjust', 'update');
+        if($result){
+            $this->loadModels('RelationshipType');
+            $this->loadModels('Classlevel');
+            $decrypt_student_id = $this->encryption->decode($encrypt_id);
+
+            if (!$this->Student->exists($decrypt_student_id)) {
+                $this->accessDenialError('Invalid Student Record Requested for Modification', 2);
+            }
+            if ($this->request->is(array('post', 'put'))) {
+                $this->Student->id = $decrypt_student_id;
+                $data = $this->request->data['Student'];
+                if(!$data['image_url']['name']){
+                    unset($data['image_url']);
+                }
+                if ($this->Student->save($data)) {
+                    if(isset($data['image_url'])){
+                        $this->uploadImage($decrypt_student_id, 'students', $this->request->data['Student']);
+                        $this->setFlashMessage('The Student has been Updated.', 1);
+                    }else {
+                        $this->setFlashMessage('The Student has been Updated... But New Image Was Not Uploaded', 1);
+                    }
+                    return $this->redirect(array('action' => 'adjust/'.$encrypt_id));
+                } else {
+                    $this->setFlashMessage('The student could not be update. Please, try again.', 2);
+                }
+            }
+            $options = array('conditions' => array('Student.' . $this->Student->primaryKey => $decrypt_student_id));
+            $this->request->data = $this->Student->find('first', $options);
+            $this->set('student', $this->Student->find('first', $options));
+        }else{
+            $this->accessDenialError();
+        }
+    }
+
+    /*public function adjust($encrypt_id = null) {
         $this->set('title_for_layout','Modify Existing Student Record');
         $result = $this->Acl->check($this->group_alias, 'StudentsController/adjust', 'update');
         if($result){
@@ -131,7 +168,7 @@ class StudentsController extends AppController {
         }else{
             $this->accessDenialError();
         }
-    }
+    }*/
 
     public function delete($encrypt_id) {
         $studClass = ClassRegistry::init('StudentsClass');

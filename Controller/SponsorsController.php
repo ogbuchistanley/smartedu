@@ -75,8 +75,36 @@ class SponsorsController extends AppController {
             $this->accessDenialError();
         }
     }
-    
+
     public function adjust($encrypt_id = null) {
+        $result = $this->Acl->check($this->group_alias, 'SponsorsController/adjust', 'update');
+        if($result){
+            $this->loadModels('Salutation', 'salutation_name');
+            $decrypt_sponsor_id = $this->encryption->decode($encrypt_id);
+
+            if (!$this->Sponsor->exists($decrypt_sponsor_id)) {
+                $this->accessDenialError('Invalid Parent Record Requested for Modification', 2);
+            }
+            if ($this->request->is(array('post', 'put'))) {
+                $this->Sponsor->id = $decrypt_sponsor_id;
+                $data = $this->request->data['Sponsor'];
+                if ($this->Sponsor->save($data)) {
+                    $this->setFlashMessage('The Parent has been Updated.', 1);
+
+                    return $this->redirect(array('action' => 'adjust/'.$encrypt_id));
+                } else {
+                    $this->setFlashMessage('The Parent could not be Updated. Please, try again.', 2);
+                }
+            }
+            $options = array('conditions' => array('Sponsor.' . $this->Sponsor->primaryKey => $decrypt_sponsor_id));
+            $this->request->data = $this->Sponsor->find('first', $options);
+            $this->set('sponsor', $this->Sponsor->find('first', $options));
+        }else{
+            $this->accessDenialError();
+        }
+    }
+    
+    /*public function adjust($encrypt_id = null) {
         $result = $this->Acl->check($this->group_alias, 'SponsorsController/adjust', 'update');
         if($result){
             $this->loadModels('Salutation', 'salutation_name');
@@ -115,7 +143,7 @@ class SponsorsController extends AppController {
         }else{
            $this->accessDenialError();
         }
-    }
+    }*/
     
     public function delete($encrypt_id = null) {
         $result = $this->Acl->check($this->group_alias, 'SponsorsController/delete', 'delete');

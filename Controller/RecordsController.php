@@ -438,6 +438,7 @@ class RecordsController extends AppController {
                     $data['subject_id'] = ($data_array['subject_id'][$i] === '') ? null : $data_array['subject_id'][$i];
 
                     $data['subject_name'] = $data_array['subject_name'][$i];
+                    $data['subject_abbr'] = $data_array['subject_abbr'][$i];
                     $data['subject_group_id'] = $data_array['subject_group_id'][$i];
                     if($Subject->save($data)){   $count++;  }
                 }
@@ -452,11 +453,11 @@ class RecordsController extends AppController {
                         $this->MasterSetupModel->saveField('master_record_id', 9);
                         $this->redirect(array('controller' => 'records', 'action' => 'grade'));
                     }else{
-                        $this->set('Subjects', $Subject->find('all'));
+                        $this->set('Subjects', $Subject->find('all', array('order' => 'subject_name')));
                     }
                 }
             }else{
-                $this->set('Subjects', $Subject->find('all'));
+                $this->set('Subjects', $Subject->find('all', array('order' => 'subject_name')));
             }
         }else{
             $this->accessDenialError();

@@ -1,23 +1,25 @@
+<link href="<?php echo APP_DIR_ROOT; ?>Intl-Tel-Input/build/css/intlTelInput.css" rel="stylesheet">
+<?php echo $this->Html->script("../app/Intl-Tel-Input/build/js/intlTelInput.js", FALSE);?>
 <?php echo $this->Html->script("../app/jquery/custom.sponsor.js", FALSE);?>
 
     <div class="row">
         <?php
-        $errors = $this->validationErrors['SponsorNew'];
-        $flatErrors = Set::flatten($errors);
-        $flatErrors2 = $flatErrors;
-        $test = array();
-        foreach($flatErrors as $key => $value){
-            $test[] = $value;
-        }
-        if(!empty($test[count($test) - 1])) {
-            echo '<div class="alert alert-danger">';
-            echo '<ul>';
-            foreach($flatErrors2 as $key => $value) {
-                echo (!empty($value)) ? '<li>'.$value.'</li>' : false;
-            }
-            echo '</ul>';
-            echo '</div>';
-        }
+//        $errors = $this->validationErrors['SponsorNew'];
+//        $flatErrors = Set::flatten($errors);
+//        $flatErrors2 = $flatErrors;
+//        $test = array();
+//        foreach($flatErrors as $key => $value){
+//            $test[] = $value;
+//        }
+//        if(!empty($test[count($test) - 1])) {
+//            echo '<div class="alert alert-danger">';
+//            echo '<ul>';
+//            foreach($flatErrors2 as $key => $value) {
+//                echo (!empty($value)) ? '<li>'.$value.'</li>' : false;
+//            }
+//            echo '</ul>';
+//            echo '</div>';
+//        }
         ?>
     </div>
     <div class="col-md-12">
@@ -93,17 +95,18 @@
                                </div>
                             </div>
                             <div class="form-group">
+                              <label class="col-lg-2 col-md-3 control-label">Mobile Number <small class="text-danger"> * </small></label>
+                              <div class="col-lg-7 col-md-9">
+                                    <input type="tel" class="form-control form-cascade-control input-small" name="data[SponsorNew][mobile_number1]" id="mobile_number1" required>
+                                      <span id="valid-msg" class="hide alert-success">✓ Valid</span>
+                                      <span id="error-msg" class="hide alert-danger">Invalid number</span>
+                              </div>
+                            </div>
+                            <div class="form-group">
                               <label class="col-lg-2 col-md-3 control-label">Email</label>
                               <div class="col-lg-7 col-md-9">
                                 <input type="email" class="form-control form-cascade-control input-small" name="data[SponsorNew][email]"
                                 id="email" placeholder="Parent's e-mail">
-                              </div>
-                            </div>
-                            <div class="form-group">
-                              <label class="col-lg-2 col-md-3 control-label">Mobile Number <small class="text-danger"> * </small></label>
-                              <div class="col-lg-7 col-md-9">
-                                    <input type="text" class="form-control form-cascade-control input-small" name="data[SponsorNew][mobile_number1]"
-                                    id="mobile_number1" placeholder="Parent's Mobile number" required>
                               </div>
                             </div>
                             <div class="form-group">

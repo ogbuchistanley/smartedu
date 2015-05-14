@@ -79,7 +79,7 @@
                             </tr>
                             <tr>
                                 <th>Occupation</th>
-                                <td><?php echo h($sponsor['Sponsor']['occupation']);?></td>
+                                <td><?php echo (!empty($sponsor['Sponsor']['occupation'])) ? h($sponsor['Sponsor']['occupation'])  : $nil;?></td>
                             </tr>
                             <tr>
                                 <th>Company Name</th>

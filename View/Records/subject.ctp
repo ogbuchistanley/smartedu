@@ -44,7 +44,7 @@
                                                 echo $this->Form->create('SearchSubject', array(
                                                         'class' => 'form-horizontal'
                                                     )
-                                                );     
+                                                );
                                             ?>       
                                                 
                                                 <div class="form-group">
@@ -60,7 +60,7 @@
                                                                     'options' => $SubjectGroups,
                                                                     'empty' => '(Select Subject Group)'
                                                                 )
-                                                            ); 
+                                                            );
                                                         ?>
                                                     </div>
                                                 </div>
@@ -77,7 +77,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-8">
+                        <div class="col-md-10">
                            <div class="panel">
                                 <div class="panel-body">
                                     <div class="panel panel-info">
@@ -95,8 +95,9 @@
                                                 <thead>
                                                  <tr>
                                                   <th>#</th>
-                                                  <th>Subjects</th>
-                                                  <th>Subject Groups</th>
+                                                  <th>Subject Names</th>
+                                                  <th>Subject Alias</th>
+                                                  <th>Subject Group</th>
                                                   <th>Action</th>
                                                 </tr>
                                               </thead>
@@ -110,7 +111,10 @@
                                                                <input type="hidden" name="data[Subject][subject_id][]" value="<?php echo h($Subject['Subject']['subject_id']);?>">
                                                            </td>
                                                            <td>
-                                                              <?php 
+                                                               <input style="width: 150px;" class="form-control form-cascade-control" required name="data[Subject][subject_abbr][]" value="<?php echo h($Subject['Subject']['subject_abbr']);?>">
+                                                           </td>
+                                                            <td>
+                                                              <?php
                                                                   echo $this->Form->input('subject_group_id', array(
                                                                           'div' => false,
                                                                           'label' => false,
@@ -121,7 +125,7 @@
                                                                           'options' => $SubjectGroups,
                                                                           'empty' => '(Select Class Group)'
                                                                       )
-                                                                  ); 
+                                                                  );
                                                               ?>
                                                            </td>
                                                            <td>
@@ -139,7 +143,10 @@
                                                                <input type="hidden" name="data[Subject][subject_id][]" value="">
                                                            </td>
                                                            <td>
-                                                              <?php 
+                                                               <input style="width: 150px;" class="form-control form-cascade-control" required name="data[Subject][subject_abbr][]" value="">
+                                                           </td>
+                                                            <td>
+                                                              <?php
                                                                   echo $this->Form->input('subject_group_id', array(
                                                                           'div' => false,
                                                                           'label' => false,
@@ -149,7 +156,7 @@
                                                                           'options' => $SubjectGroups,
                                                                           'empty' => '(Select Class Group)'
                                                                       )
-                                                                  ); 
+                                                                  );
                                                               ?>
                                                            </td>
                                                            <td></td>
@@ -162,8 +169,9 @@
                                                 <tfoot>
                                                  <tr>
                                                   <th>#</th>
-                                                  <th>Subjects</th>
-                                                  <th>Subject Groups</th>
+                                                  <th>Subject Names</th>
+                                                  <th>Subject Alias</th>
+                                                  <th>Subject Group</th>
                                                   <th>Action</th>
                                                 </tr>
                                               </tfoot>                                              

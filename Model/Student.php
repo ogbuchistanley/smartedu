@@ -44,11 +44,6 @@ class Student extends AppModel {
             $image_url = $this->data[$this->alias]['image_url'];
             $ext = pathinfo($image_url, PATHINFO_EXTENSION);
             $this->query('UPDATE students SET image_url="students/'.$id.'.'.$ext.'", student_no="'.$no.'" WHERE student_id="'.$id.'"');
-        }else{
-            //Update The Sponsor ID
-            $this->saveField('student_no', $no);
-            //$this->query('UPDATE students SET student_no=CONCAT("STD", REPEAT("0", 4-LENGTH("'.$id.'")), '
-            //. 'CAST("'.$id.'" AS CHAR(10))) WHERE student_id="'.$id.'"');
         }
     }
 
@@ -65,18 +60,18 @@ class Student extends AppModel {
 			'className' => 'RelationshipType',
 			'foreignKey' => 'relationtype_id',
 		),
-        'Country' => array(
-			'className' => 'Country',
-			'foreignKey' => 'country_id',
-		),
-        'State' => array(
-			'className' => 'State',
-			'foreignKey' => 'state_id',
-		),
-        'LocalGovt' => array(
-			'className' => 'LocalGovt',
-			'foreignKey' => 'local_govt_id',
-		),
+//        'Country' => array(
+//			'className' => 'Country',
+//			'foreignKey' => 'country_id',
+//		),
+//        'State' => array(
+//			'className' => 'State',
+//			'foreignKey' => 'state_id',
+//		),
+//        'LocalGovt' => array(
+//			'className' => 'LocalGovt',
+//			'foreignKey' => 'local_govt_id',
+//		),
         'Classroom' => array(
 			'className' => 'Classroom',
 			'foreignKey' => 'class_id',

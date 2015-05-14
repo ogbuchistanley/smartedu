@@ -24,27 +24,75 @@ $('document').ready(function(){
             $('#local_govt_id').html('<option value="">  (Select Sponsor\'s L.G.A)  </option>');
         }
     });
-    
+
+    ////////////////////////////////////////////////////// Mobile Number Validation Begins//////////////////////////////////////////////////////////////////////////////////
+    var telInput = $("#mobile_number1"),
+        errorMsg = $("#error-msg"),
+        validMsg = $("#valid-msg");
+    //Initialization
+    telInput.intlTelInput({
+        //allowExtensions: true,
+        //autoFormat: false,
+        //autoHideDialCode: false,
+        //autoPlaceholder: false,
+        defaultCountry: "ng",
+        //ipinfoToken: "yolo",
+        //nationalMode: false,
+        //numberType: "MOBILE",
+        //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
+        preferredCountries: ["ng", "us", "gb"],
+        utilsScript: "../app/Intl-Tel-Input/lib/libphonenumber/build/utils.js"
+    });
+    // on blur: validate
+    telInput.blur(function () {
+        if ($.trim(telInput.val())) {
+            if (telInput.intlTelInput("isValidNumber")) {
+                validMsg.removeClass("hide");
+                telInput.addClass("alert-success");
+            } else {
+                telInput.addClass("alert-danger");
+                errorMsg.removeClass("hide");
+                validMsg.addClass("hide");
+            }
+        }
+        //telInput.val(telInput.intlTelInput("getNumber"));
+        //alert(telInput.intlTelInput("getNumber"));
+    });
+
+    // on keydown: reset
+    telInput.keydown(function () {
+        telInput.removeClass("alert-danger");
+        errorMsg.addClass("hide");
+        validMsg.addClass("hide");
+    });
+    /////////////////////////////////////////////////////////// Mobile Number Validation Ends /////////////////////////////////////////////////////////////////////////////
+
     //On Click of the register button
     $(document.body).on('submit', '#sponsor_form', function(){
         if($('#country_id').val() === '140' && $('#local_govt_id').val() === ''){
             $('#local_govt_id').focus();
             return false;
         }
-        if($('#salutation_id').val() !== '' && $('#first_name').val() !== '' && $('#mobile_number1').val() !== '' 
-            && $('#contact_address').val() !== '' && $('#country_id').val() !== '' && $('#occupation').val() !== '') {
-            //Hide The Submit Button
-            $('#register_sponsor_btn').addClass('hide');
+        if($('#salutation_id').val() == '' || $('#first_name').val() == '' || $('#mobile_number1').val() == '' || $('#other_name').val() == '' ) {
+            //Validate The Form
+            $('#display_message').removeClass('hide');
+            $('#display_message').addClass('alert-danger');
+            $('#display_message').html('<b><i class="fa fa-thumbs-down fa-2x"></i> All Fields With * Needs To Be Filled Properly</b>');
+            return false;
         }
+        //Set the Mobile Number With the Country Code
+        telInput.val(telInput.intlTelInput("getNumber"));
+
+        //Hide The Finish Button When its Clicked once to avoid duplicates record submission
         $("[type='submit']").addClass('hide');
         return true;
     });
-    
+
     //on click of the delete button
     $(document.body).on('click', '.delete_sponsor', function(){
         $('#hidden_sponsor_id').val($(this).val());
     });
-    
+
    // Deleting the sponsor record via modal
    $(document.body).on('submit', '#sponsor_delete_form', function(){
         $.ajax({ 
@@ -72,9 +120,9 @@ $('document').ready(function(){
     // Ajax Auto Validation : Email
     //autoValidateField($('#email'), domian_url+'validate_form');
     // Ajax Auto Validation : Mobile Number One
-    autoValidateField($('#mobile_number1'), domian_url+'validate_form');
+    //autoValidateField($('#mobile_number1'), domian_url+'validate_form');
     // Ajax Auto Validation : Contact Address
-    autoValidateField($('#contact_address'), domian_url+'validate_form');
+    //autoValidateField($('#contact_address'), domian_url+'validate_form');
     // Ajax Auto Validation : Nationality
     autoValidateDropDown($('#country_id'), domian_url+'validate_form');
     // Ajax Auto Validation : Occupation

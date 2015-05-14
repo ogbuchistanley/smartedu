@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 06, 2015 at 06:49 PM
+-- Generation Time: May 14, 2015 at 09:08 PM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -1842,9 +1842,9 @@ CREATE TABLE IF NOT EXISTS `employees` (
 --
 
 INSERT INTO `employees` (`employee_id`, `employee_no`, `salutation_id`, `first_name`, `other_name`, `gender`, `birth_date`, `image_url`, `contact_address`, `employee_type_id`, `mobile_number1`, `mobile_number2`, `marital_status`, `country_id`, `state_id`, `local_govt_id`, `email`, `next_ofkin_name`, `next_ofkin_number`, `next_ofkin_relate`, `form_of_identity`, `identity_no`, `identity_expiry_date`, `status_id`, `created_by`, `created_at`, `updated_at`) VALUES
-(1, 'STF0001', 1, 'Dotun', 'Kudaisi', 'Male', '2015-03-03', 'employees/1.png', 'iofdi', NULL, '08052139529', '', 'Single', 140, 5, NULL, 'dotman2kx@gmail.com', 'djj', '08019189298', 'jdfhjdfh', '', '', '1970-01-01', 1, 1, '2015-03-19 02:16:59', '2015-03-24 16:05:02'),
+(1, 'STF0001', 1, 'Dotun', 'Kudaisi', 'Male', '2015-03-03', 'employees/1.png', 'iofdi', NULL, '08052139529', '', 'Single', 140, 5, NULL, 'dotman2kx@gmail.com', 'djj', '08019189298', 'jdfhjdfh', '', '', '1970-01-01', 1, 1, '2015-03-19 02:16:59', '2015-05-14 10:32:50'),
 (3, 'STF0003', 1, 'Abikoye', 'J.', NULL, NULL, NULL, NULL, NULL, '07035376722', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 06:40:35', '2015-03-21 10:03:50'),
-(4, 'STF0004', 1, 'ADEGOKE', 'M.', NULL, NULL, NULL, NULL, NULL, '07033895470', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 06:42:34', '2015-03-21 13:08:24'),
+(4, 'STF0004', 1, 'ADEGOKE', 'M.', 'Male', NULL, NULL, NULL, NULL, '07033895470', '', 'Single', NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 06:42:34', '2015-05-14 19:00:41'),
 (5, 'STF0005', 1, 'ADEYEMI', 'B.', NULL, NULL, NULL, NULL, NULL, '08068891010', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 06:47:32', '2015-03-21 13:03:47'),
 (6, 'STF0006', 1, 'ADISA', 'S.', NULL, NULL, NULL, NULL, NULL, '08062915800', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 06:48:42', '2015-03-21 13:03:05'),
 (7, 'STF0007', 1, 'AIGBOMIAN', 'A.', NULL, NULL, NULL, NULL, NULL, '07062371754', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 06:49:44', '2015-03-21 13:02:06'),
@@ -3164,7 +3164,7 @@ CREATE TABLE IF NOT EXISTS `sponsors` (
 
 INSERT INTO `sponsors` (`sponsor_id`, `sponsor_no`, `first_name`, `other_name`, `salutation_id`, `occupation`, `company_name`, `company_address`, `email`, `image_url`, `contact_address`, `local_govt_id`, `state_id`, `country_id`, `mobile_number1`, `mobile_number2`, `created_by`, `sponsorship_type_id`, `created_at`, `updated_at`) VALUES
 (1, 'PAR0001', 'Ogbuchi', 'Stanley', 1, NULL, NULL, NULL, 'ogbuchistanley@rocketmail.com', NULL, NULL, NULL, NULL, NULL, '08180966334', NULL, 1, NULL, '2015-03-19 02:11:34', '2015-03-19 13:11:34'),
-(2, 'PAR0002', 'ADENIRAN', 'JOSEPH', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08055492870', NULL, 1, NULL, '2015-03-19 06:57:19', '2015-03-22 23:13:48'),
+(2, 'PAR0002', 'ADENIRAN', 'JOSEPH', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08055492870', '', 1, NULL, '2015-03-19 06:57:19', '2015-05-14 18:56:33'),
 (3, 'PAR0003', 'ATUNRASE', 'BANKOLE', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08028861077', NULL, 1, NULL, '2015-03-19 06:58:57', '2015-03-22 23:14:26'),
 (4, 'PAR0004', 'BAIYEKUSI', 'PHOS BAYOWA', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08088080606', NULL, 1, NULL, '2015-03-19 07:00:53', '2015-03-22 23:17:33'),
 (5, 'PAR0005', 'BAKRE', 'OLUWATOFARATI DAVID', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08023056956', NULL, 1, NULL, '2015-03-19 07:02:41', '2015-03-22 23:18:38'),
@@ -3638,15 +3638,15 @@ CREATE TABLE IF NOT EXISTS `students` (
   `created_by` int(11) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=286 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=287 ;
 
 --
 -- Dumping data for table `students`
 --
 
 INSERT INTO `students` (`student_id`, `sponsor_id`, `first_name`, `surname`, `other_name`, `student_no`, `image_url`, `gender`, `birth_date`, `class_id`, `religion`, `previous_school`, `academic_term_id`, `term_admitted`, `student_status_id`, `local_govt_id`, `state_id`, `country_id`, `relationtype_id`, `created_by`, `created_at`, `updated_at`) VALUES
-(1, 2, 'JOSEPH', 'ADENIRAN', '', 'STD0001', NULL, 'Male', NULL, 2, NULL, NULL, 1, '', 1, 248, 36, 140, 1, 1, '2015-03-19 08:12:26', '2015-03-23 00:39:43'),
-(2, 3, 'BANKOLE', 'ATUNRASE', '', 'STD0002', NULL, 'Male', NULL, 2, NULL, NULL, 1, '', 1, NULL, 0, 140, 1, 0, '2015-03-21 11:12:32', '2015-03-23 00:32:48'),
+(1, 2, 'JOSEPH', 'ADENIRAN', '', 'STD0001', NULL, 'Male', '2011-01-11', 2, NULL, NULL, 1, '', 1, 248, 36, 140, 1, 1, '2015-03-19 08:12:26', '2015-05-14 18:42:25'),
+(2, 3, 'BANKOLE', 'ATUNRASE', '', 'STD0002', NULL, 'Male', '2015-04-05', 2, NULL, NULL, 1, '', 1, NULL, 0, 140, 1, 0, '2015-03-21 11:12:32', '2015-05-14 11:05:17'),
 (3, 4, ' PHOS BAYOWA', 'BAIYEKUSI', '', 'STD0003', NULL, 'Male', NULL, 2, NULL, NULL, 1, '', 1, NULL, 0, 140, 1, 0, '2015-03-21 11:14:27', '2015-03-23 00:33:36'),
 (4, 5, 'OLUWATOFARATI ', 'BAKRE ', 'DAVID', 'STD0004', NULL, 'Male', '2004-08-01', 2, NULL, NULL, 1, '', 1, NULL, 0, 140, 1, 0, '2015-03-21 03:34:07', '2015-03-21 15:31:08'),
 (5, 6, 'MOSES', 'BALOGUN ', '', 'STD0005', NULL, 'Male', NULL, 2, NULL, NULL, 1, '', 1, NULL, 0, 140, 1, 0, '2015-03-21 03:48:50', '2015-03-23 00:30:57'),
@@ -3924,7 +3924,8 @@ INSERT INTO `students` (`student_id`, `sponsor_id`, `first_name`, `surname`, `ot
 (282, 271, 'JEREMIAH', 'ENI', '', 'STD0282', NULL, 'Male', NULL, 30, NULL, NULL, NULL, NULL, 1, NULL, 0, 140, 1, 59, '2015-03-25 05:08:14', '2015-03-25 16:08:14'),
 (283, 272, 'DAMILARE', 'OPARA', 'ONYEKACHI', 'STD0283', NULL, 'Male', NULL, 17, NULL, NULL, NULL, NULL, 1, NULL, 0, 140, 1, 32, '2015-03-25 05:08:59', '2015-03-25 16:08:59'),
 (284, 63, 'ADESEYE', 'OKESINA', '', 'STD0284', NULL, 'Male', NULL, 1, NULL, NULL, NULL, NULL, 1, NULL, 0, 140, 1, 1, '2015-03-26 10:53:48', '2015-03-26 09:53:48'),
-(285, 273, 'Daaiyefumasu', 'NICHOLAS', '', 'STD0285', NULL, 'Male', NULL, 12, NULL, NULL, NULL, NULL, 1, NULL, 0, 140, 1, 43, '2015-03-26 12:24:41', '2015-03-26 11:24:41');
+(285, 273, 'Daaiyefumasu', 'NICHOLAS', '', 'STD0285', NULL, 'Male', NULL, 12, NULL, NULL, NULL, NULL, 1, NULL, 0, 140, 1, 43, '2015-03-26 12:24:41', '2015-03-26 11:24:41'),
+(286, 40, 'Joshine', 'Eric', 'Ann', 'STD0286', NULL, 'Male', '2011-05-05', 7, NULL, NULL, 1, NULL, 1, NULL, 0, 140, 1, 1, '2015-05-14 07:43:34', '2015-05-14 18:55:41');
 
 -- --------------------------------------------------------
 
@@ -3938,7 +3939,7 @@ CREATE TABLE IF NOT EXISTS `students_classes` (
   `student_id` int(11) NOT NULL,
   `class_id` int(11) NOT NULL,
   `academic_year_id` int(11) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=288 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=289 ;
 
 --
 -- Dumping data for table `students_classes`
@@ -4224,7 +4225,8 @@ INSERT INTO `students_classes` (`student_class_id`, `student_id`, `class_id`, `a
 (284, 282, 30, 1),
 (285, 283, 17, 1),
 (286, 284, 1, 1),
-(287, 285, 12, 1);
+(287, 285, 12, 1),
+(288, 286, 7, 1);
 
 -- --------------------------------------------------------
 
@@ -4737,56 +4739,57 @@ DROP TABLE IF EXISTS `subjects`;
 CREATE TABLE IF NOT EXISTS `subjects` (
 `subject_id` int(3) NOT NULL,
   `subject_name` varchar(50) DEFAULT NULL,
+  `subject_abbr` varchar(20) DEFAULT NULL,
   `subject_group_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=44 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=43 ;
 
 --
 -- Dumping data for table `subjects`
 --
 
-INSERT INTO `subjects` (`subject_id`, `subject_name`, `subject_group_id`) VALUES
-(1, 'English Language', 2),
-(2, 'Mathematics', 1),
-(3, 'Basic Science', 3),
-(5, 'Business Studies', 6),
-(6, 'Social Studies', 5),
-(7, 'French', 2),
-(8, 'P.H Education', 3),
-(9, 'Computer ', 1),
-(10, 'Visual Arts', 7),
-(11, 'Hausa', 2),
-(12, 'Igbo', 2),
-(13, 'Yoruba', 2),
-(14, 'Agric Science', 3),
-(15, 'Home Economics', 7),
-(16, 'C.R.S', 5),
-(17, 'I.R.S', 5),
-(18, 'Geography', 5),
-(19, 'Lit-In English', 2),
-(20, 'History ', 5),
-(21, 'Physics', 3),
-(22, 'Chemistry', 3),
-(23, 'Biology', 3),
-(24, 'Foods & Nutrition', 7),
-(25, 'Tech. Drawing', 7),
-(26, 'Music', 7),
-(27, 'Metal Work', 7),
-(28, 'Electrical', 7),
-(29, 'Wood Work', 7),
-(30, 'Commerce', 6),
-(31, 'Account', 6),
-(32, 'Economics', 6),
-(33, 'Government', 5),
-(34, 'F.Maths', 1),
-(35, 'Animal Husbandry', 3),
-(36, 'Data Processing', 1),
-(37, 'ICT', 1),
-(38, 'Civics', 5),
-(39, 'Fine Arts', 7),
-(40, 'Cat. Craft', 7),
-(41, 'Paint & Decor', 7),
-(42, 'Chinese', 2),
-(43, 'Basic Tech', 7);
+INSERT INTO `subjects` (`subject_id`, `subject_name`, `subject_abbr`, `subject_group_id`) VALUES
+(1, 'English Language', NULL, 2),
+(2, 'Mathematics', NULL, 1),
+(3, 'Basic Science', 'Basic Sci.', 3),
+(4, 'Basic Technology', 'Basic Tech', 7),
+(5, 'Business Studies', 'Bus. Study', 6),
+(6, 'Social Studies', NULL, 5),
+(7, 'French', NULL, 2),
+(8, 'P.H Education', NULL, 3),
+(9, 'Computer ', NULL, 1),
+(10, 'Visual Arts', NULL, 7),
+(11, 'Hausa', NULL, 2),
+(12, 'Igbo', NULL, 2),
+(13, 'Yoruba', NULL, 2),
+(14, 'Agric Science', 'Agr Sci.', 3),
+(15, 'Home Economics', NULL, 7),
+(16, 'Christain Religious Studies', 'C.R.S.', 5),
+(17, 'I.R.S', NULL, 5),
+(18, 'Geography', NULL, 5),
+(19, 'Lit-In English', NULL, 2),
+(20, 'History ', NULL, 5),
+(21, 'Physics', NULL, 3),
+(22, 'Chemistry', 'Chem.', 3),
+(23, 'Biology', 'Bio.', 3),
+(24, 'Foods & Nutrition', NULL, 7),
+(25, 'Tech. Drawing', NULL, 7),
+(26, 'Music', NULL, 7),
+(27, 'Metal Work', NULL, 7),
+(28, 'Electrical', NULL, 7),
+(29, 'Wood Work', NULL, 7),
+(30, 'Commerce', NULL, 6),
+(31, 'Account', 'Acc.', 6),
+(32, 'Economics', NULL, 6),
+(33, 'Government', NULL, 5),
+(34, 'F.Maths', NULL, 1),
+(35, 'Animal Husbandry', 'Animal Hus.', 3),
+(36, 'Data Processing', NULL, 1),
+(37, 'ICT', NULL, 1),
+(38, 'Civics', NULL, 5),
+(39, 'Fine Arts', NULL, 7),
+(40, 'Creative Craft', 'Cat. Craft', 7),
+(41, 'Paint & Decor', NULL, 7),
+(42, 'Chinese', 'Chinese', 2);
 
 -- --------------------------------------------------------
 
@@ -4958,7 +4961,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 INSERT INTO `users` (`user_id`, `username`, `password`, `display_name`, `type_id`, `image_url`, `user_role_id`, `group_alias`, `status_id`, `created_by`, `created_at`, `updated_at`) VALUES
 (1, 'smartedu', '$2a$10$NfmOYa5oiakpJMzoS5y9Z.83aGg7o0ZaVkL2XD4JuKgJLM8p4FfQu', 'SmartEdu App', 0, NULL, 7, 'ADM_USERS', 1, 1, '2015-03-22 04:36:45', '2015-03-26 08:00:29'),
 (2, 'PAR0001', '$2a$10$NfmOYa5oiakpJMzoS5y9Z.83aGg7o0ZaVkL2XD4JuKgJLM8p4FfQu', 'Ogbuchi Stanley', 1, 'sponsors/1.jpg', 1, 'PAR_USERS', 1, 1, '2015-03-19 02:11:34', '2015-04-22 10:02:43'),
-(3, 'STF0001', '$2a$10$NfmOYa5oiakpJMzoS5y9Z.83aGg7o0ZaVkL2XD4JuKgJLM8p4FfQu', 'Dotun Kudaisi', 1, 'employees/1.png', 7, 'ADM_USERS', 1, 1, '2015-03-23 11:09:03', '2015-04-22 10:03:46'),
+(3, 'STF0001', '$2a$10$NfmOYa5oiakpJMzoS5y9Z.83aGg7o0ZaVkL2XD4JuKgJLM8p4FfQu', 'ADEGOKE M.', 1, 'employees/1.png', 7, 'ADM_USERS', 1, 1, '2015-03-23 11:09:03', '2015-05-14 19:00:33'),
 (5, 'STF0003', '$2a$10$NfmOYa5oiakpJMzoS5y9Z.83aGg7o0ZaVkL2XD4JuKgJLM8p4FfQu', 'Abikoye J.', 3, 'employees/3.jpg', 4, 'ICT_USERS', 1, 1, '2015-03-19 06:40:35', '2015-04-22 10:03:46'),
 (6, 'STF0004', '$2a$10$NfmOYa5oiakpJMzoS5y9Z.83aGg7o0ZaVkL2XD4JuKgJLM8p4FfQu', 'ADEGOKE M.', 4, 'employees/4.jpg', 4, 'ICT_USERS', 1, 1, '2015-03-19 06:42:34', '2015-04-22 10:03:46'),
 (7, 'STF0005', '$2a$10$NfmOYa5oiakpJMzoS5y9Z.83aGg7o0ZaVkL2XD4JuKgJLM8p4FfQu', 'ADEYEMI B.', 5, 'employees/5.jpg', 4, 'ICT_USERS', 1, 1, '2015-03-19 06:47:32', '2015-04-22 10:03:46'),
@@ -5280,27 +5283,26 @@ CREATE TABLE IF NOT EXISTS `weekly_detail_setups` (
 `weekly_detail_setup_id` int(11) NOT NULL,
   `weekly_report_setup_id` int(11) NOT NULL,
   `weekly_report_no` int(11) NOT NULL,
-  `weekly_weight_point` int(11) NOT NULL DEFAULT '0',
+  `weekly_weight_point` decimal(4,1) NOT NULL DEFAULT '0.0',
   `weekly_weight_percent` int(11) NOT NULL DEFAULT '0',
   `submission_date` date NOT NULL,
   `report_description` text
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data for table `weekly_detail_setups`
 --
 
 INSERT INTO `weekly_detail_setups` (`weekly_detail_setup_id`, `weekly_report_setup_id`, `weekly_report_no`, `weekly_weight_point`, `weekly_weight_percent`, `submission_date`, `report_description`) VALUES
-(1, 1, 1, 10, 15, '2015-05-05', 'Opening'),
-(2, 1, 2, 15, 15, '2015-05-06', 'Second Week'),
-(3, 1, 3, 20, 20, '2015-05-15', 'Mid Term'),
-(4, 1, 4, 30, 50, '2015-05-22', 'General C.A'),
-(5, 2, 1, 5, 5, '2015-05-05', 'Opening Week'),
-(6, 2, 2, 10, 10, '2015-05-06', 'Second Week'),
-(7, 2, 3, 15, 20, '2015-05-07', 'Mid Term'),
-(8, 2, 4, 20, 15, '2015-05-29', 'Assignment'),
-(9, 2, 5, 25, 15, '2015-06-05', 'Class Work'),
-(10, 2, 6, 30, 35, '2015-06-12', 'General C.A');
+(1, 1, 1, '10.0', 10, '2015-05-22', 'Opening C.A'),
+(2, 1, 2, '15.0', 15, '2015-05-29', 'Assignment'),
+(3, 1, 3, '20.0', 25, '2015-06-05', 'Second C.A'),
+(4, 1, 4, '20.0', 50, '2015-06-12', 'Major C.A'),
+(5, 2, 1, '10.0', 10, '2015-05-22', 'Opening C.A'),
+(6, 2, 2, '15.0', 10, '2015-05-29', 'First C.A'),
+(7, 2, 3, '20.0', 15, '2015-06-05', 'Assignment'),
+(8, 2, 4, '20.0', 15, '2015-06-12', 'Second C.A'),
+(9, 2, 5, '30.0', 50, '2015-06-19', 'Major C.A');
 
 -- --------------------------------------------------------
 
@@ -5314,53 +5316,7 @@ CREATE TABLE IF NOT EXISTS `weekly_report_details` (
   `weekly_report_id` int(11) DEFAULT NULL,
   `student_id` int(11) DEFAULT NULL,
   `weekly_ca` decimal(4,1) DEFAULT '0.0'
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=69 ;
-
---
--- Dumping data for table `weekly_report_details`
---
-
-INSERT INTO `weekly_report_details` (`weekly_report_detail_id`, `weekly_report_id`, `student_id`, `weekly_ca`) VALUES
-(1, 1, 189, '8.0'),
-(2, 1, 190, '5.0'),
-(3, 1, 191, '9.0'),
-(4, 1, 192, '6.0'),
-(5, 1, 193, '4.0'),
-(6, 1, 194, '7.0'),
-(7, 1, 195, '7.0'),
-(8, 1, 196, '5.0'),
-(16, 2, 189, '5.6'),
-(17, 2, 190, '2.0'),
-(18, 2, 191, '3.0'),
-(19, 2, 192, '9.0'),
-(20, 2, 193, '8.0'),
-(21, 2, 194, '7.0'),
-(22, 2, 195, '7.0'),
-(23, 2, 196, '6.0'),
-(31, 3, 189, '6.0'),
-(32, 3, 190, '9.0'),
-(33, 3, 191, '8.0'),
-(34, 3, 192, '7.0'),
-(35, 3, 193, '6.0'),
-(36, 3, 194, '9.0'),
-(37, 3, 195, '5.0'),
-(38, 3, 196, '8.0'),
-(46, 4, 189, '5.0'),
-(47, 4, 190, '6.0'),
-(48, 4, 191, '3.0'),
-(49, 4, 192, '8.0'),
-(50, 4, 193, '9.0'),
-(51, 4, 194, '7.0'),
-(52, 4, 195, '6.0'),
-(53, 4, 196, '8.0'),
-(54, 5, 189, '11.0'),
-(55, 5, 190, '9.0'),
-(56, 5, 191, '12.0'),
-(57, 5, 192, '9.0'),
-(58, 5, 193, '8.0'),
-(59, 5, 194, '10.0'),
-(60, 5, 195, '8.0'),
-(61, 5, 196, '7.0');
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -5382,7 +5338,7 @@ CREATE TABLE IF NOT EXISTS `weekly_report_setups` (
 
 INSERT INTO `weekly_report_setups` (`weekly_report_setup_id`, `weekly_report`, `classgroup_id`, `academic_term_id`) VALUES
 (1, 4, 1, 1),
-(2, 6, 2, 1);
+(2, 5, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -5397,18 +5353,7 @@ CREATE TABLE IF NOT EXISTS `weekly_reports` (
   `weekly_detail_setup_id` int(11) DEFAULT NULL,
   `marked_status` int(11) NOT NULL DEFAULT '2',
   `notification_status` int(11) NOT NULL DEFAULT '2'
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
-
---
--- Dumping data for table `weekly_reports`
---
-
-INSERT INTO `weekly_reports` (`weekly_report_id`, `subject_classlevel_id`, `weekly_detail_setup_id`, `marked_status`, `notification_status`) VALUES
-(1, 22, 5, 1, 1),
-(2, 24, 5, 1, 2),
-(3, 23, 5, 1, 2),
-(4, 21, 5, 1, 2),
-(5, 22, 7, 1, 2);
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -5419,7 +5364,7 @@ DROP VIEW IF EXISTS `weekly_setupviews`;
 CREATE TABLE IF NOT EXISTS `weekly_setupviews` (
 `weekly_report_setup_id` int(11) unsigned
 ,`weekly_report` int(11)
-,`weekly_weight_point` int(11)
+,`weekly_weight_point` decimal(4,1)
 ,`weekly_weight_percent` int(11)
 ,`classgroup_id` int(11)
 ,`academic_term_id` int(11)
@@ -5454,7 +5399,7 @@ CREATE TABLE IF NOT EXISTS `weeklyreport_studentdetailsviews` (
 ,`report_description` text
 ,`submission_date` date
 ,`weekly_report_setup_id` int(11) unsigned
-,`weekly_weight_point` int(11)
+,`weekly_weight_point` decimal(4,1)
 ,`sponsor_id` int(11)
 ,`sponsor_no` varchar(10)
 ,`mobile_number1` varchar(20)
@@ -6137,12 +6082,12 @@ MODIFY `student_status_id` int(3) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMEN
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-MODIFY `student_id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=286;
+MODIFY `student_id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=287;
 --
 -- AUTO_INCREMENT for table `students_classes`
 --
 ALTER TABLE `students_classes`
-MODIFY `student_class_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=288;
+MODIFY `student_class_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=289;
 --
 -- AUTO_INCREMENT for table `subject_classlevels`
 --
@@ -6157,7 +6102,7 @@ MODIFY `subject_group_id` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 -- AUTO_INCREMENT for table `subjects`
 --
 ALTER TABLE `subjects`
-MODIFY `subject_id` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=44;
+MODIFY `subject_id` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=43;
 --
 -- AUTO_INCREMENT for table `teachers_classes`
 --
@@ -6182,12 +6127,12 @@ MODIFY `user_id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=343;
 -- AUTO_INCREMENT for table `weekly_detail_setups`
 --
 ALTER TABLE `weekly_detail_setups`
-MODIFY `weekly_detail_setup_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
+MODIFY `weekly_detail_setup_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `weekly_report_details`
 --
 ALTER TABLE `weekly_report_details`
-MODIFY `weekly_report_detail_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=69;
+MODIFY `weekly_report_detail_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `weekly_report_setups`
 --
@@ -6197,7 +6142,7 @@ MODIFY `weekly_report_setup_id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_IN
 -- AUTO_INCREMENT for table `weekly_reports`
 --
 ALTER TABLE `weekly_reports`
-MODIFY `weekly_report_id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+MODIFY `weekly_report_id` int(11) unsigned NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

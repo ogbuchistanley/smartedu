@@ -109,16 +109,63 @@ $('document').ready(function(){
         changeYear: true,
         yearRange: "-40:+10"
     });
-    
+
+    ////////////////////////////////////////////////////// Mobile Number Validation Begins//////////////////////////////////////////////////////////////////////////////////
+    var telInput = $("#mobile_number1"),
+        errorMsg = $("#error-msg"),
+        validMsg = $("#valid-msg");
+    //Initialization
+    telInput.intlTelInput({
+        //allowExtensions: true,
+        //autoFormat: false,
+        //autoHideDialCode: false,
+        //autoPlaceholder: false,
+        defaultCountry: "ng",
+        //ipinfoToken: "yolo",
+        //nationalMode: false,
+        //numberType: "MOBILE",
+        //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
+        preferredCountries: ["ng", "us", "gb"],
+        utilsScript: "../app/Intl-Tel-Input/lib/libphonenumber/build/utils.js"
+    });
+    // on blur: validate
+    telInput.blur(function () {
+        if ($.trim(telInput.val())) {
+            if (telInput.intlTelInput("isValidNumber")) {
+                validMsg.removeClass("hide");
+                telInput.addClass("alert-success");
+            } else {
+                telInput.addClass("alert-danger");
+                errorMsg.removeClass("hide");
+                validMsg.addClass("hide");
+            }
+        }
+        //telInput.val(telInput.intlTelInput("getNumber"));
+        //alert(telInput.intlTelInput("getNumber"));
+    });
+
+    // on keydown: reset
+    telInput.keydown(function () {
+        telInput.removeClass("alert-danger");
+        errorMsg.addClass("hide");
+        validMsg.addClass("hide");
+    });
+    /////////////////////////////////////////////////////////// Mobile Number Validation Ends /////////////////////////////////////////////////////////////////////////////
+
+
     //On Click of the register button
     $(document.body).on('submit', '#employee_form', function(){
+        if($('#salutation_id').val() == '' || $('#first_name').val() == '' || $('#mobile_number1').val() == '' || $('#other_name').val() == '' ) {
+            //Validate The Form
+            $('#display_message').removeClass('hide');
+            $('#display_message').addClass('alert-danger');
+            $('#display_message').html('<b><i class="fa fa-thumbs-down fa-2x"></i> All Fields With * Needs To Be Filled Properly</b>');
+            return false;
+        }
+        //Set the Mobile Number With the Country Code
+        telInput.val(telInput.intlTelInput("getNumber"));
+
         //Hide The Finish Button When its Clicked once to avoid duplicates record submission
-//        if($('#salutation_id').val() !== '' && $('#first_name').val() !== '' && $('#other_name').val() !== '' 
-//            && $('#email').val() !== '' && $('#mobile_number1').val() !== '' && $('#contact_address').val() !== ''
-//            && $('#country_id').val() !== '' && $('#gender').val() !== '' && $('#birth_date').val() !== '') {
-//            //Hide The Submit Button
-//            //$('#register_emp_btn').addClass('hide');
-//        }
         $("[type='submit']").addClass('hide');
         return true;
     });
@@ -175,25 +222,25 @@ $('document').ready(function(){
     // Ajax Auto Validation : Email
     //autoValidateField($('#email'), domian_url+'validate_form');
     // Ajax Auto Validation : Mobile Number One
-    autoValidateField($('#mobile_number1'), domian_url+'validate_form');
+    //autoValidateField($('#mobile_number1'), domian_url+'validate_form');
     // Ajax Auto Validation : Contact Address
-    autoValidateField($('#contact_address'), domian_url+'validate_form');
+    //autoValidateField($('#contact_address'), domian_url+'validate_form');
     // Ajax Auto Validation : Nationality
-    autoValidateDropDown($('#country_id'), domian_url+'validate_form');
+    //autoValidateDropDown($('#country_id'), domian_url+'validate_form');
     // Ajax Auto Validation : Gender
     autoValidateDropDown($('#gender'), domian_url+'validate_form');
     // Ajax Auto Validation : Birth Date
-    autoValidateField($('#birth_date'), domian_url+'validate_form');
+    //autoValidateField($('#birth_date'), domian_url+'validate_form');
     // Ajax Auto Validation : Marital Status
-    autoValidateDropDown($('#marital_status'), domian_url+'validate_form');
+    //autoValidateDropDown($('#marital_status'), domian_url+'validate_form');
     // Ajax Auto Validation : Sponsorship Type
     //autoValidateDropDown($('#employee_type_id'), domian_url+'validate_form');
     // Ajax Auto Validation : Next of Kin Name
-    autoValidateField($('#next_ofkin_name'), domian_url+'validate_form');
+   // autoValidateField($('#next_ofkin_name'), domian_url+'validate_form');
     // Ajax Auto Validation : Next of Kin Number
-    autoValidateField($('#next_ofkin_number'), domian_url+'validate_form');
+    //autoValidateField($('#next_ofkin_number'), domian_url+'validate_form');
     // Ajax Auto Validation : Next of Kin Relationship
-    autoValidateField($('#next_ofkin_relate'), domian_url+'validate_form');
+    //autoValidateField($('#next_ofkin_relate'), domian_url+'validate_form');
     // Ajax Auto Validation : Passport
     validateImageFile($("#image_url"));
     /////// Validations  : ends/////////////////////////////////////      

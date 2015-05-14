@@ -146,7 +146,37 @@ class EmployeesController extends AppController {
         }
     }
 
+    //Update Employee Admin Access Only
     public function adjust($encrypt_id = null) {
+        $result = $this->Acl->check($this->group_alias, 'EmployeesController/adjust', 'update');
+        if($result){
+            $this->loadModels('Salutation', 'salutation_name');
+            $decrypt_employee_id = $this->encryption->decode($encrypt_id);
+
+            if (!$this->Employee->exists($decrypt_employee_id)) {
+                $this->accessDenialError('Invalid Staff Record Requested for Modification', 2);
+            }
+            if ($this->request->is(array('post', 'put'))) {
+                $this->Employee->id = $decrypt_employee_id;
+                $data = $this->request->data['Employee'];
+
+                if ($this->Employee->save($data)) {
+                    $this->setFlashMessage('The Staff has been Updated', 1);
+
+                    return $this->redirect(array('action' => 'adjust/' . $encrypt_id));
+                } else {
+                    $this->setFlashMessage('The Staff could not be saved. Please, try again.', 2);
+                }
+            }
+            $options = array('conditions' => array('Employee.' . $this->Employee->primaryKey => $decrypt_employee_id));
+            $this->request->data = $this->Employee->find('first', $options);
+            $this->set('employee', $this->Employee->find('first', $options));
+        }else{
+            $this->accessDenialError();
+        }
+    }
+
+    /*public function adjust($encrypt_id = null) {
         $result = $this->Acl->check($this->group_alias, 'EmployeesController/adjust', 'update');
         if($result){
             $SpouseDetail = ClassRegistry::init('SpouseDetail');
@@ -216,7 +246,7 @@ class EmployeesController extends AppController {
         }else{
             $this->accessDenialError();
         }
-    }
+    }*/
 
     public function delete($encrypt_id = null) {
         $result = $this->Acl->check($this->group_alias, 'EmployeesController/delete', 'delete');

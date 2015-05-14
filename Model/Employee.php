@@ -107,24 +107,24 @@ class Employee extends AppModel {
                 'message' => 'A Gender is required',                
             )
         ),
-        'birth_date' => array(
-            'notEmpty' => array(
-                'rule' => array('notEmpty'),
-                'message' => 'A Date of Birth is required',                
-            )
-        ),
-        'marital_status' => array(
-            'notEmpty' => array(
-                'rule' => array('notEmpty'),
-                'message' => 'A Marital Status is required',                
-            )
-        ),
-        'email' => array(
-            'rule' => array('email'),
-            'message' => 'Please enter a valid email address',
-            'allowEmpty' => false,
-            'isUnique' => array( 'rule' => 'isUnique', 'message' => 'This email has already been added')
-        ),
+//        'birth_date' => array(
+//            'notEmpty' => array(
+//                'rule' => array('notEmpty'),
+//                'message' => 'A Date of Birth is required',
+//            )
+//        ),
+//        'marital_status' => array(
+//            'notEmpty' => array(
+//                'rule' => array('notEmpty'),
+//                'message' => 'A Marital Status is required',
+//            )
+//        ),
+//        'email' => array(
+//            'rule' => array('email'),
+//            'message' => 'Please enter a valid email address',
+//            'allowEmpty' => false,
+//            'isUnique' => array( 'rule' => 'isUnique', 'message' => 'This email has already been added')
+//        ),
         'mobile_number1' => array(
             'notEmpty' => array(
                 'rule' => array('notEmpty'),
@@ -135,58 +135,58 @@ class Employee extends AppModel {
                 'message' => 'A Valid Mobile Number is required',                
             )
         ),
-        'contact_address' => array(
-            'notEmpty' => array(
-                'rule' => array('notEmpty'),
-                'message' => 'A Contact Address is required',                
-            )
-        ),
-        'country_id' => array(
-            'notEmpty' => array(
-                'rule' => array('notEmpty'),
-                'message' => 'A Nationality is required',                
-            )
-        ),
-        'next_ofkin_name' => array(
-            'notEmpty' => array(
-                'rule' => array('notEmpty'),
-                'message' => 'Next of Kin Full Name is required',                
-            )
-        ),
-        'next_ofkin_number' => array(
-            'notEmpty' => array(
-                'rule' => array('notEmpty'),
-                'message' => 'Next of Kin Mobile Number is required',                
-            )
-        ),
-        'next_ofkin_relate' => array(
-            'notEmpty' => array(
-                'rule' => array('notEmpty'),
-                'message' => 'Next of Kin Relatioship is required',                
-            )
-        ),
+//        'contact_address' => array(
+//            'notEmpty' => array(
+//                'rule' => array('notEmpty'),
+//                'message' => 'A Contact Address is required',
+//            )
+//        ),
+//        'country_id' => array(
+//            'notEmpty' => array(
+//                'rule' => array('notEmpty'),
+//                'message' => 'A Nationality is required',
+//            )
+//        ),
+//        'next_ofkin_name' => array(
+//            'notEmpty' => array(
+//                'rule' => array('notEmpty'),
+//                'message' => 'Next of Kin Full Name is required',
+//            )
+//        ),
+//        'next_ofkin_number' => array(
+//            'notEmpty' => array(
+//                'rule' => array('notEmpty'),
+//                'message' => 'Next of Kin Mobile Number is required',
+//            )
+//        ),
+//        'next_ofkin_relate' => array(
+//            'notEmpty' => array(
+//                'rule' => array('notEmpty'),
+//                'message' => 'Next of Kin Relatioship is required',
+//            )
+//        ),
 //        'employee_type_id' => array(
 //            'notEmpty' => array(
 //                'rule' => array('notEmpty'),
 //                'message' => 'A Employee Type is required',                
 //            )
 //        ),
-        'image_url' => array(
-            'uploadError' => array(
-                'rule' => 'uploadError',
-                'message' => 'The image upload failed.',
-                'allowEmpty' => TRUE
-            ),
+//        'image_url' => array(
+//            'uploadError' => array(
+//                'rule' => 'uploadError',
+//                'message' => 'The image upload failed.',
+//                'allowEmpty' => TRUE
+//            ),
 //            'mimeType' => array(
 //                'rule' => array('mimeType', array('image/gif', 'image/png', 'image/jpg', 'image/jpeg')),
 //                'message' => 'Please only upload images (gif, png, jpg).',
 //                'allowEmpty' => TRUE
 //            ),
-            'fileSize' => array(
-                'rule' => array('fileSize', '<=', '1MB'),
-                'message' => 'Image must be less than 1MB.',
-                'allowEmpty' => TRUE
-            )
-        )
+//            'fileSize' => array(
+//                'rule' => array('fileSize', '<=', '1MB'),
+//                'message' => 'Image must be less than 1MB.',
+//                'allowEmpty' => TRUE
+//            )
+//        )
     );
 }

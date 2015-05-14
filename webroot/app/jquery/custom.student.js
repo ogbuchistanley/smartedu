@@ -44,12 +44,14 @@ $('document').ready(function(){
     
     //On Click of the register button
     $(document.body).on('submit', '#student_form', function(){
+        if($('#sponsor_name').val() == '' || $('#first_name').val() == '' || $('#relationtype_id').val() == '' || $('#surname').val() == '' || $('#gender').val() == '') {
+            //Validate The Form
+            $('#display_message').removeClass('hide');
+            $('#display_message').addClass('alert-danger');
+            $('#display_message').html('<b><i class="fa fa-thumbs-down fa-2x"></i> All Fields With * Needs To Be Filled Properly</b>');
+            return false;
+        }
         //Hide The Finish Button When its Clicked once to avoid duplicates record submission
-//        if($('#sponsor_name').val() !== '' && $('#first_name').val() !== '' && $('#relationtype_id').val() !== '' 
-//            && $('#birth_date').val() !== '' && $('#surname').val() !== '' && $('#country_id').val() !== '' && $('#gender').val() !== '') {
-//            //Hide The Submit Button
-//            $('#register_stud_btn').addClass('hide');
-//        }
         $("[type='submit']").addClass('hide');
         return true;
     });
@@ -142,7 +144,7 @@ $('document').ready(function(){
     // Ajax Auto Validation : Relationship Type
     autoValidateDropDown($('#gender'), domian_url+'validate_form');
     // Ajax Auto Validation : Date of Birth
-    autoValidateField($('#birth_date'), domian_url+'validate_form');
+    //autoValidateField($('#birth_date'), domian_url+'validate_form');
     // Ajax Auto Validation : Nationality
     autoValidateDropDown($('#country_id'), domian_url+'validate_form');
     // Ajax Auto Validation : Religion

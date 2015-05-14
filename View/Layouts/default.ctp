@@ -78,13 +78,14 @@ $cakeDescription = __d('app_dev', ':: '.APP_NAME.' :');
     <!-- Loading Stylesheets -->    
     <link href="<?php echo APP_DIR_ROOT; ?>css/jquery-ui.css" rel="stylesheet">
     <link href="<?php echo APP_DIR_ROOT; ?>css/font-awesome.css" rel="stylesheet">
-    <link href="<?php echo APP_DIR_ROOT; ?>css/style.css" rel="stylesheet" type="text/css"> 
+    <link href="<?php echo APP_DIR_ROOT; ?>css/style.css" rel="stylesheet" type="text/css">
     <link href="<?php echo APP_DIR_ROOT; ?>less/style.less" rel="stylesheet"  title="lessCss" id="lessCss">
-    
-    <!-- Loading Custom Stylesheets -->   
+
+    <!-- Loading Custom Stylesheets -->
     <link href="<?php echo APP_DIR_ROOT; ?>css/jquery.autocomplete.css" rel="stylesheet">
     <link href="<?php echo APP_DIR_ROOT; ?>css/custom.css" rel="stylesheet">
-    <link href="<?php echo APP_DIR_ROOT; ?>images/icon.png" rel="shortcut icon">
+
+    <link href="<?php echo APP_DIR_ROOT; ?>images/smartedu-icon.png" rel="shortcut icon">
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
     <!--[if lt IE 9]>
         <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -124,7 +125,7 @@ $cakeDescription = __d('app_dev', ':: '.APP_NAME.' :');
                     <i class="fa fa-list btn-nav-toggle-responsive text-white"></i>
                 </a>
                 <a class="navbar-brand" href="<?php echo DOMAIN_NAME ?>/dashboard">
-                    <span class="logo small"><?php echo substr(APP_NAME, 0, 5)?><img style="width: 55px; height: 57px;" src="<?php echo APP_DIR_ROOT; ?>images/icon.png" /><?php echo substr(APP_NAME, 5); ?></span>
+                    <span class="logo small"><?php echo substr(APP_NAME, 0, 5)?><img style="width: 55px; height: 57px;" src="<?php echo APP_DIR_ROOT; ?>images/smartedu-icon.png" /><?php echo substr(APP_NAME, 5); ?></span>
                 </a>
             </div>
 
@@ -355,7 +356,7 @@ $cakeDescription = __d('app_dev', ':: '.APP_NAME.' :');
                                             <?php if($master_record_id > 5): ?>
                                                 <li><a href="<?php echo DOMAIN_NAME ?>/records/weeklyrep_detail" data-original-title="Weekly Reports Details"><i class="fa fa-tasks"></i><span> Weekly Report Details</span></a></li>
                                             <?php endif;?>
-                                            <?php if($master_record_id > 6): ?>
+                                            <?php if($master_record_id > 6 ): ?>
                                                 <li><a href="<?php echo DOMAIN_NAME ?>/records/subject_group" data-original-title="Subject Group"><i class="fa fa-align-left"></i><span> Subject Groups</span></a></li>
                                             <?php endif;?>
                                             <?php if($master_record_id > 7): ?>
@@ -428,6 +429,8 @@ $cakeDescription = __d('app_dev', ':: '.APP_NAME.' :');
                         <?php echo  $this->Html->image('loader.gif', array('id' => 'msg_box1')); ?>
                         <span style='color:green; margin:15px; font-size: 18px;'> Loading...</span>
                     </div>
+                    <div id="display_message" class="alert alert-info hide">
+                    </div>
                 </div>
                 <div class="row">
                     <noscript>
@@ -480,6 +483,7 @@ $cakeDescription = __d('app_dev', ':: '.APP_NAME.' :');
 		
     <!-- start: MAIN JAVASCRIPTS -->
     <!-- Load JS here for Faster site load =============================-->
+    <!--script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script-->
     <script src="<?php echo APP_DIR_ROOT; ?>js/jquery-1.10.2.js"></script>
     <script src="<?php echo APP_DIR_ROOT; ?>js/jquery-ui-1.10.3.custom.js"></script>
     <script src="<?php echo APP_DIR_ROOT; ?>js/less-1.5.0.min.js"></script>
