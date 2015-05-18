@@ -4,7 +4,7 @@
     $temp = $Subjects;
     $temp = array_shift($temp);
     $marked_report = $marked_report['marked_report'];
-    //print_r($marked_report);
+    //print_r($temp);
 
 ?>
 <!DOCTYPE html>
@@ -110,12 +110,18 @@
                                         <th width="8"></th>
                                         <th width="800" colspan="<?php echo $marked_report + 1;?>" style="text-align: center">Weekly Report Assessment Scores</th>
                                     </tr>
+                                    <?php
+                                        $WPs = $WeeklyReportModel->query('SELECT a.* FROM weeklyreport_studentdetailsviews a WHERE a.academic_term_id="'.$temp['academic_term_id'].'" AND a.marked_status=1
+                                        AND a.class_id="'.$temp['class_id'].'" AND a.student_id="'.$temp['student_id'].'" AND a.subject_id=(SELECT subject_id FROM
+                                        (SELECT COUNT(subject_id) AS weight_point, subject_id FROM weeklyreport_studentdetailsviews WHERE academic_term_id="'.$temp['academic_term_id'].'" AND marked_status=1
+                                        AND class_id="'.$temp['class_id'].'" AND student_id="'.$temp['student_id'].'" GROUP BY subject_id ORDER BY weight_point DESC) AS subject_id LIMIT 1) ORDER BY a.weekly_report_no');
+                                    ?>
                                     <tr style="font-weight:bold; background-color:#CCCCCC;">
                                         <th width="8">#</th>
                                         <th width="232">Subject</th>
                                         <?php
-                                            for($k=0; $k<$marked_report; $k++)
-                                                echo '<th width="80">'.$this->Utility->formatPosition(($k+1)).'</th>';
+                                            for($k=0; $k<count($WPs); $k++)
+                                                echo '<td>' . $this->Utility->formatPosition(($k+1)) . '  (' . intval($WPs[$k]['a']['weekly_weight_point']) . ')</td>';
                                         ?>
                                     </tr>
                                 </thead>
@@ -141,7 +147,7 @@
                                                             $j = $TermScore['a']['weekly_report_no'];
                                                         }
                                                         if($j == $TermScore['a']['weekly_report_no']) {
-                                                            echo '<td>' . $TermScore['a']['weekly_ca'] . ' / ' . intval($TermScore['a']['weekly_weight_point']) . '</td>';
+                                                            echo '<td>' . $TermScore['a']['weekly_ca'] . '</td>';
                                                             $j++;
                                                         }
                                                     }
@@ -158,8 +164,8 @@
                                         <th width="8">#</th>
                                         <th width="232">Subject</th>
                                         <?php
-                                            for($k=0; $k<$marked_report; $k++)
-                                                echo '<th width="80">'.$this->Utility->formatPosition(($k+1)).'</th>';
+                                            for($k=0; $k<count($WPs); $k++)
+                                                echo '<td>' . $this->Utility->formatPosition(($k+1)) . '  (' . intval($WPs[$k]['a']['weekly_weight_point']) . ')</td>';
                                         ?>
                                     </tr>
                                 </tfoot>

@@ -42,7 +42,7 @@
                               <th>#</th>
                               <th>Class Name</th>
                               <th>Academic Year</th>
-                              <th>Head Tutor</th>
+                              <th>Class Teacher</th>
                               <th>Date Assign</th>
                               <th>View Students</th>
                             </tr>
@@ -70,7 +70,7 @@
                               <th>#</th>
                               <th>Class Name</th>
                               <th>Academic Year</th>
-                              <th>Head Tutor</th>
+                              <th>Class Teacher</th>
                               <th>Date Assign</th>
                               <th>View Students</th>
                             </tr>
