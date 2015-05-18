@@ -260,7 +260,8 @@ $cakeDescription = __d('app_dev', ':: '.APP_NAME.' :');
                                     <li class="submenu">
                                         <a class="dropdown" href="javascript:void(0)" data-original-title="Assessments"><i class="fa fa-bookmark"></i><span class="hidden-minibar"> Assessments <span class="badge bg-primary pull-right" id="exams_count"></span></span></a>
                                         <ul>
-                                            <li><a href="<?php echo DOMAIN_NAME ?>/weekly_reports/index" data-original-title="Weekly Assessments"><i class="fa fa-tasks"></i><span> Weekly Assessments</span></a></li>
+                                            <li><a href="<?php echo DOMAIN_NAME ?>/weekly_reports/index#report" data-original-title="Weekly Assessments"><i class="fa fa-tasks"></i><span> Weekly Assessments</span></a></li>
+                                            <li><a href="<?php echo DOMAIN_NAME ?>/weekly_reports/index#midterm" data-original-title="Mid-Term Report"><i class="fa fa-book"></i><span> Mid-Term Report</span></a></li>
                                             <?php if($setup_exam): ?>
                                             <li><a href="<?php echo DOMAIN_NAME ?>/exams/index#setupExam" data-original-title="Setup Exams"><i class="fa fa-gear"></i><span> Setup Exams</span></a></li>
                                             <?php endif;?>
@@ -317,7 +318,7 @@ $cakeDescription = __d('app_dev', ':: '.APP_NAME.' :');
                                         <li><a href="<?php echo DOMAIN_NAME ?>/records/class_level" data-original-title="Class Level"><i class="fa fa-trello"></i><span> Class Level</span></a></li>
                                         <li><a href="<?php echo DOMAIN_NAME ?>/records/class_room" data-original-title="Class Rooms"><i class="fa fa-group"></i><span> Class Rooms</span></a></li>
                                         <li><a href="<?php echo DOMAIN_NAME ?>/records/weekly_report" data-original-title="Weekly Reports"><i class="fa fa-bar-chart-o"></i><span> Weekly Reports</span></a></li>
-                                        <li><a href="<?php echo DOMAIN_NAME ?>/records/weeklyrep_detail" data-original-title="Weekly Reports Details"><i class="fa fa-tasks"></i><span> Weekly Report Details</span></a></li>
+                                        <li><a href="<?php echo DOMAIN_NAME ?>/records/weekly_detail" data-original-title="Weekly Reports Details"><i class="fa fa-tasks"></i><span> Weekly Report Details</span></a></li>
                                         <li><a href="<?php echo DOMAIN_NAME ?>/records/subject_group" data-original-title="Subject Group"><i class="fa fa-align-left"></i><span> Subject Groups</span></a></li>
                                         <li><a href="<?php echo DOMAIN_NAME ?>/records/subject" data-original-title="Subject"><i class="fa fa-file-text"></i><span> Subjects</span></a></li>
                                         <li><a href="<?php echo DOMAIN_NAME ?>/records/grade" data-original-title="Grade Grouping"><i class="fa fa-renren"></i><span> Grade Grouping</span></a></li>
@@ -354,7 +355,7 @@ $cakeDescription = __d('app_dev', ':: '.APP_NAME.' :');
                                                 <li><a href="<?php echo DOMAIN_NAME ?>/records/weekly_report" data-original-title="Weekly Reports"><i class="fa fa-bar-chart-o"></i><span> Weekly Reports</span></a></li>
                                             <?php endif;?>
                                             <?php if($master_record_id > 5): ?>
-                                                <li><a href="<?php echo DOMAIN_NAME ?>/records/weeklyrep_detail" data-original-title="Weekly Reports Details"><i class="fa fa-tasks"></i><span> Weekly Report Details</span></a></li>
+                                                <li><a href="<?php echo DOMAIN_NAME ?>/records/weekly_detail" data-original-title="Weekly Reports Details"><i class="fa fa-tasks"></i><span> Weekly Report Details</span></a></li>
                                             <?php endif;?>
                                             <?php if($master_record_id > 6 ): ?>
                                                 <li><a href="<?php echo DOMAIN_NAME ?>/records/subject_group" data-original-title="Subject Group"><i class="fa fa-align-left"></i><span> Subject Groups</span></a></li>

@@ -35,19 +35,26 @@ class Employee extends AppModel {
         $this->data[$this->alias]['status_id'] = (isset($this->data[$this->alias]['status_id'])) ? $this->data[$this->alias]['status_id'] : 1;
         return parent::beforeSave($options);
     }
+
+
     public function afterSave($created, $options = array()) {
-        $id = $this->id;
         $UserModel = ClassRegistry::init('User');
-        $UserModel->id = AuthComponent::user('user_id');
+        $id = $this->id;
         $name = trim(strtoupper($this->data[$this->alias]['first_name'] . ' ' . ucwords($this->data[$this->alias]['other_name'])));
+        
+        $Staff = $this->query('SELECT b.user_id FROM employees a INNER JOIN users b ON a.employee_no=b.username WHERE a.employee_id="'.$id.'" LIMIT 1');
+        $Staff = array_shift($Staff);
+        
+        $UserModel->id = $Staff['b']['user_id'];
         $UserModel->saveField('display_name', $name);
-        //$no = 'emp'. str_pad($id, 4, '0', STR_PAD_LEFT);
-        if(isset($this->data[$this->alias]['image_url'])){
-            $image_url = $this->data[$this->alias]['image_url'];
-            $ext = pathinfo($image_url, PATHINFO_EXTENSION);
-            $url = 'employees/' . $id . '.' . $ext;
-            //User Image URL
-            $UserModel->saveField('image_url', $url);
+
+         //$no = 'emp'. str_pad($id, 4, '0', STR_PAD_LEFT);
+         if(isset($this->data[$this->alias]['image_url'])){
+             $image_url = $this->data[$this->alias]['image_url'];
+             $ext = pathinfo($image_url, PATHINFO_EXTENSION);
+             $url = 'employees/' . $id . '.' . $ext;
+             //User Image URL
+             $UserModel->saveField('image_url', $url);
         }
     }
     

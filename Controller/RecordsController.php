@@ -309,7 +309,7 @@ class RecordsController extends AppController {
                     if($this->master_record_id < $this->master_record_count) {
                         $this->MasterSetupModel->id = 1;
                         $this->MasterSetupModel->saveField('master_record_id', 6);
-                        $this->redirect(array('controller' => 'records', 'action' => 'weeklyRep_detail'));
+                        $this->redirect(array('controller' => 'records', 'action' => 'weekly_detail'));
                     }else{
                         $this->set('WeeklyReports', $WeeklyReportSetup->find('all'));
                     }
@@ -324,7 +324,7 @@ class RecordsController extends AppController {
 
 
     /////// Weekly Report Details  Master Record  ////////////////////// 7th Step //////////////////////////////////////////////////////////////
-    public function weeklyrep_detail() {
+    public function weekly_detail() {
         $this->set('title_for_layout', 'Weekly Report Details Records');
         $resultCheck = $this->Acl->check($this->group_alias, 'RecordsController');
         if($resultCheck){

@@ -45,9 +45,6 @@ class SponsorNew extends AppModel {
             $User->data['User']['image_url'] = $val;
             $User->data['User']['user_role_id'] = 1;
             if($User->save()) {
-                //Update The Sponsor ID
-                $this->saveField('sponsor_no', $no);
-
                 //Send SMS
                 $this->SendSMS($mobile_no, $msg);
 
@@ -57,6 +54,8 @@ class SponsorNew extends AppModel {
                 if(!empty($email)){
                     $this->sendMail($msg_body, 'Login Details', $email, $name);
                 }
+                //Update The Sponsor ID
+                $this->saveField('sponsor_no', $no);
             }
             //$this->createNewUser($no, $this->data[$this->alias]['first_name'], $this->data[$this->alias]['other_name'], $id, $val, 1);
         }

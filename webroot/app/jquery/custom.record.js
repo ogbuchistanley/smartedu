@@ -133,7 +133,28 @@ $('document').ready(function(){
 
     ////////////////////    Weekly Report Details  ////////////////////////////////////////////////////////////////////////////
     $(document.body).on('click', '#save_weekly_detail_btn', function(){
-        setDeleteIDs();
+        //Validate The C.A Percentage
+        var no = $(this).val().split('_');
+        var cg1_percent = 0;
+        var cg2_percent = 0;
+        $(".ca_percent").each(function(index, element) {
+            //alert(index+'--'+$(element).val());
+            if(index < no[0])
+                cg1_percent += parseInt($(element).val());
+            if(index >= no[0] && index < (no[0] + no[1]))
+                cg2_percent += parseInt($(element).val());
+        });
+        if(cg1_percent !== 100) {
+            $(this).next().html('<h4><span class="label label-danger">The Sum Total of the percentages For The <strong style="text-decoration: underline">First Class Group is '+cg1_percent+'%.</strong> It Must Sum Up To 100%</span></h4>')
+            return false;
+        }else if(cg2_percent !== 100) {
+            $(this).next().html('<h4><span class="label label-danger">The Sum Total of the percentages For The <strong style="text-decoration: underline">Second Class Group is '+cg2_percent+'%.</strong> It Must Sum Up To 100%</span></h4>')
+            return false;
+        }else{
+            setDeleteIDs();
+            $(this).next().html('')
+            return true;
+        }
     });
     
     ////////////////////    Grade Grouping  ////////////////////////////////////////////////////////////////////////////
