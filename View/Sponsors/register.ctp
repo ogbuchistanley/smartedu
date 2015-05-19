@@ -95,7 +95,7 @@
                                </div>
                             </div>
                             <div class="form-group">
-                              <label class="col-lg-2 col-md-3 control-label">Mobile Number <small class="text-danger"> * </small></label>
+                              <label class="col-lg-2 col-md-3 control-label" for="mobile_number1">Mobile Number <small class="text-danger"> * </small></label>
                               <div class="col-lg-7 col-md-9">
                                     <input type="tel" class="form-control form-cascade-control input-small" name="data[SponsorNew][mobile_number1]" id="mobile_number1" required>
                                       <span id="valid-msg" class="hide alert-success">✓ Valid</span>
