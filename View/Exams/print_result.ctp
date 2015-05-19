@@ -32,7 +32,6 @@
                 width:300px;
                 z-index:2;
             }
-
             #apDi1 {
                 position:absolute;
                 left:0px;

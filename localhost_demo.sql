@@ -29,7 +29,7 @@ CREATE PROCEDURE `proc_annualClassPositionViews`(IN `ClassID` INT, IN `AcademicY
 BEGIN
 	#Create a Temporary Table to Hold The Values
 	DROP TEMPORARY TABLE IF EXISTS AnnualClassPositionResultTable;
-	CREATE TEMPORARY TABLE IF NOT EXISTS AnnualClassPositionResultTable 
+	CREATE TEMPORARY TABLE IF NOT EXISTS AnnualClassPositionResultTable
 	(
 		-- Add the column definitions for the TABLE variable here
 		row_id int AUTO_INCREMENT,
@@ -46,7 +46,7 @@ BEGIN
 	);
 
 	-- cursor block for calculating the students annual exam total scores
-	Block1: BEGIN								
+	Block1: BEGIN
 		DECLARE done1 BOOLEAN DEFAULT FALSE;
 		DECLARE StudentID, ClassRoomID, YearID INT;
 		DECLARE StudentName VARCHAR(150);
@@ -55,16 +55,16 @@ BEGIN
 		FROM students_classlevelviews WHERE class_id=ClassID AND academic_year_id=AcademicYearID
 		GROUP BY student_id, student_name, class_id, class_name, academic_year_id,academic_year;
 		DECLARE CONTINUE HANDLER FOR NOT FOUND SET done1 = TRUE;
-	
+
 		#Open The Cursor For Iterating Through The Recordset cur1
 		OPEN cur1;
 			REPEAT
 			FETCH cur1 INTO StudentID, StudentName, ClassRoomID, ClassName, YearID, YearName;
-				IF NOT done1 THEN	
+				IF NOT done1 THEN
 					BEGIN
 						-- Function Call to the records
 						SET @Res = (SELECT func_annualExamsViews(StudentID, AcademicYearID));
-							
+
 						IF @Res > 0 THEN
 							BEGIN
 								INSERT INTO AnnualClassPositionResultTable(student_id, full_name, class_id, class_name, academic_year_id, academic_year, student_annual_total_score, exam_annual_perfect_score)
@@ -75,13 +75,13 @@ BEGIN
 					END;
 				END IF;
 			UNTIL done1 END REPEAT;
-		CLOSE cur1;								
+		CLOSE cur1;
 	END Block1;
 
 	-- cursor block for calculating the students annual class Position
-	Block2: BEGIN		
+	Block2: BEGIN
 		-- Get the number of students in the class
-		SET @ClassSize = (SELECT COUNT(*) FROM students_classlevelviews 
+		SET @ClassSize = (SELECT COUNT(*) FROM students_classlevelviews
 			WHERE class_id = ClassID AND academic_year_id = AcademicYearID
 		);
 		SET @TempPosition = 1;
@@ -97,12 +97,12 @@ BEGIN
 			GROUP BY row_id, student_annual_total_score
 			ORDER BY student_annual_total_score DESC;
 			DECLARE CONTINUE HANDLER FOR NOT FOUND SET done2 = TRUE;
-		
+
 			#Open The Cursor For Iterating Through The Recordset cur1
 			OPEN cur2;
 				REPEAT
 				FETCH cur2 INTO RowID, StudentAnnualTotal;
-					IF NOT done2 THEN	
+					IF NOT done2 THEN
 						BEGIN
 							-- IF the current student total is equal to the next student's total
 							IF @TempStudentScore = StudentAnnualTotal THEN
@@ -111,7 +111,7 @@ BEGIN
 							-- Else if they are not equal
 							ELSE
 								BEGIN
-									-- Set the current student's position to be that of the temp variable	
+									-- Set the current student's position to be that of the temp variable
 									SET @Position = @TempPosition;
 									-- Add one to the temp variable position
 									SET @TempPosition = @TempPosition + 1;
@@ -122,19 +122,19 @@ BEGIN
 								UPDATE AnnualClassPositionResultTable SET class_annual_position=@Position, class_size=@ClassSize
 								WHERE row_id=RowID;
 							END;
-							-- Get the current student total score and set it the variable for the next comparism 
-							SET @TempStudentScore = StudentAnnualTotal;							
+							-- Get the current student total score and set it the variable for the next comparism
+							SET @TempStudentScore = StudentAnnualTotal;
 					   END;
 					END IF;
 				UNTIL done2 END REPEAT;
-			CLOSE cur2;								
+			CLOSE cur2;
 		END Block3;
 	END Block2;
 END$$
 
 DROP PROCEDURE IF EXISTS `proc_assignSubject2Classlevels`$$
 CREATE PROCEDURE `proc_assignSubject2Classlevels`(IN `LevelID` INT, `TermID` INT, `SubjectIDs` VARCHAR(225))
-BEGIN 
+BEGIN
 	DECLARE done1 BOOLEAN DEFAULT FALSE;
 	DECLARE ClassID INT;
 	DECLARE cur1 CURSOR FOR SELECT class_id FROM classrooms WHERE classlevel_id=LevelID;
@@ -144,22 +144,22 @@ BEGIN
 	OPEN cur1;
 		REPEAT
 		FETCH cur1 INTO ClassID;
-			IF NOT done1 THEN	
+			IF NOT done1 THEN
 				BEGIN
-					-- Procedure Call -- To register the subjects to the students in that classroom 
+					-- Procedure Call -- To register the subjects to the students in that classroom
 					CALL `proc_assignSubject2Classrooms`(ClassID, LevelID, TermID, SubjectIDs);
 				END;
 			END IF;
 		UNTIL done1 END REPEAT;
-	CLOSE cur1;	
+	CLOSE cur1;
 END$$
 
 DROP PROCEDURE IF EXISTS `proc_assignSubject2Classrooms`$$
 CREATE PROCEDURE `proc_assignSubject2Classrooms`(IN `ClassID` INT, `LevelID` INT, `TermID` INT, `SubjectIDs` VARCHAR(225))
-BEGIN 
+BEGIN
 	#Create a Temporary Table to Hold The Values
 	DROP TEMPORARY TABLE IF EXISTS SubjectTemp;
-	CREATE TEMPORARY TABLE IF NOT EXISTS SubjectTemp 
+	CREATE TEMPORARY TABLE IF NOT EXISTS SubjectTemp
 	(
 		-- Add the column definitions for the TABLE variable here
 		row_id int AUTO_INCREMENT,
@@ -186,53 +186,53 @@ BEGIN
 	Block1: BEGIN
 		DELETE FROM subject_students_registers WHERE subject_classlevel_id IN
 		(
-			SELECT subject_classlevel_id FROM subject_classlevels WHERE class_id=ClassID AND classlevel_id=LevelID AND academic_term_id=TermID AND subject_id NOT IN 
+			SELECT subject_classlevel_id FROM subject_classlevels WHERE class_id=ClassID AND classlevel_id=LevelID AND academic_term_id=TermID AND subject_id NOT IN
 			(SELECT subject_id FROM SubjectTemp)
 		);
 
-		DELETE FROM subject_classlevels WHERE class_id=ClassID AND classlevel_id=LevelID AND academic_term_id=TermID AND subject_id NOT IN 
+		DELETE FROM subject_classlevels WHERE class_id=ClassID AND classlevel_id=LevelID AND academic_term_id=TermID AND subject_id NOT IN
 		(SELECT subject_id FROM SubjectTemp);
-		
-        Block2: BEGIN								
+
+        Block2: BEGIN
 			DECLARE done1 BOOLEAN DEFAULT FALSE;
 			DECLARE SubjectID INT;
 			DECLARE cur1 CURSOR FOR SELECT subject_id FROM SubjectTemp;
 			DECLARE CONTINUE HANDLER FOR NOT FOUND SET done1 = TRUE;
-		
+
 			#Open The Cursor For Iterating Through The Recordset cur1
 			OPEN cur1;
 				REPEAT
 				FETCH cur1 INTO SubjectID;
-					IF NOT done1 THEN	
+					IF NOT done1 THEN
 						BEGIN
-							SET @Exist = (SELECT COUNT(*) FROM subject_classlevels WHERE subject_id=SubjectID AND class_id=ClassID AND classlevel_id=LevelID AND academic_term_id=TermID); 
+							SET @Exist = (SELECT COUNT(*) FROM subject_classlevels WHERE subject_id=SubjectID AND class_id=ClassID AND classlevel_id=LevelID AND academic_term_id=TermID);
 							IF @Exist = 0 THEN
 								BEGIN
 									# Insert into subject classlevel those newly assigned subjects
 									INSERT INTO subject_classlevels(subject_id, classlevel_id, class_id, academic_term_id)
 									VALUES(SubjectID, LevelID, ClassID, TermID);
-                                    
-                                    -- Procedure Call -- To register the subjects to the students in that classroom 
+
+                                    -- Procedure Call -- To register the subjects to the students in that classroom
 									CALL proc_assignSubject2Students(LAST_INSERT_ID());
 								END;
 							END IF;
 						END;
 					END IF;
 				UNTIL done1 END REPEAT;
-			CLOSE cur1;								
+			CLOSE cur1;
 		END Block2;
-	END Block1;	
+	END Block1;
 END$$
 
 DROP PROCEDURE IF EXISTS `proc_assignSubject2Students`$$
 CREATE PROCEDURE `proc_assignSubject2Students`(IN `subjectClasslevelID` INT)
-BEGIN 
-	SELECT classlevel_id, class_id, academic_term_id 
-	INTO @ClassLevelID, @ClassID, @AcademicTermID 
+BEGIN
+	SELECT classlevel_id, class_id, academic_term_id
+	INTO @ClassLevelID, @ClassID, @AcademicTermID
 	FROM subject_classlevels WHERE subject_classlevel_id=subjectClasslevelID LIMIT 1;
 	SET @SubjectClasslevelID = subjectClasslevelID;
 
-		
+
 	SELECT COUNT(*) INTO @Exist FROM subject_students_registers WHERE subject_classlevel_id=subjectClasslevelID LIMIT 1;
 	IF @Exist > 0 THEN
 		BEGIN
@@ -245,7 +245,7 @@ BEGIN
 		BEGIN
 			INSERT INTO subject_students_registers(student_id, class_id, subject_classlevel_id)
 			SELECT	b.student_id, b.class_id, @SubjectClasslevelID
-			FROM	students a INNER JOIN students_classes b ON a.student_id=b.student_id INNER JOIN 
+			FROM	students a INNER JOIN students_classes b ON a.student_id=b.student_id INNER JOIN
 					classrooms c ON c.class_id = b.class_id
 			WHERE 	c.classlevel_id = @ClassLevelID  AND a.student_status_id = 1
 			AND 	b.academic_year_id = (SELECT academic_year_id FROM academic_terms WHERE academic_term_id = @AcademicTermID LIMIT 1);
@@ -254,7 +254,7 @@ BEGIN
 		BEGIN
 			INSERT INTO subject_students_registers(student_id, class_id, subject_classlevel_id)
 			SELECT	b.student_id, b.class_id, @SubjectClasslevelID
-			FROM	students a INNER JOIN students_classes b ON a.student_id=b.student_id INNER JOIN 
+			FROM	students a INNER JOIN students_classes b ON a.student_id=b.student_id INNER JOIN
 					classrooms c ON c.class_id = b.class_id
 			WHERE	b.class_id = @ClassID AND a.student_status_id = 1
             AND 	b.academic_year_id = (SELECT academic_year_id FROM academic_terms WHERE academic_term_id = @AcademicTermID LIMIT 1);
@@ -268,10 +268,10 @@ CREATE PROCEDURE `proc_examsDetailsReportViews`(IN `AcademicID` INT, IN `TypeID`
 BEGIN
 	-- Create Temporary Table
 	DROP TEMPORARY TABLE IF EXISTS ExamsDetailsResultTable;
-	CREATE TEMPORARY TABLE IF NOT EXISTS ExamsDetailsResultTable 
+	CREATE TEMPORARY TABLE IF NOT EXISTS ExamsDetailsResultTable
 	(
 		-- Add the column definitions for the TABLE variable here
-		row_id int AUTO_INCREMENT, exam_id int, subject_id int, classlevel_id int, class_id int, student_id int, 
+		row_id int AUTO_INCREMENT, exam_id int, subject_id int, classlevel_id int, class_id int, student_id int,
 		subject_name varchar(80), class_name varchar(80), student_fullname varchar(180),
 		ca1 int, ca2 int, exam int, weightageCA1 int, weightageCA2 int, weightageExam int,
 		academic_term_id int, academic_term varchar(80), exammarked_status_id int, academic_year_id int,
@@ -279,11 +279,11 @@ BEGIN
 		studentSubjectTotal Decimal(6, 2), studentPercentTotal Decimal(6, 2), weightageTotal Decimal(6, 2), grade varchar(20),
 		grade_abbr varchar(5), student_sum_total Decimal(6, 2), exam_perfect_score int, PRIMARY KEY (row_id)
 	);
-			
+
 	-- TypeID values 1 for term while others for year
 	IF TypeID = 1 THEN
 		-- Insert Into the temporary table
-		INSERT INTO ExamsDetailsResultTable(exam_id, subject_id, classlevel_id, class_id, student_id, 
+		INSERT INTO ExamsDetailsResultTable(exam_id, subject_id, classlevel_id, class_id, student_id,
 			subject_name, class_name, student_fullname,
 			ca1, ca2, exam, weightageCA1, weightageCA2, weightageExam,
 			academic_term_id, academic_term, exammarked_status_id, academic_year_id,
@@ -292,79 +292,79 @@ BEGIN
 		WHERE exammarked_status_id=1 AND academic_term_id=AcademicID;
 	ELSE
 		-- Insert Into the temporary table
-		INSERT INTO ExamsDetailsResultTable(exam_id, subject_id, classlevel_id, class_id, student_id, 
+		INSERT INTO ExamsDetailsResultTable(exam_id, subject_id, classlevel_id, class_id, student_id,
 			subject_name, class_name, student_fullname,
 			ca1, ca2, exam, weightageCA1, weightageCA2, weightageExam,
 			academic_term_id, academic_term, exammarked_status_id, academic_year_id,
 			academic_year, classlevel, classgroup_id)
 		SELECT * FROM examsdetails_reportviews
-		WHERE exammarked_status_id=1 AND academic_term_id IN 
+		WHERE exammarked_status_id=1 AND academic_term_id IN
 			(SELECT academic_term_id FROM academic_terms WHERE academic_year_id=AcademicID);
 	END IF;
 	-- cursor block for calculating the students exam total scores
-	Block1: BEGIN								
+	Block1: BEGIN
 		DECLARE done1 BOOLEAN DEFAULT FALSE;
 		DECLARE RowID, StudentID, SubjectID, TermID INT;
 		DECLARE cur1 CURSOR FOR SELECT row_id, student_id, subject_id, academic_term_id
-		FROM ExamsDetailsResultTable;	
+		FROM ExamsDetailsResultTable;
 		DECLARE CONTINUE HANDLER FOR NOT FOUND SET done1 = TRUE;
-	
+
 		#Open The Cursor For Iterating Through The Recordset cur1
 		OPEN cur1;
 			REPEAT
 			FETCH cur1 INTO RowID, StudentID, SubjectID, TermID;
-				IF NOT done1 THEN	
+				IF NOT done1 THEN
 					BEGIN
-						SELECT CAST((ca1 + ca2 + exam) AS Decimal(6, 2)), CAST((((ca1 + ca2 + exam) / (weightageCA1 + weightageCA2 + weightageExam)) * 100) 
+						SELECT CAST((ca1 + ca2 + exam) AS Decimal(6, 2)), CAST((((ca1 + ca2 + exam) / (weightageCA1 + weightageCA2 + weightageExam)) * 100)
 						AS Decimal(6, 2)), CAST((weightageCA1 + weightageCA2 + weightageExam) AS Decimal(6, 2)) INTO @StudentSubjectTotal,  @StudentPercentTotal, @WeightageTotal
-						FROM exam_details INNER JOIN exams ON exam_details.exam_id = exams.exam_id INNER JOIN 
-						subject_classlevels ON exams.subject_classlevel_id = subject_classlevels.subject_classlevel_id INNER JOIN 
+						FROM exam_details INNER JOIN exams ON exam_details.exam_id = exams.exam_id INNER JOIN
+						subject_classlevels ON exams.subject_classlevel_id = subject_classlevels.subject_classlevel_id INNER JOIN
                         classlevels ON subject_classlevels.classlevel_id = classlevels.classlevel_id INNER JOIN
                         classgroups ON classlevels.classgroup_id = classgroups.classgroup_id
 						WHERE  exam_details.student_id = StudentID AND subject_id=SubjectID AND subject_classlevels.academic_term_id = TermID
 						GROUP BY exam_details.student_id;
-						-- update the temporary table with the new calculated values 
+						-- update the temporary table with the new calculated values
 						BEGIN
-							UPDATE ExamsDetailsResultTable SET 
+							UPDATE ExamsDetailsResultTable SET
 							studentSubjectTotal=@StudentSubjectTotal, studentPercentTotal=@StudentPercentTotal, weightageTotal=@WeightageTotal
 							WHERE row_id=RowID AND student_id = StudentID AND subject_id=SubjectID AND academic_term_id = TermID;
-						END;						
+						END;
 					END;
 				END IF;
 			UNTIL done1 END REPEAT;
-		CLOSE cur1;								
+		CLOSE cur1;
 	END Block1;
-	
+
 	-- cursor for calculating the students grade base on the scores
-	Block2: BEGIN								
+	Block2: BEGIN
 		DECLARE done2 BOOLEAN DEFAULT FALSE;
 		DECLARE RowID, StudentID, SubjectID, TermID, ClassGroupID INT;
 		DECLARE StudentPercentT Decimal(6, 2);
 		DECLARE cur2 CURSOR FOR SELECT row_id, student_id, subject_id, academic_term_id, studentPercentTotal, classgroup_id
-		FROM ExamsDetailsResultTable;	
+		FROM ExamsDetailsResultTable;
 		DECLARE CONTINUE HANDLER FOR NOT FOUND SET done2 = TRUE;
-	
+
 		#Open The Cursor For Iterating Through The Recordset cur1
 		OPEN cur2;
 			REPEAT
 			FETCH cur2 INTO RowID, StudentID, SubjectID, TermID, StudentPercentT, ClassGroupID;
-				IF NOT done2 THEN	
+				IF NOT done2 THEN
 					BEGIN
 						SELECT grade, grade_abbr INTO @Grade, @GradeAbbr FROM grades
 						WHERE StudentPercentT BETWEEN lower_bound AND upper_bound AND classgroup_id = ClassGroupID;
-								
+
 						SELECT CAST(SUM(studentPercentTotal)AS Decimal(6, 2)), (COUNT(studentPercentTotal) * 100) INTO @StudentSumTotal, @ExamPerfectScore
 						FROM ExamsDetailsResultTable WHERE student_id = StudentID AND academic_term_id = TermID GROUP BY student_id;
 						-- update the temporary table with the calculated values
 						BEGIN
-							UPDATE ExamsDetailsResultTable SET grade=@Grade, grade_abbr=@GradeAbbr, 
+							UPDATE ExamsDetailsResultTable SET grade=@Grade, grade_abbr=@GradeAbbr,
 							student_sum_total=@StudentSumTotal, exam_perfect_score=@ExamPerfectScore
 							WHERE row_id=RowID AND student_id = StudentID AND subject_id=SubjectID AND academic_term_id = TermID;
-						END;						
+						END;
 					END;
 				END IF;
 			UNTIL done2 END REPEAT;
-		CLOSE cur2;								
+		CLOSE cur2;
 	END Block2;
 END$$
 
@@ -378,7 +378,7 @@ BEGIN
 			DELETE FROM attend_details WHERE attend_id=AttendID;
 		END;
 	END IF;
-	
+
 	IF StudentIDS IS NOT NULL THEN
 		BEGIN
 			DECLARE count INT Default 0 ;
@@ -401,10 +401,10 @@ DROP PROCEDURE IF EXISTS `proc_insertWeeklyReportDetail`$$
 CREATE PROCEDURE `proc_insertWeeklyReportDetail`(IN `WeeklyReportID` INT)
 BEGIN
 	# Delete The Record if it exists
-	SELECT weekly_detail_setup_id, subject_classlevel_id, marked_status, notification_status 
-    INTO @WDS_ID, @SCL_ID, @MStatus, @NStatus 
+	SELECT weekly_detail_setup_id, subject_classlevel_id, marked_status, notification_status
+    INTO @WDS_ID, @SCL_ID, @MStatus, @NStatus
     FROM weekly_reports WHERE weekly_report_id=WeeklyReportID;
-    
+
     # Check if the weekly report has been marked before
 	IF @NStatus = 2 THEN
 		BEGIN
@@ -412,9 +412,9 @@ BEGIN
             INSERT INTO weekly_report_details(weekly_report_id, student_id)
 			SELECT WeeklyReportID, student_id FROM subject_students_registers WHERE subject_classlevel_id=@SCL_ID
             AND student_id NOT IN (SELECT student_id FROM weekly_report_details WHERE weekly_report_id=WeeklyReportID);
-            
+
 			# remove the students that was just removed from the list of students to offer the subject
-			DELETE FROM weekly_report_details WHERE weekly_report_id=WeeklyReportID AND student_id NOT IN 
+			DELETE FROM weekly_report_details WHERE weekly_report_id=WeeklyReportID AND student_id NOT IN
 			(SELECT student_id FROM subject_students_registers WHERE subject_classlevel_id=@SCL_ID);
 		END;
 	END IF;
@@ -422,45 +422,45 @@ END$$
 
 DROP PROCEDURE IF EXISTS `proc_processExams`$$
 CREATE PROCEDURE `proc_processExams`(IN `TermID` INT)
-BEGIN 
-	Block0: BEGIN								
+BEGIN
+	Block0: BEGIN
 		-- Delete the exams details record for that term if its has not been marked already
-		DELETE FROM exam_details WHERE exam_id IN 
+		DELETE FROM exam_details WHERE exam_id IN
 		(SELECT exam_id FROM exam_subjectviews WHERE academic_term_id=TermID AND exammarked_status_id=2);
-		
+
 		-- Delete the exams record for that term if its has not been marked already
-		DELETE FROM exams WHERE exammarked_status_id=2 AND subject_classlevel_id IN 
+		DELETE FROM exams WHERE exammarked_status_id=2 AND subject_classlevel_id IN
 		(SELECT subject_classlevel_id FROM subject_classlevels WHERE academic_term_id=TermID);
 	END Block0;
-    
-    Block1: BEGIN	
+
+    Block1: BEGIN
 		-- Insert into exams table with all the subjects that has assigned to a class room with students offering them
 		-- also skip those records that exist already to avoid duplicates in terms of class_id and subject_classlevel_id
 		INSERT INTO exams(class_id, subject_classlevel_id)
-		SELECT a.class_id, a.subject_classlevel_id FROM classroom_subjectregisterviews a 
-		WHERE a.academic_term_id=TermID AND a.class_id NOT IN 
+		SELECT a.class_id, a.subject_classlevel_id FROM classroom_subjectregisterviews a
+		WHERE a.academic_term_id=TermID AND a.class_id NOT IN
 		(SELECT class_id FROM exams b WHERE academic_term_id=TermID AND b.subject_classlevel_id = a.subject_classlevel_id);
-		
+
         -- Update the exam setup status_id = 1
         UPDATE subject_classlevels set examstatus_id=1;
     END Block1;
-    
+
     -- insert into exams details the students offering such subjects in the class room using the exams assigned
     -- cursor block for inserting exam details from exams and subject_students_registers
-	Block2: BEGIN								
+	Block2: BEGIN
 		DECLARE done1 BOOLEAN DEFAULT FALSE;
 		DECLARE ExamID, ClassID, SubjectClasslevelID, ExamMarkStatusID INT;
 		-- DECLARE cur1 CURSOR FOR SELECT a.exam_id, a.class_id, a.subject_classlevel_id, a.exammarked_status_id
         DECLARE cur1 CURSOR FOR SELECT a.*
-		FROM exams a INNER JOIN subject_classlevels b ON a.subject_classlevel_id=b.subject_classlevel_id 
+		FROM exams a INNER JOIN subject_classlevels b ON a.subject_classlevel_id=b.subject_classlevel_id
         WHERE b.academic_term_id=TermID;
 		DECLARE CONTINUE HANDLER FOR NOT FOUND SET done1 = TRUE;
-	
+
 		#Open The Cursor For Iterating Through The Recordset cur1
 		OPEN cur1;
 			REPEAT
 			FETCH cur1 INTO ExamID, ClassID, SubjectClasslevelID, ExamMarkStatusID;
-				IF NOT done1 THEN	
+				IF NOT done1 THEN
 					BEGIN
 						IF ExamMarkStatusID = 2 THEN
 							BEGIN
@@ -478,11 +478,11 @@ BEGIN
 								FROM 	subject_students_registers
 								WHERE 	class_id=ClassID AND subject_classlevel_id=SubjectClasslevelID AND student_id NOT IN
                                 (SELECT student_id FROM exam_details WHERE exam_id=ExamID);
-                                
+
                                 # remove the students that was just removed from the list of students to offer the subject
-                                DELETE FROM exam_details WHERE exam_id=ExamID AND student_id NOT IN 
+                                DELETE FROM exam_details WHERE exam_id=ExamID AND student_id NOT IN
 								(
-									SELECT student_id FROM subject_students_registers 
+									SELECT student_id FROM subject_students_registers
 									WHERE class_id=ClassID AND subject_classlevel_id=SubjectClasslevelID
                                 );
 							END;
@@ -490,26 +490,26 @@ BEGIN
 					END;
 				END IF;
 			UNTIL done1 END REPEAT;
-		CLOSE cur1;								
+		CLOSE cur1;
 	END Block2;
 END$$
 
 DROP PROCEDURE IF EXISTS `proc_processItemVariable`$$
 CREATE PROCEDURE `proc_processItemVariable`(IN `ItemVariableID` INT)
 BEGIN
-	SELECT item_id, student_id, class_id, academic_term_id, price 
-	INTO @ItemID, @StudentID, @ClassID, @AcademicTermID, @Price 
+	SELECT item_id, student_id, class_id, academic_term_id, price
+	INTO @ItemID, @StudentID, @ClassID, @AcademicTermID, @Price
 	FROM item_variables WHERE item_variable_id = ItemVariableID LIMIT 1;
 
 	SET @SponsorID = (SELECT sponsor_id FROM students WHERE student_id=@StudentID);
 	SET @AcademicYearID = (SELECT academic_year_id FROM academic_terms WHERE academic_term_id=@AcademicTermID LIMIT 1);
-	
+
 	Block1: BEGIN
 	IF @StudentID IS NOT NULL THEN
 		BEGIN
 			INSERT INTO orders(student_id, sponsor_id, academic_term_id)
 			VALUES (@StudentID, @SponsorID, @AcademicTermID);
-			
+
 			SET @OrderID = (SELECT MAX(order_id) FROM orders LIMIT 1);
 
 			INSERT INTO order_items(order_id, item_id, price)
@@ -521,10 +521,10 @@ BEGIN
 			DECLARE done1 BOOLEAN DEFAULT FALSE;
 			DECLARE StudentID, SponsorID INT;
 
-			-- Populate the cursor with the values in a record i want to iterate through					
+			-- Populate the cursor with the values in a record i want to iterate through
 			DECLARE cur1 CURSOR FOR
 			SELECT student_id, sponsor_id
-			FROM students_classlevelviews 
+			FROM students_classlevelviews
 			WHERE student_status_id=1 AND class_id=@ClassID AND academic_year_id=@AcademicYearID;
 
 			DECLARE CONTINUE HANDLER FOR NOT FOUND SET done1 = TRUE;
@@ -536,7 +536,7 @@ BEGIN
 						BEGIN
 							INSERT INTO orders(student_id, sponsor_id, academic_term_id)
 							SELECT StudentID, SponsorID, @AcademicTermID;
-							
+
 							SET @OrderID = (SELECT MAX(order_id) FROM orders LIMIT 1);
 
 							INSERT INTO order_items(order_id, item_id, price)
@@ -544,8 +544,8 @@ BEGIN
 					   END;
 					END IF;
 				UNTIL done1 END REPEAT;
-			CLOSE cur1;		
-		END Block2;	
+			CLOSE cur1;
+		END Block2;
 	END IF;
 	END Block1;
 END$$
@@ -553,8 +553,8 @@ END$$
 DROP PROCEDURE IF EXISTS `proc_processTerminalFees`$$
 CREATE PROCEDURE `proc_processTerminalFees`(IN `ProcessID` INT)
 BEGIN
-	SELECT academic_term_id 
-	INTO @AcademicTermID 
+	SELECT academic_term_id
+	INTO @AcademicTermID
 	FROM process_items WHERE process_item_id = ProcessID LIMIT 1;
 	SET @TermTypeID = (SELECT term_type_id FROM academic_terms WHERE academic_term_id=@AcademicTermID);
 
@@ -562,13 +562,13 @@ BEGIN
 		INSERT INTO orders(student_id, sponsor_id, academic_term_id, process_item_id)
 		SELECT student_id, sponsor_id, @AcademicTermID, ProcessID
 		FROM students_classlevelviews WHERE student_status_id=1;
-		
+
 		if @TermTypeID = 1 THEN
 			BEGIN
 				INSERT INTO order_items(order_id, item_id, price)
 				SELECT order_id, item_id, price FROM student_feesqueryviews
 				WHERE process_item_id=ProcessID AND item_type_id <> 3 AND item_status_id=1;
-			END;	
+			END;
 		ELSEIF @TermTypeID = 3 THEN
 			BEGIN
 				INSERT INTO order_items(order_id, item_id, price)
@@ -591,10 +591,10 @@ Block0: BEGIN
 	SET @Output = 0;
     SET @Average = 0;
 	SET @Count = 0;
-	
+
     #Create a Temporary Table to Hold The Values
 	DROP TEMPORARY TABLE IF EXISTS TerminalClassPositionResultTable;
-	CREATE TEMPORARY TABLE IF NOT EXISTS TerminalClassPositionResultTable 
+	CREATE TEMPORARY TABLE IF NOT EXISTS TerminalClassPositionResultTable
 	(
 		-- Add the column definitions for the TABLE variable here
 		student_id int,
@@ -608,15 +608,15 @@ Block0: BEGIN
 		class_position int,
 		class_size int,
         class_average float
-        
+
 	);
 
 	CALL proc_examsDetailsReportViews(term_id, 1);
 
-	Block1: BEGIN		
+	Block1: BEGIN
 		-- CALL smartschool.proc_examsDetailsReportViews(term_id);
 		-- Get the number of students in the class
-		SET @ClassSize = (SELECT COUNT(*) FROM students_classlevelviews 
+		SET @ClassSize = (SELECT COUNT(*) FROM students_classlevelviews
 			WHERE class_id = cla_id AND academic_year_id = (
 			SELECT academic_year_id FROM academic_terms WHERE academic_term_id=term_id)
 		);
@@ -630,12 +630,12 @@ Block0: BEGIN
 			DECLARE StudentID, ClassID, TermID int;
 			DECLARE StudentName, ClassName, TermName nvarchar(60);
 			DECLARE StudentSumTotal, ExamPerfectScore float;
-			-- Populate the cursor with the values in a record i want to iterate through		
-			
+			-- Populate the cursor with the values in a record i want to iterate through
+
 			DECLARE cur1 CURSOR FOR
-			SELECT student_id, student_fullname, class_id, class_name, academic_term_id, academic_term, student_sum_total, exam_perfect_score 
-			FROM ExamsDetailsResultTable WHERE class_id = cla_id and academic_term_id = term_id 
-			GROUP BY student_id, student_fullname, class_name, academic_term, student_sum_total, exam_perfect_score 
+			SELECT student_id, student_fullname, class_id, class_name, academic_term_id, academic_term, student_sum_total, exam_perfect_score
+			FROM ExamsDetailsResultTable WHERE class_id = cla_id and academic_term_id = term_id
+			GROUP BY student_id, student_fullname, class_name, academic_term, student_sum_total, exam_perfect_score
 			ORDER BY student_sum_total DESC;
 
 			DECLARE CONTINUE HANDLER FOR NOT FOUND SET done1 = TRUE;
@@ -652,7 +652,7 @@ Block0: BEGIN
 							-- Else if they are not equal
 							ELSE
 								BEGIN
-									-- Set the current student's position to be that of the temp variable	
+									-- Set the current student's position to be that of the temp variable
 									SET @Position = @TempPosition;
 									-- Add one to the temp variable position
 									SET @TempPosition = @TempPosition + 1;
@@ -660,12 +660,12 @@ Block0: BEGIN
 							END IF;
 							BEGIN
 								-- Insert into the resultant table that will display the computed results
-								INSERT INTO TerminalClassPositionResultTable 
+								INSERT INTO TerminalClassPositionResultTable
 								VALUES(StudentID, StudentName, ClassID, ClassName, TermID, TermName, StudentSumTotal, ExamPerfectScore, @Position, @ClassSize, @Average);
 							END;
-							-- Get the current student total score and set it the variable for the next comparism 
-							SET @TempStudentScore = @StudentSumTotal;	
-                            
+							-- Get the current student total score and set it the variable for the next comparism
+							SET @TempStudentScore = @StudentSumTotal;
+
                             -- Get the average of the students scores
                             SET @Average = @Average + StudentSumTotal;
                             -- Update Count
@@ -675,9 +675,9 @@ Block0: BEGIN
 					   END;
 					END IF;
 				UNTIL done1 END REPEAT;
-			CLOSE cur1;		
-		END Block2;	
-	END Block1;	
+			CLOSE cur1;
+		END Block2;
+	END Block1;
 END Block0$$
 
 --
@@ -689,11 +689,11 @@ BEGIN
 	SET @Output = 0;
 	#Create a Temporary Table to Hold The Values
 	DROP TEMPORARY TABLE IF EXISTS AnnualSubjectViewsResultTable;
-	CREATE TEMPORARY TABLE IF NOT EXISTS AnnualSubjectViewsResultTable 
+	CREATE TEMPORARY TABLE IF NOT EXISTS AnnualSubjectViewsResultTable
 	(
 		-- Add the column definitions for the TABLE variable here
 		subject_id INT,
-		subject_name VARCHAR(60), 
+		subject_name VARCHAR(60),
 		first_term Decimal(6, 2),
 		second_term Decimal(6, 2),
 		third_term Decimal(6, 2),
@@ -702,14 +702,14 @@ BEGIN
 	);
 
 	CALL proc_examsDetailsReportViews(AcademicYearID, 2);
-	
-	Block0: BEGIN			
-		-- Set three of those variable to get the 1st, 2nd and 3rd terms in that year passed as parameter of the student 
+
+	Block0: BEGIN
+		-- Set three of those variable to get the 1st, 2nd and 3rd terms in that year passed as parameter of the student
 		SET @FirstTerm = (SELECT academic_term_id FROM academic_terms WHERE academic_year_id = AcademicYearID AND term_type_id = 1);
 		SET @SecondTerm = (SELECT academic_term_id FROM academic_terms WHERE academic_year_id = AcademicYearID AND term_type_id = 2);
 		SET @ThirdTerm = (SELECT academic_term_id FROM academic_terms WHERE academic_year_id = AcademicYearID AND term_type_id = 3);
-		SET @ClassGroupID = (SELECT classgroup_id FROM ExamsDetailsResultTable WHERE academic_year_id=AcademicYearID AND student_id=StudentID LIMIT 1); 
-			
+		SET @ClassGroupID = (SELECT classgroup_id FROM ExamsDetailsResultTable WHERE academic_year_id=AcademicYearID AND student_id=StudentID LIMIT 1);
+
 		Block1: BEGIN
 			-- Declare Variable to be used in looping through the recordset or cursor
 			DECLARE done1 BOOLEAN DEFAULT FALSE;
@@ -733,42 +733,42 @@ BEGIN
 							SET @FirstTermSubjectScore = (SELECT studentPercentTotal FROM ExamsDetailsResultTable WHERE academic_term_id=@FirstTerm AND student_id=StudentID AND subject_id=SubjectID);
 							SET @SecondTermSubjectScore = (SELECT studentPercentTotal FROM ExamsDetailsResultTable WHERE academic_term_id=@SecondTerm AND student_id=StudentID AND subject_id=SubjectID);
 							SET @ThirdTermSubjectScore = (SELECT studentPercentTotal FROM ExamsDetailsResultTable WHERE academic_term_id=@ThirdTerm AND student_id=StudentID AND subject_id=SubjectID);
-							
+
 							BEGIN
-								-- Get the average of a particular subject that he or she offered in that year and also check if any term was missed 
+								-- Get the average of a particular subject that he or she offered in that year and also check if any term was missed
 								IF @FirstTermSubjectScore IS NOT NULL AND @SecondTermSubjectScore IS NOT NULL AND @ThirdTermSubjectScore IS NOT NULL THEN
 									SET @AnnualSubjectAverage = (@FirstTermSubjectScore + @SecondTermSubjectScore + @ThirdTermSubjectScore) / 3;
-								ElSEIF	@FirstTermSubjectScore IS NOT NULL AND @SecondTermSubjectScore IS NOT NULL AND @ThirdTermSubjectScore IS NULL THEN	
+								ElSEIF	@FirstTermSubjectScore IS NOT NULL AND @SecondTermSubjectScore IS NOT NULL AND @ThirdTermSubjectScore IS NULL THEN
 									SET @AnnualSubjectAverage = (@FirstTermSubjectScore + @SecondTermSubjectScore ) / 2;
-								ElSEIF	@FirstTermSubjectScore IS NOT NULL AND @SecondTermSubjectScore IS NULL AND @ThirdTermSubjectScore IS NOT NULL THEN	
+								ElSEIF	@FirstTermSubjectScore IS NOT NULL AND @SecondTermSubjectScore IS NULL AND @ThirdTermSubjectScore IS NOT NULL THEN
 									SET @AnnualSubjectAverage = (@FirstTermSubjectScore + @ThirdTermSubjectScore ) / 2;
-								ElSEIF	@FirstTermSubjectScore IS NULL AND @SecondTermSubjectScore IS NOT NULL AND @ThirdTermSubjectScore IS NOT NULL THEN	
-									SET @AnnualSubjectAverage = (@SecondTermSubjectScore + @ThirdTermSubjectScore) / 2;	
+								ElSEIF	@FirstTermSubjectScore IS NULL AND @SecondTermSubjectScore IS NOT NULL AND @ThirdTermSubjectScore IS NOT NULL THEN
+									SET @AnnualSubjectAverage = (@SecondTermSubjectScore + @ThirdTermSubjectScore) / 2;
 								ElSEIF	@FirstTermSubjectScore IS NOT NULL AND @SecondTermSubjectScore IS NULL AND @ThirdTermSubjectScore IS NULL THEN
 									SET @AnnualSubjectAverage = @FirstTermSubjectScore;
 								ElSEIF	@FirstTermSubjectScore IS NULL AND @SecondTermSubjectScore IS NOT NULL AND @ThirdTermSubjectScore IS NULL THEN
-									SET @AnnualSubjectAverage = @SecondTermSubjectScore;	
-								ElSEIF	@FirstTermSubjectScore IS NULL AND @SecondTermSubjectScore IS NULL AND @ThirdTermSubjectScore IS NOT NULL THEN	
+									SET @AnnualSubjectAverage = @SecondTermSubjectScore;
+								ElSEIF	@FirstTermSubjectScore IS NULL AND @SecondTermSubjectScore IS NULL AND @ThirdTermSubjectScore IS NOT NULL THEN
 									SET @AnnualSubjectAverage = @ThirdTermSubjectScore;
 								ELSE
 									SET @AnnualSubjectAverage = 0;
 								END IF;
 							END;
-							-- Set the annal grade for each subject 
+							-- Set the annal grade for each subject
 							BEGIN
 								SET @AnnualGrade = (SELECT grade FROM grades WHERE @AnnualSubjectAverage BETWEEN lower_bound AND upper_bound AND classgroup_id=@ClassGroupID LIMIT 1);
 							END;
 							BEGIN
 								-- Insert into the resultant table that will display the computed results
-								INSERT INTO AnnualSubjectViewsResultTable 
+								INSERT INTO AnnualSubjectViewsResultTable
 								VALUES(SubjectID, SubjectName, @FirstTermSubjectScore, @SecondTermSubjectScore, @ThirdTermSubjectScore,	@AnnualSubjectAverage, @AnnualGrade);
 							END;
 						END;
 					END IF;
 				UNTIL done1 END REPEAT;
-			CLOSE cur1;		
-		END Block1;	
-	END Block0;	
+			CLOSE cur1;
+		END Block1;
+	END Block0;
 	SET @Output = (SELECT COUNT(*) FROM AnnualSubjectViewsResultTable);
 	RETURN @Output;
 END$$
@@ -779,7 +779,7 @@ Block0: BEGIN
 	SET @Output = 0;
 	#Create a Temporary Table to Hold The Values
 	DROP TEMPORARY TABLE IF EXISTS AttendSummaryResultTable;
-	CREATE TEMPORARY TABLE IF NOT EXISTS AttendSummaryResultTable 
+	CREATE TEMPORARY TABLE IF NOT EXISTS AttendSummaryResultTable
 	(
 		-- Add the column definitions for the TABLE variable here
 		student_id INT,
@@ -792,18 +792,18 @@ Block0: BEGIN
         head_tutor VARCHAR(50),
         academic_term VARCHAR(50)
 	);
-	Block2: BEGIN	
+	Block2: BEGIN
 		SET @TotalAttend = (SELECT COUNT(attend_id) FROM attends WHERE class_id=ClassID AND academic_term_id=TermID LIMIT 1);
-        
+
         INSERT INTO AttendSummaryResultTable
-		SELECT a.student_id, c.student_no, c.student_name, @TotalAttend, COUNT(a.student_id), 
+		SELECT a.student_id, c.student_no, c.student_name, @TotalAttend, COUNT(a.student_id),
         (@TotalAttend - COUNT(a.student_id)), b.class_name, b.head_tutor, b.academic_term
-		FROM students_classlevelviews c 
+		FROM students_classlevelviews c
 		INNER JOIN attend_details a ON c.student_id=a.student_id
 		INNER JOIN attend_headerviews b ON a.attend_id=b.attend_id
 		WHERE b.class_id=ClassID AND b.academic_term_id=TermID GROUP BY student_id;
-								
-	END Block2;	
+
+	END Block2;
 
 	SET @Output = (SELECT COUNT(*) FROM AttendSummaryResultTable);
 	RETURN @Output;
@@ -816,45 +816,45 @@ Block0: BEGIN
 	SET @Output = 0;
 	#Create a Temporary Table to Hold The Values
 	DROP TEMPORARY TABLE IF EXISTS ClassHeadTutorResultTable;
-	CREATE TEMPORARY TABLE IF NOT EXISTS ClassHeadTutorResultTable 
+	CREATE TEMPORARY TABLE IF NOT EXISTS ClassHeadTutorResultTable
 	(
 		-- Add the column definitions for the TABLE variable here
 		class_id INT,
 		class_name VARCHAR(50),
 		classlevel_id INT,
 		student_count INT,
-		teacher_class_id INT NULL, 
+		teacher_class_id INT NULL,
 		employee_id INT NULL,
 		employee_name VARCHAR(80),
 		academic_year_id INT
 	);
-	Block2: BEGIN								
+	Block2: BEGIN
 		DECLARE done1 BOOLEAN DEFAULT FALSE;
 		DECLARE ClassID, Classlevel_ID INT;
 		DECLARE ClassName VARCHAR(50);
-		DECLARE cur1 CURSOR FOR 
+		DECLARE cur1 CURSOR FOR
 		SELECT a.class_id, a.class_name, a.classlevel_id
 		FROM classrooms a WHERE a.classlevel_id=ClassLevelID;
 		DECLARE CONTINUE HANDLER FOR NOT FOUND SET done1 = TRUE;
-	
+
 		#Open The Cursor For Iterating Through The Recordset cur1
 		OPEN cur1;
 			REPEAT
 			FETCH cur1 INTO ClassID, ClassName, Classlevel_ID;
-				IF NOT done1 THEN	
+				IF NOT done1 THEN
 					BEGIN
 						SET @StudentCount = (SELECT COUNT(*) FROM students_classes WHERE class_id=ClassID AND academic_year_id=YearID);
 						SET @TeachClassID = (SELECT teacher_class_id FROM teachers_classes WHERE class_id=ClassID AND academic_year_id=YearID LIMIT 1);
 						SET @EmployeeID = (SELECT employee_id FROM teachers_classes WHERE teacher_class_id=@TeachClassID);
 						SET @EmployeeName = (SELECT CONCAT(first_name, ' ', other_name) FROM employees WHERE employee_id=@EmployeeID);
-						
-						INSERT INTO ClassHeadTutorResultTable(class_id, class_name, classlevel_id, student_count, teacher_class_id, employee_id, employee_name, academic_year_id) 
-						SELECT ClassID, ClassName, Classlevel_ID, @StudentCount, @TeachClassID, @EmployeeID, @EmployeeName, YearID;						
+
+						INSERT INTO ClassHeadTutorResultTable(class_id, class_name, classlevel_id, student_count, teacher_class_id, employee_id, employee_name, academic_year_id)
+						SELECT ClassID, ClassName, Classlevel_ID, @StudentCount, @TeachClassID, @EmployeeID, @EmployeeName, YearID;
 					END;
 				END IF;
 			UNTIL done1 END REPEAT;
-		CLOSE cur1;								
-	END Block2;	
+		CLOSE cur1;
+	END Block2;
 
 	SET @Output = (SELECT COUNT(*) FROM ClassHeadTutorResultTable);
 	RETURN @Output;
@@ -867,7 +867,7 @@ Block0: BEGIN
 	SET @Output = 0;
 	#Create a Temporary Table to Hold The Values
 	DROP TEMPORARY TABLE IF EXISTS SubjectClasslevelTemp;
-	CREATE TEMPORARY TABLE IF NOT EXISTS SubjectClasslevelTemp 
+	CREATE TEMPORARY TABLE IF NOT EXISTS SubjectClasslevelTemp
 	(
 		-- Add the column definitions for the TABLE variable here
 		row_id INT AUTO_INCREMENT,
@@ -880,15 +880,15 @@ Block0: BEGIN
 		classlevel_id INT,
 		classlevel VARCHAR(50), PRIMARY KEY (row_id)
 	);
-    
-    Block2: BEGIN								
+
+    Block2: BEGIN
 		DECLARE done1 BOOLEAN DEFAULT FALSE;
 		DECLARE SubjectID, ClassID, ClasslevelID, AcademicID  INT;
 		DECLARE SubjectName, ClassName, AcademicTerm VARCHAR(50);
-		DECLARE cur1 CURSOR FOR SELECT subject_id, class_id, classlevel_id, academic_term_id, subject_name, class_name, academic_term 
+		DECLARE cur1 CURSOR FOR SELECT subject_id, class_id, classlevel_id, academic_term_id, subject_name, class_name, academic_term
 		FROM subject_classlevelviews WHERE academic_term_id=TermID AND classlevel_id=LevelID GROUP BY subject_id ORDER BY subject_name;
 		DECLARE CONTINUE HANDLER FOR NOT FOUND SET done1 = TRUE;
-	
+
 		#Open The Cursor For Iterating Through The Recordset cur1
 		OPEN cur1;
 			REPEAT
@@ -900,14 +900,14 @@ Block0: BEGIN
 
 						IF @ClassInLevel = @SubjectInLevel THEN
 							-- Insert into the resultant table that will display the results
-							INSERT INTO SubjectClasslevelTemp(subject_id, subject_name, academic_term_id, academic_term, class_id, class_name, classlevel_id, classlevel) 
-                            VALUES(SubjectID, SubjectName, AcademicID, AcademicTerm, ClassID, ClassName, ClasslevelID, classlevel);	
+							INSERT INTO SubjectClasslevelTemp(subject_id, subject_name, academic_term_id, academic_term, class_id, class_name, classlevel_id, classlevel)
+                            VALUES(SubjectID, SubjectName, AcademicID, AcademicTerm, ClassID, ClassName, ClasslevelID, classlevel);
 						END IF;
 					END;
 				END IF;
 			UNTIL done1 END REPEAT;
-		CLOSE cur1;								
-	END Block2;	
+		CLOSE cur1;
+	END Block2;
 
 	SET @Output = (SELECT COUNT(*) FROM SubjectClasslevelTemp);
 	RETURN @Output;
@@ -920,7 +920,7 @@ Block0: BEGIN
 	SET @Output = 0;
 	#Create a Temporary Table to Hold The Values
 	DROP TEMPORARY TABLE IF EXISTS SubjectClasslevelResultTable;
-	CREATE TEMPORARY TABLE IF NOT EXISTS SubjectClasslevelResultTable 
+	CREATE TEMPORARY TABLE IF NOT EXISTS SubjectClasslevelResultTable
 	(
 		-- Add the column definitions for the TABLE variable here
 		class_name VARCHAR(50),
@@ -937,42 +937,42 @@ Block0: BEGIN
 		academic_year_id INT,
 		academic_year VARCHAR(50)
 	);
-	Block2: BEGIN								
+	Block2: BEGIN
 		DECLARE done1 BOOLEAN DEFAULT FALSE;
 		DECLARE si, ci, cli, scli, esi, ati, ayi  INT;
 		DECLARE cn, sn, cl, es, atn, ayn VARCHAR(30);
-		DECLARE cur1 CURSOR FOR SELECT * FROM subject_classlevelviews WHERE academic_term_id=term_id;	
+		DECLARE cur1 CURSOR FOR SELECT * FROM subject_classlevelviews WHERE academic_term_id=term_id;
 		DECLARE CONTINUE HANDLER FOR NOT FOUND SET done1 = TRUE;
-	
+
 		#Open The Cursor For Iterating Through The Recordset cur1
 		OPEN cur1;
 			REPEAT
 			FETCH cur1 INTO cn, sn, si, ci, cli, scli, cl, esi, es, ati, atn, ayi, ayn;
-				IF NOT done1 THEN	
+				IF NOT done1 THEN
 					BEGIN
 						IF ci > 0 OR ci IS NOT NULL THEN
 							-- Insert into the resultant table that will display the results
 							BEGIN
-								INSERT INTO SubjectClasslevelResultTable VALUES(cn, sn, si, ci, cli, scli, cl, esi, es, ati, atn, ayi, ayn);			
+								INSERT INTO SubjectClasslevelResultTable VALUES(cn, sn, si, ci, cli, scli, cl, esi, es, ati, atn, ayi, ayn);
 							END;
 						ELSE
 							BEGIN
 								INSERT INTO SubjectClasslevelResultTable(class_name, subject_name,subject_id, class_id, classlevel_id, subject_classlevel_id,
-									classlevel, examstatus_id, exam_status, academic_term_id, academic_term, academic_year_id, academic_year) 
+									classlevel, examstatus_id, exam_status, academic_term_id, academic_term, academic_year_id, academic_year)
 								SELECT a.class_name, sn, si, a.class_id, cli, scli, cl, esi, es, ati, atn, ayi, ayn
                                 FROM classroom_subjectregisterviews a
                                 WHERE a.subject_classlevel_id=scli AND a.academic_term_id=ati;
-                                
+
                                 -- SELECT classrooms.class_name, sn, si, classrooms.class_id, cli, scli, cl, esi, es, ati, atn, ayi, ayn
 								-- FROM   classrooms INNER JOIN classlevels ON classrooms.classlevel_id = classlevels.classlevel_id
-								-- WHERE classrooms.classlevel_id = cli;		
+								-- WHERE classrooms.classlevel_id = cli;
 							END;
 						END IF;
 					END;
 				END IF;
 			UNTIL done1 END REPEAT;
-		CLOSE cur1;								
-	END Block2;	
+		CLOSE cur1;
+	END Block2;
 
 	SET @Output = (SELECT COUNT(*) FROM SubjectClasslevelResultTable);
 	RETURN @Output;
@@ -987,7 +987,7 @@ END$$
 DROP FUNCTION IF EXISTS `getCurrentYearID`$$
 CREATE FUNCTION `getCurrentYearID`() RETURNS int(11)
 BEGIN
-	RETURN (SELECT academic_year_id FROM academic_years WHERE year_status_id=1 LIMIT 1);	
+	RETURN (SELECT academic_year_id FROM academic_years WHERE year_status_id=1 LIMIT 1);
 END$$
 
 DROP FUNCTION IF EXISTS `SPLIT_STR`$$

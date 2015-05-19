@@ -45667,12 +45667,660 @@ Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
 Stack Trace:
 #0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
 #1 {main}
-2015-05-18 19:01:49 Error: [MissingControllerException] Controller class WebrootController could not be found.
+2015-05-19 13:48:08 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/images/smartedu-icon.png
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 13:48:09 Error: [MissingControllerException] Controller class WebrootController could not be found.
 Exception Attributes: array (
   'class' => 'WebrootController',
   'plugin' => NULL,
 )
 Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
 Stack Trace:
-#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 13:48:23 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/images/smartedu-icon.png
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 13:48:23 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 13:48:23 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/js/fe30e3f37b2defe4fa397fdfcd9ee6d9.js
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 13:48:39 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/images/smartedu-icon.png
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 13:48:39 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 13:48:40 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/js/bcc8a3ad9f4e410e602b9e731e13e683.js
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 13:49:32 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/images/smartedu-icon.png
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 13:49:32 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 13:49:32 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/js/d49b9585d2ab94bf631cb822090bafeb.js
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 13:49:43 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/images/smartedu-icon.png
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 13:49:43 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 13:49:44 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/js/fe30e3f37b2defe4fa397fdfcd9ee6d9.js
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 13:50:26 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/images/smartedu-icon.png
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 13:50:27 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 13:50:27 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/js/781fc032bfa982043152107a8e59d433.js
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 13:50:43 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/images/smartedu-icon.png
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 13:50:43 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 13:50:44 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/js/781fc032bfa982043152107a8e59d433.js
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 13:50:53 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/images/smartedu-icon.png
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 13:50:54 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 13:50:54 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/js/fe30e3f37b2defe4fa397fdfcd9ee6d9.js
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 13:51:05 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/images/smartedu-icon.png
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 13:51:06 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 13:51:06 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/js/bcc8a3ad9f4e410e602b9e731e13e683.js
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 13:51:30 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/images/smartedu-icon.png
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 13:51:30 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 13:51:31 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/js/16cd8ba14fa56e48f6ae893a64602de9.js
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 13:52:07 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/images/smartedu-icon.png
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 13:52:07 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 13:52:07 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/js/d49b9585d2ab94bf631cb822090bafeb.js
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 13:53:28 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/images/smartedu-icon.png
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 13:53:28 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 13:53:29 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/js/bcc8a3ad9f4e410e602b9e731e13e683.js
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 13:54:15 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/images/bells_logo.png
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 13:55:06 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/images/bells_logo.png
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 14:13:19 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/images/bells_logo.png
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 14:13:48 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/images/bells_logo.png
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 14:14:14 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/images/bells_logo.png
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 14:14:31 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/images/bells_logo.png
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 14:14:43 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/images/bells_logo.png
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 14:14:52 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/images/bells_logo.png
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 14:15:03 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/images/bells_logo.png
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 14:15:13 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/images/bells_logo.png
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 14:15:26 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/images/bells_logo.png
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 14:15:55 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/images/bells_logo.png
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 14:41:08 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/images/bells_logo.png
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 14:46:31 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/images/bells_logo.png
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 14:46:37 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/images/bells_logo.png
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 14:50:11 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/images/bells_logo.png
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 14:50:40 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/images/bells_logo.png
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 14:51:39 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/images/bells_logo.png
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 14:52:27 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/images/bells_logo.png
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 14:52:55 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/images/bells_logo.png
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 14:54:06 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/images/bells_logo.png
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 14:54:43 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/images/bells_logo.png
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 14:55:24 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/images/bells_logo.png
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 14:57:08 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/images/bells_logo.png
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 14:57:31 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/images/bells_logo.png
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 14:58:18 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/images/bells_logo.png
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 14:58:34 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/images/bells_logo.png
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 14:59:05 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/images/bells_logo.png
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 15:01:56 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/images/bells_logo.png
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 15:02:25 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/images/bells_logo.png
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 15:02:59 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/images/bells_logo.png
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 15:05:13 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/images/bells_logo.png
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 15:08:00 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/images/bells_logo.png
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 15:09:18 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/images/bells_logo.png
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 15:09:48 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/images/bells_logo.png
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 15:11:19 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/images/bells_logo.png
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 15:11:57 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/images/bells_logo.png
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 15:16:13 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/images/bells_logo.png
+Stack Trace:
+#0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
 #1 {main}
