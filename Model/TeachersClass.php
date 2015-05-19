@@ -17,4 +17,19 @@ class TeachersClass extends AppModel {
         return parent::beforeSave($options);
     }
 
+    public $belongsTo = array(
+        'Classroom' => array(
+            'className' => 'Classroom',
+            'foreignKey' => 'class_id'
+        ),
+        'Employee' => array(
+            'className' => 'Employee',
+            'foreignKey' => 'employee_id',
+        ),
+        'AcademicYear' => array(
+            'className' => 'AcademicYear',
+            'foreignKey' => 'academic_year_id',
+        )
+    );
+
 }

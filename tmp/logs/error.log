@@ -46324,3 +46324,48 @@ Request URL: /smartedu/webroot/app/images/bells_logo.png
 Stack Trace:
 #0 C:\wamp\www\smartedu\webroot\index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
 #1 {main}
+2015-05-19 18:33:00 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 18:33:05 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 19:19:30 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 19:21:32 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-19 19:22:03 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}

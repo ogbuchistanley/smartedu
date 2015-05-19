@@ -10,7 +10,7 @@ class Employee extends AppModel {
 	public $displayField = 'first_name';
         
     public $virtualFields = array(
-        'full_name' => "CONCAT(UCASE(Employee.first_name), ', ', Employee.other_name)"
+        'full_name' => "CONCAT(UCASE(Employee.first_name), ' ', Employee.other_name)"
     );
     
     public function beforeSave($options = array()) {

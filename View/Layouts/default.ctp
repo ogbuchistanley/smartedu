@@ -85,7 +85,7 @@ $cakeDescription = __d('app_dev', ':: '.APP_NAME.' :');
     <link href="<?php echo APP_DIR_ROOT; ?>css/jquery.autocomplete.css" rel="stylesheet">
     <link href="<?php echo APP_DIR_ROOT; ?>css/custom.css" rel="stylesheet">
 
-    <link href="<?php echo APP_DIR_ROOT; ?>images/smartedu-icon.png" rel="shortcut icon">
+    <link href="<?php echo APP_DIR_ROOT, $SchoolInfo['school_logo'];?>" rel="shortcut icon">
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
     <!--[if lt IE 9]>
         <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -125,7 +125,7 @@ $cakeDescription = __d('app_dev', ':: '.APP_NAME.' :');
                     <i class="fa fa-list btn-nav-toggle-responsive text-white"></i>
                 </a>
                 <a class="navbar-brand" href="<?php echo DOMAIN_NAME ?>/dashboard">
-                    <span class="logo small"><?php echo substr(APP_NAME, 0, 5)?><img style="width: 55px; height: 57px;" src="<?php echo APP_DIR_ROOT; ?>images/smartedu-icon.png" /><?php echo substr(APP_NAME, 5); ?></span>
+                    <span class="logo small"><?php echo substr(APP_NAME, 0, 5)?><img style="width: 55px; height: 57px;" src="<?php echo APP_DIR_ROOT, $SchoolInfo['school_logo'];?>" /><?php echo substr(APP_NAME, 5); ?></span>
                 </a>
             </div>
 

@@ -1,10 +1,13 @@
 <?php
 $TermModel = ClassRegistry::init('AcademicTerm');  //print_r($test);
 $WeeklyReportModel = ClassRegistry::init('WeeklyReport');  //print_r($test);
+$TeachersClassModel = ClassRegistry::init('TeachersClass');  //print_r($test);
+$RemarkModel = ClassRegistry::init('Remark');  //print_r($test);
+$EmployeeModel = ClassRegistry::init('Employee');
 $temp = $Subjects;
 $temp = array_shift($temp);
 $marked_report = $marked_report['marked_report'];
-//print_r($temp);
+//print_r($SchoolInfo);
 
 ?>
 <!DOCTYPE html>
@@ -14,7 +17,7 @@ $marked_report = $marked_report['marked_report'];
     <title>Student Terminal Result Sheet</title>
     <link href="<?php echo APP_DIR_ROOT; ?>css/bootstrap.css" rel="stylesheet">
     <link href="<?php //echo APP_DIR_ROOT; ?>css/style.css" rel="stylesheet" type="text/css">
-    <link href="<?php echo APP_DIR_ROOT; ?>images/icon.png" rel="shortcut icon">
+    <link href="<?php echo APP_DIR_ROOT, $SchoolInfo['school_logo']?>" rel="shortcut icon">
     <link href="<?php echo APP_DIR_ROOT; ?>css/print.css" rel="stylesheet" media="print">
     <style type="text/css">
         .table th,
@@ -62,10 +65,10 @@ $marked_report = $marked_report['marked_report'];
     <div class="you">
         <div align="center" style="width:100%">
             <div align="center"><img style="width: 80px; height: 80px;;"
-                                     src="<?php echo APP_DIR_ROOT; ?>images/bells_logo.png" alt="School Logo"/></div>
+                                     src="<?php echo APP_DIR_ROOT, $SchoolInfo['school_logo'] ?>" alt="School Logo"/></div>
 
-            <div style="color:#666; font-size: 40px; font-weight: bolder; font-family: " verdana
-            ", "lucida grande", sans-serif"> THE BELLS
+            <div style="color:#666; font-size: 40px; font-weight: bolder; font-family: "verdana", "lucida grande", sans-serif">
+                <?php echo strtoupper($SchoolInfo['school_name'])?>
         </div>
         <div style="font-size: 14px; font-weight: bold;">Comprehensive Secondary School for Boys and Girls<br>Ota, Ogun
             State
@@ -200,20 +203,38 @@ $marked_report = $marked_report['marked_report'];
                 <table class="table table-bordered">
                     <tr>
                         <th>Total Score</th>
-                        <th><?php echo $totalScore; ?></th>
+                        <td><?php echo $totalScore; ?></td>
                         <th>Total Mark Obtainable</th>
-                        <th><?php echo $totalmarkObtainable; ?></th>
+                        <td><?php echo $totalmarkObtainable; ?></td>
                     </tr>
                 </table>
-
+                <?php
+                    $staff = $TeachersClassModel->find('first', array('conditions' =>
+                        array(
+                            'TeachersClass.class_id' => $temp['class_id'],
+                            'TeachersClass.academic_year_id' => $TermModel->getYearID($temp['academic_term_id']))
+                        )
+                    );
+                    $comment = $RemarkModel->find('first', array('conditions' =>
+                        array(
+                            'Remark.student_id' => $temp['student_id'],
+                            'Remark.academic_term_id' => $temp['academic_term_id'])
+                        )
+                    );
+                    $principal = $EmployeeModel->find('first', array('conditions', array('Employee.employee_id' => $SchoolInfo['principal_id'])));
+                ?>
                 <table class="table table-bordered">
-                    <tr>
+                    <tr style="font-weight:bold; background-color:#CCCCCC;">
                         <th>Class Teacher</th>
                         <th>Comment</th>
                     </tr>
                     <tr>
-                        <th>Okafor Emmanuel</th>
-                        <th>He is a very bright student</th>
+                        <td><?php echo $staff['Employee']['full_name'];?></td>
+                        <td><?php echo !empty($comment) ? $comment['Remark']['class_teacher_remark'] : $temp['student_name'].' is a Good student';?></td>
+                    </tr>
+                    <tr style="font-weight:bold; background-color:#CCCCCC;">
+                        <th>Principal</th>
+                        <th><?php echo $principal['Employee']['full_name']?></th>
                     </tr>
                 </table>
 

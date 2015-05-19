@@ -69,7 +69,6 @@ class AppController extends Controller {
         return trim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, Configure::read('Security.key'), base64_decode($text), MCRYPT_MODE_ECB, mcrypt_create_iv(mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB), MCRYPT_RAND)));
     }
 
-
     // 1 Success // 2 Error
     function setFlashMessage($msg, $type=0) {
         $temp = 'alert alert-info';
@@ -117,6 +116,8 @@ class AppController extends Controller {
         $this->master_record_count = 9;
         Configure::write('master_record_id', $val);
         Configure::write('master_record_count', $this->master_record_count);
+        //Set the school info
+        $this->set('SchoolInfo', $MasterSetupModel->getSchoolInfo());
 
     }
 
