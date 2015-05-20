@@ -193,43 +193,47 @@ class WeeklyReportsController extends AppController {
     //Printing of Student Terminal Result Sheet
     public function print_report($encrypt_id) {
         $this->set('title_for_layout','Mid Term Result Sheet');
-        $this->layout = null;
+        $resultCheck = $this->Acl->check($this->group_alias, 'ExamsController');
+        if($resultCheck){
+            $this->layout = null;
+            //Decrypt the id sent
+            $decrypt_id = $this->encryption->decode($encrypt_id);
+            $encrypt = explode('/', $decrypt_id);
+            $student_id = $encrypt[0];
+            $class_id = $encrypt[1];
+            $term_id = $encrypt[2];
 
-        //Decrypt the id sent
-        $decrypt_id = $this->encryption->decode($encrypt_id);
-        $encrypt = explode('/', $decrypt_id);
-        $student_id = $encrypt[0];
-        $class_id = $encrypt[1];
-        $term_id = $encrypt[2];
+            $results = $this->WeeklyReport->getStudentMidTermReport($term_id, $class_id, $student_id);
+            $response = array();
+            $marked_report = ($results[1]) ? array_shift($results[1]) : null;
 
-        $results = $this->WeeklyReport->getStudentMidTermReport($term_id, $class_id, $student_id);
-        $response = array();
-        $marked_report = ($results[1]) ? array_shift($results[1]) : null;
+            if(!empty($results[0])) {
+                //All the students by classroom
+                foreach ($results[0] as $result){
+                    $response[] = array(
+                        "student_no"=>$result['a']['student_no'],
+                        "student_id"=>$result['a']['student_id'],
+                        "student_name"=>$result['a']['student_name'],
+                        "image_url"=>$result['a']['image_url'],
+                        "gender"=>$result['a']['gender'],
+                        "class_name"=>$result['a']['class_name'],
+                        "class_id"=>$result['a']['class_id'],
+                        "subject_name"=>$result['a']['subject_name'],
+                        "subject_id"=>$result['a']['subject_id'],
+                        "sponsor_name"=>$result['a']['sponsor_name'],
+                        "sponsor_no"=>$result['a']['sponsor_no'],
+                        "academic_term"=>$result['a']['academic_term'],
+                        "academic_term_id"=>$result['a']['academic_term_id'],
+                    );
 
-        if(!empty($results[0])) {
-            //All the students by classroom
-            foreach ($results[0] as $result){
-                $response[] = array(
-                    "student_no"=>$result['a']['student_no'],
-                    "student_id"=>$result['a']['student_id'],
-                    "student_name"=>$result['a']['student_name'],
-                    "image_url"=>$result['a']['image_url'],
-                    "gender"=>$result['a']['gender'],
-                    "class_name"=>$result['a']['class_name'],
-                    "class_id"=>$result['a']['class_id'],
-                    "subject_name"=>$result['a']['subject_name'],
-                    "subject_id"=>$result['a']['subject_id'],
-                    "sponsor_name"=>$result['a']['sponsor_name'],
-                    "sponsor_no"=>$result['a']['sponsor_no'],
-                    "academic_term"=>$result['a']['academic_term'],
-                    "academic_term_id"=>$result['a']['academic_term_id'],
-                );
-
+                }
+            } else {
+                $response['MidTerm'] = null;
             }
-        } else {
-            $response['MidTerm'] = null;
+            $this->set('Subjects', $response);
+            $this->set('marked_report', array_shift($marked_report));
+        }else{
+            $this->accessDenialError();
         }
-        $this->set('Subjects', $response);
-        $this->set('marked_report', array_shift($marked_report));
     }
 }
