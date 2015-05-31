@@ -490,19 +490,17 @@ class SubjectsController extends AppController {
 
                 $results = $this->Subject->findStudentsSubject($term_id, $subject_id, $class_id);
                 $response = array();
-                $wa1 = $wa2 = $waexam = $waTotal =0;
+                $wa = $waexam = $waTotal =0;
                 if($results) {
                     //All the students offering the subjects in a classroom or classlevel
                     foreach ($results as $result){
-                        $wa1 = $result['a']['weightageCA1'];
-                        $wa2 = $result['a']['weightageCA2'];
-                        $waexam = $result['a']['weightageExam'];
-                        $waTotal = $wa1 + $wa2 + $waexam;
+                        $wa = $result['a']['ca_weight_point'];
+                        $waexam = $result['a']['exam_weight_point'];
+                        $waTotal = $wa + $waexam;
                         $res[] = array(
                             "std_sub_cla_term_id"=>$this->encryption->encode($result['a']['student_id'].'/'.$result['a']['subject_id'].'/'.$class_id.'/'.$term_id),
                             "student_fullname"=>$result['a']['student_fullname'],
-                            "ca1"=>$result['a']['ca1'],
-                            "ca2"=>$result['a']['ca2'],
+                            "ca"=>$result['a']['ca'],
                             "exam"=>$result['a']['exam'],
                             "sum_total"=>number_format($result[0]['sum_total'], 2)
                         );
@@ -513,8 +511,7 @@ class SubjectsController extends AppController {
                     $response['StudentScores'] = null;
                     $response['Flag'] = 0;
                 }
-                $response['WA1'] = $wa1;
-                $response['WA2'] = $wa2;
+                $response['WA'] = $wa;
                 $response['WAExam'] = $waexam;
                 $response['WATotal'] = $waTotal;
                 echo json_encode($response);

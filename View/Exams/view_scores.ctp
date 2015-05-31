@@ -54,20 +54,16 @@
                                         <td><?php echo (empty($ExamSubject['Exam']['class_name'])) ? '<span class="label label-danger">nill</span>' : $ExamSubject['Exam']['class_name'];?></td>
                                     </tr>
                                     <tr>
-                                        <th>Weight Point CA1</th>
-                                        <td><?php echo $ExamSubject['Exam']['weightageCA1'];?></td>
-                                        <th>Weight Point CA2</th>
-                                        <td><?php echo $ExamSubject['Exam']['weightageCA2'];?></td>
-                                    </tr>
-                                    <tr>
+                                        <th>Weight Point C. A</th>
+                                        <td><?php echo $ExamSubject['Exam']['ca_weight_point'];?></td>
                                         <th>Weight Point Exam</th>
-                                        <td><?php echo $ExamSubject['Exam']['weightageExam'];?></td>
-                                        <th>Weight Point Total Sum</th>
-                                        <td><?php echo ($ExamSubject['Exam']['weightageCA1']+$ExamSubject['Exam']['weightageCA2']+$ExamSubject['Exam']['weightageExam']);?></td>
+                                        <td><?php echo $ExamSubject['Exam']['exam_weight_point'];?></td>
                                     </tr>
                                     <tr>
+                                        <th>Weight Point Total Sum</th>
+                                        <td><?php echo ($ExamSubject['Exam']['ca_weight_point']+$ExamSubject['Exam']['exam_weight_point']);?></td>
                                         <th>Marked Status</th>
-                                        <td style="font-size: medium"><?php echo ($ExamSubject['Exam']['exammarked_status_id'] === '2') ? '<span class="label label-danger">Subject Not Marked</span>' : '<span class="label label-success">Subject Marked</span>';?></td>                                        
+                                        <td style="font-size: medium"><?php echo ($ExamSubject['Exam']['exammarked_status_id'] === '2') ? '<span class="label label-danger">Subject Not Marked</span>' : '<span class="label label-success">Subject Marked</span>';?></td>
                                     </tr>
                                 <?php else:?>
                                     <tr>
@@ -95,8 +91,7 @@
                                       <th>Full Name</th>
                                       <th>Gender</th>
                                       <th>Class</th>
-                                      <th>First CA</th>
-                                      <th>Second CA</th>
+                                      <th>C. A</th>
                                       <th>Exam</th>
                                       <th>Exam Total(Sum)</th>
                                     </tr>
@@ -113,10 +108,9 @@
                                          <td><?php echo h($ExamDetail['Student']['first_name']), ' ', h($ExamDetail['Student']['surname']), ' '; echo (!empty($ExamDetail['Student']['other_name'])) ? h($ExamDetail['Student']['other_name']) : '' ?>&nbsp;</td>
                                          <td><?php echo h($ExamDetail['Student']['gender']); ?>&nbsp;</td>
                                          <td><?php echo (!empty($ExamDetail['Student']['class_id'])) ? h($Student['Classroom']['class_name']) : '<span class="label label-danger">nill</span>'; ?>&nbsp;</td>
-                                         <td><?php echo h($ExamDetail['ExamDetail']['ca1']);?></td>
-                                         <td><?php echo h($ExamDetail['ExamDetail']['ca2']);?></td>
+                                         <td><?php echo h($ExamDetail['ExamDetail']['ca']);?></td>
                                          <td><?php echo h($ExamDetail['ExamDetail']['exam']);?></td>
-                                         <td><?php echo h($ExamDetail['ExamDetail']['ca1']) + h($ExamDetail['ExamDetail']['ca2']) + h($ExamDetail['ExamDetail']['exam']);?></td>
+                                         <td><?php echo h($ExamDetail['ExamDetail']['ca']) + h($ExamDetail['ExamDetail']['exam']);?></td>
                                      </tr>
                                      <?php endforeach; ?>
                                     </tbody>
@@ -126,8 +120,7 @@
                                       <th>Full Name</th>
                                       <th>Gender</th>
                                       <th>Class</th>
-                                      <th>First CA</th>
-                                      <th>Second CA</th>
+                                      <th>C. A</th>
                                       <th>Exam</th>
                                       <th>Exam Total(Sum)</th>
                                     </tr>

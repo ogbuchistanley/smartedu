@@ -124,29 +124,29 @@ class ExamsController extends AppController {
 
 
     //Returns all the exams that has been setup
-    public function get_exam_setup() {
-        $this->autoRender = false;
-        //$this->set('title_for_layout', 'Exams');
-        $resultCheck = $this->Acl->check($this->group_alias, 'ExamsController');
-        if($resultCheck){
-            if ($this->request->is('ajax')) {
-                $options = array('conditions' => array('Exam.' . $this->Exam->primaryKey => $this->request->data('exam_id')));
-                $result = $this->Exam->find('first', $options);
-                $res = array(						
-                            "exam_id"=>$result['Exam']['exam_id'],
-                            "class_id"=>$result['Exam']['class_id'],
-                            "exam_desc"=>$result['Exam']['exam_desc'],
-                            "weightageCA1"=>$result['Exam']['weightageCA1'],
-                            "weightageCA2"=>$result['Exam']['weightageCA2'],
-                            "weightageExam"=>$result['Exam']['weightageExam'],
-                            "subject_classlevel_id"=>$result['Exam']['subject_classlevel_id']
-                        );
-                echo json_encode($res);
-            }
-        }else{
-            $this->accessDenialError();
-        }
-    }
+//    public function get_exam_setup() {
+//        $this->autoRender = false;
+//        //$this->set('title_for_layout', 'Exams');
+//        $resultCheck = $this->Acl->check($this->group_alias, 'ExamsController');
+//        if($resultCheck){
+//            if ($this->request->is('ajax')) {
+//                $options = array('conditions' => array('Exam.' . $this->Exam->primaryKey => $this->request->data('exam_id')));
+//                $result = $this->Exam->find('first', $options);
+//                $res = array(
+//                            "exam_id"=>$result['Exam']['exam_id'],
+//                            "class_id"=>$result['Exam']['class_id'],
+//                            "exam_desc"=>$result['Exam']['exam_desc'],
+//                            "weightageCA1"=>$result['Exam']['weightageCA1'],
+//                            "weightageCA2"=>$result['Exam']['weightageCA2'],
+//                            "weightageExam"=>$result['Exam']['weightageExam'],
+//                            "subject_classlevel_id"=>$result['Exam']['subject_classlevel_id']
+//                        );
+//                echo json_encode($res);
+//            }
+//        }else{
+//            $this->accessDenialError();
+//        }
+//    }
 
 
     //Seacrh for all the subjects assigned to a classlevel or classroom for a specific academic year
@@ -210,9 +210,8 @@ class ExamsController extends AppController {
                             "class_id"=>(empty($result['a']['class_id'])) ? -1 : $result['a']['class_id'],
                             "classlevel"=>$result['a']['classlevel'],
                             "subject_classlevel_id"=>$result['a']['subject_classlevel_id'],
-                            "weightageCA1"=>$result['a']['weightageCA1'],
-                            "weightageCA2"=>$result['a']['weightageCA2'],
-                            "weightageExam"=>$result['a']['weightageExam'],
+                            "ca_weight_point"=>$result['a']['ca_weight_point'],
+                            "exam_weight_point"=>$result['a']['exam_weight_point'],
                             "exammarked_status_id"=>$result['a']['exammarked_status_id'],
                             "exammarked_status"=>($result['a']['exammarked_status_id'] === '2') ? '<span class="label label-danger">Not Marked</span>' : '<span class="label label-success">Marked</span>',
                             "exam_id"=>$this->encryption->encode($result['a']['exam_id'])
@@ -252,8 +251,7 @@ class ExamsController extends AppController {
                     $val = $encrypt[1];
                     $data = $this->request->data['ExamDetail'];
                     $data['exam_detail_id'] = $data_array['exam_detail_id'][$i];
-                    $data['ca1'] = $data_array['ca1'][$i];
-                    $data['ca2'] = $data_array['ca2'][$i];
+                    $data['ca'] = $data_array['ca'][$i];
                     $data['exam'] = $data_array['exam'][$i];
                     if($ExamDetail->save($data)){   $j++;  }
                 }
@@ -381,15 +379,13 @@ class ExamsController extends AppController {
                foreach ($results[0] as $result){
                    $res[] = array(						
                        "subject_name"=>$result['a']['subject_name'],
-                       "ca1"=>$result['a']['ca1'],
-                       "ca2"=>$result['a']['ca2'],
+                       "ca"=>$result['a']['ca'],
                        "exam"=>$result['a']['exam'],
                        "studentSubjectTotal"=>$result['a']['studentSubjectTotal'],
                        "studentPercentTotal"=>$result['a']['studentPercentTotal'],
                        "grade"=>$result['a']['grade'],
-                       "weightageCA1"=>$result['a']['weightageCA1'],
-                       "weightageCA2"=>$result['a']['weightageCA2'],
-                       "weightageExam"=>$result['a']['weightageExam'],
+                       "ca_weight_point"=>$result['a']['ca_weight_point'],
+                       "exam_weight_point"=>$result['a']['exam_weight_point'],
                        "weightageTotal"=>$result['a']['weightageTotal'],
                    );
                }
@@ -494,15 +490,13 @@ class ExamsController extends AppController {
                     foreach ($results as $result){
                         $res[] = array(						
                             "subject_name"=>$result['a']['subject_name'],
-                            "ca1"=>$result['a']['ca1'],
-                            "ca2"=>$result['a']['ca2'],
+                            "ca"=>$result['a']['ca'],
                             "exam"=>$result['a']['exam'],
                             "studentSubjectTotal"=>$result['a']['studentSubjectTotal'],
                             "studentPercentTotal"=>$result['a']['studentPercentTotal'],
                             "grade"=>$result['a']['grade'],
-                            "weightageCA1"=>$result['a']['weightageCA1'],
-                            "weightageCA2"=>$result['a']['weightageCA2'],
-                            "weightageExam"=>$result['a']['weightageExam'],
+                            "ca_weight_point"=>$result['a']['ca_weight_point'],
+                            "exam_weight_point"=>$result['a']['exam_weight_point'],
                             "weightageTotal"=>$result['a']['weightageTotal'],
                         );
                     }
@@ -625,16 +619,14 @@ class ExamsController extends AppController {
             foreach ($results[0] as $result){
                 $res[] = array(
                     "subject_name"=>$result['a']['subject_name'],
-                    "ca1"=>$result['a']['ca1'],
-                    "ca2"=>$result['a']['ca2'],
+                    "ca"=>$result['a']['ca'],
                     "exam"=>$result['a']['exam'],
                     "studentSubjectTotal"=>$result['a']['studentSubjectTotal'],
                     "studentPercentTotal"=>$result['a']['studentPercentTotal'],
                     "grade"=>$result['a']['grade'],
                     "grade_abbr"=>$result['a']['grade_abbr'],
-                    "weightageCA1"=>$result['a']['weightageCA1'],
-                    "weightageCA2"=>$result['a']['weightageCA2'],
-                    "weightageExam"=>$result['a']['weightageExam'],
+                    "ca_weight_point"=>$result['a']['ca_weight_point'],
+                    "exam_weight_point"=>$result['a']['exam_weight_point'],
                     "weightageTotal"=>$result['a']['weightageTotal'],
                 );
 
@@ -719,7 +711,7 @@ class ExamsController extends AppController {
                     foreach ($results[0] as $result){
                         $res[] = array(
                             "subject_name"=>$result['a']['subject_name'],
-                            "ca"=>($result['a']['ca1'] + $result['a']['ca2']),
+                            "ca"=>($result['a']['ca']),
                             "exam"=>$result['a']['exam'],
                             "total"=>$result['a']['studentPercentTotal'],
                         );

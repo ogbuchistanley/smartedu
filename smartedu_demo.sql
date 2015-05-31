@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 20, 2015 at 02:01 PM
+-- Generation Time: May 31, 2015 at 04:19 PM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -273,7 +273,7 @@ BEGIN
 		-- Add the column definitions for the TABLE variable here
 		row_id int AUTO_INCREMENT, exam_id int, subject_id int, classlevel_id int, class_id int, student_id int, 
 		subject_name varchar(80), class_name varchar(80), student_fullname varchar(180),
-		ca1 int, ca2 int, exam int, weightageCA1 int, weightageCA2 int, weightageExam int,
+		ca int, exam int, ca_weight_point int, exam_weight_point int,
 		academic_term_id int, academic_term varchar(80), exammarked_status_id int, academic_year_id int,
 		academic_year varchar(80), classlevel varchar(80), classgroup_id int,
 		studentSubjectTotal Decimal(6, 2), studentPercentTotal Decimal(6, 2), weightageTotal Decimal(6, 2), grade varchar(20),
@@ -285,7 +285,7 @@ BEGIN
 		-- Insert Into the temporary table
 		INSERT INTO ExamsDetailsResultTable(exam_id, subject_id, classlevel_id, class_id, student_id, 
 			subject_name, class_name, student_fullname,
-			ca1, ca2, exam, weightageCA1, weightageCA2, weightageExam,
+			ca, exam, ca_weight_point, exam_weight_point,
 			academic_term_id, academic_term, exammarked_status_id, academic_year_id,
 			academic_year, classlevel, classgroup_id)
 		SELECT * FROM examsdetails_reportviews
@@ -294,7 +294,7 @@ BEGIN
 		-- Insert Into the temporary table
 		INSERT INTO ExamsDetailsResultTable(exam_id, subject_id, classlevel_id, class_id, student_id, 
 			subject_name, class_name, student_fullname,
-			ca1, ca2, exam, weightageCA1, weightageCA2, weightageExam,
+			ca, exam, ca_weight_point, exam_weight_point,
 			academic_term_id, academic_term, exammarked_status_id, academic_year_id,
 			academic_year, classlevel, classgroup_id)
 		SELECT * FROM examsdetails_reportviews
@@ -315,8 +315,8 @@ BEGIN
 			FETCH cur1 INTO RowID, StudentID, SubjectID, TermID;
 				IF NOT done1 THEN	
 					BEGIN
-						SELECT CAST((ca1 + ca2 + exam) AS Decimal(6, 2)), CAST((((ca1 + ca2 + exam) / (weightageCA1 + weightageCA2 + weightageExam)) * 100) 
-						AS Decimal(6, 2)), CAST((weightageCA1 + weightageCA2 + weightageExam) AS Decimal(6, 2)) INTO @StudentSubjectTotal,  @StudentPercentTotal, @WeightageTotal
+						SELECT CAST((ca + exam) AS Decimal(6, 2)), CAST((((ca + exam) / (ca_weight_point + exam_weight_point)) * 100) 
+						AS Decimal(6, 2)), CAST((ca_weight_point + exam_weight_point) AS Decimal(6, 2)) INTO @StudentSubjectTotal,  @StudentPercentTotal, @WeightageTotal
 						FROM exam_details INNER JOIN exams ON exam_details.exam_id = exams.exam_id INNER JOIN 
 						subject_classlevels ON exams.subject_classlevel_id = subject_classlevels.subject_classlevel_id INNER JOIN 
                         classlevels ON subject_classlevels.classlevel_id = classlevels.classlevel_id INNER JOIN
@@ -492,6 +492,10 @@ BEGIN
 			UNTIL done1 END REPEAT;
 		CLOSE cur1;								
 	END Block2;
+    
+    -- Update the C.A with the calculated values from the weekly reports
+    call proc_processWeeklyReportCA(TermID);
+    
 END$$
 
 DROP PROCEDURE IF EXISTS `proc_processItemVariable`$$
@@ -584,6 +588,130 @@ BEGIN
 		END IF;
 	END Block1;
 END$$
+
+DROP PROCEDURE IF EXISTS `proc_processWeeklyReportCA`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_processWeeklyReportCA`(IN `TermID` INT)
+Block0: BEGIN
+	#Create a Temporary Table to Hold The Values for manupulations
+	/*DROP TEMPORARY TABLE IF EXISTS SubjectCAResultTable;
+	CREATE TEMPORARY TABLE IF NOT EXISTS SubjectCAResultTable 
+	(
+		-- Add the column definitions for the TABLE variable here
+		row_id INT AUTO_INCREMENT,
+		student_id INT,
+        student_name VARCHAR(100),
+        class_id INT,
+		subject_id INT,
+        subject_name VARCHAR(100),
+		subject_classlevel_id INT,
+		academic_term_id INT,
+        calculated_ca DECIMAL(4,2),
+		calculated_wp DECIMAL(4,1),
+		PRIMARY KEY(row_id)
+	);*/
+    
+	Block1: BEGIN
+		-- Declare Variable to be used in looping through the recordset or cursor
+		DECLARE done1 BOOLEAN DEFAULT FALSE;
+		DECLARE StudentID, ClassID, CA_WP INT;
+		DECLARE StudentName VARCHAR(100);
+		
+		DECLARE cur1 CURSOR FOR
+		SELECT student_id, class_id, ca_weight_point, student_name FROM weeklyreport_studentdetailsviews 
+		WHERE academic_term_id=TermID GROUP BY student_id, class_id, ca_weight_point;
+		
+		DECLARE CONTINUE HANDLER FOR NOT FOUND SET done1 = TRUE;
+		#Open The Cursor For Iterating Through The Recordset cur1
+		OPEN cur1;
+			REPEAT
+			FETCH cur1 INTO StudentID, ClassID, CA_WP, StudentName;
+				IF NOT done1 THEN
+					
+					-- Second Iteration get the subjects a student offered during the weekly report for the academic term
+					Block2: BEGIN
+						-- Declare Variable to be used in looping through the recordset or cursor
+						DECLARE done2 BOOLEAN DEFAULT FALSE;
+						DECLARE SubjectID, SubClassLevel int;
+                        DECLARE SubjectName VARCHAR(100);
+						
+						DECLARE cur2 CURSOR FOR
+						SELECT subject_id, subject_classlevel_id, subject_name FROM weeklyreport_studentdetailsviews 
+						WHERE student_id=StudentID AND class_id=ClassID AND academic_term_id=TermID AND marked_status=1
+						GROUP BY subject_id, subject_classlevel_id, subject_name;
+						
+						DECLARE CONTINUE HANDLER FOR NOT FOUND SET done2 = TRUE;
+						#Open The Cursor For Iterating Through The Recordset cur1
+						OPEN cur2;
+							REPEAT
+							FETCH cur2 INTO SubjectID, SubClassLevel, SubjectName;
+								IF NOT done2 THEN
+								
+									SET @TEMP_SUM = 0.0;
+									-- Third Iteration computes each subjects score  student offered during the weekly report for the academic term
+									Block3: BEGIN
+										-- Declare Variable to be used in looping through the recordset or cursor
+										DECLARE done3 BOOLEAN DEFAULT FALSE;
+										DECLARE W_CA, WW_Point, WW_Percent FLOAT;
+                                    	
+										DECLARE cur3 CURSOR FOR
+										SELECT  weekly_ca, weekly_weight_point, weekly_weight_percent FROM weeklyreport_studentdetailsviews 
+										WHERE student_id=StudentID AND class_id=ClassID AND academic_term_id=TermID AND marked_status=1
+										AND subject_id=SubjectID AND subject_classlevel_id=SubClassLevel;
+										
+										DECLARE CONTINUE HANDLER FOR NOT FOUND SET done3 = TRUE;
+										#Open The Cursor For Iterating Through The Recordset cur1
+										OPEN cur3;
+											REPEAT
+											FETCH cur3 INTO W_CA, WW_Point, WW_Percent;
+												IF NOT done3 THEN
+													BEGIN
+														-- Get the sum of the weight point percent (100)
+														SET @PercentSUM = (SELECT SUM(weekly_weight_percent) FROM weeklyreport_studentdetailsviews 
+														WHERE student_id=StudentID AND class_id=ClassID AND academic_term_id=TermID AND marked_status=1
+														AND subject_id=SubjectID AND subject_classlevel_id=SubClassLevel);
+                                                        
+                                                        -- Get the new weight point assigned to the weeks report ((25/100) * 30)
+                                                        -- i.e the (weekly weight point percentage (/) divides the sum of the percentages) (*) multiply by the original C.A weight point
+                                                        SET @Temp_WP = ((WW_Percent / @PercentSUM) * CA_WP);
+                                                        -- Get the new calcualted C.A of the weeks report ((11/15) * (((25/100) * 30)))
+                                                        -- i.e the (weekly C.A score (/) divides the weekly weight point) (*) multiply by the calculated weight point above
+                                                        SET @Temp_CA = ((W_CA / WW_Point) * @Temp_WP);
+                                                        -- Sum up all the calculated C.A weekly reports for the subjects
+                                                        SET @TEMP_SUM = @TEMP_SUM + @TEMP_CA;
+                                                        
+													END;
+                                                    
+												END IF;
+											UNTIL done3 END REPEAT;
+										CLOSE cur3;		
+									END Block3;
+                                    
+                                    Block3_1: BEGIN
+										-- Get the exam details id for that subject
+										SET @ExamDetailID = (SELECT exam_detail_id FROM examsdetails_reportviews 
+										WHERE student_id=StudentID AND class_id=ClassID AND academic_term_id=TermID
+										AND subject_id=SubjectID AND subject_classlevel_id=SubClassLevel);
+										
+                                        -- Udate the exam details table and set the students C.A for that subject with the calculated C.A score
+										UPDATE exam_details SET ca=@TEMP_SUM WHERE exam_detail_id=@ExamDetailID;
+										
+										-- Save the calculated C.A for each subjects for each student
+										/*INSERT INTO SubjectCAResultTable(
+											student_id, student_name, class_id, subject_id, subject_name, 
+											subject_classlevel_id, academic_term_id, calculated_ca, calculated_wp
+										)
+										VALUES(StudentID, StudentName, ClassID, SubjectID, SubjectName, SubClassLevel, TermID, @TEMP_SUM, CA_WP);*/
+									END Block3_1;	
+								END IF;
+							UNTIL done2 END REPEAT;
+						CLOSE cur2;		
+					END Block2;	
+					
+				END IF;
+			UNTIL done1 END REPEAT;
+		CLOSE cur1;		
+	END Block1;
+END Block0$$
 
 DROP PROCEDURE IF EXISTS `proc_terminalClassPositionViews`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_terminalClassPositionViews`(IN `cla_id` INT, IN `term_id` INT)
@@ -1411,18 +1539,17 @@ DROP TABLE IF EXISTS `classgroups`;
 CREATE TABLE IF NOT EXISTS `classgroups` (
 `classgroup_id` int(11) unsigned NOT NULL,
   `classgroup` varchar(50) DEFAULT NULL,
-  `weightageCA1` int(10) unsigned DEFAULT '0',
-  `weightageCA2` int(10) unsigned DEFAULT '0',
-  `weightageExam` int(10) unsigned DEFAULT '0'
+  `ca_weight_point` int(10) unsigned DEFAULT '0',
+  `exam_weight_point` int(10) unsigned DEFAULT '0'
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `classgroups`
 --
 
-INSERT INTO `classgroups` (`classgroup_id`, `classgroup`, `weightageCA1`, `weightageCA2`, `weightageExam`) VALUES
-(1, 'Junior Secondary School', 20, 20, 60),
-(2, 'Senior Secondary School', 20, 20, 60);
+INSERT INTO `classgroups` (`classgroup_id`, `classgroup`, `ca_weight_point`, `exam_weight_point`) VALUES
+(1, 'Junior Secondary School', 30, 70),
+(2, 'Senior Secondary School', 30, 70);
 
 -- --------------------------------------------------------
 
@@ -1882,7 +2009,9 @@ INSERT INTO `exams` (`exam_id`, `class_id`, `subject_classlevel_id`, `exammarked
 --
 DROP VIEW IF EXISTS `examsdetails_reportviews`;
 CREATE TABLE IF NOT EXISTS `examsdetails_reportviews` (
-`exam_id` int(11) unsigned
+`exam_detail_id` int(11)
+,`exam_id` int(11) unsigned
+,`subject_classlevel_id` int(11)
 ,`subject_id` int(11)
 ,`classlevel_id` int(11)
 ,`class_id` int(11)
@@ -1890,12 +2019,10 @@ CREATE TABLE IF NOT EXISTS `examsdetails_reportviews` (
 ,`subject_name` varchar(50)
 ,`class_name` varchar(50)
 ,`student_fullname` varchar(152)
-,`ca1` decimal(4,1)
-,`ca2` decimal(4,1)
-,`exam` decimal(4,1)
-,`weightageCA1` int(10) unsigned
-,`weightageCA2` int(10) unsigned
-,`weightageExam` int(10) unsigned
+,`ca` decimal(4,2)
+,`exam` decimal(4,2)
+,`ca_weight_point` int(10) unsigned
+,`exam_weight_point` int(10) unsigned
 ,`academic_term_id` int(11)
 ,`academic_term` varchar(50)
 ,`exammarked_status_id` int(11)
@@ -1915,166 +2042,165 @@ CREATE TABLE IF NOT EXISTS `exam_details` (
 `exam_detail_id` int(11) NOT NULL,
   `exam_id` int(11) DEFAULT NULL,
   `student_id` int(11) DEFAULT NULL,
-  `ca1` decimal(4,1) DEFAULT '0.0',
-  `ca2` decimal(4,1) DEFAULT '0.0',
-  `exam` decimal(4,1) DEFAULT '0.0'
+  `ca` decimal(4,2) DEFAULT '0.00',
+  `exam` decimal(4,2) DEFAULT '0.00'
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=209 ;
 
 --
 -- Dumping data for table `exam_details`
 --
 
-INSERT INTO `exam_details` (`exam_detail_id`, `exam_id`, `student_id`, `ca1`, `ca2`, `exam`) VALUES
-(1, 1, 1, '0.0', '0.0', '0.0'),
-(2, 1, 7, '0.0', '0.0', '0.0'),
-(3, 1, 13, '0.0', '0.0', '0.0'),
-(4, 1, 15, '0.0', '0.0', '0.0'),
-(5, 1, 25, '0.0', '0.0', '0.0'),
-(8, 2, 1, '0.0', '0.0', '0.0'),
-(9, 2, 7, '0.0', '0.0', '0.0'),
-(10, 2, 13, '0.0', '0.0', '0.0'),
-(11, 2, 15, '0.0', '0.0', '0.0'),
-(12, 2, 25, '0.0', '0.0', '0.0'),
-(15, 3, 1, '0.0', '0.0', '0.0'),
-(16, 3, 7, '0.0', '0.0', '0.0'),
-(17, 3, 13, '0.0', '0.0', '0.0'),
-(18, 3, 15, '0.0', '0.0', '0.0'),
-(19, 3, 25, '0.0', '0.0', '0.0'),
-(22, 4, 1, '0.0', '0.0', '0.0'),
-(23, 4, 7, '0.0', '0.0', '0.0'),
-(24, 4, 13, '0.0', '0.0', '0.0'),
-(25, 4, 15, '0.0', '0.0', '0.0'),
-(26, 4, 25, '0.0', '0.0', '0.0'),
-(29, 5, 1, '0.0', '0.0', '0.0'),
-(30, 5, 7, '0.0', '0.0', '0.0'),
-(31, 5, 13, '0.0', '0.0', '0.0'),
-(32, 5, 15, '0.0', '0.0', '0.0'),
-(33, 5, 25, '0.0', '0.0', '0.0'),
-(36, 6, 2, '0.0', '0.0', '0.0'),
-(37, 6, 8, '0.0', '0.0', '0.0'),
-(38, 6, 14, '0.0', '0.0', '0.0'),
-(39, 6, 16, '0.0', '0.0', '0.0'),
-(40, 6, 26, '0.0', '0.0', '0.0'),
-(43, 7, 2, '0.0', '0.0', '0.0'),
-(44, 7, 8, '0.0', '0.0', '0.0'),
-(45, 7, 14, '0.0', '0.0', '0.0'),
-(46, 7, 16, '0.0', '0.0', '0.0'),
-(47, 7, 26, '0.0', '0.0', '0.0'),
-(50, 8, 2, '0.0', '0.0', '0.0'),
-(51, 8, 8, '0.0', '0.0', '0.0'),
-(52, 8, 14, '0.0', '0.0', '0.0'),
-(53, 8, 16, '0.0', '0.0', '0.0'),
-(54, 8, 26, '0.0', '0.0', '0.0'),
-(57, 9, 2, '0.0', '0.0', '0.0'),
-(58, 9, 8, '0.0', '0.0', '0.0'),
-(59, 9, 14, '0.0', '0.0', '0.0'),
-(60, 9, 16, '0.0', '0.0', '0.0'),
-(61, 9, 26, '0.0', '0.0', '0.0'),
-(64, 10, 2, '0.0', '0.0', '0.0'),
-(65, 10, 8, '0.0', '0.0', '0.0'),
-(66, 10, 14, '0.0', '0.0', '0.0'),
-(67, 10, 16, '0.0', '0.0', '0.0'),
-(68, 10, 26, '0.0', '0.0', '0.0'),
-(71, 11, 3, '0.0', '0.0', '0.0'),
-(72, 11, 12, '0.0', '0.0', '0.0'),
-(73, 11, 17, '0.0', '0.0', '0.0'),
-(74, 11, 19, '0.0', '0.0', '0.0'),
-(75, 11, 27, '0.0', '0.0', '0.0'),
-(76, 11, 28, '0.0', '0.0', '0.0'),
-(78, 12, 3, '0.0', '0.0', '0.0'),
-(79, 12, 12, '0.0', '0.0', '0.0'),
-(80, 12, 17, '0.0', '0.0', '0.0'),
-(81, 12, 19, '0.0', '0.0', '0.0'),
-(82, 12, 27, '0.0', '0.0', '0.0'),
-(83, 12, 28, '0.0', '0.0', '0.0'),
-(85, 13, 3, '0.0', '0.0', '0.0'),
-(86, 13, 12, '0.0', '0.0', '0.0'),
-(87, 13, 17, '0.0', '0.0', '0.0'),
-(88, 13, 19, '0.0', '0.0', '0.0'),
-(89, 13, 27, '0.0', '0.0', '0.0'),
-(90, 13, 28, '0.0', '0.0', '0.0'),
-(92, 14, 3, '0.0', '0.0', '0.0'),
-(93, 14, 12, '0.0', '0.0', '0.0'),
-(94, 14, 17, '0.0', '0.0', '0.0'),
-(95, 14, 19, '0.0', '0.0', '0.0'),
-(96, 14, 27, '0.0', '0.0', '0.0'),
-(97, 14, 28, '0.0', '0.0', '0.0'),
-(99, 15, 3, '0.0', '0.0', '0.0'),
-(100, 15, 12, '0.0', '0.0', '0.0'),
-(101, 15, 17, '0.0', '0.0', '0.0'),
-(102, 15, 19, '0.0', '0.0', '0.0'),
-(103, 15, 27, '0.0', '0.0', '0.0'),
-(104, 15, 28, '0.0', '0.0', '0.0'),
-(106, 16, 9, '0.0', '0.0', '0.0'),
-(107, 16, 18, '0.0', '0.0', '0.0'),
-(108, 16, 22, '0.0', '0.0', '0.0'),
-(109, 16, 29, '0.0', '0.0', '0.0'),
-(113, 17, 9, '0.0', '0.0', '0.0'),
-(114, 17, 18, '0.0', '0.0', '0.0'),
-(115, 17, 22, '0.0', '0.0', '0.0'),
-(116, 17, 29, '0.0', '0.0', '0.0'),
-(120, 18, 9, '0.0', '0.0', '0.0'),
-(121, 18, 18, '0.0', '0.0', '0.0'),
-(122, 18, 22, '0.0', '0.0', '0.0'),
-(123, 18, 29, '0.0', '0.0', '0.0'),
-(127, 19, 9, '0.0', '0.0', '0.0'),
-(128, 19, 18, '0.0', '0.0', '0.0'),
-(129, 19, 22, '0.0', '0.0', '0.0'),
-(130, 19, 29, '0.0', '0.0', '0.0'),
-(134, 20, 9, '0.0', '0.0', '0.0'),
-(135, 20, 18, '0.0', '0.0', '0.0'),
-(136, 20, 22, '0.0', '0.0', '0.0'),
-(137, 20, 29, '0.0', '0.0', '0.0'),
-(141, 21, 5, '0.0', '0.0', '0.0'),
-(142, 21, 10, '0.0', '0.0', '0.0'),
-(143, 21, 20, '0.0', '0.0', '0.0'),
-(144, 21, 23, '0.0', '0.0', '0.0'),
-(145, 21, 30, '0.0', '0.0', '0.0'),
-(148, 22, 5, '0.0', '0.0', '0.0'),
-(149, 22, 10, '0.0', '0.0', '0.0'),
-(150, 22, 20, '0.0', '0.0', '0.0'),
-(151, 22, 23, '0.0', '0.0', '0.0'),
-(152, 22, 30, '0.0', '0.0', '0.0'),
-(155, 23, 5, '0.0', '0.0', '0.0'),
-(156, 23, 10, '0.0', '0.0', '0.0'),
-(157, 23, 20, '0.0', '0.0', '0.0'),
-(158, 23, 23, '0.0', '0.0', '0.0'),
-(159, 23, 30, '0.0', '0.0', '0.0'),
-(162, 24, 5, '0.0', '0.0', '0.0'),
-(163, 24, 10, '0.0', '0.0', '0.0'),
-(164, 24, 20, '0.0', '0.0', '0.0'),
-(165, 24, 23, '0.0', '0.0', '0.0'),
-(166, 24, 30, '0.0', '0.0', '0.0'),
-(169, 25, 5, '0.0', '0.0', '0.0'),
-(170, 25, 10, '0.0', '0.0', '0.0'),
-(171, 25, 20, '0.0', '0.0', '0.0'),
-(172, 25, 23, '0.0', '0.0', '0.0'),
-(173, 25, 30, '0.0', '0.0', '0.0'),
-(176, 26, 6, '0.0', '0.0', '0.0'),
-(177, 26, 11, '0.0', '0.0', '0.0'),
-(178, 26, 21, '0.0', '0.0', '0.0'),
-(179, 26, 24, '0.0', '0.0', '0.0'),
-(180, 26, 31, '0.0', '0.0', '0.0'),
-(183, 27, 6, '0.0', '0.0', '0.0'),
-(184, 27, 11, '0.0', '0.0', '0.0'),
-(185, 27, 21, '0.0', '0.0', '0.0'),
-(186, 27, 24, '0.0', '0.0', '0.0'),
-(187, 27, 31, '0.0', '0.0', '0.0'),
-(190, 28, 6, '0.0', '0.0', '0.0'),
-(191, 28, 11, '0.0', '0.0', '0.0'),
-(192, 28, 21, '0.0', '0.0', '0.0'),
-(193, 28, 24, '0.0', '0.0', '0.0'),
-(194, 28, 31, '0.0', '0.0', '0.0'),
-(197, 29, 6, '0.0', '0.0', '0.0'),
-(198, 29, 11, '0.0', '0.0', '0.0'),
-(199, 29, 21, '0.0', '0.0', '0.0'),
-(200, 29, 24, '0.0', '0.0', '0.0'),
-(201, 29, 31, '0.0', '0.0', '0.0'),
-(204, 30, 6, '0.0', '0.0', '0.0'),
-(205, 30, 11, '0.0', '0.0', '0.0'),
-(206, 30, 21, '0.0', '0.0', '0.0'),
-(207, 30, 24, '0.0', '0.0', '0.0'),
-(208, 30, 31, '0.0', '0.0', '0.0');
+INSERT INTO `exam_details` (`exam_detail_id`, `exam_id`, `student_id`, `ca`, `exam`) VALUES
+(1, 1, 1, '16.07', '0.00'),
+(2, 1, 7, '15.60', '0.00'),
+(3, 1, 13, '16.27', '0.00'),
+(4, 1, 15, '24.00', '0.00'),
+(5, 1, 25, '13.93', '0.00'),
+(8, 2, 1, '17.80', '0.00'),
+(9, 2, 7, '17.50', '0.00'),
+(10, 2, 13, '17.50', '0.00'),
+(11, 2, 15, '19.50', '0.00'),
+(12, 2, 25, '20.70', '0.00'),
+(15, 3, 1, '26.72', '0.00'),
+(16, 3, 7, '21.39', '0.00'),
+(17, 3, 13, '21.39', '0.00'),
+(18, 3, 15, '23.83', '0.00'),
+(19, 3, 25, '21.28', '0.00'),
+(22, 4, 1, '22.35', '0.00'),
+(23, 4, 7, '24.20', '0.00'),
+(24, 4, 13, '22.25', '0.00'),
+(25, 4, 15, '22.90', '0.00'),
+(26, 4, 25, '19.85', '0.00'),
+(29, 5, 1, '19.67', '0.00'),
+(30, 5, 7, '20.89', '0.00'),
+(31, 5, 13, '25.33', '0.00'),
+(32, 5, 15, '25.22', '0.00'),
+(33, 5, 25, '20.89', '0.00'),
+(36, 6, 2, '25.25', '0.00'),
+(37, 6, 8, '23.90', '0.00'),
+(38, 6, 14, '21.55', '0.00'),
+(39, 6, 16, '25.70', '0.00'),
+(40, 6, 26, '24.90', '0.00'),
+(43, 7, 2, '10.50', '0.00'),
+(44, 7, 8, '7.50', '0.00'),
+(45, 7, 14, '13.50', '0.00'),
+(46, 7, 16, '13.50', '0.00'),
+(47, 7, 26, '12.00', '0.00'),
+(50, 8, 2, '21.40', '0.00'),
+(51, 8, 8, '19.70', '0.00'),
+(52, 8, 14, '21.90', '0.00'),
+(53, 8, 16, '18.70', '0.00'),
+(54, 8, 26, '19.20', '0.00'),
+(57, 9, 2, '20.55', '0.00'),
+(58, 9, 8, '23.30', '0.00'),
+(59, 9, 14, '14.00', '0.00'),
+(60, 9, 16, '18.45', '0.00'),
+(61, 9, 26, '20.90', '0.00'),
+(64, 10, 2, '21.50', '0.00'),
+(65, 10, 8, '8.90', '0.00'),
+(66, 10, 14, '15.70', '0.00'),
+(67, 10, 16, '16.90', '0.00'),
+(68, 10, 26, '18.50', '0.00'),
+(71, 11, 3, '22.75', '0.00'),
+(72, 11, 12, '19.60', '0.00'),
+(73, 11, 17, '21.25', '0.00'),
+(74, 11, 19, '19.95', '0.00'),
+(75, 11, 27, '21.00', '0.00'),
+(76, 11, 28, '24.05', '0.00'),
+(78, 12, 3, '19.70', '0.00'),
+(79, 12, 12, '22.00', '0.00'),
+(80, 12, 17, '19.60', '0.00'),
+(81, 12, 19, '21.20', '0.00'),
+(82, 12, 27, '21.00', '0.00'),
+(83, 12, 28, '17.70', '0.00'),
+(85, 13, 3, '21.20', '0.00'),
+(86, 13, 12, '17.90', '0.00'),
+(87, 13, 17, '19.90', '0.00'),
+(88, 13, 19, '16.10', '0.00'),
+(89, 13, 27, '19.00', '0.00'),
+(90, 13, 28, '19.15', '0.00'),
+(92, 14, 3, '20.30', '0.00'),
+(93, 14, 12, '19.50', '0.00'),
+(94, 14, 17, '18.20', '0.00'),
+(95, 14, 19, '18.60', '0.00'),
+(96, 14, 27, '17.80', '0.00'),
+(97, 14, 28, '7.50', '0.00'),
+(99, 15, 3, '22.70', '0.00'),
+(100, 15, 12, '23.20', '0.00'),
+(101, 15, 17, '22.00', '0.00'),
+(102, 15, 19, '20.75', '0.00'),
+(103, 15, 27, '22.60', '0.00'),
+(104, 15, 28, '24.80', '0.00'),
+(106, 16, 9, '23.90', '0.00'),
+(107, 16, 18, '24.30', '0.00'),
+(108, 16, 22, '21.90', '0.00'),
+(109, 16, 29, '19.80', '0.00'),
+(113, 17, 9, '18.50', '0.00'),
+(114, 17, 18, '18.80', '0.00'),
+(115, 17, 22, '5.70', '0.00'),
+(116, 17, 29, '19.10', '0.00'),
+(120, 18, 9, '20.15', '0.00'),
+(121, 18, 18, '20.75', '0.00'),
+(122, 18, 22, '26.15', '0.00'),
+(123, 18, 29, '21.25', '0.00'),
+(127, 19, 9, '19.20', '0.00'),
+(128, 19, 18, '20.50', '0.00'),
+(129, 19, 22, '25.10', '0.00'),
+(130, 19, 29, '22.70', '0.00'),
+(134, 20, 9, '25.00', '0.00'),
+(135, 20, 18, '20.70', '0.00'),
+(136, 20, 22, '23.50', '0.00'),
+(137, 20, 29, '22.30', '0.00'),
+(141, 21, 5, '25.00', '0.00'),
+(142, 21, 10, '21.75', '0.00'),
+(143, 21, 20, '21.15', '0.00'),
+(144, 21, 23, '26.25', '0.00'),
+(145, 21, 30, '21.00', '0.00'),
+(148, 22, 5, '14.90', '0.00'),
+(149, 22, 10, '16.40', '0.00'),
+(150, 22, 20, '20.30', '0.00'),
+(151, 22, 23, '15.80', '0.00'),
+(152, 22, 30, '17.30', '0.00'),
+(155, 23, 5, '24.85', '0.00'),
+(156, 23, 10, '22.70', '0.00'),
+(157, 23, 20, '27.25', '0.00'),
+(158, 23, 23, '21.80', '0.00'),
+(159, 23, 30, '23.65', '0.00'),
+(162, 24, 5, '15.80', '0.00'),
+(163, 24, 10, '12.60', '0.00'),
+(164, 24, 20, '17.70', '0.00'),
+(165, 24, 23, '16.70', '0.00'),
+(166, 24, 30, '16.20', '0.00'),
+(169, 25, 5, '15.70', '0.00'),
+(170, 25, 10, '14.50', '0.00'),
+(171, 25, 20, '17.60', '0.00'),
+(172, 25, 23, '14.70', '0.00'),
+(173, 25, 30, '16.70', '0.00'),
+(176, 26, 6, '25.35', '0.00'),
+(177, 26, 11, '26.80', '0.00'),
+(178, 26, 21, '25.80', '0.00'),
+(179, 26, 24, '25.90', '0.00'),
+(180, 26, 31, '26.00', '0.00'),
+(183, 27, 6, '12.30', '0.00'),
+(184, 27, 11, '21.00', '0.00'),
+(185, 27, 21, '20.90', '0.00'),
+(186, 27, 24, '16.80', '0.00'),
+(187, 27, 31, '20.20', '0.00'),
+(190, 28, 6, '18.60', '0.00'),
+(191, 28, 11, '19.30', '0.00'),
+(192, 28, 21, '20.80', '0.00'),
+(193, 28, 24, '20.30', '0.00'),
+(194, 28, 31, '20.00', '0.00'),
+(197, 29, 6, '19.10', '0.00'),
+(198, 29, 11, '17.20', '0.00'),
+(199, 29, 21, '18.80', '0.00'),
+(200, 29, 24, '16.30', '0.00'),
+(201, 29, 31, '17.60', '0.00'),
+(204, 30, 6, '15.60', '0.00'),
+(205, 30, 11, '15.00', '0.00'),
+(206, 30, 21, '16.30', '0.00'),
+(207, 30, 24, '17.50', '0.00'),
+(208, 30, 31, '19.00', '0.00');
 
 -- --------------------------------------------------------
 
@@ -2089,9 +2215,8 @@ CREATE TABLE IF NOT EXISTS `exam_subjectviews` (
 ,`subject_name` varchar(50)
 ,`subject_id` int(11)
 ,`subject_classlevel_id` int(11)
-,`weightageCA1` int(10) unsigned
-,`weightageCA2` int(10) unsigned
-,`weightageExam` int(10) unsigned
+,`ca_weight_point` int(10) unsigned
+,`exam_weight_point` int(10) unsigned
 ,`exammarked_status_id` int(11)
 ,`classlevel_id` int(11)
 ,`classlevel` varchar(50)
@@ -3591,6 +3716,8 @@ CREATE TABLE IF NOT EXISTS `students_subjectsviews` (
 ,`subject_name` varchar(50)
 ,`classlevel_id` int(11)
 ,`classlevel` varchar(50)
+,`academic_term_id` int(11)
+,`academic_term` varchar(50)
 );
 -- --------------------------------------------------------
 
@@ -5599,6 +5726,8 @@ CREATE TABLE IF NOT EXISTS `weekly_setupviews` (
 ,`report_description` text
 ,`submission_date` date
 ,`classgroup` varchar(50)
+,`ca_weight_point` int(10) unsigned
+,`exam_weight_point` int(10) unsigned
 ,`academic_term` varchar(50)
 ,`academic_year_id` int(11) unsigned
 );
@@ -5627,7 +5756,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `examsdetails_reportviews`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `examsdetails_reportviews` AS select `exams`.`exam_id` AS `exam_id`,`subject_classlevels`.`subject_id` AS `subject_id`,`subject_classlevels`.`classlevel_id` AS `classlevel_id`,`classrooms`.`class_id` AS `class_id`,`students`.`student_id` AS `student_id`,`subjects`.`subject_name` AS `subject_name`,`classrooms`.`class_name` AS `class_name`,concat(ucase(`students`.`first_name`),' ',lcase(`students`.`surname`),' ',lcase(`students`.`other_name`)) AS `student_fullname`,`exam_details`.`ca1` AS `ca1`,`exam_details`.`ca2` AS `ca2`,`exam_details`.`exam` AS `exam`,`classgroups`.`weightageCA1` AS `weightageCA1`,`classgroups`.`weightageCA2` AS `weightageCA2`,`classgroups`.`weightageExam` AS `weightageExam`,`academic_terms`.`academic_term_id` AS `academic_term_id`,`academic_terms`.`academic_term` AS `academic_term`,`exams`.`exammarked_status_id` AS `exammarked_status_id`,`academic_terms`.`academic_year_id` AS `academic_year_id`,`academic_years`.`academic_year` AS `academic_year`,`classlevels`.`classlevel` AS `classlevel`,`classlevels`.`classgroup_id` AS `classgroup_id` from ((((((((((`exams` join `exam_details` on((`exams`.`exam_id` = `exam_details`.`exam_id`))) join `subject_classlevels` on((`exams`.`subject_classlevel_id` = `subject_classlevels`.`subject_classlevel_id`))) join `subjects` on((`subject_classlevels`.`subject_id` = `subjects`.`subject_id`))) join `students` on((`exam_details`.`student_id` = `students`.`student_id`))) join `academic_terms` on((`subject_classlevels`.`academic_term_id` = `academic_terms`.`academic_term_id`))) join `academic_years` on((`academic_years`.`academic_year_id` = `academic_terms`.`academic_year_id`))) join `classlevels` on((`subject_classlevels`.`classlevel_id` = `classlevels`.`classlevel_id`))) join `students_classes` on((`students`.`student_id` = `students_classes`.`student_id`))) join `classrooms` on((`students_classes`.`class_id` = `classrooms`.`class_id`))) join `classgroups` on((`classgroups`.`classgroup_id` = `classlevels`.`classgroup_id`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `examsdetails_reportviews` AS select `exam_details`.`exam_detail_id` AS `exam_detail_id`,`exams`.`exam_id` AS `exam_id`,`subject_classlevels`.`subject_classlevel_id` AS `subject_classlevel_id`,`subject_classlevels`.`subject_id` AS `subject_id`,`subject_classlevels`.`classlevel_id` AS `classlevel_id`,`classrooms`.`class_id` AS `class_id`,`students`.`student_id` AS `student_id`,`subjects`.`subject_name` AS `subject_name`,`classrooms`.`class_name` AS `class_name`,concat(ucase(`students`.`first_name`),' ',lcase(`students`.`surname`),' ',lcase(`students`.`other_name`)) AS `student_fullname`,`exam_details`.`ca` AS `ca`,`exam_details`.`exam` AS `exam`,`classgroups`.`ca_weight_point` AS `ca_weight_point`,`classgroups`.`exam_weight_point` AS `exam_weight_point`,`academic_terms`.`academic_term_id` AS `academic_term_id`,`academic_terms`.`academic_term` AS `academic_term`,`exams`.`exammarked_status_id` AS `exammarked_status_id`,`academic_terms`.`academic_year_id` AS `academic_year_id`,`academic_years`.`academic_year` AS `academic_year`,`classlevels`.`classlevel` AS `classlevel`,`classlevels`.`classgroup_id` AS `classgroup_id` from ((((((((((`exams` join `exam_details` on((`exams`.`exam_id` = `exam_details`.`exam_id`))) join `subject_classlevels` on((`exams`.`subject_classlevel_id` = `subject_classlevels`.`subject_classlevel_id`))) join `subjects` on((`subject_classlevels`.`subject_id` = `subjects`.`subject_id`))) join `students` on((`exam_details`.`student_id` = `students`.`student_id`))) join `academic_terms` on((`subject_classlevels`.`academic_term_id` = `academic_terms`.`academic_term_id`))) join `academic_years` on((`academic_years`.`academic_year_id` = `academic_terms`.`academic_year_id`))) join `classlevels` on((`subject_classlevels`.`classlevel_id` = `classlevels`.`classlevel_id`))) join `students_classes` on((`students`.`student_id` = `students_classes`.`student_id`))) join `classrooms` on((`students_classes`.`class_id` = `classrooms`.`class_id`))) join `classgroups` on((`classgroups`.`classgroup_id` = `classlevels`.`classgroup_id`)));
 
 -- --------------------------------------------------------
 
@@ -5636,7 +5765,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `exam_subjectviews`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `exam_subjectviews` AS select `a`.`exam_id` AS `exam_id`,`a`.`class_id` AS `class_id`,`f`.`class_name` AS `class_name`,`c`.`subject_name` AS `subject_name`,`b`.`subject_id` AS `subject_id`,`a`.`subject_classlevel_id` AS `subject_classlevel_id`,`h`.`weightageCA1` AS `weightageCA1`,`h`.`weightageCA2` AS `weightageCA2`,`h`.`weightageExam` AS `weightageExam`,`a`.`exammarked_status_id` AS `exammarked_status_id`,`f`.`classlevel_id` AS `classlevel_id`,`g`.`classlevel` AS `classlevel`,`b`.`academic_term_id` AS `academic_term_id`,`d`.`academic_term` AS `academic_term`,`d`.`academic_year_id` AS `academic_year_id`,`e`.`academic_year` AS `academic_year` from ((((((`exams` `a` left join (`classlevels` `g` join `classrooms` `f` on((`f`.`classlevel_id` = `g`.`classlevel_id`))) on((`a`.`class_id` = `f`.`class_id`))) join `subject_classlevels` `b` on((`a`.`subject_classlevel_id` = `b`.`subject_classlevel_id`))) join `subjects` `c` on((`b`.`subject_id` = `c`.`subject_id`))) join `academic_terms` `d` on((`b`.`academic_term_id` = `d`.`academic_term_id`))) join `academic_years` `e` on((`d`.`academic_year_id` = `e`.`academic_year_id`))) join `classgroups` `h` on((`g`.`classgroup_id` = `h`.`classgroup_id`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `exam_subjectviews` AS select `a`.`exam_id` AS `exam_id`,`a`.`class_id` AS `class_id`,`f`.`class_name` AS `class_name`,`c`.`subject_name` AS `subject_name`,`b`.`subject_id` AS `subject_id`,`a`.`subject_classlevel_id` AS `subject_classlevel_id`,`h`.`ca_weight_point` AS `ca_weight_point`,`h`.`exam_weight_point` AS `exam_weight_point`,`a`.`exammarked_status_id` AS `exammarked_status_id`,`f`.`classlevel_id` AS `classlevel_id`,`g`.`classlevel` AS `classlevel`,`b`.`academic_term_id` AS `academic_term_id`,`d`.`academic_term` AS `academic_term`,`d`.`academic_year_id` AS `academic_year_id`,`e`.`academic_year` AS `academic_year` from ((((((`exams` `a` left join (`classlevels` `g` join `classrooms` `f` on((`f`.`classlevel_id` = `g`.`classlevel_id`))) on((`a`.`class_id` = `f`.`class_id`))) join `subject_classlevels` `b` on((`a`.`subject_classlevel_id` = `b`.`subject_classlevel_id`))) join `subjects` `c` on((`b`.`subject_id` = `c`.`subject_id`))) join `academic_terms` `d` on((`b`.`academic_term_id` = `d`.`academic_term_id`))) join `academic_years` `e` on((`d`.`academic_year_id` = `e`.`academic_year_id`))) join `classgroups` `h` on((`g`.`classgroup_id` = `h`.`classgroup_id`)));
 
 -- --------------------------------------------------------
 
@@ -5663,7 +5792,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `students_subjectsviews`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `students_subjectsviews` AS select `a`.`student_id` AS `student_id`,`a`.`class_id` AS `class_id`,`a`.`subject_classlevel_id` AS `subject_classlevel_id`,concat(ucase(`b`.`first_name`),', ',`b`.`surname`,' ',`b`.`other_name`) AS `student_name`,`b`.`student_no` AS `student_no`,`c`.`class_name` AS `class_name`,`e`.`subject_id` AS `subject_id`,`f`.`subject_name` AS `subject_name`,`c`.`classlevel_id` AS `classlevel_id`,`d`.`classlevel` AS `classlevel` from (((((`subject_students_registers` `a` join `students` `b` on((`a`.`student_id` = `b`.`student_id`))) join `classrooms` `c` on((`a`.`class_id` = `c`.`class_id`))) join `classlevels` `d` on((`c`.`classlevel_id` = `d`.`classlevel_id`))) join `subject_classlevels` `e` on((`e`.`subject_classlevel_id` = `a`.`subject_classlevel_id`))) join `subjects` `f` on((`f`.`subject_id` = `e`.`subject_id`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `students_subjectsviews` AS select `a`.`student_id` AS `student_id`,`a`.`class_id` AS `class_id`,`a`.`subject_classlevel_id` AS `subject_classlevel_id`,concat(ucase(`b`.`first_name`),', ',`b`.`surname`,' ',`b`.`other_name`) AS `student_name`,`b`.`student_no` AS `student_no`,`c`.`class_name` AS `class_name`,`e`.`subject_id` AS `subject_id`,`f`.`subject_name` AS `subject_name`,`c`.`classlevel_id` AS `classlevel_id`,`d`.`classlevel` AS `classlevel`,`e`.`academic_term_id` AS `academic_term_id`,`h`.`academic_term` AS `academic_term` from ((((((`subject_students_registers` `a` join `students` `b` on((`a`.`student_id` = `b`.`student_id`))) join `classrooms` `c` on((`a`.`class_id` = `c`.`class_id`))) join `classlevels` `d` on((`c`.`classlevel_id` = `d`.`classlevel_id`))) join `subject_classlevels` `e` on((`e`.`subject_classlevel_id` = `a`.`subject_classlevel_id`))) join `subjects` `f` on((`f`.`subject_id` = `e`.`subject_id`))) join `academic_terms` `h` on((`h`.`academic_term_id` = `e`.`academic_term_id`)));
 
 -- --------------------------------------------------------
 
@@ -5717,7 +5846,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `weeklyreport_studentdetailsviews`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `weeklyreport_studentdetailsviews` AS select `f`.`weekly_report_id` AS `weekly_report_id`,`f`.`subject_classlevel_id` AS `subject_classlevel_id`,`f`.`weekly_detail_setup_id` AS `weekly_detail_setup_id`,`f`.`marked_status` AS `marked_status`,`f`.`notification_status` AS `notification_status`,`g`.`weekly_report_detail_id` AS `weekly_report_detail_id`,`g`.`student_id` AS `student_id`,`j`.`student_no` AS `student_no`,concat(`j`.`first_name`,' ',`j`.`surname`) AS `student_name`,`j`.`gender` AS `gender`,`g`.`weekly_ca` AS `weekly_ca`,`h`.`weekly_weight_point` AS `weekly_weight_point`,`h`.`weekly_report_no` AS `weekly_report_no`,`h`.`weekly_weight_percent` AS `weekly_weight_percent`,`h`.`report_description` AS `report_description`,`h`.`submission_date` AS `submission_date`,`i`.`weekly_report_setup_id` AS `weekly_report_setup_id`,`i`.`weekly_report` AS `weekly_report`,`m`.`weightageCA1` AS `ca_weight_point`,`m`.`weightageExam` AS `exam_weight_point`,`j`.`sponsor_id` AS `sponsor_id`,`j`.`image_url` AS `image_url`,`k`.`sponsor_no` AS `sponsor_no`,`k`.`mobile_number1` AS `mobile_number1`,`k`.`email` AS `email`,concat(`k`.`first_name`,' ',`k`.`other_name`) AS `sponsor_name`,`b`.`subject_id` AS `subject_id`,`b`.`subject_name` AS `subject_name`,`a`.`class_id` AS `class_id`,`c`.`class_name` AS `class_name`,`c`.`classlevel_id` AS `classlevel_id`,`d`.`classlevel` AS `classlevel`,`d`.`classgroup_id` AS `classgroup_id`,`a`.`academic_term_id` AS `academic_term_id`,`e`.`academic_term` AS `academic_term` from (((((((((((`subject_classlevels` `a` join `subjects` `b` on((`a`.`subject_id` = `b`.`subject_id`))) join `classrooms` `c` on((`a`.`class_id` = `c`.`class_id`))) join `classlevels` `d` on((`a`.`classlevel_id` = `d`.`classlevel_id`))) join `academic_terms` `e` on((`a`.`academic_term_id` = `e`.`academic_term_id`))) join `weekly_reports` `f` on((`a`.`subject_classlevel_id` = `f`.`subject_classlevel_id`))) join `weekly_report_details` `g` on((`f`.`weekly_report_id` = `g`.`weekly_report_id`))) join `weekly_detail_setups` `h` on((`f`.`weekly_detail_setup_id` = `h`.`weekly_detail_setup_id`))) join `weekly_report_setups` `i` on((`h`.`weekly_report_setup_id` = `i`.`weekly_report_setup_id`))) join `students` `j` on((`g`.`student_id` = `j`.`student_id`))) join `sponsors` `k` on((`j`.`sponsor_id` = `k`.`sponsor_id`))) join `classgroups` `m` on((`d`.`classgroup_id` = `m`.`classgroup_id`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `weeklyreport_studentdetailsviews` AS select `f`.`weekly_report_id` AS `weekly_report_id`,`f`.`subject_classlevel_id` AS `subject_classlevel_id`,`f`.`weekly_detail_setup_id` AS `weekly_detail_setup_id`,`f`.`marked_status` AS `marked_status`,`f`.`notification_status` AS `notification_status`,`g`.`weekly_report_detail_id` AS `weekly_report_detail_id`,`g`.`student_id` AS `student_id`,`j`.`student_no` AS `student_no`,concat(`j`.`first_name`,' ',`j`.`surname`) AS `student_name`,`j`.`gender` AS `gender`,`g`.`weekly_ca` AS `weekly_ca`,`h`.`weekly_weight_point` AS `weekly_weight_point`,`h`.`weekly_report_no` AS `weekly_report_no`,`h`.`weekly_weight_percent` AS `weekly_weight_percent`,`h`.`report_description` AS `report_description`,`h`.`submission_date` AS `submission_date`,`i`.`weekly_report_setup_id` AS `weekly_report_setup_id`,`i`.`weekly_report` AS `weekly_report`,`m`.`ca_weight_point` AS `ca_weight_point`,`m`.`exam_weight_point` AS `exam_weight_point`,`j`.`sponsor_id` AS `sponsor_id`,`j`.`image_url` AS `image_url`,`k`.`sponsor_no` AS `sponsor_no`,`k`.`mobile_number1` AS `mobile_number1`,`k`.`email` AS `email`,concat(`k`.`first_name`,' ',`k`.`other_name`) AS `sponsor_name`,`b`.`subject_id` AS `subject_id`,`b`.`subject_name` AS `subject_name`,`a`.`class_id` AS `class_id`,`c`.`class_name` AS `class_name`,`c`.`classlevel_id` AS `classlevel_id`,`d`.`classlevel` AS `classlevel`,`d`.`classgroup_id` AS `classgroup_id`,`a`.`academic_term_id` AS `academic_term_id`,`e`.`academic_term` AS `academic_term` from (((((((((((`subject_classlevels` `a` join `subjects` `b` on((`a`.`subject_id` = `b`.`subject_id`))) join `classrooms` `c` on((`a`.`class_id` = `c`.`class_id`))) join `classlevels` `d` on((`a`.`classlevel_id` = `d`.`classlevel_id`))) join `academic_terms` `e` on((`a`.`academic_term_id` = `e`.`academic_term_id`))) join `weekly_reports` `f` on((`a`.`subject_classlevel_id` = `f`.`subject_classlevel_id`))) join `weekly_report_details` `g` on((`f`.`weekly_report_id` = `g`.`weekly_report_id`))) join `weekly_detail_setups` `h` on((`f`.`weekly_detail_setup_id` = `h`.`weekly_detail_setup_id`))) join `weekly_report_setups` `i` on((`h`.`weekly_report_setup_id` = `i`.`weekly_report_setup_id`))) join `students` `j` on((`g`.`student_id` = `j`.`student_id`))) join `sponsors` `k` on((`j`.`sponsor_id` = `k`.`sponsor_id`))) join `classgroups` `m` on((`d`.`classgroup_id` = `m`.`classgroup_id`)));
 
 -- --------------------------------------------------------
 
@@ -5726,7 +5855,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `weekly_setupviews`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `weekly_setupviews` AS select `a`.`weekly_report_setup_id` AS `weekly_report_setup_id`,`a`.`weekly_report` AS `weekly_report`,`b`.`weekly_weight_point` AS `weekly_weight_point`,`b`.`weekly_weight_percent` AS `weekly_weight_percent`,`a`.`classgroup_id` AS `classgroup_id`,`a`.`academic_term_id` AS `academic_term_id`,`b`.`weekly_detail_setup_id` AS `weekly_detail_setup_id`,`b`.`weekly_report_no` AS `weekly_report_no`,`b`.`report_description` AS `report_description`,`b`.`submission_date` AS `submission_date`,`c`.`classgroup` AS `classgroup`,`d`.`academic_term` AS `academic_term`,`d`.`academic_year_id` AS `academic_year_id` from (((`weekly_report_setups` `a` join `weekly_detail_setups` `b` on((`a`.`weekly_report_setup_id` = `b`.`weekly_report_setup_id`))) join `classgroups` `c` on((`a`.`classgroup_id` = `c`.`classgroup_id`))) join `academic_terms` `d` on((`a`.`academic_term_id` = `d`.`academic_term_id`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `weekly_setupviews` AS select `a`.`weekly_report_setup_id` AS `weekly_report_setup_id`,`a`.`weekly_report` AS `weekly_report`,`b`.`weekly_weight_point` AS `weekly_weight_point`,`b`.`weekly_weight_percent` AS `weekly_weight_percent`,`a`.`classgroup_id` AS `classgroup_id`,`a`.`academic_term_id` AS `academic_term_id`,`b`.`weekly_detail_setup_id` AS `weekly_detail_setup_id`,`b`.`weekly_report_no` AS `weekly_report_no`,`b`.`report_description` AS `report_description`,`b`.`submission_date` AS `submission_date`,`c`.`classgroup` AS `classgroup`,`c`.`ca_weight_point` AS `ca_weight_point`,`c`.`exam_weight_point` AS `exam_weight_point`,`d`.`academic_term` AS `academic_term`,`d`.`academic_year_id` AS `academic_year_id` from (((`weekly_report_setups` `a` join `weekly_detail_setups` `b` on((`a`.`weekly_report_setup_id` = `b`.`weekly_report_setup_id`))) join `classgroups` `c` on((`a`.`classgroup_id` = `c`.`classgroup_id`))) join `academic_terms` `d` on((`a`.`academic_term_id` = `d`.`academic_term_id`)));
 
 --
 -- Indexes for dumped tables

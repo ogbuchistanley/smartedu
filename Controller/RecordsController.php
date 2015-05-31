@@ -143,9 +143,9 @@ class RecordsController extends AppController {
                     $data['classgroup_id'] = ($data_array['classgroup_id'][$i] === '') ? null : $data_array['classgroup_id'][$i];
 
                     $data['classgroup'] = $data_array['classgroup'][$i];
-                    $data['weightageCA1'] = $data_array['weightageCA1'][$i];
-                    $data['weightageCA2'] = $data_array['weightageCA2'][$i];
-                    $data['weightageExam'] = $data_array['weightageExam'][$i];
+                    $data['ca_weight_point'] = $data_array['ca_weight_point'][$i];
+//                    $data['weightageCA2'] = $data_array['weightageCA2'][$i];
+                    $data['exam_weight_point'] = $data_array['exam_weight_point'][$i];
                     if($Classgroup->save($data)){   $count++;  }
                 }
                 //Delete The ID's Checked

@@ -59,15 +59,11 @@
                                     </tr>
                                     <tr>
                                         <th>1st C.A / (W.A)</th>
-                                        <td><?php echo $StudentScore['a']['ca1'];?> / <?php echo $StudentScore['a']['weightageCA1'];?></td>
-                                    </tr>
-                                    <tr>
-                                        <th>2nd C.A / (W.A)</th>
-                                        <td><?php echo $StudentScore['a']['ca2'];?> / <?php echo $StudentScore['a']['weightageCA2'];?></td>
+                                        <td><?php echo $StudentScore['a']['ca'];?> / <?php echo $StudentScore['a']['ca_weight_point'];?></td>
                                     </tr>
                                     <tr>
                                         <th>Exam / (W.A)</th>
-                                        <td><?php echo $StudentScore['a']['exam'];?> / <?php echo $StudentScore['a']['weightageExam'];?></td>
+                                        <td><?php echo $StudentScore['a']['exam'];?> / <?php echo $StudentScore['a']['exam_weight_point'];?></td>
                                     </tr>
                                     <tr>
                                         <th>Total / (W.A)</th>

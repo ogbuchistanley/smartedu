@@ -1,0 +1,229 @@
+2015-05-20 16:10:02 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-20 16:10:10 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-29 15:31:25 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-29 15:31:43 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-29 15:31:49 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-29 15:32:29 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-30 19:09:47 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-30 20:24:01 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-31 15:35:14 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-31 15:39:03 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-31 14:39:03 Error: [PDOException] SQLSTATE[21S01]: Insert value list does not match column list: 1136 Column count doesn't match value count at row 1
+Request URL: /smartedu/exams/chart_analysis/undefined
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Model/Datasource/DboSource.php(458): PDOStatement->execute(Array)
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Model/Datasource/DboSource.php(424): DboSource->_execute('CALL proc_termi...', Array)
+#2 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Model/Datasource/DboSource.php(666): DboSource->execute('CALL proc_termi...', Array, Array)
+#3 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Model/Datasource/DboSource.php(537): DboSource->fetchAll('CALL proc_termi...')
+#4 [internal function]: DboSource->query('CALL proc_termi...')
+#5 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Model/Model.php(3354): call_user_func_array(Array, Array)
+#6 /Applications/XAMPP/xamppfiles/htdocs/smartedu/Model/Exam.php(105): Model->query('CALL proc_termi...')
+#7 /Applications/XAMPP/xamppfiles/htdocs/smartedu/Controller/ExamsController.php(715): Exam->findStudentExamTerminalDetails('K\xADg\xF38P\xA5c\xC1\xCD\xEA=\xD5>\x04...', NULL, NULL)
+#8 [internal function]: ExamsController->chart_analysis('undefined')
+#9 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(ExamsController), Array)
+#10 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#11 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(ExamsController), Object(CakeRequest))
+#12 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#13 {main}
+2015-05-31 15:44:43 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-31 16:07:53 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-31 15:07:54 Error: [PDOException] SQLSTATE[21S01]: Insert value list does not match column list: 1136 Column count doesn't match value count at row 1
+Request URL: /smartedu/exams/chart_analysis/undefined
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Model/Datasource/DboSource.php(458): PDOStatement->execute(Array)
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Model/Datasource/DboSource.php(424): DboSource->_execute('CALL proc_termi...', Array)
+#2 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Model/Datasource/DboSource.php(666): DboSource->execute('CALL proc_termi...', Array, Array)
+#3 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Model/Datasource/DboSource.php(537): DboSource->fetchAll('CALL proc_termi...')
+#4 [internal function]: DboSource->query('CALL proc_termi...')
+#5 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Model/Model.php(3354): call_user_func_array(Array, Array)
+#6 /Applications/XAMPP/xamppfiles/htdocs/smartedu/Model/Exam.php(105): Model->query('CALL proc_termi...')
+#7 /Applications/XAMPP/xamppfiles/htdocs/smartedu/Controller/ExamsController.php(707): Exam->findStudentExamTerminalDetails('K\xADg\xF38P\xA5c\xC1\xCD\xEA=\xD5>\x04...', NULL, NULL)
+#8 [internal function]: ExamsController->chart_analysis('undefined')
+#9 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(ExamsController), Array)
+#10 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#11 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(ExamsController), Object(CakeRequest))
+#12 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#13 {main}
+2015-05-31 16:08:19 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-31 16:08:23 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-31 15:08:23 Error: [PDOException] SQLSTATE[21S01]: Insert value list does not match column list: 1136 Column count doesn't match value count at row 1
+Request URL: /smartedu/exams/chart_analysis/undefined
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Model/Datasource/DboSource.php(458): PDOStatement->execute(Array)
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Model/Datasource/DboSource.php(424): DboSource->_execute('CALL proc_termi...', Array)
+#2 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Model/Datasource/DboSource.php(666): DboSource->execute('CALL proc_termi...', Array, Array)
+#3 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Model/Datasource/DboSource.php(537): DboSource->fetchAll('CALL proc_termi...')
+#4 [internal function]: DboSource->query('CALL proc_termi...')
+#5 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Model/Model.php(3354): call_user_func_array(Array, Array)
+#6 /Applications/XAMPP/xamppfiles/htdocs/smartedu/Model/Exam.php(105): Model->query('CALL proc_termi...')
+#7 /Applications/XAMPP/xamppfiles/htdocs/smartedu/Controller/ExamsController.php(707): Exam->findStudentExamTerminalDetails('K\xADg\xF38P\xA5c\xC1\xCD\xEA=\xD5>\x04...', NULL, NULL)
+#8 [internal function]: ExamsController->chart_analysis('undefined')
+#9 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(ExamsController), Array)
+#10 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#11 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(ExamsController), Object(CakeRequest))
+#12 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#13 {main}
+2015-05-31 16:08:34 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-31 15:08:35 Error: [PDOException] SQLSTATE[21S01]: Insert value list does not match column list: 1136 Column count doesn't match value count at row 1
+Request URL: /smartedu/exams/chart_analysis/undefined
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Model/Datasource/DboSource.php(458): PDOStatement->execute(Array)
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Model/Datasource/DboSource.php(424): DboSource->_execute('CALL proc_termi...', Array)
+#2 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Model/Datasource/DboSource.php(666): DboSource->execute('CALL proc_termi...', Array, Array)
+#3 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Model/Datasource/DboSource.php(537): DboSource->fetchAll('CALL proc_termi...')
+#4 [internal function]: DboSource->query('CALL proc_termi...')
+#5 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Model/Model.php(3354): call_user_func_array(Array, Array)
+#6 /Applications/XAMPP/xamppfiles/htdocs/smartedu/Model/Exam.php(105): Model->query('CALL proc_termi...')
+#7 /Applications/XAMPP/xamppfiles/htdocs/smartedu/Controller/ExamsController.php(707): Exam->findStudentExamTerminalDetails('K\xADg\xF38P\xA5c\xC1\xCD\xEA=\xD5>\x04...', NULL, NULL)
+#8 [internal function]: ExamsController->chart_analysis('undefined')
+#9 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(ExamsController), Array)
+#10 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#11 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(ExamsController), Object(CakeRequest))
+#12 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#13 {main}
+2015-05-31 16:08:54 Error: [MissingControllerException] Controller class WebrootController could not be found.
+Exception Attributes: array (
+  'class' => 'WebrootController',
+  'plugin' => NULL,
+)
+Request URL: /smartedu/webroot/app/less/@boxedBackgroundImage
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-31 15:08:54 Error: [PDOException] SQLSTATE[21S01]: Insert value list does not match column list: 1136 Column count doesn't match value count at row 1
+Request URL: /smartedu/exams/chart_analysis/undefined
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Model/Datasource/DboSource.php(458): PDOStatement->execute(Array)
+#1 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Model/Datasource/DboSource.php(424): DboSource->_execute('CALL proc_termi...', Array)
+#2 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Model/Datasource/DboSource.php(666): DboSource->execute('CALL proc_termi...', Array, Array)
+#3 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Model/Datasource/DboSource.php(537): DboSource->fetchAll('CALL proc_termi...')
+#4 [internal function]: DboSource->query('CALL proc_termi...')
+#5 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Model/Model.php(3354): call_user_func_array(Array, Array)
+#6 /Applications/XAMPP/xamppfiles/htdocs/smartedu/Model/Exam.php(105): Model->query('CALL proc_termi...')
+#7 /Applications/XAMPP/xamppfiles/htdocs/smartedu/Controller/ExamsController.php(707): Exam->findStudentExamTerminalDetails('K\xADg\xF38P\xA5c\xC1\xCD\xEA=\xD5>\x04...', NULL, NULL)
+#8 [internal function]: ExamsController->chart_analysis('undefined')
+#9 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(ExamsController), Array)
+#10 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#11 /Applications/XAMPP/xamppfiles/cakephp/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(ExamsController), Object(CakeRequest))
+#12 /Applications/XAMPP/xamppfiles/htdocs/smartedu/webroot/index.php(154): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#13 {main}

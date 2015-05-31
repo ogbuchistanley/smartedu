@@ -57,14 +57,14 @@
                                         <th>Marked Status</th>
                                         <td style="font-size: medium"><?php echo ($ExamSubject['Exam']['exammarked_status_id'] === '2') ? '<span class="label label-danger">Subject Not Marked</span>' : '<span class="label label-success">Subject Marked</span>';?></td>
                                         <th>Weight Point CA1</th>
-                                        <td><?php echo $ExamSubject['Exam']['weightageCA1'];?></td>
+                                        <td><?php echo $ExamSubject['Exam']['ca_weight_point'];?></td>
                                     </tr>
                                     <tr>
-                                        <th>Weight Point CA2</th>
-                                        <td><?php echo $ExamSubject['Exam']['weightageCA2'];?></td>
                                         <th>Weight Point Exam</th>
-                                        <td><?php echo $ExamSubject['Exam']['weightageExam'];?></td>
-                                        <input type="hidden" id="hidden_WA_value" value="<?php echo $ExamSubject['Exam']['weightageCA1'].'-'.$ExamSubject['Exam']['weightageCA2'].'-'.$ExamSubject['Exam']['weightageExam'];?>">
+                                        <td><?php echo $ExamSubject['Exam']['exam_weight_point'];?></td>
+                                        <td colspan="2">
+                                            <input type="hidden" id="hidden_WA_value" value="<?php echo $ExamSubject['Exam']['ca_weight_point'].'-'.$ExamSubject['Exam']['exam_weight_point'];?>">
+                                        </td>
                                     </tr>
                                 <?php else:?>
                                     <tr>
@@ -78,7 +78,7 @@
             </div> <!-- /Panel with Tables -->
         </div>
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-10">
                <div class="panel">
                     <div class="panel-body">
                         <div class="panel panel-info">
@@ -102,8 +102,7 @@
                                       <th>Full Name</th>
                                       <th>Gender</th>
                                       <th>Class</th>
-                                      <th>First CA</th>
-                                      <th>Second CA</th>
+                                      <th>C. A</th>
                                       <th>Exam</th>
                                     </tr>
                                   </thead>
@@ -120,8 +119,7 @@
                                          <td><?php echo h($ExamDetail['Student']['first_name']), ' ', h($ExamDetail['Student']['surname']), ' '; echo (!empty($ExamDetail['Student']['other_name'])) ? h($ExamDetail['Student']['other_name']) : '' ?>&nbsp;</td>
                                          <td><?php echo h($ExamDetail['Student']['gender']); ?>&nbsp;</td>
                                          <td><?php echo (!empty($ExamDetail['Student']['class_id'])) ? h($Student['Classroom']['class_name']) : '<span class="label label-danger">nill</span>'; ?>&nbsp;</td>
-                                         <td><input style="width: 100px;" class="form-cascade-control input-sm ca1_value" name="data[ExamDetail][ca1][]" value="<?php echo h($ExamDetail['ExamDetail']['ca1']);?>" maxlength="4"><span></span></td>
-                                         <td><input style="width: 100px;" class="form-cascade-control input-sm ca2_value" name="data[ExamDetail][ca2][]" value="<?php echo h($ExamDetail['ExamDetail']['ca2']);?>" maxlength="4"><span></span></td>
+                                         <td><input style="width: 100px;" class="form-cascade-control input-sm ca_value" name="data[ExamDetail][ca][]" value="<?php echo h($ExamDetail['ExamDetail']['ca']);?>" maxlength="4"><span></span></td>
                                          <td><input style="width: 100px;" class="form-cascade-control input-sm exam_value" name="data[ExamDetail][exam][]" value="<?php echo h($ExamDetail['ExamDetail']['exam']);?>" maxlength="4"><span></span></td>
                                      </tr>
                                      <?php endforeach; ?>
@@ -133,8 +131,7 @@
                                       <th>Full Name</th>
                                       <th>Gender</th>
                                       <th>Class</th>
-                                      <th>First CA</th>
-                                      <th>Second CA</th>
+                                      <th>C. A</th>
                                       <th>Exam</th>
                                     </tr>
                                   </tfoot>
