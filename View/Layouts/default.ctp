@@ -37,7 +37,8 @@ $cakeDescription = __d('app_dev', ':: '.APP_NAME.' :');
     $msg_index = Configure::read('msg_index');
     $attend_index = Configure::read('attend_index');
     $user_index = Configure::read('user_index');
-    
+    $clone_index = Configure::read('clone_index');
+
     //Disable The Links For Parents if user role > 2
     $user_role = Configure::read('user_role');
 
@@ -327,6 +328,16 @@ $cakeDescription = __d('app_dev', ':: '.APP_NAME.' :');
                                     </ul>
                                 </li>
                                 <?php endif;?>
+                                <?php if($clone_index): ?>
+                                    <li class="submenu">
+                                        <a class="dropdown" href="javascript:void(0)" data-original-title="Clone Records">
+                                            <i class="fa fa-copy"></i><span class="hidden-minibar"> Clone Records <span class="badge bg-primary pull-right" id="clone_count"></span></span>
+                                        </a>
+                                        <ul>
+                                            <li><a href="<?php echo DOMAIN_NAME ?>/clones/index" data-original-title="Subjects To Class / Teacher"><i class="fa fa-building"></i><span> Subjects To Class / Teacher</span></a></li>
+                                        </ul>
+                                    </li>
+                                <?php endif;?>
                                 <?php if($user_index): ?>
                                     <li><a href="<?php echo DOMAIN_NAME ?>/users/index" data-original-title="Users"><i class="fa fa-user"></i><span> Manage Users</span></a></li>
                                     <!--li><a href="<?php echo DOMAIN_NAME ?>/users/register" data-original-title="Users"><i class="fa fa-exclamation-circle"></i><span> Register New</span></a></li-->
@@ -426,8 +437,8 @@ $cakeDescription = __d('app_dev', ':: '.APP_NAME.' :');
                 </div>
 
                 <div class="row">
-                    <div id="msg_box1" class="alert alert-info hide">
-                        <?php echo  $this->Html->image('loader.gif', array('id' => 'msg_box1')); ?>
+                    <div id="msg_box" class="alert alert-info hide">
+                        <?php echo  $this->Html->image('loader.gif', array('id' => 'msg_box')); ?>
                         <span style='color:green; margin:15px; font-size: 18px;'> Loading...</span>
                     </div>
                     <div id="display_message" class="alert alert-info hide">

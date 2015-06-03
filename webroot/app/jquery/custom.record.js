@@ -36,12 +36,10 @@ $('document').ready(function(){
 
     //Submission Date
     $('.date_picker').datepicker({
-        minDate: 0,
         changeMonth: true,
         changeYear: true,
-        yearRange: "-0:+10"
+        yearRange: "-2:+10"
     });
-
 
     
     //Add a new row for inputting new record
@@ -59,7 +57,14 @@ $('document').ready(function(){
         new_tr.children(':nth-child(5)').children('input').val('');
         new_tr.children(':nth-child(5)').children('select').val('');
         new_tr.children(':nth-child(6)').children('input').val('');
+        new_tr.children(':nth-child(7)').children('input').val('');
         new_tr.children(':last-child').html('<td><button type="button" class="btn btn-xs btn-danger remove_tr_btn">Remove</button></td>');
+
+        //Assign Date Pickers
+        new_tr.children(':nth-child(6)').children('input').datepicker();
+        new_tr.children(':nth-child(7)').children('input').datepicker();
+        new_tr.children(':nth-child(6)').children('input').attr('placeholder', 'mm/dd/yyyy');
+        new_tr.children(':nth-child(7)').children('input').attr('placeholder', 'mm/dd/yyyy');
     });
     
     //Remove the row added

@@ -175,7 +175,8 @@ class AppController extends Controller {
         Configure::write('msg_index', $this->Acl->check($auth, 'MessagesController'));
         Configure::write('record_index', $this->Acl->check($auth, 'RecordsController'));
         Configure::write('user_index', $this->Acl->check($auth, 'UsersController'));
-        
+        Configure::write('clone_index', $this->Acl->check($auth, 'ClonesController'));
+
         //Disable The Links For Sponsors During Error Displays
         Configure::write('user_role', $this->Auth->user('user_role_id'));
     }

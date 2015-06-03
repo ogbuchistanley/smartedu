@@ -297,19 +297,19 @@ $('document').ready(function(){
     });
     
     
-    //Validate Weight Point
+    //Validate The C.A Weight Point
     $(document.body).on('blur', '.ca_value, .exam_value', function(){
         var ca = parseInt($(this).val());
         var WA = $('#hidden_WA_value').val().split('-');
         var classes = $(this).attr('class').split(' ');
         var value = '';
-        if(classes[3] === 'ca_value'){
+        if(classes[2] === 'ca_value'){
             value = WA[0];
-        }else if(classes[3] === 'exam_value'){
+        }else if(classes[2] === 'exam_value'){
             value = WA[1];
         }
         if(ca > parseInt(value) || ca < 0){
-            $(this).parent().children(':nth-child(2)').html('<span class="label label-danger">>= 0 and <='+value+'</span>');
+            $(this).parent().children(':nth-child(2)').html('<span class="label label-danger">>= 0 and <= '+value+'</span>');
             $(this).focus();
         }else{
             $(this).parent().children(':nth-child(2)').html('');

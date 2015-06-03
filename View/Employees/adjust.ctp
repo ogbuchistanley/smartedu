@@ -156,6 +156,18 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label for="image_url" class="col-lg-2 col-md-3 control-label">&nbsp;&nbsp;</label>
+                                <div class="col-lg-7 col-md-9">
+                                    <span class="btn btn-info fileinput-button" ng-class="{disabled: disabled}">
+                                        <i class="glyphicon glyphicon-plus"></i>
+                                        <span>Browse File...</span>
+                                        <input ng-disabled="disabled" value="<?php echo $employee['Employee']['image_url']?>" type="file" name="data[Employee][image_url]" id="image_url" onChange="readURL(this);" required="required" /><br>
+                                        <img data-src="holder.js/140x140" class="img-rounded" id="img_prev" src="<?php echo DOMAIN_NAME ?>/img/uploads/<?php echo ($employee['Employee']['image_url']) ? $employee['Employee']['image_url'] : 'avatar.jpg';?>" style="width: 140px; height: 140px;"/>
+                                    </span>
+                                    <div id="image_error"></div>
+                                </div>
+                            </div><br><br>
+                            <div class="form-group">
                               <label class="col-lg-2 col-md-3 control-label">&nbsp;&nbsp;</label>
                               <div class="col-lg-7 col-md-9">
                                   <button type="submit" id="register_emp_btn" class="btn btn-info">Update Record</button>

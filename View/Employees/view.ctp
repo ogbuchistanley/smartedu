@@ -53,13 +53,13 @@
                                 <th>Gender</th>
                                 <td><?php echo h($employee['Employee']['gender']); ?></td>
                             </tr>
-                            <tr>
+                            <!--tr>
                                 <th>Date of Birth</th>
-                                <td><?php echo h($employee['Employee']['birth_date']); ?></td>
-                            </tr>
+                                <td><?php //echo h($employee['Employee']['birth_date']); ?></td>
+                            </tr-->
                             <tr>
                                 <th>Marital Status</th>
-                                <td><?php echo h($employee['Employee']['marital_status']); ?></td>
+                                <td><?php echo (!empty($employee['Employee']['marital_status'])) ? h($employee['Employee']['marital_status']) : $nil; ?></td>
                             </tr>
                             <tr>
                                 <th>Email</th>

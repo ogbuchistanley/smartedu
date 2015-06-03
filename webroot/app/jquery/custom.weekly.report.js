@@ -86,7 +86,7 @@ $('document').ready(function(){
         var weekly_ca = parseInt($(this).val());
         var WP = $('#hidden_weight_point').val();
         if(weekly_ca > parseInt(WP) || weekly_ca < 0){
-            $(this).parent().children(':nth-child(2)').html('<span class="label label-danger">>= 0 and <='+WP+'</span>');
+            $(this).parent().children(':nth-child(2)').html('<span class="label label-danger">>= 0 and <= '+WP+'</span>');
             $(this).focus();
         }else{
             $(this).parent().children(':nth-child(2)').html('');

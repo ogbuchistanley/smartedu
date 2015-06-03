@@ -54,14 +54,14 @@
                                         <td><?php echo (empty($ExamSubject['Exam']['class_name'])) ? '<span class="label label-danger">nill</span>' : $ExamSubject['Exam']['class_name'];?></td>
                                     </tr>
                                     <tr>
-                                        <th>Marked Status</th>
-                                        <td style="font-size: medium"><?php echo ($ExamSubject['Exam']['exammarked_status_id'] === '2') ? '<span class="label label-danger">Subject Not Marked</span>' : '<span class="label label-success">Subject Marked</span>';?></td>
-                                        <th>Weight Point CA1</th>
+                                        <th>Weight Point C. A</th>
                                         <td><?php echo $ExamSubject['Exam']['ca_weight_point'];?></td>
-                                    </tr>
-                                    <tr>
                                         <th>Weight Point Exam</th>
                                         <td><?php echo $ExamSubject['Exam']['exam_weight_point'];?></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Marked Status</th>
+                                        <td style="font-size: medium"><?php echo ($ExamSubject['Exam']['exammarked_status_id'] === '2') ? '<span class="label label-danger">Subject Not Marked</span>' : '<span class="label label-success">Subject Marked</span>';?></td>
                                         <td colspan="2">
                                             <input type="hidden" id="hidden_WA_value" value="<?php echo $ExamSubject['Exam']['ca_weight_point'].'-'.$ExamSubject['Exam']['exam_weight_point'];?>">
                                         </td>
@@ -102,8 +102,8 @@
                                       <th>Full Name</th>
                                       <th>Gender</th>
                                       <th>Class</th>
-                                      <th>C. A</th>
-                                      <th>Exam</th>
+                                      <th>C. A (<?php echo $ExamSubject['Exam']['ca_weight_point']; ?>)</th>
+                                      <th>Exam (<?php echo $ExamSubject['Exam']['exam_weight_point']; ?>)</th>
                                     </tr>
                                   </thead>
                                   <tbody>
@@ -131,8 +131,8 @@
                                       <th>Full Name</th>
                                       <th>Gender</th>
                                       <th>Class</th>
-                                      <th>C. A</th>
-                                      <th>Exam</th>
+                                      <th>C. A (<?php echo $ExamSubject['Exam']['ca_weight_point']; ?>)</th>
+                                      <th>Exam (<?php echo $ExamSubject['Exam']['exam_weight_point']; ?>)</th>
                                     </tr>
                                   </tfoot>
                                 </table> 

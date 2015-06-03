@@ -200,44 +200,49 @@ $marked_report = $marked_report['marked_report'];
                     <?php endif; ?>
                 </table>
 
-                <table class="table table-bordered">
+                <?php if ($temp): ?>
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>Total Score</th>
+                            <td><?php echo $totalScore; ?></td>
+                            <th>Total Mark Obtainable</th>
+                            <td><?php echo $totalmarkObtainable; ?></td>
+                        </tr>
+                    </table>
+                    <?php
+                        $staff = $TeachersClassModel->find('first', array('conditions' =>
+                            array(
+                                'TeachersClass.class_id' => $temp['class_id'],
+                                'TeachersClass.academic_year_id' => $TermModel->getYearID($temp['academic_term_id']))
+                            )
+                        );
+                        $comment = $RemarkModel->find('first', array('conditions' =>
+                            array(
+                                'Remark.student_id' => $temp['student_id'],
+                                'Remark.academic_term_id' => $temp['academic_term_id'])
+                            )
+                        );
+                        $principal = $EmployeeModel->find('first', array('conditions' => array('Employee.' . $EmployeeModel->primaryKey => $SchoolInfo['principal_id'])));
+                    ?>
+                    <table class="table table-bordered">
+                        <tr style="font-weight:bold; background-color:#CCCCCC;">
+                            <th>Class Teacher</th>
+                            <th>Comment</th>
+                        </tr>
+                        <tr>
+                            <td><?php echo $staff['Employee']['full_name'];?></td>
+                            <td><?php echo !empty($comment) ? $comment['Remark']['class_teacher_remark'] : $temp['student_name'].' is a Good student';?></td>
+                        </tr>
+                        <tr style="font-weight:bold; background-color:#CCCCCC;">
+                            <th>Principal</th>
+                            <th><?php echo $principal['Employee']['full_name'];?></th>
+                        </tr>
+                    </table>
+                <?php else: ?>
                     <tr>
-                        <th>Total Score</th>
-                        <td><?php echo $totalScore; ?></td>
-                        <th>Total Mark Obtainable</th>
-                        <td><?php echo $totalmarkObtainable; ?></td>
+                        <th>No Record Found</th>
                     </tr>
-                </table>
-                <?php
-                    $staff = $TeachersClassModel->find('first', array('conditions' =>
-                        array(
-                            'TeachersClass.class_id' => $temp['class_id'],
-                            'TeachersClass.academic_year_id' => $TermModel->getYearID($temp['academic_term_id']))
-                        )
-                    );
-                    $comment = $RemarkModel->find('first', array('conditions' =>
-                        array(
-                            'Remark.student_id' => $temp['student_id'],
-                            'Remark.academic_term_id' => $temp['academic_term_id'])
-                        )
-                    );
-                    $principal = $EmployeeModel->find('first', array('conditions', array('Employee.employee_id' => $SchoolInfo['principal_id'])));
-                ?>
-                <table class="table table-bordered">
-                    <tr style="font-weight:bold; background-color:#CCCCCC;">
-                        <th>Class Teacher</th>
-                        <th>Comment</th>
-                    </tr>
-                    <tr>
-                        <td><?php echo $staff['Employee']['full_name'];?></td>
-                        <td><?php echo !empty($comment) ? $comment['Remark']['class_teacher_remark'] : $temp['student_name'].' is a Good student';?></td>
-                    </tr>
-                    <tr style="font-weight:bold; background-color:#CCCCCC;">
-                        <th>Principal</th>
-                        <th><?php echo $principal['Employee']['full_name']?></th>
-                    </tr>
-                </table>
-
+                <?php endif; ?>
 
                 <div>
                     <br/><br>

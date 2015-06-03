@@ -22,6 +22,8 @@ $('document').ready(function(){
     submenuCount($('#record_count'));
     //Message Records
     submenuCount($('#message_count'));
+    //Clone Records
+    submenuCount($('#clone_count'));
 
 });
 
