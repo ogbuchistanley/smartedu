@@ -36,12 +36,10 @@ $('document').ready(function(){
 
     //Submission Date
     $('.date_picker').datepicker({
-        minDate: 0,
         changeMonth: true,
         changeYear: true,
-        yearRange: "-0:+10"
+        yearRange: "-2:+10"
     });
-
 
     
     //Add a new row for inputting new record
@@ -59,7 +57,14 @@ $('document').ready(function(){
         new_tr.children(':nth-child(5)').children('input').val('');
         new_tr.children(':nth-child(5)').children('select').val('');
         new_tr.children(':nth-child(6)').children('input').val('');
+        new_tr.children(':nth-child(7)').children('input').val('');
         new_tr.children(':last-child').html('<td><button type="button" class="btn btn-xs btn-danger remove_tr_btn">Remove</button></td>');
+
+        //Assign Date Pickers
+        new_tr.children(':nth-child(6)').children('input').datepicker();
+        new_tr.children(':nth-child(7)').children('input').datepicker();
+        new_tr.children(':nth-child(6)').children('input').attr('placeholder', 'mm/dd/yyyy');
+        new_tr.children(':nth-child(7)').children('input').attr('placeholder', 'mm/dd/yyyy');
     });
     
     //Remove the row added
@@ -133,7 +138,28 @@ $('document').ready(function(){
 
     ////////////////////    Weekly Report Details  ////////////////////////////////////////////////////////////////////////////
     $(document.body).on('click', '#save_weekly_detail_btn', function(){
-        setDeleteIDs();
+        //Validate The C.A Percentage
+        var no = $(this).val().split('_');
+        var cg1_percent = 0;
+        var cg2_percent = 0;
+        $(".ca_percent").each(function(index, element) {
+            //alert(index+'--'+$(element).val());
+            if(index < no[0])
+                cg1_percent += parseInt($(element).val());
+            if(index >= no[0] && index < (no[0] + no[1]))
+                cg2_percent += parseInt($(element).val());
+        });
+        if(cg1_percent !== 100) {
+            $(this).next().html('<h4><span class="label label-danger">The Sum Total of the percentages For The <strong style="text-decoration: underline">First Class Group is '+cg1_percent+'%.</strong> It Must Sum Up To 100%</span></h4>')
+            return false;
+        }else if(cg2_percent !== 100) {
+            $(this).next().html('<h4><span class="label label-danger">The Sum Total of the percentages For The <strong style="text-decoration: underline">Second Class Group is '+cg2_percent+'%.</strong> It Must Sum Up To 100%</span></h4>')
+            return false;
+        }else{
+            setDeleteIDs();
+            $(this).next().html('')
+            return true;
+        }
     });
     
     ////////////////////    Grade Grouping  ////////////////////////////////////////////////////////////////////////////

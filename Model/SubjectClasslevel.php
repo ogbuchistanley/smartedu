@@ -162,4 +162,10 @@ class SubjectClasslevel extends AppModel {
 
         return $query;
     }
+
+    //Cloning of Subjects Assigned to class room form one academic term to the other
+    public function proc_cloneSubjectsAssigned($from, $to){
+        $result = $this->query('CALL `proc_cloneSubjectsAssigned`("'.$from.'", "'.$to.'")');
+        return $result;
+    }
 }

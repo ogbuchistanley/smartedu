@@ -37,7 +37,8 @@ $cakeDescription = __d('app_dev', ':: '.APP_NAME.' :');
     $msg_index = Configure::read('msg_index');
     $attend_index = Configure::read('attend_index');
     $user_index = Configure::read('user_index');
-    
+    $clone_index = Configure::read('clone_index');
+
     //Disable The Links For Parents if user role > 2
     $user_role = Configure::read('user_role');
 
@@ -85,7 +86,7 @@ $cakeDescription = __d('app_dev', ':: '.APP_NAME.' :');
     <link href="<?php echo APP_DIR_ROOT; ?>css/jquery.autocomplete.css" rel="stylesheet">
     <link href="<?php echo APP_DIR_ROOT; ?>css/custom.css" rel="stylesheet">
 
-    <link href="<?php echo APP_DIR_ROOT; ?>images/smartedu-icon.png" rel="shortcut icon">
+    <link href="<?php echo APP_DIR_ROOT, $SchoolInfo['school_logo'];?>" rel="shortcut icon">
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
     <!--[if lt IE 9]>
         <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -125,7 +126,7 @@ $cakeDescription = __d('app_dev', ':: '.APP_NAME.' :');
                     <i class="fa fa-list btn-nav-toggle-responsive text-white"></i>
                 </a>
                 <a class="navbar-brand" href="<?php echo DOMAIN_NAME ?>/dashboard">
-                    <span class="logo small"><?php echo substr(APP_NAME, 0, 5)?><img style="width: 55px; height: 57px;" src="<?php echo APP_DIR_ROOT; ?>images/smartedu-icon.png" /><?php echo substr(APP_NAME, 5); ?></span>
+                    <span class="logo small"><?php echo substr(APP_NAME, 0, 5)?><img style="width: 55px; height: 57px;" src="<?php echo APP_DIR_ROOT, $SchoolInfo['school_logo'];?>" /><?php echo substr(APP_NAME, 5); ?></span>
                 </a>
             </div>
 
@@ -260,7 +261,8 @@ $cakeDescription = __d('app_dev', ':: '.APP_NAME.' :');
                                     <li class="submenu">
                                         <a class="dropdown" href="javascript:void(0)" data-original-title="Assessments"><i class="fa fa-bookmark"></i><span class="hidden-minibar"> Assessments <span class="badge bg-primary pull-right" id="exams_count"></span></span></a>
                                         <ul>
-                                            <li><a href="<?php echo DOMAIN_NAME ?>/weekly_reports/index" data-original-title="Weekly Assessments"><i class="fa fa-tasks"></i><span> Weekly Assessments</span></a></li>
+                                            <li><a href="<?php echo DOMAIN_NAME ?>/weekly_reports/index#report" data-original-title="Weekly Assessments"><i class="fa fa-tasks"></i><span> Weekly Assessments</span></a></li>
+                                            <li><a href="<?php echo DOMAIN_NAME ?>/weekly_reports/index#midterm" data-original-title="Mid-Term Report"><i class="fa fa-book"></i><span> Mid-Term Report</span></a></li>
                                             <?php if($setup_exam): ?>
                                             <li><a href="<?php echo DOMAIN_NAME ?>/exams/index#setupExam" data-original-title="Setup Exams"><i class="fa fa-gear"></i><span> Setup Exams</span></a></li>
                                             <?php endif;?>
@@ -317,7 +319,7 @@ $cakeDescription = __d('app_dev', ':: '.APP_NAME.' :');
                                         <li><a href="<?php echo DOMAIN_NAME ?>/records/class_level" data-original-title="Class Level"><i class="fa fa-trello"></i><span> Class Level</span></a></li>
                                         <li><a href="<?php echo DOMAIN_NAME ?>/records/class_room" data-original-title="Class Rooms"><i class="fa fa-group"></i><span> Class Rooms</span></a></li>
                                         <li><a href="<?php echo DOMAIN_NAME ?>/records/weekly_report" data-original-title="Weekly Reports"><i class="fa fa-bar-chart-o"></i><span> Weekly Reports</span></a></li>
-                                        <li><a href="<?php echo DOMAIN_NAME ?>/records/weeklyrep_detail" data-original-title="Weekly Reports Details"><i class="fa fa-tasks"></i><span> Weekly Report Details</span></a></li>
+                                        <li><a href="<?php echo DOMAIN_NAME ?>/records/weekly_detail" data-original-title="Weekly Reports Details"><i class="fa fa-tasks"></i><span> Weekly Report Details</span></a></li>
                                         <li><a href="<?php echo DOMAIN_NAME ?>/records/subject_group" data-original-title="Subject Group"><i class="fa fa-align-left"></i><span> Subject Groups</span></a></li>
                                         <li><a href="<?php echo DOMAIN_NAME ?>/records/subject" data-original-title="Subject"><i class="fa fa-file-text"></i><span> Subjects</span></a></li>
                                         <li><a href="<?php echo DOMAIN_NAME ?>/records/grade" data-original-title="Grade Grouping"><i class="fa fa-renren"></i><span> Grade Grouping</span></a></li>
@@ -325,6 +327,16 @@ $cakeDescription = __d('app_dev', ':: '.APP_NAME.' :');
                                         <li><a href="<?php //echo DOMAIN_NAME ?>/records/item_bill" data-original-title="Item Bills"><i class="fa fa-money"></i><span> Item Bills</span></a></li-->
                                     </ul>
                                 </li>
+                                <?php endif;?>
+                                <?php if($clone_index): ?>
+                                    <li class="submenu">
+                                        <a class="dropdown" href="javascript:void(0)" data-original-title="Clone Records">
+                                            <i class="fa fa-copy"></i><span class="hidden-minibar"> Clone Records <span class="badge bg-primary pull-right" id="clone_count"></span></span>
+                                        </a>
+                                        <ul>
+                                            <li><a href="<?php echo DOMAIN_NAME ?>/clones/index" data-original-title="Subjects To Class / Teacher"><i class="fa fa-building"></i><span> Subjects To Class / Teacher</span></a></li>
+                                        </ul>
+                                    </li>
                                 <?php endif;?>
                                 <?php if($user_index): ?>
                                     <li><a href="<?php echo DOMAIN_NAME ?>/users/index" data-original-title="Users"><i class="fa fa-user"></i><span> Manage Users</span></a></li>
@@ -354,7 +366,7 @@ $cakeDescription = __d('app_dev', ':: '.APP_NAME.' :');
                                                 <li><a href="<?php echo DOMAIN_NAME ?>/records/weekly_report" data-original-title="Weekly Reports"><i class="fa fa-bar-chart-o"></i><span> Weekly Reports</span></a></li>
                                             <?php endif;?>
                                             <?php if($master_record_id > 5): ?>
-                                                <li><a href="<?php echo DOMAIN_NAME ?>/records/weeklyrep_detail" data-original-title="Weekly Reports Details"><i class="fa fa-tasks"></i><span> Weekly Report Details</span></a></li>
+                                                <li><a href="<?php echo DOMAIN_NAME ?>/records/weekly_detail" data-original-title="Weekly Reports Details"><i class="fa fa-tasks"></i><span> Weekly Report Details</span></a></li>
                                             <?php endif;?>
                                             <?php if($master_record_id > 6 ): ?>
                                                 <li><a href="<?php echo DOMAIN_NAME ?>/records/subject_group" data-original-title="Subject Group"><i class="fa fa-align-left"></i><span> Subject Groups</span></a></li>
@@ -425,8 +437,8 @@ $cakeDescription = __d('app_dev', ':: '.APP_NAME.' :');
                 </div>
 
                 <div class="row">
-                    <div id="msg_box1" class="alert alert-info hide">
-                        <?php echo  $this->Html->image('loader.gif', array('id' => 'msg_box1')); ?>
+                    <div id="msg_box" class="alert alert-info hide">
+                        <?php echo  $this->Html->image('loader.gif', array('id' => 'msg_box')); ?>
                         <span style='color:green; margin:15px; font-size: 18px;'> Loading...</span>
                     </div>
                     <div id="display_message" class="alert alert-info hide">

@@ -32,6 +32,7 @@ class EmployeeNew extends AppModel {
             $mobile_no = $this->data[$this->alias]['mobile_number1'];
             $pass = '123456';//$this->generatePassword();
             $msg = 'Welcome To '.APP_NAME.' Application here is your Username='.$no.' and Password='.$pass.' to access the portal, login via '.DOMAIN_URL;
+            //$this->SendSMS($mobile_no, $msg);
             $msg_email = 'Welcome To '.APP_NAME.' Application here is your <br><br>Username: '.$no.' <br>Password: '.$pass.' <br><br>to access the portal, login via '.DOMAIN_URL;
             $email = $this->data[$this->alias]['email'];
             $name = $this->data[$this->alias]['first_name'] . ' ' . $this->data[$this->alias]['other_name'];
@@ -45,18 +46,17 @@ class EmployeeNew extends AppModel {
             $User->data['User']['image_url'] = $val;
             $User->data['User']['user_role_id'] = 3;
             if($User->save()) {
-                //Update The Employee ID
-                $this->saveField('employee_no', $no);
-
                 //Send SMS
                 $this->SendSMS($mobile_no, $msg);
 
                 //Send Mail
                 $msg_body = 'Find Below your username and password to access the school application portal<br><br>';
-                $msg_body .= $msg_email;;
-                if(!empty($email)){                                 
+                $msg_body .= $msg_email;
+                if(!empty($email)){
                     $this->sendMail($msg_body, 'Login Details', $email, $name);
-                } 
+                }
+                //Update The Employee ID
+                $this->saveField('employee_no', $no);
             }
         }
     }

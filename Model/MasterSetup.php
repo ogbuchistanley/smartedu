@@ -10,4 +10,11 @@ class MasterSetup extends AppModel {
 
     public $displayField = 'master_setup';
 
+    public function getSchoolInfo(){
+        //$EmployeeModel = ClassRegistry::init('Employee');
+        $result = $this->find('first');
+
+        return $result['MasterSetup'];
+    }
+
 }

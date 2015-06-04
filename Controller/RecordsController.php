@@ -143,9 +143,9 @@ class RecordsController extends AppController {
                     $data['classgroup_id'] = ($data_array['classgroup_id'][$i] === '') ? null : $data_array['classgroup_id'][$i];
 
                     $data['classgroup'] = $data_array['classgroup'][$i];
-                    $data['weightageCA1'] = $data_array['weightageCA1'][$i];
-                    $data['weightageCA2'] = $data_array['weightageCA2'][$i];
-                    $data['weightageExam'] = $data_array['weightageExam'][$i];
+                    $data['ca_weight_point'] = $data_array['ca_weight_point'][$i];
+//                    $data['weightageCA2'] = $data_array['weightageCA2'][$i];
+                    $data['exam_weight_point'] = $data_array['exam_weight_point'][$i];
                     if($Classgroup->save($data)){   $count++;  }
                 }
                 //Delete The ID's Checked
@@ -309,7 +309,7 @@ class RecordsController extends AppController {
                     if($this->master_record_id < $this->master_record_count) {
                         $this->MasterSetupModel->id = 1;
                         $this->MasterSetupModel->saveField('master_record_id', 6);
-                        $this->redirect(array('controller' => 'records', 'action' => 'weeklyRep_detail'));
+                        $this->redirect(array('controller' => 'records', 'action' => 'weekly_detail'));
                     }else{
                         $this->set('WeeklyReports', $WeeklyReportSetup->find('all'));
                     }
@@ -324,7 +324,7 @@ class RecordsController extends AppController {
 
 
     /////// Weekly Report Details  Master Record  ////////////////////// 7th Step //////////////////////////////////////////////////////////////
-    public function weeklyrep_detail() {
+    public function weekly_detail() {
         $this->set('title_for_layout', 'Weekly Report Details Records');
         $resultCheck = $this->Acl->check($this->group_alias, 'RecordsController');
         if($resultCheck){

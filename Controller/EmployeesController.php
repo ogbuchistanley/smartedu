@@ -159,10 +159,19 @@ class EmployeesController extends AppController {
             if ($this->request->is(array('post', 'put'))) {
                 $this->Employee->id = $decrypt_employee_id;
                 $data = $this->request->data['Employee'];
+                if(!$data['image_url']['name']){
+                    unset($data['image_url']);
+                }
 
                 if ($this->Employee->save($data)) {
-                    $this->setFlashMessage('The Staff has been Updated', 1);
-
+                    //Uploading The Image Provided
+                    if(isset($data['image_url'])){
+                        if($this->uploadImage($decrypt_employee_id, 'employees', $this->request->data['Employee'])) {
+                            $this->setFlashMessage('The Staff has been Updated.', 1);
+                        }
+                    }else {
+                        $this->setFlashMessage('The Staff has been Updated... But New Image Was Not Uploaded', 1);
+                    }
                     return $this->redirect(array('action' => 'adjust/' . $encrypt_id));
                 } else {
                     $this->setFlashMessage('The Staff could not be saved. Please, try again.', 2);

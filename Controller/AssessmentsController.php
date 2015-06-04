@@ -124,7 +124,7 @@ class AssessmentsController extends AppController {
 
                         $data['student_id'] = $data_array['student_id'][$i];
                         $data['principal_remark'] = ($data_array['principal_remark'][$i] == '') ? 'None' : $data_array['principal_remark'][$i];
-                        $data['class_teacher_remark'] = ($data_array['class_teacher_remark'][$i] == '') ? 'None' : $data_array['class_teacher_remarks'][$i];
+                        $data['class_teacher_remark'] = ($data_array['class_teacher_remark'][$i] == '') ? 'None' : $data_array['class_teacher_remark'][$i];
                         $data['house_master_remark'] = ($data_array['house_master_remark'][$i] == '') ? 'None' : $data_array['house_master_remark'][$i];
                         if ($RemarkModel->save($data)) {
                             $count++;

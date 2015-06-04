@@ -42,7 +42,7 @@ $cakeDescription = __d('app_dev', ':: '.APP_NAME.' :');
 
         <!-- Loading Custom Stylesheets -->    
         <link href="<?php echo APP_DIR_ROOT; ?>css/custom.css" rel="stylesheet">
-        <link href="<?php echo APP_DIR_ROOT; ?>images/icon.png" rel="shortcut icon">
+        <link href="<?php echo APP_DIR_ROOT, $SchoolInfo['school_logo'];?>" rel="shortcut icon">
         <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
         <!--[if lt IE 9]>
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>

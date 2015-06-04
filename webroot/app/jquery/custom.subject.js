@@ -434,8 +434,7 @@ $('document').ready(function(){
                                     <thead><tr>\
                                         <th>#</th>\
                                         <th>Full Name</th>\
-                                        <th>1st C.A ('+obj.WA1+')</th>\
-                                        <th>2nd C.A ('+obj.WA2+')</th>\
+                                        <th>C. A ('+obj.WA+')</th>\
                                         <th>Exam ('+obj.WAExam+')</th>\
                                         <th>Total ('+obj.WATotal+')</th>\
                                         <th>Total (100%)</th>\
@@ -447,8 +446,7 @@ $('document').ready(function(){
                             output += '<tr>\
                                 <td>'+(key + 1)+'</td>\n\
                                 <td>'+value.student_fullname+'</td>\n\
-                                <td>'+value.ca1+'</td>\n\
-                                <td>'+value.ca2+'</td>\n\
+                                <td>'+value.ca+'</td>\n\
                                 <td>'+value.exam+'</td>\n\
                                 <td>'+value.sum_total+'</td>\n\
                                 <td>'+ ((value.sum_total * 100) / obj.WATotal).toFixed(2)+'</td>\n\
@@ -461,7 +459,7 @@ $('document').ready(function(){
                         output += '</tbody>';
                         $('#subjects_view_table').html(output);
                     }else if(obj.Flag === 0){
-                        output += '<tr><th colspan="8">No Record Found</th></tr>';
+                        output += '<tr><th colspan="7">No Record Found</th></tr>';
                         $('#subjects_view_table').html(output);
                     }
                 } catch (exception) {

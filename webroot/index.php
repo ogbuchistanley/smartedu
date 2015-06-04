@@ -58,7 +58,7 @@ if (!defined('APP_DIR')) {
 //Online Path
 //define('CAKE_CORE_INCLUDE_PATH',  DS . 'home' . DS . 'crithink' . DS . 'cakephp' . DS . 'lib');
 define('CAKE_CORE_INCLUDE_PATH', DS . 'Applications' . DS . 'XAMPP' . DS . 'xamppfiles' . DS . 'cakephp' . DS . 'lib');
-//define('CAKE_CORE_INCLUDE_PATH', 'C:' . DS . 'wamp' . DS . 'cakephp' . DS . 'lib');
+//define('CAKE_CORE_INCLUDE_PATH', 'C:' . DS . 'wamp' . DS . 'cake' . DS . 'lib');
 
 /**
  * Editing below this line should NOT be necessary.

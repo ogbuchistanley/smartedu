@@ -165,21 +165,19 @@
                                     <thead>
                                      <tr class="text-white" style="background-color: #999;">
                                         <th colspan="3"></th>
-                                        <th colspan="6" style="text-align: center">Student Score(s) and Grade</th>
-                                        <th colspan="4" style="text-align: center">Weight Point</th>
+                                        <th colspan="5" style="text-align: center">Student Score(s) and Grade</th>
+                                        <th colspan="3" style="text-align: center">Weight Point</th>
                                      </tr>
                                     <tr class="text-white" style="background-color: #999;">
                                       <th>#</th>
                                       <th>Term</th>
                                       <th>Subject Name</th>
-                                      <th>1st C.A</th>
-                                      <th>2nd C.A</th>
+                                      <th>C. A</th>
                                       <th>Exam</th>
                                       <th>Total</th>
                                       <th>Total (100%)</th>
                                       <th>Grades</th>
-                                      <th>1st C.A</th>
-                                      <th>2nd C.A</th>
+                                      <th>C. A</th>
                                       <th>Exam</th>
                                       <th>C.A + Exam Total</th>
                                     </tr>
@@ -191,40 +189,36 @@
                                                 <th></th>
                                                 <th colspan="12"><?php echo $AnnualScoresArray['AcademicTermName'][$j];?></th>
                                             </tr>
-                                            <?php $ca1Sum=0; $ca2Sum=0; $examSum=0; $stdSSum=0; $stdPSum=0;?>
-                                            <?php $wa1Sum=0; $wa2Sum=0; $wexamSum=0; $wSum=0;?>
+                                            <?php $caSum=0; $examSum=0; $stdSSum=0; $stdPSum=0;?>
+                                            <?php $waSum=0; $wexamSum=0; $wSum=0;?>
                                             <?php $i=1; foreach ($AnnualScoresArray[$j] as $TermScore): ?>
                                                 <tr>
                                                    <td><?php echo $i++;?></td>
                                                    <td></td>
                                                    <td><?php echo h($TermScore['subject_name']);?></td>
-                                                   <td><?php $ca1Sum += $TermScore['ca1'];  echo h($TermScore['ca1']);?></td>
-                                                   <td><?php $ca2Sum += $TermScore['ca2'];  echo h($TermScore['ca2']);?></td>
+                                                   <td><?php $caSum += $TermScore['ca'];  echo h($TermScore['ca']);?></td>
                                                    <td><?php $examSum += $TermScore['exam'];  echo h($TermScore['exam']);?></td>
                                                    <td><?php $stdSSum += $TermScore['studentSubjectTotal'];  echo h($TermScore['studentSubjectTotal']);?></td>
                                                    <td><?php $stdPSum += $TermScore['studentPercentTotal'];  echo h($TermScore['studentPercentTotal']);?></td>
                                                    <td><?php echo h($TermScore['grade']);?></td>
-                                                   <td><?php $wa1Sum += $TermScore['weightageCA1'];  echo h($TermScore['weightageCA1']);?></td>
-                                                   <td><?php $wa2Sum += $TermScore['weightageCA2'];  echo h($TermScore['weightageCA2']);?></td>
-                                                   <td><?php $wexamSum += $TermScore['weightageExam'];  echo h($TermScore['weightageExam']);?></td>
+                                                   <td><?php $waSum += $TermScore['ca_weight_point'];  echo h($TermScore['ca_weight_point']);?></td>
+                                                   <td><?php $wexamSum += $TermScore['exam_weight_point'];  echo h($TermScore['exam_weight_point']);?></td>
                                                    <td><?php $wSum += $TermScore['weightageTotal'];  echo h($TermScore['weightageTotal']);?></td>
                                                 </tr>
                                             <?php endforeach; ?>
                                             <tr>
                                                 <th></th>
                                                 <th colspan="2">Term Sub Total</th>
-                                                <th><?php echo $ca1Sum;?></th>
-                                                <th><?php echo $ca2Sum;?></th>
+                                                <th><?php echo $caSum;?></th>
                                                 <th><?php echo $examSum;?></th>
                                                 <th><?php echo $stdSSum;?></th>
                                                 <th><?php echo $stdPSum;?></th>
                                                 <th></th>
-                                                <th><?php echo $wa1Sum;?></th>
-                                                <th><?php echo $wa2Sum;?></th>
+                                                <th><?php echo $waSum;?></th>
                                                 <th><?php echo $wexamSum;?></th>
                                                 <th><?php echo $wSum;?></th>
                                             </tr>
-                                            <tr><th colspan="13"></th></tr>
+                                            <tr><th colspan="11"></th></tr>
                                         <?php endif; ?>
                                      <?php endfor; ?>
                                     </tbody>
@@ -233,14 +227,12 @@
                                       <th>#</th>
                                       <th>Term</th>
                                       <th>Subject Name</th>
-                                      <th>1st C.A</th>
-                                      <th>2nd C.A</th>
+                                      <th>C. A</th>
                                       <th>Exam</th>
                                       <th>Total</th>
                                       <th>Total (100%)</th>
                                       <th>Grades</th>
-                                      <th>1st C.A</th>
-                                      <th>2nd C.A</th>
+                                      <th>C. A</th>
                                       <th>Exam</th>
                                       <th>C.A + Exam Total</th>
                                     </tr>

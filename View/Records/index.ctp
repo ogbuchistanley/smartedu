@@ -1,7 +1,7 @@
-<?php echo $this->Html->script("../app/js/jquery-ui.js", FALSE);?>
 <?php echo $this->Html->script("../app/js/bootstrap-datatables.js", FALSE);?>
 <?php echo $this->Html->script("../app/js/dataTables-custom.js", FALSE);?>
 <?php echo $this->Html->script("../app/js/icheck/icheck.js", FALSE);?>
+<?php echo $this->Html->script("../app/js/jquery-ui.js", FALSE);?>
 <?php echo $this->Html->script("../app/jquery/custom.record.js", FALSE);?>
 
 <?php //$term_id = ClassRegistry::init('AcademicTerm'); ?>
@@ -164,10 +164,12 @@
                                                               ?>
                                                            </td>
                                                             <td style="width: 112px;">
-                                                                <input class="form-control form-cascade-control date_picker" name="data[AcademicTerm][term_begins][]" value="<?php echo h($AcademicTerm['AcademicTerm']['term_begins']);?>">
+                                                                <input class="form-control form-cascade-control date_picker" name="data[AcademicTerm][term_begins][]"
+                                                                       value="<?php echo $this->Utility->formatDate($AcademicTerm['AcademicTerm']['term_begins']);?>">
                                                             </td>
                                                             <td style="width: 112px;">
-                                                                <input class="form-control form-cascade-control date_picker" name="data[AcademicTerm][term_ends][]" value="<?php echo h($AcademicTerm['AcademicTerm']['term_ends']);?>">
+                                                                <input class="form-control form-cascade-control date_picker" name="data[AcademicTerm][term_ends][]"
+                                                                       value="<?php echo $this->Utility->formatDate($AcademicTerm['AcademicTerm']['term_ends']);?>">
                                                             </td>
                                                            <td>
                                                                <input type="checkbox" class="polaris-input delete_ids" value="<?php echo h($AcademicTerm['AcademicTerm']['academic_term_id']);?>">&nbsp;Delete
@@ -226,10 +228,10 @@
                                                               ?>
                                                            </td>
                                                            <td style="width: 112px;">
-                                                               <input class="form-control form-cascade-control date_picker" name="data[AcademicTerm][term_begins][]" value="">
+                                                               <input class="form-control form-cascade-control date_picker" placeholder="mm/dd/yyyy" name="data[AcademicTerm][term_begins][]">
                                                            </td>
                                                             <td style="width: 112px;">
-                                                               <input class="form-control form-cascade-control date_picker" name="data[AcademicTerm][term_ends][]" value="">
+                                                               <input class="form-control form-cascade-control date_picker" placeholder="mm/dd/yyyy" name="data[AcademicTerm][term_ends][]">
                                                            </td>
                                                            <td></td>
                                                            <td></td>

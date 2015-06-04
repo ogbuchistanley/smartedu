@@ -27,11 +27,15 @@ class Sponsor extends AppModel {
     }
     
      public function afterSave($created, $options = array()) {
-         $id = $this->id;
-         $UserModel = ClassRegistry::init('User');
-         $UserModel->id = AuthComponent::user('user_id');
-         $name = trim(strtoupper($this->data[$this->alias]['first_name'] . ' ' . ucwords($this->data[$this->alias]['other_name'])));
-         $UserModel->saveField('display_name', $name);
+        $UserModel = ClassRegistry::init('User');
+        $id = $this->id;
+        $name = trim(strtoupper($this->data[$this->alias]['first_name'] . ' ' . ucwords($this->data[$this->alias]['other_name'])));
+
+        $Parent = $this->query('SELECT b.user_id FROM sponsors a INNER JOIN users b ON a.sponsor_no=b.username WHERE a.sponsor_id="'.$id.'" LIMIT 1');
+        $Parent = array_shift($Parent);
+        
+        $UserModel->id = $Parent['b']['user_id'];
+        $UserModel->saveField('display_name', $name);
 
          //$no = 'emp'. str_pad($id, 4, '0', STR_PAD_LEFT);
          if(isset($this->data[$this->alias]['image_url'])){

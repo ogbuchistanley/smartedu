@@ -49,4 +49,14 @@ class WeeklyReport extends AppModel {
 		AND a.marked_status=1 GROUP BY a.student_id');
 		return $result;
 	}
+
+	//Get all the weekly reports that are due for submission
+	public function getStudentMidTermReport($term_id, $class_id, $student_id){
+		$result = null;
+		$result[0] = $this->query('SELECT a.* FROM weeklyreport_studentdetailsviews a WHERE a.academic_term_id="'.$term_id.'"
+		AND a.class_id="'.$class_id.'" AND a.student_id="'.$student_id.'" AND a.marked_status=1 GROUP BY a.subject_name ORDER BY a.subject_name');
+		$result[1] = $this->query('SELECT MAX(marked_report) as marked_report FROM (SELECT COUNT(a.subject_classlevel_id) AS marked_report FROM weeklyreport_studentdetailsviews a WHERE a.academic_term_id="'.$term_id.'"
+		AND a.class_id="'.$class_id.'" AND a.student_id="'.$student_id.'" AND a.marked_status=1 GROUP BY a.subject_classlevel_id) as marked_report');
+		return $result;
+	}
 }

@@ -155,22 +155,20 @@
                                     <thead>
                                      <tr>
                                         <th colspan="2"></th>
-                                        <th colspan="6" style="text-align: center">Student Score(s) and Grade</th>
-                                        <th colspan="4" style="text-align: center">Weight Point</th>
+                                        <th colspan="5" style="text-align: center">Student Score(s) and Grade</th>
+                                        <th colspan="3" style="text-align: center">Weight Point</th>
                                      </tr>
                                     </thead>
                                     <thead>
                                      <tr>
                                       <th>#</th>
                                       <th>Subject Name</th>
-                                      <th>1st C.A</th>
-                                      <th>2nd C.A</th>
+                                      <th>C. A</th>
                                       <th>Exam</th>
                                       <th>Total</th>
                                       <th>Total (100%)</th>
                                       <th>Grades</th>
-                                      <th>1st C.A</th>
-                                      <th>2nd C.A</th>
+                                      <th>C. A</th>
                                       <th>Exam</th>
                                       <th>C.A + Exam Total</th>
                                     </tr>
@@ -180,15 +178,13 @@
                                      <tr class="gradeA">
                                          <td><?php echo $i++;?></td>
                                          <td><?php echo h($TermScore['subject_name']);?></td>
-                                         <td><?php echo h($TermScore['ca1']);?></td>
-                                         <td><?php echo h($TermScore['ca2']);?></td>
+                                         <td><?php echo h($TermScore['ca']);?></td>
                                          <td><?php echo h($TermScore['exam']);?></td>
                                          <td><?php echo h($TermScore['studentSubjectTotal']);?></td>
                                          <td><?php echo h($TermScore['studentPercentTotal']);?></td>
                                          <td><?php echo h($TermScore['grade']);?></td>
-                                         <td><?php echo h($TermScore['weightageCA1']);?></td>
-                                         <td><?php echo h($TermScore['weightageCA2']);?></td>
-                                         <td><?php echo h($TermScore['weightageExam']);?></td>
+                                         <td><?php echo h($TermScore['ca_weight_point']);?></td>
+                                         <td><?php echo h($TermScore['exam_weight_point']);?></td>
                                          <td><?php echo h($TermScore['weightageTotal']);?></td>
                                      </tr>
                                      <?php endforeach; ?>
@@ -197,14 +193,12 @@
                                      <tr>
                                       <th>#</th>
                                       <th>Subject Name</th>
-                                      <th>1st C.A</th>
-                                      <th>2nd C.A</th>
+                                      <th>C. A</th>
                                       <th>Exam</th>
                                       <th>Total</th>
                                       <th>Total (100%)</th>
                                       <th>Grades</th>
-                                      <th>1st C.A</th>
-                                      <th>2nd C.A</th>
+                                      <th>C. A</th>
                                       <th>Exam</th>
                                       <th>C.A + Exam Total</th>
                                     </tr>

@@ -160,37 +160,37 @@ $('document').ready(function(){
    //});
    
    //When the Edit setup exam button is clicked show the form with the existing values
-   $(document.body).on('click', '.edit_setup_exam_btn', function(){
-        ajax_loading_image($('#msg_box'), ' Loading Contents');
-        var exam_id = $(this).val();
-        $.ajax({
-            type: "POST",
-            url: domain_name+'/exams/get_exam_setup',
-            data: {exam_id:exam_id},
-            success: function(data){
-            //$.post(domain_name+'/exams/get_exam_setup', {exam_id:exam_id}, function(data){
-                try {
-                    var obj = $.parseJSON(data);
-                    $('#edit_exam_id').val(exam_id);
-                    $('#class_id').val(obj.class_id);
-                    $('#weightageCA1').val(obj.weightageCA1);
-                    $('#weightageCA2').val(obj.weightageCA2);
-                    $('#weightageExam').val(obj.weightageExam);
-                    $('#exam_desc').val(obj.exam_desc);
-                    $('#subject_classlevel_id').val(obj.subject_classlevel_id);
-                    $('#setup_exam_modal').modal('show');
-                    ajax_remove_loading_image($('#msg_box'));
-                } catch (exception) {
-                    $('#search_subjects_assigned_table').html(data);
-                }
-                ajax_remove_loading_image($('#msg_box'));
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown) {
-               $('#search_subjects_assigned_table').html(errorThrown);
-                ajax_remove_loading_image($('#msg_box'));
-            }  
-        });
-   });
+   //$(document.body).on('click', '.edit_setup_exam_btn', function(){
+   //     ajax_loading_image($('#msg_box'), ' Loading Contents');
+   //     var exam_id = $(this).val();
+   //     $.ajax({
+   //         type: "POST",
+   //         url: domain_name+'/exams/get_exam_setup',
+   //         data: {exam_id:exam_id},
+   //         success: function(data){
+   //         //$.post(domain_name+'/exams/get_exam_setup', {exam_id:exam_id}, function(data){
+   //             try {
+   //                 var obj = $.parseJSON(data);
+   //                 $('#edit_exam_id').val(exam_id);
+   //                 $('#class_id').val(obj.class_id);
+   //                 $('#weightageCA1').val(obj.weightageCA1);
+   //                 $('#weightageCA2').val(obj.weightageCA2);
+   //                 $('#weightageExam').val(obj.weightageExam);
+   //                 $('#exam_desc').val(obj.exam_desc);
+   //                 $('#subject_classlevel_id').val(obj.subject_classlevel_id);
+   //                 $('#setup_exam_modal').modal('show');
+   //                 ajax_remove_loading_image($('#msg_box'));
+   //             } catch (exception) {
+   //                 $('#search_subjects_assigned_table').html(data);
+   //             }
+   //             ajax_remove_loading_image($('#msg_box'));
+   //         },
+   //         error: function(XMLHttpRequest, textStatus, errorThrown) {
+   //            $('#search_subjects_assigned_table').html(errorThrown);
+   //             ajax_remove_loading_image($('#msg_box'));
+   //         }
+   //     });
+   //});
    
    
    //When the modal form is submitted... setup the exam
@@ -234,7 +234,7 @@ $('document').ready(function(){
                     var output = '<caption><strong>Results Output From The Search ::: <u>'+term+' Academic Year</u></strong></caption>\
                                     <thead><tr>\
                                         <th colspan="4"></th>\
-                                        <th colspan="3" style="text-align: center">Weight Point</th>\
+                                        <th colspan="2" style="text-align: center">Weight Point</th>\
                                         <th colspan="3"></th>\
                                     </tr></thead>\
                                     <thead><tr>\
@@ -242,8 +242,7 @@ $('document').ready(function(){
                                         <th>Subjects</th>\
                                         <th>Classlevels</th>\
                                         <th>Class Rooms</th>\
-                                        <th>C.A. 1</th>\
-                                        <th>C.A. 2</th>\
+                                        <th>C.A</th>\
                                         <th>Exam</th>\
                                         <th>Exam Status</th>\
                                         <th colspan="2" style="text-align: center">Action</th>\
@@ -256,9 +255,8 @@ $('document').ready(function(){
                                 <td>'+value.subject_name+'</td>\n\
                                 <td>'+value.classlevel+'</td>\
                                 <td>'+value.class_name+'</td>\n\
-                                <td>'+value.weightageCA1+'</td>\n\
-                                <td>'+value.weightageCA2+'</td>\n\
-                                <td>'+value.weightageExam+'</td>\n\
+                                <td>'+value.ca_weight_point+'</td>\n\
+                                <td>'+value.exam_weight_point+'</td>\n\
                                 <td  style="font-size: medium">'+value.exammarked_status+'</td>';
                                 if(value.exammarked_status_id === '2'){
                                     output += '<td>\n\
@@ -280,7 +278,7 @@ $('document').ready(function(){
                         output += '</tbody>';
                         $('#search_subjects_scores_table').html(output);
                     }else if(obj.Flag === 0){
-                        output += '<tr><th colspan="10">No Subject Assigned To You In The Class Level</th></tr>';
+                        output += '<tr><th colspan="9">No Subject Assigned To You In The Class Level</th></tr>';
                         $('#search_subjects_scores_table').html(output);
                     }
                 } catch (exception) {
@@ -299,21 +297,19 @@ $('document').ready(function(){
     });
     
     
-    //Validate Weight Point
-    $(document.body).on('blur', '.ca1_value, .ca2_value, .exam_value', function(){
-        var ca1 = parseInt($(this).val());
+    //Validate The C.A Weight Point
+    $(document.body).on('blur', '.ca_value, .exam_value', function(){
+        var ca = parseInt($(this).val());
         var WA = $('#hidden_WA_value').val().split('-');
         var classes = $(this).attr('class').split(' ');
         var value = '';
-        if(classes[3] === 'ca1_value'){
+        if(classes[2] === 'ca_value'){
             value = WA[0];
-        }else if(classes[3] === 'ca2_value'){
+        }else if(classes[2] === 'exam_value'){
             value = WA[1];
-        }else if(classes[3] === 'exam_value'){
-            value = WA[2];
         }
-        if(ca1 > parseInt(value) || ca1 < 0){
-            $(this).parent().children(':nth-child(2)').html('<span class="label label-danger">>= 0 and <='+value+'</span>');
+        if(ca > parseInt(value) || ca < 0){
+            $(this).parent().children(':nth-child(2)').html('<span class="label label-danger">>= 0 and <= '+value+'</span>');
             $(this).focus();
         }else{
             $(this).parent().children(':nth-child(2)').html('');
@@ -323,11 +319,7 @@ $('document').ready(function(){
     //Validate The Weekly Report Form Before Submission
     $(document.body).on('click', '#exam_form_btn', function(){
         var validate = '';
-        $('.ca1_value').each(function(){
-            var span = $(this).next('span').html();
-            validate += span;
-        });
-        $('.ca2_value').each(function(){
+        $('.ca_value').each(function(){
             var span = $(this).next('span').html();
             validate += span;
         });

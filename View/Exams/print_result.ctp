@@ -32,7 +32,6 @@
                 width:300px;
                 z-index:2;
             }
-
             #apDi1 {
                 position:absolute;
                 left:0px;
@@ -101,8 +100,7 @@
                                     <tr style="font-weight:bold; background-color:#CCCCCC;">
                                         <th width="8">#</th>
                                         <th width="232">Subject</th>
-                                        <th width="80">1st</th>
-                                        <th width="80">2nd</th>
+                                        <th width="80">C. A</th>
                                         <th width="80">Exam</th>
                                         <th width="80">Score</th>
                                         <th width="100">(100%)</th>
@@ -115,9 +113,8 @@
                                         <?php if($i === 1): ?>
                                             <tr style="font-weight:bold; background-color:#CCCCCC;">
                                                 <th colspan="2">Scores Obtainable</th>
-                                                <th><?php echo h($TermScore['weightageCA1']);?></th>
-                                                <th><?php echo h($TermScore['weightageCA2']);?></th>
-                                                <th><?php echo h($TermScore['weightageExam']);?></th>
+                                                <th><?php echo h($TermScore['ca_weight_point']);?></th>
+                                                <th><?php echo h($TermScore['exam_weight_point']);?></th>
                                                 <th><?php echo intval(h($TermScore['weightageTotal']));?></th>
                                                 <th colspan="3"></th>
                                             </tr>
@@ -125,8 +122,7 @@
                                         <tr style="background-color: #F2F0F0 !important;" style="font-weight:bold">
                                             <td><?php echo $i++;?></td>
                                             <td><?php echo h($TermScore['subject_name']);?></td>
-                                            <td><?php echo h($TermScore['ca1']);?></td>
-                                            <td><?php echo h($TermScore['ca2']);?></td>
+                                            <td><?php echo h($TermScore['ca']);?></td>
                                             <td><?php echo h($TermScore['exam']);?></td>
                                             <td><?php echo intval(h($TermScore['studentSubjectTotal']));?></td>
                                             <td><?php echo h($TermScore['studentPercentTotal']);?></td>
@@ -139,8 +135,7 @@
                                     <tr style="font-weight:bold; background-color:#CCCCCC;">
                                         <th width="8">#</th>
                                         <th width="232">Subject</th>
-                                        <th width="80">1st C.A</th>
-                                        <th width="80">2nd C.A</th>
+                                        <th width="80">C. A</th>
                                         <th width="80">Exam</th>
                                         <th width="80">Score</th>
                                         <th width="100">(100%)</th>

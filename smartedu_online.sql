@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.2.7.1
+-- version 4.0.10.7
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 14, 2015 at 09:08 PM
--- Server version: 5.6.20
--- PHP Version: 5.5.15
+-- Generation Time: May 20, 2015 at 01:36 PM
+-- Server version: 5.5.42-cll
+-- PHP Version: 5.4.23
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `smartedu`
+-- Database: `smartedu_smartedu`
 --
 
 DELIMITER $$
@@ -25,7 +25,7 @@ DELIMITER $$
 -- Procedures
 --
 DROP PROCEDURE IF EXISTS `proc_annualClassPositionViews`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_annualClassPositionViews`(IN `ClassID` INT, IN `AcademicYearID` INT)
+CREATE DEFINER=`smartedu`@`localhost` PROCEDURE `proc_annualClassPositionViews`(IN `ClassID` INT, IN `AcademicYearID` INT)
 BEGIN
 	#Create a Temporary Table to Hold The Values
 	DROP TEMPORARY TABLE IF EXISTS AnnualClassPositionResultTable;
@@ -133,7 +133,7 @@ BEGIN
 END$$
 
 DROP PROCEDURE IF EXISTS `proc_assignSubject2Classlevels`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_assignSubject2Classlevels`(IN `LevelID` INT, `TermID` INT, `SubjectIDs` VARCHAR(225))
+CREATE DEFINER=`smartedu`@`localhost` PROCEDURE `proc_assignSubject2Classlevels`(IN `LevelID` INT, `TermID` INT, `SubjectIDs` VARCHAR(225))
 BEGIN 
 	DECLARE done1 BOOLEAN DEFAULT FALSE;
 	DECLARE ClassID INT;
@@ -155,7 +155,7 @@ BEGIN
 END$$
 
 DROP PROCEDURE IF EXISTS `proc_assignSubject2Classrooms`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_assignSubject2Classrooms`(IN `ClassID` INT, `LevelID` INT, `TermID` INT, `SubjectIDs` VARCHAR(225))
+CREATE DEFINER=`smartedu`@`localhost` PROCEDURE `proc_assignSubject2Classrooms`(IN `ClassID` INT, `LevelID` INT, `TermID` INT, `SubjectIDs` VARCHAR(225))
 BEGIN 
 	#Create a Temporary Table to Hold The Values
 	DROP TEMPORARY TABLE IF EXISTS SubjectTemp;
@@ -225,7 +225,7 @@ BEGIN
 END$$
 
 DROP PROCEDURE IF EXISTS `proc_assignSubject2Students`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_assignSubject2Students`(IN `subjectClasslevelID` INT)
+CREATE DEFINER=`smartedu`@`localhost` PROCEDURE `proc_assignSubject2Students`(IN `subjectClasslevelID` INT)
 BEGIN 
 	SELECT classlevel_id, class_id, academic_term_id 
 	INTO @ClassLevelID, @ClassID, @AcademicTermID 
@@ -264,7 +264,7 @@ BEGIN
 END$$
 
 DROP PROCEDURE IF EXISTS `proc_examsDetailsReportViews`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_examsDetailsReportViews`(IN `AcademicID` INT, IN `TypeID` INT)
+CREATE DEFINER=`smartedu`@`localhost` PROCEDURE `proc_examsDetailsReportViews`(IN `AcademicID` INT, IN `TypeID` INT)
 BEGIN
 	-- Create Temporary Table
 	DROP TEMPORARY TABLE IF EXISTS ExamsDetailsResultTable;
@@ -369,7 +369,7 @@ BEGIN
 END$$
 
 DROP PROCEDURE IF EXISTS `proc_insertAttendDetails`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_insertAttendDetails`(IN `AttendID` INT, `StudentIDS` VARCHAR(225))
+CREATE DEFINER=`smartedu`@`localhost` PROCEDURE `proc_insertAttendDetails`(IN `AttendID` INT, `StudentIDS` VARCHAR(225))
 BEGIN
 	# Delete The Record if it exists
 	SELECT COUNT(*) INTO @Exist FROM attend_details WHERE attend_id=AttendID;
@@ -398,7 +398,7 @@ BEGIN
 END$$
 
 DROP PROCEDURE IF EXISTS `proc_insertWeeklyReportDetail`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_insertWeeklyReportDetail`(IN `WeeklyReportID` INT)
+CREATE DEFINER=`smartedu`@`localhost` PROCEDURE `proc_insertWeeklyReportDetail`(IN `WeeklyReportID` INT)
 BEGIN
 	# Delete The Record if it exists
 	SELECT weekly_detail_setup_id, subject_classlevel_id, marked_status, notification_status 
@@ -421,7 +421,7 @@ BEGIN
 END$$
 
 DROP PROCEDURE IF EXISTS `proc_processExams`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_processExams`(IN `TermID` INT)
+CREATE DEFINER=`smartedu`@`localhost` PROCEDURE `proc_processExams`(IN `TermID` INT)
 BEGIN 
 	Block0: BEGIN								
 		-- Delete the exams details record for that term if its has not been marked already
@@ -495,7 +495,7 @@ BEGIN
 END$$
 
 DROP PROCEDURE IF EXISTS `proc_processItemVariable`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_processItemVariable`(IN `ItemVariableID` INT)
+CREATE DEFINER=`smartedu`@`localhost` PROCEDURE `proc_processItemVariable`(IN `ItemVariableID` INT)
 BEGIN
 	SELECT item_id, student_id, class_id, academic_term_id, price 
 	INTO @ItemID, @StudentID, @ClassID, @AcademicTermID, @Price 
@@ -551,7 +551,7 @@ BEGIN
 END$$
 
 DROP PROCEDURE IF EXISTS `proc_processTerminalFees`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_processTerminalFees`(IN `ProcessID` INT)
+CREATE DEFINER=`smartedu`@`localhost` PROCEDURE `proc_processTerminalFees`(IN `ProcessID` INT)
 BEGIN
 	SELECT academic_term_id 
 	INTO @AcademicTermID 
@@ -586,7 +586,7 @@ BEGIN
 END$$
 
 DROP PROCEDURE IF EXISTS `proc_terminalClassPositionViews`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_terminalClassPositionViews`(IN `cla_id` INT, IN `term_id` INT)
+CREATE DEFINER=`smartedu`@`localhost` PROCEDURE `proc_terminalClassPositionViews`(IN `cla_id` INT, IN `term_id` INT)
 Block0: BEGIN
 	SET @Output = 0;
     SET @Average = 0;
@@ -684,7 +684,7 @@ END Block0$$
 -- Functions
 --
 DROP FUNCTION IF EXISTS `func_annualExamsViews`$$
-CREATE DEFINER=`root`@`localhost` FUNCTION `func_annualExamsViews`(`StudentID` INT, `AcademicYearID` INT) RETURNS int(11)
+CREATE DEFINER=`smartedu`@`localhost` FUNCTION `func_annualExamsViews`(`StudentID` INT, `AcademicYearID` INT) RETURNS int(11)
 BEGIN
 	SET @Output = 0;
 	#Create a Temporary Table to Hold The Values
@@ -774,7 +774,7 @@ BEGIN
 END$$
 
 DROP FUNCTION IF EXISTS `fun_getAttendSummary`$$
-CREATE DEFINER=`root`@`localhost` FUNCTION `fun_getAttendSummary`(TermID INT, ClassID INT) RETURNS int(11)
+CREATE DEFINER=`smartedu`@`localhost` FUNCTION `fun_getAttendSummary`(TermID INT, ClassID INT) RETURNS int(11)
 Block0: BEGIN
 	SET @Output = 0;
 	#Create a Temporary Table to Hold The Values
@@ -810,7 +810,7 @@ Block0: BEGIN
 END Block0$$
 
 DROP FUNCTION IF EXISTS `fun_getClassHeadTutor`$$
-CREATE DEFINER=`root`@`localhost` FUNCTION `fun_getClassHeadTutor`(ClassLevelID INT, YearID INT) RETURNS int(3)
+CREATE DEFINER=`smartedu`@`localhost` FUNCTION `fun_getClassHeadTutor`(ClassLevelID INT, YearID INT) RETURNS int(3)
     DETERMINISTIC
 Block0: BEGIN
 	SET @Output = 0;
@@ -861,7 +861,7 @@ Block0: BEGIN
 END Block0$$
 
 DROP FUNCTION IF EXISTS `fun_getClasslevelSub`$$
-CREATE DEFINER=`root`@`localhost` FUNCTION `fun_getClasslevelSub`(`TermID` INT, `LevelID` INT) RETURNS int(11)
+CREATE DEFINER=`smartedu`@`localhost` FUNCTION `fun_getClasslevelSub`(`TermID` INT, `LevelID` INT) RETURNS int(11)
     DETERMINISTIC
 Block0: BEGIN
 	SET @Output = 0;
@@ -914,7 +914,7 @@ Block0: BEGIN
 END Block0$$
 
 DROP FUNCTION IF EXISTS `fun_getSubjectClasslevel`$$
-CREATE DEFINER=`root`@`localhost` FUNCTION `fun_getSubjectClasslevel`(`term_id` INT) RETURNS int(11)
+CREATE DEFINER=`smartedu`@`localhost` FUNCTION `fun_getSubjectClasslevel`(`term_id` INT) RETURNS int(11)
     DETERMINISTIC
 Block0: BEGIN
 	SET @Output = 0;
@@ -979,19 +979,19 @@ Block0: BEGIN
 END Block0$$
 
 DROP FUNCTION IF EXISTS `getCurrentTermID`$$
-CREATE DEFINER=`root`@`localhost` FUNCTION `getCurrentTermID`() RETURNS int(11)
+CREATE DEFINER=`smartedu`@`localhost` FUNCTION `getCurrentTermID`() RETURNS int(11)
 BEGIN
 	RETURN (SELECT academic_term_id FROM academic_terms WHERE term_status_id=1 LIMIT 1);
 END$$
 
 DROP FUNCTION IF EXISTS `getCurrentYearID`$$
-CREATE DEFINER=`root`@`localhost` FUNCTION `getCurrentYearID`() RETURNS int(11)
+CREATE DEFINER=`smartedu`@`localhost` FUNCTION `getCurrentYearID`() RETURNS int(11)
 BEGIN
 	RETURN (SELECT academic_year_id FROM academic_years WHERE year_status_id=1 LIMIT 1);	
 END$$
 
 DROP FUNCTION IF EXISTS `SPLIT_STR`$$
-CREATE DEFINER=`root`@`localhost` FUNCTION `SPLIT_STR`(
+CREATE DEFINER=`smartedu`@`localhost` FUNCTION `SPLIT_STR`(
 	  x VARCHAR(255),
 	  delim VARCHAR(12),
 	  pos INT
@@ -1010,7 +1010,7 @@ DELIMITER ;
 
 DROP TABLE IF EXISTS `academic_terms`;
 CREATE TABLE IF NOT EXISTS `academic_terms` (
-`academic_term_id` int(11) NOT NULL,
+  `academic_term_id` int(11) NOT NULL AUTO_INCREMENT,
   `academic_term` varchar(50) DEFAULT NULL,
   `academic_year_id` int(11) unsigned DEFAULT NULL,
   `term_status_id` int(11) unsigned DEFAULT NULL,
@@ -1021,7 +1021,11 @@ CREATE TABLE IF NOT EXISTS `academic_terms` (
   `term_begins` date DEFAULT NULL,
   `term_ends` date DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`academic_term_id`),
+  KEY `academic_year_id` (`academic_year_id`),
+  KEY `term_status_id` (`term_status_id`),
+  KEY `term_type_id` (`term_type_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
@@ -1041,11 +1045,13 @@ INSERT INTO `academic_terms` (`academic_term_id`, `academic_term`, `academic_yea
 
 DROP TABLE IF EXISTS `academic_years`;
 CREATE TABLE IF NOT EXISTS `academic_years` (
-`academic_year_id` int(11) unsigned NOT NULL,
+  `academic_year_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `academic_year` varchar(50) DEFAULT NULL,
   `year_status_id` int(11) unsigned DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`academic_year_id`),
+  KEY `year_status_id` (`year_status_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
@@ -1064,21 +1070,22 @@ INSERT INTO `academic_years` (`academic_year_id`, `academic_year`, `year_status_
 
 DROP TABLE IF EXISTS `acos`;
 CREATE TABLE IF NOT EXISTS `acos` (
-`id` int(10) NOT NULL,
+  `id` int(10) NOT NULL AUTO_INCREMENT,
   `parent_id` int(10) DEFAULT NULL,
   `model` varchar(255) DEFAULT NULL,
   `foreign_key` int(10) DEFAULT NULL,
   `alias` varchar(255) DEFAULT NULL,
   `lft` int(10) DEFAULT NULL,
-  `rght` int(10) DEFAULT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=157 ;
+  `rght` int(10) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=168 ;
 
 --
 -- Dumping data for table `acos`
 --
 
 INSERT INTO `acos` (`id`, `parent_id`, `model`, `foreign_key`, `alias`, `lft`, `rght`) VALUES
-(1, NULL, NULL, NULL, 'controllers', 1, 312),
+(1, NULL, NULL, NULL, 'controllers', 1, 334),
 (2, 1, NULL, NULL, 'AcademicTermsController', 2, 5),
 (3, 2, NULL, NULL, 'ajax_get_terms', 3, 4),
 (4, 1, NULL, NULL, 'AcademicYearsController', 6, 7),
@@ -1173,67 +1180,78 @@ INSERT INTO `acos` (`id`, `parent_id`, `model`, `foreign_key`, `alias`, `lft`, `
 (93, 88, NULL, NULL, 'sendOne', 183, 184),
 (94, 88, NULL, NULL, 'search_student_classlevel', 185, 186),
 (95, 88, NULL, NULL, 'encrypt', 187, 188),
-(96, 1, NULL, NULL, 'RecordsController', 190, 213),
+(96, 1, NULL, NULL, 'RecordsController', 190, 217),
 (97, 96, NULL, NULL, 'deleteIDs', 191, 192),
 (98, 96, NULL, NULL, 'academic_year', 193, 194),
 (99, 96, NULL, NULL, 'index', 195, 196),
 (100, 96, NULL, NULL, 'class_group', 197, 198),
 (101, 96, NULL, NULL, 'class_level', 199, 200),
 (102, 96, NULL, NULL, 'class_room', 201, 202),
-(103, 96, NULL, NULL, 'subject_group', 203, 204),
-(104, 96, NULL, NULL, 'subject', 205, 206),
-(105, 96, NULL, NULL, 'grade', 207, 208),
-(106, 96, NULL, NULL, 'item', 209, 210),
-(107, 96, NULL, NULL, 'item_bill', 211, 212),
-(108, 1, NULL, NULL, 'SetupsController', 214, 217),
-(109, 108, NULL, NULL, 'setup', 215, 216),
-(110, 1, NULL, NULL, 'SponsorsController', 218, 233),
-(111, 110, NULL, NULL, 'autoComplete', 219, 220),
-(112, 110, NULL, NULL, 'validate_form', 221, 222),
-(113, 110, NULL, NULL, 'index', 223, 224),
-(114, 110, NULL, NULL, 'register', 225, 226),
-(115, 110, NULL, NULL, 'view', 227, 228),
-(116, 110, NULL, NULL, 'adjust', 229, 230),
-(117, 110, NULL, NULL, 'delete', 231, 232),
-(118, 1, NULL, NULL, 'StudentsClassesController', 234, 241),
-(119, 118, NULL, NULL, 'assign', 235, 236),
-(120, 118, NULL, NULL, 'search', 237, 238),
-(121, 118, NULL, NULL, 'search_all', 239, 240),
-(122, 1, NULL, NULL, 'StudentsController', 242, 257),
-(123, 122, NULL, NULL, 'validate_form', 243, 244),
-(124, 122, NULL, NULL, 'index', 245, 246),
-(125, 122, NULL, NULL, 'view', 247, 248),
-(126, 122, NULL, NULL, 'register', 249, 250),
-(127, 122, NULL, NULL, 'adjust', 251, 252),
-(128, 122, NULL, NULL, 'delete', 253, 254),
-(129, 122, NULL, NULL, 'statusUpdate', 255, 256),
-(130, 1, NULL, NULL, 'SubjectsController', 258, 293),
-(131, 130, NULL, NULL, 'ajax_get_subjects', 259, 260),
-(132, 130, NULL, NULL, 'add2class', 261, 262),
-(133, 130, NULL, NULL, 'assign', 263, 264),
-(134, 130, NULL, NULL, 'validateIfExist', 265, 266),
-(135, 130, NULL, NULL, 'search_all', 267, 268),
-(136, 130, NULL, NULL, 'assign_tutor', 269, 270),
-(137, 130, NULL, NULL, 'search_assigned', 271, 272),
-(138, 130, NULL, NULL, 'modify_assign', 273, 274),
-(139, 130, NULL, NULL, 'delete_assign', 275, 276),
-(140, 130, NULL, NULL, 'search_students', 277, 278),
-(141, 130, NULL, NULL, 'updateStudentsSubjects', 279, 280),
-(142, 130, NULL, NULL, 'index', 281, 282),
-(143, 130, NULL, NULL, 'search_assigned2Staff', 283, 284),
-(144, 130, NULL, NULL, 'search_students_subjects', 285, 286),
-(145, 130, NULL, NULL, 'updateStudentsStaffSubjects', 287, 288),
-(146, 130, NULL, NULL, 'search_subject', 289, 290),
-(147, 130, NULL, NULL, 'view', 291, 292),
-(148, 1, NULL, NULL, 'UsersController', 294, 311),
-(149, 148, NULL, NULL, 'login', 295, 296),
-(150, 148, NULL, NULL, 'logout', 297, 298),
-(151, 148, NULL, NULL, 'index', 299, 300),
-(152, 148, NULL, NULL, 'register', 301, 302),
-(153, 148, NULL, NULL, 'forget_password', 303, 304),
-(154, 148, NULL, NULL, 'adjust', 305, 306),
-(155, 148, NULL, NULL, 'change', 307, 308),
-(156, 148, NULL, NULL, 'statusUpdate', 309, 310);
+(103, 96, NULL, NULL, 'weekly_report', 203, 204),
+(104, 96, NULL, NULL, 'weekly_detail', 205, 206),
+(105, 96, NULL, NULL, 'subject_group', 207, 208),
+(106, 96, NULL, NULL, 'subject', 209, 210),
+(107, 96, NULL, NULL, 'grade', 211, 212),
+(108, 96, NULL, NULL, 'item', 213, 214),
+(109, 96, NULL, NULL, 'item_bill', 215, 216),
+(110, 1, NULL, NULL, 'SetupsController', 218, 221),
+(111, 110, NULL, NULL, 'setup', 219, 220),
+(112, 1, NULL, NULL, 'SponsorsController', 222, 237),
+(113, 112, NULL, NULL, 'autoComplete', 223, 224),
+(114, 112, NULL, NULL, 'validate_form', 225, 226),
+(115, 112, NULL, NULL, 'index', 227, 228),
+(116, 112, NULL, NULL, 'register', 229, 230),
+(117, 112, NULL, NULL, 'view', 231, 232),
+(118, 112, NULL, NULL, 'adjust', 233, 234),
+(119, 112, NULL, NULL, 'delete', 235, 236),
+(120, 1, NULL, NULL, 'StudentsClassesController', 238, 245),
+(121, 120, NULL, NULL, 'assign', 239, 240),
+(122, 120, NULL, NULL, 'search', 241, 242),
+(123, 120, NULL, NULL, 'search_all', 243, 244),
+(124, 1, NULL, NULL, 'StudentsController', 246, 261),
+(125, 124, NULL, NULL, 'validate_form', 247, 248),
+(126, 124, NULL, NULL, 'index', 249, 250),
+(127, 124, NULL, NULL, 'view', 251, 252),
+(128, 124, NULL, NULL, 'register', 253, 254),
+(129, 124, NULL, NULL, 'adjust', 255, 256),
+(130, 124, NULL, NULL, 'delete', 257, 258),
+(131, 124, NULL, NULL, 'statusUpdate', 259, 260),
+(132, 1, NULL, NULL, 'SubjectsController', 262, 299),
+(133, 132, NULL, NULL, 'ajax_get_subjects', 263, 264),
+(134, 132, NULL, NULL, 'add2class', 265, 266),
+(135, 132, NULL, NULL, 'search_assign', 267, 268),
+(136, 132, NULL, NULL, 'assign', 269, 270),
+(137, 132, NULL, NULL, 'search_assignlevel', 271, 272),
+(138, 132, NULL, NULL, 'assign_level', 273, 274),
+(139, 132, NULL, NULL, 'search_all', 275, 276),
+(140, 132, NULL, NULL, 'assign_tutor', 277, 278),
+(141, 132, NULL, NULL, 'search_assigned', 279, 280),
+(142, 132, NULL, NULL, 'delete_assign', 281, 282),
+(143, 132, NULL, NULL, 'search_students', 283, 284),
+(144, 132, NULL, NULL, 'updateStudentsSubjects', 285, 286),
+(145, 132, NULL, NULL, 'index', 287, 288),
+(146, 132, NULL, NULL, 'search_assigned2Staff', 289, 290),
+(147, 132, NULL, NULL, 'search_students_subjects', 291, 292),
+(148, 132, NULL, NULL, 'updateStudentsStaffSubjects', 293, 294),
+(149, 132, NULL, NULL, 'search_subject', 295, 296),
+(150, 132, NULL, NULL, 'view', 297, 298),
+(151, 1, NULL, NULL, 'UsersController', 300, 317),
+(152, 151, NULL, NULL, 'login', 301, 302),
+(153, 151, NULL, NULL, 'logout', 303, 304),
+(154, 151, NULL, NULL, 'index', 305, 306),
+(155, 151, NULL, NULL, 'register', 307, 308),
+(156, 151, NULL, NULL, 'forget_password', 309, 310),
+(157, 151, NULL, NULL, 'adjust', 311, 312),
+(158, 151, NULL, NULL, 'change', 313, 314),
+(159, 151, NULL, NULL, 'statusUpdate', 315, 316),
+(160, 1, NULL, NULL, 'WeeklyReportsController', 318, 333),
+(161, 160, NULL, NULL, 'index', 319, 320),
+(162, 160, NULL, NULL, 'report', 321, 322),
+(163, 160, NULL, NULL, 'scores', 323, 324),
+(164, 160, NULL, NULL, 'save_scores', 325, 326),
+(165, 160, NULL, NULL, 'view', 327, 328),
+(166, 160, NULL, NULL, 'send', 329, 330),
+(167, 160, NULL, NULL, 'print_report', 331, 332);
 
 -- --------------------------------------------------------
 
@@ -1243,13 +1261,14 @@ INSERT INTO `acos` (`id`, `parent_id`, `model`, `foreign_key`, `alias`, `lft`, `
 
 DROP TABLE IF EXISTS `aros`;
 CREATE TABLE IF NOT EXISTS `aros` (
-`id` int(10) NOT NULL,
+  `id` int(10) NOT NULL AUTO_INCREMENT,
   `parent_id` int(10) DEFAULT NULL,
   `model` varchar(255) DEFAULT NULL,
   `foreign_key` int(10) DEFAULT NULL,
   `alias` varchar(255) DEFAULT NULL,
   `lft` int(10) DEFAULT NULL,
-  `rght` int(10) DEFAULT NULL
+  `rght` int(10) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
@@ -1272,13 +1291,15 @@ INSERT INTO `aros` (`id`, `parent_id`, `model`, `foreign_key`, `alias`, `lft`, `
 
 DROP TABLE IF EXISTS `aros_acos`;
 CREATE TABLE IF NOT EXISTS `aros_acos` (
-`id` int(10) NOT NULL,
+  `id` int(10) NOT NULL AUTO_INCREMENT,
   `aro_id` int(10) NOT NULL,
   `aco_id` int(10) NOT NULL,
   `_create` varchar(2) NOT NULL DEFAULT '0',
   `_read` varchar(2) NOT NULL DEFAULT '0',
   `_update` varchar(2) NOT NULL DEFAULT '0',
-  `_delete` varchar(2) NOT NULL DEFAULT '0'
+  `_delete` varchar(2) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `ARO_ACO_KEY` (`aro_id`,`aco_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=49 ;
 
 --
@@ -1289,18 +1310,18 @@ INSERT INTO `aros_acos` (`id`, `aro_id`, `aco_id`, `_create`, `_read`, `_update`
 (1, 1, 1, '-1', '-1', '-1', '-1'),
 (2, 2, 1, '-1', '-1', '-1', '-1'),
 (3, 2, 67, '1', '1', '1', '1'),
-(4, 2, 125, '1', '1', '1', '1'),
-(5, 2, 115, '1', '1', '1', '1'),
-(6, 2, 116, '0', '0', '1', '0'),
-(7, 2, 113, '-1', '-1', '-1', '-1'),
+(4, 2, 127, '1', '1', '1', '1'),
+(5, 2, 117, '1', '1', '1', '1'),
+(6, 2, 118, '0', '0', '1', '0'),
+(7, 2, 115, '-1', '-1', '-1', '-1'),
 (8, 3, 1, '-1', '-1', '-1', '-1'),
 (9, 3, 31, '1', '1', '1', '1'),
 (10, 3, 49, '1', '1', '1', '1'),
-(11, 3, 130, '1', '1', '1', '1'),
-(12, 3, 132, '-1', '-1', '-1', '-1'),
+(11, 3, 132, '1', '1', '1', '1'),
+(12, 3, 134, '-1', '-1', '-1', '-1'),
 (13, 3, 52, '-1', '-1', '-1', '-1'),
 (14, 3, 13, '1', '1', '1', '1'),
-(15, 3, 125, '1', '1', '1', '1'),
+(15, 3, 127, '1', '1', '1', '1'),
 (16, 3, 27, '1', '1', '1', '1'),
 (17, 3, 30, '1', '1', '1', '1'),
 (18, 3, 46, '0', '0', '1', '0'),
@@ -1311,25 +1332,25 @@ INSERT INTO `aros_acos` (`id`, `aro_id`, `aco_id`, `_create`, `_read`, `_update`
 (23, 4, 49, '1', '1', '1', '1'),
 (24, 4, 52, '-1', '-1', '-1', '-1'),
 (25, 4, 24, '1', '1', '1', '1'),
-(26, 4, 122, '1', '1', '1', '1'),
-(27, 4, 124, '1', '1', '1', '1'),
-(28, 4, 125, '1', '1', '1', '1'),
-(29, 4, 126, '1', '0', '0', '0'),
-(30, 4, 127, '0', '0', '1', '0'),
-(31, 4, 128, '0', '0', '0', '-1'),
-(32, 4, 110, '1', '1', '1', '1'),
-(33, 4, 113, '1', '1', '1', '1'),
-(34, 4, 115, '1', '1', '1', '1'),
-(35, 4, 114, '1', '0', '0', '0'),
-(36, 4, 116, '0', '0', '1', '0'),
-(37, 4, 117, '0', '0', '0', '-1'),
+(26, 4, 124, '1', '1', '1', '1'),
+(27, 4, 126, '1', '1', '1', '1'),
+(28, 4, 127, '1', '1', '1', '1'),
+(29, 4, 128, '1', '0', '0', '0'),
+(30, 4, 129, '0', '0', '1', '0'),
+(31, 4, 130, '0', '0', '0', '-1'),
+(32, 4, 112, '1', '1', '1', '1'),
+(33, 4, 115, '1', '1', '1', '1'),
+(34, 4, 117, '1', '1', '1', '1'),
+(35, 4, 116, '1', '0', '0', '0'),
+(36, 4, 118, '0', '0', '1', '0'),
+(37, 4, 119, '0', '0', '0', '-1'),
 (38, 4, 40, '1', '1', '1', '1'),
 (39, 4, 43, '1', '1', '1', '1'),
 (40, 4, 44, '1', '0', '0', '0'),
 (41, 4, 46, '0', '0', '1', '0'),
 (42, 4, 47, '0', '0', '0', '-1'),
-(43, 4, 130, '1', '1', '1', '1'),
-(44, 4, 132, '1', '1', '1', '1'),
+(43, 4, 132, '1', '1', '1', '1'),
+(44, 4, 134, '1', '1', '1', '1'),
 (45, 4, 76, '1', '1', '1', '1'),
 (46, 4, 81, '-1', '-1', '-1', '-1'),
 (47, 6, 1, '1', '1', '1', '1'),
@@ -1343,9 +1364,29 @@ INSERT INTO `aros_acos` (`id`, `aro_id`, `aco_id`, `_create`, `_read`, `_update`
 
 DROP TABLE IF EXISTS `assessments`;
 CREATE TABLE IF NOT EXISTS `assessments` (
-`assessment_id` int(11) NOT NULL,
+  `assessment_id` int(11) NOT NULL AUTO_INCREMENT,
   `student_id` int(11) NOT NULL,
-  `academic_term_id` int(11) NOT NULL
+  `academic_term_id` int(11) NOT NULL,
+  PRIMARY KEY (`assessment_id`),
+  KEY `student_id` (`student_id`),
+  KEY `academic_term_id` (`academic_term_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `attends`
+--
+
+DROP TABLE IF EXISTS `attends`;
+CREATE TABLE IF NOT EXISTS `attends` (
+  `attend_id` int(11) NOT NULL AUTO_INCREMENT,
+  `class_id` int(11) NOT NULL,
+  `employee_id` int(11) NOT NULL,
+  `academic_term_id` int(11) NOT NULL,
+  `attend_date` date NOT NULL,
+  PRIMARY KEY (`attend_id`),
+  KEY `class_id` (`class_id`,`employee_id`,`academic_term_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -1357,7 +1398,8 @@ CREATE TABLE IF NOT EXISTS `assessments` (
 DROP TABLE IF EXISTS `attend_details`;
 CREATE TABLE IF NOT EXISTS `attend_details` (
   `student_id` int(11) DEFAULT NULL,
-  `attend_id` int(11) DEFAULT NULL
+  `attend_id` int(11) DEFAULT NULL,
+  KEY `student_id` (`student_id`,`attend_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -1381,31 +1423,17 @@ CREATE TABLE IF NOT EXISTS `attend_headerviews` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `attends`
---
-
-DROP TABLE IF EXISTS `attends`;
-CREATE TABLE IF NOT EXISTS `attends` (
-`attend_id` int(11) NOT NULL,
-  `class_id` int(11) NOT NULL,
-  `employee_id` int(11) NOT NULL,
-  `academic_term_id` int(11) NOT NULL,
-  `attend_date` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `classgroups`
 --
 
 DROP TABLE IF EXISTS `classgroups`;
 CREATE TABLE IF NOT EXISTS `classgroups` (
-`classgroup_id` int(11) unsigned NOT NULL,
+  `classgroup_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `classgroup` varchar(50) DEFAULT NULL,
   `weightageCA1` int(10) unsigned DEFAULT '0',
   `weightageCA2` int(10) unsigned DEFAULT '0',
-  `weightageExam` int(10) unsigned DEFAULT '0'
+  `weightageExam` int(10) unsigned DEFAULT '0',
+  PRIMARY KEY (`classgroup_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
@@ -1424,9 +1452,11 @@ INSERT INTO `classgroups` (`classgroup_id`, `classgroup`, `weightageCA1`, `weigh
 
 DROP TABLE IF EXISTS `classlevels`;
 CREATE TABLE IF NOT EXISTS `classlevels` (
-`classlevel_id` int(11) NOT NULL,
+  `classlevel_id` int(11) NOT NULL AUTO_INCREMENT,
   `classlevel` varchar(50) DEFAULT NULL,
-  `classgroup_id` int(11) unsigned DEFAULT NULL
+  `classgroup_id` int(11) unsigned DEFAULT NULL,
+  PRIMARY KEY (`classlevel_id`),
+  KEY `classgroup_id` (`classgroup_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
@@ -1444,32 +1474,19 @@ INSERT INTO `classlevels` (`classlevel_id`, `classlevel`, `classgroup_id`) VALUE
 -- --------------------------------------------------------
 
 --
--- Stand-in structure for view `classroom_subjectregisterviews`
---
-DROP VIEW IF EXISTS `classroom_subjectregisterviews`;
-CREATE TABLE IF NOT EXISTS `classroom_subjectregisterviews` (
-`student_id` int(11)
-,`class_id` int(11)
-,`subject_classlevel_id` int(11)
-,`subject_id` int(11)
-,`academic_term_id` int(11)
-,`examstatus_id` int(11)
-,`classlevel_id` int(11)
-,`class_name` varchar(50)
-);
--- --------------------------------------------------------
-
---
 -- Table structure for table `classrooms`
 --
 
 DROP TABLE IF EXISTS `classrooms`;
 CREATE TABLE IF NOT EXISTS `classrooms` (
-`class_id` int(11) NOT NULL,
+  `class_id` int(11) NOT NULL AUTO_INCREMENT,
   `class_name` varchar(50) DEFAULT NULL,
   `classlevel_id` int(11) DEFAULT NULL,
   `class_size` int(11) DEFAULT NULL,
-  `class_status_id` int(3) DEFAULT '1'
+  `class_status_id` int(3) DEFAULT '1',
+  PRIMARY KEY (`class_id`),
+  KEY `classlevel_id` (`classlevel_id`),
+  KEY `class_status_id` (`class_status_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=31 ;
 
 --
@@ -1502,13 +1519,30 @@ INSERT INTO `classrooms` (`class_id`, `class_name`, `classlevel_id`, `class_size
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `classroom_subjectregisterviews`
+--
+DROP VIEW IF EXISTS `classroom_subjectregisterviews`;
+CREATE TABLE IF NOT EXISTS `classroom_subjectregisterviews` (
+`student_id` int(11)
+,`class_id` int(11)
+,`subject_classlevel_id` int(11)
+,`subject_id` int(11)
+,`academic_term_id` int(11)
+,`examstatus_id` int(11)
+,`classlevel_id` int(11)
+,`class_name` varchar(50)
+);
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `countries`
 --
 
 DROP TABLE IF EXISTS `countries`;
 CREATE TABLE IF NOT EXISTS `countries` (
-`country_id` int(3) unsigned NOT NULL,
-  `country_name` varchar(50) DEFAULT NULL
+  `country_id` int(3) unsigned NOT NULL AUTO_INCREMENT,
+  `country_name` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`country_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=234 ;
 
 --
@@ -1753,66 +1787,16 @@ INSERT INTO `countries` (`country_id`, `country_name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `employee_qualifications`
---
-
-DROP TABLE IF EXISTS `employee_qualifications`;
-CREATE TABLE IF NOT EXISTS `employee_qualifications` (
-`employee_qualification_id` int(11) NOT NULL,
-  `employee_id` int(11) NOT NULL,
-  `institution` text NOT NULL,
-  `qualification` varchar(150) DEFAULT NULL,
-  `date_from` date DEFAULT NULL,
-  `date_to` date DEFAULT NULL,
-  `qualification_date` date DEFAULT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
-
---
--- Dumping data for table `employee_qualifications`
---
-
-INSERT INTO `employee_qualifications` (`employee_qualification_id`, `employee_id`, `institution`, `qualification`, `date_from`, `date_to`, `qualification_date`) VALUES
-(1, 1, '', '', NULL, NULL, NULL),
-(2, 1, '', '', NULL, NULL, NULL);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `employee_types`
---
-
-DROP TABLE IF EXISTS `employee_types`;
-CREATE TABLE IF NOT EXISTS `employee_types` (
-`employee_type_id` int(11) unsigned NOT NULL,
-  `employee_type` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
-
---
--- Dumping data for table `employee_types`
---
-
-INSERT INTO `employee_types` (`employee_type_id`, `employee_type`) VALUES
-(1, 'Applicants'),
-(2, 'Auxiliary'),
-(3, 'Contract'),
-(4, 'Corper/IT'),
-(5, 'OutSourced Staffs'),
-(6, 'Permanent'),
-(7, 'Retired/Pension');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `employees`
 --
 
 DROP TABLE IF EXISTS `employees`;
 CREATE TABLE IF NOT EXISTS `employees` (
-`employee_id` int(11) NOT NULL,
+  `employee_id` int(11) NOT NULL AUTO_INCREMENT,
   `employee_no` varchar(10) NOT NULL,
   `salutation_id` int(10) unsigned DEFAULT NULL,
-  `first_name` varchar(100) DEFAULT NULL,
   `other_name` varchar(100) DEFAULT NULL,
+  `first_name` varchar(100) DEFAULT NULL,
   `gender` varchar(10) DEFAULT NULL,
   `birth_date` date DEFAULT NULL,
   `image_url` varchar(50) DEFAULT NULL,
@@ -1834,119 +1818,124 @@ CREATE TABLE IF NOT EXISTS `employees` (
   `status_id` int(2) NOT NULL DEFAULT '1',
   `created_by` int(11) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`employee_id`),
+  KEY `salutation_id` (`salutation_id`),
+  KEY `employee_type_id` (`employee_type_id`),
+  KEY `state_id` (`state_id`),
+  KEY `local_govt_id` (`local_govt_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=68 ;
 
 --
 -- Dumping data for table `employees`
 --
 
-INSERT INTO `employees` (`employee_id`, `employee_no`, `salutation_id`, `first_name`, `other_name`, `gender`, `birth_date`, `image_url`, `contact_address`, `employee_type_id`, `mobile_number1`, `mobile_number2`, `marital_status`, `country_id`, `state_id`, `local_govt_id`, `email`, `next_ofkin_name`, `next_ofkin_number`, `next_ofkin_relate`, `form_of_identity`, `identity_no`, `identity_expiry_date`, `status_id`, `created_by`, `created_at`, `updated_at`) VALUES
-(1, 'STF0001', 1, 'Dotun', 'Kudaisi', 'Male', '2015-03-03', 'employees/1.png', 'iofdi', NULL, '08052139529', '', 'Single', 140, 5, NULL, 'dotman2kx@gmail.com', 'djj', '08019189298', 'jdfhjdfh', '', '', '1970-01-01', 1, 1, '2015-03-19 02:16:59', '2015-05-14 10:32:50'),
-(3, 'STF0003', 1, 'Abikoye', 'J.', NULL, NULL, NULL, NULL, NULL, '07035376722', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 06:40:35', '2015-03-21 10:03:50'),
-(4, 'STF0004', 1, 'ADEGOKE', 'M.', 'Male', NULL, NULL, NULL, NULL, '07033895470', '', 'Single', NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 06:42:34', '2015-05-14 19:00:41'),
-(5, 'STF0005', 1, 'ADEYEMI', 'B.', NULL, NULL, NULL, NULL, NULL, '08068891010', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 06:47:32', '2015-03-21 13:03:47'),
-(6, 'STF0006', 1, 'ADISA', 'S.', NULL, NULL, NULL, NULL, NULL, '08062915800', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 06:48:42', '2015-03-21 13:03:05'),
-(7, 'STF0007', 1, 'AIGBOMIAN', 'A.', NULL, NULL, NULL, NULL, NULL, '07062371754', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 06:49:44', '2015-03-21 13:02:06'),
-(8, 'STF0008', 1, 'AJAYI', 'G.', NULL, NULL, NULL, NULL, NULL, '08060132925', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 06:53:19', '2015-03-21 13:01:37'),
-(9, 'STF0009', 1, 'AKINROLABU', 'B.', NULL, NULL, NULL, NULL, NULL, '08068578087', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 06:57:44', '2015-03-21 13:00:42'),
-(10, 'STF0010', 1, 'AKINYEMI', 'D.', NULL, NULL, NULL, NULL, NULL, '08034497060', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 06:58:39', '2015-03-21 12:57:44'),
-(11, 'STF0011', 4, 'ALIU', 'Z.', NULL, NULL, NULL, NULL, NULL, '08033426503', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 06:59:28', '2015-03-21 12:55:51'),
-(12, 'STF0012', 1, 'ANJORIN', 'A.', NULL, NULL, NULL, NULL, NULL, '08130113255', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 07:00:59', '2015-03-21 12:54:52'),
-(13, 'STF0013', 1, 'ARAOYE', 'O.', NULL, NULL, NULL, NULL, NULL, '08028274106', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 07:02:00', '2015-03-21 12:53:50'),
-(14, 'STF0014', 3, 'AWOGBADE', 'A.', NULL, NULL, NULL, NULL, NULL, '07064818193', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 07:03:50', '2015-03-21 12:53:17'),
-(15, 'STF0015', 4, 'AYEGBUSI', 'ADERONKE', NULL, NULL, NULL, NULL, NULL, '08033877116', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 07:05:29', '2015-03-21 12:51:24'),
-(16, 'STF0016', 4, 'AZEEZ', 'B.', NULL, NULL, NULL, NULL, NULL, '08063533814', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 07:06:03', '2015-03-21 12:50:48'),
-(17, 'STF0017', 4, 'AZIAKA', 'D.', NULL, NULL, NULL, NULL, NULL, '08061697111', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 07:07:31', '2015-03-21 12:46:34'),
-(18, 'STF0018', 4, 'BABALOLA', 'A.', NULL, NULL, NULL, NULL, NULL, '07031233376', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 07:08:50', '2015-03-21 12:41:48'),
-(19, 'STF0019', 4, 'BABATOPE', 'F.', NULL, NULL, NULL, NULL, NULL, '08023629883', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 07:12:59', '2015-03-21 12:42:21'),
-(20, 'STF0020', 4, 'BADERIN', '.', NULL, NULL, NULL, NULL, NULL, '08027282096', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 07:14:15', '2015-03-21 12:29:19'),
-(21, 'STF0021', 1, 'BETIKU', 'INCREASE ', NULL, NULL, NULL, NULL, NULL, '08035714860', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 07:14:58', '2015-03-21 12:25:18'),
-(22, 'STF0022', 1, 'DADA', 'B.', NULL, NULL, NULL, NULL, NULL, '08023979489', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 07:17:57', '2015-03-21 12:23:51'),
-(23, 'STF0023', 4, 'EKPUH', 'M.', NULL, NULL, NULL, NULL, NULL, '08104942760', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 07:36:44', '2015-03-21 12:21:37'),
-(24, 'STF0024', 1, 'EKUNBOYEJO', 'E.', NULL, NULL, NULL, NULL, NULL, '08038321559', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 07:37:49', '2015-03-21 12:11:50'),
-(25, 'STF0025', 1, 'EWERE', 'L.', NULL, NULL, NULL, NULL, NULL, '08160535011', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 07:39:13', '2015-03-21 12:08:48'),
-(26, 'STF0026', 1, 'FAKOLUJO', 'E. ', NULL, NULL, NULL, NULL, NULL, '07057546505', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 07:39:46', '2015-03-21 11:54:01'),
-(27, 'STF0027', 1, 'FAMAKINWA', 'J.', NULL, NULL, NULL, NULL, NULL, '07067834982', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 07:46:36', '2015-03-21 11:41:46'),
-(28, 'STF0028', 1, 'GBADAMOSI', 'ABIODUN', NULL, NULL, NULL, NULL, NULL, '08027524466', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 07:50:51', '2015-03-21 11:37:09'),
-(29, 'STF0029', 1, 'IBITAYO', 'M.', NULL, NULL, NULL, NULL, NULL, '08038330145', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 07:53:51', '2015-03-21 11:31:42'),
-(30, 'STF0030', 3, 'IKEME', 'N.', NULL, NULL, NULL, NULL, NULL, '08137895592', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 07:57:25', '2015-03-21 11:28:57'),
-(32, 'STF0032', 4, 'JOSEPH', 'F.', NULL, NULL, NULL, NULL, NULL, '07060828677', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 08:03:17', '2015-03-21 11:24:48'),
-(33, 'STF0033', 1, 'KOLORUKO', 'L.', NULL, NULL, NULL, NULL, NULL, '08064797801', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 08:08:36', '2015-03-21 11:22:18'),
-(34, 'STF0034', 1, 'LIADI', 'A.', NULL, NULL, NULL, NULL, NULL, '08062601861', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 08:10:38', '2015-03-21 11:19:14'),
-(35, 'STF0035', 1, 'MEMUD', 'OLANREWAJU', NULL, NULL, NULL, NULL, NULL, '08053603925', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 08:11:09', '2015-03-21 11:08:32'),
-(36, 'STF0036', 1, 'MUDASIRU', 'T.', NULL, NULL, NULL, NULL, NULL, '08060933502', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 08:15:50', '2015-03-21 11:05:51'),
-(38, 'STF0038', 3, 'NOAH', 'F.', NULL, NULL, NULL, NULL, NULL, '08067297449', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2015-03-21 11:46:14', '2015-03-21 10:52:19'),
-(39, 'STF0039', 1, 'NOSIKE', 'D.', NULL, NULL, NULL, NULL, NULL, '08063095009', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2015-03-21 12:00:40', '2015-03-21 11:00:40'),
-(40, 'STF0040', 1, 'ADEOGUN', '.', NULL, NULL, NULL, NULL, NULL, '08135469418', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-21 02:12:36', '2015-03-21 13:12:36'),
-(41, 'STF0041', 1, 'NWANI', ' J.', NULL, NULL, NULL, NULL, NULL, '07066363009', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-21 05:09:36', '2015-03-21 16:09:37'),
-(42, 'STF0042', 1, 'NWANKWO', 'U.', NULL, NULL, NULL, NULL, NULL, '08068345230', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-21 05:10:54', '2015-03-21 16:10:54'),
-(43, 'STF0043', 2, 'OBAJINMI', ' B.', NULL, NULL, NULL, NULL, NULL, '07041144695', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-21 05:12:34', '2015-03-21 16:19:07'),
-(44, 'STF0044', 3, 'OBIANO', 'C.', NULL, NULL, NULL, NULL, NULL, '08037687230', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-21 05:13:13', '2015-03-21 16:13:13'),
-(45, 'STF0045', 3, 'OGUNBOWALE', 'A.', NULL, NULL, NULL, NULL, NULL, '08034656573', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-21 05:15:41', '2015-03-21 16:15:41'),
-(46, 'STF0046', 4, 'OGUNLEYE', 'M.', NULL, NULL, NULL, NULL, NULL, '08035824686', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-21 05:22:15', '2015-03-21 16:22:16'),
-(47, 'STF0047', 3, 'OGUNSOLA', 'M.', NULL, NULL, NULL, NULL, NULL, '07064500449', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-21 05:24:14', '2015-03-21 16:24:14'),
-(48, 'STF0048', 4, 'OJENIYI', 'A.', NULL, NULL, NULL, NULL, NULL, '08062253157', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-21 05:26:32', '2015-03-21 16:26:33'),
-(49, 'STF0049', 1, 'OJETUNDE', 'S.', NULL, NULL, NULL, NULL, NULL, '08025532237', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-21 05:27:16', '2015-03-21 16:27:16'),
-(50, 'STF0050', 1, 'OJO', 'T.', NULL, NULL, NULL, NULL, NULL, '08036284758', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-21 05:27:56', '2015-03-21 16:27:56'),
-(51, 'STF0051', 4, 'OKECHUKWU-OMOLUABI', 'B.', NULL, NULL, NULL, NULL, NULL, '08069277582', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-21 05:30:43', '2015-03-21 16:30:43'),
-(52, 'STF0052', 3, 'OKINI, ', 'I.', NULL, NULL, NULL, NULL, NULL, '07069524725', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-21 05:31:48', '2015-03-21 16:31:48'),
-(53, 'STF0053', 3, 'OLAKANLE', 'O.', NULL, NULL, NULL, NULL, NULL, '08062690908', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-21 05:32:40', '2015-03-21 16:32:41'),
-(54, 'STF0054', 4, 'OLATUNDE', 'T.', NULL, NULL, NULL, NULL, NULL, '08035059758', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-21 05:44:30', '2015-03-21 16:44:30'),
-(55, 'STF0055', 1, 'OLAWOLE', 'O.', NULL, NULL, NULL, NULL, NULL, '08035059087', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-21 05:47:53', '2015-03-21 16:47:53'),
-(56, 'STF0056', 1, 'ORIMOLADE', 'K.', NULL, NULL, NULL, NULL, NULL, '08035484885', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-21 05:48:44', '2015-03-21 16:48:44'),
-(57, 'STF0057', 4, 'OWADOYE ', 'A.', NULL, NULL, NULL, NULL, NULL, '08034387875', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-21 05:49:38', '2015-03-21 16:49:38'),
-(58, 'STF0058', 4, 'SOKOYA', 'T.', NULL, NULL, NULL, NULL, NULL, '08167452006', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-21 05:50:21', '2015-03-21 16:50:21'),
-(59, 'STF0059', 4, 'TEMURU', 'S.', NULL, NULL, NULL, NULL, NULL, '08027315354', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-21 05:53:25', '2015-03-21 16:53:25'),
-(60, 'STF0060', 1, 'UADEMEVBO', 'O.', NULL, NULL, NULL, NULL, NULL, '07033473699', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-21 05:55:03', '2015-03-21 16:55:03'),
-(61, 'STF0061', 1, 'UDOKPORO', 'L.', NULL, NULL, NULL, NULL, NULL, '08029087555', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-21 05:55:54', '2015-03-21 16:55:54'),
-(62, 'STF0062', 1, 'UMAR-MUHAMMED', 'A.', NULL, NULL, NULL, NULL, NULL, '07062052814', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-21 05:57:28', '2015-03-21 17:04:56'),
-(63, 'STF0063', 3, 'USHIE', 'G.', NULL, NULL, NULL, NULL, NULL, '08038703859', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-21 05:59:08', '2015-03-21 16:59:08'),
-(64, 'STF0064', 1, 'Okafor', 'Emmanuel', NULL, NULL, NULL, NULL, NULL, '08061539278', NULL, NULL, NULL, NULL, NULL, 'nondefyde@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-22 02:15:37', '2015-03-22 13:15:37'),
-(65, 'STF0065', 3, 'Salau', '.', NULL, NULL, NULL, NULL, NULL, '08128560399', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-24 08:52:59', '2015-03-24 07:52:59'),
-(66, 'STF0066', 1, 'ZIWORITIN', 'Ebikabo-Owei', NULL, NULL, NULL, NULL, NULL, '07062522236', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, 43, '2015-03-25 11:46:52', '2015-03-25 10:46:52'),
-(67, 'STF0067', 4, 'SU', '.', NULL, NULL, NULL, NULL, NULL, '08077863953', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-26 09:19:43', '2015-03-26 08:19:43');
+INSERT INTO `employees` (`employee_id`, `employee_no`, `salutation_id`, `other_name`, `first_name`, `gender`, `birth_date`, `image_url`, `contact_address`, `employee_type_id`, `mobile_number1`, `mobile_number2`, `marital_status`, `country_id`, `state_id`, `local_govt_id`, `email`, `next_ofkin_name`, `next_ofkin_number`, `next_ofkin_relate`, `form_of_identity`, `identity_no`, `identity_expiry_date`, `status_id`, `created_by`, `created_at`, `updated_at`) VALUES
+(1, 'STF0001', 1, 'Kudaisi', 'Dotun', 'Male', '2015-03-03', 'employees/1.png', 'iofdi', NULL, '08052139529', '', 'Single', 140, 5, NULL, 'dotman2kx@gmail.com', 'djj', '08019189298', 'jdfhjdfh', '', '', '1970-01-01', 1, 1, '2015-03-19 02:16:59', '2015-03-24 16:05:02'),
+(3, 'STF0003', 1, 'J.', 'Abikoye', NULL, NULL, NULL, NULL, NULL, '07035376722', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 06:40:35', '2015-03-21 10:03:50'),
+(4, 'STF0004', 1, 'M.', 'ADEGOKE', NULL, NULL, NULL, NULL, NULL, '07033895470', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 06:42:34', '2015-03-21 13:08:24'),
+(5, 'STF0005', 1, 'B.', 'ADEYEMI', NULL, NULL, NULL, NULL, NULL, '08068891010', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 06:47:32', '2015-03-21 13:03:47'),
+(6, 'STF0006', 1, 'S.', 'ADISA', NULL, NULL, NULL, NULL, NULL, '08062915800', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 06:48:42', '2015-03-21 13:03:05'),
+(7, 'STF0007', 1, 'A.', 'AIGBOMIAN', NULL, NULL, NULL, NULL, NULL, '07062371754', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 06:49:44', '2015-03-21 13:02:06'),
+(8, 'STF0008', 1, 'G.', 'AJAYI', NULL, NULL, NULL, NULL, NULL, '08060132925', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 06:53:19', '2015-03-21 13:01:37'),
+(9, 'STF0009', 1, 'B.', 'AKINROLABU', NULL, NULL, NULL, NULL, NULL, '08068578087', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 06:57:44', '2015-03-21 13:00:42'),
+(10, 'STF0010', 1, 'D.', 'AKINYEMI', NULL, NULL, NULL, NULL, NULL, '08034497060', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 06:58:39', '2015-03-21 12:57:44'),
+(11, 'STF0011', 4, 'Z.', 'ALIU', NULL, NULL, NULL, NULL, NULL, '08033426503', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 06:59:28', '2015-03-21 12:55:51'),
+(12, 'STF0012', 1, 'A.', 'ANJORIN', NULL, NULL, NULL, NULL, NULL, '08130113255', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 07:00:59', '2015-03-21 12:54:52'),
+(13, 'STF0013', 1, 'O.', 'ARAOYE', NULL, NULL, NULL, NULL, NULL, '08028274106', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 07:02:00', '2015-03-21 12:53:50'),
+(14, 'STF0014', 3, 'A.', 'AWOGBADE', NULL, NULL, NULL, NULL, NULL, '07064818193', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 07:03:50', '2015-03-21 12:53:17'),
+(15, 'STF0015', 4, 'ADERONKE', 'AYEGBUSI', NULL, NULL, NULL, NULL, NULL, '08033877116', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 07:05:29', '2015-03-21 12:51:24'),
+(16, 'STF0016', 4, 'B.', 'AZEEZ', NULL, NULL, NULL, NULL, NULL, '08063533814', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 07:06:03', '2015-03-21 12:50:48'),
+(17, 'STF0017', 4, 'D.', 'AZIAKA', NULL, NULL, NULL, NULL, NULL, '08061697111', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 07:07:31', '2015-03-21 12:46:34'),
+(18, 'STF0018', 4, 'A.', 'BABALOLA', NULL, NULL, NULL, NULL, NULL, '07031233376', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 07:08:50', '2015-03-21 12:41:48'),
+(19, 'STF0019', 4, 'F.', 'BABATOPE', NULL, NULL, NULL, NULL, NULL, '08023629883', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 07:12:59', '2015-03-21 12:42:21'),
+(20, 'STF0020', 4, '.', 'BADERIN', NULL, NULL, NULL, NULL, NULL, '08027282096', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 07:14:15', '2015-03-21 12:29:19'),
+(21, 'STF0021', 1, 'INCREASE ', 'BETIKU', NULL, NULL, NULL, NULL, NULL, '08035714860', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 07:14:58', '2015-03-21 12:25:18'),
+(22, 'STF0022', 1, 'B.', 'DADA', NULL, NULL, NULL, NULL, NULL, '08023979489', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 07:17:57', '2015-03-21 12:23:51'),
+(23, 'STF0023', 4, 'M.', 'EKPUH', NULL, NULL, NULL, NULL, NULL, '08104942760', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 07:36:44', '2015-03-21 12:21:37'),
+(24, 'STF0024', 1, 'E.', 'EKUNBOYEJO', NULL, NULL, NULL, NULL, NULL, '08038321559', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 07:37:49', '2015-03-21 12:11:50'),
+(25, 'STF0025', 1, 'L.', 'EWERE', NULL, NULL, NULL, NULL, NULL, '08160535011', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 07:39:13', '2015-03-21 12:08:48'),
+(26, 'STF0026', 1, 'E. ', 'FAKOLUJO', NULL, NULL, NULL, NULL, NULL, '07057546505', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 07:39:46', '2015-03-21 11:54:01'),
+(27, 'STF0027', 1, 'J.', 'FAMAKINWA', NULL, NULL, NULL, NULL, NULL, '07067834982', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 07:46:36', '2015-03-21 11:41:46'),
+(28, 'STF0028', 1, 'ABIODUN', 'GBADAMOSI', NULL, NULL, NULL, NULL, NULL, '08027524466', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 07:50:51', '2015-03-21 11:37:09'),
+(29, 'STF0029', 1, 'M.', 'IBITAYO', NULL, NULL, NULL, NULL, NULL, '08038330145', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 07:53:51', '2015-03-21 11:31:42'),
+(30, 'STF0030', 3, 'N.', 'IKEME', NULL, NULL, NULL, NULL, NULL, '08137895592', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 07:57:25', '2015-03-21 11:28:57'),
+(32, 'STF0032', 4, 'F.', 'JOSEPH', NULL, NULL, NULL, NULL, NULL, '07060828677', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 08:03:17', '2015-03-21 11:24:48'),
+(33, 'STF0033', 1, 'L.', 'KOLORUKO', NULL, NULL, NULL, NULL, NULL, '08064797801', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 08:08:36', '2015-03-21 11:22:18'),
+(34, 'STF0034', 1, 'A.', 'LIADI', NULL, NULL, NULL, NULL, NULL, '08062601861', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 08:10:38', '2015-03-21 11:19:14'),
+(35, 'STF0035', 1, 'OLANREWAJU', 'MEMUD', NULL, NULL, NULL, NULL, NULL, '08053603925', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 08:11:09', '2015-03-21 11:08:32'),
+(36, 'STF0036', 1, 'T.', 'MUDASIRU', NULL, NULL, NULL, NULL, NULL, '08060933502', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-19 08:15:50', '2015-03-21 11:05:51'),
+(38, 'STF0038', 3, 'F.', 'NOAH', NULL, NULL, NULL, NULL, NULL, '08067297449', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2015-03-21 11:46:14', '2015-03-21 10:52:19'),
+(39, 'STF0039', 1, 'D.', 'NOSIKE', NULL, NULL, NULL, NULL, NULL, '08063095009', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2015-03-21 12:00:40', '2015-03-21 11:00:40'),
+(40, 'STF0040', 1, '.', 'ADEOGUN', NULL, NULL, NULL, NULL, NULL, '08135469418', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-21 02:12:36', '2015-03-21 13:12:36'),
+(41, 'STF0041', 1, ' J.', 'NWANI', NULL, NULL, NULL, NULL, NULL, '07066363009', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-21 05:09:36', '2015-03-21 16:09:37'),
+(42, 'STF0042', 1, 'U.', 'NWANKWO', NULL, NULL, NULL, NULL, NULL, '08068345230', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-21 05:10:54', '2015-03-21 16:10:54'),
+(43, 'STF0043', 2, ' B.', 'OBAJINMI', NULL, NULL, NULL, NULL, NULL, '07041144695', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-21 05:12:34', '2015-03-21 16:19:07'),
+(44, 'STF0044', 3, 'C.', 'OBIANO', NULL, NULL, NULL, NULL, NULL, '08037687230', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-21 05:13:13', '2015-03-21 16:13:13'),
+(45, 'STF0045', 3, 'A.', 'OGUNBOWALE', NULL, NULL, NULL, NULL, NULL, '08034656573', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-21 05:15:41', '2015-03-21 16:15:41'),
+(46, 'STF0046', 4, 'M.', 'OGUNLEYE', NULL, NULL, NULL, NULL, NULL, '08035824686', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-21 05:22:15', '2015-03-21 16:22:16'),
+(47, 'STF0047', 3, 'M.', 'OGUNSOLA', NULL, NULL, NULL, NULL, NULL, '07064500449', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-21 05:24:14', '2015-03-21 16:24:14'),
+(48, 'STF0048', 4, 'A.', 'OJENIYI', NULL, NULL, NULL, NULL, NULL, '08062253157', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-21 05:26:32', '2015-03-21 16:26:33'),
+(49, 'STF0049', 1, 'S.', 'OJETUNDE', NULL, NULL, NULL, NULL, NULL, '08025532237', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-21 05:27:16', '2015-03-21 16:27:16'),
+(50, 'STF0050', 1, 'T.', 'OJO', NULL, NULL, NULL, NULL, NULL, '08036284758', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-21 05:27:56', '2015-03-21 16:27:56'),
+(51, 'STF0051', 4, 'B.', 'OKECHUKWU-OMOLUABI', NULL, NULL, NULL, NULL, NULL, '08069277582', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-21 05:30:43', '2015-03-21 16:30:43'),
+(52, 'STF0052', 3, 'I.', 'OKINI, ', NULL, NULL, NULL, NULL, NULL, '07069524725', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-21 05:31:48', '2015-03-21 16:31:48'),
+(53, 'STF0053', 3, 'O.', 'OLAKANLE', NULL, NULL, NULL, NULL, NULL, '08062690908', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-21 05:32:40', '2015-03-21 16:32:41'),
+(54, 'STF0054', 4, 'T.', 'OLATUNDE', NULL, NULL, NULL, NULL, NULL, '08035059758', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-21 05:44:30', '2015-03-21 16:44:30'),
+(55, 'STF0055', 1, 'O.', 'OLAWOLE', NULL, NULL, NULL, NULL, NULL, '08035059087', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-21 05:47:53', '2015-03-21 16:47:53'),
+(56, 'STF0056', 1, 'K.', 'ORIMOLADE', NULL, NULL, NULL, NULL, NULL, '08035484885', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-21 05:48:44', '2015-03-21 16:48:44'),
+(57, 'STF0057', 4, 'A.', 'OWADOYE ', NULL, NULL, NULL, NULL, NULL, '08034387875', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-21 05:49:38', '2015-03-21 16:49:38'),
+(58, 'STF0058', 4, 'T.', 'SOKOYA', NULL, NULL, NULL, NULL, NULL, '08167452006', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-21 05:50:21', '2015-03-21 16:50:21'),
+(59, 'STF0059', 4, 'S.', 'TEMURU', NULL, NULL, NULL, NULL, NULL, '08027315354', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-21 05:53:25', '2015-03-21 16:53:25'),
+(60, 'STF0060', 1, 'O.', 'UADEMEVBO', NULL, NULL, NULL, NULL, NULL, '07033473699', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-21 05:55:03', '2015-03-21 16:55:03'),
+(61, 'STF0061', 1, 'L.', 'UDOKPORO', NULL, NULL, NULL, NULL, NULL, '08029087555', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-21 05:55:54', '2015-03-21 16:55:54'),
+(62, 'STF0062', 1, 'A.', 'UMAR-MUHAMMED', NULL, NULL, NULL, NULL, NULL, '07062052814', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-21 05:57:28', '2015-03-21 17:04:56'),
+(63, 'STF0063', 3, 'G.', 'USHIE', NULL, NULL, NULL, NULL, NULL, '08038703859', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-21 05:59:08', '2015-03-21 16:59:08'),
+(64, 'STF0064', 1, 'Emmanuel', 'Okafor', NULL, NULL, NULL, NULL, NULL, '08061539278', NULL, NULL, NULL, NULL, NULL, 'nondefyde@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-22 02:15:37', '2015-03-22 13:15:37'),
+(65, 'STF0065', 3, '.', 'Salau', NULL, NULL, NULL, NULL, NULL, '08128560399', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-24 08:52:59', '2015-03-24 07:52:59'),
+(66, 'STF0066', 1, 'Ebikabo-Owei', 'ZIWORITIN', NULL, NULL, NULL, NULL, NULL, '07062522236', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, 43, '2015-03-25 11:46:52', '2015-03-25 10:46:52'),
+(67, 'STF0067', 4, '.', 'SU', NULL, NULL, NULL, NULL, NULL, '08077863953', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2015-03-26 09:19:43', '2015-03-26 08:19:43');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `exam_details`
+-- Table structure for table `employee_qualifications`
 --
 
-DROP TABLE IF EXISTS `exam_details`;
-CREATE TABLE IF NOT EXISTS `exam_details` (
-`exam_detail_id` int(11) NOT NULL,
-  `exam_id` int(11) DEFAULT NULL,
-  `student_id` int(11) DEFAULT NULL,
-  `ca1` decimal(4,1) DEFAULT '0.0',
-  `ca2` decimal(4,1) DEFAULT '0.0',
-  `exam` decimal(4,1) DEFAULT '0.0'
+DROP TABLE IF EXISTS `employee_qualifications`;
+CREATE TABLE IF NOT EXISTS `employee_qualifications` (
+  `employee_qualification_id` int(11) NOT NULL AUTO_INCREMENT,
+  `employee_id` int(11) NOT NULL,
+  `institution` text NOT NULL,
+  `qualification` varchar(150) DEFAULT NULL,
+  `date_from` date DEFAULT NULL,
+  `date_to` date DEFAULT NULL,
+  `qualification_date` date DEFAULT NULL,
+  PRIMARY KEY (`employee_qualification_id`),
+  KEY `employee_id` (`employee_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `employee_qualifications`
+--
+
+INSERT INTO `employee_qualifications` (`employee_qualification_id`, `employee_id`, `institution`, `qualification`, `date_from`, `date_to`, `qualification_date`) VALUES
+(1, 1, '', '', NULL, NULL, NULL),
+(2, 1, '', '', NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `employee_types`
+--
+
+DROP TABLE IF EXISTS `employee_types`;
+CREATE TABLE IF NOT EXISTS `employee_types` (
+  `employee_type_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `employee_type` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`employee_type_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
--- --------------------------------------------------------
-
---
--- Stand-in structure for view `exam_subjectviews`
---
-DROP VIEW IF EXISTS `exam_subjectviews`;
-CREATE TABLE IF NOT EXISTS `exam_subjectviews` (
-`exam_id` int(11) unsigned
-,`class_id` int(11)
-,`class_name` varchar(50)
-,`subject_name` varchar(50)
-,`subject_id` int(11)
-,`subject_classlevel_id` int(11)
-,`weightageCA1` int(10) unsigned
-,`weightageCA2` int(10) unsigned
-,`weightageExam` int(10) unsigned
-,`exammarked_status_id` int(11)
-,`classlevel_id` int(11)
-,`classlevel` varchar(50)
-,`academic_term_id` int(11)
-,`academic_term` varchar(50)
-,`academic_year_id` int(11) unsigned
-,`academic_year` varchar(50)
-);
 -- --------------------------------------------------------
 
 --
@@ -1955,10 +1944,12 @@ CREATE TABLE IF NOT EXISTS `exam_subjectviews` (
 
 DROP TABLE IF EXISTS `exams`;
 CREATE TABLE IF NOT EXISTS `exams` (
-`exam_id` int(11) unsigned NOT NULL,
+  `exam_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `class_id` int(11) DEFAULT NULL,
   `subject_classlevel_id` int(11) DEFAULT NULL,
-  `exammarked_status_id` int(11) DEFAULT '2'
+  `exammarked_status_id` int(11) DEFAULT '2',
+  PRIMARY KEY (`exam_id`),
+  KEY `class_id` (`class_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -1993,17 +1984,61 @@ CREATE TABLE IF NOT EXISTS `examsdetails_reportviews` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `exam_details`
+--
+
+DROP TABLE IF EXISTS `exam_details`;
+CREATE TABLE IF NOT EXISTS `exam_details` (
+  `exam_detail_id` int(11) NOT NULL AUTO_INCREMENT,
+  `exam_id` int(11) DEFAULT NULL,
+  `student_id` int(11) DEFAULT NULL,
+  `ca1` decimal(4,1) DEFAULT '0.0',
+  `ca2` decimal(4,1) DEFAULT '0.0',
+  `exam` decimal(4,1) DEFAULT '0.0',
+  PRIMARY KEY (`exam_detail_id`),
+  KEY `exam_id` (`exam_id`,`student_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `exam_subjectviews`
+--
+DROP VIEW IF EXISTS `exam_subjectviews`;
+CREATE TABLE IF NOT EXISTS `exam_subjectviews` (
+`exam_id` int(11) unsigned
+,`class_id` int(11)
+,`class_name` varchar(50)
+,`subject_name` varchar(50)
+,`subject_id` int(11)
+,`subject_classlevel_id` int(11)
+,`weightageCA1` int(10) unsigned
+,`weightageCA2` int(10) unsigned
+,`weightageExam` int(10) unsigned
+,`exammarked_status_id` int(11)
+,`classlevel_id` int(11)
+,`classlevel` varchar(50)
+,`academic_term_id` int(11)
+,`academic_term` varchar(50)
+,`academic_year_id` int(11) unsigned
+,`academic_year` varchar(50)
+);
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `grades`
 --
 
 DROP TABLE IF EXISTS `grades`;
 CREATE TABLE IF NOT EXISTS `grades` (
-`grades_id` int(11) NOT NULL,
+  `grades_id` int(11) NOT NULL AUTO_INCREMENT,
   `grade` varchar(20) DEFAULT NULL,
   `grade_abbr` varchar(3) DEFAULT NULL,
   `classgroup_id` int(11) DEFAULT NULL,
   `lower_bound` decimal(4,1) DEFAULT NULL,
-  `upper_bound` decimal(4,1) DEFAULT NULL
+  `upper_bound` decimal(4,1) DEFAULT NULL,
+  PRIMARY KEY (`grades_id`),
+  KEY `classgroup_id` (`classgroup_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
 
 --
@@ -2028,15 +2063,34 @@ INSERT INTO `grades` (`grades_id`, `grade`, `grade_abbr`, `classgroup_id`, `lowe
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `items`
+--
+
+DROP TABLE IF EXISTS `items`;
+CREATE TABLE IF NOT EXISTS `items` (
+  `item_id` int(11) NOT NULL AUTO_INCREMENT,
+  `item_name` varchar(100) NOT NULL,
+  `item_status_id` int(3) NOT NULL DEFAULT '2',
+  `item_description` text NOT NULL,
+  `item_type_id` int(11) NOT NULL,
+  PRIMARY KEY (`item_id`),
+  KEY `item_type_id` (`item_type_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `item_bills`
 --
 
 DROP TABLE IF EXISTS `item_bills`;
 CREATE TABLE IF NOT EXISTS `item_bills` (
-`item_bill_id` int(11) NOT NULL,
+  `item_bill_id` int(11) NOT NULL AUTO_INCREMENT,
   `item_id` int(11) NOT NULL,
   `price` decimal(12,2) NOT NULL,
-  `classlevel_id` int(11) NOT NULL
+  `classlevel_id` int(11) NOT NULL,
+  PRIMARY KEY (`item_bill_id`),
+  KEY `item_id` (`item_id`,`classlevel_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -2047,8 +2101,9 @@ CREATE TABLE IF NOT EXISTS `item_bills` (
 
 DROP TABLE IF EXISTS `item_types`;
 CREATE TABLE IF NOT EXISTS `item_types` (
-`item_type_id` int(11) NOT NULL,
-  `item_type` varchar(50) NOT NULL
+  `item_type_id` int(11) NOT NULL AUTO_INCREMENT,
+  `item_type` varchar(50) NOT NULL,
+  PRIMARY KEY (`item_type_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
@@ -2068,27 +2123,14 @@ INSERT INTO `item_types` (`item_type_id`, `item_type`) VALUES
 
 DROP TABLE IF EXISTS `item_variables`;
 CREATE TABLE IF NOT EXISTS `item_variables` (
-`item_variable_id` int(11) NOT NULL,
+  `item_variable_id` int(11) NOT NULL AUTO_INCREMENT,
   `item_id` int(11) NOT NULL,
   `student_id` int(11) DEFAULT NULL,
   `class_id` int(11) DEFAULT NULL,
   `academic_term_id` int(11) NOT NULL,
-  `price` decimal(10,2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `items`
---
-
-DROP TABLE IF EXISTS `items`;
-CREATE TABLE IF NOT EXISTS `items` (
-`item_id` int(11) NOT NULL,
-  `item_name` varchar(100) NOT NULL,
-  `item_status_id` int(3) NOT NULL DEFAULT '2',
-  `item_description` text NOT NULL,
-  `item_type_id` int(11) NOT NULL
+  `price` decimal(10,2) NOT NULL,
+  PRIMARY KEY (`item_variable_id`),
+  KEY `item_id` (`item_id`,`student_id`,`class_id`,`academic_term_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -2099,9 +2141,11 @@ CREATE TABLE IF NOT EXISTS `items` (
 
 DROP TABLE IF EXISTS `local_govts`;
 CREATE TABLE IF NOT EXISTS `local_govts` (
-`local_govt_id` int(3) unsigned NOT NULL,
+  `local_govt_id` int(3) unsigned NOT NULL AUTO_INCREMENT,
   `local_govt_name` varchar(50) DEFAULT NULL,
-  `state_id` int(3) DEFAULT NULL
+  `state_id` int(3) DEFAULT NULL,
+  PRIMARY KEY (`local_govt_id`),
+  KEY `state_id` (`state_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=781 ;
 
 --
@@ -2898,32 +2942,23 @@ INSERT INTO `local_govts` (`local_govt_id`, `local_govt_name`, `state_id`) VALUE
 
 DROP TABLE IF EXISTS `master_setups`;
 CREATE TABLE IF NOT EXISTS `master_setups` (
-`master_setup_id` int(11) NOT NULL,
+  `master_setup_id` int(11) NOT NULL AUTO_INCREMENT,
   `setup` varchar(30) NOT NULL DEFAULT 'smartedu',
-  `master_record_id` int(11) NOT NULL DEFAULT '0'
+  `school_name` varchar(200) NOT NULL,
+  `school_address` text NOT NULL,
+  `master_record_id` int(11) NOT NULL DEFAULT '0',
+  `principal_id` int(11) NOT NULL,
+  `vprincipal_id` int(11) NOT NULL,
+  `school_logo` varchar(100) NOT NULL,
+  PRIMARY KEY (`master_setup_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `master_setups`
 --
 
-INSERT INTO `master_setups` (`master_setup_id`, `setup`, `master_record_id`) VALUES
-(1, 'smartedu', 9);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `message_recipients`
---
-
-DROP TABLE IF EXISTS `message_recipients`;
-CREATE TABLE IF NOT EXISTS `message_recipients` (
-`message_recipient_id` int(11) NOT NULL,
-  `recipient_name` varchar(150) NOT NULL,
-  `mobile_number` varchar(15) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+INSERT INTO `master_setups` (`master_setup_id`, `setup`, `school_name`, `school_address`, `master_record_id`, `principal_id`, `vprincipal_id`, `school_logo`) VALUES
+(1, 'smartedu', 'The Bells', '', 9, 2, 0, 'images/bells_logo.png');
 
 -- --------------------------------------------------------
 
@@ -2933,28 +2968,30 @@ CREATE TABLE IF NOT EXISTS `message_recipients` (
 
 DROP TABLE IF EXISTS `messages`;
 CREATE TABLE IF NOT EXISTS `messages` (
-`message_id` int(11) NOT NULL,
+  `message_id` int(11) NOT NULL AUTO_INCREMENT,
   `message` text NOT NULL,
   `message_subject` varchar(20) NOT NULL,
   `sms_count` int(11) NOT NULL,
   `email_count` int(11) NOT NULL,
   `message_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `message_sender` int(11) NOT NULL
+  `message_sender` int(11) NOT NULL,
+  PRIMARY KEY (`message_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `order_items`
+-- Table structure for table `message_recipients`
 --
 
-DROP TABLE IF EXISTS `order_items`;
-CREATE TABLE IF NOT EXISTS `order_items` (
-`order_item_id` int(11) NOT NULL,
-  `order_id` int(11) NOT NULL,
-  `price` decimal(12,2) NOT NULL,
-  `quantity` int(3) NOT NULL DEFAULT '1',
-  `item_id` int(11) NOT NULL
+DROP TABLE IF EXISTS `message_recipients`;
+CREATE TABLE IF NOT EXISTS `message_recipients` (
+  `message_recipient_id` int(11) NOT NULL AUTO_INCREMENT,
+  `recipient_name` varchar(150) NOT NULL,
+  `mobile_number` varchar(15) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`message_recipient_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -2965,12 +3002,31 @@ CREATE TABLE IF NOT EXISTS `order_items` (
 
 DROP TABLE IF EXISTS `orders`;
 CREATE TABLE IF NOT EXISTS `orders` (
-`order_id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL AUTO_INCREMENT,
   `student_id` int(11) NOT NULL,
   `sponsor_id` int(11) NOT NULL,
   `academic_term_id` int(11) NOT NULL,
   `process_item_id` int(11) DEFAULT NULL,
-  `status_id` int(3) NOT NULL DEFAULT '2'
+  `status_id` int(3) NOT NULL DEFAULT '2',
+  PRIMARY KEY (`order_id`),
+  KEY `student_id` (`student_id`,`sponsor_id`,`academic_term_id`,`process_item_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_items`
+--
+
+DROP TABLE IF EXISTS `order_items`;
+CREATE TABLE IF NOT EXISTS `order_items` (
+  `order_item_id` int(11) NOT NULL AUTO_INCREMENT,
+  `order_id` int(11) NOT NULL,
+  `price` decimal(12,2) NOT NULL,
+  `quantity` int(3) NOT NULL DEFAULT '1',
+  `item_id` int(11) NOT NULL,
+  PRIMARY KEY (`order_item_id`),
+  KEY `item_id` (`item_id`,`order_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -2981,10 +3037,11 @@ CREATE TABLE IF NOT EXISTS `orders` (
 
 DROP TABLE IF EXISTS `process_items`;
 CREATE TABLE IF NOT EXISTS `process_items` (
-`process_item_id` int(11) NOT NULL,
+  `process_item_id` int(11) NOT NULL AUTO_INCREMENT,
   `process_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `process_by` int(11) NOT NULL,
-  `academic_term_id` int(11) NOT NULL
+  `academic_term_id` int(11) NOT NULL,
+  PRIMARY KEY (`process_item_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -2995,8 +3052,9 @@ CREATE TABLE IF NOT EXISTS `process_items` (
 
 DROP TABLE IF EXISTS `relationship_types`;
 CREATE TABLE IF NOT EXISTS `relationship_types` (
-`relationship_type_id` int(3) unsigned NOT NULL,
-  `relationship_type` varchar(50) DEFAULT NULL
+  `relationship_type_id` int(3) unsigned NOT NULL AUTO_INCREMENT,
+  `relationship_type` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`relationship_type_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
@@ -3022,13 +3080,14 @@ INSERT INTO `relationship_types` (`relationship_type_id`, `relationship_type`) V
 
 DROP TABLE IF EXISTS `remarks`;
 CREATE TABLE IF NOT EXISTS `remarks` (
-`remark_id` int(11) NOT NULL,
+  `remark_id` int(11) NOT NULL AUTO_INCREMENT,
   `class_teacher_remark` varchar(300) NOT NULL DEFAULT 'None',
   `house_master_remark` varchar(300) DEFAULT 'None',
   `principal_remark` varchar(300) DEFAULT 'None',
   `student_id` int(11) NOT NULL,
   `academic_term_id` int(11) NOT NULL,
-  `employee_id` int(11) DEFAULT NULL
+  `employee_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`remark_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -3039,9 +3098,10 @@ CREATE TABLE IF NOT EXISTS `remarks` (
 
 DROP TABLE IF EXISTS `salutations`;
 CREATE TABLE IF NOT EXISTS `salutations` (
-`salutation_id` int(3) unsigned NOT NULL,
+  `salutation_id` int(3) unsigned NOT NULL AUTO_INCREMENT,
   `salutation_abbr` varchar(10) DEFAULT NULL,
-  `salutation_name` varchar(50) DEFAULT NULL
+  `salutation_name` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`salutation_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
 
 --
@@ -3069,28 +3129,15 @@ INSERT INTO `salutations` (`salutation_id`, `salutation_abbr`, `salutation_name`
 
 DROP TABLE IF EXISTS `setups`;
 CREATE TABLE IF NOT EXISTS `setups` (
-`setup_id` int(11) NOT NULL,
+  `setup_id` int(11) NOT NULL AUTO_INCREMENT,
   `school_name` text NOT NULL,
   `full_name` varchar(150) NOT NULL,
   `email` varchar(50) NOT NULL,
   `phone_number` varchar(20) DEFAULT NULL,
   `subdomain` varchar(150) NOT NULL,
   `progress` int(3) NOT NULL DEFAULT '1',
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `skill_assessments`
---
-
-DROP TABLE IF EXISTS `skill_assessments`;
-CREATE TABLE IF NOT EXISTS `skill_assessments` (
-`skill_assessment_id` int(11) NOT NULL,
-  `skill_id` int(11) NOT NULL,
-  `assessment_id` int(11) NOT NULL,
-  `option` int(11) NOT NULL
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`setup_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -3101,8 +3148,9 @@ CREATE TABLE IF NOT EXISTS `skill_assessments` (
 
 DROP TABLE IF EXISTS `skills`;
 CREATE TABLE IF NOT EXISTS `skills` (
-`skill_id` int(11) NOT NULL,
-  `skill` varchar(200) NOT NULL
+  `skill_id` int(11) NOT NULL AUTO_INCREMENT,
+  `skill` varchar(200) NOT NULL,
+  PRIMARY KEY (`skill_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
 
 --
@@ -3131,15 +3179,31 @@ INSERT INTO `skills` (`skill_id`, `skill`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `skill_assessments`
+--
+
+DROP TABLE IF EXISTS `skill_assessments`;
+CREATE TABLE IF NOT EXISTS `skill_assessments` (
+  `skill_assessment_id` int(11) NOT NULL AUTO_INCREMENT,
+  `skill_id` int(11) NOT NULL,
+  `assessment_id` int(11) NOT NULL,
+  `option` int(11) NOT NULL,
+  PRIMARY KEY (`skill_assessment_id`),
+  KEY `skill_id` (`skill_id`,`assessment_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `sponsors`
 --
 
 DROP TABLE IF EXISTS `sponsors`;
 CREATE TABLE IF NOT EXISTS `sponsors` (
-`sponsor_id` int(3) unsigned NOT NULL,
+  `sponsor_id` int(3) unsigned NOT NULL AUTO_INCREMENT,
   `sponsor_no` varchar(10) NOT NULL,
-  `first_name` varchar(50) DEFAULT NULL,
   `other_name` varchar(50) DEFAULT NULL,
+  `first_name` varchar(50) DEFAULT NULL,
   `salutation_id` int(11) DEFAULT NULL,
   `occupation` varchar(70) DEFAULT NULL,
   `company_name` varchar(100) DEFAULT NULL,
@@ -3155,260 +3219,262 @@ CREATE TABLE IF NOT EXISTS `sponsors` (
   `created_by` int(11) DEFAULT NULL,
   `sponsorship_type_id` int(11) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`sponsor_id`),
+  KEY `salutation_id` (`salutation_id`,`local_govt_id`,`state_id`,`sponsorship_type_id`,`country_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=274 ;
 
 --
 -- Dumping data for table `sponsors`
 --
 
-INSERT INTO `sponsors` (`sponsor_id`, `sponsor_no`, `first_name`, `other_name`, `salutation_id`, `occupation`, `company_name`, `company_address`, `email`, `image_url`, `contact_address`, `local_govt_id`, `state_id`, `country_id`, `mobile_number1`, `mobile_number2`, `created_by`, `sponsorship_type_id`, `created_at`, `updated_at`) VALUES
-(1, 'PAR0001', 'Ogbuchi', 'Stanley', 1, NULL, NULL, NULL, 'ogbuchistanley@rocketmail.com', NULL, NULL, NULL, NULL, NULL, '08180966334', NULL, 1, NULL, '2015-03-19 02:11:34', '2015-03-19 13:11:34'),
-(2, 'PAR0002', 'ADENIRAN', 'JOSEPH', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08055492870', '', 1, NULL, '2015-03-19 06:57:19', '2015-05-14 18:56:33'),
-(3, 'PAR0003', 'ATUNRASE', 'BANKOLE', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08028861077', NULL, 1, NULL, '2015-03-19 06:58:57', '2015-03-22 23:14:26'),
-(4, 'PAR0004', 'BAIYEKUSI', 'PHOS BAYOWA', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08088080606', NULL, 1, NULL, '2015-03-19 07:00:53', '2015-03-22 23:17:33'),
-(5, 'PAR0005', 'BAKRE', 'OLUWATOFARATI DAVID', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08023056956', NULL, 1, NULL, '2015-03-19 07:02:41', '2015-03-22 23:18:38'),
-(6, 'PAR0006', 'BALOGUN', 'MOSES', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08033249151', NULL, 1, NULL, '2015-03-19 07:04:50', '2015-03-22 23:19:33'),
-(7, 'PAR0007', 'BAYOKO', 'NATHAN', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08033228548', NULL, 1, NULL, '2015-03-19 07:12:26', '2015-03-22 23:36:49'),
-(8, 'PAR0008', 'EGBEDEYI', 'SAMUEL', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08023006777', NULL, 1, NULL, '2015-03-19 07:20:00', '2015-03-22 23:37:49'),
-(9, 'PAR0009', 'HENRY-NKEKI', 'DAVID', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08123000064', NULL, 1, NULL, '2015-03-19 07:36:10', '2015-03-22 23:38:24'),
-(10, 'PAR0010', 'IBILOLA', 'DAVID', 1, NULL, NULL, NULL, 'richardibilola@yahoo.com', NULL, NULL, NULL, NULL, NULL, '08033573649', NULL, 1, NULL, '2015-03-19 07:37:47', '2015-03-22 23:38:45'),
-(11, 'PAR0011', 'NICK-IBITOYE ', 'OLANREWAJU', 1, NULL, NULL, NULL, 'nick.ibitoye@shell.com', NULL, NULL, NULL, NULL, NULL, '08035500298', NULL, 1, NULL, '2015-03-19 07:42:44', '2015-03-22 23:40:14'),
-(12, 'PAR0012', 'NKUME-ANYIGOR ', 'VICTOR', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '07033469369', NULL, 1, NULL, '2015-03-19 07:46:39', '2015-03-22 23:52:18'),
-(13, 'PAR0013', 'OFOEGBUNAM', 'CHUKWUKA', 1, NULL, NULL, NULL, 'tmotrading@yahoo.com', NULL, NULL, NULL, NULL, NULL, '08035755653', NULL, 1, NULL, '2015-03-19 07:51:38', '2015-03-22 23:54:21'),
-(14, 'PAR0014', 'OGHOORE', 'JOSHUA', 1, NULL, NULL, NULL, 'oviemuno2002@yahoo.co.uk', NULL, NULL, NULL, NULL, NULL, '08033083745', NULL, 1, NULL, '2015-03-19 07:55:38', '2015-03-22 23:55:32'),
-(15, 'PAR0015', 'OLAGUNJU', 'ADEYEMI', 1, NULL, NULL, NULL, 'homeinnlux@gmail.com', NULL, NULL, NULL, NULL, NULL, '08037697680', NULL, 1, NULL, '2015-03-19 07:57:44', '2015-03-22 23:56:25'),
-(16, 'PAR0016', 'OLATUNBOSUN', 'OLANREWAJU JOSEPH', 1, NULL, NULL, NULL, 'loladeboy@yahoo.com', NULL, NULL, NULL, NULL, NULL, '08028723456', NULL, 1, NULL, '2015-03-19 08:01:47', '2015-03-22 23:56:53'),
-(17, 'PAR0017', 'YUSUF', 'AYODELE', 1, NULL, NULL, NULL, 'olabisiakinlabi@gmail.com', NULL, NULL, NULL, NULL, NULL, '08023401123', NULL, 1, NULL, '2015-03-19 08:03:41', '2015-03-23 00:11:06'),
-(25, 'PAR0025', 'Ajayi', 'Oladapo', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08020593133', NULL, 13, NULL, '2015-03-24 10:17:45', '2015-03-24 09:17:45'),
+INSERT INTO `sponsors` (`sponsor_id`, `sponsor_no`, `other_name`, `first_name`, `salutation_id`, `occupation`, `company_name`, `company_address`, `email`, `image_url`, `contact_address`, `local_govt_id`, `state_id`, `country_id`, `mobile_number1`, `mobile_number2`, `created_by`, `sponsorship_type_id`, `created_at`, `updated_at`) VALUES
+(1, 'PAR0001', 'Stanley', 'Ogbuchi', 1, NULL, NULL, NULL, 'ogbuchistanley@rocketmail.com', NULL, NULL, NULL, NULL, NULL, '08180966334', NULL, 1, NULL, '2015-03-19 02:11:34', '2015-03-19 13:11:34'),
+(2, 'PAR0002', 'JOSEPH', 'ADENIRAN', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08055492870', NULL, 1, NULL, '2015-03-19 06:57:19', '2015-03-22 23:13:48'),
+(3, 'PAR0003', 'BANKOLE', 'ATUNRASE', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08028861077', NULL, 1, NULL, '2015-03-19 06:58:57', '2015-03-22 23:14:26'),
+(4, 'PAR0004', 'PHOS BAYOWA', 'BAIYEKUSI', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08088080606', NULL, 1, NULL, '2015-03-19 07:00:53', '2015-03-22 23:17:33'),
+(5, 'PAR0005', 'OLUWATOFARATI DAVID', 'BAKRE', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08023056956', NULL, 1, NULL, '2015-03-19 07:02:41', '2015-03-22 23:18:38'),
+(6, 'PAR0006', 'MOSES', 'BALOGUN', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08033249151', NULL, 1, NULL, '2015-03-19 07:04:50', '2015-03-22 23:19:33'),
+(7, 'PAR0007', 'NATHAN', 'BAYOKO', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08033228548', NULL, 1, NULL, '2015-03-19 07:12:26', '2015-03-22 23:36:49'),
+(8, 'PAR0008', 'SAMUEL', 'EGBEDEYI', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08023006777', NULL, 1, NULL, '2015-03-19 07:20:00', '2015-03-22 23:37:49'),
+(9, 'PAR0009', 'DAVID', 'HENRY-NKEKI', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08123000064', NULL, 1, NULL, '2015-03-19 07:36:10', '2015-03-22 23:38:24'),
+(10, 'PAR0010', 'DAVID', 'IBILOLA', 1, NULL, NULL, NULL, 'richardibilola@yahoo.com', NULL, NULL, NULL, NULL, NULL, '08033573649', NULL, 1, NULL, '2015-03-19 07:37:47', '2015-03-22 23:38:45'),
+(11, 'PAR0011', 'OLANREWAJU', 'NICK-IBITOYE ', 1, NULL, NULL, NULL, 'nick.ibitoye@shell.com', NULL, NULL, NULL, NULL, NULL, '08035500298', NULL, 1, NULL, '2015-03-19 07:42:44', '2015-03-22 23:40:14'),
+(12, 'PAR0012', 'VICTOR', 'NKUME-ANYIGOR ', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '07033469369', NULL, 1, NULL, '2015-03-19 07:46:39', '2015-03-22 23:52:18'),
+(13, 'PAR0013', 'CHUKWUKA', 'OFOEGBUNAM', 1, NULL, NULL, NULL, 'tmotrading@yahoo.com', NULL, NULL, NULL, NULL, NULL, '08035755653', NULL, 1, NULL, '2015-03-19 07:51:38', '2015-03-22 23:54:21'),
+(14, 'PAR0014', 'JOSHUA', 'OGHOORE', 1, NULL, NULL, NULL, 'oviemuno2002@yahoo.co.uk', NULL, NULL, NULL, NULL, NULL, '08033083745', NULL, 1, NULL, '2015-03-19 07:55:38', '2015-03-22 23:55:32'),
+(15, 'PAR0015', 'ADEYEMI', 'OLAGUNJU', 1, NULL, NULL, NULL, 'homeinnlux@gmail.com', NULL, NULL, NULL, NULL, NULL, '08037697680', NULL, 1, NULL, '2015-03-19 07:57:44', '2015-03-22 23:56:25'),
+(16, 'PAR0016', 'OLANREWAJU JOSEPH', 'OLATUNBOSUN', 1, NULL, NULL, NULL, 'loladeboy@yahoo.com', NULL, NULL, NULL, NULL, NULL, '08028723456', NULL, 1, NULL, '2015-03-19 08:01:47', '2015-03-22 23:56:53'),
+(17, 'PAR0017', 'AYODELE', 'YUSUF', 1, NULL, NULL, NULL, 'olabisiakinlabi@gmail.com', NULL, NULL, NULL, NULL, NULL, '08023401123', NULL, 1, NULL, '2015-03-19 08:03:41', '2015-03-23 00:11:06'),
+(25, 'PAR0025', 'Oladapo', 'Ajayi', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08020593133', NULL, 13, NULL, '2015-03-24 10:17:45', '2015-03-24 09:17:45'),
 (26, 'PAR0026', 'Opeyemi', 'Opeyemi', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08189145603', NULL, 53, NULL, '2015-03-24 10:23:45', '2015-03-24 15:58:04'),
-(29, 'PAR0029', 'Williams', 'Adegboyega', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08189145603', NULL, 53, NULL, '2015-03-24 10:49:42', '2015-03-24 09:49:42'),
-(30, 'PAR0030', 'Adealu', 'Ifeoluwa', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08023006122', NULL, 40, NULL, '2015-03-24 11:08:11', '2015-03-24 10:08:11'),
-(32, 'PAR0032', 'ABADI', 'KEME', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08063753985', NULL, 30, NULL, '2015-03-24 11:21:47', '2015-03-24 10:21:47'),
-(34, 'PAR0034', 'AMARA', 'EBIKABOERE', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '07038743024', NULL, 30, NULL, '2015-03-24 11:25:10', '2015-03-24 10:25:10'),
-(35, 'PAR0035', 'ANIWETA-NEZIANYA', 'CHIAMAKA', 8, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08035900798', NULL, 30, NULL, '2015-03-24 11:26:48', '2015-03-24 10:26:48'),
-(36, 'PAR0036', 'BAGOU', 'KENDRAH', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08031902363', NULL, 30, NULL, '2015-03-24 11:28:15', '2015-03-24 10:28:15'),
-(37, 'PAR0037', 'ERIVWODE', 'OKEOGHENE', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08066766565', NULL, 30, NULL, '2015-03-24 11:29:35', '2015-03-24 10:29:35'),
-(38, 'PAR0038', 'GEORGEWILL', 'AYEBANENGIYEFA', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08037968795', NULL, 30, NULL, '2015-03-24 11:30:56', '2015-03-24 10:30:56'),
-(39, 'PAR0039', 'ITSEUWA ', 'ROSEMARY', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08033215262', NULL, 30, NULL, '2015-03-24 11:32:20', '2015-03-24 10:32:20'),
-(40, 'PAR0040', 'JOB', 'VICTORIA', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08135591296', NULL, 30, NULL, '2015-03-24 11:33:22', '2015-03-24 10:33:23'),
-(41, 'PAR0041', 'KALAYOLO', 'HAPPINESS', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '07062687122', NULL, 30, NULL, '2015-03-24 11:34:25', '2015-03-24 10:34:25'),
-(42, 'PAR0042', 'MAZI', 'ONISOKIE', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08037899243', NULL, 30, NULL, '2015-03-24 11:36:03', '2015-03-24 10:36:03'),
-(43, 'PAR0043', 'NATHANIEL', 'EVELYN', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08131346013', NULL, 30, NULL, '2015-03-24 11:37:04', '2015-03-24 10:37:04'),
-(44, 'PAR0044', 'OBUBE', 'OYINKANSOLA', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08067183793', NULL, 30, NULL, '2015-03-24 11:37:58', '2015-03-24 10:37:58'),
-(45, 'PAR0045', 'OKE', 'OYINDAMOLA', 11, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08090906406', NULL, 30, NULL, '2015-03-24 11:38:54', '2015-03-24 10:38:54'),
-(46, 'PAR0046', 'Otori', 'Jimoh', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08023070934', NULL, 53, NULL, '2015-03-24 11:39:32', '2015-03-24 10:39:32'),
-(47, 'PAR0047', 'OKOYE', 'CHISOM', 6, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08023376269', NULL, 30, NULL, '2015-03-24 11:39:55', '2015-03-24 10:39:55'),
-(48, 'PAR0048', 'Salau', 'Funke', 4, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08023288942', NULL, 53, NULL, '2015-03-24 11:41:13', '2015-03-24 10:41:14'),
-(49, 'PAR0049', 'TELIMOYE', 'IBEINMO', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '07037722998', NULL, 30, NULL, '2015-03-24 11:41:32', '2015-03-24 10:41:32'),
-(50, 'PAR0050', 'Adealu', 'Moruf', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08023006122', NULL, 53, NULL, '2015-03-24 11:42:50', '2015-03-24 10:42:50'),
-(51, 'PAR0051', 'WAIBITE', 'ENDURANCE', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08168189756', NULL, 30, NULL, '2015-03-24 11:44:42', '2015-03-24 10:44:43'),
-(52, 'PAR0052', 'Ojo', 'Oluwagbenga', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08023318436', NULL, 53, NULL, '2015-03-24 11:45:33', '2015-03-24 10:45:33'),
-(53, 'PAR0053', 'WILLIAMS', 'IBUKUN', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08038404056', NULL, 30, NULL, '2015-03-24 11:45:38', '2015-03-24 10:45:38'),
-(54, 'PAR0054', 'Oloyede', 'Adekunle', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08024001476', NULL, 53, NULL, '2015-03-24 11:46:23', '2015-03-24 10:46:23'),
-(55, 'PAR0055', 'Abioye', 'Oyinlade', 4, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08023328277', NULL, 53, NULL, '2015-03-24 11:47:30', '2015-03-24 10:47:30'),
-(56, 'PAR0056', 'Odesola', 'Jelili', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08061663367', NULL, 53, NULL, '2015-03-24 11:48:22', '2015-03-24 10:48:22'),
-(57, 'PAR0057', 'ADEOSUN', 'Oladapo', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08023125717', NULL, 52, NULL, '2015-03-24 12:17:24', '2015-03-24 11:17:24'),
-(58, 'PAR0058', 'DADA', 'MUBARAK', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08026829359', NULL, 52, NULL, '2015-03-24 12:18:11', '2015-03-24 11:18:11'),
-(59, 'PAR0059', 'ADEDOTUN', 'MICHEAL', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08085439241', NULL, 52, NULL, '2015-03-24 12:19:09', '2015-03-24 11:19:10'),
-(60, 'PAR0060', 'AGUNBIADE', 'DEBORAH', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '09034109157', NULL, 52, NULL, '2015-03-24 12:21:48', '2015-03-24 11:21:48'),
-(61, 'PAR0061', 'HAMZAT', 'Adekunle', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '080233359199', NULL, 52, NULL, '2015-03-24 12:22:32', '2015-03-24 11:22:33'),
-(62, 'PAR0062', 'LALA', 'EMMANUEL', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08034015407', NULL, 52, NULL, '2015-03-24 12:23:09', '2015-03-24 11:23:10'),
-(63, 'PAR0063', 'OKESINA', 'ADESOJI', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08062883453', NULL, 52, NULL, '2015-03-24 12:23:48', '2015-03-24 11:23:48'),
-(64, 'PAR0064', 'OJO', 'JOSEPH', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08023176070', NULL, 52, NULL, '2015-03-24 12:24:29', '2015-03-24 11:24:30'),
-(65, 'PAR0065', 'ADENIYI', 'IBAZEBO', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08023193180', NULL, 52, NULL, '2015-03-24 12:40:25', '2015-03-24 11:40:25'),
-(66, 'PAR0066', 'Azeez', 'Olufemi', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08189268578', NULL, 14, NULL, '2015-03-24 12:49:56', '2015-03-24 11:49:57'),
-(67, 'PAR0067', 'Bello', 'Tajudeen', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08092855295', NULL, 14, NULL, '2015-03-24 12:50:43', '2015-03-24 11:50:43'),
-(68, 'PAR0068', 'Bello', 'Aderemi', 8, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08035103728', NULL, 14, NULL, '2015-03-24 12:51:49', '2015-03-24 11:51:49'),
-(69, 'PAR0069', 'Bribena', 'Kelvin', 5, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08168800002', NULL, 14, NULL, '2015-03-24 12:52:39', '2015-03-24 11:52:39'),
-(70, 'PAR0070', 'Folorunso', 'Isaac', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08023120561', NULL, 14, NULL, '2015-03-24 12:55:00', '2015-03-24 11:55:00'),
-(71, 'PAR0071', 'Ogundele', 'Amos', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08025015608', NULL, 14, NULL, '2015-03-24 12:55:31', '2015-03-24 11:55:31'),
-(72, 'PAR0072', 'Olaoye', 'Oyekanmi', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08057932322', NULL, 14, NULL, '2015-03-24 12:56:12', '2015-03-24 11:56:12'),
-(73, 'PAR0073', 'Onyebuchi', 'Edwin', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08033008296', NULL, 14, NULL, '2015-03-24 12:57:04', '2015-03-24 11:57:04'),
-(74, 'PAR0074', 'Eze', 'Adaobi', 6, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08033017899', NULL, 14, NULL, '2015-03-24 01:00:05', '2015-03-24 12:00:05'),
-(75, 'PAR0075', 'Ibetei', 'Humphrey', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08062893168', NULL, 44, NULL, '2015-03-24 01:24:31', '2015-03-24 12:24:31'),
-(76, 'PAR0076', 'Dede', 'Reginald', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08130786804', NULL, 44, NULL, '2015-03-24 01:25:40', '2015-03-24 12:25:40'),
-(77, 'PAR0077', 'Abdou', 'Fatiou', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '22997224403', NULL, 44, NULL, '2015-03-24 01:28:24', '2015-03-24 12:28:24'),
-(78, 'PAR0078', 'Obireke', 'Osoru', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08035185309', NULL, 44, NULL, '2015-03-24 01:29:12', '2015-03-24 12:29:12'),
-(79, 'PAR0079', 'Umoru', 'Solomon', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08022030333', NULL, 44, NULL, '2015-03-24 01:30:08', '2015-03-24 12:30:09'),
-(80, 'PAR0080', 'Nanakede', 'Smdoth', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08088657546', NULL, 44, NULL, '2015-03-24 01:32:02', '2015-03-24 12:32:03'),
-(81, 'PAR0081', 'puragha', 'Bob', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08038921816', NULL, 44, NULL, '2015-03-24 01:33:19', '2015-03-24 12:33:19'),
-(82, 'PAR0082', 'Soroh', 'Anthony', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08069760970', NULL, 44, NULL, '2015-03-24 01:34:06', '2015-03-24 12:34:07'),
-(83, 'PAR0083', 'Maddocks', 'Christopher', 3, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08069097498', NULL, 44, NULL, '2015-03-24 01:34:59', '2015-03-24 12:34:59'),
-(84, 'PAR0084', 'Isibor', 'Osahon', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '07086455645', NULL, 44, NULL, '2015-03-24 01:35:43', '2015-03-24 12:35:43'),
-(85, 'PAR0085', 'Zolo', 'Joshua', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08032124113', NULL, 44, NULL, '2015-03-24 01:37:22', '2015-03-24 12:37:22'),
-(86, 'PAR0086', 'Koroye ', 'Ebikabo', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08037375525', NULL, 44, NULL, '2015-03-24 01:38:31', '2015-03-24 12:38:32'),
-(87, 'PAR0087', 'Amakedi', 'Moneyman', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08053397636', NULL, 44, NULL, '2015-03-24 01:39:27', '2015-03-24 12:39:28'),
-(88, 'PAR0088', 'Azugha', 'Sunday', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '080379911959', NULL, 44, NULL, '2015-03-24 01:40:04', '2015-03-24 12:40:04'),
-(89, 'PAR0089', 'Abdullahi', 'Saadu', 1, NULL, NULL, NULL, 'abdusaadu@yahoo.co.uk', NULL, NULL, NULL, NULL, NULL, '08033026256', NULL, 65, NULL, '2015-03-24 01:40:06', '2015-03-24 12:40:06'),
-(90, 'PAR0090', 'Inenemo-Usman', 'Abdul', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08035351939', NULL, 44, NULL, '2015-03-24 01:41:00', '2015-03-24 12:41:00'),
-(91, 'PAR0091', 'adeyemi', 'J.A', 8, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08068678683', NULL, 65, NULL, '2015-03-24 01:41:01', '2015-03-24 12:41:02'),
-(92, 'PAR0092', 'Adewole', 'Abdul', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08023154167', NULL, 44, NULL, '2015-03-24 01:41:40', '2015-03-24 12:41:41'),
-(94, 'PAR0094', 'kushimo', 'olakunle', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08023434661', NULL, 60, NULL, '2015-03-24 01:43:36', '2015-03-24 12:43:36'),
-(95, 'PAR0095', 'Sam-Micheal', 'Azibabhom', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '07032420601', NULL, 44, NULL, '2015-03-24 01:43:46', '2015-03-24 12:43:47'),
-(96, 'PAR0096', 'ajibode', 'adesoji', 1, NULL, NULL, NULL, 'cedarlinks2001@yahoo.com', NULL, NULL, NULL, NULL, NULL, '07034077523', NULL, 65, NULL, '2015-03-24 01:44:21', '2015-03-24 12:44:21'),
-(97, 'PAR0097', 'Bagou', 'Ayibatare', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08063509486', NULL, 44, NULL, '2015-03-24 01:44:58', '2015-03-24 12:44:58'),
-(98, 'PAR0098', 'faloye', 'omolade', 1, NULL, NULL, NULL, 'omoladefaloye@yahoo.com', NULL, NULL, NULL, NULL, NULL, '08023193280', NULL, 65, NULL, '2015-03-24 01:45:33', '2015-03-24 12:45:33'),
-(100, 'PAR0100', 'Isikpi', 'Nike', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08069760970', NULL, 44, NULL, '2015-03-24 01:47:14', '2015-03-24 12:47:14'),
-(101, 'PAR0101', 'orhiunu', 'lina', 4, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '447930347074', NULL, 65, NULL, '2015-03-24 01:47:23', '2015-03-24 12:47:23'),
-(102, 'PAR0102', 'imasuen', 'o.o', 1, NULL, NULL, NULL, 'femimasuen@yahoo.com', NULL, NULL, NULL, NULL, NULL, '08022234476', NULL, 65, NULL, '2015-03-24 01:48:36', '2015-03-24 12:48:37'),
-(103, 'PAR0103', 'Momoh', 'Muhsin', 5, NULL, NULL, NULL, 'amomoh@yahoo.com', NULL, NULL, NULL, NULL, NULL, '08033313424', NULL, 43, NULL, '2015-03-24 01:49:33', '2015-03-24 12:49:33'),
-(104, 'PAR0104', 'ishola', 'yusuf', 1, NULL, NULL, NULL, 'yetty@gmail.com', NULL, NULL, NULL, NULL, NULL, '08034706971', NULL, 65, NULL, '2015-03-24 01:49:53', '2015-03-24 12:49:53'),
-(105, 'PAR0105', 'Mbaegbu', 'Norbert', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08037186709', NULL, 60, NULL, '2015-03-24 01:51:28', '2015-03-24 12:51:28'),
-(106, 'PAR0106', 'madueke', 'Joseph', 1, NULL, NULL, NULL, 'madson1993@yahoo.com', NULL, NULL, NULL, NULL, NULL, '08033012374', NULL, 65, NULL, '2015-03-24 01:51:34', '2015-03-24 12:51:34'),
-(107, 'PAR0107', 'odufuwa', 'ayodele', 1, NULL, NULL, NULL, 'odufuwdupe@yahoo.com', NULL, NULL, NULL, NULL, NULL, '08055476213', NULL, 65, NULL, '2015-03-24 01:54:29', '2015-03-24 12:54:30'),
-(108, 'PAR0108', 'olaniyan', 'p.a', 1, 'tt', '', '', 'akinolaniyanpms@yahoo.com', NULL, 'Hhgg', 147, 7, 140, '08033181314', '', 65, NULL, '2015-03-24 01:56:51', '2015-03-24 13:22:55'),
-(109, 'PAR0109', 'olory', 'Matthew', 1, NULL, NULL, NULL, '0806666811', NULL, NULL, NULL, NULL, NULL, '08037865675', NULL, 65, NULL, '2015-03-24 02:00:01', '2015-03-24 13:00:01'),
-(110, 'PAR0110', 'Tobiah', 'Emmanuel', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08037950435', NULL, 43, NULL, '2015-03-24 02:00:32', '2015-03-24 13:00:32'),
-(111, 'PAR0111', 'olory', 'Matthew', 1, NULL, NULL, NULL, 'matthewolory@yahoo.com', NULL, NULL, NULL, NULL, NULL, '08066666811', NULL, 65, NULL, '2015-03-24 02:01:04', '2015-03-24 13:01:04'),
-(112, 'PAR0112', 'oneh', 'Matthew', 1, NULL, NULL, NULL, 'm.oneh@interairnigeria.com', NULL, NULL, NULL, NULL, NULL, '08037865676', NULL, 65, NULL, '2015-03-24 02:06:06', '2015-03-24 13:06:06'),
-(113, 'PAR0113', 'Oke', 'Isiaka', 11, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08090906406', NULL, 44, NULL, '2015-03-24 02:11:48', '2015-03-24 13:11:48'),
-(114, 'PAR0114', 'onung', 'nkereuwem', 1, NULL, NULL, NULL, 'afimaonung@yahoo.com', NULL, NULL, NULL, NULL, NULL, '08037135661', NULL, 65, NULL, '2015-03-24 02:12:04', '2015-03-24 13:12:04'),
-(115, 'PAR0115', 'osadolor', 'Kingsley', 1, NULL, NULL, NULL, 'osakingosa@hotmail.com', NULL, NULL, NULL, NULL, NULL, '08033042837', NULL, 65, NULL, '2015-03-24 02:15:02', '2015-03-24 13:15:02'),
-(116, 'PAR0116', 'ATABULE', 'FAITH', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08055024772', NULL, 60, NULL, '2015-03-24 02:18:25', '2015-03-24 13:18:26'),
-(117, 'PAR0117', 'KUSHIMOH', 'OLAMIDE', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08054881234', NULL, 60, NULL, '2015-03-24 02:19:05', '2015-03-24 13:19:05'),
-(119, 'PAR0119', 'OGUNDIMU', 'MOTUNRAYO', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08050442115', NULL, 60, NULL, '2015-03-24 02:21:29', '2015-03-24 13:21:29'),
-(120, 'PAR0120', 'BUHARI-ABDULLAHI', 'HAUWA', 11, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08033024367', NULL, 60, NULL, '2015-03-24 02:22:41', '2015-03-24 13:22:41'),
-(121, 'PAR0121', 'Faloye', 'Ayomide', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08033040696', NULL, 43, NULL, '2015-03-24 02:22:59', '2015-03-24 13:22:59'),
-(122, 'PAR0122', 'LAWAL', 'ENIOLA', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08033370213', NULL, 60, NULL, '2015-03-24 02:24:32', '2015-03-24 13:24:32'),
-(123, 'PAR0123', 'Asubiaro', 'Tomisin', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08030839881', NULL, 13, NULL, '2015-03-24 02:24:51', '2015-03-24 13:24:51'),
-(124, 'PAR0124', 'ibeke', 'okey', 1, NULL, NULL, NULL, 'bekey4all@yahoo.com', NULL, NULL, NULL, NULL, NULL, '08033040009', NULL, 65, NULL, '2015-03-24 02:25:03', '2015-03-24 13:25:03'),
-(125, 'PAR0125', 'ITSEUWA', 'EMILY', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08033215262', NULL, 60, NULL, '2015-03-24 02:26:10', '2015-03-24 13:26:10'),
-(126, 'PAR0126', 'OSHOBU', 'OLUWAFUNMILAYO', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08023039969', NULL, 60, NULL, '2015-03-24 02:27:47', '2015-03-24 13:27:47'),
-(127, 'PAR0127', 'SANNI', 'OLUWASEUN', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08023187676', NULL, 60, NULL, '2015-03-24 02:28:52', '2015-03-24 13:28:53'),
-(128, 'PAR0128', 'ONYEMAECHI', 'JENNIFER', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08033088494', NULL, 60, NULL, '2015-03-24 02:29:56', '2015-03-24 13:29:56'),
-(129, 'PAR0129', 'ERIVWODE ', 'RUKEVWE', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08066766565', NULL, 60, NULL, '2015-03-24 02:31:00', '2015-03-24 13:31:01'),
-(130, 'PAR0130', 'LAWAL', 'HABEEBAT', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08033379127', NULL, 60, NULL, '2015-03-24 02:32:03', '2015-03-24 13:32:03'),
-(131, 'PAR0131', 'POPOOLA', 'IBUKUN', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '07085810372', NULL, 60, NULL, '2015-03-24 02:32:59', '2015-03-24 13:32:59'),
-(132, 'PAR0132', 'NOIKI', 'OLUWATOMIWA', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08023092160', NULL, 60, NULL, '2015-03-24 02:33:52', '2015-03-24 13:33:53'),
-(133, 'PAR0133', 'EZEJELUE', 'SOMKENE', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08037278502', NULL, 60, NULL, '2015-03-24 02:34:55', '2015-03-24 13:34:55'),
-(134, 'PAR0134', 'Faluade', 'Kayode', 1, NULL, NULL, NULL, 'Kayodefaluade@yahoo.com', NULL, NULL, NULL, NULL, NULL, '08023361524', NULL, 50, NULL, '2015-03-24 02:48:18', '2015-03-24 13:48:18'),
-(135, 'PAR0135', 'Hamman-Obel', 'Ogheneyoma', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08026806660', NULL, 43, NULL, '2015-03-24 02:48:23', '2015-03-24 13:48:24'),
-(136, 'PAR0136', 'Akintola', 'Ibrahim', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08033049351', NULL, 50, NULL, '2015-03-24 02:50:38', '2015-03-24 13:50:38'),
-(137, 'PAR0137', 'Hassan', 'Adetunji', 1, NULL, NULL, NULL, 'Hassankhadijan@gmail.com', NULL, NULL, NULL, NULL, NULL, '08055463880', NULL, 50, NULL, '2015-03-24 02:52:09', '2015-03-24 13:52:09'),
-(138, 'PAR0138', 'Okesina', 'Victor', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08062883453', NULL, 50, NULL, '2015-03-24 02:53:42', '2015-03-24 13:53:42'),
-(139, 'PAR0139', 'Adeniyi', 'Adeyinka', 1, NULL, NULL, NULL, 'ontop.affairs@yahoo.com', NULL, NULL, NULL, NULL, NULL, '08029727676', NULL, 50, NULL, '2015-03-24 02:54:59', '2015-03-24 13:55:00'),
-(141, 'PAR0141', 'Adesina', 'Adekunle', 1, NULL, NULL, NULL, 'Adekunle.adesina@gmail.com', NULL, NULL, NULL, NULL, NULL, '08034722758', NULL, 50, NULL, '2015-03-24 02:59:11', '2015-03-24 13:59:11'),
-(142, 'PAR0142', 'Agunbiade', 'Olukayode', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '07031193987', NULL, 50, NULL, '2015-03-24 03:03:38', '2015-03-24 14:03:38'),
-(143, 'PAR0143', 'Chinda', 'Hope', 1, NULL, NULL, NULL, 'Adekokun2@hotmail.com', NULL, NULL, NULL, NULL, NULL, '08023335056', NULL, 50, NULL, '2015-03-24 03:04:50', '2015-03-24 14:04:50'),
-(144, 'PAR0144', 'Samson', 'Olufemi', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08168442659', NULL, 50, NULL, '2015-03-24 03:06:43', '2015-03-24 14:06:43'),
-(145, 'PAR0145', 'ABDOU', 'AMOUDATH', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '22997222403', NULL, 60, NULL, '2015-03-24 03:08:15', '2015-03-24 18:43:11'),
-(146, 'PAR0146', 'BAKRE', 'BABAJIDE', 1, NULL, NULL, NULL, 'jidebakre@yahoo.com', NULL, NULL, NULL, NULL, NULL, '08033076087', NULL, 13, NULL, '2015-03-24 03:13:57', '2015-03-25 15:39:27'),
-(147, 'PAR0147', 'chiejile', 'Williams', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08051245920', NULL, 13, NULL, '2015-03-24 03:14:55', '2015-03-24 14:14:55'),
-(148, 'PAR0148', 'Lawal', 'Sunkanmi', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08033370213', NULL, 13, NULL, '2015-03-24 03:15:30', '2015-03-24 14:15:30'),
-(149, 'PAR0149', 'Nwogu', 'Victor', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '0803397834', NULL, 13, NULL, '2015-03-24 03:16:18', '2015-03-24 14:16:19'),
-(150, 'PAR0150', 'Okeke ', 'Chigozie', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08032463769', NULL, 13, NULL, '2015-03-24 03:16:55', '2015-03-24 14:16:56'),
-(151, 'PAR0151', 'Ogunbanjo', 'Timilehin', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08033058040', NULL, 13, NULL, '2015-03-24 03:17:35', '2015-03-24 14:17:36'),
-(152, 'PAR0152', 'Onwuchelu ', 'Christian', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '22505052049', NULL, 13, NULL, '2015-03-24 03:18:41', '2015-03-24 14:18:42'),
-(153, 'PAR0153', 'Soyebi', 'Oluwaseun', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08060854491', NULL, 13, NULL, '2015-03-24 03:19:19', '2015-03-24 14:19:20'),
-(154, 'PAR0154', 'Uduji-Emenike', 'Chibueze', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08033283134', NULL, 13, NULL, '2015-03-24 03:20:06', '2015-03-24 14:20:06'),
-(155, 'PAR0155', 'Olatunbosun', 'Olaoluwa', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08028723456', NULL, 13, NULL, '2015-03-24 03:21:08', '2015-03-24 14:21:08'),
-(156, 'PAR0156', 'Ikpi-Iyam', 'Felix', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08033131070', NULL, 13, NULL, '2015-03-24 03:21:53', '2015-03-24 14:21:53'),
-(158, 'PAR0158', 'KAZEEM', 'OLAWALE', 11, NULL, NULL, NULL, 'Kazwal2@yahoo.com', NULL, NULL, NULL, NULL, NULL, '018907218', NULL, 60, NULL, '2015-03-24 03:38:18', '2015-03-24 14:38:19'),
-(159, 'PAR0159', 'UGOCHUKWU', 'CHRISTINA', 4, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08034027185', NULL, 60, NULL, '2015-03-24 03:44:20', '2015-03-24 14:44:20'),
-(160, 'PAR0160', 'OJUDU', 'BABAFEMI ', 1, NULL, NULL, NULL, 'ojudubabafemi@gmail.com', NULL, NULL, NULL, NULL, NULL, '08023033594', NULL, 60, NULL, '2015-03-24 03:52:35', '2015-03-24 14:52:35'),
-(161, 'PAR0161', 'Afolabi', 'wuraola', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '07062845703', NULL, 23, NULL, '2015-03-24 03:55:54', '2015-03-24 14:55:55'),
-(162, 'PAR0162', 'Angel', 'EMMANUEL', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08032185524', NULL, 23, NULL, '2015-03-24 03:56:54', '2015-03-24 14:56:54'),
-(163, 'PAR0163', 'Ikpi-Iyam', 'Irene', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08033131070', NULL, 23, NULL, '2015-03-24 03:58:14', '2015-03-24 14:58:14'),
-(164, 'PAR0164', 'Johnson', 'Precious', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08026621330', NULL, 23, NULL, '2015-03-24 03:59:31', '2015-03-24 14:59:31'),
-(165, 'PAR0165', 'Okey-Ezealah', 'Viola', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08055288380', NULL, 23, NULL, '2015-03-24 04:02:07', '2015-03-24 15:02:07'),
-(166, 'PAR0166', 'Oshobu', 'Yemisi', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08023164370', NULL, 23, NULL, '2015-03-24 04:03:30', '2015-03-24 15:03:31'),
-(168, 'PAR0168', 'Sobowale', 'Anike', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08037235348', NULL, 23, NULL, '2015-03-24 04:05:42', '2015-03-24 15:05:42'),
-(169, 'PAR0169', 'Yahaya', 'Mariam', 11, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08033045008', NULL, 23, NULL, '2015-03-24 04:06:59', '2015-03-24 15:06:59'),
-(170, 'PAR0170', 'DANDEKAR', 'RAJEEV', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08024780331', NULL, 62, NULL, '2015-03-24 04:09:02', '2015-03-24 15:09:02'),
-(171, 'PAR0171', 'ONONAEKE', 'KENNEDY', 5, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08056316263', NULL, 62, NULL, '2015-03-24 04:10:28', '2015-03-24 15:10:28'),
-(172, 'PAR0172', 'ANAGBE', 'PETER PAUL', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08062100389', NULL, 62, NULL, '2015-03-24 04:12:03', '2015-03-24 15:12:04'),
-(173, 'PAR0173', 'ALAYANDE', 'OLALEKAN', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08036158009', NULL, 62, NULL, '2015-03-24 04:13:06', '2015-03-24 15:13:06'),
-(174, 'PAR0174', 'OYENIRAN', 'MUFTAU', 11, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08024401482', NULL, 62, NULL, '2015-03-24 04:13:52', '2015-03-24 15:13:52'),
-(178, 'PAR0178', 'Olukokun', 'Adediran', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08023335056', NULL, 50, NULL, '2015-03-24 04:24:32', '2015-03-24 15:24:32'),
-(179, 'PAR0179', 'AKINTELU', 'ADEBAYO', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '07034154821', NULL, 62, NULL, '2015-03-24 04:27:11', '2015-03-24 15:27:11'),
-(180, 'PAR0180', 'LAWRENCE', 'ADEPOJU', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08023031469', NULL, 62, NULL, '2015-03-24 04:35:02', '2015-03-24 15:35:02'),
-(181, 'PAR0181', 'ABIOLA', 'HAFEEZ', 1, NULL, NULL, NULL, 'habiola@elektrint.com', NULL, NULL, NULL, NULL, NULL, '08033065549', NULL, 16, NULL, '2015-03-24 04:35:06', '2015-03-24 15:35:07'),
-(182, 'PAR0182', 'OLADAPO', 'ADEOSUN', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08033463008', NULL, 62, NULL, '2015-03-24 04:36:05', '2015-03-24 15:36:06'),
-(183, 'PAR0183', 'ADENIYI', 'ABDULSALAM ', 1, NULL, NULL, NULL, 'wallayadeniyi@yahoo.co.uk', NULL, NULL, NULL, NULL, NULL, '08033142881', NULL, 16, NULL, '2015-03-24 04:37:02', '2015-03-24 15:37:03'),
-(184, 'PAR0184', 'UBANDOMA', 'BELLO', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08032260898', NULL, 62, NULL, '2015-03-24 04:37:47', '2015-03-24 15:37:47'),
-(185, 'PAR0185', 'AJIBOLA', 'ISLAM', 1, NULL, NULL, NULL, 'tempuston@yahoo.com', NULL, NULL, NULL, NULL, NULL, '07061376488', NULL, 16, NULL, '2015-03-24 04:38:16', '2015-03-24 15:38:16'),
-(186, 'PAR0186', 'BAKARE', 'OLUDAYO', 1, NULL, NULL, NULL, 'Rafiu.Bakare@zenithbank.com', NULL, NULL, NULL, NULL, NULL, '08033087642', NULL, 16, NULL, '2015-03-24 04:39:18', '2015-03-24 15:39:18'),
-(188, 'PAR0188', 'BELLO ', 'AYOTUNDE', 1, NULL, NULL, NULL, 'bello_topza@yahoo.co.uk', NULL, NULL, NULL, NULL, NULL, '08055832217', NULL, 16, NULL, '2015-03-24 04:40:26', '2015-03-24 15:40:26'),
-(189, 'PAR0189', 'EMMANUEL', 'OBINNA', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08032185524', NULL, 16, NULL, '2015-03-24 04:41:32', '2015-03-24 15:41:32'),
-(190, 'PAR0190', 'FOLORUNSO', 'IYIOLA', 1, NULL, NULL, NULL, 'isaac.folorunso@yahoo.com', NULL, NULL, NULL, NULL, NULL, '08023120561', NULL, 16, NULL, '2015-03-24 04:43:05', '2015-03-24 15:43:05'),
-(191, 'PAR0191', 'IDOWU', 'OLUWABUKUNMI', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08033034118', NULL, 16, NULL, '2015-03-24 04:44:17', '2015-03-24 15:44:17'),
-(192, 'PAR0192', 'NIKORO', 'OMAGBITSE', 1, NULL, NULL, NULL, 'tonynikoro@yahoo.co.uk', NULL, NULL, NULL, NULL, NULL, '08051095262', NULL, 16, NULL, '2015-03-24 04:45:18', '2015-03-24 15:45:19'),
-(193, 'PAR0193', 'FAYOMI', 'I', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08035070732', NULL, 62, NULL, '2015-03-24 04:45:48', '2015-03-24 15:45:49'),
-(194, 'PAR0194', 'OBRIBAI', 'SAMSON', 1, NULL, NULL, NULL, 'yeyeone@yahoo.com', NULL, NULL, NULL, NULL, NULL, '08038266225', NULL, 16, NULL, '2015-03-24 04:46:23', '2015-03-24 15:46:23'),
-(195, 'PAR0195', 'ELENDU', 'CHURCHIL', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08034740241', NULL, 62, NULL, '2015-03-24 04:46:53', '2015-03-24 15:46:53'),
-(196, 'PAR0196', 'OGUNDIMU ', 'MOBOLUWADURO', 1, NULL, NULL, NULL, 'sina_ogun@yahoo.co.uk', NULL, NULL, NULL, NULL, NULL, '08037224353', NULL, 16, NULL, '2015-03-24 04:47:24', '2015-03-24 15:47:24'),
-(198, 'PAR0198', 'OGUNEKO', 'AYOOLA', 1, NULL, NULL, NULL, 'oguneko.o@acn.aero', NULL, NULL, NULL, NULL, NULL, '08034061274', NULL, 16, NULL, '2015-03-24 04:48:52', '2015-03-24 15:48:52'),
-(199, 'PAR0199', 'OKOYE ', 'PAUL', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08032235812', NULL, 16, NULL, '2015-03-24 04:49:29', '2015-03-24 15:49:29'),
-(200, 'PAR0200', 'OKPARA', 'NATHANIEL', 1, NULL, NULL, NULL, 'daniel.okpara@qualitymarineng.com', NULL, NULL, NULL, NULL, NULL, '08034345521', NULL, 16, NULL, '2015-03-24 04:50:29', '2015-03-24 15:50:29'),
-(201, 'PAR0201', 'SOWOLE', 'AYOTOMI ', 1, NULL, NULL, NULL, 'sowoles@yahoo.com', NULL, NULL, NULL, NULL, NULL, '08035942511', NULL, 16, NULL, '2015-03-24 04:51:28', '2015-03-24 15:51:28'),
-(204, 'PAR0204', 'SOGE', 'ABAYOMI', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08024700738', NULL, 62, NULL, '2015-03-24 06:55:11', '2015-03-24 17:55:11'),
-(205, 'PAR0205', 'RAJI', 'HABEEB', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08026301862', NULL, 62, NULL, '2015-03-24 06:58:45', '2015-03-24 17:58:45'),
-(206, 'PAR0206', 'OSINAIKE', 'OLANREWAJU', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08033212239', NULL, 62, NULL, '2015-03-24 07:04:54', '2015-03-24 18:04:54'),
-(207, 'PAR0207', 'AMZAT', 'YAYA', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '07074969994', NULL, 62, NULL, '2015-03-24 07:08:01', '2015-03-24 18:08:01'),
-(208, 'PAR0208', 'Soge', 'Olumuyiwa', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08036661699', NULL, 40, NULL, '2015-03-25 08:12:08', '2015-03-25 07:12:08'),
-(209, 'PAR0209', 'Shadouh', 'Hani', 8, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08039567889', NULL, 40, NULL, '2015-03-25 08:15:40', '2015-03-25 07:15:40'),
-(210, 'PAR0210', 'Ibazebo', 'Adeniyi', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08094649847', NULL, 40, NULL, '2015-03-25 08:17:47', '2015-03-25 07:17:47'),
-(211, 'PAR0211', 'Ajisebutu', 'Olusayo', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08052155846', NULL, 40, NULL, '2015-03-25 08:20:41', '2015-03-25 07:20:41'),
-(212, 'PAR0212', 'Oshunlola', 'Yisa', 11, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08033436172', NULL, 40, NULL, '2015-03-25 08:21:29', '2015-03-25 07:21:29'),
-(213, 'PAR0213', 'Olaore', 'Oludare', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08055257545', NULL, 40, NULL, '2015-03-25 08:22:43', '2015-03-25 07:22:43'),
-(214, 'PAR0214', 'Olasedidun', 'Tunde', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08065058550', NULL, 40, NULL, '2015-03-25 08:26:32', '2015-03-25 07:26:32'),
-(215, 'PAR0215', 'Adepoju', 'Lawrence', 7, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08023031469', NULL, 40, NULL, '2015-03-25 08:28:22', '2015-03-25 07:28:22'),
-(216, 'PAR0216', 'Onwuchelu', 'Emeka', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '05052049', NULL, 43, NULL, '2015-03-25 09:13:15', '2015-03-25 08:13:15'),
-(217, 'PAR0217', 'Ishola', 'Bolaji', 1, NULL, NULL, NULL, 'adeoluwafaniyi@yahoo.com', NULL, NULL, NULL, NULL, NULL, '08023409352', NULL, 43, NULL, '2015-03-25 09:19:24', '2015-03-25 08:19:24'),
-(218, 'PAR0218', 'Akpama', 'Paul', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '07062849533', NULL, 43, NULL, '2015-03-25 09:23:02', '2015-03-25 08:23:02'),
-(219, 'PAR0219', 'Wikimor', 'John', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08052462012', NULL, 43, NULL, '2015-03-25 09:25:44', '2015-03-25 08:25:44'),
-(220, 'PAR0220', 'Ziworitin', 'Ebikabo-Owei', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '07036603754', NULL, 43, NULL, '2015-03-25 09:30:26', '2015-03-25 08:30:27'),
-(221, 'PAR0221', 'Olumese', 'Anthony', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '07098702770', NULL, 38, NULL, '2015-03-25 09:31:19', '2015-03-25 08:31:19'),
-(222, 'PAR0222', 'Markbere', 'Abraham', 2, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '07030952769', NULL, 43, NULL, '2015-03-25 09:33:05', '2015-03-25 08:33:05'),
-(223, 'PAR0223', 'Okunbor', 'Ifeanyi', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08034029238', NULL, 38, NULL, '2015-03-25 09:34:37', '2015-03-25 08:34:37'),
-(224, 'PAR0224', 'Osinbanjo', 'Oluwafemi', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08033223660', NULL, 38, NULL, '2015-03-25 09:35:20', '2015-03-25 08:35:21'),
-(225, 'PAR0225', 'Awolaja', 'Adekunle', 1, NULL, NULL, NULL, 'kunlaj2002@yahoo.com', NULL, NULL, NULL, NULL, NULL, '08053021329', NULL, 38, NULL, '2015-03-25 09:35:58', '2015-03-25 14:05:56'),
-(226, 'PAR0226', 'Abdou', 'Fatou', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '+22990927584', NULL, 38, NULL, '2015-03-25 09:37:01', '2015-03-25 08:37:01'),
-(227, 'PAR0227', 'Emmanuel', 'Offodile', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08032185524', NULL, 38, NULL, '2015-03-25 09:38:02', '2015-03-25 08:38:02'),
-(228, 'PAR0228', 'Ohadike', 'Michael', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08023003470', NULL, 38, NULL, '2015-03-25 09:38:40', '2015-03-25 08:38:40'),
-(229, 'PAR0229', 'Owhonda', 'Okechukwu', 7, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08023119504', NULL, 38, NULL, '2015-03-25 09:39:32', '2015-03-25 08:39:32'),
-(230, 'PAR0230', 'Eldine', 'Layefa', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08037794556', NULL, 43, NULL, '2015-03-25 09:41:57', '2015-03-25 08:41:57'),
+(29, 'PAR0029', 'Adegboyega', 'Williams', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08189145603', NULL, 53, NULL, '2015-03-24 10:49:42', '2015-03-24 09:49:42'),
+(30, 'PAR0030', 'Ifeoluwa', 'Adealu', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08023006122', NULL, 40, NULL, '2015-03-24 11:08:11', '2015-03-24 10:08:11'),
+(32, 'PAR0032', 'KEME', 'ABADI', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08063753985', NULL, 30, NULL, '2015-03-24 11:21:47', '2015-03-24 10:21:47'),
+(34, 'PAR0034', 'EBIKABOERE', 'AMARA', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '07038743024', NULL, 30, NULL, '2015-03-24 11:25:10', '2015-03-24 10:25:10'),
+(35, 'PAR0035', 'CHIAMAKA', 'ANIWETA-NEZIANYA', 8, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08035900798', NULL, 30, NULL, '2015-03-24 11:26:48', '2015-03-24 10:26:48'),
+(36, 'PAR0036', 'KENDRAH', 'BAGOU', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08031902363', NULL, 30, NULL, '2015-03-24 11:28:15', '2015-03-24 10:28:15'),
+(37, 'PAR0037', 'OKEOGHENE', 'ERIVWODE', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08066766565', NULL, 30, NULL, '2015-03-24 11:29:35', '2015-03-24 10:29:35'),
+(38, 'PAR0038', 'AYEBANENGIYEFA', 'GEORGEWILL', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08037968795', NULL, 30, NULL, '2015-03-24 11:30:56', '2015-03-24 10:30:56'),
+(39, 'PAR0039', 'ROSEMARY', 'ITSEUWA ', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08033215262', NULL, 30, NULL, '2015-03-24 11:32:20', '2015-03-24 10:32:20'),
+(40, 'PAR0040', 'VICTORIA', 'JOB', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08135591296', NULL, 30, NULL, '2015-03-24 11:33:22', '2015-03-24 10:33:23'),
+(41, 'PAR0041', 'HAPPINESS', 'KALAYOLO', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '07062687122', NULL, 30, NULL, '2015-03-24 11:34:25', '2015-03-24 10:34:25'),
+(42, 'PAR0042', 'ONISOKIE', 'MAZI', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08037899243', NULL, 30, NULL, '2015-03-24 11:36:03', '2015-03-24 10:36:03'),
+(43, 'PAR0043', 'EVELYN', 'NATHANIEL', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08131346013', NULL, 30, NULL, '2015-03-24 11:37:04', '2015-03-24 10:37:04'),
+(44, 'PAR0044', 'OYINKANSOLA', 'OBUBE', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08067183793', NULL, 30, NULL, '2015-03-24 11:37:58', '2015-03-24 10:37:58'),
+(45, 'PAR0045', 'OYINDAMOLA', 'OKE', 11, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08090906406', NULL, 30, NULL, '2015-03-24 11:38:54', '2015-03-24 10:38:54'),
+(46, 'PAR0046', 'Jimoh', 'Otori', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08023070934', NULL, 53, NULL, '2015-03-24 11:39:32', '2015-03-24 10:39:32'),
+(47, 'PAR0047', 'CHISOM', 'OKOYE', 6, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08023376269', NULL, 30, NULL, '2015-03-24 11:39:55', '2015-03-24 10:39:55'),
+(48, 'PAR0048', 'Funke', 'Salau', 4, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08023288942', NULL, 53, NULL, '2015-03-24 11:41:13', '2015-03-24 10:41:14'),
+(49, 'PAR0049', 'IBEINMO', 'TELIMOYE', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '07037722998', NULL, 30, NULL, '2015-03-24 11:41:32', '2015-03-24 10:41:32'),
+(50, 'PAR0050', 'Moruf', 'Adealu', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08023006122', NULL, 53, NULL, '2015-03-24 11:42:50', '2015-03-24 10:42:50'),
+(51, 'PAR0051', 'ENDURANCE', 'WAIBITE', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08168189756', NULL, 30, NULL, '2015-03-24 11:44:42', '2015-03-24 10:44:43'),
+(52, 'PAR0052', 'Oluwagbenga', 'Ojo', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08023318436', NULL, 53, NULL, '2015-03-24 11:45:33', '2015-03-24 10:45:33'),
+(53, 'PAR0053', 'IBUKUN', 'WILLIAMS', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08038404056', NULL, 30, NULL, '2015-03-24 11:45:38', '2015-03-24 10:45:38'),
+(54, 'PAR0054', 'Adekunle', 'Oloyede', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08024001476', NULL, 53, NULL, '2015-03-24 11:46:23', '2015-03-24 10:46:23'),
+(55, 'PAR0055', 'Oyinlade', 'Abioye', 4, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08023328277', NULL, 53, NULL, '2015-03-24 11:47:30', '2015-03-24 10:47:30'),
+(56, 'PAR0056', 'Jelili', 'Odesola', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08061663367', NULL, 53, NULL, '2015-03-24 11:48:22', '2015-03-24 10:48:22'),
+(57, 'PAR0057', 'Oladapo', 'ADEOSUN', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08023125717', NULL, 52, NULL, '2015-03-24 12:17:24', '2015-03-24 11:17:24'),
+(58, 'PAR0058', 'MUBARAK', 'DADA', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08026829359', NULL, 52, NULL, '2015-03-24 12:18:11', '2015-03-24 11:18:11'),
+(59, 'PAR0059', 'MICHEAL', 'ADEDOTUN', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08085439241', NULL, 52, NULL, '2015-03-24 12:19:09', '2015-03-24 11:19:10'),
+(60, 'PAR0060', 'DEBORAH', 'AGUNBIADE', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '09034109157', NULL, 52, NULL, '2015-03-24 12:21:48', '2015-03-24 11:21:48'),
+(61, 'PAR0061', 'Adekunle', 'HAMZAT', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '080233359199', NULL, 52, NULL, '2015-03-24 12:22:32', '2015-03-24 11:22:33'),
+(62, 'PAR0062', 'EMMANUEL', 'LALA', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08034015407', NULL, 52, NULL, '2015-03-24 12:23:09', '2015-03-24 11:23:10'),
+(63, 'PAR0063', 'ADESOJI', 'OKESINA', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08062883453', NULL, 52, NULL, '2015-03-24 12:23:48', '2015-03-24 11:23:48'),
+(64, 'PAR0064', 'JOSEPH', 'OJO', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08023176070', NULL, 52, NULL, '2015-03-24 12:24:29', '2015-03-24 11:24:30'),
+(65, 'PAR0065', 'IBAZEBO', 'ADENIYI', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08023193180', NULL, 52, NULL, '2015-03-24 12:40:25', '2015-03-24 11:40:25'),
+(66, 'PAR0066', 'Olufemi', 'Azeez', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08189268578', NULL, 14, NULL, '2015-03-24 12:49:56', '2015-03-24 11:49:57'),
+(67, 'PAR0067', 'Tajudeen', 'Bello', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08092855295', NULL, 14, NULL, '2015-03-24 12:50:43', '2015-03-24 11:50:43'),
+(68, 'PAR0068', 'Aderemi', 'Bello', 8, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08035103728', NULL, 14, NULL, '2015-03-24 12:51:49', '2015-03-24 11:51:49'),
+(69, 'PAR0069', 'Kelvin', 'Bribena', 5, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08168800002', NULL, 14, NULL, '2015-03-24 12:52:39', '2015-03-24 11:52:39'),
+(70, 'PAR0070', 'Isaac', 'Folorunso', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08023120561', NULL, 14, NULL, '2015-03-24 12:55:00', '2015-03-24 11:55:00'),
+(71, 'PAR0071', 'Amos', 'Ogundele', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08025015608', NULL, 14, NULL, '2015-03-24 12:55:31', '2015-03-24 11:55:31'),
+(72, 'PAR0072', 'Oyekanmi', 'Olaoye', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08057932322', NULL, 14, NULL, '2015-03-24 12:56:12', '2015-03-24 11:56:12'),
+(73, 'PAR0073', 'Edwin', 'Onyebuchi', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08033008296', NULL, 14, NULL, '2015-03-24 12:57:04', '2015-03-24 11:57:04'),
+(74, 'PAR0074', 'Adaobi', 'Eze', 6, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08033017899', NULL, 14, NULL, '2015-03-24 01:00:05', '2015-03-24 12:00:05'),
+(75, 'PAR0075', 'Humphrey', 'Ibetei', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08062893168', NULL, 44, NULL, '2015-03-24 01:24:31', '2015-03-24 12:24:31'),
+(76, 'PAR0076', 'Reginald', 'Dede', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08130786804', NULL, 44, NULL, '2015-03-24 01:25:40', '2015-03-24 12:25:40'),
+(77, 'PAR0077', 'Fatiou', 'Abdou', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '22997224403', NULL, 44, NULL, '2015-03-24 01:28:24', '2015-03-24 12:28:24'),
+(78, 'PAR0078', 'Osoru', 'Obireke', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08035185309', NULL, 44, NULL, '2015-03-24 01:29:12', '2015-03-24 12:29:12'),
+(79, 'PAR0079', 'Solomon', 'Umoru', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08022030333', NULL, 44, NULL, '2015-03-24 01:30:08', '2015-03-24 12:30:09'),
+(80, 'PAR0080', 'Smdoth', 'Nanakede', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08088657546', NULL, 44, NULL, '2015-03-24 01:32:02', '2015-03-24 12:32:03'),
+(81, 'PAR0081', 'Bob', 'puragha', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08038921816', NULL, 44, NULL, '2015-03-24 01:33:19', '2015-03-24 12:33:19'),
+(82, 'PAR0082', 'Anthony', 'Soroh', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08069760970', NULL, 44, NULL, '2015-03-24 01:34:06', '2015-03-24 12:34:07'),
+(83, 'PAR0083', 'Christopher', 'Maddocks', 3, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08069097498', NULL, 44, NULL, '2015-03-24 01:34:59', '2015-03-24 12:34:59'),
+(84, 'PAR0084', 'Osahon', 'Isibor', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '07086455645', NULL, 44, NULL, '2015-03-24 01:35:43', '2015-03-24 12:35:43'),
+(85, 'PAR0085', 'Joshua', 'Zolo', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08032124113', NULL, 44, NULL, '2015-03-24 01:37:22', '2015-03-24 12:37:22'),
+(86, 'PAR0086', 'Ebikabo', 'Koroye ', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08037375525', NULL, 44, NULL, '2015-03-24 01:38:31', '2015-03-24 12:38:32'),
+(87, 'PAR0087', 'Moneyman', 'Amakedi', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08053397636', NULL, 44, NULL, '2015-03-24 01:39:27', '2015-03-24 12:39:28'),
+(88, 'PAR0088', 'Sunday', 'Azugha', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '080379911959', NULL, 44, NULL, '2015-03-24 01:40:04', '2015-03-24 12:40:04'),
+(89, 'PAR0089', 'Saadu', 'Abdullahi', 1, NULL, NULL, NULL, 'abdusaadu@yahoo.co.uk', NULL, NULL, NULL, NULL, NULL, '08033026256', NULL, 65, NULL, '2015-03-24 01:40:06', '2015-03-24 12:40:06'),
+(90, 'PAR0090', 'Abdul', 'Inenemo-Usman', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08035351939', NULL, 44, NULL, '2015-03-24 01:41:00', '2015-03-24 12:41:00'),
+(91, 'PAR0091', 'J.A', 'adeyemi', 8, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08068678683', NULL, 65, NULL, '2015-03-24 01:41:01', '2015-03-24 12:41:02'),
+(92, 'PAR0092', 'Abdul', 'Adewole', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08023154167', NULL, 44, NULL, '2015-03-24 01:41:40', '2015-03-24 12:41:41'),
+(94, 'PAR0094', 'olakunle', 'kushimo', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08023434661', NULL, 60, NULL, '2015-03-24 01:43:36', '2015-03-24 12:43:36'),
+(95, 'PAR0095', 'Azibabhom', 'Sam-Micheal', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '07032420601', NULL, 44, NULL, '2015-03-24 01:43:46', '2015-03-24 12:43:47'),
+(96, 'PAR0096', 'adesoji', 'ajibode', 1, NULL, NULL, NULL, 'cedarlinks2001@yahoo.com', NULL, NULL, NULL, NULL, NULL, '07034077523', NULL, 65, NULL, '2015-03-24 01:44:21', '2015-03-24 12:44:21'),
+(97, 'PAR0097', 'Ayibatare', 'Bagou', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08063509486', NULL, 44, NULL, '2015-03-24 01:44:58', '2015-03-24 12:44:58'),
+(98, 'PAR0098', 'omolade', 'faloye', 1, NULL, NULL, NULL, 'omoladefaloye@yahoo.com', NULL, NULL, NULL, NULL, NULL, '08023193280', NULL, 65, NULL, '2015-03-24 01:45:33', '2015-03-24 12:45:33'),
+(100, 'PAR0100', 'Nike', 'Isikpi', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08069760970', NULL, 44, NULL, '2015-03-24 01:47:14', '2015-03-24 12:47:14'),
+(101, 'PAR0101', 'lina', 'orhiunu', 4, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '447930347074', NULL, 65, NULL, '2015-03-24 01:47:23', '2015-03-24 12:47:23'),
+(102, 'PAR0102', 'o.o', 'imasuen', 1, NULL, NULL, NULL, 'femimasuen@yahoo.com', NULL, NULL, NULL, NULL, NULL, '08022234476', NULL, 65, NULL, '2015-03-24 01:48:36', '2015-03-24 12:48:37'),
+(103, 'PAR0103', 'Muhsin', 'Momoh', 5, NULL, NULL, NULL, 'amomoh@yahoo.com', NULL, NULL, NULL, NULL, NULL, '08033313424', NULL, 43, NULL, '2015-03-24 01:49:33', '2015-03-24 12:49:33'),
+(104, 'PAR0104', 'yusuf', 'ishola', 1, NULL, NULL, NULL, 'yetty@gmail.com', NULL, NULL, NULL, NULL, NULL, '08034706971', NULL, 65, NULL, '2015-03-24 01:49:53', '2015-03-24 12:49:53'),
+(105, 'PAR0105', 'Norbert', 'Mbaegbu', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08037186709', NULL, 60, NULL, '2015-03-24 01:51:28', '2015-03-24 12:51:28'),
+(106, 'PAR0106', 'Joseph', 'madueke', 1, NULL, NULL, NULL, 'madson1993@yahoo.com', NULL, NULL, NULL, NULL, NULL, '08033012374', NULL, 65, NULL, '2015-03-24 01:51:34', '2015-03-24 12:51:34'),
+(107, 'PAR0107', 'ayodele', 'odufuwa', 1, NULL, NULL, NULL, 'odufuwdupe@yahoo.com', NULL, NULL, NULL, NULL, NULL, '08055476213', NULL, 65, NULL, '2015-03-24 01:54:29', '2015-03-24 12:54:30'),
+(108, 'PAR0108', 'p.a', 'olaniyan', 1, 'tt', '', '', 'akinolaniyanpms@yahoo.com', NULL, 'Hhgg', 147, 7, 140, '08033181314', '', 65, NULL, '2015-03-24 01:56:51', '2015-03-24 13:22:55'),
+(109, 'PAR0109', 'Matthew', 'olory', 1, NULL, NULL, NULL, '0806666811', NULL, NULL, NULL, NULL, NULL, '08037865675', NULL, 65, NULL, '2015-03-24 02:00:01', '2015-03-24 13:00:01'),
+(110, 'PAR0110', 'Emmanuel', 'Tobiah', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08037950435', NULL, 43, NULL, '2015-03-24 02:00:32', '2015-03-24 13:00:32'),
+(111, 'PAR0111', 'Matthew', 'olory', 1, NULL, NULL, NULL, 'matthewolory@yahoo.com', NULL, NULL, NULL, NULL, NULL, '08066666811', NULL, 65, NULL, '2015-03-24 02:01:04', '2015-03-24 13:01:04'),
+(112, 'PAR0112', 'Matthew', 'oneh', 1, NULL, NULL, NULL, 'm.oneh@interairnigeria.com', NULL, NULL, NULL, NULL, NULL, '08037865676', NULL, 65, NULL, '2015-03-24 02:06:06', '2015-03-24 13:06:06'),
+(113, 'PAR0113', 'Isiaka', 'Oke', 11, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08090906406', NULL, 44, NULL, '2015-03-24 02:11:48', '2015-03-24 13:11:48'),
+(114, 'PAR0114', 'nkereuwem', 'onung', 1, NULL, NULL, NULL, 'afimaonung@yahoo.com', NULL, NULL, NULL, NULL, NULL, '08037135661', NULL, 65, NULL, '2015-03-24 02:12:04', '2015-03-24 13:12:04'),
+(115, 'PAR0115', 'Kingsley', 'osadolor', 1, NULL, NULL, NULL, 'osakingosa@hotmail.com', NULL, NULL, NULL, NULL, NULL, '08033042837', NULL, 65, NULL, '2015-03-24 02:15:02', '2015-03-24 13:15:02'),
+(116, 'PAR0116', 'FAITH', 'ATABULE', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08055024772', NULL, 60, NULL, '2015-03-24 02:18:25', '2015-03-24 13:18:26'),
+(117, 'PAR0117', 'OLAMIDE', 'KUSHIMOH', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08054881234', NULL, 60, NULL, '2015-03-24 02:19:05', '2015-03-24 13:19:05'),
+(119, 'PAR0119', 'MOTUNRAYO', 'OGUNDIMU', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08050442115', NULL, 60, NULL, '2015-03-24 02:21:29', '2015-03-24 13:21:29'),
+(120, 'PAR0120', 'HAUWA', 'BUHARI-ABDULLAHI', 11, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08033024367', NULL, 60, NULL, '2015-03-24 02:22:41', '2015-03-24 13:22:41'),
+(121, 'PAR0121', 'Ayomide', 'Faloye', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08033040696', NULL, 43, NULL, '2015-03-24 02:22:59', '2015-03-24 13:22:59'),
+(122, 'PAR0122', 'ENIOLA', 'LAWAL', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08033370213', NULL, 60, NULL, '2015-03-24 02:24:32', '2015-03-24 13:24:32'),
+(123, 'PAR0123', 'Tomisin', 'Asubiaro', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08030839881', NULL, 13, NULL, '2015-03-24 02:24:51', '2015-03-24 13:24:51'),
+(124, 'PAR0124', 'okey', 'ibeke', 1, NULL, NULL, NULL, 'bekey4all@yahoo.com', NULL, NULL, NULL, NULL, NULL, '08033040009', NULL, 65, NULL, '2015-03-24 02:25:03', '2015-03-24 13:25:03'),
+(125, 'PAR0125', 'EMILY', 'ITSEUWA', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08033215262', NULL, 60, NULL, '2015-03-24 02:26:10', '2015-03-24 13:26:10'),
+(126, 'PAR0126', 'OLUWAFUNMILAYO', 'OSHOBU', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08023039969', NULL, 60, NULL, '2015-03-24 02:27:47', '2015-03-24 13:27:47'),
+(127, 'PAR0127', 'OLUWASEUN', 'SANNI', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08023187676', NULL, 60, NULL, '2015-03-24 02:28:52', '2015-03-24 13:28:53'),
+(128, 'PAR0128', 'JENNIFER', 'ONYEMAECHI', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08033088494', NULL, 60, NULL, '2015-03-24 02:29:56', '2015-03-24 13:29:56'),
+(129, 'PAR0129', 'RUKEVWE', 'ERIVWODE ', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08066766565', NULL, 60, NULL, '2015-03-24 02:31:00', '2015-03-24 13:31:01'),
+(130, 'PAR0130', 'HABEEBAT', 'LAWAL', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08033379127', NULL, 60, NULL, '2015-03-24 02:32:03', '2015-03-24 13:32:03'),
+(131, 'PAR0131', 'IBUKUN', 'POPOOLA', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '07085810372', NULL, 60, NULL, '2015-03-24 02:32:59', '2015-03-24 13:32:59'),
+(132, 'PAR0132', 'OLUWATOMIWA', 'NOIKI', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08023092160', NULL, 60, NULL, '2015-03-24 02:33:52', '2015-03-24 13:33:53'),
+(133, 'PAR0133', 'SOMKENE', 'EZEJELUE', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08037278502', NULL, 60, NULL, '2015-03-24 02:34:55', '2015-03-24 13:34:55'),
+(134, 'PAR0134', 'Kayode', 'Faluade', 1, NULL, NULL, NULL, 'Kayodefaluade@yahoo.com', NULL, NULL, NULL, NULL, NULL, '08023361524', NULL, 50, NULL, '2015-03-24 02:48:18', '2015-03-24 13:48:18'),
+(135, 'PAR0135', 'Ogheneyoma', 'Hamman-Obel', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08026806660', NULL, 43, NULL, '2015-03-24 02:48:23', '2015-03-24 13:48:24'),
+(136, 'PAR0136', 'Ibrahim', 'Akintola', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08033049351', NULL, 50, NULL, '2015-03-24 02:50:38', '2015-03-24 13:50:38'),
+(137, 'PAR0137', 'Adetunji', 'Hassan', 1, NULL, NULL, NULL, 'Hassankhadijan@gmail.com', NULL, NULL, NULL, NULL, NULL, '08055463880', NULL, 50, NULL, '2015-03-24 02:52:09', '2015-03-24 13:52:09'),
+(138, 'PAR0138', 'Victor', 'Okesina', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08062883453', NULL, 50, NULL, '2015-03-24 02:53:42', '2015-03-24 13:53:42'),
+(139, 'PAR0139', 'Adeyinka', 'Adeniyi', 1, NULL, NULL, NULL, 'ontop.affairs@yahoo.com', NULL, NULL, NULL, NULL, NULL, '08029727676', NULL, 50, NULL, '2015-03-24 02:54:59', '2015-03-24 13:55:00'),
+(141, 'PAR0141', 'Adekunle', 'Adesina', 1, NULL, NULL, NULL, 'Adekunle.adesina@gmail.com', NULL, NULL, NULL, NULL, NULL, '08034722758', NULL, 50, NULL, '2015-03-24 02:59:11', '2015-03-24 13:59:11'),
+(142, 'PAR0142', 'Olukayode', 'Agunbiade', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '07031193987', NULL, 50, NULL, '2015-03-24 03:03:38', '2015-03-24 14:03:38'),
+(143, 'PAR0143', 'Hope', 'Chinda', 1, NULL, NULL, NULL, 'Adekokun2@hotmail.com', NULL, NULL, NULL, NULL, NULL, '08023335056', NULL, 50, NULL, '2015-03-24 03:04:50', '2015-03-24 14:04:50'),
+(144, 'PAR0144', 'Olufemi', 'Samson', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08168442659', NULL, 50, NULL, '2015-03-24 03:06:43', '2015-03-24 14:06:43'),
+(145, 'PAR0145', 'AMOUDATH', 'ABDOU', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '22997222403', NULL, 60, NULL, '2015-03-24 03:08:15', '2015-03-24 18:43:11'),
+(146, 'PAR0146', 'BABAJIDE', 'BAKRE', 1, NULL, NULL, NULL, 'jidebakre@yahoo.com', NULL, NULL, NULL, NULL, NULL, '08033076087', NULL, 13, NULL, '2015-03-24 03:13:57', '2015-03-25 15:39:27'),
+(147, 'PAR0147', 'Williams', 'chiejile', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08051245920', NULL, 13, NULL, '2015-03-24 03:14:55', '2015-03-24 14:14:55'),
+(148, 'PAR0148', 'Sunkanmi', 'Lawal', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08033370213', NULL, 13, NULL, '2015-03-24 03:15:30', '2015-03-24 14:15:30'),
+(149, 'PAR0149', 'Victor', 'Nwogu', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '0803397834', NULL, 13, NULL, '2015-03-24 03:16:18', '2015-03-24 14:16:19'),
+(150, 'PAR0150', 'Chigozie', 'Okeke ', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08032463769', NULL, 13, NULL, '2015-03-24 03:16:55', '2015-03-24 14:16:56'),
+(151, 'PAR0151', 'Timilehin', 'Ogunbanjo', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08033058040', NULL, 13, NULL, '2015-03-24 03:17:35', '2015-03-24 14:17:36'),
+(152, 'PAR0152', 'Christian', 'Onwuchelu ', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '22505052049', NULL, 13, NULL, '2015-03-24 03:18:41', '2015-03-24 14:18:42'),
+(153, 'PAR0153', 'Oluwaseun', 'Soyebi', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08060854491', NULL, 13, NULL, '2015-03-24 03:19:19', '2015-03-24 14:19:20'),
+(154, 'PAR0154', 'Chibueze', 'Uduji-Emenike', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08033283134', NULL, 13, NULL, '2015-03-24 03:20:06', '2015-03-24 14:20:06'),
+(155, 'PAR0155', 'Olaoluwa', 'Olatunbosun', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08028723456', NULL, 13, NULL, '2015-03-24 03:21:08', '2015-03-24 14:21:08'),
+(156, 'PAR0156', 'Felix', 'Ikpi-Iyam', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08033131070', NULL, 13, NULL, '2015-03-24 03:21:53', '2015-03-24 14:21:53'),
+(158, 'PAR0158', 'OLAWALE', 'KAZEEM', 11, NULL, NULL, NULL, 'Kazwal2@yahoo.com', NULL, NULL, NULL, NULL, NULL, '018907218', NULL, 60, NULL, '2015-03-24 03:38:18', '2015-03-24 14:38:19'),
+(159, 'PAR0159', 'CHRISTINA', 'UGOCHUKWU', 4, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08034027185', NULL, 60, NULL, '2015-03-24 03:44:20', '2015-03-24 14:44:20'),
+(160, 'PAR0160', 'BABAFEMI ', 'OJUDU', 1, NULL, NULL, NULL, 'ojudubabafemi@gmail.com', NULL, NULL, NULL, NULL, NULL, '08023033594', NULL, 60, NULL, '2015-03-24 03:52:35', '2015-03-24 14:52:35'),
+(161, 'PAR0161', 'wuraola', 'Afolabi', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '07062845703', NULL, 23, NULL, '2015-03-24 03:55:54', '2015-03-24 14:55:55'),
+(162, 'PAR0162', 'EMMANUEL', 'Angel', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08032185524', NULL, 23, NULL, '2015-03-24 03:56:54', '2015-03-24 14:56:54'),
+(163, 'PAR0163', 'Irene', 'Ikpi-Iyam', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08033131070', NULL, 23, NULL, '2015-03-24 03:58:14', '2015-03-24 14:58:14'),
+(164, 'PAR0164', 'Precious', 'Johnson', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08026621330', NULL, 23, NULL, '2015-03-24 03:59:31', '2015-03-24 14:59:31'),
+(165, 'PAR0165', 'OKECHUKWU', 'EZEALAH', 1, 'MARKETING', 'CONOIL PLC', '1, RECLAMATION ROAD, PORT HARCOURT. RIVERS STATE', 'okeyezealah@yahoo.com', 'sponsors/165.jpg', 'HOUSE 8, MIFE ESTATE, RD ROAD, RUMUKRUSHI, PORT HARCOURT. RIVERS STATE.\r\n\r\nP.O. BOX 7190 TRANS AMADI, PORT HARCOURT. RIVERS STATE.', 288, 12, 140, '08055288380', '08034042640', 23, NULL, '2015-03-24 04:02:07', '2015-04-13 15:29:19'),
+(166, 'PAR0166', 'Yemisi', 'Oshobu', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08023164370', NULL, 23, NULL, '2015-03-24 04:03:30', '2015-03-24 15:03:31'),
+(168, 'PAR0168', 'Anike', 'Sobowale', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08037235348', NULL, 23, NULL, '2015-03-24 04:05:42', '2015-03-24 15:05:42'),
+(169, 'PAR0169', 'Mariam', 'Yahaya', 11, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08033045008', NULL, 23, NULL, '2015-03-24 04:06:59', '2015-03-24 15:06:59'),
+(170, 'PAR0170', 'RAJEEV', 'DANDEKAR', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08024780331', NULL, 62, NULL, '2015-03-24 04:09:02', '2015-03-24 15:09:02'),
+(171, 'PAR0171', 'KENNEDY', 'ONONAEKE', 5, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08056316263', NULL, 62, NULL, '2015-03-24 04:10:28', '2015-03-24 15:10:28'),
+(172, 'PAR0172', 'PETER PAUL', 'ANAGBE', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08062100389', NULL, 62, NULL, '2015-03-24 04:12:03', '2015-03-24 15:12:04'),
+(173, 'PAR0173', 'OLALEKAN', 'ALAYANDE', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08036158009', NULL, 62, NULL, '2015-03-24 04:13:06', '2015-03-24 15:13:06'),
+(174, 'PAR0174', 'MUFTAU', 'OYENIRAN', 11, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08024401482', NULL, 62, NULL, '2015-03-24 04:13:52', '2015-03-24 15:13:52'),
+(178, 'PAR0178', 'Adediran', 'Olukokun', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08023335056', NULL, 50, NULL, '2015-03-24 04:24:32', '2015-03-24 15:24:32'),
+(179, 'PAR0179', 'ADEBAYO', 'AKINTELU', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '07034154821', NULL, 62, NULL, '2015-03-24 04:27:11', '2015-03-24 15:27:11'),
+(180, 'PAR0180', 'ADEPOJU', 'LAWRENCE', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08023031469', NULL, 62, NULL, '2015-03-24 04:35:02', '2015-03-24 15:35:02'),
+(181, 'PAR0181', 'HAFEEZ', 'ABIOLA', 1, NULL, NULL, NULL, 'habiola@elektrint.com', NULL, NULL, NULL, NULL, NULL, '08033065549', NULL, 16, NULL, '2015-03-24 04:35:06', '2015-03-24 15:35:07'),
+(182, 'PAR0182', 'ADEOSUN', 'OLADAPO', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08033463008', NULL, 62, NULL, '2015-03-24 04:36:05', '2015-03-24 15:36:06'),
+(183, 'PAR0183', 'ABDULSALAM ', 'ADENIYI', 1, NULL, NULL, NULL, 'wallayadeniyi@yahoo.co.uk', NULL, NULL, NULL, NULL, NULL, '08033142881', NULL, 16, NULL, '2015-03-24 04:37:02', '2015-03-24 15:37:03'),
+(184, 'PAR0184', 'BELLO', 'UBANDOMA', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08032260898', NULL, 62, NULL, '2015-03-24 04:37:47', '2015-03-24 15:37:47'),
+(185, 'PAR0185', 'ISLAM', 'AJIBOLA', 1, NULL, NULL, NULL, 'tempuston@yahoo.com', NULL, NULL, NULL, NULL, NULL, '07061376488', NULL, 16, NULL, '2015-03-24 04:38:16', '2015-03-24 15:38:16'),
+(186, 'PAR0186', 'OLUDAYO', 'BAKARE', 1, NULL, NULL, NULL, 'Rafiu.Bakare@zenithbank.com', NULL, NULL, NULL, NULL, NULL, '08033087642', NULL, 16, NULL, '2015-03-24 04:39:18', '2015-03-24 15:39:18'),
+(188, 'PAR0188', 'AYOTUNDE', 'BELLO ', 1, NULL, NULL, NULL, 'bello_topza@yahoo.co.uk', NULL, NULL, NULL, NULL, NULL, '08055832217', NULL, 16, NULL, '2015-03-24 04:40:26', '2015-03-24 15:40:26'),
+(189, 'PAR0189', 'OBINNA', 'EMMANUEL', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08032185524', NULL, 16, NULL, '2015-03-24 04:41:32', '2015-03-24 15:41:32'),
+(190, 'PAR0190', 'IYIOLA', 'FOLORUNSO', 1, NULL, NULL, NULL, 'isaac.folorunso@yahoo.com', NULL, NULL, NULL, NULL, NULL, '08023120561', NULL, 16, NULL, '2015-03-24 04:43:05', '2015-03-24 15:43:05'),
+(191, 'PAR0191', 'OLUWABUKUNMI', 'IDOWU', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08033034118', NULL, 16, NULL, '2015-03-24 04:44:17', '2015-03-24 15:44:17'),
+(192, 'PAR0192', 'OMAGBITSE', 'NIKORO', 1, NULL, NULL, NULL, 'tonynikoro@yahoo.co.uk', NULL, NULL, NULL, NULL, NULL, '08051095262', NULL, 16, NULL, '2015-03-24 04:45:18', '2015-03-24 15:45:19'),
+(193, 'PAR0193', 'I', 'FAYOMI', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08035070732', NULL, 62, NULL, '2015-03-24 04:45:48', '2015-03-24 15:45:49'),
+(194, 'PAR0194', 'SAMSON', 'OBRIBAI', 1, NULL, NULL, NULL, 'yeyeone@yahoo.com', NULL, NULL, NULL, NULL, NULL, '08038266225', NULL, 16, NULL, '2015-03-24 04:46:23', '2015-03-24 15:46:23'),
+(195, 'PAR0195', 'CHURCHIL', 'ELENDU', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08034740241', NULL, 62, NULL, '2015-03-24 04:46:53', '2015-03-24 15:46:53'),
+(196, 'PAR0196', 'MOBOLUWADURO', 'OGUNDIMU ', 1, NULL, NULL, NULL, 'sina_ogun@yahoo.co.uk', NULL, NULL, NULL, NULL, NULL, '08037224353', NULL, 16, NULL, '2015-03-24 04:47:24', '2015-03-24 15:47:24'),
+(198, 'PAR0198', 'AYOOLA', 'OGUNEKO', 1, NULL, NULL, NULL, 'oguneko.o@acn.aero', NULL, NULL, NULL, NULL, NULL, '08034061274', NULL, 16, NULL, '2015-03-24 04:48:52', '2015-03-24 15:48:52'),
+(199, 'PAR0199', 'PAUL', 'OKOYE ', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08032235812', NULL, 16, NULL, '2015-03-24 04:49:29', '2015-03-24 15:49:29'),
+(200, 'PAR0200', 'NATHANIEL', 'OKPARA', 1, NULL, NULL, NULL, 'daniel.okpara@qualitymarineng.com', NULL, NULL, NULL, NULL, NULL, '08034345521', NULL, 16, NULL, '2015-03-24 04:50:29', '2015-03-24 15:50:29'),
+(201, 'PAR0201', 'AYOTOMI ', 'SOWOLE', 1, NULL, NULL, NULL, 'sowoles@yahoo.com', NULL, NULL, NULL, NULL, NULL, '08035942511', NULL, 16, NULL, '2015-03-24 04:51:28', '2015-03-24 15:51:28'),
+(204, 'PAR0204', 'ABAYOMI', 'SOGE', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08024700738', NULL, 62, NULL, '2015-03-24 06:55:11', '2015-03-24 17:55:11'),
+(205, 'PAR0205', 'HABEEB', 'RAJI', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08026301862', NULL, 62, NULL, '2015-03-24 06:58:45', '2015-03-24 17:58:45'),
+(206, 'PAR0206', 'OLANREWAJU', 'OSINAIKE', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08033212239', NULL, 62, NULL, '2015-03-24 07:04:54', '2015-03-24 18:04:54'),
+(207, 'PAR0207', 'YAYA', 'AMZAT', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '07074969994', NULL, 62, NULL, '2015-03-24 07:08:01', '2015-03-24 18:08:01'),
+(208, 'PAR0208', 'Olumuyiwa', 'Soge', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08036661699', NULL, 40, NULL, '2015-03-25 08:12:08', '2015-03-25 07:12:08'),
+(209, 'PAR0209', 'Hani', 'Shadouh', 8, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08039567889', NULL, 40, NULL, '2015-03-25 08:15:40', '2015-03-25 07:15:40'),
+(210, 'PAR0210', 'Adeniyi', 'Ibazebo', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08094649847', NULL, 40, NULL, '2015-03-25 08:17:47', '2015-03-25 07:17:47'),
+(211, 'PAR0211', 'Olusayo', 'Ajisebutu', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08052155846', NULL, 40, NULL, '2015-03-25 08:20:41', '2015-03-25 07:20:41'),
+(212, 'PAR0212', 'Yisa', 'Oshunlola', 11, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08033436172', NULL, 40, NULL, '2015-03-25 08:21:29', '2015-03-25 07:21:29'),
+(213, 'PAR0213', 'Oludare', 'Olaore', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08055257545', NULL, 40, NULL, '2015-03-25 08:22:43', '2015-03-25 07:22:43'),
+(214, 'PAR0214', 'Tunde', 'Olasedidun', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08065058550', NULL, 40, NULL, '2015-03-25 08:26:32', '2015-03-25 07:26:32'),
+(215, 'PAR0215', 'Lawrence', 'Adepoju', 7, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08023031469', NULL, 40, NULL, '2015-03-25 08:28:22', '2015-03-25 07:28:22'),
+(216, 'PAR0216', 'Emeka', 'Onwuchelu', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '05052049', NULL, 43, NULL, '2015-03-25 09:13:15', '2015-03-25 08:13:15'),
+(217, 'PAR0217', 'Bolaji', 'Ishola', 1, NULL, NULL, NULL, 'adeoluwafaniyi@yahoo.com', NULL, NULL, NULL, NULL, NULL, '08023409352', NULL, 43, NULL, '2015-03-25 09:19:24', '2015-03-25 08:19:24'),
+(218, 'PAR0218', 'Paul', 'Akpama', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '07062849533', NULL, 43, NULL, '2015-03-25 09:23:02', '2015-03-25 08:23:02'),
+(219, 'PAR0219', 'John', 'Wikimor', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08052462012', NULL, 43, NULL, '2015-03-25 09:25:44', '2015-03-25 08:25:44'),
+(220, 'PAR0220', 'Ebikabo-Owei', 'Ziworitin', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '07036603754', NULL, 43, NULL, '2015-03-25 09:30:26', '2015-03-25 08:30:27'),
+(221, 'PAR0221', 'Anthony', 'Olumese', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '07098702770', NULL, 38, NULL, '2015-03-25 09:31:19', '2015-03-25 08:31:19'),
+(222, 'PAR0222', 'Abraham', 'Markbere', 2, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '07030952769', NULL, 43, NULL, '2015-03-25 09:33:05', '2015-03-25 08:33:05'),
+(223, 'PAR0223', 'Ifeanyi', 'Okunbor', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08034029238', NULL, 38, NULL, '2015-03-25 09:34:37', '2015-03-25 08:34:37'),
+(224, 'PAR0224', 'Oluwafemi', 'Osinbanjo', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08033223660', NULL, 38, NULL, '2015-03-25 09:35:20', '2015-03-25 08:35:21'),
+(225, 'PAR0225', 'Adekunle', 'Awolaja', 1, NULL, NULL, NULL, 'kunlaj2002@yahoo.com', NULL, NULL, NULL, NULL, NULL, '08053021329', NULL, 38, NULL, '2015-03-25 09:35:58', '2015-03-25 14:05:56'),
+(226, 'PAR0226', 'Fatou', 'Abdou', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '+22990927584', NULL, 38, NULL, '2015-03-25 09:37:01', '2015-03-25 08:37:01'),
+(227, 'PAR0227', 'Offodile', 'Emmanuel', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08032185524', NULL, 38, NULL, '2015-03-25 09:38:02', '2015-03-25 08:38:02'),
+(228, 'PAR0228', 'Michael', 'Ohadike', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08023003470', NULL, 38, NULL, '2015-03-25 09:38:40', '2015-03-25 08:38:40'),
+(229, 'PAR0229', 'Okechukwu', 'Owhonda', 7, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08023119504', NULL, 38, NULL, '2015-03-25 09:39:32', '2015-03-25 08:39:32'),
+(230, 'PAR0230', 'Layefa', 'Eldine', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08037794556', NULL, 43, NULL, '2015-03-25 09:41:57', '2015-03-25 08:41:57'),
 (231, 'PAR0231', 'Simolings', 'Simolings', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08024685146', NULL, 43, NULL, '2015-03-25 09:45:43', '2015-03-25 08:45:43'),
-(232, 'PAR0232', 'Anagbe', 'Peter', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08062100829', NULL, 54, NULL, '2015-03-25 09:51:13', '2015-03-25 08:51:13'),
-(233, 'PAR0233', 'Akinola', 'Afolabi', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '+447404659884', NULL, 54, NULL, '2015-03-25 09:51:59', '2015-03-25 08:51:59'),
-(234, 'PAR0234', 'Shadrack', 'Amos', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08057340467', NULL, 43, NULL, '2015-03-25 09:53:48', '2015-03-25 08:53:48'),
-(235, 'PAR0235', 'Gbadebo', 'Adebisi', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '07062786208', NULL, 54, NULL, '2015-03-25 09:54:00', '2015-03-25 08:54:00'),
-(236, 'PAR0236', 'Ogundeyi', 'Najeem', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08032380610', NULL, 54, NULL, '2015-03-25 09:55:34', '2015-03-25 08:55:35'),
-(237, 'PAR0237', 'Ogunbona', 'Ismael', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08033244810', NULL, 54, NULL, '2015-03-25 09:57:57', '2015-03-25 08:57:58'),
-(238, 'PAR0238', 'Olukokun', 'Adeniran', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08023335056', NULL, 54, NULL, '2015-03-25 10:04:05', '2015-03-25 09:04:05'),
-(239, 'PAR0239', 'Ojo', 'Oluwagbenga', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08033436172', NULL, 54, NULL, '2015-03-25 10:04:48', '2015-03-25 09:04:48'),
-(240, 'PAR0240', 'Raji', 'Habeeb', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08023335273', NULL, 54, NULL, '2015-03-25 10:05:33', '2015-03-25 09:05:33'),
-(241, 'PAR0241', 'Adeola', 'Rotimi', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08055154675', NULL, 54, NULL, '2015-03-25 10:06:21', '2015-03-25 09:06:21'),
-(242, 'PAR0242', 'Oyedeji', 'James', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08026819964', NULL, 54, NULL, '2015-03-25 10:07:28', '2015-03-25 09:07:28'),
-(243, 'PAR0243', 'Promise', 'Joel', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08068050905', NULL, 43, NULL, '2015-03-25 10:08:33', '2015-03-25 09:08:34'),
-(244, 'PAR0244', 'Agadah', 'Ebiye', 1, NULL, NULL, NULL, 'chairman.bssb.gov.com', NULL, NULL, NULL, NULL, NULL, '07062522236', NULL, 43, NULL, '2015-03-25 10:35:52', '2015-03-25 09:35:52'),
-(246, 'PAR0246', 'Jesumienpreder', 'Ayere', 1, NULL, NULL, NULL, 'chairman.bssb@gmail.com', NULL, NULL, NULL, NULL, NULL, '07062522236', NULL, 43, NULL, '2015-03-25 10:41:43', '2015-03-25 09:41:44'),
-(247, 'PAR0247', 'DANIEL', 'Emmanuel', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08152662481', NULL, 43, NULL, '2015-03-25 11:35:25', '2015-03-25 10:35:25'),
-(248, 'PAR0248', 'Akunwa', 'Glory', 1, 'Property Developer', 'Glomykes Property Development Co. Ltd.', '', 'glomyke@yahoo.com', NULL, 'D46, Royal Gardens Estate, Ajah - Lekki, Lagos.', 188, 9, 140, '08023020139', '08025191010', 42, NULL, '2015-03-25 12:44:02', '2015-03-25 19:21:50'),
-(249, 'PAR0249', 'Anokwuru', 'Obioma', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08023121077', NULL, 42, NULL, '2015-03-25 12:46:14', '2015-03-25 11:46:14'),
-(251, 'PAR0251', 'Bello', 'Garba', 1, NULL, NULL, NULL, 'gbkankarofi@yahoo.com', NULL, NULL, NULL, NULL, NULL, '08023240911', NULL, 42, NULL, '2015-03-25 12:50:12', '2015-03-25 11:50:12'),
-(252, 'PAR0252', 'DADINSON-OGBOGBO ', 'David', 1, NULL, NULL, NULL, 'tone_ventures@yahoo.com', NULL, NULL, NULL, NULL, NULL, '08032002657', NULL, 42, NULL, '2015-03-25 12:51:49', '2015-03-25 11:51:50'),
-(253, 'PAR0253', 'Bayelsa', 'Guardian', 1, NULL, NULL, NULL, 'oyinbunugha@gmail.com', NULL, NULL, NULL, NULL, NULL, '07062522236', NULL, 46, NULL, '2015-03-25 01:27:30', '2015-03-25 12:27:30'),
-(254, 'PAR0254', 'NWOKEKE', 'FAVOUR', 1, NULL, NULL, NULL, 'nwokekebasil@yahoo.com', NULL, NULL, NULL, NULL, NULL, '08032002294', NULL, 46, NULL, '2015-03-25 01:31:40', '2015-03-25 12:31:40'),
-(256, 'PAR0256', 'DADINSON-OGBOGBO ', 'David', 1, NULL, NULL, NULL, 'tone_ventures@yahoo.com', NULL, NULL, NULL, NULL, NULL, '08032002657', NULL, 42, NULL, '2015-03-25 02:01:23', '2015-03-25 13:01:23'),
-(257, 'PAR0257', 'DAPPAH ', 'Owabomate', 1, NULL, NULL, NULL, 'dappaizrael@yahoo.com', NULL, NULL, NULL, NULL, NULL, '08024379053', NULL, 42, NULL, '2015-03-25 02:05:07', '2015-03-25 13:05:07'),
-(258, 'PAR0258', 'EZIMOHA ', 'EBUBECHI', 1, NULL, NULL, NULL, 'okechukwu.ezimoha@yahoo.com', NULL, NULL, NULL, NULL, NULL, '08033314669', NULL, 42, NULL, '2015-03-25 02:09:37', '2015-03-25 13:09:37'),
-(259, 'PAR0259', 'NNOROM', 'MIRACLE', 1, NULL, NULL, NULL, 'emmanuel.nnorom@ubagroup.com', NULL, NULL, NULL, NULL, NULL, '08033034944', NULL, 42, NULL, '2015-03-25 02:18:48', '2015-03-25 13:18:48'),
-(260, 'PAR0260', 'OGBECHIE', 'CHIDIEBUBE', 1, NULL, NULL, NULL, 'nyem0430@yahoo.com', NULL, NULL, NULL, NULL, NULL, '08033353232', NULL, 42, NULL, '2015-03-25 02:20:16', '2015-03-25 13:20:17'),
-(261, 'PAR0261', 'OKEREAFOR', 'EBUBE', 1, NULL, NULL, NULL, 'goddyuoconcept@yahoo.com', NULL, NULL, NULL, NULL, NULL, '08034040316', NULL, 42, NULL, '2015-03-25 02:23:04', '2015-03-25 13:23:04'),
-(262, 'PAR0262', 'OLANIYONU', 'OLADIPO', 1, NULL, NULL, NULL, 'yusuphola@yahoo.co.uk', NULL, NULL, NULL, NULL, NULL, '08055001965', NULL, 42, NULL, '2015-03-25 02:25:08', '2015-03-25 13:25:08'),
-(263, 'PAR0263', 'UNAH', 'RINCHA', 1, NULL, NULL, NULL, 'nwaunah@yahoo.com', NULL, NULL, NULL, NULL, NULL, '08023232152', NULL, 42, NULL, '2015-03-25 02:33:42', '2015-03-25 13:33:42'),
-(264, 'PAR0264', 'IGWE', 'CHUKWURAH', 4, NULL, NULL, NULL, 'kemfe@yahoo.com', NULL, NULL, NULL, NULL, NULL, '08033005452', NULL, 32, NULL, '2015-03-25 04:23:23', '2015-03-25 15:23:23'),
-(265, 'PAR0265', 'OBIDIEGWU', 'DANIEL', 1, NULL, NULL, NULL, 'daobidiegwu@yahoo.com', NULL, NULL, NULL, NULL, NULL, '08034788780', NULL, 32, NULL, '2015-03-25 04:24:43', '2015-03-25 15:24:43'),
-(266, 'PAR0266', 'AGBAWHE', 'MATTHEW', 8, NULL, NULL, NULL, 'matty2001@yahoo.com', NULL, NULL, NULL, NULL, NULL, '08023252981', NULL, 32, NULL, '2015-03-25 04:27:08', '2015-03-25 15:27:08'),
-(267, 'PAR0267', 'ASAKITIPI', 'ALEX', 1, NULL, NULL, NULL, 'alexasak@yahoo.com', NULL, NULL, NULL, NULL, NULL, '27738500581', NULL, 32, NULL, '2015-03-25 04:29:25', '2015-03-25 15:29:25'),
-(268, 'PAR0268', 'ODESANYA', 'KOREDE', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08023014818', NULL, 59, NULL, '2015-03-25 04:47:56', '2015-03-25 15:47:57'),
-(269, 'PAR0269', 'OSHINAIKE', 'TEMILOLUWA', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08033212239', NULL, 59, NULL, '2015-03-25 04:54:09', '2015-03-25 15:54:09'),
-(270, 'PAR0270', 'TOOGUN', 'YEWANDE', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '07038166337', NULL, 59, NULL, '2015-03-25 04:55:22', '2015-03-25 15:55:23'),
-(271, 'PAR0271', 'ENI', 'JEREMIAH', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '07056058605', NULL, 59, NULL, '2015-03-25 04:57:12', '2015-03-25 15:57:13'),
-(272, 'PAR0272', 'OPARA', 'HOPE', 1, NULL, NULL, NULL, 'toykachy@yahoo.com', NULL, NULL, NULL, NULL, NULL, '07029198727', NULL, 32, NULL, '2015-03-25 05:07:48', '2015-03-25 16:07:49'),
-(273, 'PAR0273', 'NICHOLAS', 'Daaiyefumasu', 1, NULL, NULL, NULL, 'chairman.bssb@gmail.com', NULL, NULL, NULL, NULL, NULL, '07062522236', NULL, 43, NULL, '2015-03-26 12:22:49', '2015-03-26 11:22:49');
+(232, 'PAR0232', 'Peter', 'Anagbe', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08062100829', NULL, 54, NULL, '2015-03-25 09:51:13', '2015-03-25 08:51:13'),
+(233, 'PAR0233', 'Afolabi', 'Akinola', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '+447404659884', NULL, 54, NULL, '2015-03-25 09:51:59', '2015-03-25 08:51:59'),
+(234, 'PAR0234', 'Amos', 'Shadrack', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08057340467', NULL, 43, NULL, '2015-03-25 09:53:48', '2015-03-25 08:53:48'),
+(235, 'PAR0235', 'Adebisi', 'Gbadebo', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '07062786208', NULL, 54, NULL, '2015-03-25 09:54:00', '2015-03-25 08:54:00'),
+(236, 'PAR0236', 'Najeem', 'Ogundeyi', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08032380610', NULL, 54, NULL, '2015-03-25 09:55:34', '2015-03-25 08:55:35'),
+(237, 'PAR0237', 'Ismael', 'Ogunbona', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08033244810', NULL, 54, NULL, '2015-03-25 09:57:57', '2015-03-25 08:57:58'),
+(238, 'PAR0238', 'Adeniran', 'Olukokun', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08023335056', NULL, 54, NULL, '2015-03-25 10:04:05', '2015-03-25 09:04:05'),
+(239, 'PAR0239', 'Oluwagbenga', 'Ojo', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08033436172', NULL, 54, NULL, '2015-03-25 10:04:48', '2015-03-25 09:04:48'),
+(240, 'PAR0240', 'Habeeb', 'Raji', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08023335273', NULL, 54, NULL, '2015-03-25 10:05:33', '2015-03-25 09:05:33'),
+(241, 'PAR0241', 'Rotimi', 'Adeola', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08055154675', NULL, 54, NULL, '2015-03-25 10:06:21', '2015-03-25 09:06:21'),
+(242, 'PAR0242', 'James', 'Oyedeji', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08026819964', NULL, 54, NULL, '2015-03-25 10:07:28', '2015-03-25 09:07:28'),
+(243, 'PAR0243', 'Joel', 'Promise', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08068050905', NULL, 43, NULL, '2015-03-25 10:08:33', '2015-03-25 09:08:34'),
+(244, 'PAR0244', 'Ebiye', 'Agadah', 1, NULL, NULL, NULL, 'chairman.bssb.gov.com', NULL, NULL, NULL, NULL, NULL, '07062522236', NULL, 43, NULL, '2015-03-25 10:35:52', '2015-03-25 09:35:52'),
+(246, 'PAR0246', 'Ayere', 'Jesumienpreder', 1, NULL, NULL, NULL, 'chairman.bssb@gmail.com', NULL, NULL, NULL, NULL, NULL, '07062522236', NULL, 43, NULL, '2015-03-25 10:41:43', '2015-03-25 09:41:44'),
+(247, 'PAR0247', 'Emmanuel', 'DANIEL', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08152662481', NULL, 43, NULL, '2015-03-25 11:35:25', '2015-03-25 10:35:25'),
+(248, 'PAR0248', 'Glory', 'Akunwa', 1, 'Property Developer', 'Glomykes Property Development Co. Ltd.', '', 'glomyke@yahoo.com', NULL, 'D46, Royal Gardens Estate, Ajah - Lekki, Lagos.', 188, 9, 140, '08023020139', '08025191010', 42, NULL, '2015-03-25 12:44:02', '2015-03-25 19:21:50'),
+(249, 'PAR0249', 'Obioma', 'Anokwuru', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08023121077', NULL, 42, NULL, '2015-03-25 12:46:14', '2015-03-25 11:46:14'),
+(251, 'PAR0251', 'Garba', 'Bello', 1, NULL, NULL, NULL, 'gbkankarofi@yahoo.com', NULL, NULL, NULL, NULL, NULL, '08023240911', NULL, 42, NULL, '2015-03-25 12:50:12', '2015-03-25 11:50:12'),
+(252, 'PAR0252', 'David', 'DADINSON-OGBOGBO ', 1, NULL, NULL, NULL, 'tone_ventures@yahoo.com', NULL, NULL, NULL, NULL, NULL, '08032002657', NULL, 42, NULL, '2015-03-25 12:51:49', '2015-03-25 11:51:50'),
+(253, 'PAR0253', 'Guardian', 'Bayelsa', 1, NULL, NULL, NULL, 'oyinbunugha@gmail.com', NULL, NULL, NULL, NULL, NULL, '07062522236', NULL, 46, NULL, '2015-03-25 01:27:30', '2015-03-25 12:27:30'),
+(254, 'PAR0254', 'FAVOUR', 'NWOKEKE', 1, NULL, NULL, NULL, 'nwokekebasil@yahoo.com', NULL, NULL, NULL, NULL, NULL, '08032002294', NULL, 46, NULL, '2015-03-25 01:31:40', '2015-03-25 12:31:40'),
+(256, 'PAR0256', 'David', 'DADINSON-OGBOGBO ', 1, NULL, NULL, NULL, 'tone_ventures@yahoo.com', NULL, NULL, NULL, NULL, NULL, '08032002657', NULL, 42, NULL, '2015-03-25 02:01:23', '2015-03-25 13:01:23'),
+(257, 'PAR0257', 'Owabomate', 'DAPPAH ', 1, NULL, NULL, NULL, 'dappaizrael@yahoo.com', NULL, NULL, NULL, NULL, NULL, '08024379053', NULL, 42, NULL, '2015-03-25 02:05:07', '2015-03-25 13:05:07'),
+(258, 'PAR0258', 'EBUBECHI', 'EZIMOHA ', 1, NULL, NULL, NULL, 'okechukwu.ezimoha@yahoo.com', NULL, NULL, NULL, NULL, NULL, '08033314669', NULL, 42, NULL, '2015-03-25 02:09:37', '2015-03-25 13:09:37'),
+(259, 'PAR0259', 'MIRACLE', 'NNOROM', 1, NULL, NULL, NULL, 'emmanuel.nnorom@ubagroup.com', NULL, NULL, NULL, NULL, NULL, '08033034944', NULL, 42, NULL, '2015-03-25 02:18:48', '2015-03-25 13:18:48'),
+(260, 'PAR0260', 'CHIDIEBUBE', 'OGBECHIE', 1, NULL, NULL, NULL, 'nyem0430@yahoo.com', NULL, NULL, NULL, NULL, NULL, '08033353232', NULL, 42, NULL, '2015-03-25 02:20:16', '2015-03-25 13:20:17'),
+(261, 'PAR0261', 'EBUBE', 'OKEREAFOR', 1, NULL, NULL, NULL, 'goddyuoconcept@yahoo.com', NULL, NULL, NULL, NULL, NULL, '08034040316', NULL, 42, NULL, '2015-03-25 02:23:04', '2015-03-25 13:23:04'),
+(262, 'PAR0262', 'OLADIPO', 'OLANIYONU', 1, NULL, NULL, NULL, 'yusuphola@yahoo.co.uk', NULL, NULL, NULL, NULL, NULL, '08055001965', NULL, 42, NULL, '2015-03-25 02:25:08', '2015-03-25 13:25:08'),
+(263, 'PAR0263', 'RINCHA', 'UNAH', 1, NULL, NULL, NULL, 'nwaunah@yahoo.com', NULL, NULL, NULL, NULL, NULL, '08023232152', NULL, 42, NULL, '2015-03-25 02:33:42', '2015-03-25 13:33:42'),
+(264, 'PAR0264', 'CHUKWURAH', 'IGWE', 4, NULL, NULL, NULL, 'kemfe@yahoo.com', NULL, NULL, NULL, NULL, NULL, '08033005452', NULL, 32, NULL, '2015-03-25 04:23:23', '2015-03-25 15:23:23'),
+(265, 'PAR0265', 'DANIEL', 'OBIDIEGWU', 1, NULL, NULL, NULL, 'daobidiegwu@yahoo.com', NULL, NULL, NULL, NULL, NULL, '08034788780', NULL, 32, NULL, '2015-03-25 04:24:43', '2015-03-25 15:24:43'),
+(266, 'PAR0266', 'MATTHEW', 'AGBAWHE', 8, NULL, NULL, NULL, 'matty2001@yahoo.com', NULL, NULL, NULL, NULL, NULL, '08023252981', NULL, 32, NULL, '2015-03-25 04:27:08', '2015-03-25 15:27:08'),
+(267, 'PAR0267', 'ALEX', 'ASAKITIPI', 1, NULL, NULL, NULL, 'alexasak@yahoo.com', NULL, NULL, NULL, NULL, NULL, '27738500581', NULL, 32, NULL, '2015-03-25 04:29:25', '2015-03-25 15:29:25'),
+(268, 'PAR0268', 'KOREDE', 'ODESANYA', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08023014818', NULL, 59, NULL, '2015-03-25 04:47:56', '2015-03-25 15:47:57'),
+(269, 'PAR0269', 'TEMILOLUWA', 'OSHINAIKE', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '08033212239', NULL, 59, NULL, '2015-03-25 04:54:09', '2015-03-25 15:54:09'),
+(270, 'PAR0270', 'YEWANDE', 'TOOGUN', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '07038166337', NULL, 59, NULL, '2015-03-25 04:55:22', '2015-03-25 15:55:23'),
+(271, 'PAR0271', 'JEREMIAH', 'ENI', 1, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '07056058605', NULL, 59, NULL, '2015-03-25 04:57:12', '2015-03-25 15:57:13'),
+(272, 'PAR0272', 'HOPE', 'OPARA', 1, NULL, NULL, NULL, 'toykachy@yahoo.com', NULL, NULL, NULL, NULL, NULL, '07029198727', NULL, 32, NULL, '2015-03-25 05:07:48', '2015-03-25 16:07:49'),
+(273, 'PAR0273', 'Daaiyefumasu', 'NICHOLAS', 1, NULL, NULL, NULL, 'chairman.bssb@gmail.com', NULL, NULL, NULL, NULL, NULL, '07062522236', NULL, 43, NULL, '2015-03-26 12:22:49', '2015-03-26 11:22:49');
 
 -- --------------------------------------------------------
 
@@ -3418,8 +3484,9 @@ INSERT INTO `sponsors` (`sponsor_id`, `sponsor_no`, `first_name`, `other_name`, 
 
 DROP TABLE IF EXISTS `sponsorship_types`;
 CREATE TABLE IF NOT EXISTS `sponsorship_types` (
-`sponsorship_type_id` int(3) unsigned NOT NULL,
-  `sponsorship_type` varchar(50) DEFAULT NULL
+  `sponsorship_type_id` int(3) unsigned NOT NULL AUTO_INCREMENT,
+  `sponsorship_type` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`sponsorship_type_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
@@ -3439,11 +3506,13 @@ INSERT INTO `sponsorship_types` (`sponsorship_type_id`, `sponsorship_type`) VALU
 
 DROP TABLE IF EXISTS `spouse_details`;
 CREATE TABLE IF NOT EXISTS `spouse_details` (
-`spouse_detail_id` int(11) NOT NULL,
+  `spouse_detail_id` int(11) NOT NULL AUTO_INCREMENT,
   `employee_id` int(5) NOT NULL,
   `spouse_name` varchar(100) NOT NULL,
   `spouse_number` varchar(15) NOT NULL,
-  `spouse_employer` varchar(150) DEFAULT NULL
+  `spouse_employer` varchar(150) DEFAULT NULL,
+  PRIMARY KEY (`spouse_detail_id`),
+  KEY `employee_id` (`employee_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -3454,9 +3523,10 @@ CREATE TABLE IF NOT EXISTS `spouse_details` (
 
 DROP TABLE IF EXISTS `states`;
 CREATE TABLE IF NOT EXISTS `states` (
-`state_id` int(3) unsigned NOT NULL,
+  `state_id` int(3) unsigned NOT NULL AUTO_INCREMENT,
   `state_name` varchar(30) DEFAULT NULL,
-  `state_code` varchar(5) DEFAULT NULL
+  `state_code` varchar(5) DEFAULT NULL,
+  PRIMARY KEY (`state_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=38 ;
 
 --
@@ -3510,8 +3580,9 @@ INSERT INTO `states` (`state_id`, `state_name`, `state_code`) VALUES
 
 DROP TABLE IF EXISTS `status`;
 CREATE TABLE IF NOT EXISTS `status` (
-`status_id` int(11) NOT NULL,
-  `status` varchar(50) NOT NULL
+  `status_id` int(11) NOT NULL AUTO_INCREMENT,
+  `status` varchar(50) NOT NULL,
+  PRIMARY KEY (`status_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
@@ -3525,98 +3596,12 @@ INSERT INTO `status` (`status_id`, `status`) VALUES
 -- --------------------------------------------------------
 
 --
--- Stand-in structure for view `student_feesqueryviews`
---
-DROP VIEW IF EXISTS `student_feesqueryviews`;
-CREATE TABLE IF NOT EXISTS `student_feesqueryviews` (
-`order_id` int(11)
-,`price` decimal(12,2)
-,`process_item_id` int(11)
-,`item_id` int(11)
-,`item_name` varchar(100)
-,`academic_term_id` int(11)
-,`academic_term` varchar(50)
-,`student_name` varchar(152)
-,`student_id` int(10) unsigned
-,`sponsor_name` varchar(101)
-,`sponsor_id` int(3) unsigned
-,`class_name` varchar(50)
-,`class_id` int(11)
-,`classlevel` varchar(50)
-,`classlevel_id` int(11)
-,`academic_year_id` int(11)
-,`academic_year` varchar(50)
-,`item_type_id` int(11)
-,`item_status_id` int(3)
-,`item_type` varchar(50)
-);
--- --------------------------------------------------------
-
---
--- Stand-in structure for view `student_feesviews`
---
-DROP VIEW IF EXISTS `student_feesviews`;
-CREATE TABLE IF NOT EXISTS `student_feesviews` (
-`student_name` varchar(152)
-,`student_id` int(10) unsigned
-,`student_no` varchar(50)
-,`sponsor_name` varchar(101)
-,`sponsor_id` int(3) unsigned
-,`salutation_name` varchar(50)
-,`order_id` int(11)
-,`price` decimal(12,2)
-,`quantity` int(3)
-,`subtotal` decimal(22,2)
-,`item_id` int(11)
-,`item_name` varchar(100)
-,`item_description` text
-,`academic_term_id` int(11)
-,`academic_term` varchar(50)
-,`order_status_id` int(3)
-,`class_id` int(11)
-,`class_name` varchar(50)
-,`classlevel_id` int(11)
-,`classlevel` varchar(50)
-,`item_type_id` int(11)
-,`item_type` varchar(50)
-,`image_url` varchar(50)
-,`academic_year_id` int(11) unsigned
-,`academic_year` varchar(50)
-,`student_status_id` int(3) unsigned
-,`student_status` varchar(50)
-);
--- --------------------------------------------------------
-
---
--- Table structure for table `student_status`
---
-
-DROP TABLE IF EXISTS `student_status`;
-CREATE TABLE IF NOT EXISTS `student_status` (
-`student_status_id` int(3) unsigned NOT NULL,
-  `student_status` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
-
---
--- Dumping data for table `student_status`
---
-
-INSERT INTO `student_status` (`student_status_id`, `student_status`) VALUES
-(1, 'Active'),
-(2, 'Graduated'),
-(3, 'Suspended'),
-(4, 'Transfered'),
-(5, 'Deceased');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `students`
 --
 
 DROP TABLE IF EXISTS `students`;
 CREATE TABLE IF NOT EXISTS `students` (
-`student_id` int(10) unsigned NOT NULL,
+  `student_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `sponsor_id` int(11) DEFAULT NULL,
   `first_name` varchar(50) DEFAULT NULL,
   `surname` varchar(50) DEFAULT NULL,
@@ -3637,16 +3622,18 @@ CREATE TABLE IF NOT EXISTS `students` (
   `relationtype_id` int(11) DEFAULT NULL,
   `created_by` int(11) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=287 ;
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`student_id`),
+  KEY `class_id` (`class_id`,`academic_term_id`,`local_govt_id`,`student_status_id`,`state_id`,`country_id`,`relationtype_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=286 ;
 
 --
 -- Dumping data for table `students`
 --
 
 INSERT INTO `students` (`student_id`, `sponsor_id`, `first_name`, `surname`, `other_name`, `student_no`, `image_url`, `gender`, `birth_date`, `class_id`, `religion`, `previous_school`, `academic_term_id`, `term_admitted`, `student_status_id`, `local_govt_id`, `state_id`, `country_id`, `relationtype_id`, `created_by`, `created_at`, `updated_at`) VALUES
-(1, 2, 'JOSEPH', 'ADENIRAN', '', 'STD0001', NULL, 'Male', '2011-01-11', 2, NULL, NULL, 1, '', 1, 248, 36, 140, 1, 1, '2015-03-19 08:12:26', '2015-05-14 18:42:25'),
-(2, 3, 'BANKOLE', 'ATUNRASE', '', 'STD0002', NULL, 'Male', '2015-04-05', 2, NULL, NULL, 1, '', 1, NULL, 0, 140, 1, 0, '2015-03-21 11:12:32', '2015-05-14 11:05:17'),
+(1, 2, 'JOSEPH', 'ADENIRAN', '', 'STD0001', NULL, 'Male', NULL, 2, NULL, NULL, 1, '', 1, 248, 36, 140, 1, 1, '2015-03-19 08:12:26', '2015-03-23 00:39:43'),
+(2, 3, 'BANKOLE', 'ATUNRASE', '', 'STD0002', NULL, 'Male', NULL, 2, NULL, NULL, 1, '', 1, NULL, 0, 140, 1, 0, '2015-03-21 11:12:32', '2015-03-23 00:32:48'),
 (3, 4, ' PHOS BAYOWA', 'BAIYEKUSI', '', 'STD0003', NULL, 'Male', NULL, 2, NULL, NULL, 1, '', 1, NULL, 0, 140, 1, 0, '2015-03-21 11:14:27', '2015-03-23 00:33:36'),
 (4, 5, 'OLUWATOFARATI ', 'BAKRE ', 'DAVID', 'STD0004', NULL, 'Male', '2004-08-01', 2, NULL, NULL, 1, '', 1, NULL, 0, 140, 1, 0, '2015-03-21 03:34:07', '2015-03-21 15:31:08'),
 (5, 6, 'MOSES', 'BALOGUN ', '', 'STD0005', NULL, 'Male', NULL, 2, NULL, NULL, 1, '', 1, NULL, 0, 140, 1, 0, '2015-03-21 03:48:50', '2015-03-23 00:30:57'),
@@ -3924,8 +3911,7 @@ INSERT INTO `students` (`student_id`, `sponsor_id`, `first_name`, `surname`, `ot
 (282, 271, 'JEREMIAH', 'ENI', '', 'STD0282', NULL, 'Male', NULL, 30, NULL, NULL, NULL, NULL, 1, NULL, 0, 140, 1, 59, '2015-03-25 05:08:14', '2015-03-25 16:08:14'),
 (283, 272, 'DAMILARE', 'OPARA', 'ONYEKACHI', 'STD0283', NULL, 'Male', NULL, 17, NULL, NULL, NULL, NULL, 1, NULL, 0, 140, 1, 32, '2015-03-25 05:08:59', '2015-03-25 16:08:59'),
 (284, 63, 'ADESEYE', 'OKESINA', '', 'STD0284', NULL, 'Male', NULL, 1, NULL, NULL, NULL, NULL, 1, NULL, 0, 140, 1, 1, '2015-03-26 10:53:48', '2015-03-26 09:53:48'),
-(285, 273, 'Daaiyefumasu', 'NICHOLAS', '', 'STD0285', NULL, 'Male', NULL, 12, NULL, NULL, NULL, NULL, 1, NULL, 0, 140, 1, 43, '2015-03-26 12:24:41', '2015-03-26 11:24:41'),
-(286, 40, 'Joshine', 'Eric', 'Ann', 'STD0286', NULL, 'Male', '2011-05-05', 7, NULL, NULL, 1, NULL, 1, NULL, 0, 140, 1, 1, '2015-05-14 07:43:34', '2015-05-14 18:55:41');
+(285, 273, 'Daaiyefumasu', 'NICHOLAS', '', 'STD0285', NULL, 'Male', NULL, 12, NULL, NULL, NULL, NULL, 1, NULL, 0, 140, 1, 43, '2015-03-26 12:24:41', '2015-03-26 11:24:41');
 
 -- --------------------------------------------------------
 
@@ -3935,11 +3921,13 @@ INSERT INTO `students` (`student_id`, `sponsor_id`, `first_name`, `surname`, `ot
 
 DROP TABLE IF EXISTS `students_classes`;
 CREATE TABLE IF NOT EXISTS `students_classes` (
-`student_class_id` int(11) NOT NULL,
+  `student_class_id` int(11) NOT NULL AUTO_INCREMENT,
   `student_id` int(11) NOT NULL,
   `class_id` int(11) NOT NULL,
-  `academic_year_id` int(11) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=289 ;
+  `academic_year_id` int(11) NOT NULL,
+  PRIMARY KEY (`student_class_id`),
+  KEY `student_id` (`student_id`,`class_id`,`academic_year_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=288 ;
 
 --
 -- Dumping data for table `students_classes`
@@ -4225,8 +4213,7 @@ INSERT INTO `students_classes` (`student_class_id`, `student_id`, `class_id`, `a
 (284, 282, 30, 1),
 (285, 283, 17, 1),
 (286, 284, 1, 1),
-(287, 285, 12, 1),
-(288, 286, 7, 1);
+(287, 285, 12, 1);
 
 -- --------------------------------------------------------
 
@@ -4294,52 +4281,269 @@ CREATE TABLE IF NOT EXISTS `students_subjectsviews` (
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `student_feesqueryviews`
+--
+DROP VIEW IF EXISTS `student_feesqueryviews`;
+CREATE TABLE IF NOT EXISTS `student_feesqueryviews` (
+`order_id` int(11)
+,`price` decimal(12,2)
+,`process_item_id` int(11)
+,`item_id` int(11)
+,`item_name` varchar(100)
+,`academic_term_id` int(11)
+,`academic_term` varchar(50)
+,`student_name` varchar(152)
+,`student_id` int(10) unsigned
+,`sponsor_name` varchar(101)
+,`sponsor_id` int(3) unsigned
+,`class_name` varchar(50)
+,`class_id` int(11)
+,`classlevel` varchar(50)
+,`classlevel_id` int(11)
+,`academic_year_id` int(11)
+,`academic_year` varchar(50)
+,`item_type_id` int(11)
+,`item_status_id` int(3)
+,`item_type` varchar(50)
+);
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `student_feesviews`
+--
+DROP VIEW IF EXISTS `student_feesviews`;
+CREATE TABLE IF NOT EXISTS `student_feesviews` (
+`student_name` varchar(152)
+,`student_id` int(10) unsigned
+,`student_no` varchar(50)
+,`sponsor_name` varchar(101)
+,`sponsor_id` int(3) unsigned
+,`salutation_name` varchar(50)
+,`order_id` int(11)
+,`price` decimal(12,2)
+,`quantity` int(3)
+,`subtotal` decimal(22,2)
+,`item_id` int(11)
+,`item_name` varchar(100)
+,`item_description` text
+,`academic_term_id` int(11)
+,`academic_term` varchar(50)
+,`order_status_id` int(3)
+,`class_id` int(11)
+,`class_name` varchar(50)
+,`classlevel_id` int(11)
+,`classlevel` varchar(50)
+,`item_type_id` int(11)
+,`item_type` varchar(50)
+,`image_url` varchar(50)
+,`academic_year_id` int(11) unsigned
+,`academic_year` varchar(50)
+,`student_status_id` int(3) unsigned
+,`student_status` varchar(50)
+);
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `student_status`
+--
+
+DROP TABLE IF EXISTS `student_status`;
+CREATE TABLE IF NOT EXISTS `student_status` (
+  `student_status_id` int(3) unsigned NOT NULL AUTO_INCREMENT,
+  `student_status` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`student_status_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+
+--
+-- Dumping data for table `student_status`
+--
+
+INSERT INTO `student_status` (`student_status_id`, `student_status`) VALUES
+(1, 'Active'),
+(2, 'Graduated'),
+(3, 'Suspended'),
+(4, 'Transfered'),
+(5, 'Deceased');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `subjects`
+--
+
+DROP TABLE IF EXISTS `subjects`;
+CREATE TABLE IF NOT EXISTS `subjects` (
+  `subject_id` int(3) NOT NULL AUTO_INCREMENT,
+  `subject_name` varchar(50) DEFAULT NULL,
+  `subject_abbr` varchar(20) DEFAULT NULL,
+  `subject_group_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`subject_id`),
+  KEY `subject_group_id` (`subject_group_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=47 ;
+
+--
+-- Dumping data for table `subjects`
+--
+
+INSERT INTO `subjects` (`subject_id`, `subject_name`, `subject_abbr`, `subject_group_id`) VALUES
+(1, 'English Language', 'ENG', 2),
+(2, 'Mathematics', 'MAT', 1),
+(3, 'Basic Science', 'B. SCI', 3),
+(4, 'Basic Technology', 'B. TECH', 7),
+(5, 'Business Studies', 'BUS. STDS', 6),
+(6, 'Social Studies', 'SOC STD', 5),
+(7, 'French Language', 'FRE', 2),
+(8, 'Physical & Health Education', 'PHE', 3),
+(9, 'Computer  Science', 'COMP.SCI', 1),
+(10, 'Visual Arts', 'V.ARTS', 7),
+(11, 'Hausa Language', 'HAU', 2),
+(12, 'Igbo Language', 'IGB', 2),
+(13, 'Yoruba Language', 'YOR', 2),
+(14, 'Agricultural Science', 'AGR SCI', 3),
+(15, 'Home Economics', 'H.ECONS', 7),
+(16, 'Christain Religious Studies', 'C.R.S.', 5),
+(17, 'Islamic Religious Studies', 'I.R.S', 5),
+(18, 'Geography', 'GEO', 5),
+(19, 'Literature-In-English', 'LIT', 2),
+(20, 'History ', 'HIS', 5),
+(21, 'Physics', 'PHY', 3),
+(22, 'Chemistry', 'CHEM', 3),
+(23, 'Biology', 'BIO', 3),
+(24, 'Foods & Nutrition', 'F&N', 7),
+(25, 'Technical Drawing', 'T.D', 7),
+(26, 'Music', 'MUS', 7),
+(27, 'Metal Work', 'M.WRK', 7),
+(28, 'Electronics', 'ELECT', 7),
+(29, 'Wood Work', 'WD WRK', 7),
+(30, 'Commerce', 'COM', 6),
+(31, 'Accounting', 'ACC', 6),
+(32, 'Economics', 'ECONS', 6),
+(33, 'Government', 'GOV', 5),
+(34, 'Further Mathematics', 'F.MATHS', 1),
+(35, 'Animal Husbandry', 'ANI. HUS', 3),
+(36, 'Data Processing', 'DAT', 1),
+(37, 'Information & Communication Technology', 'ICT', 1),
+(38, 'Civic Education', 'CIV', 5),
+(39, 'Fine Arts', 'F.ARTS', 7),
+(40, 'Creative Craft', 'Cat. Craft', 7),
+(41, 'Paint & Decoration', 'P&D', 7),
+(42, 'Chinese', 'CHIN', 2),
+(43, 'Building Construction', 'BLD CONSTR', 7),
+(44, 'Arabic ', 'ARA', 2),
+(45, 'Auto Mechanic', 'AUTO', 7),
+(46, 'Health Science', 'H. SCI', 7);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `subject_classlevels`
 --
 
 DROP TABLE IF EXISTS `subject_classlevels`;
 CREATE TABLE IF NOT EXISTS `subject_classlevels` (
-`subject_classlevel_id` int(11) NOT NULL,
+  `subject_classlevel_id` int(11) NOT NULL AUTO_INCREMENT,
   `subject_id` int(11) DEFAULT NULL,
   `classlevel_id` int(11) DEFAULT NULL,
   `class_id` int(11) DEFAULT NULL,
   `academic_term_id` int(11) DEFAULT NULL,
-  `examstatus_id` int(11) DEFAULT '2'
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=29 ;
+  `examstatus_id` int(11) DEFAULT '2',
+  PRIMARY KEY (`subject_classlevel_id`),
+  KEY `subject_id` (`subject_id`,`classlevel_id`,`class_id`,`academic_term_id`,`examstatus_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=94 ;
 
 --
 -- Dumping data for table `subject_classlevels`
 --
 
 INSERT INTO `subject_classlevels` (`subject_classlevel_id`, `subject_id`, `classlevel_id`, `class_id`, `academic_term_id`, `examstatus_id`) VALUES
-(1, 1, 1, 1, 1, 2),
-(5, 1, 1, 2, 1, 2),
-(9, 1, 1, 4, 1, 2),
-(13, 1, 1, 5, 1, 2),
-(19, 1, 4, 17, 1, 2),
-(23, 1, 4, 19, 1, 2),
-(27, 1, 4, 20, 1, 2),
-(2, 2, 1, 1, 1, 2),
-(6, 2, 1, 2, 1, 2),
-(10, 2, 1, 4, 1, 2),
-(14, 2, 1, 5, 1, 2),
-(20, 2, 4, 17, 1, 2),
-(24, 2, 4, 19, 1, 2),
-(28, 2, 4, 20, 1, 2),
-(18, 9, 4, 17, 1, 2),
-(22, 9, 4, 19, 1, 2),
-(26, 9, 4, 20, 1, 2),
+(16, 1, 1, 1, 1, 2),
+(35, 1, 1, 2, 1, 2),
+(54, 1, 1, 4, 1, 2),
+(73, 1, 1, 5, 1, 2),
+(19, 2, 1, 1, 1, 2),
+(38, 2, 1, 2, 1, 2),
+(57, 2, 1, 4, 1, 2),
+(76, 2, 1, 5, 1, 2),
+(2, 3, 1, 1, 1, 2),
+(21, 3, 1, 2, 1, 2),
+(40, 3, 1, 4, 1, 2),
+(59, 3, 1, 5, 1, 2),
+(83, 3, 2, 7, 1, 2),
+(86, 3, 2, 9, 1, 2),
+(89, 3, 2, 10, 1, 2),
+(3, 5, 1, 1, 1, 2),
+(22, 5, 1, 2, 1, 2),
+(41, 5, 1, 4, 1, 2),
+(60, 5, 1, 5, 1, 2),
+(91, 5, 2, 7, 1, 2),
+(92, 5, 2, 9, 1, 2),
+(93, 5, 2, 10, 1, 2),
+(11, 6, 1, 1, 1, 2),
+(30, 6, 1, 2, 1, 2),
+(49, 6, 1, 4, 1, 2),
+(68, 6, 1, 5, 1, 2),
+(7, 7, 1, 1, 1, 2),
+(26, 7, 1, 2, 1, 2),
+(45, 7, 1, 4, 1, 2),
+(64, 7, 1, 5, 1, 2),
+(15, 9, 1, 1, 1, 2),
+(34, 9, 1, 2, 1, 2),
+(53, 9, 1, 4, 1, 2),
+(72, 9, 1, 5, 1, 2),
+(12, 10, 1, 1, 1, 2),
+(31, 10, 1, 2, 1, 2),
+(50, 10, 1, 4, 1, 2),
+(69, 10, 1, 5, 1, 2),
+(8, 11, 1, 1, 1, 2),
+(27, 11, 1, 2, 1, 2),
+(46, 11, 1, 4, 1, 2),
+(65, 11, 1, 5, 1, 2),
+(18, 12, 1, 1, 1, 2),
+(37, 12, 1, 2, 1, 2),
+(56, 12, 1, 4, 1, 2),
+(75, 12, 1, 5, 1, 2),
+(13, 13, 1, 1, 1, 2),
+(32, 13, 1, 2, 1, 2),
+(51, 13, 1, 4, 1, 2),
+(70, 13, 1, 5, 1, 2),
+(1, 14, 1, 1, 1, 2),
+(20, 14, 1, 2, 1, 2),
+(39, 14, 1, 4, 1, 2),
+(58, 14, 1, 5, 1, 2),
+(82, 14, 2, 7, 1, 2),
+(85, 14, 2, 9, 1, 2),
+(88, 14, 2, 10, 1, 2),
+(9, 15, 1, 1, 1, 2),
+(28, 15, 1, 2, 1, 2),
+(47, 15, 1, 4, 1, 2),
+(66, 15, 1, 5, 1, 2),
 (4, 16, 1, 1, 1, 2),
-(8, 16, 1, 2, 1, 2),
-(12, 16, 1, 4, 1, 2),
-(16, 16, 1, 5, 1, 2),
-(3, 17, 1, 1, 1, 2),
-(7, 17, 1, 2, 1, 2),
-(11, 17, 1, 4, 1, 2),
-(15, 17, 1, 5, 1, 2),
-(17, 23, 4, 17, 1, 2),
-(21, 23, 4, 19, 1, 2),
-(25, 23, 4, 20, 1, 2);
+(23, 16, 1, 2, 1, 2),
+(42, 16, 1, 4, 1, 2),
+(61, 16, 1, 5, 1, 2),
+(10, 26, 1, 1, 1, 2),
+(29, 26, 1, 2, 1, 2),
+(48, 26, 1, 4, 1, 2),
+(67, 26, 1, 5, 1, 2),
+(6, 38, 1, 1, 1, 2),
+(25, 38, 1, 2, 1, 2),
+(44, 38, 1, 4, 1, 2),
+(63, 38, 1, 5, 1, 2),
+(17, 39, 1, 1, 1, 2),
+(36, 39, 1, 2, 1, 2),
+(55, 39, 1, 4, 1, 2),
+(74, 39, 1, 5, 1, 2),
+(5, 42, 1, 1, 1, 2),
+(24, 42, 1, 2, 1, 2),
+(43, 42, 1, 4, 1, 2),
+(62, 42, 1, 5, 1, 2),
+(14, 43, 1, 1, 1, 2),
+(33, 43, 1, 2, 1, 2),
+(52, 43, 1, 4, 1, 2),
+(71, 43, 1, 5, 1, 2),
+(84, 43, 2, 7, 1, 2),
+(87, 43, 2, 9, 1, 2),
+(90, 43, 2, 10, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -4370,8 +4574,9 @@ CREATE TABLE IF NOT EXISTS `subject_classlevelviews` (
 
 DROP TABLE IF EXISTS `subject_groups`;
 CREATE TABLE IF NOT EXISTS `subject_groups` (
-`subject_group_id` int(3) NOT NULL,
-  `subject_group` varchar(50) DEFAULT NULL
+  `subject_group_id` int(3) NOT NULL AUTO_INCREMENT,
+  `subject_group` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`subject_group_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
@@ -4396,7 +4601,8 @@ DROP TABLE IF EXISTS `subject_students_registers`;
 CREATE TABLE IF NOT EXISTS `subject_students_registers` (
   `student_id` int(11) DEFAULT NULL,
   `class_id` int(11) DEFAULT NULL,
-  `subject_classlevel_id` int(11) DEFAULT NULL
+  `subject_classlevel_id` int(11) DEFAULT NULL,
+  KEY `student_id` (`student_id`,`class_id`,`subject_classlevel_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -4404,392 +4610,1027 @@ CREATE TABLE IF NOT EXISTS `subject_students_registers` (
 --
 
 INSERT INTO `subject_students_registers` (`student_id`, `class_id`, `subject_classlevel_id`) VALUES
-(1, 2, 5),
-(1, 2, 6),
-(1, 2, 7),
-(1, 2, 8),
-(2, 2, 5),
-(2, 2, 6),
-(2, 2, 7),
-(2, 2, 8),
-(3, 2, 5),
-(3, 2, 6),
-(3, 2, 7),
-(3, 2, 8),
-(4, 2, 5),
-(4, 2, 6),
-(4, 2, 7),
-(4, 2, 8),
-(5, 2, 5),
-(5, 2, 6),
-(5, 2, 7),
-(5, 2, 8),
-(6, 2, 5),
-(6, 2, 6),
-(6, 2, 7),
-(6, 2, 8),
-(7, 2, 5),
-(7, 2, 6),
-(7, 2, 7),
-(7, 2, 8),
-(10, 2, 5),
-(10, 2, 6),
-(10, 2, 7),
-(10, 2, 8),
-(11, 2, 5),
-(11, 2, 6),
-(11, 2, 7),
-(11, 2, 8),
-(12, 2, 5),
-(12, 2, 6),
-(12, 2, 7),
-(12, 2, 8),
-(13, 2, 5),
-(13, 2, 6),
-(13, 2, 7),
-(13, 2, 8),
-(14, 2, 5),
-(14, 2, 6),
-(14, 2, 7),
-(14, 2, 8),
-(15, 2, 5),
-(15, 2, 6),
-(15, 2, 7),
-(15, 2, 8),
-(16, 2, 5),
-(16, 2, 6),
-(16, 2, 7),
-(16, 2, 8),
-(17, 2, 5),
-(17, 2, 6),
-(17, 2, 7),
-(17, 2, 8),
-(18, 2, 5),
-(18, 2, 6),
-(18, 2, 7),
-(18, 2, 8),
-(57, 4, 9),
-(57, 4, 10),
-(57, 4, 11),
-(57, 4, 12),
-(58, 4, 9),
-(58, 4, 10),
-(58, 4, 11),
-(58, 4, 12),
-(59, 4, 9),
-(59, 4, 10),
-(59, 4, 11),
-(59, 4, 12),
-(60, 4, 9),
-(60, 4, 10),
-(60, 4, 11),
-(60, 4, 12),
-(61, 4, 9),
-(61, 4, 10),
-(61, 4, 11),
-(61, 4, 12),
-(62, 4, 9),
-(62, 4, 10),
-(62, 4, 11),
-(62, 4, 12),
-(63, 4, 9),
-(63, 4, 10),
-(63, 4, 11),
-(63, 4, 12),
-(64, 4, 9),
-(64, 4, 10),
-(64, 4, 11),
-(64, 4, 12),
-(65, 4, 9),
-(65, 4, 10),
-(65, 4, 11),
-(65, 4, 12),
+(1, 2, 20),
+(1, 2, 21),
+(1, 2, 22),
+(1, 2, 23),
+(1, 2, 24),
+(1, 2, 25),
+(1, 2, 26),
+(1, 2, 27),
+(1, 2, 28),
+(1, 2, 29),
+(1, 2, 30),
+(1, 2, 31),
+(1, 2, 32),
+(1, 2, 33),
+(1, 2, 34),
+(1, 2, 35),
+(1, 2, 36),
+(1, 2, 37),
+(1, 2, 38),
+(2, 2, 20),
+(2, 2, 21),
+(2, 2, 22),
+(2, 2, 23),
+(2, 2, 24),
+(2, 2, 25),
+(2, 2, 26),
+(2, 2, 27),
+(2, 2, 28),
+(2, 2, 29),
+(2, 2, 30),
+(2, 2, 31),
+(2, 2, 32),
+(2, 2, 33),
+(2, 2, 34),
+(2, 2, 35),
+(2, 2, 36),
+(2, 2, 37),
+(2, 2, 38),
+(3, 2, 20),
+(3, 2, 21),
+(3, 2, 22),
+(3, 2, 23),
+(3, 2, 24),
+(3, 2, 25),
+(3, 2, 26),
+(3, 2, 27),
+(3, 2, 28),
+(3, 2, 29),
+(3, 2, 30),
+(3, 2, 31),
+(3, 2, 32),
+(3, 2, 33),
+(3, 2, 34),
+(3, 2, 35),
+(3, 2, 36),
+(3, 2, 37),
+(3, 2, 38),
+(4, 2, 20),
+(4, 2, 21),
+(4, 2, 22),
+(4, 2, 23),
+(4, 2, 24),
+(4, 2, 25),
+(4, 2, 26),
+(4, 2, 27),
+(4, 2, 28),
+(4, 2, 29),
+(4, 2, 30),
+(4, 2, 31),
+(4, 2, 32),
+(4, 2, 33),
+(4, 2, 34),
+(4, 2, 35),
+(4, 2, 36),
+(4, 2, 37),
+(4, 2, 38),
+(5, 2, 20),
+(5, 2, 21),
+(5, 2, 22),
+(5, 2, 23),
+(5, 2, 24),
+(5, 2, 25),
+(5, 2, 26),
+(5, 2, 27),
+(5, 2, 28),
+(5, 2, 29),
+(5, 2, 30),
+(5, 2, 31),
+(5, 2, 32),
+(5, 2, 33),
+(5, 2, 34),
+(5, 2, 35),
+(5, 2, 36),
+(5, 2, 37),
+(5, 2, 38),
+(6, 2, 20),
+(6, 2, 21),
+(6, 2, 22),
+(6, 2, 23),
+(6, 2, 24),
+(6, 2, 25),
+(6, 2, 26),
+(6, 2, 27),
+(6, 2, 28),
+(6, 2, 29),
+(6, 2, 30),
+(6, 2, 31),
+(6, 2, 32),
+(6, 2, 33),
+(6, 2, 34),
+(6, 2, 35),
+(6, 2, 36),
+(6, 2, 37),
+(6, 2, 38),
+(7, 2, 20),
+(7, 2, 21),
+(7, 2, 22),
+(7, 2, 23),
+(7, 2, 24),
+(7, 2, 25),
+(7, 2, 26),
+(7, 2, 27),
+(7, 2, 28),
+(7, 2, 29),
+(7, 2, 30),
+(7, 2, 31),
+(7, 2, 32),
+(7, 2, 33),
+(7, 2, 34),
+(7, 2, 35),
+(7, 2, 36),
+(7, 2, 37),
+(7, 2, 38),
+(10, 2, 20),
+(10, 2, 21),
+(10, 2, 22),
+(10, 2, 23),
+(10, 2, 24),
+(10, 2, 25),
+(10, 2, 26),
+(10, 2, 27),
+(10, 2, 28),
+(10, 2, 29),
+(10, 2, 30),
+(10, 2, 31),
+(10, 2, 32),
+(10, 2, 33),
+(10, 2, 34),
+(10, 2, 35),
+(10, 2, 36),
+(10, 2, 37),
+(10, 2, 38),
+(11, 2, 20),
+(11, 2, 21),
+(11, 2, 22),
+(11, 2, 23),
+(11, 2, 24),
+(11, 2, 25),
+(11, 2, 26),
+(11, 2, 27),
+(11, 2, 28),
+(11, 2, 29),
+(11, 2, 30),
+(11, 2, 31),
+(11, 2, 32),
+(11, 2, 33),
+(11, 2, 34),
+(11, 2, 35),
+(11, 2, 36),
+(11, 2, 37),
+(11, 2, 38),
+(12, 2, 20),
+(12, 2, 21),
+(12, 2, 22),
+(12, 2, 23),
+(12, 2, 24),
+(12, 2, 25),
+(12, 2, 26),
+(12, 2, 27),
+(12, 2, 28),
+(12, 2, 29),
+(12, 2, 30),
+(12, 2, 31),
+(12, 2, 32),
+(12, 2, 33),
+(12, 2, 34),
+(12, 2, 35),
+(12, 2, 36),
+(12, 2, 37),
+(12, 2, 38),
+(13, 2, 20),
+(13, 2, 21),
+(13, 2, 22),
+(13, 2, 23),
+(13, 2, 24),
+(13, 2, 25),
+(13, 2, 26),
+(13, 2, 27),
+(13, 2, 28),
+(13, 2, 29),
+(13, 2, 30),
+(13, 2, 31),
+(13, 2, 32),
+(13, 2, 33),
+(13, 2, 34),
+(13, 2, 35),
+(13, 2, 36),
+(13, 2, 37),
+(13, 2, 38),
+(14, 2, 20),
+(14, 2, 21),
+(14, 2, 22),
+(14, 2, 23),
+(14, 2, 24),
+(14, 2, 25),
+(14, 2, 26),
+(14, 2, 27),
+(14, 2, 28),
+(14, 2, 29),
+(14, 2, 30),
+(14, 2, 31),
+(14, 2, 32),
+(14, 2, 33),
+(14, 2, 34),
+(14, 2, 35),
+(14, 2, 36),
+(14, 2, 37),
+(14, 2, 38),
+(15, 2, 20),
+(15, 2, 21),
+(15, 2, 22),
+(15, 2, 23),
+(15, 2, 24),
+(15, 2, 25),
+(15, 2, 26),
+(15, 2, 27),
+(15, 2, 28),
+(15, 2, 29),
+(15, 2, 30),
+(15, 2, 31),
+(15, 2, 32),
+(15, 2, 33),
+(15, 2, 34),
+(15, 2, 35),
+(15, 2, 36),
+(15, 2, 37),
+(15, 2, 38),
+(16, 2, 20),
+(16, 2, 21),
+(16, 2, 22),
+(16, 2, 23),
+(16, 2, 24),
+(16, 2, 25),
+(16, 2, 26),
+(16, 2, 27),
+(16, 2, 28),
+(16, 2, 29),
+(16, 2, 30),
+(16, 2, 31),
+(16, 2, 32),
+(16, 2, 33),
+(16, 2, 34),
+(16, 2, 35),
+(16, 2, 36),
+(16, 2, 37),
+(16, 2, 38),
+(17, 2, 20),
+(17, 2, 21),
+(17, 2, 22),
+(17, 2, 23),
+(17, 2, 24),
+(17, 2, 25),
+(17, 2, 26),
+(17, 2, 27),
+(17, 2, 28),
+(17, 2, 29),
+(17, 2, 30),
+(17, 2, 31),
+(17, 2, 32),
+(17, 2, 33),
+(17, 2, 34),
+(17, 2, 35),
+(17, 2, 36),
+(17, 2, 37),
+(17, 2, 38),
+(18, 2, 20),
+(18, 2, 21),
+(18, 2, 22),
+(18, 2, 23),
+(18, 2, 24),
+(18, 2, 25),
+(18, 2, 26),
+(18, 2, 27),
+(18, 2, 28),
+(18, 2, 29),
+(18, 2, 30),
+(18, 2, 31),
+(18, 2, 32),
+(18, 2, 33),
+(18, 2, 34),
+(18, 2, 35),
+(18, 2, 36),
+(18, 2, 37),
+(18, 2, 38),
+(19, 7, 82),
+(19, 7, 83),
+(19, 7, 84),
+(19, 7, 91),
+(48, 10, 88),
+(48, 10, 89),
+(48, 10, 90),
+(48, 10, 93),
+(49, 10, 88),
+(49, 10, 89),
+(49, 10, 90),
+(49, 10, 93),
+(50, 10, 88),
+(50, 10, 89),
+(50, 10, 90),
+(50, 10, 93),
+(51, 10, 88),
+(51, 10, 89),
+(51, 10, 90),
+(51, 10, 93),
+(52, 10, 88),
+(52, 10, 89),
+(52, 10, 90),
+(52, 10, 93),
+(53, 10, 88),
+(53, 10, 89),
+(53, 10, 90),
+(53, 10, 93),
+(54, 10, 88),
+(54, 10, 89),
+(54, 10, 90),
+(54, 10, 93),
+(55, 10, 88),
+(55, 10, 89),
+(55, 10, 90),
+(55, 10, 93),
+(56, 10, 88),
+(56, 10, 89),
+(56, 10, 90),
+(56, 10, 93),
+(57, 4, 39),
+(57, 4, 40),
+(57, 4, 41),
+(57, 4, 42),
+(57, 4, 43),
+(57, 4, 44),
+(57, 4, 45),
+(57, 4, 46),
+(57, 4, 47),
+(57, 4, 48),
+(57, 4, 49),
+(57, 4, 50),
+(57, 4, 51),
+(57, 4, 52),
+(57, 4, 53),
+(57, 4, 54),
+(57, 4, 55),
+(57, 4, 56),
+(57, 4, 57),
+(58, 4, 39),
+(58, 4, 40),
+(58, 4, 41),
+(58, 4, 42),
+(58, 4, 43),
+(58, 4, 44),
+(58, 4, 45),
+(58, 4, 46),
+(58, 4, 47),
+(58, 4, 48),
+(58, 4, 49),
+(58, 4, 50),
+(58, 4, 51),
+(58, 4, 52),
+(58, 4, 53),
+(58, 4, 54),
+(58, 4, 55),
+(58, 4, 56),
+(58, 4, 57),
+(59, 4, 39),
+(59, 4, 40),
+(59, 4, 41),
+(59, 4, 42),
+(59, 4, 43),
+(59, 4, 44),
+(59, 4, 45),
+(59, 4, 46),
+(59, 4, 47),
+(59, 4, 48),
+(59, 4, 49),
+(59, 4, 50),
+(59, 4, 51),
+(59, 4, 52),
+(59, 4, 53),
+(59, 4, 54),
+(59, 4, 55),
+(59, 4, 56),
+(59, 4, 57),
+(60, 4, 39),
+(60, 4, 40),
+(60, 4, 41),
+(60, 4, 42),
+(60, 4, 43),
+(60, 4, 44),
+(60, 4, 45),
+(60, 4, 46),
+(60, 4, 47),
+(60, 4, 48),
+(60, 4, 49),
+(60, 4, 50),
+(60, 4, 51),
+(60, 4, 52),
+(60, 4, 53),
+(60, 4, 54),
+(60, 4, 55),
+(60, 4, 56),
+(60, 4, 57),
+(61, 4, 39),
+(61, 4, 40),
+(61, 4, 41),
+(61, 4, 42),
+(61, 4, 43),
+(61, 4, 44),
+(61, 4, 45),
+(61, 4, 46),
+(61, 4, 47),
+(61, 4, 48),
+(61, 4, 49),
+(61, 4, 50),
+(61, 4, 51),
+(61, 4, 52),
+(61, 4, 53),
+(61, 4, 54),
+(61, 4, 55),
+(61, 4, 56),
+(61, 4, 57),
+(62, 4, 39),
+(62, 4, 40),
+(62, 4, 41),
+(62, 4, 42),
+(62, 4, 43),
+(62, 4, 44),
+(62, 4, 45),
+(62, 4, 46),
+(62, 4, 47),
+(62, 4, 48),
+(62, 4, 49),
+(62, 4, 50),
+(62, 4, 51),
+(62, 4, 52),
+(62, 4, 53),
+(62, 4, 54),
+(62, 4, 55),
+(62, 4, 56),
+(62, 4, 57),
+(63, 4, 39),
+(63, 4, 40),
+(63, 4, 41),
+(63, 4, 42),
+(63, 4, 43),
+(63, 4, 44),
+(63, 4, 45),
+(63, 4, 46),
+(63, 4, 47),
+(63, 4, 48),
+(63, 4, 49),
+(63, 4, 50),
+(63, 4, 51),
+(63, 4, 52),
+(63, 4, 53),
+(63, 4, 54),
+(63, 4, 55),
+(63, 4, 56),
+(63, 4, 57),
+(64, 4, 39),
+(64, 4, 40),
+(64, 4, 41),
+(64, 4, 42),
+(64, 4, 43),
+(64, 4, 44),
+(64, 4, 45),
+(64, 4, 46),
+(64, 4, 47),
+(64, 4, 48),
+(64, 4, 49),
+(64, 4, 50),
+(64, 4, 51),
+(64, 4, 52),
+(64, 4, 53),
+(64, 4, 54),
+(64, 4, 55),
+(64, 4, 56),
+(64, 4, 57),
+(65, 4, 39),
+(65, 4, 40),
+(65, 4, 41),
+(65, 4, 42),
+(65, 4, 43),
+(65, 4, 44),
+(65, 4, 45),
+(65, 4, 46),
+(65, 4, 47),
+(65, 4, 48),
+(65, 4, 49),
+(65, 4, 50),
+(65, 4, 51),
+(65, 4, 52),
+(65, 4, 53),
+(65, 4, 54),
+(65, 4, 55),
+(65, 4, 56),
+(65, 4, 57),
 (118, 1, 1),
 (118, 1, 2),
 (118, 1, 3),
 (118, 1, 4),
+(118, 1, 5),
+(118, 1, 6),
+(118, 1, 7),
+(118, 1, 8),
+(118, 1, 9),
+(118, 1, 10),
+(118, 1, 11),
+(118, 1, 12),
+(118, 1, 13),
+(118, 1, 14),
+(118, 1, 15),
+(118, 1, 16),
+(118, 1, 17),
+(118, 1, 18),
+(118, 1, 19),
+(120, 7, 82),
+(120, 7, 83),
+(120, 7, 84),
+(120, 7, 91),
+(121, 7, 82),
+(121, 7, 83),
+(121, 7, 84),
+(121, 7, 91),
+(122, 7, 82),
+(122, 7, 83),
+(122, 7, 84),
+(122, 7, 91),
+(123, 7, 82),
+(123, 7, 83),
+(123, 7, 84),
+(123, 7, 91),
+(124, 7, 82),
+(124, 7, 83),
+(124, 7, 84),
+(124, 7, 91),
+(125, 7, 82),
+(125, 7, 83),
+(125, 7, 84),
+(125, 7, 91),
+(126, 7, 82),
+(126, 7, 83),
+(126, 7, 84),
+(126, 7, 91),
+(127, 7, 82),
+(127, 7, 83),
+(127, 7, 84),
+(127, 7, 91),
+(128, 7, 82),
+(128, 7, 83),
+(128, 7, 84),
+(128, 7, 91),
 (129, 1, 1),
 (129, 1, 2),
 (129, 1, 3),
 (129, 1, 4),
+(129, 1, 5),
+(129, 1, 6),
+(129, 1, 7),
+(129, 1, 8),
+(129, 1, 9),
+(129, 1, 10),
+(129, 1, 11),
+(129, 1, 12),
+(129, 1, 13),
+(129, 1, 14),
+(129, 1, 15),
+(129, 1, 16),
+(129, 1, 17),
+(129, 1, 18),
+(129, 1, 19),
+(130, 7, 82),
+(130, 7, 83),
+(130, 7, 84),
+(130, 7, 91),
 (131, 1, 1),
 (131, 1, 2),
 (131, 1, 3),
 (131, 1, 4),
+(131, 1, 5),
+(131, 1, 6),
+(131, 1, 7),
+(131, 1, 8),
+(131, 1, 9),
+(131, 1, 10),
+(131, 1, 11),
+(131, 1, 12),
+(131, 1, 13),
+(131, 1, 14),
+(131, 1, 15),
+(131, 1, 16),
+(131, 1, 17),
+(131, 1, 18),
+(131, 1, 19),
+(132, 7, 82),
+(132, 7, 83),
+(132, 7, 84),
+(132, 7, 91),
+(133, 7, 82),
+(133, 7, 83),
+(133, 7, 84),
+(133, 7, 91),
+(135, 7, 82),
+(135, 7, 83),
+(135, 7, 84),
+(135, 7, 91),
 (137, 1, 1),
 (137, 1, 2),
 (137, 1, 3),
 (137, 1, 4),
+(137, 1, 5),
+(137, 1, 6),
+(137, 1, 7),
+(137, 1, 8),
+(137, 1, 9),
+(137, 1, 10),
+(137, 1, 11),
+(137, 1, 12),
+(137, 1, 13),
+(137, 1, 14),
+(137, 1, 15),
+(137, 1, 16),
+(137, 1, 17),
+(137, 1, 18),
+(137, 1, 19),
 (138, 1, 1),
 (138, 1, 2),
 (138, 1, 3),
 (138, 1, 4),
+(138, 1, 5),
+(138, 1, 6),
+(138, 1, 7),
+(138, 1, 8),
+(138, 1, 9),
+(138, 1, 10),
+(138, 1, 11),
+(138, 1, 12),
+(138, 1, 13),
+(138, 1, 14),
+(138, 1, 15),
+(138, 1, 16),
+(138, 1, 17),
+(138, 1, 18),
+(138, 1, 19),
 (140, 1, 1),
 (140, 1, 2),
 (140, 1, 3),
 (140, 1, 4),
+(140, 1, 5),
+(140, 1, 6),
+(140, 1, 7),
+(140, 1, 8),
+(140, 1, 9),
+(140, 1, 10),
+(140, 1, 11),
+(140, 1, 12),
+(140, 1, 13),
+(140, 1, 14),
+(140, 1, 15),
+(140, 1, 16),
+(140, 1, 17),
+(140, 1, 18),
+(140, 1, 19),
+(141, 9, 85),
+(141, 9, 86),
+(141, 9, 87),
+(141, 9, 92),
 (142, 1, 1),
 (142, 1, 2),
 (142, 1, 3),
 (142, 1, 4),
+(142, 1, 5),
+(142, 1, 6),
+(142, 1, 7),
+(142, 1, 8),
+(142, 1, 9),
+(142, 1, 10),
+(142, 1, 11),
+(142, 1, 12),
+(142, 1, 13),
+(142, 1, 14),
+(142, 1, 15),
+(142, 1, 16),
+(142, 1, 17),
+(142, 1, 18),
+(142, 1, 19),
 (143, 1, 1),
 (143, 1, 2),
 (143, 1, 3),
 (143, 1, 4),
+(143, 1, 5),
+(143, 1, 6),
+(143, 1, 7),
+(143, 1, 8),
+(143, 1, 9),
+(143, 1, 10),
+(143, 1, 11),
+(143, 1, 12),
+(143, 1, 13),
+(143, 1, 14),
+(143, 1, 15),
+(143, 1, 16),
+(143, 1, 17),
+(143, 1, 18),
+(143, 1, 19),
 (144, 1, 1),
 (144, 1, 2),
 (144, 1, 3),
 (144, 1, 4),
+(144, 1, 5),
+(144, 1, 6),
+(144, 1, 7),
+(144, 1, 8),
+(144, 1, 9),
+(144, 1, 10),
+(144, 1, 11),
+(144, 1, 12),
+(144, 1, 13),
+(144, 1, 14),
+(144, 1, 15),
+(144, 1, 16),
+(144, 1, 17),
+(144, 1, 18),
+(144, 1, 19),
 (145, 1, 1),
 (145, 1, 2),
 (145, 1, 3),
 (145, 1, 4),
-(146, 20, 25),
-(146, 20, 26),
-(146, 20, 27),
-(146, 20, 28),
-(147, 20, 25),
-(147, 20, 26),
-(147, 20, 27),
-(147, 20, 28),
-(150, 20, 25),
-(150, 20, 26),
-(150, 20, 27),
-(150, 20, 28),
-(154, 20, 25),
-(154, 20, 26),
-(154, 20, 27),
-(154, 20, 28),
-(158, 20, 25),
-(158, 20, 26),
-(158, 20, 27),
-(158, 20, 28),
-(159, 20, 25),
-(159, 20, 26),
-(159, 20, 27),
-(159, 20, 28),
-(167, 20, 25),
-(167, 20, 26),
-(167, 20, 27),
-(167, 20, 28),
-(168, 20, 25),
-(168, 20, 26),
-(168, 20, 27),
-(168, 20, 28),
-(169, 20, 25),
-(169, 20, 26),
-(169, 20, 27),
-(169, 20, 28),
-(170, 20, 25),
-(170, 20, 26),
-(170, 20, 27),
-(170, 20, 28),
-(172, 20, 25),
-(172, 20, 26),
-(172, 20, 27),
-(172, 20, 28),
-(173, 20, 25),
-(173, 20, 26),
-(173, 20, 27),
-(173, 20, 28),
-(174, 20, 25),
-(174, 20, 26),
-(174, 20, 27),
-(174, 20, 28),
-(176, 20, 25),
-(176, 20, 26),
-(176, 20, 27),
-(176, 20, 28),
-(177, 20, 25),
-(177, 20, 26),
-(177, 20, 27),
-(177, 20, 28),
-(178, 20, 25),
-(178, 20, 26),
-(178, 20, 27),
-(178, 20, 28),
-(179, 20, 25),
-(179, 20, 26),
-(179, 20, 27),
-(179, 20, 28),
-(189, 19, 21),
-(189, 19, 22),
-(189, 19, 23),
-(189, 19, 24),
-(190, 19, 21),
-(190, 19, 22),
-(190, 19, 23),
-(190, 19, 24),
-(191, 19, 21),
-(191, 19, 22),
-(191, 19, 23),
-(191, 19, 24),
-(192, 19, 21),
-(192, 19, 22),
-(192, 19, 23),
-(192, 19, 24),
-(193, 19, 21),
-(193, 19, 22),
-(193, 19, 23),
-(193, 19, 24),
-(194, 19, 21),
-(194, 19, 22),
-(194, 19, 23),
-(194, 19, 24),
-(195, 19, 21),
-(195, 19, 22),
-(195, 19, 23),
-(195, 19, 24),
-(196, 19, 21),
-(196, 19, 22),
-(196, 19, 23),
-(196, 19, 24),
-(197, 5, 13),
-(197, 5, 14),
-(197, 5, 15),
-(197, 5, 16),
-(198, 5, 13),
-(198, 5, 14),
-(198, 5, 15),
-(198, 5, 16),
-(199, 5, 13),
-(199, 5, 14),
-(199, 5, 15),
-(199, 5, 16),
-(200, 5, 13),
-(200, 5, 14),
-(200, 5, 15),
-(200, 5, 16),
-(201, 5, 13),
-(201, 5, 14),
-(201, 5, 15),
-(201, 5, 16),
-(202, 5, 13),
-(202, 5, 14),
-(202, 5, 15),
-(202, 5, 16),
-(204, 5, 13),
-(204, 5, 14),
-(204, 5, 15),
-(204, 5, 16),
-(205, 5, 13),
-(205, 5, 14),
-(205, 5, 15),
-(205, 5, 16),
-(223, 5, 13),
-(223, 5, 14),
-(223, 5, 15),
-(223, 5, 16),
-(227, 5, 13),
-(227, 5, 14),
-(227, 5, 15),
-(227, 5, 16),
-(228, 5, 13),
-(228, 5, 14),
-(228, 5, 15),
-(228, 5, 16),
-(269, 17, 17),
-(269, 17, 18),
-(269, 17, 19),
-(269, 17, 20),
-(270, 17, 17),
-(270, 17, 18),
-(270, 17, 19),
-(270, 17, 20),
-(271, 17, 17),
-(271, 17, 18),
-(271, 17, 19),
-(271, 17, 20),
-(272, 17, 17),
-(272, 17, 18),
-(272, 17, 19),
-(272, 17, 20),
-(273, 17, 17),
-(273, 17, 18),
-(273, 17, 19),
-(273, 17, 20),
-(274, 17, 17),
-(274, 17, 18),
-(274, 17, 19),
-(274, 17, 20),
-(275, 17, 17),
-(275, 17, 18),
-(275, 17, 19),
-(275, 17, 20),
-(276, 17, 17),
-(276, 17, 18),
-(276, 17, 19),
-(276, 17, 20),
-(283, 17, 17),
-(283, 17, 18),
-(283, 17, 19),
-(283, 17, 20),
+(145, 1, 5),
+(145, 1, 6),
+(145, 1, 7),
+(145, 1, 8),
+(145, 1, 9),
+(145, 1, 10),
+(145, 1, 11),
+(145, 1, 12),
+(145, 1, 13),
+(145, 1, 14),
+(145, 1, 15),
+(145, 1, 16),
+(145, 1, 17),
+(145, 1, 18),
+(145, 1, 19),
+(197, 5, 58),
+(197, 5, 59),
+(197, 5, 60),
+(197, 5, 61),
+(197, 5, 62),
+(197, 5, 63),
+(197, 5, 64),
+(197, 5, 65),
+(197, 5, 66),
+(197, 5, 67),
+(197, 5, 68),
+(197, 5, 69),
+(197, 5, 70),
+(197, 5, 71),
+(197, 5, 72),
+(197, 5, 73),
+(197, 5, 74),
+(197, 5, 75),
+(197, 5, 76),
+(198, 5, 58),
+(198, 5, 59),
+(198, 5, 60),
+(198, 5, 61),
+(198, 5, 62),
+(198, 5, 63),
+(198, 5, 64),
+(198, 5, 65),
+(198, 5, 66),
+(198, 5, 67),
+(198, 5, 68),
+(198, 5, 69),
+(198, 5, 70),
+(198, 5, 71),
+(198, 5, 72),
+(198, 5, 73),
+(198, 5, 74),
+(198, 5, 75),
+(198, 5, 76),
+(199, 5, 58),
+(199, 5, 59),
+(199, 5, 60),
+(199, 5, 61),
+(199, 5, 62),
+(199, 5, 63),
+(199, 5, 64),
+(199, 5, 65),
+(199, 5, 66),
+(199, 5, 67),
+(199, 5, 68),
+(199, 5, 69),
+(199, 5, 70),
+(199, 5, 71),
+(199, 5, 72),
+(199, 5, 73),
+(199, 5, 74),
+(199, 5, 75),
+(199, 5, 76),
+(200, 5, 58),
+(200, 5, 59),
+(200, 5, 60),
+(200, 5, 61),
+(200, 5, 62),
+(200, 5, 63),
+(200, 5, 64),
+(200, 5, 65),
+(200, 5, 66),
+(200, 5, 67),
+(200, 5, 68),
+(200, 5, 69),
+(200, 5, 70),
+(200, 5, 71),
+(200, 5, 72),
+(200, 5, 73),
+(200, 5, 74),
+(200, 5, 75),
+(200, 5, 76),
+(201, 5, 58),
+(201, 5, 59),
+(201, 5, 60),
+(201, 5, 61),
+(201, 5, 62),
+(201, 5, 63),
+(201, 5, 64),
+(201, 5, 65),
+(201, 5, 66),
+(201, 5, 67),
+(201, 5, 68),
+(201, 5, 69),
+(201, 5, 70),
+(201, 5, 71),
+(201, 5, 72),
+(201, 5, 73),
+(201, 5, 74),
+(201, 5, 75),
+(201, 5, 76),
+(202, 5, 58),
+(202, 5, 59),
+(202, 5, 60),
+(202, 5, 61),
+(202, 5, 62),
+(202, 5, 63),
+(202, 5, 64),
+(202, 5, 65),
+(202, 5, 66),
+(202, 5, 67),
+(202, 5, 68),
+(202, 5, 69),
+(202, 5, 70),
+(202, 5, 71),
+(202, 5, 72),
+(202, 5, 73),
+(202, 5, 74),
+(202, 5, 75),
+(202, 5, 76),
+(204, 5, 58),
+(204, 5, 59),
+(204, 5, 60),
+(204, 5, 61),
+(204, 5, 62),
+(204, 5, 63),
+(204, 5, 64),
+(204, 5, 65),
+(204, 5, 66),
+(204, 5, 67),
+(204, 5, 68),
+(204, 5, 69),
+(204, 5, 70),
+(204, 5, 71),
+(204, 5, 72),
+(204, 5, 73),
+(204, 5, 74),
+(204, 5, 75),
+(204, 5, 76),
+(205, 5, 58),
+(205, 5, 59),
+(205, 5, 60),
+(205, 5, 61),
+(205, 5, 62),
+(205, 5, 63),
+(205, 5, 64),
+(205, 5, 65),
+(205, 5, 66),
+(205, 5, 67),
+(205, 5, 68),
+(205, 5, 69),
+(205, 5, 70),
+(205, 5, 71),
+(205, 5, 72),
+(205, 5, 73),
+(205, 5, 74),
+(205, 5, 75),
+(205, 5, 76),
+(221, 9, 85),
+(221, 9, 86),
+(221, 9, 87),
+(221, 9, 92),
+(222, 9, 85),
+(222, 9, 86),
+(222, 9, 87),
+(222, 9, 92),
+(223, 5, 58),
+(223, 5, 59),
+(223, 5, 60),
+(223, 5, 61),
+(223, 5, 62),
+(223, 5, 63),
+(223, 5, 64),
+(223, 5, 65),
+(223, 5, 66),
+(223, 5, 67),
+(223, 5, 68),
+(223, 5, 69),
+(223, 5, 70),
+(223, 5, 71),
+(223, 5, 72),
+(223, 5, 73),
+(223, 5, 74),
+(223, 5, 75),
+(223, 5, 76),
+(224, 9, 85),
+(224, 9, 86),
+(224, 9, 87),
+(224, 9, 92),
+(225, 9, 85),
+(225, 9, 86),
+(225, 9, 87),
+(225, 9, 92),
+(226, 9, 85),
+(226, 9, 86),
+(226, 9, 87),
+(226, 9, 92),
+(227, 5, 58),
+(227, 5, 59),
+(227, 5, 60),
+(227, 5, 61),
+(227, 5, 62),
+(227, 5, 63),
+(227, 5, 64),
+(227, 5, 65),
+(227, 5, 66),
+(227, 5, 67),
+(227, 5, 68),
+(227, 5, 69),
+(227, 5, 70),
+(227, 5, 71),
+(227, 5, 72),
+(227, 5, 73),
+(227, 5, 74),
+(227, 5, 75),
+(227, 5, 76),
+(228, 5, 58),
+(228, 5, 59),
+(228, 5, 60),
+(228, 5, 61),
+(228, 5, 62),
+(228, 5, 63),
+(228, 5, 64),
+(228, 5, 65),
+(228, 5, 66),
+(228, 5, 67),
+(228, 5, 68),
+(228, 5, 69),
+(228, 5, 70),
+(228, 5, 71),
+(228, 5, 72),
+(228, 5, 73),
+(228, 5, 74),
+(228, 5, 75),
+(228, 5, 76),
+(229, 9, 85),
+(229, 9, 86),
+(229, 9, 87),
+(229, 9, 92),
+(230, 9, 85),
+(230, 9, 86),
+(230, 9, 87),
+(230, 9, 92),
+(231, 9, 85),
+(231, 9, 86),
+(231, 9, 87),
+(231, 9, 92),
 (284, 1, 1),
 (284, 1, 2),
 (284, 1, 3),
-(284, 1, 4);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `subjects`
---
-
-DROP TABLE IF EXISTS `subjects`;
-CREATE TABLE IF NOT EXISTS `subjects` (
-`subject_id` int(3) NOT NULL,
-  `subject_name` varchar(50) DEFAULT NULL,
-  `subject_abbr` varchar(20) DEFAULT NULL,
-  `subject_group_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=43 ;
-
---
--- Dumping data for table `subjects`
---
-
-INSERT INTO `subjects` (`subject_id`, `subject_name`, `subject_abbr`, `subject_group_id`) VALUES
-(1, 'English Language', NULL, 2),
-(2, 'Mathematics', NULL, 1),
-(3, 'Basic Science', 'Basic Sci.', 3),
-(4, 'Basic Technology', 'Basic Tech', 7),
-(5, 'Business Studies', 'Bus. Study', 6),
-(6, 'Social Studies', NULL, 5),
-(7, 'French', NULL, 2),
-(8, 'P.H Education', NULL, 3),
-(9, 'Computer ', NULL, 1),
-(10, 'Visual Arts', NULL, 7),
-(11, 'Hausa', NULL, 2),
-(12, 'Igbo', NULL, 2),
-(13, 'Yoruba', NULL, 2),
-(14, 'Agric Science', 'Agr Sci.', 3),
-(15, 'Home Economics', NULL, 7),
-(16, 'Christain Religious Studies', 'C.R.S.', 5),
-(17, 'I.R.S', NULL, 5),
-(18, 'Geography', NULL, 5),
-(19, 'Lit-In English', NULL, 2),
-(20, 'History ', NULL, 5),
-(21, 'Physics', NULL, 3),
-(22, 'Chemistry', 'Chem.', 3),
-(23, 'Biology', 'Bio.', 3),
-(24, 'Foods & Nutrition', NULL, 7),
-(25, 'Tech. Drawing', NULL, 7),
-(26, 'Music', NULL, 7),
-(27, 'Metal Work', NULL, 7),
-(28, 'Electrical', NULL, 7),
-(29, 'Wood Work', NULL, 7),
-(30, 'Commerce', NULL, 6),
-(31, 'Account', 'Acc.', 6),
-(32, 'Economics', NULL, 6),
-(33, 'Government', NULL, 5),
-(34, 'F.Maths', NULL, 1),
-(35, 'Animal Husbandry', 'Animal Hus.', 3),
-(36, 'Data Processing', NULL, 1),
-(37, 'ICT', NULL, 1),
-(38, 'Civics', NULL, 5),
-(39, 'Fine Arts', NULL, 7),
-(40, 'Creative Craft', 'Cat. Craft', 7),
-(41, 'Paint & Decor', NULL, 7),
-(42, 'Chinese', 'Chinese', 2);
+(284, 1, 4),
+(284, 1, 5),
+(284, 1, 6),
+(284, 1, 7),
+(284, 1, 8),
+(284, 1, 9),
+(284, 1, 10),
+(284, 1, 11),
+(284, 1, 12),
+(284, 1, 13),
+(284, 1, 14),
+(284, 1, 15),
+(284, 1, 16),
+(284, 1, 17),
+(284, 1, 18),
+(284, 1, 19);
 
 -- --------------------------------------------------------
 
@@ -4799,12 +5640,14 @@ INSERT INTO `subjects` (`subject_id`, `subject_name`, `subject_abbr`, `subject_g
 
 DROP TABLE IF EXISTS `teachers_classes`;
 CREATE TABLE IF NOT EXISTS `teachers_classes` (
-`teacher_class_id` int(11) NOT NULL,
+  `teacher_class_id` int(11) NOT NULL AUTO_INCREMENT,
   `employee_id` int(11) NOT NULL,
   `class_id` int(11) NOT NULL,
   `academic_year_id` int(11) NOT NULL,
   `created_at` datetime NOT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`teacher_class_id`),
+  KEY `class_id` (`class_id`,`employee_id`,`academic_year_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=23 ;
 
 --
@@ -4812,12 +5655,12 @@ CREATE TABLE IF NOT EXISTS `teachers_classes` (
 --
 
 INSERT INTO `teachers_classes` (`teacher_class_id`, `employee_id`, `class_id`, `academic_year_id`, `created_at`, `updated_at`) VALUES
-(1, 1, 4, 1, '2015-03-23 12:32:00', '2015-04-29 09:00:21'),
+(1, 14, 4, 1, '2015-03-23 12:32:00', '2015-03-23 11:32:00'),
 (2, 48, 3, 1, '2015-03-23 12:32:28', '2015-03-23 11:32:28'),
-(3, 1, 2, 1, '2015-03-23 12:32:49', '2015-04-29 09:00:10'),
+(3, 17, 2, 1, '2015-03-23 12:32:49', '2015-03-23 11:32:49'),
 (4, 50, 1, 1, '2015-03-23 12:35:55', '2015-03-23 11:36:11'),
 (5, 54, 5, 1, '2015-03-23 12:36:41', '2015-03-23 11:36:41'),
-(6, 6, 7, 1, '2015-03-23 12:37:27', '2015-04-29 09:00:51'),
+(6, 13, 7, 1, '2015-03-23 12:37:27', '2015-03-23 11:37:27'),
 (7, 52, 10, 1, '2015-03-23 12:38:31', '2015-03-23 11:38:31'),
 (8, 23, 9, 1, '2015-03-23 12:38:52', '2015-03-23 11:38:52'),
 (9, 44, 13, 1, '2015-03-23 12:43:15', '2015-03-23 11:43:15'),
@@ -4826,8 +5669,8 @@ INSERT INTO `teachers_classes` (`teacher_class_id`, `employee_id`, `class_id`, `
 (12, 46, 11, 1, '2015-03-23 12:44:57', '2015-03-23 11:44:57'),
 (13, 53, 15, 1, '2015-03-23 12:45:16', '2015-03-23 11:45:21'),
 (14, 62, 20, 1, '2015-03-23 12:53:48', '2015-03-23 11:53:48'),
-(15, 1, 19, 1, '2015-03-23 12:54:56', '2015-04-29 09:01:18'),
-(16, 1, 17, 1, '2015-03-23 12:55:08', '2015-04-29 09:01:14'),
+(15, 38, 19, 1, '2015-03-23 12:54:56', '2015-03-23 11:54:56'),
+(16, 32, 17, 1, '2015-03-23 12:55:08', '2015-03-23 11:55:08'),
 (17, 60, 24, 1, '2015-03-23 12:58:14', '2015-03-23 11:58:14'),
 (18, 42, 22, 1, '2015-03-23 12:58:35', '2015-03-23 11:58:35'),
 (19, 40, 25, 1, '2015-03-23 12:58:52', '2015-03-23 11:58:52'),
@@ -4862,30 +5705,14 @@ CREATE TABLE IF NOT EXISTS `teachers_classviews` (
 
 DROP TABLE IF EXISTS `teachers_subjects`;
 CREATE TABLE IF NOT EXISTS `teachers_subjects` (
-`teachers_subjects_id` int(11) NOT NULL,
+  `teachers_subjects_id` int(11) NOT NULL AUTO_INCREMENT,
   `employee_id` int(11) DEFAULT NULL,
   `class_id` int(11) DEFAULT NULL,
   `subject_classlevel_id` int(11) DEFAULT NULL,
-  `assign_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
-
---
--- Dumping data for table `teachers_subjects`
---
-
-INSERT INTO `teachers_subjects` (`teachers_subjects_id`, `employee_id`, `class_id`, `subject_classlevel_id`, `assign_date`) VALUES
-(1, 19, 17, 17, '2015-04-29 09:05:11'),
-(2, 19, 19, 21, '2015-04-29 09:05:16'),
-(3, 1, 19, 24, '2015-04-29 09:05:31'),
-(4, 1, 20, 28, '2015-04-29 09:05:40'),
-(5, 1, 20, 26, '2015-04-29 09:05:49'),
-(6, 1, 19, 22, '2015-04-29 09:05:56'),
-(7, 19, 19, 23, '2015-04-29 09:06:46'),
-(8, 19, 20, 27, '2015-04-29 09:06:51'),
-(9, 19, 2, 5, '2015-04-29 09:07:21'),
-(10, 19, 4, 9, '2015-04-29 09:07:25'),
-(11, 1, 4, 10, '2015-04-29 09:07:36'),
-(12, 1, 2, 6, '2015-04-29 09:07:43');
+  `assign_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`teachers_subjects_id`),
+  KEY `employee_id` (`employee_id`,`class_id`,`subject_classlevel_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -4910,37 +5737,12 @@ CREATE TABLE IF NOT EXISTS `teachers_subjectsviews` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user_roles`
---
-
-DROP TABLE IF EXISTS `user_roles`;
-CREATE TABLE IF NOT EXISTS `user_roles` (
-`user_role_id` int(3) unsigned NOT NULL,
-  `user_role` varchar(50) DEFAULT NULL,
-  `group_alias` varchar(30) NOT NULL DEFAULT 'PAR_USERS'
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
-
---
--- Dumping data for table `user_roles`
---
-
-INSERT INTO `user_roles` (`user_role_id`, `user_role`, `group_alias`) VALUES
-(1, 'Parent', 'PAR_USERS'),
-(3, 'Staff', 'STF_USERS'),
-(4, 'ICT', 'ICT_USERS'),
-(5, 'Vice Principal', 'ADM_USERS'),
-(6, 'Principal', 'ADM_USERS'),
-(7, 'Super Admin', 'ADM_USERS');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `users`
 --
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
-`user_id` int(10) unsigned NOT NULL,
+  `user_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `username` varchar(70) NOT NULL,
   `password` varchar(150) NOT NULL,
   `display_name` varchar(100) DEFAULT NULL,
@@ -4951,7 +5753,10 @@ CREATE TABLE IF NOT EXISTS `users` (
   `status_id` int(11) NOT NULL DEFAULT '1',
   `created_by` int(11) NOT NULL,
   `created_at` datetime NOT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`user_id`),
+  UNIQUE KEY `username` (`username`),
+  KEY `user_role_id` (`user_role_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=343 ;
 
 --
@@ -4960,8 +5765,8 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 INSERT INTO `users` (`user_id`, `username`, `password`, `display_name`, `type_id`, `image_url`, `user_role_id`, `group_alias`, `status_id`, `created_by`, `created_at`, `updated_at`) VALUES
 (1, 'smartedu', '$2a$10$NfmOYa5oiakpJMzoS5y9Z.83aGg7o0ZaVkL2XD4JuKgJLM8p4FfQu', 'SmartEdu App', 0, NULL, 7, 'ADM_USERS', 1, 1, '2015-03-22 04:36:45', '2015-03-26 08:00:29'),
-(2, 'PAR0001', '$2a$10$NfmOYa5oiakpJMzoS5y9Z.83aGg7o0ZaVkL2XD4JuKgJLM8p4FfQu', 'Ogbuchi Stanley', 1, 'sponsors/1.jpg', 1, 'PAR_USERS', 1, 1, '2015-03-19 02:11:34', '2015-04-22 10:02:43'),
-(3, 'STF0001', '$2a$10$NfmOYa5oiakpJMzoS5y9Z.83aGg7o0ZaVkL2XD4JuKgJLM8p4FfQu', 'ADEGOKE M.', 1, 'employees/1.png', 7, 'ADM_USERS', 1, 1, '2015-03-23 11:09:03', '2015-05-14 19:00:33'),
+(2, 'PAR0001', '$2a$10$NfmOYa5oiakpJMzoS5y9Z.83aGg7o0ZaVkL2XD4JuKgJLM8p4FfQu', 'Ogbuchi Stanley', 1, 'sponsors/1.jpg', 1, 'expired_users', 2, 1, '2015-04-25 08:54:03', '2015-04-25 07:54:03'),
+(3, 'STF0001', '$2a$10$NfmOYa5oiakpJMzoS5y9Z.83aGg7o0ZaVkL2XD4JuKgJLM8p4FfQu', 'Dotun Kudaisi', 1, 'employees/1.png', 7, 'ADM_USERS', 1, 1, '2015-03-23 11:09:03', '2015-04-22 10:03:46'),
 (5, 'STF0003', '$2a$10$NfmOYa5oiakpJMzoS5y9Z.83aGg7o0ZaVkL2XD4JuKgJLM8p4FfQu', 'Abikoye J.', 3, 'employees/3.jpg', 4, 'ICT_USERS', 1, 1, '2015-03-19 06:40:35', '2015-04-22 10:03:46'),
 (6, 'STF0004', '$2a$10$NfmOYa5oiakpJMzoS5y9Z.83aGg7o0ZaVkL2XD4JuKgJLM8p4FfQu', 'ADEGOKE M.', 4, 'employees/4.jpg', 4, 'ICT_USERS', 1, 1, '2015-03-19 06:42:34', '2015-04-22 10:03:46'),
 (7, 'STF0005', '$2a$10$NfmOYa5oiakpJMzoS5y9Z.83aGg7o0ZaVkL2XD4JuKgJLM8p4FfQu', 'ADEYEMI B.', 5, 'employees/5.jpg', 4, 'ICT_USERS', 1, 1, '2015-03-19 06:47:32', '2015-04-22 10:03:46'),
@@ -5170,7 +5975,7 @@ INSERT INTO `users` (`user_id`, `username`, `password`, `display_name`, `type_id
 (229, 'PAR0162', '$2a$10$DAVP69pUBeJtbL/8tOZhCui/SHMYYYfrNOICEm2mEgl.QW1fAvdYe', 'Angel EMMANUEL', 162, 'sponsors/162.jpg', 1, 'PAR_USERS', 1, 23, '2015-03-24 03:56:54', '2015-04-22 10:02:43'),
 (230, 'PAR0163', '$2a$10$dopc6euJZvS2wmcRn50l6e1wxBrPhwPjBMlkaPxs9savz39CdzRze', 'Ikpi-Iyam Irene', 163, 'sponsors/163.jpg', 1, 'PAR_USERS', 1, 23, '2015-03-24 03:58:14', '2015-04-22 10:02:43'),
 (231, 'PAR0164', '$2a$10$S9Lpbi5cgxro3L3IssjQRODo6kn1bpVlsELHIym7FsiEsO0nDlPce', 'Johnson Precious', 164, 'sponsors/164.jpg', 1, 'PAR_USERS', 1, 23, '2015-03-24 03:59:31', '2015-04-22 10:02:43'),
-(232, 'PAR0165', '$2a$10$7Qfq7BCIG7vGYFSOncnIrOeDYpmy.OeKXwxNZ2/YiNB7r1/zZxPpK', 'Okey-Ezealah Viola', 165, 'sponsors/165.jpg', 1, 'PAR_USERS', 1, 23, '2015-03-24 04:02:07', '2015-04-22 10:02:43'),
+(232, 'PAR0165', '$2a$10$7Qfq7BCIG7vGYFSOncnIrOeDYpmy.OeKXwxNZ2/YiNB7r1/zZxPpK', 'EZEALAH OKECHUKWU', 165, 'sponsors/165.jpg', 1, 'PAR_USERS', 1, 23, '2015-03-24 04:02:07', '2015-05-20 11:25:11'),
 (233, 'PAR0166', '$2a$10$ECsApzbVrSwhZ5MdwuTCc.v633FQ1ksYqMVJ1QvEMHykLzjA89x3K', 'Oshobu Yemisi', 166, 'sponsors/166.jpg', 1, 'PAR_USERS', 1, 23, '2015-03-24 04:03:30', '2015-04-22 10:02:43'),
 (235, 'PAR0168', '$2a$10$Ho42ynPloOKzfaA/Qa2RJ.sEKtDkkfkOO3qiDGfYAWXTKh9F2wztS', 'Sobowale Anike', 168, 'sponsors/168.jpg', 1, 'PAR_USERS', 1, 23, '2015-03-24 04:05:42', '2015-04-22 10:02:43'),
 (236, 'PAR0169', '$2a$10$W34NS77Sgw2wl89lAkjFNu5Fsw7LJPITUkBWwExskbGLf/BFqlg3a', 'Yahaya Mariam', 169, 'sponsors/169.jpg', 1, 'PAR_USERS', 1, 23, '2015-03-24 04:06:59', '2015-04-22 10:02:43'),
@@ -5275,34 +6080,105 @@ INSERT INTO `users` (`user_id`, `username`, `password`, `display_name`, `type_id
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `user_roles`
+--
+
+DROP TABLE IF EXISTS `user_roles`;
+CREATE TABLE IF NOT EXISTS `user_roles` (
+  `user_role_id` int(3) unsigned NOT NULL AUTO_INCREMENT,
+  `user_role` varchar(50) DEFAULT NULL,
+  `group_alias` varchar(30) NOT NULL DEFAULT 'PAR_USERS',
+  PRIMARY KEY (`user_role_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+
+--
+-- Dumping data for table `user_roles`
+--
+
+INSERT INTO `user_roles` (`user_role_id`, `user_role`, `group_alias`) VALUES
+(1, 'Parent', 'PAR_USERS'),
+(3, 'Staff', 'STF_USERS'),
+(4, 'ICT', 'ICT_USERS'),
+(5, 'Vice Principal', 'ADM_USERS'),
+(6, 'Principal', 'ADM_USERS'),
+(7, 'Super Admin', 'ADM_USERS');
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `weeklyreport_studentdetailsviews`
+--
+DROP VIEW IF EXISTS `weeklyreport_studentdetailsviews`;
+CREATE TABLE IF NOT EXISTS `weeklyreport_studentdetailsviews` (
+`weekly_report_id` int(11) unsigned
+,`subject_classlevel_id` int(11)
+,`weekly_detail_setup_id` int(11)
+,`marked_status` int(11)
+,`notification_status` int(11)
+,`weekly_report_detail_id` int(11)
+,`student_id` int(11)
+,`student_no` varchar(50)
+,`student_name` varchar(101)
+,`gender` varchar(10)
+,`weekly_ca` decimal(4,1)
+,`weekly_weight_point` decimal(4,1)
+,`weekly_report_no` int(11)
+,`weekly_weight_percent` int(11)
+,`report_description` text
+,`submission_date` date
+,`weekly_report_setup_id` int(11) unsigned
+,`weekly_report` int(11)
+,`ca_weight_point` int(10) unsigned
+,`exam_weight_point` int(10) unsigned
+,`sponsor_id` int(11)
+,`image_url` varchar(50)
+,`sponsor_no` varchar(10)
+,`mobile_number1` varchar(20)
+,`email` varchar(100)
+,`sponsor_name` varchar(101)
+,`subject_id` int(3)
+,`subject_name` varchar(50)
+,`class_id` int(11)
+,`class_name` varchar(50)
+,`classlevel_id` int(11)
+,`classlevel` varchar(50)
+,`classgroup_id` int(11) unsigned
+,`academic_term_id` int(11)
+,`academic_term` varchar(50)
+);
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `weekly_detail_setups`
 --
 
 DROP TABLE IF EXISTS `weekly_detail_setups`;
 CREATE TABLE IF NOT EXISTS `weekly_detail_setups` (
-`weekly_detail_setup_id` int(11) NOT NULL,
+  `weekly_detail_setup_id` int(11) NOT NULL AUTO_INCREMENT,
   `weekly_report_setup_id` int(11) NOT NULL,
   `weekly_report_no` int(11) NOT NULL,
   `weekly_weight_point` decimal(4,1) NOT NULL DEFAULT '0.0',
   `weekly_weight_percent` int(11) NOT NULL DEFAULT '0',
   `submission_date` date NOT NULL,
-  `report_description` text
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+  `report_description` text,
+  PRIMARY KEY (`weekly_detail_setup_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `weekly_detail_setups`
+-- Table structure for table `weekly_reports`
 --
 
-INSERT INTO `weekly_detail_setups` (`weekly_detail_setup_id`, `weekly_report_setup_id`, `weekly_report_no`, `weekly_weight_point`, `weekly_weight_percent`, `submission_date`, `report_description`) VALUES
-(1, 1, 1, '10.0', 10, '2015-05-22', 'Opening C.A'),
-(2, 1, 2, '15.0', 15, '2015-05-29', 'Assignment'),
-(3, 1, 3, '20.0', 25, '2015-06-05', 'Second C.A'),
-(4, 1, 4, '20.0', 50, '2015-06-12', 'Major C.A'),
-(5, 2, 1, '10.0', 10, '2015-05-22', 'Opening C.A'),
-(6, 2, 2, '15.0', 10, '2015-05-29', 'First C.A'),
-(7, 2, 3, '20.0', 15, '2015-06-05', 'Assignment'),
-(8, 2, 4, '20.0', 15, '2015-06-12', 'Second C.A'),
-(9, 2, 5, '30.0', 50, '2015-06-19', 'Major C.A');
+DROP TABLE IF EXISTS `weekly_reports`;
+CREATE TABLE IF NOT EXISTS `weekly_reports` (
+  `weekly_report_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `subject_classlevel_id` int(11) DEFAULT NULL,
+  `weekly_detail_setup_id` int(11) DEFAULT NULL,
+  `marked_status` int(11) NOT NULL DEFAULT '2',
+  `notification_status` int(11) NOT NULL DEFAULT '2',
+  PRIMARY KEY (`weekly_report_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -5312,10 +6188,12 @@ INSERT INTO `weekly_detail_setups` (`weekly_detail_setup_id`, `weekly_report_set
 
 DROP TABLE IF EXISTS `weekly_report_details`;
 CREATE TABLE IF NOT EXISTS `weekly_report_details` (
-`weekly_report_detail_id` int(11) NOT NULL,
+  `weekly_report_detail_id` int(11) NOT NULL AUTO_INCREMENT,
   `weekly_report_id` int(11) DEFAULT NULL,
   `student_id` int(11) DEFAULT NULL,
-  `weekly_ca` decimal(4,1) DEFAULT '0.0'
+  `weekly_ca` decimal(4,1) DEFAULT '0.0',
+  PRIMARY KEY (`weekly_report_detail_id`),
+  KEY `exam_id` (`weekly_report_id`,`student_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -5326,33 +6204,12 @@ CREATE TABLE IF NOT EXISTS `weekly_report_details` (
 
 DROP TABLE IF EXISTS `weekly_report_setups`;
 CREATE TABLE IF NOT EXISTS `weekly_report_setups` (
-`weekly_report_setup_id` int(11) unsigned NOT NULL,
+  `weekly_report_setup_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `weekly_report` int(11) DEFAULT NULL,
   `classgroup_id` int(11) DEFAULT NULL,
-  `academic_term_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
-
---
--- Dumping data for table `weekly_report_setups`
---
-
-INSERT INTO `weekly_report_setups` (`weekly_report_setup_id`, `weekly_report`, `classgroup_id`, `academic_term_id`) VALUES
-(1, 4, 1, 1),
-(2, 5, 2, 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `weekly_reports`
---
-
-DROP TABLE IF EXISTS `weekly_reports`;
-CREATE TABLE IF NOT EXISTS `weekly_reports` (
-`weekly_report_id` int(11) unsigned NOT NULL,
-  `subject_classlevel_id` int(11) DEFAULT NULL,
-  `weekly_detail_setup_id` int(11) DEFAULT NULL,
-  `marked_status` int(11) NOT NULL DEFAULT '2',
-  `notification_status` int(11) NOT NULL DEFAULT '2'
+  `academic_term_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`weekly_report_setup_id`),
+  KEY `class_id` (`weekly_report`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -5379,49 +6236,11 @@ CREATE TABLE IF NOT EXISTS `weekly_setupviews` (
 -- --------------------------------------------------------
 
 --
--- Stand-in structure for view `weeklyreport_studentdetailsviews`
---
-DROP VIEW IF EXISTS `weeklyreport_studentdetailsviews`;
-CREATE TABLE IF NOT EXISTS `weeklyreport_studentdetailsviews` (
-`weekly_report_id` int(11) unsigned
-,`subject_classlevel_id` int(11)
-,`weekly_detail_setup_id` int(11)
-,`marked_status` int(11)
-,`notification_status` int(11)
-,`weekly_report_detail_id` int(11)
-,`student_id` int(11)
-,`student_no` varchar(50)
-,`student_name` varchar(101)
-,`gender` varchar(10)
-,`weekly_ca` decimal(4,1)
-,`weekly_report_no` int(11)
-,`weekly_weight_percent` int(11)
-,`report_description` text
-,`submission_date` date
-,`weekly_report_setup_id` int(11) unsigned
-,`weekly_weight_point` decimal(4,1)
-,`sponsor_id` int(11)
-,`sponsor_no` varchar(10)
-,`mobile_number1` varchar(20)
-,`email` varchar(100)
-,`sponsor_name` varchar(101)
-,`subject_name` varchar(50)
-,`class_id` int(11)
-,`class_name` varchar(50)
-,`classlevel_id` int(11)
-,`classlevel` varchar(50)
-,`classgroup_id` int(11) unsigned
-,`academic_term_id` int(11)
-,`academic_term` varchar(50)
-);
--- --------------------------------------------------------
-
---
 -- Structure for view `attend_headerviews`
 --
 DROP TABLE IF EXISTS `attend_headerviews`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `attend_headerviews` AS select `a`.`attend_id` AS `attend_id`,`a`.`class_id` AS `class_id`,`a`.`employee_id` AS `employee_id`,`a`.`academic_term_id` AS `academic_term_id`,`a`.`attend_date` AS `attend_date`,`b`.`class_name` AS `class_name`,`b`.`classlevel_id` AS `classlevel_id`,`c`.`academic_term` AS `academic_term`,`c`.`academic_year_id` AS `academic_year_id`,concat(ucase(`d`.`first_name`),' ',`d`.`other_name`) AS `head_tutor` from (((`attends` `a` join `classrooms` `b` on((`a`.`class_id` = `b`.`class_id`))) join `academic_terms` `c` on((`a`.`academic_term_id` = `c`.`academic_term_id`))) join `employees` `d` on((`a`.`employee_id` = `d`.`employee_id`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`smartedu`@`localhost` SQL SECURITY DEFINER VIEW `attend_headerviews` AS select `a`.`attend_id` AS `attend_id`,`a`.`class_id` AS `class_id`,`a`.`employee_id` AS `employee_id`,`a`.`academic_term_id` AS `academic_term_id`,`a`.`attend_date` AS `attend_date`,`b`.`class_name` AS `class_name`,`b`.`classlevel_id` AS `classlevel_id`,`c`.`academic_term` AS `academic_term`,`c`.`academic_year_id` AS `academic_year_id`,concat(ucase(`d`.`first_name`),' ',`d`.`other_name`) AS `head_tutor` from (((`attends` `a` join `classrooms` `b` on((`a`.`class_id` = `b`.`class_id`))) join `academic_terms` `c` on((`a`.`academic_term_id` = `c`.`academic_term_id`))) join `employees` `d` on((`a`.`employee_id` = `d`.`employee_id`)));
 
 -- --------------------------------------------------------
 
@@ -5430,16 +6249,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `classroom_subjectregisterviews`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `classroom_subjectregisterviews` AS select `a`.`student_id` AS `student_id`,`a`.`class_id` AS `class_id`,`a`.`subject_classlevel_id` AS `subject_classlevel_id`,`b`.`subject_id` AS `subject_id`,`b`.`academic_term_id` AS `academic_term_id`,`b`.`examstatus_id` AS `examstatus_id`,`c`.`classlevel_id` AS `classlevel_id`,`c`.`class_name` AS `class_name` from ((`subject_students_registers` `a` join `subject_classlevels` `b` on((`a`.`subject_classlevel_id` = `b`.`subject_classlevel_id`))) join `classrooms` `c` on((`a`.`class_id` = `c`.`class_id`))) group by `a`.`class_id`,`a`.`subject_classlevel_id`;
-
--- --------------------------------------------------------
-
---
--- Structure for view `exam_subjectviews`
---
-DROP TABLE IF EXISTS `exam_subjectviews`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `exam_subjectviews` AS select `a`.`exam_id` AS `exam_id`,`a`.`class_id` AS `class_id`,`f`.`class_name` AS `class_name`,`c`.`subject_name` AS `subject_name`,`b`.`subject_id` AS `subject_id`,`a`.`subject_classlevel_id` AS `subject_classlevel_id`,`h`.`weightageCA1` AS `weightageCA1`,`h`.`weightageCA2` AS `weightageCA2`,`h`.`weightageExam` AS `weightageExam`,`a`.`exammarked_status_id` AS `exammarked_status_id`,`f`.`classlevel_id` AS `classlevel_id`,`g`.`classlevel` AS `classlevel`,`b`.`academic_term_id` AS `academic_term_id`,`d`.`academic_term` AS `academic_term`,`d`.`academic_year_id` AS `academic_year_id`,`e`.`academic_year` AS `academic_year` from ((((((`exams` `a` left join (`classlevels` `g` join `classrooms` `f` on((`f`.`classlevel_id` = `g`.`classlevel_id`))) on((`a`.`class_id` = `f`.`class_id`))) join `subject_classlevels` `b` on((`a`.`subject_classlevel_id` = `b`.`subject_classlevel_id`))) join `subjects` `c` on((`b`.`subject_id` = `c`.`subject_id`))) join `academic_terms` `d` on((`b`.`academic_term_id` = `d`.`academic_term_id`))) join `academic_years` `e` on((`d`.`academic_year_id` = `e`.`academic_year_id`))) join `classgroups` `h` on((`g`.`classgroup_id` = `h`.`classgroup_id`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`smartedu`@`localhost` SQL SECURITY DEFINER VIEW `classroom_subjectregisterviews` AS select `a`.`student_id` AS `student_id`,`a`.`class_id` AS `class_id`,`a`.`subject_classlevel_id` AS `subject_classlevel_id`,`b`.`subject_id` AS `subject_id`,`b`.`academic_term_id` AS `academic_term_id`,`b`.`examstatus_id` AS `examstatus_id`,`c`.`classlevel_id` AS `classlevel_id`,`c`.`class_name` AS `class_name` from ((`subject_students_registers` `a` join `subject_classlevels` `b` on((`a`.`subject_classlevel_id` = `b`.`subject_classlevel_id`))) join `classrooms` `c` on((`a`.`class_id` = `c`.`class_id`))) group by `a`.`class_id`,`a`.`subject_classlevel_id`;
 
 -- --------------------------------------------------------
 
@@ -5448,25 +6258,16 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `examsdetails_reportviews`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `examsdetails_reportviews` AS select `exams`.`exam_id` AS `exam_id`,`subject_classlevels`.`subject_id` AS `subject_id`,`subject_classlevels`.`classlevel_id` AS `classlevel_id`,`classrooms`.`class_id` AS `class_id`,`students`.`student_id` AS `student_id`,`subjects`.`subject_name` AS `subject_name`,`classrooms`.`class_name` AS `class_name`,concat(ucase(`students`.`first_name`),' ',lcase(`students`.`surname`),' ',lcase(`students`.`other_name`)) AS `student_fullname`,`exam_details`.`ca1` AS `ca1`,`exam_details`.`ca2` AS `ca2`,`exam_details`.`exam` AS `exam`,`classgroups`.`weightageCA1` AS `weightageCA1`,`classgroups`.`weightageCA2` AS `weightageCA2`,`classgroups`.`weightageExam` AS `weightageExam`,`academic_terms`.`academic_term_id` AS `academic_term_id`,`academic_terms`.`academic_term` AS `academic_term`,`exams`.`exammarked_status_id` AS `exammarked_status_id`,`academic_terms`.`academic_year_id` AS `academic_year_id`,`academic_years`.`academic_year` AS `academic_year`,`classlevels`.`classlevel` AS `classlevel`,`classlevels`.`classgroup_id` AS `classgroup_id` from ((((((((((`exams` join `exam_details` on((`exams`.`exam_id` = `exam_details`.`exam_id`))) join `subject_classlevels` on((`exams`.`subject_classlevel_id` = `subject_classlevels`.`subject_classlevel_id`))) join `subjects` on((`subject_classlevels`.`subject_id` = `subjects`.`subject_id`))) join `students` on((`exam_details`.`student_id` = `students`.`student_id`))) join `academic_terms` on((`subject_classlevels`.`academic_term_id` = `academic_terms`.`academic_term_id`))) join `academic_years` on((`academic_years`.`academic_year_id` = `academic_terms`.`academic_year_id`))) join `classlevels` on((`subject_classlevels`.`classlevel_id` = `classlevels`.`classlevel_id`))) join `students_classes` on((`students`.`student_id` = `students_classes`.`student_id`))) join `classrooms` on((`students_classes`.`class_id` = `classrooms`.`class_id`))) join `classgroups` on((`classgroups`.`classgroup_id` = `classlevels`.`classgroup_id`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`smartedu`@`localhost` SQL SECURITY DEFINER VIEW `examsdetails_reportviews` AS select `exams`.`exam_id` AS `exam_id`,`subject_classlevels`.`subject_id` AS `subject_id`,`subject_classlevels`.`classlevel_id` AS `classlevel_id`,`classrooms`.`class_id` AS `class_id`,`students`.`student_id` AS `student_id`,`subjects`.`subject_name` AS `subject_name`,`classrooms`.`class_name` AS `class_name`,concat(ucase(`students`.`first_name`),' ',lcase(`students`.`surname`),' ',lcase(`students`.`other_name`)) AS `student_fullname`,`exam_details`.`ca1` AS `ca1`,`exam_details`.`ca2` AS `ca2`,`exam_details`.`exam` AS `exam`,`classgroups`.`weightageCA1` AS `weightageCA1`,`classgroups`.`weightageCA2` AS `weightageCA2`,`classgroups`.`weightageExam` AS `weightageExam`,`academic_terms`.`academic_term_id` AS `academic_term_id`,`academic_terms`.`academic_term` AS `academic_term`,`exams`.`exammarked_status_id` AS `exammarked_status_id`,`academic_terms`.`academic_year_id` AS `academic_year_id`,`academic_years`.`academic_year` AS `academic_year`,`classlevels`.`classlevel` AS `classlevel`,`classlevels`.`classgroup_id` AS `classgroup_id` from ((((((((((`exams` join `exam_details` on((`exams`.`exam_id` = `exam_details`.`exam_id`))) join `subject_classlevels` on((`exams`.`subject_classlevel_id` = `subject_classlevels`.`subject_classlevel_id`))) join `subjects` on((`subject_classlevels`.`subject_id` = `subjects`.`subject_id`))) join `students` on((`exam_details`.`student_id` = `students`.`student_id`))) join `academic_terms` on((`subject_classlevels`.`academic_term_id` = `academic_terms`.`academic_term_id`))) join `academic_years` on((`academic_years`.`academic_year_id` = `academic_terms`.`academic_year_id`))) join `classlevels` on((`subject_classlevels`.`classlevel_id` = `classlevels`.`classlevel_id`))) join `students_classes` on((`students`.`student_id` = `students_classes`.`student_id`))) join `classrooms` on((`students_classes`.`class_id` = `classrooms`.`class_id`))) join `classgroups` on((`classgroups`.`classgroup_id` = `classlevels`.`classgroup_id`)));
 
 -- --------------------------------------------------------
 
 --
--- Structure for view `student_feesqueryviews`
+-- Structure for view `exam_subjectviews`
 --
-DROP TABLE IF EXISTS `student_feesqueryviews`;
+DROP TABLE IF EXISTS `exam_subjectviews`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `student_feesqueryviews` AS select `orders`.`order_id` AS `order_id`,`item_bills`.`price` AS `price`,`orders`.`process_item_id` AS `process_item_id`,`item_bills`.`item_id` AS `item_id`,`items`.`item_name` AS `item_name`,`orders`.`academic_term_id` AS `academic_term_id`,`academic_terms`.`academic_term` AS `academic_term`,`students_classlevelviews`.`student_name` AS `student_name`,`students_classlevelviews`.`student_id` AS `student_id`,concat(ucase(`sponsors`.`first_name`),' ',`sponsors`.`other_name`) AS `sponsor_name`,`sponsors`.`sponsor_id` AS `sponsor_id`,`students_classlevelviews`.`class_name` AS `class_name`,`students_classlevelviews`.`class_id` AS `class_id`,`students_classlevelviews`.`classlevel` AS `classlevel`,`students_classlevelviews`.`classlevel_id` AS `classlevel_id`,`students_classlevelviews`.`academic_year_id` AS `academic_year_id`,`students_classlevelviews`.`academic_year` AS `academic_year`,`items`.`item_type_id` AS `item_type_id`,`items`.`item_status_id` AS `item_status_id`,`item_types`.`item_type` AS `item_type` from ((((((`item_types` join `items` on((`item_types`.`item_type_id` = `items`.`item_type_id`))) join `item_bills` on((`item_bills`.`item_id` = `items`.`item_id`))) join `students_classlevelviews` on((`item_bills`.`classlevel_id` = `students_classlevelviews`.`classlevel_id`))) join `sponsors` on((`sponsors`.`sponsor_id` = `students_classlevelviews`.`sponsor_id`))) join `orders` on((`orders`.`student_id` = `students_classlevelviews`.`student_id`))) join `academic_terms` on((`academic_terms`.`academic_term_id` = `orders`.`academic_term_id`)));
-
--- --------------------------------------------------------
-
---
--- Structure for view `student_feesviews`
---
-DROP TABLE IF EXISTS `student_feesviews`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `student_feesviews` AS select concat(ucase(`a`.`first_name`),' ',`a`.`surname`,' ',`a`.`other_name`) AS `student_name`,`a`.`student_id` AS `student_id`,`a`.`student_no` AS `student_no`,concat(ucase(`b`.`first_name`),' ',`b`.`other_name`) AS `sponsor_name`,`b`.`sponsor_id` AS `sponsor_id`,`c`.`salutation_name` AS `salutation_name`,`f`.`order_id` AS `order_id`,`h`.`price` AS `price`,`h`.`quantity` AS `quantity`,(`h`.`quantity` * `h`.`price`) AS `subtotal`,`h`.`item_id` AS `item_id`,`i`.`item_name` AS `item_name`,`i`.`item_description` AS `item_description`,`f`.`academic_term_id` AS `academic_term_id`,`g`.`academic_term` AS `academic_term`,`f`.`status_id` AS `order_status_id`,`l`.`class_id` AS `class_id`,`m`.`class_name` AS `class_name`,`m`.`classlevel_id` AS `classlevel_id`,`n`.`classlevel` AS `classlevel`,`i`.`item_type_id` AS `item_type_id`,`j`.`item_type` AS `item_type`,`a`.`image_url` AS `image_url`,`g`.`academic_year_id` AS `academic_year_id`,`k`.`academic_year` AS `academic_year`,`d`.`student_status_id` AS `student_status_id`,`d`.`student_status` AS `student_status` from ((((((((((((`students` `a` join `sponsors` `b` on((`a`.`sponsor_id` = `b`.`sponsor_id`))) join `salutations` `c` on((`c`.`salutation_id` = `b`.`salutation_id`))) join `student_status` `d` on((`a`.`student_status_id` = `d`.`student_status_id`))) join `orders` `f` on((`a`.`student_id` = `f`.`student_id`))) join `academic_terms` `g` on((`f`.`academic_term_id` = `g`.`academic_term_id`))) join `order_items` `h` on((`f`.`order_id` = `h`.`order_id`))) join `items` `i` on((`h`.`item_id` = `i`.`item_id`))) join `item_types` `j` on((`i`.`item_type_id` = `j`.`item_type_id`))) join `academic_years` `k` on((`g`.`academic_year_id` = `k`.`academic_year_id`))) join `students_classes` `l` on(((`a`.`student_id` = `l`.`student_id`) and (`g`.`academic_year_id` = `l`.`academic_year_id`)))) join `classrooms` `m` on((`l`.`class_id` = `m`.`class_id`))) join `classlevels` `n` on((`m`.`classlevel_id` = `n`.`classlevel_id`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`smartedu`@`localhost` SQL SECURITY DEFINER VIEW `exam_subjectviews` AS select `a`.`exam_id` AS `exam_id`,`a`.`class_id` AS `class_id`,`f`.`class_name` AS `class_name`,`c`.`subject_name` AS `subject_name`,`b`.`subject_id` AS `subject_id`,`a`.`subject_classlevel_id` AS `subject_classlevel_id`,`h`.`weightageCA1` AS `weightageCA1`,`h`.`weightageCA2` AS `weightageCA2`,`h`.`weightageExam` AS `weightageExam`,`a`.`exammarked_status_id` AS `exammarked_status_id`,`f`.`classlevel_id` AS `classlevel_id`,`g`.`classlevel` AS `classlevel`,`b`.`academic_term_id` AS `academic_term_id`,`d`.`academic_term` AS `academic_term`,`d`.`academic_year_id` AS `academic_year_id`,`e`.`academic_year` AS `academic_year` from ((((((`exams` `a` left join (`classlevels` `g` join `classrooms` `f` on((`f`.`classlevel_id` = `g`.`classlevel_id`))) on((`a`.`class_id` = `f`.`class_id`))) join `subject_classlevels` `b` on((`a`.`subject_classlevel_id` = `b`.`subject_classlevel_id`))) join `subjects` `c` on((`b`.`subject_id` = `c`.`subject_id`))) join `academic_terms` `d` on((`b`.`academic_term_id` = `d`.`academic_term_id`))) join `academic_years` `e` on((`d`.`academic_year_id` = `e`.`academic_year_id`))) join `classgroups` `h` on((`g`.`classgroup_id` = `h`.`classgroup_id`)));
 
 -- --------------------------------------------------------
 
@@ -5475,7 +6276,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `students_classlevelviews`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `students_classlevelviews` AS select concat(ucase(`students`.`first_name`),' ',`students`.`surname`,' ',`students`.`other_name`) AS `student_name`,`students`.`student_no` AS `student_no`,`classrooms`.`class_name` AS `class_name`,`classrooms`.`class_id` AS `class_id`,`students`.`student_id` AS `student_id`,`classlevels`.`classlevel` AS `classlevel`,`classrooms`.`classlevel_id` AS `classlevel_id`,`students`.`sponsor_id` AS `sponsor_id`,concat(ucase(`sponsors`.`first_name`),' ',`sponsors`.`other_name`) AS `sponsor_name`,`students_classes`.`academic_year_id` AS `academic_year_id`,`academic_years`.`academic_year` AS `academic_year`,`students`.`student_status_id` AS `student_status_id` from (((((`students` join `students_classes` on((`students_classes`.`student_id` = `students`.`student_id`))) join `classrooms` on((`students_classes`.`class_id` = `classrooms`.`class_id`))) join `classlevels` on((`classlevels`.`classlevel_id` = `classrooms`.`classlevel_id`))) join `academic_years` on((`students_classes`.`academic_year_id` = `academic_years`.`academic_year_id`))) join `sponsors` on((`students`.`sponsor_id` = `sponsors`.`sponsor_id`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`smartedu`@`localhost` SQL SECURITY DEFINER VIEW `students_classlevelviews` AS select concat(ucase(`students`.`first_name`),' ',`students`.`surname`,' ',`students`.`other_name`) AS `student_name`,`students`.`student_no` AS `student_no`,`classrooms`.`class_name` AS `class_name`,`classrooms`.`class_id` AS `class_id`,`students`.`student_id` AS `student_id`,`classlevels`.`classlevel` AS `classlevel`,`classrooms`.`classlevel_id` AS `classlevel_id`,`students`.`sponsor_id` AS `sponsor_id`,concat(ucase(`sponsors`.`first_name`),' ',`sponsors`.`other_name`) AS `sponsor_name`,`students_classes`.`academic_year_id` AS `academic_year_id`,`academic_years`.`academic_year` AS `academic_year`,`students`.`student_status_id` AS `student_status_id` from (((((`students` join `students_classes` on((`students_classes`.`student_id` = `students`.`student_id`))) join `classrooms` on((`students_classes`.`class_id` = `classrooms`.`class_id`))) join `classlevels` on((`classlevels`.`classlevel_id` = `classrooms`.`classlevel_id`))) join `academic_years` on((`students_classes`.`academic_year_id` = `academic_years`.`academic_year_id`))) join `sponsors` on((`students`.`sponsor_id` = `sponsors`.`sponsor_id`)));
 
 -- --------------------------------------------------------
 
@@ -5484,7 +6285,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `students_paymentviews`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `students_paymentviews` AS select `a`.`order_id` AS `order_id`,`a`.`academic_term_id` AS `academic_term_id`,`a`.`status_id` AS `status_id`,(case `a`.`status_id` when 1 then 'Paid' when 2 then 'Not Paid' end) AS `payment_status`,`c`.`academic_term` AS `academic_term`,`b`.`student_name` AS `student_name`,`b`.`student_no` AS `student_no`,`b`.`class_name` AS `class_name`,`b`.`class_id` AS `class_id`,`b`.`student_id` AS `student_id`,`b`.`classlevel` AS `classlevel`,`b`.`classlevel_id` AS `classlevel_id`,`b`.`sponsor_id` AS `sponsor_id`,`b`.`sponsor_name` AS `sponsor_name`,`b`.`academic_year_id` AS `academic_year_id`,`b`.`academic_year` AS `academic_year`,`b`.`student_status_id` AS `student_status_id` from ((`orders` `a` join `students_classlevelviews` `b` on((`a`.`student_id` = `b`.`student_id`))) join `academic_terms` `c` on(((`a`.`academic_term_id` = `c`.`academic_term_id`) and (`c`.`academic_year_id` = `b`.`academic_year_id`)))) where (`a`.`process_item_id` is not null);
+CREATE ALGORITHM=UNDEFINED DEFINER=`smartedu`@`localhost` SQL SECURITY DEFINER VIEW `students_paymentviews` AS select `a`.`order_id` AS `order_id`,`a`.`academic_term_id` AS `academic_term_id`,`a`.`status_id` AS `status_id`,(case `a`.`status_id` when 1 then 'Paid' when 2 then 'Not Paid' end) AS `payment_status`,`c`.`academic_term` AS `academic_term`,`b`.`student_name` AS `student_name`,`b`.`student_no` AS `student_no`,`b`.`class_name` AS `class_name`,`b`.`class_id` AS `class_id`,`b`.`student_id` AS `student_id`,`b`.`classlevel` AS `classlevel`,`b`.`classlevel_id` AS `classlevel_id`,`b`.`sponsor_id` AS `sponsor_id`,`b`.`sponsor_name` AS `sponsor_name`,`b`.`academic_year_id` AS `academic_year_id`,`b`.`academic_year` AS `academic_year`,`b`.`student_status_id` AS `student_status_id` from ((`orders` `a` join `students_classlevelviews` `b` on((`a`.`student_id` = `b`.`student_id`))) join `academic_terms` `c` on(((`a`.`academic_term_id` = `c`.`academic_term_id`) and (`c`.`academic_year_id` = `b`.`academic_year_id`)))) where (`a`.`process_item_id` is not null);
 
 -- --------------------------------------------------------
 
@@ -5493,7 +6294,25 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `students_subjectsviews`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `students_subjectsviews` AS select `a`.`student_id` AS `student_id`,`a`.`class_id` AS `class_id`,`a`.`subject_classlevel_id` AS `subject_classlevel_id`,concat(ucase(`b`.`first_name`),', ',`b`.`surname`,' ',`b`.`other_name`) AS `student_name`,`b`.`student_no` AS `student_no`,`c`.`class_name` AS `class_name`,`e`.`subject_id` AS `subject_id`,`f`.`subject_name` AS `subject_name`,`c`.`classlevel_id` AS `classlevel_id`,`d`.`classlevel` AS `classlevel` from (((((`subject_students_registers` `a` join `students` `b` on((`a`.`student_id` = `b`.`student_id`))) join `classrooms` `c` on((`a`.`class_id` = `c`.`class_id`))) join `classlevels` `d` on((`c`.`classlevel_id` = `d`.`classlevel_id`))) join `subject_classlevels` `e` on((`e`.`subject_classlevel_id` = `a`.`subject_classlevel_id`))) join `subjects` `f` on((`f`.`subject_id` = `e`.`subject_id`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`smartedu`@`localhost` SQL SECURITY DEFINER VIEW `students_subjectsviews` AS select `a`.`student_id` AS `student_id`,`a`.`class_id` AS `class_id`,`a`.`subject_classlevel_id` AS `subject_classlevel_id`,concat(ucase(`b`.`first_name`),', ',`b`.`surname`,' ',`b`.`other_name`) AS `student_name`,`b`.`student_no` AS `student_no`,`c`.`class_name` AS `class_name`,`e`.`subject_id` AS `subject_id`,`f`.`subject_name` AS `subject_name`,`c`.`classlevel_id` AS `classlevel_id`,`d`.`classlevel` AS `classlevel` from (((((`subject_students_registers` `a` join `students` `b` on((`a`.`student_id` = `b`.`student_id`))) join `classrooms` `c` on((`a`.`class_id` = `c`.`class_id`))) join `classlevels` `d` on((`c`.`classlevel_id` = `d`.`classlevel_id`))) join `subject_classlevels` `e` on((`e`.`subject_classlevel_id` = `a`.`subject_classlevel_id`))) join `subjects` `f` on((`f`.`subject_id` = `e`.`subject_id`)));
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `student_feesqueryviews`
+--
+DROP TABLE IF EXISTS `student_feesqueryviews`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`smartedu`@`localhost` SQL SECURITY DEFINER VIEW `student_feesqueryviews` AS select `orders`.`order_id` AS `order_id`,`item_bills`.`price` AS `price`,`orders`.`process_item_id` AS `process_item_id`,`item_bills`.`item_id` AS `item_id`,`items`.`item_name` AS `item_name`,`orders`.`academic_term_id` AS `academic_term_id`,`academic_terms`.`academic_term` AS `academic_term`,`students_classlevelviews`.`student_name` AS `student_name`,`students_classlevelviews`.`student_id` AS `student_id`,concat(ucase(`sponsors`.`first_name`),' ',`sponsors`.`other_name`) AS `sponsor_name`,`sponsors`.`sponsor_id` AS `sponsor_id`,`students_classlevelviews`.`class_name` AS `class_name`,`students_classlevelviews`.`class_id` AS `class_id`,`students_classlevelviews`.`classlevel` AS `classlevel`,`students_classlevelviews`.`classlevel_id` AS `classlevel_id`,`students_classlevelviews`.`academic_year_id` AS `academic_year_id`,`students_classlevelviews`.`academic_year` AS `academic_year`,`items`.`item_type_id` AS `item_type_id`,`items`.`item_status_id` AS `item_status_id`,`item_types`.`item_type` AS `item_type` from ((((((`item_types` join `items` on((`item_types`.`item_type_id` = `items`.`item_type_id`))) join `item_bills` on((`item_bills`.`item_id` = `items`.`item_id`))) join `students_classlevelviews` on((`item_bills`.`classlevel_id` = `students_classlevelviews`.`classlevel_id`))) join `sponsors` on((`sponsors`.`sponsor_id` = `students_classlevelviews`.`sponsor_id`))) join `orders` on((`orders`.`student_id` = `students_classlevelviews`.`student_id`))) join `academic_terms` on((`academic_terms`.`academic_term_id` = `orders`.`academic_term_id`)));
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `student_feesviews`
+--
+DROP TABLE IF EXISTS `student_feesviews`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`smartedu`@`localhost` SQL SECURITY DEFINER VIEW `student_feesviews` AS select concat(ucase(`a`.`first_name`),' ',`a`.`surname`,' ',`a`.`other_name`) AS `student_name`,`a`.`student_id` AS `student_id`,`a`.`student_no` AS `student_no`,concat(ucase(`b`.`first_name`),' ',`b`.`other_name`) AS `sponsor_name`,`b`.`sponsor_id` AS `sponsor_id`,`c`.`salutation_name` AS `salutation_name`,`f`.`order_id` AS `order_id`,`h`.`price` AS `price`,`h`.`quantity` AS `quantity`,(`h`.`quantity` * `h`.`price`) AS `subtotal`,`h`.`item_id` AS `item_id`,`i`.`item_name` AS `item_name`,`i`.`item_description` AS `item_description`,`f`.`academic_term_id` AS `academic_term_id`,`g`.`academic_term` AS `academic_term`,`f`.`status_id` AS `order_status_id`,`l`.`class_id` AS `class_id`,`m`.`class_name` AS `class_name`,`m`.`classlevel_id` AS `classlevel_id`,`n`.`classlevel` AS `classlevel`,`i`.`item_type_id` AS `item_type_id`,`j`.`item_type` AS `item_type`,`a`.`image_url` AS `image_url`,`g`.`academic_year_id` AS `academic_year_id`,`k`.`academic_year` AS `academic_year`,`d`.`student_status_id` AS `student_status_id`,`d`.`student_status` AS `student_status` from ((((((((((((`students` `a` join `sponsors` `b` on((`a`.`sponsor_id` = `b`.`sponsor_id`))) join `salutations` `c` on((`c`.`salutation_id` = `b`.`salutation_id`))) join `student_status` `d` on((`a`.`student_status_id` = `d`.`student_status_id`))) join `orders` `f` on((`a`.`student_id` = `f`.`student_id`))) join `academic_terms` `g` on((`f`.`academic_term_id` = `g`.`academic_term_id`))) join `order_items` `h` on((`f`.`order_id` = `h`.`order_id`))) join `items` `i` on((`h`.`item_id` = `i`.`item_id`))) join `item_types` `j` on((`i`.`item_type_id` = `j`.`item_type_id`))) join `academic_years` `k` on((`g`.`academic_year_id` = `k`.`academic_year_id`))) join `students_classes` `l` on(((`a`.`student_id` = `l`.`student_id`) and (`g`.`academic_year_id` = `l`.`academic_year_id`)))) join `classrooms` `m` on((`l`.`class_id` = `m`.`class_id`))) join `classlevels` `n` on((`m`.`classlevel_id` = `n`.`classlevel_id`)));
 
 -- --------------------------------------------------------
 
@@ -5502,7 +6321,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `subject_classlevelviews`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `subject_classlevelviews` AS select `classrooms`.`class_name` AS `class_name`,`subjects`.`subject_name` AS `subject_name`,`subjects`.`subject_id` AS `subject_id`,`classrooms`.`class_id` AS `class_id`,`classlevels`.`classlevel_id` AS `classlevel_id`,`subject_classlevels`.`subject_classlevel_id` AS `subject_classlevel_id`,`classlevels`.`classlevel` AS `classlevel`,`subject_classlevels`.`examstatus_id` AS `examstatus_id`,(case `subject_classlevels`.`examstatus_id` when 1 then 'Already Setup' when 2 then 'Not Setup' end) AS `exam_status`,`subject_classlevels`.`academic_term_id` AS `academic_term_id`,`academic_terms`.`academic_term` AS `academic_term`,`academic_terms`.`academic_year_id` AS `academic_year_id`,`academic_years`.`academic_year` AS `academic_year` from (((((`subject_classlevels` join `academic_terms` on((`subject_classlevels`.`academic_term_id` = `academic_terms`.`academic_term_id`))) join `academic_years` on((`academic_terms`.`academic_year_id` = `academic_years`.`academic_year_id`))) left join `classrooms` on((`subject_classlevels`.`class_id` = `classrooms`.`class_id`))) left join `classlevels` on((`subject_classlevels`.`classlevel_id` = `classlevels`.`classlevel_id`))) left join `subjects` on((`subject_classlevels`.`subject_id` = `subjects`.`subject_id`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`smartedu`@`localhost` SQL SECURITY DEFINER VIEW `subject_classlevelviews` AS select `classrooms`.`class_name` AS `class_name`,`subjects`.`subject_name` AS `subject_name`,`subjects`.`subject_id` AS `subject_id`,`classrooms`.`class_id` AS `class_id`,`classlevels`.`classlevel_id` AS `classlevel_id`,`subject_classlevels`.`subject_classlevel_id` AS `subject_classlevel_id`,`classlevels`.`classlevel` AS `classlevel`,`subject_classlevels`.`examstatus_id` AS `examstatus_id`,(case `subject_classlevels`.`examstatus_id` when 1 then 'Already Setup' when 2 then 'Not Setup' end) AS `exam_status`,`subject_classlevels`.`academic_term_id` AS `academic_term_id`,`academic_terms`.`academic_term` AS `academic_term`,`academic_terms`.`academic_year_id` AS `academic_year_id`,`academic_years`.`academic_year` AS `academic_year` from (((((`subject_classlevels` join `academic_terms` on((`subject_classlevels`.`academic_term_id` = `academic_terms`.`academic_term_id`))) join `academic_years` on((`academic_terms`.`academic_year_id` = `academic_years`.`academic_year_id`))) left join `classrooms` on((`subject_classlevels`.`class_id` = `classrooms`.`class_id`))) left join `classlevels` on((`subject_classlevels`.`classlevel_id` = `classlevels`.`classlevel_id`))) left join `subjects` on((`subject_classlevels`.`subject_id` = `subjects`.`subject_id`)));
 
 -- --------------------------------------------------------
 
@@ -5511,7 +6330,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `teachers_classviews`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `teachers_classviews` AS select `b`.`teacher_class_id` AS `teacher_class_id`,`b`.`employee_id` AS `employee_id`,`b`.`class_id` AS `class_id`,`b`.`academic_year_id` AS `academic_year_id`,`b`.`created_at` AS `created_at`,`b`.`updated_at` AS `updated_at`,concat(ucase(`a`.`first_name`),', ',`a`.`other_name`) AS `employee_name`,`a`.`status_id` AS `status_id`,`c`.`class_name` AS `class_name`,`c`.`classlevel_id` AS `classlevel_id`,`d`.`academic_year` AS `academic_year` from (((`employees` `a` join `teachers_classes` `b` on((`a`.`employee_id` = `b`.`employee_id`))) join `classrooms` `c` on((`b`.`class_id` = `c`.`class_id`))) join `academic_years` `d` on((`b`.`academic_year_id` = `d`.`academic_year_id`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`smartedu`@`localhost` SQL SECURITY DEFINER VIEW `teachers_classviews` AS select `b`.`teacher_class_id` AS `teacher_class_id`,`b`.`employee_id` AS `employee_id`,`b`.`class_id` AS `class_id`,`b`.`academic_year_id` AS `academic_year_id`,`b`.`created_at` AS `created_at`,`b`.`updated_at` AS `updated_at`,concat(ucase(`a`.`first_name`),', ',`a`.`other_name`) AS `employee_name`,`a`.`status_id` AS `status_id`,`c`.`class_name` AS `class_name`,`c`.`classlevel_id` AS `classlevel_id`,`d`.`academic_year` AS `academic_year` from (((`employees` `a` join `teachers_classes` `b` on((`a`.`employee_id` = `b`.`employee_id`))) join `classrooms` `c` on((`b`.`class_id` = `c`.`class_id`))) join `academic_years` `d` on((`b`.`academic_year_id` = `d`.`academic_year_id`)));
 
 -- --------------------------------------------------------
 
@@ -5520,16 +6339,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `teachers_subjectsviews`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `teachers_subjectsviews` AS select `b`.`teachers_subjects_id` AS `teachers_subjects_id`,`b`.`employee_id` AS `employee_id`,`b`.`class_id` AS `class_id`,`d`.`subject_id` AS `subject_id`,`f`.`subject_name` AS `subject_name`,`b`.`subject_classlevel_id` AS `subject_classlevel_id`,`b`.`assign_date` AS `assign_date`,`a`.`class_name` AS `class_name`,concat(ucase(`c`.`first_name`),', ',`c`.`other_name`) AS `employee_name`,`c`.`status_id` AS `status_id`,`d`.`academic_term_id` AS `academic_term_id`,`e`.`academic_term` AS `academic_term` from (((((`classrooms` `a` join `teachers_subjects` `b` on((`a`.`class_id` = `b`.`class_id`))) join `employees` `c` on((`c`.`employee_id` = `b`.`employee_id`))) join `subject_classlevels` `d` on((`d`.`subject_classlevel_id` = `b`.`subject_classlevel_id`))) join `academic_terms` `e` on((`e`.`academic_term_id` = `d`.`academic_term_id`))) join `subjects` `f` on((`f`.`subject_id` = `d`.`subject_id`)));
-
--- --------------------------------------------------------
-
---
--- Structure for view `weekly_setupviews`
---
-DROP TABLE IF EXISTS `weekly_setupviews`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `weekly_setupviews` AS select `a`.`weekly_report_setup_id` AS `weekly_report_setup_id`,`a`.`weekly_report` AS `weekly_report`,`b`.`weekly_weight_point` AS `weekly_weight_point`,`b`.`weekly_weight_percent` AS `weekly_weight_percent`,`a`.`classgroup_id` AS `classgroup_id`,`a`.`academic_term_id` AS `academic_term_id`,`b`.`weekly_detail_setup_id` AS `weekly_detail_setup_id`,`b`.`weekly_report_no` AS `weekly_report_no`,`b`.`report_description` AS `report_description`,`b`.`submission_date` AS `submission_date`,`c`.`classgroup` AS `classgroup`,`d`.`academic_term` AS `academic_term`,`d`.`academic_year_id` AS `academic_year_id` from (((`weekly_report_setups` `a` join `weekly_detail_setups` `b` on((`a`.`weekly_report_setup_id` = `b`.`weekly_report_setup_id`))) join `classgroups` `c` on((`a`.`classgroup_id` = `c`.`classgroup_id`))) join `academic_terms` `d` on((`a`.`academic_term_id` = `d`.`academic_term_id`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`smartedu`@`localhost` SQL SECURITY DEFINER VIEW `teachers_subjectsviews` AS select `b`.`teachers_subjects_id` AS `teachers_subjects_id`,`b`.`employee_id` AS `employee_id`,`b`.`class_id` AS `class_id`,`d`.`subject_id` AS `subject_id`,`f`.`subject_name` AS `subject_name`,`b`.`subject_classlevel_id` AS `subject_classlevel_id`,`b`.`assign_date` AS `assign_date`,`a`.`class_name` AS `class_name`,concat(ucase(`c`.`first_name`),', ',`c`.`other_name`) AS `employee_name`,`c`.`status_id` AS `status_id`,`d`.`academic_term_id` AS `academic_term_id`,`e`.`academic_term` AS `academic_term` from (((((`classrooms` `a` join `teachers_subjects` `b` on((`a`.`class_id` = `b`.`class_id`))) join `employees` `c` on((`c`.`employee_id` = `b`.`employee_id`))) join `subject_classlevels` `d` on((`d`.`subject_classlevel_id` = `b`.`subject_classlevel_id`))) join `academic_terms` `e` on((`e`.`academic_term_id` = `d`.`academic_term_id`))) join `subjects` `f` on((`f`.`subject_id` = `d`.`subject_id`)));
 
 -- --------------------------------------------------------
 
@@ -5538,611 +6348,17 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `weeklyreport_studentdetailsviews`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `weeklyreport_studentdetailsviews` AS select `f`.`weekly_report_id` AS `weekly_report_id`,`f`.`subject_classlevel_id` AS `subject_classlevel_id`,`f`.`weekly_detail_setup_id` AS `weekly_detail_setup_id`,`f`.`marked_status` AS `marked_status`,`f`.`notification_status` AS `notification_status`,`g`.`weekly_report_detail_id` AS `weekly_report_detail_id`,`g`.`student_id` AS `student_id`,`j`.`student_no` AS `student_no`,concat(`j`.`first_name`,' ',`j`.`surname`) AS `student_name`,`j`.`gender` AS `gender`,`g`.`weekly_ca` AS `weekly_ca`,`h`.`weekly_report_no` AS `weekly_report_no`,`h`.`weekly_weight_percent` AS `weekly_weight_percent`,`h`.`report_description` AS `report_description`,`h`.`submission_date` AS `submission_date`,`i`.`weekly_report_setup_id` AS `weekly_report_setup_id`,`h`.`weekly_weight_point` AS `weekly_weight_point`,`j`.`sponsor_id` AS `sponsor_id`,`k`.`sponsor_no` AS `sponsor_no`,`k`.`mobile_number1` AS `mobile_number1`,`k`.`email` AS `email`,concat(`k`.`first_name`,' ',`k`.`other_name`) AS `sponsor_name`,`b`.`subject_name` AS `subject_name`,`a`.`class_id` AS `class_id`,`c`.`class_name` AS `class_name`,`c`.`classlevel_id` AS `classlevel_id`,`d`.`classlevel` AS `classlevel`,`d`.`classgroup_id` AS `classgroup_id`,`a`.`academic_term_id` AS `academic_term_id`,`e`.`academic_term` AS `academic_term` from ((((((((((`subject_classlevels` `a` join `subjects` `b` on((`a`.`subject_id` = `b`.`subject_id`))) join `classrooms` `c` on((`a`.`class_id` = `c`.`class_id`))) join `classlevels` `d` on((`a`.`classlevel_id` = `d`.`classlevel_id`))) join `academic_terms` `e` on((`a`.`academic_term_id` = `e`.`academic_term_id`))) join `weekly_reports` `f` on((`a`.`subject_classlevel_id` = `f`.`subject_classlevel_id`))) join `weekly_report_details` `g` on((`f`.`weekly_report_id` = `g`.`weekly_report_id`))) join `weekly_detail_setups` `h` on((`f`.`weekly_detail_setup_id` = `h`.`weekly_detail_setup_id`))) join `weekly_report_setups` `i` on((`h`.`weekly_report_setup_id` = `i`.`weekly_report_setup_id`))) join `students` `j` on((`g`.`student_id` = `j`.`student_id`))) join `sponsors` `k` on((`j`.`sponsor_id` = `k`.`sponsor_id`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`smartedu`@`localhost` SQL SECURITY DEFINER VIEW `weeklyreport_studentdetailsviews` AS select `f`.`weekly_report_id` AS `weekly_report_id`,`f`.`subject_classlevel_id` AS `subject_classlevel_id`,`f`.`weekly_detail_setup_id` AS `weekly_detail_setup_id`,`f`.`marked_status` AS `marked_status`,`f`.`notification_status` AS `notification_status`,`g`.`weekly_report_detail_id` AS `weekly_report_detail_id`,`g`.`student_id` AS `student_id`,`j`.`student_no` AS `student_no`,concat(`j`.`first_name`,' ',`j`.`surname`) AS `student_name`,`j`.`gender` AS `gender`,`g`.`weekly_ca` AS `weekly_ca`,`h`.`weekly_weight_point` AS `weekly_weight_point`,`h`.`weekly_report_no` AS `weekly_report_no`,`h`.`weekly_weight_percent` AS `weekly_weight_percent`,`h`.`report_description` AS `report_description`,`h`.`submission_date` AS `submission_date`,`i`.`weekly_report_setup_id` AS `weekly_report_setup_id`,`i`.`weekly_report` AS `weekly_report`,`m`.`weightageCA1` AS `ca_weight_point`,`m`.`weightageExam` AS `exam_weight_point`,`j`.`sponsor_id` AS `sponsor_id`,`j`.`image_url` AS `image_url`,`k`.`sponsor_no` AS `sponsor_no`,`k`.`mobile_number1` AS `mobile_number1`,`k`.`email` AS `email`,concat(`k`.`first_name`,' ',`k`.`other_name`) AS `sponsor_name`,`b`.`subject_id` AS `subject_id`,`b`.`subject_name` AS `subject_name`,`a`.`class_id` AS `class_id`,`c`.`class_name` AS `class_name`,`c`.`classlevel_id` AS `classlevel_id`,`d`.`classlevel` AS `classlevel`,`d`.`classgroup_id` AS `classgroup_id`,`a`.`academic_term_id` AS `academic_term_id`,`e`.`academic_term` AS `academic_term` from (((((((((((`subject_classlevels` `a` join `subjects` `b` on((`a`.`subject_id` = `b`.`subject_id`))) join `classrooms` `c` on((`a`.`class_id` = `c`.`class_id`))) join `classlevels` `d` on((`a`.`classlevel_id` = `d`.`classlevel_id`))) join `academic_terms` `e` on((`a`.`academic_term_id` = `e`.`academic_term_id`))) join `weekly_reports` `f` on((`a`.`subject_classlevel_id` = `f`.`subject_classlevel_id`))) join `weekly_report_details` `g` on((`f`.`weekly_report_id` = `g`.`weekly_report_id`))) join `weekly_detail_setups` `h` on((`f`.`weekly_detail_setup_id` = `h`.`weekly_detail_setup_id`))) join `weekly_report_setups` `i` on((`h`.`weekly_report_setup_id` = `i`.`weekly_report_setup_id`))) join `students` `j` on((`g`.`student_id` = `j`.`student_id`))) join `sponsors` `k` on((`j`.`sponsor_id` = `k`.`sponsor_id`))) join `classgroups` `m` on((`d`.`classgroup_id` = `m`.`classgroup_id`)));
+
+-- --------------------------------------------------------
 
 --
--- Indexes for dumped tables
+-- Structure for view `weekly_setupviews`
 --
+DROP TABLE IF EXISTS `weekly_setupviews`;
 
---
--- Indexes for table `academic_terms`
---
-ALTER TABLE `academic_terms`
- ADD PRIMARY KEY (`academic_term_id`), ADD KEY `academic_year_id` (`academic_year_id`), ADD KEY `term_status_id` (`term_status_id`), ADD KEY `term_type_id` (`term_type_id`);
+CREATE ALGORITHM=UNDEFINED DEFINER=`smartedu`@`localhost` SQL SECURITY DEFINER VIEW `weekly_setupviews` AS select `a`.`weekly_report_setup_id` AS `weekly_report_setup_id`,`a`.`weekly_report` AS `weekly_report`,`b`.`weekly_weight_point` AS `weekly_weight_point`,`b`.`weekly_weight_percent` AS `weekly_weight_percent`,`a`.`classgroup_id` AS `classgroup_id`,`a`.`academic_term_id` AS `academic_term_id`,`b`.`weekly_detail_setup_id` AS `weekly_detail_setup_id`,`b`.`weekly_report_no` AS `weekly_report_no`,`b`.`report_description` AS `report_description`,`b`.`submission_date` AS `submission_date`,`c`.`classgroup` AS `classgroup`,`d`.`academic_term` AS `academic_term`,`d`.`academic_year_id` AS `academic_year_id` from (((`weekly_report_setups` `a` join `weekly_detail_setups` `b` on((`a`.`weekly_report_setup_id` = `b`.`weekly_report_setup_id`))) join `classgroups` `c` on((`a`.`classgroup_id` = `c`.`classgroup_id`))) join `academic_terms` `d` on((`a`.`academic_term_id` = `d`.`academic_term_id`)));
 
---
--- Indexes for table `academic_years`
---
-ALTER TABLE `academic_years`
- ADD PRIMARY KEY (`academic_year_id`), ADD KEY `year_status_id` (`year_status_id`);
-
---
--- Indexes for table `acos`
---
-ALTER TABLE `acos`
- ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `aros`
---
-ALTER TABLE `aros`
- ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `aros_acos`
---
-ALTER TABLE `aros_acos`
- ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `ARO_ACO_KEY` (`aro_id`,`aco_id`);
-
---
--- Indexes for table `assessments`
---
-ALTER TABLE `assessments`
- ADD PRIMARY KEY (`assessment_id`), ADD KEY `student_id` (`student_id`), ADD KEY `academic_term_id` (`academic_term_id`);
-
---
--- Indexes for table `attend_details`
---
-ALTER TABLE `attend_details`
- ADD KEY `student_id` (`student_id`,`attend_id`);
-
---
--- Indexes for table `attends`
---
-ALTER TABLE `attends`
- ADD PRIMARY KEY (`attend_id`), ADD KEY `class_id` (`class_id`,`employee_id`,`academic_term_id`);
-
---
--- Indexes for table `classgroups`
---
-ALTER TABLE `classgroups`
- ADD PRIMARY KEY (`classgroup_id`);
-
---
--- Indexes for table `classlevels`
---
-ALTER TABLE `classlevels`
- ADD PRIMARY KEY (`classlevel_id`), ADD KEY `classgroup_id` (`classgroup_id`);
-
---
--- Indexes for table `classrooms`
---
-ALTER TABLE `classrooms`
- ADD PRIMARY KEY (`class_id`), ADD KEY `classlevel_id` (`classlevel_id`), ADD KEY `class_status_id` (`class_status_id`);
-
---
--- Indexes for table `countries`
---
-ALTER TABLE `countries`
- ADD PRIMARY KEY (`country_id`);
-
---
--- Indexes for table `employee_qualifications`
---
-ALTER TABLE `employee_qualifications`
- ADD PRIMARY KEY (`employee_qualification_id`), ADD KEY `employee_id` (`employee_id`);
-
---
--- Indexes for table `employee_types`
---
-ALTER TABLE `employee_types`
- ADD PRIMARY KEY (`employee_type_id`);
-
---
--- Indexes for table `employees`
---
-ALTER TABLE `employees`
- ADD PRIMARY KEY (`employee_id`), ADD KEY `salutation_id` (`salutation_id`), ADD KEY `employee_type_id` (`employee_type_id`), ADD KEY `state_id` (`state_id`), ADD KEY `local_govt_id` (`local_govt_id`);
-
---
--- Indexes for table `exam_details`
---
-ALTER TABLE `exam_details`
- ADD PRIMARY KEY (`exam_detail_id`), ADD KEY `exam_id` (`exam_id`,`student_id`);
-
---
--- Indexes for table `exams`
---
-ALTER TABLE `exams`
- ADD PRIMARY KEY (`exam_id`), ADD KEY `class_id` (`class_id`);
-
---
--- Indexes for table `grades`
---
-ALTER TABLE `grades`
- ADD PRIMARY KEY (`grades_id`), ADD KEY `classgroup_id` (`classgroup_id`);
-
---
--- Indexes for table `item_bills`
---
-ALTER TABLE `item_bills`
- ADD PRIMARY KEY (`item_bill_id`), ADD KEY `item_id` (`item_id`,`classlevel_id`);
-
---
--- Indexes for table `item_types`
---
-ALTER TABLE `item_types`
- ADD PRIMARY KEY (`item_type_id`);
-
---
--- Indexes for table `item_variables`
---
-ALTER TABLE `item_variables`
- ADD PRIMARY KEY (`item_variable_id`), ADD KEY `item_id` (`item_id`,`student_id`,`class_id`,`academic_term_id`);
-
---
--- Indexes for table `items`
---
-ALTER TABLE `items`
- ADD PRIMARY KEY (`item_id`), ADD KEY `item_type_id` (`item_type_id`);
-
---
--- Indexes for table `local_govts`
---
-ALTER TABLE `local_govts`
- ADD PRIMARY KEY (`local_govt_id`), ADD KEY `state_id` (`state_id`);
-
---
--- Indexes for table `master_setups`
---
-ALTER TABLE `master_setups`
- ADD PRIMARY KEY (`master_setup_id`);
-
---
--- Indexes for table `message_recipients`
---
-ALTER TABLE `message_recipients`
- ADD PRIMARY KEY (`message_recipient_id`);
-
---
--- Indexes for table `messages`
---
-ALTER TABLE `messages`
- ADD PRIMARY KEY (`message_id`);
-
---
--- Indexes for table `order_items`
---
-ALTER TABLE `order_items`
- ADD PRIMARY KEY (`order_item_id`), ADD KEY `item_id` (`item_id`,`order_id`);
-
---
--- Indexes for table `orders`
---
-ALTER TABLE `orders`
- ADD PRIMARY KEY (`order_id`), ADD KEY `student_id` (`student_id`,`sponsor_id`,`academic_term_id`,`process_item_id`);
-
---
--- Indexes for table `process_items`
---
-ALTER TABLE `process_items`
- ADD PRIMARY KEY (`process_item_id`);
-
---
--- Indexes for table `relationship_types`
---
-ALTER TABLE `relationship_types`
- ADD PRIMARY KEY (`relationship_type_id`);
-
---
--- Indexes for table `remarks`
---
-ALTER TABLE `remarks`
- ADD PRIMARY KEY (`remark_id`);
-
---
--- Indexes for table `salutations`
---
-ALTER TABLE `salutations`
- ADD PRIMARY KEY (`salutation_id`);
-
---
--- Indexes for table `setups`
---
-ALTER TABLE `setups`
- ADD PRIMARY KEY (`setup_id`);
-
---
--- Indexes for table `skill_assessments`
---
-ALTER TABLE `skill_assessments`
- ADD PRIMARY KEY (`skill_assessment_id`), ADD KEY `skill_id` (`skill_id`,`assessment_id`);
-
---
--- Indexes for table `skills`
---
-ALTER TABLE `skills`
- ADD PRIMARY KEY (`skill_id`);
-
---
--- Indexes for table `sponsors`
---
-ALTER TABLE `sponsors`
- ADD PRIMARY KEY (`sponsor_id`), ADD KEY `salutation_id` (`salutation_id`,`local_govt_id`,`state_id`,`sponsorship_type_id`,`country_id`);
-
---
--- Indexes for table `sponsorship_types`
---
-ALTER TABLE `sponsorship_types`
- ADD PRIMARY KEY (`sponsorship_type_id`);
-
---
--- Indexes for table `spouse_details`
---
-ALTER TABLE `spouse_details`
- ADD PRIMARY KEY (`spouse_detail_id`), ADD KEY `employee_id` (`employee_id`);
-
---
--- Indexes for table `states`
---
-ALTER TABLE `states`
- ADD PRIMARY KEY (`state_id`);
-
---
--- Indexes for table `status`
---
-ALTER TABLE `status`
- ADD PRIMARY KEY (`status_id`);
-
---
--- Indexes for table `student_status`
---
-ALTER TABLE `student_status`
- ADD PRIMARY KEY (`student_status_id`);
-
---
--- Indexes for table `students`
---
-ALTER TABLE `students`
- ADD PRIMARY KEY (`student_id`), ADD KEY `class_id` (`class_id`,`academic_term_id`,`local_govt_id`,`student_status_id`,`state_id`,`country_id`,`relationtype_id`);
-
---
--- Indexes for table `students_classes`
---
-ALTER TABLE `students_classes`
- ADD PRIMARY KEY (`student_class_id`), ADD KEY `student_id` (`student_id`,`class_id`,`academic_year_id`);
-
---
--- Indexes for table `subject_classlevels`
---
-ALTER TABLE `subject_classlevels`
- ADD PRIMARY KEY (`subject_classlevel_id`), ADD KEY `subject_id` (`subject_id`,`classlevel_id`,`class_id`,`academic_term_id`,`examstatus_id`);
-
---
--- Indexes for table `subject_groups`
---
-ALTER TABLE `subject_groups`
- ADD PRIMARY KEY (`subject_group_id`);
-
---
--- Indexes for table `subject_students_registers`
---
-ALTER TABLE `subject_students_registers`
- ADD KEY `student_id` (`student_id`,`class_id`,`subject_classlevel_id`);
-
---
--- Indexes for table `subjects`
---
-ALTER TABLE `subjects`
- ADD PRIMARY KEY (`subject_id`), ADD KEY `subject_group_id` (`subject_group_id`);
-
---
--- Indexes for table `teachers_classes`
---
-ALTER TABLE `teachers_classes`
- ADD PRIMARY KEY (`teacher_class_id`), ADD KEY `class_id` (`class_id`,`employee_id`,`academic_year_id`);
-
---
--- Indexes for table `teachers_subjects`
---
-ALTER TABLE `teachers_subjects`
- ADD PRIMARY KEY (`teachers_subjects_id`), ADD KEY `employee_id` (`employee_id`,`class_id`,`subject_classlevel_id`);
-
---
--- Indexes for table `user_roles`
---
-ALTER TABLE `user_roles`
- ADD PRIMARY KEY (`user_role_id`);
-
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
- ADD PRIMARY KEY (`user_id`), ADD KEY `user_role_id` (`user_role_id`);
-
---
--- Indexes for table `weekly_detail_setups`
---
-ALTER TABLE `weekly_detail_setups`
- ADD PRIMARY KEY (`weekly_detail_setup_id`);
-
---
--- Indexes for table `weekly_report_details`
---
-ALTER TABLE `weekly_report_details`
- ADD PRIMARY KEY (`weekly_report_detail_id`), ADD KEY `exam_id` (`weekly_report_id`,`student_id`);
-
---
--- Indexes for table `weekly_report_setups`
---
-ALTER TABLE `weekly_report_setups`
- ADD PRIMARY KEY (`weekly_report_setup_id`), ADD KEY `class_id` (`weekly_report`);
-
---
--- Indexes for table `weekly_reports`
---
-ALTER TABLE `weekly_reports`
- ADD PRIMARY KEY (`weekly_report_id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `academic_terms`
---
-ALTER TABLE `academic_terms`
-MODIFY `academic_term_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT for table `academic_years`
---
-ALTER TABLE `academic_years`
-MODIFY `academic_year_id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT for table `acos`
---
-ALTER TABLE `acos`
-MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=157;
---
--- AUTO_INCREMENT for table `aros`
---
-ALTER TABLE `aros`
-MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
---
--- AUTO_INCREMENT for table `aros_acos`
---
-ALTER TABLE `aros_acos`
-MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=49;
---
--- AUTO_INCREMENT for table `assessments`
---
-ALTER TABLE `assessments`
-MODIFY `assessment_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `attends`
---
-ALTER TABLE `attends`
-MODIFY `attend_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `classgroups`
---
-ALTER TABLE `classgroups`
-MODIFY `classgroup_id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT for table `classlevels`
---
-ALTER TABLE `classlevels`
-MODIFY `classlevel_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
---
--- AUTO_INCREMENT for table `classrooms`
---
-ALTER TABLE `classrooms`
-MODIFY `class_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=31;
---
--- AUTO_INCREMENT for table `countries`
---
-ALTER TABLE `countries`
-MODIFY `country_id` int(3) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=234;
---
--- AUTO_INCREMENT for table `employee_qualifications`
---
-ALTER TABLE `employee_qualifications`
-MODIFY `employee_qualification_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT for table `employee_types`
---
-ALTER TABLE `employee_types`
-MODIFY `employee_type_id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
---
--- AUTO_INCREMENT for table `employees`
---
-ALTER TABLE `employees`
-MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=68;
---
--- AUTO_INCREMENT for table `exam_details`
---
-ALTER TABLE `exam_details`
-MODIFY `exam_detail_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `exams`
---
-ALTER TABLE `exams`
-MODIFY `exam_id` int(11) unsigned NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `grades`
---
-ALTER TABLE `grades`
-MODIFY `grades_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
---
--- AUTO_INCREMENT for table `item_bills`
---
-ALTER TABLE `item_bills`
-MODIFY `item_bill_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `item_types`
---
-ALTER TABLE `item_types`
-MODIFY `item_type_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT for table `item_variables`
---
-ALTER TABLE `item_variables`
-MODIFY `item_variable_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `items`
---
-ALTER TABLE `items`
-MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `local_govts`
---
-ALTER TABLE `local_govts`
-MODIFY `local_govt_id` int(3) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=781;
---
--- AUTO_INCREMENT for table `master_setups`
---
-ALTER TABLE `master_setups`
-MODIFY `master_setup_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT for table `message_recipients`
---
-ALTER TABLE `message_recipients`
-MODIFY `message_recipient_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `messages`
---
-ALTER TABLE `messages`
-MODIFY `message_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `order_items`
---
-ALTER TABLE `order_items`
-MODIFY `order_item_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `orders`
---
-ALTER TABLE `orders`
-MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `process_items`
---
-ALTER TABLE `process_items`
-MODIFY `process_item_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `relationship_types`
---
-ALTER TABLE `relationship_types`
-MODIFY `relationship_type_id` int(3) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
---
--- AUTO_INCREMENT for table `remarks`
---
-ALTER TABLE `remarks`
-MODIFY `remark_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `salutations`
---
-ALTER TABLE `salutations`
-MODIFY `salutation_id` int(3) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
---
--- AUTO_INCREMENT for table `setups`
---
-ALTER TABLE `setups`
-MODIFY `setup_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `skill_assessments`
---
-ALTER TABLE `skill_assessments`
-MODIFY `skill_assessment_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `skills`
---
-ALTER TABLE `skills`
-MODIFY `skill_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=18;
---
--- AUTO_INCREMENT for table `sponsors`
---
-ALTER TABLE `sponsors`
-MODIFY `sponsor_id` int(3) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=274;
---
--- AUTO_INCREMENT for table `sponsorship_types`
---
-ALTER TABLE `sponsorship_types`
-MODIFY `sponsorship_type_id` int(3) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT for table `spouse_details`
---
-ALTER TABLE `spouse_details`
-MODIFY `spouse_detail_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `states`
---
-ALTER TABLE `states`
-MODIFY `state_id` int(3) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=38;
---
--- AUTO_INCREMENT for table `status`
---
-ALTER TABLE `status`
-MODIFY `status_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT for table `student_status`
---
-ALTER TABLE `student_status`
-MODIFY `student_status_id` int(3) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
---
--- AUTO_INCREMENT for table `students`
---
-ALTER TABLE `students`
-MODIFY `student_id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=287;
---
--- AUTO_INCREMENT for table `students_classes`
---
-ALTER TABLE `students_classes`
-MODIFY `student_class_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=289;
---
--- AUTO_INCREMENT for table `subject_classlevels`
---
-ALTER TABLE `subject_classlevels`
-MODIFY `subject_classlevel_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=29;
---
--- AUTO_INCREMENT for table `subject_groups`
---
-ALTER TABLE `subject_groups`
-MODIFY `subject_group_id` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
---
--- AUTO_INCREMENT for table `subjects`
---
-ALTER TABLE `subjects`
-MODIFY `subject_id` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=43;
---
--- AUTO_INCREMENT for table `teachers_classes`
---
-ALTER TABLE `teachers_classes`
-MODIFY `teacher_class_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=23;
---
--- AUTO_INCREMENT for table `teachers_subjects`
---
-ALTER TABLE `teachers_subjects`
-MODIFY `teachers_subjects_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
---
--- AUTO_INCREMENT for table `user_roles`
---
-ALTER TABLE `user_roles`
-MODIFY `user_role_id` int(3) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-MODIFY `user_id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=343;
---
--- AUTO_INCREMENT for table `weekly_detail_setups`
---
-ALTER TABLE `weekly_detail_setups`
-MODIFY `weekly_detail_setup_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
---
--- AUTO_INCREMENT for table `weekly_report_details`
---
-ALTER TABLE `weekly_report_details`
-MODIFY `weekly_report_detail_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `weekly_report_setups`
---
-ALTER TABLE `weekly_report_setups`
-MODIFY `weekly_report_setup_id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT for table `weekly_reports`
---
-ALTER TABLE `weekly_reports`
-MODIFY `weekly_report_id` int(11) unsigned NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
